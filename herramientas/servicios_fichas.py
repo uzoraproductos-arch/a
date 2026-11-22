@@ -426,6 +426,11 @@ def pestana_de(archivo):
         return 'Auditor'
     if a == 'index.html':
         return None
+    # Ronda 7 (22-11-2026): la Enciclopedia se volvió Planisferio (traslado.py).
+    import traslado
+    t = traslado.pestana(a)
+    if t:
+        return t
     if re.match(r'servicios?(-|\.html)', a):
         return 'Servicios'
     if a.startswith('planisferio'):

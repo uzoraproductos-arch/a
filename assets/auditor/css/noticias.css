@@ -268,3 +268,11 @@
 [data-theme="dark"] .nt-pu-serv:hover, [data-theme="dark"] .nt-ix-ult a:hover { background: #16233a; }
 [data-theme="dark"] .nt-pu-chips .nt-chip { background: #16233a; border-color: #2a3b57; color: #e8eefa; }
 [data-theme="dark"] .nt-puente .nt-btn-sec, [data-theme="dark"] .nt-ix .nt-btn-sec { background: transparent; color: #e8eefa; border-color: #5b6f91; }
+/* Ronda 7 (22-11-2026): el Noticiero arranca desde arriba, como portal del periódico. */
+.apartado-cab.nt-portal-cab { padding: 12px 0 14px; border-bottom: 3px double #0b2a63; }
+.nt-portal-cab .apartado-migas { margin-bottom: 6px; }
+.nt-portal-cab .apartado-titulo { font-family: 'Playfair Display', Georgia, serif; letter-spacing: -0.01em; margin: 4px 0 2px; }
+.nt-portal-cab .apartado-entrada { margin: 0; font-style: italic; }
+.nt-portal { margin-top: 0; }
+.nt-portal .nt-ix { margin-top: 12px; }
+[data-theme="dark"] .apartado-cab.nt-portal-cab { border-bottom-color: #8aa4d6; }

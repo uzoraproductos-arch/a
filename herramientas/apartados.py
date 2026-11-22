@@ -747,14 +747,15 @@ APARTADOS = [
         'menu': 'Comunidad',
         'icono': '💬',
         'titulo': 'Comunidad',
-        'lema': 'Ágora cívica, canales oficiales y la Enciclopedia',
-        'entrada': ('Contrasta posturas con fuentes, publica tu argumento y, si viste algo raro con el dinero público, '
-                    'llévalo al canal oficial que corresponde. Aquí vive también la Enciclopedia, la obra de consulta de '
-                    'la plataforma. Sin correos, teléfonos ni rastreo.'),
+        'lema': 'Ágora cívica, Donaciones y la Biblioteca del Erario',
+        'entrada': ('Contrasta posturas con fuentes y publica tu argumento en el Ágora, ayuda a sostener la plataforma a la vista '
+                    'de todos y consulta la Biblioteca del Erario: el diccionario, las referencias, el marco legal y los expedientes. '
+                    'Sin correos, teléfonos ni rastreo.'),
         'pestanas': True,
         # «Servicios» paso al Modo Inspector (pedido del autor, 11-10-2026).
         'hash_a_pagina': {'agora': 'agora.html', 'garantias': 'garantias.html', 'servicios': 'servicios.html',
-                          'pase': 'donaciones.html', 'comunidad': 'comunidad.html', 'donaciones': 'donaciones.html'},
+                          'pase': 'donaciones.html', 'comunidad': 'comunidad.html', 'donaciones': 'donaciones.html',
+                          'enciclopedia': 'planisferio.html', 'biblioteca': 'diccionario.html'},
         'secciones': [
             {
                 # Desde el 10-10-2026 el Agora es su propia pagina (agora()):
@@ -763,14 +764,8 @@ APARTADOS = [
                 'pagina': 'agora.html',
                 'pestana': ('💬', 'Ágora cívica', 'La red de réplica y diálogo: abre su página'),
             },
-            {
-                # Desde el 10-10-2026 es su propia pagina (garantias()): la
-                # brujula de denuncia, las seis puertas, las diez garantias y
-                # el reto. Lo que repetia Comunidad y el Agora se quito.
-                'id': 'garantias',
-                'pagina': 'garantias.html',
-                'pestana': ('🛡️', 'Garantías cívicas', 'A qué puerta tocar y qué te protege: abre su página'),
-            },
+            # Garantías cívicas fue tarjeta de Comunidad hasta el 22-11-2026: desde la Ronda 7
+            # (decisión del autor) vive en el Noticiero (traslado.py).
             # «Cuéntanos lo que viste» (comunidad.html) fue tarjeta de esta
             # pestana hasta el 24-10-2026: ese dia (pedido del autor) se fundio
             # con el boton «Cuéntanos lo que viste» de la cabecera, que es su
@@ -788,16 +783,27 @@ APARTADOS = [
                 'pestana': ('🐷', 'Donaciones', 'Ayuda a sostener la plataforma, a la vista de todos: abre su página'),
             },
             {
-                # Pedido del autor, 02-11-2026: la pestaña Enciclopedia se
-                # vuelve la cuarta tarjeta de Comunidad. Su página y las de
-                # Números, Datos y Aprende no cambian de nombre.
-                'id': 'enciclopedia',
-                'pagina': ENCICLOPEDIA,
-                'pestana': ('📚', 'Enciclopedia', 'Números, Datos y Aprende: la obra de consulta, con su fuente oficial: abre su página'),
+                # Ronda 7 (22-11-2026, decisión del autor): la Enciclopedia dejó de ser
+                # tarjeta (sus páginas viven en el Planisferio y sus portadas, en la
+                # administración); la Biblioteca del Erario es la tercera tarjeta.
+                'id': 'biblioteca',
+                'pagina': 'diccionario.html',
+                'pestana': ('📚', BIB_NOMBRE, 'El diccionario, las referencias, el marco legal, las preguntas y los expedientes de control interno: abre su página'),
             },
         ],
     },
 ]
+
+# La trivia de los presidentes (Ronda 7, 22-11-2026): vivía dentro de Aprende, que quedó privada; se muda a su
+# página en la dimensión financiera del Planisferio, con la misma sección y el mismo guion.
+TRIVIA = {
+    'archivo': 'numeros-trivia-presidentes.html', 'menu': 'El examen de los presidentes', 'icono': '🎯',
+    'titulo': 'Trivia: el examen de los presidentes', 'lema': 'Juega con las cifras oficiales',
+    'entrada': ('Del siglo XIX al primer año de Claudia Sheinbaum: adivina, comprueba con la cifra oficial y, al final, mira el estado '
+                'de cuenta de cada presidente y el reloj de su deuda.'),
+    'scripts': ['trivia-presidentes.js'], 'sin_saltos': True,
+    'secciones': [dict([x for x in APARTADOS if x['archivo'] == 'aprende.html'][0]['secciones'][0], pestana=None)],
+}
 
 # Paginas de herramienta (decision del autor, 09-10-2026): cada tarjeta de
 # Herramientas abre su propia pagina. El encabezado lleva la imagen y el
@@ -1350,15 +1356,8 @@ def nav_de_pagina(archivo, padre3=None, cap=None):
         return nav_capitulos(padre3, cap)
     if padre3 and padre3[0] in apps:
         return nav_compacta(*apps[padre3[0]], padre=padre3)
-    if archivo == ASISTENTE[0]:
-        # El chat es la portada del Auditor Virtual (24-10-2026): ya no es una
-        # «división» del Modo Inspector; desde aquí se va a las herramientas,
-        # al Modo Inspector (las Grandes investigaciones) y a la Enciclopedia.
-        return ('<nav class="herr-nav-min" aria-label="Moverte desde aquí">\n'
-                '        <a class="herr-min" href="%s"><span>🧰 Herramientas</span><small>Las cuatro, en la Enciclopedia</small></a>\n'
-                '        <a class="herr-min" href="%s"><span>🔍 Modo Inspector</span><small>Grandes investigaciones en ocho aplicaciones</small></a>\n'
-                '        <a class="herr-min" href="%s"><span>📚 Enciclopedia</span><small>Números, Datos y Aprende</small></a>\n'
-                '      </nav>' % (NUMEROS_HERR, MODO_INSPECTOR, ENCICLOPEDIA))
+    # El chat ya no lleva la barra «Moverte desde aquí» (Herramientas, Modo Inspector, Enciclopedia): la quitó el
+    # autor en la Ronda 7 (22-11-2026). Las herramientas viven en el Planisferio y el Inspector, en Servicios.
     return None
 
 
@@ -1548,10 +1547,13 @@ def noticias(base, ref):
     # cuelga de Aprende, aunque Aprende conserva su tarjeta hacia aquí. Desde
     # el 02-11-2026 se llama «Noticiero» (pedido del autor).
     'icono': '📰',
-    'titulo': 'Noticiero',
-    'lema': 'La noticia, el verificador y el seguimiento',
-    'entrada': ('Que ninguna noticia sobre el dinero público se quede sin cotejar. Aquí lees la noticia ya verificada, cotejas la que viste '
-                'y sigues el caso hasta que llegue su documento. Elige una tarjeta.'),
+    'titulo': 'Auditavisión Noticias',
+    'lema': 'El periódico del dinero público',
+    # Ronda 7 (22-11-2026): el portal arranca desde arriba, como periódico: cabeza corta, lo último
+    # verificado y luego las tarjetas (con Garantías cívicas).
+    'entrada': 'Que ninguna noticia sobre el dinero público se quede sin cotejar.',
+    'cab_extra': 'nt-portal-cab',
+    'antes': nt.portada(),
     # Tablero de tarjetas por grupo desde el 16-11-2026 (reestructura del autor):
     # cada sección tiene su tarjeta (nt.tablero()), y abajo van lo último, el
     # modo Periodista y los servicios para redacciones (nt.cierre_indice()).
@@ -6962,7 +6964,14 @@ def numeros_preparar():
 def pagina(a, sello):
     """La página, y si es de Servicios, con sus ligas a otras pestañas pasando por el
     Auditor (decisión del autor, 19-11-2026; servicios_fichas.por_auditor_html)."""
+    import traslado
+    if a['archivo'] in traslado.PRIVADAS:
+        # Ronda 7: las portadas de la antigua Enciclopedia, solo para la administración (ni buscadores).
+        a = dict(a, noindex=True)
     texto = _pagina(a, sello)
+    if a['archivo'] not in traslado.PRIVADAS and a['archivo'] != 'administracion-codigos.html':
+        # Ninguna liga pública a esas portadas: cada una va a su sustituta.
+        texto = traslado.sin_privadas(texto)
     import servicios_fichas as sf
     origen = sf.pestana_de(a['archivo'])
     if origen == 'Planisferio':
@@ -6984,6 +6993,45 @@ def pagina(a, sello):
         elif origen == 'Servicios' and a['archivo'] not in (sf.SV_CHAT, sf.SV_RESP, sf.SV_REVISA):
             texto = sf.a_revisa(texto)
     return texto
+
+
+def _traslado_migas(a, padre):
+    """Las migas y la pestaña de una página de la antigua Enciclopedia (Ronda 7, traslado.py): Planisferio › su
+    dimensión › …; la Biblioteca del Erario en Comunidad; Garantías cívicas en el Noticiero; las portadas, solo en la
+    administración. Ninguna miga lleva a una portada privada."""
+    import traslado
+    marca = a.get('menu_archivo', a['archivo'])
+    t = traslado.pestana(a['archivo'])
+    if not t:
+        return padre, marca
+    sep = ' <span aria-hidden="true">›</span> '
+    fuera = set(traslado.PRIVADAS) | {'participa.html', 'index.html'}
+    cadena = [x for x in (a.get('padre'), a.get('padre2'), a.get('padre3')) if x and x[0] not in fuera]
+    if t == 'Planisferio':
+        d = traslado.dim_de(a['archivo'])
+        nom = [x for x in _dimensiones() if x[0] == d][0][2]
+        cab = [(PLANISFERIO, 'Planisferio'), (traslado.DIM_PAG % d, nom)]
+        marca = PLANISFERIO
+    elif t == 'Comunidad':
+        cab = [('participa.html', 'Comunidad')] + ([] if a['archivo'] == 'diccionario.html' else [('diccionario.html', 'Biblioteca del Erario')])
+        marca = 'participa.html'
+    elif t == 'Noticiero':
+        cab = [('noticias-relevantes.html', 'Noticiero')]
+        marca = 'noticias-relevantes.html'
+    else:
+        cab = [('administracion-codigos.html', 'Administración')]
+        marca = ''
+    vistos, cad = set(), []
+    for f, n in cab + cadena:
+        if f not in vistos and f != a['archivo']:
+            vistos.add(f)
+            cad.append((f, n))
+    return ''.join('<a href="%s">%s</a>%s' % (f, n, sep) for f, n in cad), marca
+
+
+def _dimensiones():
+    import planisferio
+    return planisferio.DIMENSIONES
 
 
 def _pagina(a, sello):
@@ -7128,6 +7176,8 @@ def _pagina(a, sello):
     if a['archivo'] != ENCICLOPEDIA and (ENCICLOPEDIA in padre or a['archivo'] in modos.ENCICLOPEDIA_EXTRA):
         migas = re.sub(r'<[^>]+>', '', padre + a['menu'])
         nota = (nota + ' ' if nota else '') + modos.enlace(a['archivo'], migas, re.sub('<[^>]+>', '', a['menu']))
+    # Ronda 7 (22-11-2026): la Enciclopedia se volvió Planisferio. Las migas y la pestaña salen del traslado.
+    padre, marca = _traslado_migas(a, padre)
     cab_clase, cab_estilo = 'apartado-cab', ''
     if a.get('fondo'):
         cab_clase += ' herr-cab herr-foto rubro-%s' % a['rubro'] + (' ' + a['foto_clase'] if a.get('foto_clase') else '')
@@ -7222,7 +7272,7 @@ def _pagina(a, sello):
 </html>
 '''.format(csp=seguridad.meta(), titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
            sociales=sociales(a['archivo'], titulo_doc, descripcion) + ('\n  <meta name="robots" content="noindex, nofollow">' if a.get('noindex') else ''),
-           cabecera=cabecera(a.get('menu_archivo', a['archivo']), sello), menu=a['menu'],
+           cabecera=cabecera(marca, sello), menu=a['menu'],
            volver='' if a.get('pie_corto') else (
                '      <a class="apartado-volver" href="index.html">← Volver al auditor</a>\n'
                '      <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>\n'),
@@ -7430,12 +7480,12 @@ def indice(base, ref):
                                   ('mis-respuestas.html', 'Tus respuestas', 'Lo que le pediste al Auditor y los servicios que vienen a tu caso')], ASISTENTE[0]),
         _grupo('🎛️', 'Los cuatro modos', [('%s?modo=%s' % (ASISTENTE[0], m[0]), '%s Modo %s' % (m[1], m[2]), m[3])
                                           for m in asistente.MODOS])])
-    enciclopedia = _rejilla([_grupo('📚', 'Enciclopedia', [
-        (ENCICLOPEDIA, 'Enciclopedia', 'Números, Datos y Aprende en una sola puerta'),
-        ('sigue-el-dinero.html', 'Números', 'El recorrido del dinero público'),
+    # Ronda 7 (22-11-2026): la Enciclopedia se volvió Planisferio; cada dimensión, con su página (traslado.py).
+    import planisferio as _pl7
+    enciclopedia = _rejilla([_grupo('🧭', 'Las diez dimensiones', [
+        ('planisferio-dim-%s.html' % d[0], '%s %s' % (d[1], d[2]), d[3]) for d in _pl7.DIMENSIONES] + [
         (NUMEROS_HERR, 'Herramientas del Auditor', 'Las cuatro herramientas y sus aplicaciones'),
-        ('descarga-los-datos.html', 'Datos', 'El radar, las descargas, el ambiente y los Poderes'),
-        ('aprende.html', 'Aprende', 'La trivia, la Biblioteca y las noticias')])])
+        ('numeros-trivia-presidentes.html', 'El examen de los presidentes', 'La trivia con el estado de cuenta de cada presidente')])])
     datos_aprende, comunidad = [], []
     for archivo in ('descarga-los-datos.html', 'aprende.html', 'participa.html'):
         a = ap[archivo]
@@ -7449,8 +7499,6 @@ def indice(base, ref):
             enl += [('diccionario.html', BIB_NOMBRE, 'La obra de consulta')] + [(b[0], '· ' + b[2], b[3]) for b in BIBLIOTECA]
         if archivo == 'participa.html':
             enl = [e for e in enl if e[0] != 'comunidad.html']
-            k = [e[0] for e in enl].index('garantias.html') + 1
-            enl[k:k] = [(g[1], '· ' + g[3], '') for g in GARANTIAS_PARTES]
             enl += [('expedientes.html', 'Expedientes de casos de la ASF', 'Los casos por aclarar')]
             comunidad.append(grupo(a['icono'], a['menu'], enl, archivo))
             # El boton de la cabecera, con sus cinco paginas (24-10-2026).
@@ -7468,7 +7516,10 @@ def indice(base, ref):
     nsec = {x[0]: x[2] for x in noticias.SECCIONES}
     diario = _rejilla([_grupo('📰', 'Noticias', [(noticias.ARCHIVO, 'Noticias', 'La pestaña: sus tres páginas en una sola puerta')], noticias.ARCHIVO)] +
                       [_grupo(ico, tit, [(arch, tit, lema)] + [('%s#%s' % (arch, i), '· ' + nsec[i], '') for i in secs], arch)
-                       for arch, ico, tit, lema, _t, secs in noticias.PARTES])
+                       for arch, ico, tit, lema, _t, secs in noticias.PARTES] +
+                      # Garantías cívicas vive en el Noticiero desde la Ronda 7 (22-11-2026).
+                      [_grupo('🧭', 'Garantías cívicas', [('garantias.html', 'Garantías cívicas', 'A qué puerta tocar y qué te protege')] +
+                              [(g[1], '· ' + g[3], '') for g in GARANTIAS_PARTES], 'garantias.html')])
     # El Planisferio y los Servicios (19-11-2026: el índice cuelga del Auditor y lleva a
     # todas las pestañas). Salen de sus mismas listas: un portal o un servicio nuevo
     # aparece solo.
@@ -7499,12 +7550,12 @@ def indice(base, ref):
     secc = [
         ('auditor', '🔍 Auditor Virtual', 'El chat que te contesta todo, en sus cuatro modos, con su dictamen.', auditor),
         ('planisferio', '🗺️ Planisferio', 'El mapa de México y el portal de cada entidad, con sus temas en páginas propias.', mapa_pl),
-        ('enciclopedia', '📚 Enciclopedia', 'La parte de consulta: Números, sus Herramientas, Datos y Aprende.', enciclopedia),
-        ('numeros', '💰 Enciclopedia · Números', 'El recorrido del dinero público, del impuesto a la rendición de cuentas, cada parte en su propia página.', numeros),
-        ('herramientas', '🧰 Enciclopedia · Herramientas del Auditor', 'Cada herramienta y sus aplicaciones, con página propia.', herr),
-        ('mas', '📊 Enciclopedia · Datos y Aprende', 'Las descargas, el radar, el ambiente, los Poderes de la Unión y la Biblioteca del Erario Público.', _rejilla(datos_aprende)),
-        ('comunidad', '🤝 Comunidad', 'La participación ciudadana: el Ágora, tus garantías, las donaciones y «Cuéntanos lo que viste».', _rejilla(comunidad)),
-        ('noticias', '📰 Noticias', 'Auditavisión Noticias, el verificador y el seguimiento de cada caso.', diario),
+        ('enciclopedia', '🧭 Planisferio · las diez dimensiones', 'Lo que era la Enciclopedia (Números, Datos y Aprende), repartido en las dimensiones del Planisferio.', enciclopedia),
+        ('numeros', '💰 Planisferio · el recorrido del dinero', 'Del impuesto a la rendición de cuentas, cada parte en su propia página.', numeros),
+        ('herramientas', '🧰 Planisferio · Herramientas del Auditor', 'Cada herramienta y sus aplicaciones, con página propia.', herr),
+        ('mas', '📊 Planisferio · los datos', 'Las descargas, el radar, el ambiente, los Poderes de la Unión y la Biblioteca del Erario Público.', _rejilla(datos_aprende)),
+        ('comunidad', '🤝 Comunidad', 'El Ágora, las donaciones, la Biblioteca del Erario y «Cuéntanos lo que viste».', _rejilla(comunidad)),
+        ('noticias', '📰 Noticiero', 'Auditavisión Noticias, el verificador, el seguimiento de cada caso y tus garantías cívicas.', diario),
         ('servicios', '🧰 Servicios', 'Lo que hacemos por encargo: cada servicio con su página, y todo empieza en el chat.', servicios_idx),
         ('investigaciones', '🖼️ Auditoría en imágenes, por tema', 'Las investigaciones. Cada una explica el caso y lleva a sus números y a su evidencia.', investigaciones),
         ('metodologia', '🔎 Cómo verificamos', 'La regla que sigue cada cifra y lo último que cambió.', metodologia),
@@ -7513,9 +7564,9 @@ def indice(base, ref):
         'archivo': 'indice.html', 'menu': 'Índice general', 'menu_archivo': 'indice.html', 'padre': (AUDITOR_VIRTUAL, 'Auditor'),
         'icono': '🗂️', 'titulo': 'Índice general', 'lema': 'Todo lo que sabe el Auditor, en una página',
         'entrada': ('El Auditor es la puerta de la plataforma y este es su índice: todo lo que puede contestarte, en el orden de sus pestañas. '
-                    'Pregúntale lo que sea en el chat, o abre aquí la página que buscas. Primero el Auditor Virtual y sus modos; el Planisferio; '
-                    'la Enciclopedia, con los capítulos de Números, cada herramienta con sus aplicaciones, los datos y la obra de consulta; '
-                    'Comunidad, Noticias y Servicios. Al final, las investigaciones por tema y cómo verificamos cada cifra. '
+                    'Pregúntale lo que sea en el chat, o abre aquí la página que buscas. Primero el Auditor Virtual y sus modos; el Planisferio, '
+                    'con sus diez dimensiones, el recorrido del dinero, cada herramienta con sus aplicaciones y los datos; '
+                    'Comunidad, el Noticiero y Servicios. Al final, las investigaciones por tema y cómo verificamos cada cifra. '
                     'Cada enlace abre su propia página.'),
         'secciones': [{'id': i, 'titulo': t, 'texto': x, 'tarjetas': [], 'bloque': b} for i, t, x, b in secc],
     }
@@ -7594,8 +7645,8 @@ REDIRECCIONES = {
     # data) se retiró el 24-10-2026 por decisión del autor: lo que servía ya
     # vive en Auditavisión. Su dirección lleva a la pestaña Enciclopedia; el
     # código original queda en el historial (commit 490233d).
-    'enciclopedia.html': ('enciclopedia-auditavision.html', 'La Enciclopedia antigua',
-                          'Lo que servía de ella ya vive en la pestaña Enciclopedia de Auditavisión: Números, Datos y Aprende.'),
+    'enciclopedia.html': ('planisferio.html', 'La Enciclopedia antigua',
+                          'Lo que servía de ella ya vive en el Planisferio, repartido en sus diez dimensiones (Ronda 7, 22-11-2026).'),
     'busca-y-verifica.html': ('herramienta-inspector-entes.html', 'Busca y verifica',
                               'Ahora vive dentro del Modo Inspector, en la parte «Busca y verifica».'),
     # Los dos estantes del Diccionario se fundieron en la Biblioteca del
@@ -7698,6 +7749,11 @@ def generar(sello=None):
     import presupuesto_modulos
     import mis_respuestas
     for extra in [mis_respuestas.pagina(SERVICIOS, COBRO, __import__('asistente').MODOS, AUDITOR_VIRTUAL)] + planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), fraude.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), *servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA + [dict(x, pie_extra=bib_nav(expedientes_inv.INDICE)) for x in expedientes_inv.paginas()]:
+        texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
+        open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
+    # Ronda 7 (22-11-2026): la Enciclopedia se volvió Planisferio; cada dimensión, con todo lo que trae (traslado.py).
+    import traslado
+    for extra in [TRIVIA] + traslado.paginas_dim():
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

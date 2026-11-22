@@ -281,6 +281,9 @@ def tablero():
             out.append((GRUPO[arch] if n == 0 else '', 'ir-' + sid, arch + '#' + sid, (ico, nom, TARJETA[sid])))
     out.append(('🛡️ Quienes informan', 'ir-periodismo', PERIODISMO,
                 ('🛡️', 'Periodismo en riesgo', 'Las agresiones a la prensa, con el informe del Mecanismo de Protección')))
+    # Ronda 7 (22-11-2026, decisión del autor): Garantías cívicas se muda de Comunidad al Noticiero.
+    out.append(('🧭 Tus garantías', 'ir-garantias', 'garantias.html',
+                ('🧭', 'Garantías cívicas', 'A qué puerta tocar si viste algo raro con el dinero público, y qué te protege')))
     return out
 
 
@@ -306,7 +309,14 @@ def ultimas(n=3):
 
 
 def cierre_indice():
-    return '<div class="nt-indice">\n%s\n%s\n</div>' % (ultimas(), puente(ARCHIVO))
+    # Ronda 7: «Lo último, verificado» sube al arranque del portal (portada()); aquí queda el puente.
+    return '<div class="nt-indice">\n%s\n</div>' % puente(ARCHIVO)
+
+
+def portada():
+    """El arranque del portal (Ronda 7, decisión del autor: «que arranque directamente desde arriba como el portal del
+    periódico»): la cabeza del periódico y lo último, verificado, antes de las tarjetas."""
+    return '<div class="nt-indice nt-portal">\n%s\n</div>' % ultimas()
 
 
 def datos():

@@ -4,7 +4,7 @@
    La configuración la escribe herramientas/acceso.py entre sus marcas: no la
    edites a mano. Las páginas del canje y del panel usan acceso-paginas.js. */
 (function () {
-  var C = /*config*/{"candado":true,"funciones":"https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1","supabase":"https://nuqiyzcilbrrlezmesnf.supabase.co","anon":"sb_publishable_gf28FUrT1zcoaGl4C2f_aQ_exkzAQ9g","canje":"canjea-tu-codigo.html","panel":"administracion-codigos.html","libres":["canjea-tu-codigo.html","administracion-codigos.html","aviso-de-privacidad.html","derecho-de-replica.html","servicios.html","servicios-por-que.html","servicios-fraude-y-lavado.html","servicios-catalogo.html","servicios-tu-perfil.html","servicios-empieza-gratis.html","servicios-como-se-cobra.html","servicios-calendario.html","servicios-preguntas.html","servicios-cotiza.html"]}/*fin-config*/;
+  var C = /*config*/{"candado":true,"funciones":"https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1","supabase":"https://nuqiyzcilbrrlezmesnf.supabase.co","anon":"sb_publishable_gf28FUrT1zcoaGl4C2f_aQ_exkzAQ9g","canje":"canjea-tu-codigo.html","panel":"administracion-codigos.html","libres":["canjea-tu-codigo.html","administracion-codigos.html","aviso-de-privacidad.html","derecho-de-replica.html","servicios.html","servicios-por-que.html","servicios-fraude-y-lavado.html","servicios-catalogo.html","servicios-tu-perfil.html","servicios-empieza-gratis.html","servicios-como-se-cobra.html","servicios-calendario.html","servicios-preguntas.html","servicios-cotiza.html"],"privadas":["enciclopedia-auditavision.html","sigue-el-dinero.html","descarga-los-datos.html","aprende.html"],"fuera":"planisferio.html"}/*fin-config*/;
   var CLAVE = 'av-pase';
   var DIA = 12 * 3600 * 1000;  // cada cuánto se vuelve a preguntar a la base (por si se revocó)
 
@@ -128,11 +128,21 @@
     setInterval(manda, 30000);
   })();
 
+  // Las portadas de la antigua Enciclopedia (Ronda 7, 22-11-2026): solo en el navegador
+  // de la administración; a quien llega por una liga vieja, al Planisferio.
+  var pagina = location.pathname.split('/').pop() || 'index.html';
+  if ((C.privadas || []).indexOf(pagina) >= 0 && !(yo && yo.admin && vigente(yo)) &&
+      !/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+    /* Una liga vieja con ?abrir= o #ancla: la página la manda primero a su página propia;
+       si no la conoce, al Planisferio. */
+    if (/[?&]abrir=/.test(location.search) || location.hash) document.addEventListener('DOMContentLoaded', function () { location.replace(C.fuera); });
+    else location.replace(C.fuera);
+    return;
+  }
   if (!C.candado || !C.funciones) return;
   // En la copia local (python3 -m http.server y las pruebas de revision.py)
   // no se pide código.
   if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return;
-  var pagina = location.pathname.split('/').pop() || 'index.html';
   if (C.libres.indexOf(pagina) >= 0) return;
   // Dentro del marco del chat manda la página de arriba.
   try { if (window.top !== window && window.top.AvAcceso) return; } catch (e) {}

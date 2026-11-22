@@ -646,6 +646,7 @@ def portada():
     if n != len(AUDITORIAS):
         print('ERROR: la portada no tiene las %d diapositivas (%d)' % (len(AUDITORIAS), n))
         return 1
+    d = __import__('traslado').sin_privadas(d)  # Ronda 7: ninguna liga pública a las portadas de la Enciclopedia
     open(ruta_idx, 'wb').write(d.encode('utf-8'))
     return 0
 
@@ -653,6 +654,7 @@ def portada():
 def generar(sello):
     for a in AUDITORIAS:
         texto = pagina(a, sello).replace('\r\n', '\n').replace('\n', '\r\n')
+        texto = __import__('traslado').sin_privadas(texto)
         open(os.path.join(RAIZ, archivo(a[0])), 'wb').write(texto.encode('utf-8'))
     print('auditorías en imágenes: %d páginas generadas con el sello %s' % (len(AUDITORIAS), sello))
     return portada()

@@ -635,7 +635,7 @@
     return out.slice(0, 3).map(function (o) { return o.f; });
   }
   function enciclopediaHtml(lista) {
-    return lista.length ? '<div class="pa-rec pa-enc"><p class="pa-mas-t">📚 En la Enciclopedia</p><div class="pa-rec-lista">' + lista.map(function (f) {
+    return lista.length ? '<div class="pa-rec pa-enc"><p class="pa-mas-t">📚 Para saber más, en la plataforma</p><div class="pa-rec-lista">' + lista.map(function (f) {
       var m = f.m || 'inspector';
       return '<a class="pa-rec-a" href="' + esc(f.ir[0]) + '" data-modo="' + esc(m) + '"><span class="pa-rec-ico" aria-hidden="true">' + MODO_ICO[m] + '</span>' +
         '<span><b>' + esc(f.tit) + '</b><small>' + (f.t === 'pagina' ? 'Página' : 'En «' + esc(f.ir[1]) + '»') + ' · Modo ' + esc(m.charAt(0).toUpperCase() + m.slice(1)) + '</small></span></a>';
@@ -3505,7 +3505,7 @@
         periodistaHtml(q, r) + capaModoHtml(q, r) +
         appDe(r) +
         panel(r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r))), '🧭', 'Explóralo a fondo') +
-        panel(enciclopediaHtml(enciclopediaPara(q, r)), '📚', 'En la Enciclopedia') +
+        panel(enciclopediaHtml(enciclopediaPara(q, r)), '📚', 'Para saber más, en la plataforma') +
         (r.web ? webHtml(r.web) : '') +
         (r.sug && r.sug.length ? '<p class="pa-mas-t">' + (r.tambien ? 'También te puede servir' : 'Sigue preguntando') + '</p>' + chips(r.sug) : '');
       var caja = li.querySelector('.pa-app[data-pa-abre]');
@@ -3668,7 +3668,7 @@
         (ir ? '<p class="pa-acc"><a class="pa-boton pa-ver" href="' + esc(ir[0]) + '">📖 Saber más <span class="pa-ver-donde">· ' + esc(ir[1]) + '</span> ➔</a></p>' : '') +
         capaModoHtml(q, r) + appDe(r) + expInvHtml(q, r) + servicioHtml(r, q) +
         sec('🧭', 'En las demás partes de la plataforma', r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r))).replace(/<p class="pa-mas-t">[^<]*<\/p>/, '')) +
-        sec('📚', 'En la Enciclopedia', enciclopediaHtml(enciclopediaPara(q, r)).replace(/<p class="pa-mas-t">[^<]*<\/p>/, '')) +
+        sec('📚', 'Para saber más, en la plataforma', enciclopediaHtml(enciclopediaPara(q, r)).replace(/<p class="pa-mas-t">[^<]*<\/p>/, '')) +
         (r.web ? webHtml(r.web) : '') +
         (r.ficha ? '<section class="pa-pag-dic"><h3><span aria-hidden="true">🧾</span> Tu dictamen</h3>' +
           '<p>El respaldo de esta respuesta' + (r.integ ? ', con la revisión completa' : '') + ': tu pregunta, lo que se contestó, cada cifra con su estado, sus fuentes y el método, con folio, sello y huella digital. ' +

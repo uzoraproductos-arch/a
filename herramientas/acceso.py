@@ -63,6 +63,23 @@ DURACIONES = [
 ]
 
 
+def _enciclopedia():
+    """La antigua Enciclopedia, en privado (Ronda 7, decisión del autor, 22-11-2026): sus cuatro portadas ya no tienen
+    liga pública (traslado.py) y acceso.js solo las abre en el navegador de la administración."""
+    import traslado
+    nom = {'enciclopedia-auditavision.html': ('📚', 'La Enciclopedia', 'Su portada, con Números, Datos y Aprende.'),
+           'sigue-el-dinero.html': ('💰', 'Números', 'El índice de Presupuesto, Gasto público, Cuentas claras, Baja al territorio y las Herramientas.'),
+           'descarga-los-datos.html': ('🗂️', 'Datos', 'El índice de los Poderes, la salud, el ambiente, el padrón del SAT y los informes.'),
+           'aprende.html': ('🎓', 'Aprende', 'El índice de la Biblioteca del Erario, cómo se audita, el fraude en números y los recursos naturales.')}
+    return ('      <h3>La Enciclopedia, en privado</h3>\n'
+            '      <p class="ac-ayuda">Desde la Ronda 7 sus páginas viven en el Planisferio (cada una en su dimensión) y la Biblioteca del Erario en '
+            'Comunidad. Sus cuatro portadas quedan aquí, solo para ti: el público ya no tiene ligas a ellas y, si alguien llega por una vieja, '
+            'la página lo manda al Planisferio.</p>\n'
+            '      <ul class="ac-enc">\n%s      </ul>\n') % ''.join(
+        '        <li><a href="%s"><span aria-hidden="true">%s</span> <b>%s</b></a> <small>%s</small></li>\n' % ((f,) + nom[f])
+        for f in traslado.PRIVADAS)
+
+
 def config():
     base = SUPABASE_URL.rstrip('/')
     funciones = (base + '/functions/v1') if base else ''
@@ -77,6 +94,8 @@ def config():
         'canje': CANJE,
         'panel': PANEL,
         'libres': LIBRES,
+        'privadas': list(__import__('traslado').PRIVADAS),
+        'fuera': 'planisferio.html',
     }
 
 
@@ -273,6 +292,8 @@ HOJAS = [
     ('solicitudes', '📨', 'Solicitudes'),
     ('bitacora', '📋', 'Bitácora'),
     ('acceso', '🔐', 'Mi acceso'),
+    # Ronda 7 (22-11-2026): la antigua Enciclopedia, solo para la administración (traslado.py).
+    ('enciclopedia', '📚', 'Enciclopedia'),
 ]
 # Las gráficas del tablero: id, título y qué responde. Las pinta
 # acceso-paginas.js con lo que devuelve uso_tablero() de la base.
@@ -368,6 +389,9 @@ def pagina_panel():
               + _pestanas() +
               '    <section class="ac-hoja" id="ac-hoja-tablero" role="tabpanel" aria-labelledby="ac-tab-tablero" data-sin-medir>\n'
               + _tablero() +
+              '    </section>\n'
+              '    <section class="ac-hoja" id="ac-hoja-enciclopedia" role="tabpanel" aria-labelledby="ac-tab-enciclopedia" hidden>\n'
+              + _enciclopedia() +
               '    </section>\n'
               '    <section class="ac-hoja" id="ac-hoja-bitacora" role="tabpanel" aria-labelledby="ac-tab-bitacora" hidden>\n'
               + _bitacora() +
