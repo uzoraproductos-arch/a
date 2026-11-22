@@ -7173,7 +7173,8 @@ def _pagina(a, sello):
             padre += '<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a[nivel]
     # Cada pagina de la Enciclopedia se pregunta al Auditor en su modo (29-10-2026).
     import modos
-    if a['archivo'] != ENCICLOPEDIA and (ENCICLOPEDIA in padre or a['archivo'] in modos.ENCICLOPEDIA_EXTRA):
+    if a['archivo'] != ENCICLOPEDIA and (ENCICLOPEDIA in padre or a['archivo'] in modos.ENCICLOPEDIA_EXTRA
+                                         or __import__('traslado').dim_de(a['archivo'])):
         migas = re.sub(r'<[^>]+>', '', padre + a['menu'])
         nota = (nota + ' ' if nota else '') + modos.enlace(a['archivo'], migas, re.sub('<[^>]+>', '', a['menu']))
     # Ronda 7 (22-11-2026): la Enciclopedia se volvió Planisferio. Las migas y la pestaña salen del traslado.

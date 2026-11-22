@@ -55,6 +55,11 @@ def es_enciclopedia(archivo, migas):
     cobertura_auditor.py: una sola regla, para que la prueba y el chat no se
     separen (11-11-2026: al mudarse a Comunidad, los dos dejaron de verla y
     la prueba pasaba revisando 10 paginas)."""
+    # Ronda 7 (22-11-2026): la Enciclopedia se volvió Planisferio (traslado.py); sus páginas siguen siendo la base
+    # física del Auditor: las que el traslado manda al Planisferio o a la Biblioteca del Erario, sin las portadas privadas.
+    import traslado
+    if traslado.dim_de(archivo) or traslado.pestana(archivo) == 'Comunidad':
+        return True
     return 'Enciclopedia' in migas.split(' › ')[1:3] or archivo in ENCICLOPEDIA_EXTRA
 
 

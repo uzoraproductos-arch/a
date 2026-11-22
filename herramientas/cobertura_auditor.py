@@ -108,7 +108,7 @@ def main():
                 mal.append('en la base del chat está como %s y su botón dice %s' % (base.get(archivo), modo))
             r = pag.evaluate(PREGUNTA_JS, [q, modo])
             ir = (r['ir'] or '').split('#')[0].split('?')[0]
-            donde = 'Saber más' if ir == archivo else ('En la Enciclopedia' if archivo in r['enc'] else None)
+            donde = 'Saber más' if ir == archivo else ('Para saber más, en la plataforma' if archivo in r['enc'] else None)
             if not donde:
                 mal.append('«%s» lleva a %s y no la ofrece' % (q, 'nada' if r['sin'] else r['ir']))
             filas.append((archivo, migas, modo, q, donde))
