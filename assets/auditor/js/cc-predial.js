@@ -88,11 +88,11 @@
     var B = base(m, x.vf, x.tipo), A, artB;
     if (m.anual) {
       var t0 = m.anual[x.tipo] || m.anual.edif, a0 = r2(x.vf * t0 / 1000);
-      var queEs = { edif: 'Casa habitación', rust: 'Rústico (la ley no le da otra tasa)', com: 'Comercial, industrial o de servicios', baldio: 'Baldío' }[x.tipo] || 'Construido';
+      var queEs = (m.et_anual && m.et_anual[x.tipo]) || { edif: 'Casa habitación', rust: 'Rústico (la ley no le da otra tasa)', com: 'Comercial, industrial o de servicios', baldio: 'Baldío' }[x.tipo] || 'Construido';
       artB = m.art_anual[x.tipo] || m.art_tarifa;
       pasos.push([queEs + ': ' + t0 + ' al millar al año sobre el valor catastral', a0, ley(artB), 'b']);
       A = anual(m, x.vf, x.tipo);
-      if (A > a0) pasos.push(['La cuenta da menos del mínimo: la ley cobra ' + m.minimo.uma_anual + ' cuotas al año', A, ley(m.minimo.art), 'b']);
+      if (A > a0) pasos.push(['La cuenta da menos del mínimo: la ley cobra ' + m.minimo.uma_anual + ' ' + (m.minimo.un || 'cuotas') + ' al año', A, ley(m.minimo.art), 'b']);
       B = r2(A / 6);
     } else if (x.tipo === 'rust' && m.rustico) {
       pasos.push(['Rústico: ' + m.rustico.millar + ' al millar del valor + cuota fija de ' + cf2(m.rustico.cf), B, ley(m.rustico.art), 'b']);
@@ -397,7 +397,7 @@
     $('cpPredio').disabled = !m;
     /* «Comercial» solo donde la ley le da su propia tasa (Nuevo León, art. 21 bis-8, tercer párrafo). */
     var oc = $('cpTipo').querySelector('option[value="com"]'), conCom = !!(m && m.anual && m.anual.com);
-    if (oc) { oc.hidden = !conCom; oc.disabled = !conCom; if (!conCom && $('cpTipo').value === 'com') $('cpTipo').value = 'edif'; }
+    if (oc) { oc.hidden = !conCom; oc.disabled = !conCom; oc.textContent = (m && m.com_et) || 'Comercial, industrial o de servicios (donde la ley le da su tasa)'; if (!conCom && $('cpTipo').value === 'com') $('cpTipo').value = 'edif'; }
     if (m) {
       $('cpBen').innerHTML = '<option value="">Ninguno</option>' + m.beneficios.map(function (b) {
         if (b.fija != null) return '<option value="' + esc(b.id) + '">' + esc(b.et) + ' — pagas ' + (b.fija_bim ? pesos(b.fija_bim) + ' por bimestre' : pesos(b.fija) + ' al año (' + b.fija_uma + ' cuotas)') + (b.hasta ? ' (valor hasta ' + pesos(b.hasta) + ')' : '') + '</option>';

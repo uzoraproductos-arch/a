@@ -1972,13 +1972,13 @@
     var ents = [];
     Object.keys(EN).forEach(function (k) {
       var n = plano(EN[k]).trim();
-      if (k === 'MEX') n = 'estado de mexico';
+      if (k === 'MÉX') n = 'estado de mexico';
       if (p.indexOf(' ' + n + ' ') >= 0) ents.push(k);
     });
     if (/ (cdmx|df|distrito federal) /.test(p) && ents.indexOf('CDMX') < 0) ents.push('CDMX');
-    if (/ edomex /.test(p) && ents.indexOf('MEX') < 0) ents.push('MEX');
+    if (/ edomex /.test(p) && ents.indexOf('MÉX') < 0) ents.push('MÉX');
     /* «Ciudad de México» no es «Estado de México». */
-    if (ents.indexOf('CDMX') >= 0) ents = ents.filter(function (k) { return k !== 'MEX'; });
+    if (ents.indexOf('CDMX') >= 0) ents = ents.filter(function (k) { return k !== 'MÉX'; });
     var nomE = function (m) { return m.nom + ', ' + (EN[m.e] || m.e); };
     var otra = '', ent = '', cve = '', esp = null, nivel = '';
     if (hit) {
@@ -1999,7 +1999,7 @@
     }
     if (!hit) {
       /* Una ley que leímos y quedó en espera (León, Guanajuato): se dice, no se calcula. */
-      (C.predEsp || []).forEach(function (w) { if (!esp && p.indexOf(' ' + w.n + ' ') >= 0 && (!ents.length || ents.indexOf(w.k.split('-')[0]) >= 0)) esp = w; });
+      (C.predEsp || []).forEach(function (w) { if (!esp && [].concat(w.n).some(function (n) { return p.indexOf(' ' + n + ' ') >= 0; }) && (!ents.length || ents.indexOf(w.k.split('-')[0]) >= 0)) esp = w; });
       if (esp) { ent = esp.k.split('-')[0]; cve = esp.k.split('-')[1]; }
       else if (!ent && ents.length) ent = ents[0];
     }
@@ -2010,7 +2010,7 @@
     return respApp('ccpredial', liga, '<p><span aria-hidden="true">' + a.ico + '</span> Esa cuenta la hace <b>' + esc(a.n) + '</b>, de la ' + esc(a.grupo) + puse +
       ': escribe el valor fiscal de tu predio (viene en tu recibo) y te dice tu predial del año con la tarifa de su ley (su Ley de Ingresos; en Nuevo León, la Ley de Hacienda para los Municipios; en la Ciudad de México, el Código Fiscal), sus descuentos y, si debes bimestres, la actualización, los recargos, la multa y los gastos de cobranza, cada uno con su artículo.</p>' +
       nivel + otra +
-      (esp ? '<p class="pa-chico"><span class="est-chip est-pendiente">pendiente</span> Leímos su Ley de Ingresos, pero aún no la integramos: ' + esc(esp.m) + ' No adivinamos una tasa.</p>' : '') +
+      (esp ? '<p class="pa-chico"><span class="est-chip est-pendiente">pendiente</span> Leímos su ley, pero aún no la integramos: ' + esc(esp.m) + ' No adivinamos una tasa.</p>' : '') +
       '<p class="pa-chico">La cuenta la hace el simulador, no el chat. Cada municipio cobra con su propia ley; si el tuyo aún no está cotejado, la página te lo dice y te da cuánto recaudó de predial.</p>',
       { sug: ['Me llegó un mandamiento de ejecución por no pagar el predial', '¿Cuánto recaudó de predial mi municipio?', 'Vendes una casa o un terreno'] });
   }
