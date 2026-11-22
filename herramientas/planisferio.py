@@ -418,7 +418,9 @@ def _datos(base, padron):
         h = sa[e['abbr']]
         filas[-1].update({'imA': h['ads'], 'imX': h['conx'], 'imQ': h['iq'], 'imK': h['camk'],
                           'isM': h['is']['med'], 'isK': h['is']['cam'], 'isU': h['is']['u'], 'imM': h['im']['med'],
+                          'iaD': h['ia']['derechohabientes'], 'iaX': h['ia']['conx'], 'iaQ': h['ia']['cirugias'],
                           'sal': {'con': h['con'], 'esp': h['esp'], 'urg': h['urg'], 'egr': h['egr'], 'camc': h['camc'], 'iqk': h['iqk'],
+                                  'ic2': h['ia']['consultas'], 'ieg': h['ia']['egresos'], 'iur': h['ia']['urgencias'],
                                   'ie': h['is']['enf'], 'ic': h['is']['cons'], 'mu': h['im']['u'], 'mk': h['im']['cam'], 'me': h['im']['enf'],
                                   'oo': [n for n, _ in h.get('ooad', [])]}})
         # Su administración pública (03-11-2026): lo que su gobierno le reportó
@@ -616,11 +618,21 @@ LENTES = [
     {'id': 'imK', 'dim': 'salud', 'fmt': 'dec2', 'nom': 'IMSS · Camas por cada mil adscritos', 'pal': 'naranja', 'est': 'derivado', 'anio': 2025,
      'que': ('Las camas censables (las de hospitalización, sin urgencias ni recuperación) del IMSS en cada estado por cada mil personas adscritas. '
              'Dice con cuánto cuenta, no cuántas están ocupadas ni si hay personal para usarlas.')},
+    # El Anuario Estadístico 2025 del ISSSTE (22-11-2026): cuántas personas
+    # atiende en cada estado y qué les resolvió.
+    {'id': 'iaD', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Derechohabientes', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
+     'que': ('Las personas con derecho a los servicios del ISSSTE en cada estado al 31 de diciembre de 2025, según su Anuario Estadístico: quienes trabajan para el gobierno '
+             'federal, sus pensionados y sus familias. No es la población del estado ni cuántas personas usaron los servicios.')},
+    {'id': 'iaX', 'dim': 'salud', 'fmt': 'dec2', 'nom': 'ISSSTE · Consultas por derechohabiente', 'pal': 'naranja', 'est': 'derivado', 'anio': 2025,
+     'que': ('Las consultas externas que dio el ISSSTE en el estado en 2025 entre sus derechohabientes (Anuario Estadístico 2025). Cuenta consultas, no si se resolvió el problema '
+             'ni cuánto se esperó, y las unidades de tercer nivel atienden también a gente de otros estados.')},
+    {'id': 'iaQ', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Cirugías', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
+     'que': ('Los procedimientos quirúrgicos que registró el ISSSTE en cada estado en 2025, según su Anuario Estadístico. Se cuentan donde se operó, no donde vive la persona.')},
     {'id': 'isM', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Médicos', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
      'que': ('Las médicas y médicos generales, especialistas y odontólogos del ISSSTE en cada estado, según el registro de recursos de la Secretaría de Salud (DGIS). '
-             'Cuántas personas atiende el ISSSTE en cada estado no se puede decir: su anuario no responde. Algunas unidades no reportaron personal.')},
+             'Algunas unidades no reportaron personal.')},
     {'id': 'isK', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Camas de hospital', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
-     'que': ('Las camas del área de hospitalización del ISSSTE en cada estado (registro de la DGIS). Sin cuántos derechohabientes tiene cada estado, no se puede decir si son pocas o muchas.')},
+     'que': ('Las camas del área de hospitalización del ISSSTE en cada estado (registro de la DGIS). Su número dice con cuánto cuenta, no cuántas están ocupadas ni si alcanzan.')},
     {'id': 'isU', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Unidades', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
      'que': ('Los establecimientos del ISSSTE en cada estado (registro de la DGIS): clínicas, hospitales y unidades de apoyo. Muchas unidades chicas no es lo mismo que mucha atención.')},
     {'id': 'imM', 'dim': 'salud', 'fmt': 'n', 'nom': 'IMSS · Médicos, en el mismo registro', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
@@ -786,6 +798,11 @@ def _fuentes(ref, base=None):
         sp = gsal._estados_doc()['dgis']['sinPersonal']
         dgis = ('Secretaría de Salud, Dirección General de Información en Salud, Recursos en Salud Sectorial 2025, establecimientos del %s por entidad (<a href="%s">datos abiertos, ZIP</a>; '
                 'huella SHA-256 <code>%s…</code>). La suma por entidad es nuestra; el total de establecimientos cuadra con la nota de cierre de la DGIS')
+        def _iss(cuadro, campo):
+            f = gsal.fuente_issste(campo)
+            return 'ISSSTE, Anuario Estadístico 2025, cuadro %s, por entidad (<a href="%s">archivo ZIP</a>; huella SHA-256 <code>%s…</code>). Las 32 entidades suman el total del cuadro' % (
+                cuadro, html.escape(f['url']), f['sha256'][:12])
+
         def _mem(cuadro, cap):
             return mem % (cuadro, gsal.MEMORIA, gsal.MEM[cap]['sha256'][:12])
         extra.update({
@@ -793,6 +810,9 @@ def _fuentes(ref, base=None):
             'imQ': _mem('cuadro IV.5 «Hospitalización», columna de intervenciones quirúrgicas de 2025', 'IV') + '.',
             'imX': 'Consultas de 2025 (%s) ÷ población adscrita (%s). La división es nuestra.' % (_mem('cuadro IV.3', 'IV'), _mem('cuadro II.10', 'II')),
             'imK': 'Camas censables (%s) ÷ población adscrita (%s) × 1,000. La división es nuestra.' % (_mem('cuadro XIII.11', 'XIII'), _mem('cuadro II.10', 'II')),
+            'iaD': _iss('1.2 «Población derechohabiente»', 'derechohabientes') + '.',
+            'iaQ': _iss('25.1 «Procedimientos quirúrgicos»', 'cirugias') + '.',
+            'iaX': 'Consultas externas de 2025 (%s) ÷ derechohabientes (%s). La división es nuestra.' % (_iss('18.6', 'consultas'), _iss('1.2', 'derechohabientes')),
             'isM': (dgis % ('ISSSTE', html.escape(dg['url']), dg['sha256'][:12])) + ', columna «Total médicos generales especialistas y odontólogos». El ISSSTE no le reportó personal de %d establecimientos.' % sp['issste'],
             'isK': (dgis % ('ISSSTE', html.escape(dg['url']), dg['sha256'][:12])) + ', columna «Total camas área hospitalización».',
             'isU': (dgis % ('ISSSTE', html.escape(dg['url']), dg['sha256'][:12])) + '.',
@@ -1181,6 +1201,7 @@ TEMAS_LENTES = {
                  ('resolvio', '📊 Lo que resolvió', ['judc', 'judx', 'judr', 'judj']),
                  ('federal', '⚖️ Justicia federal', ['jdfL', 'jdfD'])],
     'salud': [('imss', '🩺 IMSS · su Memoria', ['imA', 'imX', 'imQ', 'imK']),
+              ('issste', '📋 ISSSTE · su Anuario', ['iaD', 'iaX', 'iaQ']),
               ('dgis', '🏥 ISSSTE e IMSS · registro de la DGIS', ['isM', 'isK', 'isU', 'imM'])],
     'social': [('pobreza', '🫂 Pobreza', ['soP', 'soN', 'soX', 'soI']),
                ('carencias', '🧩 Carencias', ['soS', 'soA', 'soR']),
@@ -1406,7 +1427,8 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
                      'litigiosidad federal por cada 100 mil habitantes y días que tarda un amparo indirecto); y '
                      '2) Presupuesto ejercido, gasto por asunto concluido, contadores en tiempo real por segundo y el tabulador de sueldos, prestaciones e ingresos por año, día y hora frente al tope del artículo 127.'),
         'salud': ('El IMSS y el ISSSTE en cada estado. Del IMSS, lo que registra su Memoria Estadística 2025: a cuántas personas tiene adscritas, cuántas consultas y cirugías dio '
-                  'y cuántas camas tiene por cada mil. Del ISSSTE, con qué cuenta según el registro de la Secretaría de Salud: médicos, camas y unidades. '
+                  'y cuántas camas tiene por cada mil. Del ISSSTE, lo que registra su Anuario Estadístico 2025: sus derechohabientes, sus consultas y sus cirugías; '
+                  'y con qué cuenta según el registro de la Secretaría de Salud: médicos, camas y unidades. '
                   'La última lente pone a los médicos del IMSS en ese mismo registro, para comparar las dos con la misma regla.'),
         'social': ('La pobreza en cada estado, como la mide el INEGI con la Encuesta de Ingresos y Gastos de los Hogares 2024 y la metodología del CONEVAL: '
                    'cuántas personas la viven y cuántas en pobreza extrema, cuántas tienen un ingreso que no alcanza y las tres carencias que más pesan '
@@ -1621,16 +1643,17 @@ def _nota_sal(filas):
     tm = sum(f['isM'] for f in filas)
     cd = max(filas, key=lambda f: f['isM'])
     pr = sorted(filas, key=lambda f: f['isM'] / (f['isM'] + f['imM']))
+    ix = sorted(filas, key=lambda f: f['iaX'])
     return ('<b>La misma institución no da la misma cama en todos lados.</b> Por cada mil personas adscritas, el IMSS tiene %s camas de hospitalización en %s %s y %s en %s %s. '
             'Parte de la diferencia es que los hospitales de alta especialidad se cuentan donde están y atienden a gente de otros estados; la otra parte es que no hay '
             'la misma infraestructura en todos lados. <b>El ISSSTE, en la capital:</b> %s de sus %s médicos están en %s %s, %s de cada 100 %s. '
             'Y donde menos pesa frente al IMSS es %s: de cada 100 médicos de las dos instituciones, %s son del ISSSTE %s. '
-            '<b>Lo que falta:</b> cuántas personas atiende el ISSSTE en cada estado y qué les resolvió %s. Sin eso, sus camas y sus médicos no se pueden poner por persona, '
-            'y este mapa no puede decir si el ISSSTE de un estado alcanza o no. Tampoco está quien no tiene seguridad social: el IMSS-Bienestar y los servicios estatales.') % (
+            '<b>Lo que el anuario del ISSSTE no dice:</b> las consultas por derechohabiente van de %s en %s a %s en %s %s, pero cuentan cuánto se dio, no cuánto se esperó ni si alcanzó; '
+            'y sus médicos y camas vienen de otro registro (la DGIS), así que no se dividen entre sus derechohabientes. Tampoco está quien no tiene seguridad social: el IMSS-Bienestar y los servicios estatales.') % (
         format(k[-1]['imK'], '.2f'), k[-1]['n'], chip('derivado'), format(k[0]['imK'], '.2f'), k[0]['n'], chip('derivado'),
         format(cd['isM'], ','), format(tm, ','), cd['n'], chip('oficial'), format(round(100.0 * cd['isM'] / tm)), chip('derivado'),
         pr[0]['n'], format(100.0 * pr[0]['isM'] / (pr[0]['isM'] + pr[0]['imM']), '.1f'), chip('derivado'),
-        chip('pendiente', 'salud-issste-servicios'))
+        format(ix[0]['iaX'], '.2f'), ix[0]['n'], format(ix[-1]['iaX'], '.2f'), ix[-1]['n'], chip('derivado'))
 
 
 def _ctx(i):
@@ -2337,8 +2360,8 @@ def _judicial_portal(base, ref, e):
 
 def _salud_portal(base, ref, e):
     """Su salud pública (03-11-2026): el IMSS, con su Memoria Estadística 2025
-    por OOAD, y el ISSSTE, con el registro sectorial de la DGIS. Las dos
-    fuentes no se mezclan; lo que el ISSSTE no deja ver va con su ficha."""
+    por OOAD, y el ISSSTE, con su Anuario Estadístico 2025 (22-11-2026) y el
+    registro sectorial de la DGIS. Las fuentes no se mezclan."""
     import gestion_salud as gs
     sa = gs.salud_estados(base)
     a, nom = e['abbr'], e['name']
@@ -2365,7 +2388,8 @@ def _salud_portal(base, ref, e):
               format(h['iq'], ','), chip('oficial'), format(h['iqk'], '.1f'), chip('derivado'),
               format(h['camc'], ','), chip('oficial'), format(h['camk'], '.2f'), chip('derivado'), lugar(lambda r: r['camk']), format(1000.0 * tot['camc'] / tot['ads'], '.2f'),
               gs.MEMORIA)
-    i, m = h['is'], h['im']
+    i, m, ia = h['is'], h['im'], h['ia']
+    iat = gs.issste_anuario()['tot']
     tm = sum(r['is']['med'] for r in sa.values())
     p2 = ('<article class="pl-piso pl-piso-iss"><p class="pl-piso-n">2 · El ISSSTE en %s · 2025</p>'
           '<p class="pl-piso-v"><b class="num-tabular">%s</b> médicas y médicos %s</p>'
@@ -2375,13 +2399,23 @@ def _salud_portal(base, ref, e):
           '<dt>Enfermería en contacto con el paciente</dt><dd>%s %s</dd>'
           '<dt>Consultorios</dt><dd>%s %s</dd>'
           '<dt>Frente al IMSS, en el mismo registro</dt><dd>%s médicos del IMSS %s <small>el %s de los médicos de las dos instituciones en el estado son del ISSSTE %s</small></dd>'
-          '<dt>Cuántas personas atiende y qué les resolvió</dt><dd>Sin cifra %s <small>su anuario estadístico no responde</small></dd>'
-          '</dl><p class="pl-piso-f">Secretaría de Salud, DGIS, Recursos en Salud Sectorial 2025 (<a href="%s">datos abiertos</a>), establecimientos del ISSSTE y del IMSS en %s. '
-          'Las sumas y las divisiones son nuestras.</p></article>') % (
+          '<dt>Derechohabientes</dt><dd>%s %s <small>%d.º de 32 %s</small></dd>'
+          '<dt>Consultas externas</dt><dd>%s %s <small>%s por derechohabiente %s (en el país, %s)</small></dd>'
+          '<dt>Egresos hospitalarios</dt><dd>%s %s</dd>'
+          '<dt>Urgencias</dt><dd>%s %s <small>%s reales y %s «sentidas», que no se clasificaron como reales</small></dd>'
+          '<dt>Procedimientos quirúrgicos</dt><dd>%s %s</dd>'
+          '</dl><p class="pl-piso-f">Médicos, unidades, camas, enfermería y consultorios: Secretaría de Salud, DGIS, Recursos en Salud Sectorial 2025 (<a href="%s">datos abiertos</a>), '
+          'establecimientos del ISSSTE y del IMSS en %s. Derechohabientes y servicios: ISSSTE, <a href="%s">Anuario Estadístico 2025</a>, cuadros 1.2, 18.6, 22.1, 23.5 y 25.1 '
+          '(las 32 entidades suman el total de cada cuadro). Los dos registros no se dividen entre sí. Las sumas y las divisiones son nuestras.</p></article>') % (
               html.escape(nom), format(i['med'], ','), chip('oficial'), lugar(lambda r: r['is']['med']), chip('derivado'), pct(100.0 * i['med'] / tm),
               format(i['u'], ','), chip('oficial'), format(i['cam'], ','), chip('oficial'), format(i['enf'], ','), chip('oficial'), format(i['cons'], ','), chip('oficial'),
               format(m['med'], ','), chip('oficial'), pct(100.0 * i['med'] / (i['med'] + m['med'])), chip('derivado'),
-              chip('pendiente', 'salud-issste-servicios'), html.escape(gs.fuente_dgis()['url']), html.escape(nom))
+              format(ia['derechohabientes'], ','), chip('oficial'), lugar(lambda r: r['ia']['derechohabientes']), chip('derivado'),
+              format(ia['consultas'], ','), chip('oficial'), format(ia['conx'], '.2f'), chip('derivado'), format(iat['consultas'] / iat['derechohabientes'], '.2f'),
+              format(ia['egresos'], ','), chip('oficial'),
+              format(ia['urgencias'], ','), chip('oficial'), format(ia['urgenciasReales'], ','), format(ia['urgenciasSentidas'], ','),
+              format(ia['cirugias'], ','), chip('oficial'),
+              html.escape(gs.fuente_dgis()['url']), html.escape(nom), html.escape(gs.issste_anuario()['url']))
     bi = gs.bienestar()
     eb = bi['ent'].get(a)
     if eb:

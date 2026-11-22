@@ -935,7 +935,24 @@
   },
   {
    "q": "¿Cuántas consultas da el ISSSTE?",
-   "ir": "datos-salud-sistema.html#sal-issste"
+   "ir": "datos-salud-sistema.html#sal-issste",
+   "dice": [
+    "24,289,876"
+   ]
+  },
+  {
+   "q": "¿Cuántos derechohabientes tiene el ISSSTE en Jalisco?",
+   "ir": "planisferio-jal-salud.html",
+   "dice": [
+    "derechohabientes"
+   ]
+  },
+  {
+   "q": "¿Cuántos derechohabientes tiene el ISSSTE?",
+   "ir": "datos-salud-sistema.html#sal-issste",
+   "dice": [
+    "13,829,708"
+   ]
   },
   {
    "q": "¿Cuántas denuncias resuelve la PROFEPA?",

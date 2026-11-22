@@ -212,6 +212,7 @@ def _sectores(ids):
     serv = {x[0]: x for x in gs.SERV}
     con, egr, iq = serv['Consultas, en total'], serv['Egresos hospitalarios'], serv['Intervenciones quirúrgicas']
     por_dh = gs.SEM['funcionamiento'] / gs.ADSCRITA[1]
+    ia, ie = gs.issste_anuario()['tot'], gs.issste_anuario()['ext']
     den = ga.DEN[-1]
     pres = ga.PRES[-1]
     proc = ga.PROC[-1]
@@ -237,10 +238,17 @@ def _sectores(ids):
             'pid': gs.PEND_ESPERA['p'],
             'nota': 'Los servicios no incluyen lo que el IMSS dio al IMSS-Bienestar, como advierte la Memoria.'},
         'issste': {
-            'anio': 2025, 'intro': '', 'filas': [],
-            'f': [gs.PEND_ISSSTE['fu']['tx'], gs.PEND_ISSSTE['fu']['url']],
-            'falta': 'Sus consultas, egresos y cirugías de 2025: el anuario estadístico del ISSSTE no responde, y sin su documento no se rellena.',
-            'pid': gs.PEND_ISSSTE['p']},
+            'anio': 2025, 'intro': 'Lo que el ISSSTE atendió en 2025, de su propio Anuario Estadístico.',
+            'filas': [
+                ['Derechohabientes al cierre de 2025', n(ia['derechohabientes']), 'oficial', 'Trabajadores, pensionados y sus familias; incluye %s en el extranjero.' % n(ie['derechohabientes'])],
+                ['Consultas externas que dio en 2025', n(ia['consultas']), 'oficial', ''],
+                ['Consultas por derechohabiente', '%.2f' % (ia['consultas'] / ia['derechohabientes']), 'derivado', 'Consultas ÷ derechohabientes. Cuenta consultas, no cuánto se esperó.'],
+                ['Egresos hospitalarios', n(ia['egresos']), 'oficial', 'Un egreso es una salida del hospital, no una persona.'],
+                ['Urgencias', n(ia['urgencias']), 'oficial', '%s reales y %s «sentidas», que no se clasificaron como reales.' % (n(ia['urgenciasReales']), n(ia['urgenciasSentidas']))],
+                ['Procedimientos quirúrgicos', n(ia['cirugias']), 'oficial', ''],
+            ],
+            'f': ['ISSSTE, Anuario Estadístico 2025 (cuadros 1.2, 18.6, 22.1, 23.5 y 25.1)', gs.issste_anuario()['url']],
+            'nota': 'El anuario es registro de servicios y la Cuenta Pública es presupuesto: no se dividen el uno entre el otro.'},
         'semarnat': {
             'anio': 2024, 'organo': 'PROFEPA',
             'intro': 'De la Semarnat, hoy la plataforma tiene cotejada la productividad de su procuraduría, la <b>PROFEPA</b>: las denuncias que recibió y lo que resolvió, de su Informe de Actividades.',

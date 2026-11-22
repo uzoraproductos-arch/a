@@ -295,7 +295,7 @@
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
     /* Su salud pública: el IMSS con su Memoria Estadística 2025 (por OOAD) y el
-       ISSSTE con el registro de la DGIS; las dos fuentes no se mezclan. */
+       ISSSTE con su Anuario Estadístico 2025 y el registro de la DGIS; las fuentes no se mezclan. */
     function salud(e, fijo) {
       var s = e.sal, d = function (id, nom) {
         var l = lenteDe(id);
@@ -305,10 +305,13 @@
         '<dt>Consultas</dt><dd><b class="num-tabular">' + num(s.con, 0) + '</b> ' + chip('oficial') + '</dd>' +
         d('imX', 'Por persona adscrita') + d('imQ', 'Cirugías') + d('imK', 'Camas por cada mil adscritos') + '</dl>' +
         (s.oo.length ? '<p class="pl-ficha-mun">Suma de sus dos OOAD: ' + esc(s.oo.join(' y ')) + '.</p>' : '');
-      var iss = '<p class="pl-ficha-sub">🏥 El ISSSTE · registro de la DGIS 2025</p><dl class="pl-ficha-dl">' + d('isM', 'Médicos') + d('isK', 'Camas de hospital') + d('isU', 'Unidades') +
-        '<dt>Médicos del IMSS, mismo registro</dt><dd><b class="num-tabular">' + num(e.imM, 0) + '</b> ' + chip('oficial') + '</dd>' +
-        '<dt>Personas que atiende</dt><dd>Sin cifra ' + chip('pendiente', 'salud-issste-servicios') + '</dd></dl>';
-      ficha.innerHTML = '<h3>' + esc(e.n) + '</h3>' + (/^is/.test(lente.id) ? iss + imss : imss + iss) +
+      var iss = '<p class="pl-ficha-sub">📋 El ISSSTE · Anuario Estadístico 2025</p><dl class="pl-ficha-dl">' + d('iaD', 'Derechohabientes') +
+        '<dt>Consultas externas</dt><dd><b class="num-tabular">' + num(s.ic2, 0) + '</b> ' + chip('oficial') + '</dd>' +
+        d('iaX', 'Por derechohabiente') + d('iaQ', 'Cirugías') +
+        '<dt>Urgencias</dt><dd><b class="num-tabular">' + num(s.iur, 0) + '</b> ' + chip('oficial') + '</dd></dl>' +
+        '<p class="pl-ficha-sub">🏥 El ISSSTE · registro de la DGIS 2025</p><dl class="pl-ficha-dl">' + d('isM', 'Médicos') + d('isK', 'Camas de hospital') + d('isU', 'Unidades') +
+        '<dt>Médicos del IMSS, mismo registro</dt><dd><b class="num-tabular">' + num(e.imM, 0) + '</b> ' + chip('oficial') + '</dd></dl>';
+      ficha.innerHTML = '<h3>' + esc(e.n) + '</h3>' + (/^i[sa]/.test(lente.id) ? iss + imss : imss + iss) +
         '<p class="pl-ficha-mun pl-ficha-gen">Cuentan cuánto se hizo y con qué, no cuánto se esperó ni si alcanzó.</p>' +
         '<a class="pl-ficha-ir" href="' + esc(sub(e, 'salud')) + '">Ver su salud pública en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');

@@ -1564,16 +1564,19 @@
       if (!r) return null;
       var x = SAL.t.estados, im = r[10], is = r[11];
       var tot = SAL.est.reduce(function (s, y) { return [s[0] + y[1], s[1] + y[2], s[2] + y[7], s[3] + y[11][2]]; }, [0, 0, 0, 0]);
+      var ia = r[13], tia = SAL.est.reduce(function (s, y) { return [s[0] + y[13][0], s[1] + y[13][1]]; }, [0, 0]);
       var hI = '<p><b>El IMSS en ' + esc(e.n) + '</b> tenía <b>' + n(r[1]) + ' personas adscritas</b> a una clínica familiar al cierre de 2025' + (r[12].length ? ' (suma de sus dos OOAD: ' + esc(r[12].join(' y ')) + ')' : '') + '. ' +
         'Les dio <b>' + n(r[2]) + ' consultas</b>, ' + n(r[8], 2) + ' por persona (en el país, ' + n(tot[1] / tot[0], 2) + '), e hizo <b>' + n(r[6]) + ' intervenciones quirúrgicas</b>. ' +
         'Tiene ' + n(r[7]) + ' camas de hospitalización: <b>' + n(r[9], 2) + ' por cada mil personas adscritas</b> (en el país, ' + n(1000 * tot[2] / tot[0], 2) + ').</p>';
       var hS = '<p><b>El ISSSTE en ' + esc(e.n) + '</b> reporta <b>' + n(is[2]) + ' médicas y médicos</b> (' + n(100 * is[2] / tot[3], 1) + ' % de los del ISSSTE en el país), ' +
         n(is[1]) + ' camas de hospitalización, ' + n(is[3]) + ' personas de enfermería en contacto con el paciente y ' + n(is[0]) + ' unidades. En el mismo registro, el IMSS reporta ' + n(im[2]) + ' médicos en el estado. ' +
-        'Cuántas personas atiende el ISSSTE ahí y qué les resolvió sigue ' + chip('pendiente', 'salud-issste-servicios') + ': su anuario estadístico no responde.</p>';
-      var h = (primero === 'is' ? hS + hI : hI + hS) + '<p class="pa-chico">Del IMSS, su Memoria Estadística 2025; del ISSSTE, el registro de recursos de la Secretaría de Salud (DGIS). No se mezclan: desde 2025 el IMSS de la DGIS incluye las unidades rurales del antiguo IMSS-Bienestar. ' +
+        'Su Anuario Estadístico 2025 registra ahí <b>' + n(ia[0]) + ' derechohabientes</b>, a quienes dio <b>' + n(ia[1]) + ' consultas</b> (' + n(ia[5], 2) + ' por derechohabiente; en el país, ' + n(tia[1] / tia[0], 2) + '), ' +
+        n(ia[2]) + ' egresos hospitalarios, ' + n(ia[3]) + ' atenciones de urgencias y <b>' + n(ia[4]) + ' procedimientos quirúrgicos</b>.</p>';
+      var h = (primero === 'is' ? hS + hI : hI + hS) + '<p class="pa-chico">Del IMSS, su Memoria Estadística 2025; del ISSSTE, su Anuario Estadístico 2025 y el registro de recursos de la Secretaría de Salud (DGIS). No se mezclan: desde 2025 el IMSS de la DGIS incluye las unidades rurales del antiguo IMSS-Bienestar. ' +
         'Y cuentan cuánto se hizo y con qué, no cuánto se esperó.</p>';
       var fu = [x.fu[0], x.fu[1], { que: 'Consultas por persona adscrita y camas por cada mil', e: 'derivado', op: n(r[2]) + ' ÷ ' + n(r[1]) + '; ' + n(r[7]) + ' ÷ ' + n(r[1]) + ' × 1,000', fu: x.fu[0].fu }, x.fu[x.fu.length - 1]];
-      var ci = [{ v: n(r[1]), etq: 'personas adscritas al IMSS', e: 'oficial' }, { v: n(r[9], 2), etq: 'camas del IMSS por cada mil adscritos', e: 'derivado' }, { v: n(is[2]), etq: 'médicos del ISSSTE', e: 'oficial' }];
+      fu.push({ que: 'Consultas por derechohabiente del ISSSTE', e: 'derivado', op: n(ia[1]) + ' ÷ ' + n(ia[0]), fu: x.fu[x.fu.length - 1].fu });
+      var ci = [{ v: n(r[1]), etq: 'personas adscritas al IMSS', e: 'oficial' }, { v: n(r[9], 2), etq: 'camas del IMSS por cada mil adscritos', e: 'derivado' }, { v: n(ia[0]), etq: 'derechohabientes del ISSSTE', e: 'oficial' }, { v: n(is[2]), etq: 'médicos del ISSSTE', e: 'oficial' }];
       if (primero === 'is') ci.reverse();
       return { html: h, fu: fu, ci: ci, tit: 'El IMSS y el ISSSTE en ' + e.n,
         ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-salud.html', 'su salud pública en el Planisferio'],
@@ -1602,7 +1605,7 @@
       if (!imss && !iss) return null;
       var sEs = estados(t).e;
       if (sEs.length === 1 && /consulta|cirug|operacion|egreso|hospital|camas?\b|medicos?\b|doctor|enfermer|unidades|clinicas?\b|adscrit|derechohabientes?|afiliad|cuant|tiene|hay\b/.test(t)) return salEstado(sEs[0], iss && !imss ? 'is' : 'im');
-      if (!sEs.length && /consulta|cirug|camas?\b|medicos?\b|hospital|adscrit|enfermer|unidades/.test(t) && /(que|cual|en que) estados?|cada estado|por estado|los estados|de los 32|entidad/.test(t)) return salTema('estados');
+      if (!sEs.length && /consulta|cirug|camas?\b|medicos?\b|hospital|adscrit|derechohabientes?|enfermer|unidades/.test(t) && /(que|cual|en que) estados?|cada estado|por estado|los estados|de los 32|entidad/.test(t)) return salTema('estados');
       return null;
     }
     function salResp(t) {
@@ -1616,7 +1619,7 @@
       var imss = /\bimss\b|seguro social/.test(t), iss = /issste/.test(t);
       var rse = salEdo(t);
       if (rse) return rse;
-      var gestion = /consulta|cirug|operacion|egreso|hospitaliz|urgencia|atendi|atiende|atienden|resuelve|resolvio|espera|tarda|medicos?\b|doctor|especialista|camas?\b|quirofano|ocupacion|metas?\b|anunci|en salud|atencion medica|enfermedad y maternidad/;
+      var gestion = /consulta|cirug|operacion|egreso|hospitaliz|urgencia|atendi|atiende|atienden|resuelve|resolvio|espera|tarda|derechohabientes?|afiliad|medicos?\b|doctor|especialista|camas?\b|quirofano|ocupacion|metas?\b|anunci|en salud|atencion medica|enfermedad y maternidad/;
       if (iss && gestion.test(t)) return salTema('issste');
       if (!imss || !gestion.test(t)) return null;
       if (/cirug|operacion/.test(t) && (PIDE_VER.test(t) || /1 78|millon 780|anunci|dijo|meta/.test(t))) return salTema('imss_cotejo');
