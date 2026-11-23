@@ -611,3 +611,5 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 .sv-paq-precio { margin: .25rem 0; }
 .sv-paq-liga { display: inline-flex; align-items: center; min-height: 44px; }
 [data-theme="dark"] .sv-paquete { background: #16233a; border-color: #2a3b57; border-top-color: #f2b63d; color: #e8eefa; }
+/* Ronda 10 (auditoría UX): en celular el texto corrido no baja de 16 px (AGENTS.md §4). */
+@media (max-width: 640px) { .sv-aviso, .sv-quien, .sv-most-pie { font-size: 16px; } }

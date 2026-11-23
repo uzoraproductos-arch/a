@@ -3636,7 +3636,7 @@ def servicios():
         # cuatro familias y, el mismo día, en tablero: cada sección es su página
         # (SV_PAGINAS) y lo demás vive en SV_PORQUE, sin borrar nada.
         'archivo': 'servicios.html', 'titulo': 'Servicios',
-        'lema': 'Prevención de fraude y de lavado, temporada electoral, formación e investigación',
+        'lema': 'Investigación por encargo',  # Ronda 10: el rótulo largo ya va en la portada (sv-hero-pre); aquí se repetía
         'entrada': ('La consulta es libre y lo seguirá siendo. Cuando quieras ir más a fondo, lo hacemos por encargo, con la misma regla. '
                     'Los Servicios y las <a href="donaciones.html">donaciones</a> sostienen el trabajo; ninguno compra lo que publicamos.'),
         'sin_saltos': True, 'redirige': redir,

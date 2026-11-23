@@ -227,3 +227,5 @@
 .ac-eje li b { font-family: "JetBrains Mono", monospace; color: #0b2a63; }
 .ac-ejes-nota { margin: 0; font-size: 14px; color: #44526b; }
 .ac-ejes-cta { margin: 4px 0 0; }
+/* Ronda 10 (auditoría UX): en celular el texto corrido no baja de 16 px (AGENTS.md §4). */
+@media (max-width: 640px) { .ac-eje li, .ac-ejes-nota { font-size: 16px; } }

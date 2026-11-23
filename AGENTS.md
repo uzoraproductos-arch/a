@@ -133,6 +133,10 @@ portada para las viejas), `acceso.js` solo las abre en el navegador de la admini
   art. 175 de la LHM). `adeudoAnual()` de `cc-predial.js` y `adeudo_anual()` de `cc_predial.py` son gemelas: **un municipio que cobra por año
   lleva `recargo.anual` con su `venc` y su `max_meses`.**
 
+**Ronda 10 (23-11-2026): Cuernavaca, paquetes piloto y auditoría UX.**
+- **Cuernavaca entra al predial** (`_cuernavaca()` de `cc_predial.py`; 234 municipios y alcaldías en 11 entidades): tarifa del art. 6 por bimestre y estímulos del art. 103 **como facultad del ayuntamiento, nunca como derecho**. Lo que su ley remite a otra no cotejada (el ajuste del art. 93 ter-5 de la Ley General de Hacienda Municipal, y la actualización y los recargos del Código Fiscal para el Estado de Morelos) **no se aplica: va en `nota` y en `acc_pend`**, y la cuota mínima ambigua tampoco.
+- **Los paquetes piloto** (`PAQUETES` de `apartados.py`) juntan servicios que ya existen, sin montos (decisión del autor: los precios salen de los pilotos; tabla interna en `docs/PAQUETES-PILOTO.md`). **Un paquete no agrega campos a la solicitud**: llena servicio, tema y pregunta. Un paquete con un servicio que no existe o con un monto detiene la generación.
+
 **Decisión del autor, 02-11-2026.** El menú (`MENU` de `apartados.py` y su
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Servicios** (segunda desde el 21-11-2026, pedido del autor), **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras
