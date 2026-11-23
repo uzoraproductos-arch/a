@@ -199,6 +199,7 @@
   function adeudo(D, m, y) {
     if (!m.recargo) return { error: m.acc_pend || 'Los recargos de este municipio aún no están integrados.' };
     if (m.recargo.anual) return adeudoAnual(D, m, y);
+    if (m.recargo.cfm) return adeudoCfm(D, m, y);
     var filas = [], avisos = [], tot = { imp: 0, act: 0, rec: 0 };
     var tope = y.sit === 'esp' ? D.lhm.tope_esp : D.lhm.tope;
     var ult = D.inpc_ult, faltaInpc = false;
@@ -296,6 +297,46 @@
     if (R.nota) avisos.push(R.nota);
     if (y.da < D.anio) avisos.push('Para los años antes de ' + D.anio + ' usamos la tasa de recargos de ' + D.anio + ' y el impuesto que escribiste; cada año tuvo los suyos en su ley, así que el adeudo oficial puede ser distinto.');
     return { pasos: pasos, avisos: avisos, total: total, n: filas.length, per: 'año', multa: 0, notif: 0, ejec: 0 };
+  }
+
+  /* El adeudo de Cuernavaca (Ronda 11; m.recargo.cfm), con el Código Fiscal para el Estado de Morelos. Gemela de
+     adeudo_cfm() de cc_predial.py. Cada bimestre vence al terminar su primer mes y es exigible el día 1 del siguiente;
+     recargos por mes o fracción desde ahí (art. 47; tope m.recargo.max_meses) sobre el impuesto actualizado; factor del
+     INPC (art. 46: mes anterior al pago ÷ mes anterior al vencimiento) truncado al diezmilésimo y nunca menor que 1.
+     La multa y los gastos de ejecución no se suman: m.recargo.pend los explica. */
+  function adeudoCfm(D, m, y) {
+    var R = m.recargo, filas = [], avisos = [], tot = { imp: 0, act: 0, rec: 0 };
+    var ult = D.inpc_ult, faltaInpc = false;
+    for (var a = y.da; a <= y.ha; a++) {
+      for (var b = (a === y.da ? y.db : 1); b <= (a === y.ha ? y.hb : 6); b++) {
+        var vm = 2 * b - 1;
+        var n = (y.f[0] - a) * 12 + (y.f[1] - (vm + 1)) + 1;
+        if (n <= 0) continue;
+        var nc = Math.min(n, R.max_meses);
+        var pa = mesAnt(y.f[0], y.f[1]), va = mesAnt(a, vm);
+        var iA = inpc(D, pa[0], pa[1]), iB = inpc(D, va[0], va[1]);
+        if (iA == null) { iA = inpc(D, ult[0], ult[1]); faltaInpc = true; }
+        var F = iA && iB ? Math.max(1, Math.floor(iA / iB * 10000) / 10000) : 1;
+        var act = r2(y.imp * (F - 1));
+        tot.imp += y.imp; tot.act += act; tot.rec += r2((y.imp + act) * R.pct / 100 * nc);
+        filas.push({ a: a, b: b, n: n, nc: nc, F: F });
+      }
+    }
+    if (!filas.length) return { error: 'Con esa fecha de pago, ningún bimestre de ese periodo está vencido todavía (' + m.nombre + ' se paga ' + (m.venc || '') + ').' };
+    if (faltaInpc) avisos.push('El INPC del mes anterior al pago aún no está en la base: usamos el último publicado (' + ult[1] + '/' + ult[0] + '), como dice el ' + R.ley_rec.split(',')[0] + ', art. 46.');
+    tot.imp = r2(tot.imp); tot.act = r2(tot.act); tot.rec = r2(tot.rec);
+    var v = filas[0], pasos = [];
+    pasos.push(['Impuesto omitido: ' + filas.length + ' bimestre' + (filas.length > 1 ? 's' : '') + ' × ' + pesos(y.imp), tot.imp, 'Ley de Ingresos de ' + m.nombre + ', art. 6']);
+    pasos.push(['Actualización con el INPC (el bimestre más viejo, factor ' + v.F.toFixed(4) + ')', tot.act, R.ley_rec.split(',')[0] + ', art. 46']);
+    pasos.push(['Recargos: ' + R.pct + ' % por mes o fracción sobre el impuesto actualizado (el más viejo, ' + v.n + ' mes' + (v.n > 1 ? 'es' : '') +
+      (v.nc < v.n ? '; se cuentan ' + v.nc + ', cinco años' : '') + ')', tot.rec, 'Ley de Ingresos de ' + m.nombre + ', ' + R.art + '; ' + R.ley_rec.split(',')[0] + ', art. 47']);
+    var total = r2(tot.imp + tot.act + tot.rec);
+    pasos.push(['Total a pagar (aproximado)', total, 'Suma', 'b']);
+    if (R.nota) avisos.push(R.nota);
+    if (y.sit !== 'esp' && R.pend) avisos.push(R.pend);
+    if (R.anio_tasa) avisos.push(R.anio_tasa);
+    if (y.da < D.anio) avisos.push('Para los años antes de ' + D.anio + ' usamos la tasa de recargos de ' + D.anio + ' y el impuesto que escribiste; cada año tuvo los suyos en su ley, así que el adeudo oficial puede ser distinto.');
+    return { pasos: pasos, avisos: avisos, total: total, n: filas.length, multa: 0, notif: 0, ejec: 0 };
   }
 
   /* Tu recibo contra la ley: c = {cobro, per: 'bim'|'anual'}; r = lo que dio calcula(). Nunca califica: si no cuadra,

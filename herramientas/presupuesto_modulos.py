@@ -313,6 +313,93 @@ PE_FUENTE = {
     'lfprh': 'la Ley Federal de Presupuesto y Responsabilidad Hacendaria',
 }
 
+# La Ley de Ingresos 2027 ya publicada (Ronda 11; Paquete de Datos 9). El art. 1o., los techos de deuda
+# (arts. 2o., 4o. y 6o.) y los recargos federales (art. 11) se leen de docs/paquete-2027/lif-2027-dof.json,
+# cotejado contra el PDF de la Cámara de Diputados (investigaciones/leyes/LIF_2027.pdf, misma huella). Si la
+# huella del PDF o el cuadre del art. 1o. no dan, la generación se detiene. Ninguna cifra se escribe aquí.
+# La ley rige del 1 de enero al 31 de diciembre de 2027: hasta entonces rige la de 2026. El Presupuesto de
+# Egresos 2027 no estaba publicado en el DOF al revisarlo (PEF_2027.pdf daba 404 en el índice de Diputados el
+# 23-11-2026): lo que se lee del gasto sigue siendo el proyecto.
+import hashlib
+import os
+_RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LIF27_JSON = os.path.join(_RAIZ, 'docs', 'paquete-2027', 'lif-2027-dof.json')
+LIF27_PDF = os.path.join(_RAIZ, 'investigaciones', 'leyes', 'LIF_2027.pdf')
+LIF27_SHA = '1c247831459988960cbb9ef86868c9174e1bce7532957e8156b359e214ac10db'
+PEF27_REVISADO = '23 de noviembre de 2026'
+_LIF27 = []
+
+
+def lif27():
+    if _LIF27:
+        return _LIF27[0]
+    L = json.load(open(LIF27_JSON, encoding='utf-8'))
+    F = L['fuentes']['diputados_pdf']
+    if F['sha256'] != LIF27_SHA:
+        raise SystemExit('presupuesto_modulos: %s cambió de huella: vuelve a cotejarla contra el PDF' % LIF27_JSON)
+    if os.path.exists(LIF27_PDF) and hashlib.sha256(open(LIF27_PDF, 'rb').read()).hexdigest() != LIF27_SHA:
+        raise SystemExit('presupuesto_modulos: %s no es el PDF que cotejamos' % LIF27_PDF)
+    A = L['articulo_1']
+    pres = [r for r in A['rubros'] if r['clave'] != '0']
+    fin = [r for r in A['rubros'] if r['clave'] == '0'][0]
+    if round(sum(r['mdp'] for r in pres), 1) != A['ingresos_presupuestarios_mdp'] or fin['mdp'] != A['ingresos_derivados_financiamientos_mdp'] \
+            or round(A['ingresos_presupuestarios_mdp'] + fin['mdp'], 1) != A['total_lif_mdp']:
+        raise SystemExit('presupuesto_modulos: el art. 1o. de la LIF 2027 no cuadra: revisa %s' % LIF27_JSON)
+    if L['fecha_publicacion_dof'] != '2026-11-13' or L['vigencia_inicio'] != '2027-01-01':
+        raise SystemExit('presupuesto_modulos: la fecha de publicación o la vigencia de la LIF 2027 cambió')
+    L['_pres'], L['_fin'] = pres, fin
+    _LIF27.append(L)
+    return L
+
+
+def lif27_estado():
+    """Una línea para el itinerario y las fuentes: qué ya es ley y qué no."""
+    lif27()
+    return ('<b>Dónde va:</b> la <b>Ley de Ingresos 2027 ya es ley</b>: se publicó en el Diario Oficial el 13 de noviembre de 2026 y rige del '
+            '1 de enero al 31 de diciembre de 2027; hasta entonces sigue rigiendo la de 2026 %s. El <b>Presupuesto de Egresos 2027</b> no estaba '
+            'publicado en el Diario Oficial al revisarlo el %s: lo que se lee aquí del gasto sigue siendo el proyecto. Las leyes de ingresos, la '
+            'federal y las municipales, valen un año: cada una se cambia por la del año siguiente.' % (chip('oficial'), PEF27_REVISADO))
+
+
+LIF27_PLANTILLA = """<h3 class="pm-sub" id="peLif">La Ley de Ingresos 2027, ya publicada</h3>
+          <p class="pm-txt">Lo de arriba es lo que Hacienda propuso. La Ley de Ingresos ya es ley: se publicó en el Diario Oficial el <b>13 de noviembre de 2026</b> y rige del <b>1 de enero al 31 de diciembre de 2027</b> {ofi}. Hasta el 31 de diciembre sigue rigiendo la de 2026, y las cifras de «hoy» de la plataforma son las suyas. Su artículo 1o. estima <b>{total}</b> en total: <b>{pres}</b> sin deuda y <b>{fin}</b> de ingresos derivados de financiamientos {ofi}.</p>
+          <div class="gp-tabla-caja"><table class="gp-tabla pm-tabla"><caption class="sr-only">Ingresos sin deuda de la Ley de Ingresos 2027, por rubro del artículo 1o.</caption><thead><tr><th scope="col">Rubro del artículo 1o.</th><th scope="col">Millones de pesos</th><th scope="col">De cada $100 sin deuda</th></tr></thead><tbody>{filas}</tbody></table></div>
+          <p class="pm-pie">Los montos, {ofi}; la suma sin deuda y la parte de cada rubro, {der} (cada rubro ÷ la suma de los rubros 1 a 9). La ley no trae rubro 8. El total es el mismo que traía la iniciativa.</p>
+          <p class="pm-txt">Dentro de los impuestos: {imp}. La ley proyecta además una <b>recaudación federal participable</b> de <b>{rfp}</b>, la base de lo que se reparte a estados y municipios {ofi}.</p>
+          <h3 class="pm-sub">Cuánta deuda nueva autoriza</h3>
+          <div class="gp-tabla-caja"><table class="gp-tabla pm-tabla"><caption class="sr-only">Techos de endeudamiento neto de la Ley de Ingresos 2027</caption><thead><tr><th scope="col">Quién</th><th scope="col">Interno neto, hasta</th><th scope="col">Externo neto, hasta</th></tr></thead><tbody>{techos}</tbody></table></div>
+          <p class="pm-pie">Son techos de endeudamiento <b>neto</b> (lo que se pide prestado menos lo que se paga), no la deuda total; el art. 2o. deja pasar de uno al otro si el otro queda abajo en lo mismo {ofi}.</p>
+          <h3 class="pm-sub">Los recargos federales de 2027</h3>
+          <p class="pm-txt">Si el SAT te da prórroga, <b>{r1} %</b> al mes sobre el saldo; si te autoriza pagar a plazos, <b>{r2} %</b> hasta 12 meses, <b>{r3} %</b> de 13 a 24 meses y <b>{r4} %</b> a más de 24 meses o a plazo diferido (art. 11). En esas tres ya va la actualización. Son las tasas de 2027: cada Ley de Ingresos fija las suyas {ofi}.</p>
+          <p class="pm-pie">Fuente: <a href="{url}">Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027</a>, texto de la Cámara de Diputados (DOF 13-11-2026), arts. 1o., 2o., 4o., 6o. y 11 (huella SHA-256 <code>{sha}…</code>); <a href="{dof}">la nota del Diario Oficial</a>.</p>"""
+
+
+def lif27_html():
+    """La sección de la ley publicada: art. 1o. por rubro, la recaudación participable, los techos de deuda y los recargos."""
+    L = lif27()
+    A, T, R = L['articulo_1'], L['techos_endeudamiento'], L['articulo_11_recargos_federales_2027']
+    filas = ''.join('<tr><th scope="row">%s. %s</th><td class="num-tabular">%s</td><td class="num-tabular">%s</td></tr>'
+                    % (html.escape(r['clave']), html.escape(re.sub(r' \(FMPED\)$', '', r['concepto'])), mdp(r['mdp']),
+                       '$' + format(r['mdp'] / A['ingresos_presupuestarios_mdp'] * 100, '.1f'))
+                    for r in L['_pres'])
+    D = L['_pres'][0]['desglose']
+    imp = '; '.join('%s, <b>%s</b>' % (n, mdp(D[k])) for n, k in (('impuesto sobre la renta', '11_isr'), ('IVA', '13_01_iva'),
+                                                                     ('IEPS', '13_02_ieps'), ('comercio exterior', '14_comercio_exterior')))
+    gf, pe, cfe = T['articulo_2_gobierno_federal'], T['articulo_4_pemex'], T['articulo_4_cfe']
+    usd = lambda v: '$' + format(v, ',.1f') + ' millones de dólares'
+    techos = ''.join('<tr><th scope="row">%s</th><td class="num-tabular">%s</td><td class="num-tabular">%s</td></tr>' % x for x in (
+        ('Gobierno Federal (art. 2o.)', mdp(gf['interno_neto_hasta_mdp']), usd(gf['externo_neto_hasta_mdd'])),
+        ('Petróleos Mexicanos (art. 4o.)', mdp(pe['interno_neto_hasta_mdp']), usd(pe['externo_neto_hasta_mdd'])),
+        ('Comisión Federal de Electricidad (art. 4o.)', mdp(cfe['interno_neto_hasta_mdp']), usd(cfe['externo_neto_hasta_mdd'])),
+        ('Ciudad de México (art. 6o.)', mdp(T['articulo_6_cdmx']['endeudamiento_neto_mdp']), '—')))
+    return LIF27_PLANTILLA.format(
+        ofi=chip('oficial'), der=chip('derivado'), total=mdp(A['total_lif_mdp']), pres=mdp(A['ingresos_presupuestarios_mdp']),
+        fin=mdp(A['ingresos_derivados_financiamientos_mdp']), filas=filas, imp=imp, rfp=mdp(A['recaudacion_federal_participable_mdp']),
+        techos=techos, r1=R['prorroga_mensual_pct'], r2=R['parcialidades_hasta_12m_mensual_pct'], r3=R['parcialidades_13_a_24m_mensual_pct'],
+        r4=R['parcialidades_mas_24m_o_diferido_mensual_pct'], url=html.escape(L['fuentes']['diputados_pdf']['url']), sha=LIF27_SHA[:12],
+        dof=html.escape(L['fuentes']['dof_nota']['url']))
+
+
 PE_ESCENARIOS = [
     {'id': 'pe-base', 'n': 'Como lo proyecta Hacienda', 'icono': '📋', 'v': {},
      'd': 'Las seis variables en el valor que los Criterios suponen para 2027.'},
@@ -454,7 +541,8 @@ def paquete(base, ref):
         <section class="pm" id="peItin" aria-labelledby="peItinTit">
           <p class="pm-eq-n">Y qué hizo el Estado con esa facultad · entregado el %s</p>
           <h2 class="pm-tit" id="peItinTit">El itinerario que manda la ley</h2>
-          <p class="pm-txt">%s <b>Todavía no es ley:</b> la Cámara de Diputados puede modificarlo hasta el 15 de noviembre.</p>
+          <p class="pm-txt">%s</p>
+          <p class="pm-txt pm-estado">%s</p>
           <ol class="pm-itin">%s</ol>
         </section>
         <section class="pm" id="peCifras" aria-labelledby="peCifrasTit">
@@ -464,6 +552,7 @@ def paquete(base, ref):
           <p class="pm-pie">Criterios Generales de Política Económica 2027, anexos II.5 y III.1 %s. El rango de crecimiento se publica como rango: la estimación de ingresos usa su punto medio.</p>
           %s
           <p class="pm-pie">Criterios Generales de Política Económica 2027, anexo II.6 %s. La columna de 2026 es la aprobada en el Presupuesto vigente, no el cierre estimado.</p>
+          %s
         </section>
         <section class="pm" id="peGasto" aria-labelledby="peGastoTit">
           <h2 class="pm-tit" id="peGastoTit">En qué se irá en 2027</h2>
@@ -531,13 +620,14 @@ def paquete(base, ref):
             <li><b>Iniciativa de Ley de Ingresos de la Federación 2027</b> %s — Anexo A. Su artículo 1o. enumera los ingresos estimados y los techos de endeudamiento.</li>
             <li><b>Comunicado 71 de la Secretaría de Hacienda</b> %s — Presentación oficial del paquete.</li>
             <li><b>Ley Federal de Presupuesto y Responsabilidad Hacendaria</b> %s — artículos 16, 17, 31 y 42, que mandan el contenido del paquete, su calendario y la tolerancia de desviación.</li>
+            <li><b>Ley de Ingresos de la Federación 2027, publicada</b> %s — <a href="%s">texto de la Cámara de Diputados</a> (DOF 13-11-2026, huella SHA-256 <code>%s…</code>). Su artículo 1o., sus techos de deuda y sus recargos están en «Cómo se ve 2027».</li>
           </ol>
-          <p class="pm-txt">El paquete se entregó el <b>%s</b> y se publicó en la %s. <b>Todavía no es ley</b>: la Cámara de Diputados puede modificarlo. Cuando se apruebe, esta página se contrastará renglón por renglón contra el decreto publicado en el Diario Oficial.</p>
+          <p class="pm-txt">El paquete se entregó el <b>%s</b> y se publicó en la %s. %s Cuando se publique el Presupuesto de Egresos, esta página se contrastará renglón por renglón contra su decreto.</p>
         </section>''' % (
         indice,
         CE['entrada'], ref(CE['ref_fuente']), pilares, cadena, ref('ref-cpeum'), ref('ref-ley-planeacion'),
-        P['entregado'], P['entrada'], itin,
-        bill(P['simBase']['ingresos']), bill(P['simBase']['gastoNeto']), oficial, marco, pr('cgpe'), finanzas, pr('cgpe'),
+        P['entregado'], P['entrada'], lif27_estado(), itin,
+        bill(P['simBase']['ingresos']), bill(P['simBase']['gastoNeto']), oficial, marco, pr('cgpe'), finanzas, pr('cgpe'), lif27_html(),
         oficial, funcional, Fn['nota'], pr('cgpe'),
         mdp(S['total']), pct(S['pibPct']), lista(S['filas'], '#1b7f4c'), S['nota'], pr('cgpe'),
         mdp(I['total']), lista(I['filas'], '#0f6f8f'), I['nota'], pr('cgpe'),
@@ -546,7 +636,8 @@ def paquete(base, ref):
         amort, pr('cgpe'), conting, pr('cgpe'),
         senda, Sd['nota'], pr('cgpe'),
         {10: 'Diez', 11: 'Once', 12: 'Doce'}.get(len(P['ciegos']), str(len(P['ciegos']))), ciegos,
-        pr('cgpe'), pr('ppef'), pr('ilif'), pr('com'), pr('lfprh'), P['entregado'], P['gaceta'])
+        pr('cgpe'), pr('ppef'), pr('ilif'), pr('com'), pr('lfprh'), chip('oficial'), html.escape(lif27()['fuentes']['diputados_pdf']['url']), LIF27_SHA[:12],
+        P['entregado'], P['gaceta'], lif27_estado())
 
 # Cada seccion del Paquete Economico 2027 en su propia pagina (pedido del
 # autor, 12-10-2026): la pagina del paquete queda con diez tarjetas.
@@ -572,7 +663,7 @@ PE_PARTES = [
     ('peCiegos', '🔦', 'numeros-paquete-2027-puntos-ciegos.html', 'Puntos ciegos',
      'Lo que se dijo, lo que dice el documento y por qué la diferencia importa.', 'Lo que se dijo frente al documento.'),
     ('peFuentes', '📚', 'numeros-paquete-2027-fuentes.html', 'Fuentes',
-     'Los cinco documentos oficiales de donde sale cada cifra del paquete.', 'Los cinco documentos oficiales.'),
+     'Los seis documentos oficiales de donde sale cada cifra del paquete, con la Ley de Ingresos 2027 ya publicada.', 'Los seis documentos oficiales.'),
 ]
 
 
