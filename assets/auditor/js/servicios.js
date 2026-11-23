@@ -140,6 +140,7 @@
   var EJ = {};
   try { EJ = JSON.parse($('svEjemplosDatos').textContent); } catch (e) { /* sin ejemplos */ }
   function pinta() {
+    if (typeof pintaPaq === 'function') pintaPaq();
     grupos.forEach(function (g) {
       var v = val(g.getAttribute('data-para'));
       [].forEach.call(g.querySelectorAll('.sv-op'), function (b) {
@@ -166,6 +167,30 @@
       ops.appendChild(b);
     });
   }
+  /* Los paquetes piloto (Ronda 10): un toque llena el servicio, el tema y la pregunta, que siguen libres;
+     ?paquete=<id> hace lo mismo al llegar. No agrega campos a la solicitud ni dice un monto. */
+  var PQ = {};
+  try { PQ = JSON.parse($('svPaquetesDatos').textContent); } catch (e) { /* sin paquetes */ }
+  function ponPaquete(id) {
+    var x = PQ[id];
+    if (!x) return;
+    var sel = $('svServicio');
+    if (sel && sel.querySelector('option[value="' + x[0] + '"]')) sel.value = x[0];
+    $('svTema').value = x[1];
+    $('svPregunta').value = x[2];
+    marcar('svTema', false); marcar('svPregunta', false);
+    pinta();
+  }
+  function pintaPaq() {
+    [].forEach.call(document.querySelectorAll('#svPaquetes .sv-op'), function (b) {
+      var x = PQ[b.getAttribute('data-paq')];
+      b.setAttribute('aria-pressed', x && val('svTema') === x[1] ? 'true' : 'false');
+    });
+  }
+  if ($('svPaquetes')) $('svPaquetes').addEventListener('click', function (ev) {
+    var b = ev.target.closest('.sv-op');
+    if (b) ponPaquete(b.getAttribute('data-paq'));
+  });
   grupos.forEach(function (g) {
     var campo = $(g.getAttribute('data-para'));
     if (!campo) return;
@@ -181,6 +206,10 @@
   });
   $('svTema').addEventListener('input', pinta);
   pinta();
+  try {
+    var paq = (new URLSearchParams(location.search).get('paquete') || '').replace(/[^a-z]/g, '');
+    if (paq && !val('svTema')) ponPaquete(paq);
+  } catch (e) { /* sin URLSearchParams */ }
 
   function marcar(id, malo) {
     var el = $(id);

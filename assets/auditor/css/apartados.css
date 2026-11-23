@@ -1293,3 +1293,5 @@ a.bib-nav-estante:hover, a.bib-nav-estante[aria-current] { color: #1f3a6e; text-
 .sv-puente-bib { margin: 16px 0 0; padding: 12px 16px; border-radius: 14px; background: var(--civ-gris, #f3f6fc); border: 1px solid var(--civ-gris-borde, #c9d9ee); line-height: 1.55; }
 .sv-puente-bib a { font-weight: 800; }
 [data-theme="dark"] .sv-puente-bib { background: #16233a; border-color: #2a3b57; color: #e8eefa; }
+/* Ronda 10 (auditoría UX): en celular el texto corrido no baja de 16 px (AGENTS.md §4). */
+@media (max-width: 640px) { .apartado-seccion-texto { font-size: 16px; } }

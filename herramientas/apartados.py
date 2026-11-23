@@ -2646,7 +2646,7 @@ SV_PAGINAS = [
 # Dónde vive cada ancla que antes estaba en servicios.html: las ligas viejas
 # (servicios.html#solicitud, #sv-<id>, #fam-<id>…) se mandan solas a su página.
 SV_ANCLAS = dict([(p[0], p[1]) for p in SV_PAGINAS] + [
-    ('precio', 'servicios-como-se-cobra.html'), ('planes', 'servicios-como-se-cobra.html'),
+    ('precio', 'servicios-como-se-cobra.html'), ('planes', 'servicios-como-se-cobra.html'), ('paquetes', 'servicios-como-se-cobra.html'),
     ('proceso', SV_COTIZA), ('independencia', SV_COTIZA), ('sv-*', SV_CATALOGO), ('fam-*', SV_CATALOGO)])
 
 
@@ -2694,6 +2694,47 @@ SV_EJEMPLOS = {
     'no-se': [('Algo raro con el dinero público de mi municipio', '¿Por dónde conviene empezar a revisarlo, y con qué documentos?'),
               ('Una empresa con la que voy a tratar', '¿Qué puedo saber de ella con documentos públicos?')],
 }
+# Los paquetes piloto (Ronda 10, 23-11-2026, pedido del autor: «separar claramente lo público gratuito de lo
+# cotizable en tres paquetes piloto claros y fáciles de entender»). Cada paquete junta servicios que ya existen
+# (`serv`: el primero es el que se elige en la cotización) y dice qué incluye, qué entrega y por qué se cobra.
+# **Nunca un monto**: los precios los fija el autor tras los pilotos (docs/PAQUETES-PILOTO.md, interno). Un
+# paquete que nombre un servicio que no existe detiene la generación. La cotización lo monta a un toque y con
+# ?paquete=<id> (servicios.js), sin campos nuevos: llena el servicio, el tema y la pregunta, que siguen libres.
+PAQUETES = [
+    {'id': 'pyme', 'ico': '🏢', 'nombre': 'Piloto PyME y contrapartes',
+     'para': 'Empresas que pagan a proveedores o cobran a clientes y quieren saber con quién tratan antes de firmar o pagar.',
+     'serv': ['contrapartes', 'seguimiento', 'diligencia'],
+     'incluye': ['El Vigía de tus proveedores: la lista 69-B del SAT, el Directorio de sancionados y las listas de la OFAC y de la ONU, con aviso cuando alguno cambia',
+                 'La revisión de tu cartera de RFC en una matriz: una fila por contraparte y una columna por lista',
+                 'Dictámenes ejecutivos de las contrapartes con señal, con folio y huella SHA-256'],
+     'entrega': 'La matriz de tu cartera, los avisos del Vigía y un dictamen por cada contraparte que lo amerite.',
+     'tema': 'Paquete piloto PyME y contrapartes',
+     'pregunta': '¿Alguno de mis proveedores o clientes aparece en la lista 69-B, en el Directorio de sancionados o en las listas de la OFAC y de la ONU, y me avisan si alguno cambia?'},
+    {'id': 'despacho', 'ico': '📒', 'nombre': 'Piloto despacho contable y cumplimiento PLD',
+     'para': 'Despachos contables y áreas de cumplimiento que revisan facturas, nómina y contrapartes de varios clientes.',
+     'serv': ['facturas', 'nomina', 'seguimiento', 'diligencia'],
+     'incluye': ['El Vigía ampliado: las carteras de tus clientes contra las mismas listas, con aviso semanal',
+                 'La revisión de lotes de facturas CFDI (XML) por proveedor, con los terceros «a cuenta de» y la lista 69-B',
+                 'La revisión de los recibos de nómina: ISR, subsidio y cuotas contra la ley',
+                 'Dictámenes ejecutivos de debida diligencia, con folio y huella SHA-256'],
+     'entrega': 'El resumen de cada lote por proveedor, las señales de la nómina y los dictámenes de debida diligencia de cada cliente.',
+     'tema': 'Paquete piloto despacho contable y cumplimiento PLD',
+     'pregunta': '¿Qué proveedores de los lotes de facturas de mis clientes traen alguna señal, cuadra su nómina con la ley y me avisan si una contraparte cambia de situación?'},
+    {'id': 'territorial', 'ico': '🗺️', 'nombre': 'Piloto territorial e institucional',
+     'para': 'Redacciones, organizaciones civiles, cabildos, órganos de control y universidades que siguen el dinero de un municipio o de un estado.',
+     'serv': ['radiografia', 'temporada', 'entrega', 'capacitacion', 'licencia'],
+     'incluye': ['La radiografía de tu municipio o de tu estado: lo que entra, lo que gasta, lo que debe y lo que dejó por aclarar ante la ASF',
+                 'La licencia de temporada electoral para tu redacción o el kit de entrega-recepción del gobierno que recibes',
+                 'Talleres con las matrices de la ASF («Documentar para sancionar») o la licencia de las herramientas para tu institución'],
+     'entrega': 'El dictamen de la radiografía con su expediente visual, el kit o la licencia que elijas y el taller agendado.',
+     'tema': 'Paquete piloto territorial e institucional',
+     'pregunta': '¿Qué dicen los documentos públicos de las finanzas, la deuda y las observaciones de auditoría de mi municipio o de mi estado, y cómo lo seguimos en la temporada o en la entrega-recepción?'},
+]
+PAQUETES_PORQUE = ('El dato público es gratis y lo seguirá siendo: cualquiera lo consulta en el Auditor, el Planisferio y la Enciclopedia. '
+                   'Lo que se cobra es el trabajo sobre tus datos: procesar tu cartera, tus facturas o tu nómina, vigilarlos cada semana, '
+                   'firmar el dictamen con su huella y darle seguimiento al caso.')
+
+
 SV_PERIODOS = ['2025', '2024', '2019 a 2024', 'De 2024 a hoy']
 SV_PLAZOS = ['Sin prisa', 'En un mes', 'En dos semanas', 'Esta semana']
 SV_DOCS = ['Todavía no tengo documentos', 'Tengo las ligas', 'Tengo números de contrato', 'Tengo el número de auditoría']
@@ -3334,6 +3375,32 @@ def servicios():
         '          <details class="sv-faq"><summary>%s</summary><p>%s</p></details>' % q for q in PREGUNTAS)
     politica = '\n'.join('            <li><b>%s</b> %s</li>' % p for p in INDEPENDENCIA)
     opciones = '\n'.join('                <option value="%s">%s</option>' % (s[0], s[2]) for s in SERVICIOS)
+    ids_sv = {s[0] for s in SERVICIOS}
+    for pq in PAQUETES:
+        if not pq['serv'] or set(pq['serv']) - ids_sv:
+            raise SystemExit('apartados.py: el paquete %s nombra servicios que no existen: %s' % (pq['id'], ', '.join(set(pq['serv']) - ids_sv)))
+        if re.search(r'\$\s?\d', json.dumps(pq, ensure_ascii=False)):
+            raise SystemExit('apartados.py: el paquete %s trae un monto; los precios no se publican hasta cerrar los pilotos' % pq['id'])
+    nom_sv = {s[0]: s[2] for s in SERVICIOS}
+    paq_ops = ('<div class="sv-ops sv-paq" id="svPaquetes" role="group" aria-label="Paquete piloto">%s</div>' % ''.join(
+        '<button type="button" class="sv-op" data-paq="%s" aria-pressed="false"><span aria-hidden="true">%s</span> %s</button>' % (pq['id'], pq['ico'], pq['nombre'])
+        for pq in PAQUETES))
+    paq_datos = json.dumps({pq['id']: [pq['serv'][0], pq['tema'], pq['pregunta']] for pq in PAQUETES}, ensure_ascii=False).replace('</', '<\\/')
+    paquetes = ('<p class="sv-nota">%s</p>\n        <div class="sv-paquetes">\n%s\n        </div>\n'
+                '        <p class="sv-nota">El precio de cada paquete se fija con los primeros encargos piloto y se publicará aquí, igual para todos. '
+                'Mientras tanto, cada cotización llega por escrito y nada se cobra antes de que la aceptes.</p>') % (html.escape(PAQUETES_PORQUE), '\n'.join(
+        '          <article class="sv-paquete" id="paquete-%s">\n'
+        '            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">%s</span> %s</h3>\n'
+        '            <p class="sv-quien">%s</p>\n'
+        '            <p class="sv-paq-et">Incluye</p>\n            <ul class="sv-lista">%s</ul>\n'
+        '            <p class="sv-que"><b>Recibes:</b> %s</p>\n'
+        '            <p class="sv-que"><b>Servicios que junta:</b> %s.</p>\n'
+        '            <p class="sv-paq-precio"><span class="sz-et">Precio piloto</span> Se cotiza; la tarifa sale de los pilotos.</p>\n'
+        '            <a class="sz-btn sz-btn-of" href="servicios-cotiza.html?paquete=%s#solicitud">Cotiza este paquete</a>\n'
+        '          </article>' % (pq['id'], pq['ico'], html.escape(pq['nombre']), html.escape(pq['para']),
+                                  ''.join('<li>%s</li>' % html.escape(x) for x in pq['incluye']), html.escape(pq['entrega']),
+                                  ', '.join('<a href="servicio-%s.html">%s</a>' % (i, html.escape(nom_sv[i])) for i in pq['serv']), pq['id'])
+        for pq in PAQUETES))
     sin_ej = [s[0] for s in SERVICIOS if s[0] not in SV_EJEMPLOS]
     if sin_ej:
         raise SystemExit('apartados.py: faltan los ejemplos de cotización (SV_EJEMPLOS) de: %s' % ', '.join(sin_ej))
@@ -3370,6 +3437,8 @@ def servicios():
         '<form class="sv-form" id="svForm" data-canal="%s"%s%s novalidate>' % (esc_attr(CANAL_SOLICITUD), envio, ' data-con-codigo="1"' if SERVICIOS_OPERAN else ''),
         '          <p class="sv-privado">%s</p>' % privado,
         '          <fieldset class="sv-grupo"><legend>Qué quieres investigar</legend>',
+        '            <div class="sv-campo"><span class="sv-et" id="svPaqEt">¿Te interesa un paquete piloto? <small>(opcional: llena el servicio, el tema y la pregunta, y los puedes cambiar)</small></span>%s'
+        '<script type="application/json" id="svPaquetesDatos">%s</script> <a class="sv-paq-liga" href="servicios-como-se-cobra.html#paquetes">Qué incluye cada uno ➔</a></div>' % (paq_ops, paq_datos),
         campo('svServicio', '1. ¿Qué necesitas? Toca una opción', serv_ops + '<select id="svServicio" name="servicio">\n%s\n                <option value="no-se">No sé, ayúdenme a definirlo</option>\n              </select>' % opciones),
         '            <div class="sv-ejemplos" id="svEjemplos" hidden><span class="sv-et">💡 Ejemplos: toca uno y cámbialo a tu caso</span><div class="sv-ops" id="svEjemplosOps"></div></div>',
         '            <script type="application/json" id="svEjemplosDatos">%s</script>' % json.dumps(SV_EJEMPLOS, ensure_ascii=False).replace('</', '<\\/'),
@@ -3459,7 +3528,9 @@ def servicios():
         'modulos': [('modulos', 'Empieza gratis, hoy', 'Las herramientas que ya puedes usar sin pagar y sin subir tus archivos.', gratis + '\n        ' + mas,
                      'La plataforma')],
         'cobro': [('cobro', 'Cómo se cobra cada servicio', 'Sabes cómo se cobra antes de escribirnos. Solo la investigación a la medida se cotiza.',
-                   cobro, 'Precios')] + ([('planes', 'Elige tu plan', 'Lo público es gratis siempre. Pagas por el aviso, la memoria y el trabajo.', planes,
+                   cobro, 'Precios'),
+                  ('paquetes', 'Tres paquetes piloto', 'Lo público es gratis. Lo que se cotiza es el trabajo sobre tus datos, en tres paquetes.',
+                   paquetes, 'Paquetes')] + ([('planes', 'Elige tu plan', 'Lo público es gratis siempre. Pagas por el aviso, la memoria y el trabajo.', planes,
                                            'Planes')] if planes else []),
         'calendario': [('calendario', 'Qué abre y cuándo', 'La prevención sirve todo el año; la temporada electoral tiene fecha.', calendario, 'Calendario')],
         'preguntas': [('preguntas', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.',
@@ -3565,7 +3636,7 @@ def servicios():
         # cuatro familias y, el mismo día, en tablero: cada sección es su página
         # (SV_PAGINAS) y lo demás vive en SV_PORQUE, sin borrar nada.
         'archivo': 'servicios.html', 'titulo': 'Servicios',
-        'lema': 'Prevención de fraude y de lavado, temporada electoral, formación e investigación',
+        'lema': 'Investigación por encargo',  # Ronda 10: el rótulo largo ya va en la portada (sv-hero-pre); aquí se repetía
         'entrada': ('La consulta es libre y lo seguirá siendo. Cuando quieras ir más a fondo, lo hacemos por encargo, con la misma regla. '
                     'Los Servicios y las <a href="donaciones.html">donaciones</a> sostienen el trabajo; ninguno compra lo que publicamos.'),
         'sin_saltos': True, 'redirige': redir,

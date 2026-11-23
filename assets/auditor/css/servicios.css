@@ -602,3 +602,14 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 [data-theme="dark"] .sv-pq-p > summary small { color: #c3cee0; }
 [data-theme="dark"] .sv-pq-sv a { color: #e8eefa; border-color: #5b6f91; }
 [data-theme="dark"] .sv-pq-sv a:hover { background: #16233a; }
+/* Los paquetes piloto (Ronda 10): tres tarjetas en Cómo se cobra y su fila a un toque en la cotización. */
+.sv-paquetes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 1rem; margin: 1rem 0; }
+.sv-paquete { display: flex; flex-direction: column; gap: 6px; padding: 18px; border: 1px solid var(--civ-gris-borde, #c9d9ee); border-top: 5px solid #1d4fa3; border-radius: 16px; background: #fff; min-width: 0; }
+.sv-paquete .sv-lista { margin: 0; }
+.sv-paquete .sz-btn { margin-top: auto; align-self: flex-start; min-height: 44px; display: inline-flex; align-items: center; }
+.sv-paq-et { margin: .25rem 0 0; font-weight: 700; }
+.sv-paq-precio { margin: .25rem 0; }
+.sv-paq-liga { display: inline-flex; align-items: center; min-height: 44px; }
+[data-theme="dark"] .sv-paquete { background: #16233a; border-color: #2a3b57; border-top-color: #f2b63d; color: #e8eefa; }
+/* Ronda 10 (auditoría UX): en celular el texto corrido no baja de 16 px (AGENTS.md §4). */
+@media (max-width: 640px) { .sv-aviso, .sv-quien, .sv-most-pie { font-size: 16px; } }

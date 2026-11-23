@@ -837,8 +837,8 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicio-temporada.html` | Licencia de temporada para redacciones · Auditavisión | apartados.py | 93 | 0 | 0 | 0 | 0 |
 | `servicios-calendario.html` | Calendario · Auditavisión | apartados.py | 47 | 0 | 0 | 0 | 0 |
 | `servicios-catalogo.html` | Catálogo · Auditavisión | apartados.py | 121 | 0 | 0 | 0 | 0 |
-| `servicios-como-se-cobra.html` | Cómo se cobra · Auditavisión | apartados.py | 61 | 0 | 0 | 0 | 0 |
-| `servicios-cotiza.html` | Cotiza · Auditavisión | apartados.py | 49 | 0 | 0 | 0 | 0 |
+| `servicios-como-se-cobra.html` | Cómo se cobra · Auditavisión | apartados.py | 76 | 0 | 0 | 0 | 0 |
+| `servicios-cotiza.html` | Cotiza · Auditavisión | apartados.py | 50 | 0 | 0 | 0 | 0 |
 | `servicios-empieza-gratis.html` | Empieza gratis · Auditavisión | apartados.py | 60 | 0 | 0 | 0 | 0 |
 | `servicios-fraude-y-lavado.html` | Fraude y lavado · Auditavisión | apartados.py | 58 | 0 | 2 | 1 | 0 |
 | `servicios-inspector.html` | El Inspector · Auditavisión | apartados.py | 43 | 0 | 1 | 1 | 1 |
