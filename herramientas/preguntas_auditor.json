@@ -3416,6 +3416,13 @@
    ]
   },
   {
+   "q": "¿Cuánto pago de predial en Cuernavaca?",
+   "ir": "herramienta-calculadora-predial.html?mun=mor007",
+   "dice": [
+    "Cuernavaca, Morelos"
+   ]
+  },
+  {
    "q": "¿Cuánto pago de predial en Mérida?",
    "ir": "herramienta-calculadora-predial.html?mun=yuc050",
    "dice": [
