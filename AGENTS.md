@@ -112,6 +112,27 @@ portada para las viejas), `acceso.js` solo las abre en el navegador de la admini
   «en adelante» y un descuento que exceptúa a todo el art. 7). Los PDF que un portal no sirve se guardan en `investigaciones/predial/`
   y `cc_predial.py` revisa su huella.
 
+**Ronda 9 (23-11-2026): el expediente visual, el lugar elegido y los recargos de Tijuana.**
+- **El expediente visual** (`assets/auditor/js/insp-visual.js`, `InspVisual.arma()`): cuando una revisión toca una entidad o un
+  municipio, el panel de `servicios-revisa.html` (bajo «Lo que encontró el Inspector», `#paVisual`) y el dictamen (tras la respuesta,
+  `#dicVisual`) suman la miniatura del mapa (el Marco Geoestadístico del INEGI de `docs/geo/`, el municipio resaltado) y gráficas en SVG
+  sin librerías: lo que entra (Ramos 28 y 33 y lo que recaudó, con el estado y la fuente de `D.met`; en un municipio, el EFIPEM), la deuda
+  y el Sistema de Alertas, la ASF, la deuda inscrita en el RPU (los tres acreedores con más saldo, suma derivada), las carpetas por fraude
+  del SESNSP y las megaobras con alerta ambiental de su entidad. **No trae cifras propias; cada barra se mide contra la más grande de su
+  cuadro y no se suman años distintos. No entra a la huella** (se calcula sobre la ficha: probado con y sin el módulo, misma huella).
+  El lugar sale de la pregunta (`charla.lugar()`) o del selector (`lugarDe()` de `asistente.js`).
+- **El selector «Entidad + Municipio»** en radiografía, temporada y entrega (`SV_LUGAR` y `sv_entidades()` de `apartados.py`,
+  `#svMostLugar` de `sv-mostrador.js`): las 32 entidades con su clave del INEGI y, al elegir una, sus municipios del padrón (que se carga
+  solo entonces), siempre «Municipio, Entidad · clave» para que no se confundan los homónimos. Elegir revisa al momento; la pregunta lleva
+  «Municipio de…» (o «Alcaldía…») para que el dictamen, que solo recibe la pregunta, encuentre el mismo lugar. **Un servicio territorial
+  nuevo va en `SV_LUGAR`.**
+- **Los recargos del predial de Tijuana ya se calculan** (Paquete de Datos 7): el año vence el 31 de marzo (art. 5) y es exigible el 1 de
+  abril; 2 % por mes o fracción en mora (art. 63 de su Ley de Ingresos) sobre el impuesto sin accesorios (art. 108 de la Ley de Hacienda
+  Municipal de Baja California, p. 45 del PDF, con su huella); «hasta por 5 años», leído como 60 meses (derivado y dicho). Sin actualización
+  (esa ley no la prevé para créditos fiscales); la multa y los gastos de ejecución siguen pendientes (art. 65 de la Ley de Ingresos contra el
+  art. 175 de la LHM). `adeudoAnual()` de `cc-predial.js` y `adeudo_anual()` de `cc_predial.py` son gemelas: **un municipio que cobra por año
+  lleva `recargo.anual` con su `venc` y su `max_meses`.**
+
 **Decisión del autor, 02-11-2026.** El menú (`MENU` de `apartados.py` y su
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Servicios** (segunda desde el 21-11-2026, pedido del autor), **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras

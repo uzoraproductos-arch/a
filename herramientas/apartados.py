@@ -1401,7 +1401,7 @@ def herramienta_dictamen(bloque):
                     'sus fuentes oficiales y el método, con folio, sello y huella digital. Se arma de nuevo con los datos de la plataforma cada vez que se abre el enlace.'),
         'fondo': FOTO_AUDITOR, 'rubro': h[1], 'foto_clase': 'foto-auditor',
         'secciones': [{'id': 'dictamen', 'titulo': 'Dictamen cívico independiente de Auditavisión', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
-        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'municipios-fraude.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
+        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'municipios-fraude.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'insp-visual.js', 'asistente.js'],
     }
 
 
@@ -1413,6 +1413,8 @@ def servicios_chat(bloque, resp=False):
     import asistente
     scripts = ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js']
     if resp:
+        # Ronda 9: el expediente visual (miniatura del mapa y gráficas en SVG) solo en la respuesta completa y el panel.
+        scripts = scripts[:-1] + ['insp-visual.js', 'asistente.js']
         return {
             'archivo': asistente.SV_RESPUESTA, 'menu': 'La respuesta completa', 'menu_archivo': 'servicios.html',
             'padre': ('servicios.html', 'Servicios'), 'icono': '📄', 'titulo': 'La respuesta completa del Inspector',
@@ -2901,12 +2903,21 @@ def sv_mostrador(sf):
         k, ph, ay, ej, bt = SV_ENTRADA[x[0]]
         datos[x[0]] = {'n': x[2], 'k': k, 'ph': ph, 'ay': ay, 'ej': ej, 'q': sv_pregunta(x[0])[0],
                        'app': monta[x[0]][1], 'bt': bt, 'cobro': COBRO[x[0]]}
+        if x[0] in SV_LUGAR:
+            datos[x[0]]['lugar'] = 1
         if x[0] in SV_SUELTA:
             u, campo, acepta, tx = SV_SUELTA[x[0]]
             pag = os.path.join(RAIZ, u.split('#')[0])
             if not os.path.exists(pag) or ('id="%s"' % campo) not in open(pag, encoding='utf-8').read():
                 raise SystemExit('Servicios: SV_SUELTA de %s apunta a un campo que no existe (%s en %s)' % (x[0], campo, u))
             datos[x[0]]['suelta'] = {'app': u, 'campo': campo, 'acepta': acepta, 'tx': tx}
+    ents = sv_entidades()
+    datos['_ents'] = [[a, c, nm] for a, c, nm in ents]
+    lugar = ('            <fieldset class="sv-most-lugar" id="svMostLugar" hidden><legend>O elige el lugar</legend>'
+             '<div><label for="svMostEnt">Entidad</label><select id="svMostEnt"><option value="">Elige una de las 32 entidades</option>%s</select></div>'
+             '<div><label for="svMostMun">Municipio o alcaldía</label><select id="svMostMun" disabled><option value="">Toda la entidad</option></select></div>'
+             '<small>Cada municipio va con su entidad y su clave del INEGI, para que no se confunda con otro del mismo nombre.</small></fieldset>\n') % ''.join(
+        '<option value="%s">%s</option>' % (esc_attr(a), html.escape(nm)) for a, c, nm in ents)
     opciones = ''.join('<optgroup label="%s">%s</optgroup>' % (esc_attr(tit), ''.join(
         '<option value="%s">%s</option>' % (x[0], html.escape(x[2])) for x in SERVICIOS if x[6] == lid))
         for lid, _i, tit, _t in LINEAS if any(x[6] == lid for x in SERVICIOS))
@@ -2922,6 +2933,7 @@ def sv_mostrador(sf):
             '            <p class="sv-most-ej"><span>Pruébalo:</span> <span id="svMostEj"></span> <button type="button" class="sv-most-app" id="svMostApp"></button></p>\n'
             '            <label class="sv-most-suelta" id="svMostSuelta" hidden><input type="file" id="svMostArch" multiple class="sr-only">'
             '<span aria-hidden="true">📥</span><span id="svMostSueltaTx"></span><small>Se leen en tu navegador: nada se sube.</small></label>\n'
+            '%s'
             '          </form>\n'
             '          <div class="sv-most-res" id="svMostRes" hidden aria-live="polite">'
             '<p class="sv-most-carga" id="svMostCarga">Revisando la base…</p>'
@@ -2935,7 +2947,22 @@ def sv_mostrador(sf):
             '<button type="button" class="sv-port-borra" id="svPortBorra">🗑️ Borrar todo mi portafolio</button></section>\n'
             '          <p class="sv-most-pie">Los archivos se leen en tu navegador y no se suben. Cada cifra trae su documento; la revisión no es un documento oficial ni un peritaje, '
             'y una coincidencia en una lista es una señal para revisar, nunca una acusación. ¿Prefieres platicar? <a href="%s">Abre el Inspector completo ➔</a></p>\n'
-            '        </div>') % (json.dumps(datos, ensure_ascii=False).replace('</', '<\\/'), sf.SV_RESP, opciones, 'expedientes-investigacion.html', sf.SV_CHAT)
+            '        </div>') % (json.dumps(datos, ensure_ascii=False).replace('</', '<\\/'), sf.SV_RESP, opciones, lugar, 'expedientes-investigacion.html', sf.SV_CHAT)
+
+
+# Ronda 9 (pedido del autor, 22-11-2026): los servicios del territorio traen el selector «Entidad + Municipio».
+SV_LUGAR = ('radiografia', 'temporada', 'entrega')
+
+
+def sv_entidades():
+    """Las 32 entidades con su clave del INEGI y su nombre, del padrón municipal (municipios-efipem.js) y de
+    ENTIDADES de cc_predial.py. Si no son 32 o falta un nombre, la generación se detiene."""
+    import cc_predial
+    txt = open(os.path.join(RAIZ, 'assets', 'auditor', 'js', 'municipios-efipem.js'), encoding='utf-8').read()
+    par = re.findall(r'"([A-ZÉ]+)": \{ cve: "(\d\d)"', txt)
+    if len(par) != 32 or any(a not in cc_predial.ENTIDADES for a, _ in par):
+        raise SystemExit('Servicios: el padrón municipal no trae las 32 entidades con su clave y su nombre')
+    return sorted(((a, c, cc_predial.ENTIDADES[a]) for a, c in par), key=lambda x: x[1])
 
 
 def sv_pregunta(sid):

@@ -544,6 +544,16 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 .sv-most-suelta > span[aria-hidden] { font-size: 28px; }
 .sv-most-suelta small { font-weight: 400; font-size: 15px; opacity: .9; }
 .sv-most-suelta:focus-within, .sv-most-suelta-sobre { background: rgba(255,255,255,.22); border-style: solid; }
+/* Ronda 9: el lugar (entidad y municipio del padrón del INEGI) en radiografía, temporada y entrega. */
+.sv-most-lugar { margin: 0; padding: 12px 14px; border: 1px solid rgba(255,255,255,.45); border-radius: 16px; display: grid; gap: 10px; grid-template-columns: minmax(0, 1fr); }
+.sv-most-lugar[hidden] { display: none; }
+@media (min-width: 700px) { .sv-most-lugar { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); } .sv-most-lugar small { grid-column: 1 / -1; } }
+.sv-most-lugar legend { padding: 0 6px; font-weight: 700; font-size: 16px; }
+.sv-most-lugar div { display: grid; gap: 4px; min-width: 0; }
+.sv-most-lugar label { font-size: 15px; opacity: .9; }
+.sv-most-lugar select { min-height: 44px; width: 100%; max-width: 100%; border-radius: 12px; border: 0; padding: 6px 12px; font: 16px 'Inter', system-ui, sans-serif; color: #0b2a63; background: #fff; }
+.sv-most-lugar select:disabled { opacity: .6; }
+.sv-most-lugar small { font-size: 15px; opacity: .9; }
 .sv-most-guarda { display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; padding: 6px 14px; border-radius: 999px; border: 1px solid #1d4fa3; background: #fff; color: #0b2a63; font: 700 16px 'Inter', system-ui, sans-serif; cursor: pointer; }
 .sv-most-guarda[disabled] { opacity: .8; cursor: default; }
 .sv-port { padding: 16px; border-radius: 18px; border: 1px solid #c9d6ee; background: #f6f9ff; }

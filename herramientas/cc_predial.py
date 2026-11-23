@@ -1232,6 +1232,13 @@ MUNICIPIOS += _pue_qro()
 TIJ_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'tijuana-ley-ingresos-2026.json')
 MER_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'merida-ley-hacienda-2026.json')
 TIJ_LEY = 'Ley de Ingresos del Municipio de Tijuana'
+# Paquete de Datos 7 (Ronda 9): la Ley de Hacienda Municipal del Estado de Baja California (última reforma P.O. 04-11-2024).
+# Cotejada por Claude contra el PDF (misma huella): art. 108, p. 45 del archivo; el art. 107 está derogado y en todo el texto
+# solo se actualiza con el INPC el precio de un inmueble para el impuesto sobre adquisiciones (art. 7 Bis), no los créditos.
+BC_LHM_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'bc-ley-hacienda-recargos-2026.json')
+BC_LHM_PDF = os.path.join(RAIZ, 'investigaciones', 'predial', 'bc-ley-hacienda-municipal.pdf')
+BC_LHM_SHA = 'f6bc69dc20d14878f2432d961c7f32b0246bf096d68c1999677218c97205f575'
+BC_LHM = 'Ley de Hacienda Municipal del Estado de Baja California'
 MER_LEY = 'Ley de Hacienda del Municipio de Mérida'
 # La tarifa del art. 47 de Mérida, tal como está en el PDF (límite inferior, cuota fija, factor): la del JSON debe ser esta.
 MER_47 = [(0.01, 0.0, 0.0004), (100000.01, 40.0, 0.00046), (200000.01, 86.0, 0.00055), (310000.01, 146.5, 0.0012),
@@ -1256,6 +1263,11 @@ def _tij_mer():
             or [(x['li'], x['cf'], x['factor']) for x in M['tarifa_anual_art_47']] != MER_47 \
             or M['cuota_minima_art_47']['uma_anual'] != 1.0 or (M['pronto_pago_art_48']['enero_pct'], M['pronto_pago_art_48']['febrero_pct']) != (10, 10):
         raise SystemExit('cc_predial: %s cambió: vuelve a cotejar los arts. 47 y 48 antes de integrarlo' % MER_ARCHIVO)
+    B = json.load(open(BC_LHM_ARCHIVO, encoding='utf-8'))
+    if B['sha256_pdf'] != BC_LHM_SHA or B['pagina_recargos'] != 45:
+        raise SystemExit('cc_predial: %s cambió: vuelve a cotejar el art. 108 antes de integrarlo' % BC_LHM_ARCHIVO)
+    if os.path.exists(BC_LHM_PDF) and __import__('hashlib').sha256(open(BC_LHM_PDF, 'rb').read()).hexdigest() != BC_LHM_SHA:
+        raise SystemExit('cc_predial: %s no es el PDF cotejado (huella distinta)' % BC_LHM_PDF)
     pad = {e: dict(_padron_ent(e)) for e in ('BC', 'YUC')}
     if pad['BC'].get('004') != 'Tijuana' or pad['YUC'].get('050') != 'Mérida':
         raise SystemExit('cc_predial: el padrón no trae a Tijuana (02004) o a Mérida (31050) con su nombre')
@@ -1280,9 +1292,20 @@ def _tij_mer():
         'beneficios': [],
         'suma_art': None,
         'minimo': {'uma_anual': 3.99, 'art': 'art. 5', 'un': 'UMA'},
-        'acc_pend': ('Los recargos de Tijuana son de 2 %% al mes en mora y 1.5 %% en prórroga, hasta por 5 años (art. 63 de la %s), pero '
-                     'la actualización y los gastos de ejecución los fija la Ley de Hacienda Municipal del Estado de Baja California, que aún no '
-                     'cotejamos: no calculamos el adeudo. Pídelo a la Tesorería Municipal.') % TIJ_LEY,
+        # Ronda 9: los recargos en mora ya se calculan (art. 63 de la Ley de Ingresos y art. 108 de la LHM del Estado).
+        'recargo': {'pct': 2.0, 'art': 'art. 63', 'anual': True, 'venc': [3, 31], 'art_venc': 'art. 5', 'max_meses': 60,
+                    'ley_rec': BC_LHM + ', art. 108',
+                    'nota': ('Los recargos se cuentan por cada mes o fracción desde que el impuesto es exigible (el 1 de abril, al día siguiente '
+                             'del plazo del art. 5) hasta que pagas, sobre el impuesto sin recargos, gastos ni multas (%s, art. 108), a 2 %% '
+                             'al mes en mora (art. 63). «Hasta por 5 años» (art. 63) lo leemos como 60 meses como máximo. En prórroga o en '
+                             'parcialidades autorizadas la tasa es 1.5 %% y se cuenta por días (art. 34 de la misma ley): ese caso no lo '
+                             'simulamos.') % BC_LHM,
+                    'sin_act': ('No sumamos actualización con el INPC: la %s no la prevé para los créditos fiscales (solo actualiza el precio '
+                                'de un inmueble para el impuesto sobre adquisiciones) y la Ley de Ingresos de Tijuana tampoco.') % BC_LHM,
+                    'pend': ('La multa y los gastos de ejecución no los calculamos: la multa remite al art. 88 de la %s, y para los gastos la Ley '
+                             'de Ingresos (art. 65) fija de 2 a 500 UMA por expediente mientras la %s (art. 175) da a los ejecutores 4 %% u 8 %% '
+                             'del adeudo según dónde actúen; no adivinamos cuál aplica a tu caso. Pídelo a la Tesorería Municipal.') % (BC_LHM, BC_LHM)},
+        'acc_pend': ('La multa y los gastos de ejecución de Tijuana no los calculamos (art. 65 de la %s y arts. 88 y 175 de la %s).') % (TIJ_LEY, BC_LHM),
         'nota': ('Tijuana cobra al año 4.29 al millar sobre el valor catastral, 4.10 a los predios urbanos de uso industrial y 3.70 a los '
                  'baldíos y a los rústicos, rurales o suburbanos (art. 4); nunca menos de 3.99 veces la UMA (art. 5). Un baldío destinado a '
                  'estacionamiento de un comercio paga la tasa general (art. 4). El Certificado de Mejoramiento de la Imagen Urbana da «hasta» '
@@ -2847,7 +2870,7 @@ def construir(base, ref):
     </fieldset>
 
     <fieldset class="ci-grupo">
-      <legend class="ci-tit"><span class="ci-n" aria-hidden="true">4</span> ¿Debes bimestres? <small>(opcional)</small></legend>
+      <legend class="ci-tit"><span class="ci-n" aria-hidden="true">4</span> <span id="cpDebeTit">¿Debes bimestres?</span> <small>(opcional)</small></legend>
       <label class="ci-check"><input type="checkbox" id="cpDebe"> Sí, quiero saber cuánto pagaría por ponerme al corriente</label>
       <div id="cpDeuda" hidden>
         <label class="ci-et" for="cpImp">Impuesto de cada bimestre que debes (pesos)</label>
@@ -2948,6 +2971,27 @@ def construir(base, ref):
         shf_pe=D['shf']['inf']['var_pag_ent'], shf_pm=D['shf']['inf']['var_pag_mun'], shf_nota=esc(D['shf']['inf']['nota']),
         shf_dat_url=esc(D['shf']['dat']['url']), shf_base=esc(D['shf']['dat']['base']), shf_dat_sha=D['shf']['dat']['sha256'][:12],
         shf_met_url=esc(D['shf']['met']['url']), shf_cita=esc(D['shf']['met']['cita']))
+
+
+def adeudo_anual(m, imp, da, ha, f):
+    """Gemela de adeudoAnual() de cc-predial.js: el predial que se cobra por año (Tijuana). f = (año, mes, día) del pago.
+    Devuelve (años vencidos, impuesto, recargos, total) o None si ningún año está vencido."""
+    import datetime
+    R = m['recargo']
+    n_anios, t_imp, t_rec = 0, 0.0, 0.0
+    for a in range(da, ha + 1):
+        ex = datetime.date(a, R['venc'][0], R['venc'][1]) + datetime.timedelta(days=1)
+        if (f[0], f[1], f[2]) < (ex.year, ex.month, ex.day):
+            continue
+        n = (f[0] - ex.year) * 12 + (f[1] - ex.month) - (1 if f[2] < ex.day else 0) + 1
+        nc = min(n, R['max_meses']) if R.get('max_meses') else n
+        n_anios += 1
+        t_imp += imp
+        t_rec += round(imp * R['pct'] / 100 * nc + 1e-9, 2)
+    if not n_anios:
+        return None
+    t_imp, t_rec = round(t_imp, 2), round(t_rec, 2)
+    return n_anios, t_imp, t_rec, round(t_imp + t_rec, 2)
 
 
 # ---- Prueba: el caso del mandamiento y que Python y el navegador den lo mismo ----
@@ -3198,9 +3242,9 @@ def prueba():
                 mal += 1
                 print('✗ Tijuana o Mérida en el navegador', mid, x, n, 'esperaba', esp)
         e = json.loads(l10[1])
-        if 'Ley de Hacienda Municipal del Estado de Baja California' not in e[0] or 'Ley de Ingresos del Municipio de Mérida 2026' not in e[1]:
+        if e[0] != '' or 'Ley de Ingresos del Municipio de Mérida 2026' not in e[1]:
             mal += 1
-            print('✗ el adeudo de Tijuana y de Mérida debe decir que sus recargos están pendientes', e)
+            print('✗ el adeudo de Tijuana ya se calcula (Ronda 9) y el de Mérida dice que sus recargos están pendientes', e)
     # Ronda 8: el Estado de México (art. 109 del Código Financiero), León y Saltillo; cuentas hechas a mano de la ley, por bimestre (÷ 6).
     r8 = [('mex033', 1e6, 'edif', 1728.12), ('mex106', 5e5, 'edif', 691.98), ('mex057', 3e6, 'edif', 10242.54), ('mex106', 5e5, 'baldio', 795.78),
           ('gto020', 2e6, 'edif', 4973.04), ('gto020', 1e5, 'edif', 399.4), ('gto020', 5e5, 'baldio', 2194.98),
@@ -3225,6 +3269,32 @@ def prueba():
     except ValueError:
         mal += 1
         print('✗ los casos de la Ronda 8 no corrieron en el navegador', r11.stderr[:300])
+    # Ronda 9: los recargos de Tijuana (art. 63 de su Ley de Ingresos y art. 108 de la LHM de Baja California), hechos a mano:
+    # el año vence el 31 de marzo y es exigible el 1 de abril; 2 % por mes o fracción; tope de 60 meses.
+    tj = [((4290, 2025, 2025, (2026, 6, 1)), (1, 4290.0, 1287.0, 5577.0)),        # abr-2025 a jun-2026: 15 meses
+          ((4290, 2026, 2026, (2026, 4, 1)), (1, 4290.0, 85.8, 4375.8)),          # el día que se vuelve exigible: 1 mes
+          ((4290, 2026, 2026, (2026, 5, 15)), (1, 4290.0, 171.6, 4461.6)),        # un mes y fracción: 2
+          ((4290, 2019, 2019, (2026, 6, 1)), (1, 4290.0, 5148.0, 9438.0)),        # 87 meses: se cuentan 60
+          ((1000, 2024, 2026, (2026, 6, 1)), (3, 3000.0, 900.0, 3900.0)),          # 27 + 15 + 3 = 45 meses × $20
+          ((4290, 2026, 2026, (2026, 3, 31)), None)]                              # aún en plazo
+    for (imp, da, ha, f), esp in tj:
+        if adeudo_anual(M('bc004'), imp, da, ha, f) != esp:
+            mal += 1
+            print('✗ recargos de Tijuana', imp, da, ha, f, adeudo_anual(M('bc004'), imp, da, ha, f), 'esperaba', esp)
+    prog12 = ("global.window={};global.document={getElementById:function(){return null}};require(%s);var D=%s;"
+              "var m=D.mun.filter(function(y){return y.id==='bc004'})[0];"
+              "console.log(JSON.stringify(%s.map(function(x){var r=window.AuditorPredial.adeudo(D,m,{imp:x[0],da:x[1],db:1,ha:x[2],hb:6,f:x[3],multa:0,sit:'req'});"
+              "return r.error?null:[r.n,r.pasos[0][1],r.pasos[1][1],r.total];})));"
+              % (json.dumps(js), json.dumps(D), json.dumps([[i, a, b, list(f)] for (i, a, b, f), _ in tj])))
+    r12 = subprocess.run(['node'], input=prog12, capture_output=True, text=True)
+    try:
+        for ((imp, da, ha, f), esp), n in zip(tj, json.loads(r12.stdout.strip())):
+            if (tuple(n) if n else None) != esp:
+                mal += 1
+                print('✗ recargos de Tijuana en el navegador', imp, da, ha, f, n, 'esperaba', esp)
+    except ValueError:
+        mal += 1
+        print('✗ los recargos de Tijuana no corrieron en el navegador', r12.stderr[:300])
     mex = [m for m in MUNICIPIOS if m['ent'] == 'MÉX']
     if len(mex) != 125 or any(k.startswith('MÉX-') for k in ESPERA) or 'GTO-020' in ESPERA or 'SLP-028' not in ESPERA:
         mal += 1
