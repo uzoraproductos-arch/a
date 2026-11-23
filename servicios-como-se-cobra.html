@@ -183,10 +183,18 @@
     </header>
 
     <div class="apartado-ancho apartado-cuerpo">
-
+      <nav class="apartado-saltos" aria-label="En esta página">
+          <span class="apartado-saltos-tit">En esta página:</span>
+          <a href="#cobro">Cómo se cobra cada servicio</a>
+          <a href="#paquetes">Tres paquetes piloto</a>
+      </nav>
       
       <section class="apartado-seccion" id="cobro" aria-labelledby="cobro-tit">
-        <h2 class="sr-only" id="cobro-tit">Cómo se cobra cada servicio</h2>
+        <div class="apartado-seccion-cab">
+          <p class="apartado-seccion-pre">Precios</p>
+          <h2 class="apartado-seccion-titulo" id="cobro-tit"><span class="sr-only"></span>Cómo se cobra cada servicio</h2>
+          <p class="apartado-seccion-texto">Sabes cómo se cobra antes de escribirnos. Solo la investigación a la medida se cotiza.</p>
+        </div>
         <div class="apartado-bloque">
         <div class="sv-tabla-env"><table class="sv-tabla">
             <thead><tr><th scope="col">Servicio</th><th scope="col">Cómo se cobra</th><th scope="col">Para quién</th></tr></thead>
@@ -226,6 +234,50 @@ El Vigía con aviso y memoria opera con un código de acceso vigente.
               <tr><th scope="row">El aviso: enterarte cuando algo cambia</th><td data-et="Gratis">Lo revisas tú cuando quieras</td><td data-et="De pago">Con el Vigía, con un código de acceso vigente</td></tr>
               <tr><th scope="row">El cómputo: lotes grandes de facturas</th><td data-et="Gratis">Hasta 500 facturas, en tu navegador</td><td data-et="De pago">Servicio cotizado</td></tr>
               <tr><th scope="row">Tu cartera contra todas las listas</th><td data-et="Gratis">Hasta 2,000 RFC, en tu navegador</td><td data-et="De pago">Servicio cotizado</td></tr></p>
+        </div>
+      </section>
+
+      <section class="apartado-seccion" id="paquetes" aria-labelledby="paquetes-tit">
+        <div class="apartado-seccion-cab">
+          <p class="apartado-seccion-pre">Paquetes</p>
+          <h2 class="apartado-seccion-titulo" id="paquetes-tit"><span class="sr-only"></span>Tres paquetes piloto</h2>
+          <p class="apartado-seccion-texto">Lo público es gratis. Lo que se cotiza es el trabajo sobre tus datos, en tres paquetes.</p>
+        </div>
+        <div class="apartado-bloque">
+        <p class="sv-nota">El dato público es gratis y lo seguirá siendo: cualquiera lo consulta en el Auditor, el Planisferio y la Enciclopedia. Lo que se cobra es el trabajo sobre tus datos: procesar tu cartera, tus facturas o tu nómina, vigilarlos cada semana, firmar el dictamen con su huella y darle seguimiento al caso.</p>
+        <div class="sv-paquetes">
+          <article class="sv-paquete" id="paquete-pyme">
+            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">🏢</span> Piloto PyME y contrapartes</h3>
+            <p class="sv-quien">Empresas que pagan a proveedores o cobran a clientes y quieren saber con quién tratan antes de firmar o pagar.</p>
+            <p class="sv-paq-et">Incluye</p>
+            <ul class="sv-lista"><li>El Vigía de tus proveedores: la lista 69-B del SAT, el Directorio de sancionados y las listas de la OFAC y de la ONU, con aviso cuando alguno cambia</li><li>La revisión de tu cartera de RFC en una matriz: una fila por contraparte y una columna por lista</li><li>Dictámenes ejecutivos de las contrapartes con señal, con folio y huella SHA-256</li></ul>
+            <p class="sv-que"><b>Recibes:</b> La matriz de tu cartera, los avisos del Vigía y un dictamen por cada contraparte que lo amerite.</p>
+            <p class="sv-que"><b>Servicios que junta:</b> <a href="servicio-contrapartes.html">Revisión de tu cartera de contrapartes</a>, <a href="servicio-seguimiento.html">Vigía y seguimiento periódico</a>, <a href="servicio-diligencia.html">Revisión de un proveedor</a>.</p>
+            <p class="sv-paq-precio"><span class="sz-et">Precio piloto</span> Se cotiza; la tarifa sale de los pilotos.</p>
+            <a class="sz-btn sz-btn-of" href="servicios-cotiza.html?paquete=pyme#solicitud">Cotiza este paquete</a>
+          </article>
+          <article class="sv-paquete" id="paquete-despacho">
+            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">📒</span> Piloto despacho contable y cumplimiento PLD</h3>
+            <p class="sv-quien">Despachos contables y áreas de cumplimiento que revisan facturas, nómina y contrapartes de varios clientes.</p>
+            <p class="sv-paq-et">Incluye</p>
+            <ul class="sv-lista"><li>El Vigía ampliado: las carteras de tus clientes contra las mismas listas, con aviso semanal</li><li>La revisión de lotes de facturas CFDI (XML) por proveedor, con los terceros «a cuenta de» y la lista 69-B</li><li>La revisión de los recibos de nómina: ISR, subsidio y cuotas contra la ley</li><li>Dictámenes ejecutivos de debida diligencia, con folio y huella SHA-256</li></ul>
+            <p class="sv-que"><b>Recibes:</b> El resumen de cada lote por proveedor, las señales de la nómina y los dictámenes de debida diligencia de cada cliente.</p>
+            <p class="sv-que"><b>Servicios que junta:</b> <a href="servicio-facturas.html">Revisión de facturas por lote</a>, <a href="servicio-nomina.html">Revisión de nómina</a>, <a href="servicio-seguimiento.html">Vigía y seguimiento periódico</a>, <a href="servicio-diligencia.html">Revisión de un proveedor</a>.</p>
+            <p class="sv-paq-precio"><span class="sz-et">Precio piloto</span> Se cotiza; la tarifa sale de los pilotos.</p>
+            <a class="sz-btn sz-btn-of" href="servicios-cotiza.html?paquete=despacho#solicitud">Cotiza este paquete</a>
+          </article>
+          <article class="sv-paquete" id="paquete-territorial">
+            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">🗺️</span> Piloto territorial e institucional</h3>
+            <p class="sv-quien">Redacciones, organizaciones civiles, cabildos, órganos de control y universidades que siguen el dinero de un municipio o de un estado.</p>
+            <p class="sv-paq-et">Incluye</p>
+            <ul class="sv-lista"><li>La radiografía de tu municipio o de tu estado: lo que entra, lo que gasta, lo que debe y lo que dejó por aclarar ante la ASF</li><li>La licencia de temporada electoral para tu redacción o el kit de entrega-recepción del gobierno que recibes</li><li>Talleres con las matrices de la ASF («Documentar para sancionar») o la licencia de las herramientas para tu institución</li></ul>
+            <p class="sv-que"><b>Recibes:</b> El dictamen de la radiografía con su expediente visual, el kit o la licencia que elijas y el taller agendado.</p>
+            <p class="sv-que"><b>Servicios que junta:</b> <a href="servicio-radiografia.html">Radiografía de tu municipio o de tu estado</a>, <a href="servicio-temporada.html">Licencia de temporada para redacciones</a>, <a href="servicio-entrega.html">Lo que recibes: kit de entrega-recepción</a>, <a href="servicio-capacitacion.html">Talleres y capacitación</a>, <a href="servicio-licencia.html">Licencia de las herramientas</a>.</p>
+            <p class="sv-paq-precio"><span class="sz-et">Precio piloto</span> Se cotiza; la tarifa sale de los pilotos.</p>
+            <a class="sz-btn sz-btn-of" href="servicios-cotiza.html?paquete=territorial#solicitud">Cotiza este paquete</a>
+          </article>
+        </div>
+        <p class="sv-nota">El precio de cada paquete se fija con los primeros encargos piloto y se publicará aquí, igual para todos. Mientras tanto, cada cotización llega por escrito y nada se cobra antes de que la aceptes.</p>
         </div>
       </section>
 
