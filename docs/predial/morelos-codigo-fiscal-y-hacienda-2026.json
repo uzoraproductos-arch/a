@@ -1,0 +1,73 @@
+{
+  "entidad": "Morelos",
+  "clave_entidad": "17",
+  "aplica_a": "Cuernavaca (17007) y referencia estatal para municipios de Morelos cuya Ley de Ingresos remita al Código Fiscal y a la LGHM",
+  "nota_vigencia_anual": "Las fórmulas de actualización (INPC), recargos, gastos de ejecución y tarifa base estatal viven en estas dos leyes permanentes estatales. Las tasas mensuales concretas de recargos y los porcentajes de pronto pago o estímulos de cada municipio se actualizan anualmente en su respectiva Ley de Ingresos municipal (actualmente cotejada: Cuernavaca 2026).",
+  "fuentes": {
+    "codigo_fiscal_morelos": {
+      "titulo": "Código Fiscal para el Estado de Morelos",
+      "url_oficial": "https://marcojuridico.morelos.gob.mx/documentos/1773/download",
+      "archivo_local": "investigaciones/predial/morelos-codigo-fiscal.pdf",
+      "bytes": 1967967,
+      "paginas": 244,
+      "sha256": "4ba3d58c6ecc6223b709a711657fe92fe902f9b30a1f65d149d753b36404baf1",
+      "publicacion_po": "P.O. 5351 Segunda Sección 'Tierra y Libertad', 2015-12-09 (reformas verificadas en arts. 46 y 168: Decreto 1370, P.O. 5458, 2016-12-22; art. 47: Decreto 659, P.O. 5777, 2020-01-29)",
+      "descargado": "2026-11-23"
+    },
+    "ley_general_hacienda_municipal_morelos": {
+      "titulo": "Ley General de Hacienda Municipal del Estado de Morelos",
+      "url_oficial": "https://marcojuridico.morelos.gob.mx/documentos/2797/download",
+      "archivo_local": "investigaciones/predial/morelos-ley-hacienda-municipal.pdf",
+      "bytes": 1037745,
+      "paginas": 108,
+      "sha256": "e7ab5e0b96c9af19702d00fd18c118be8410aecdf1bc3c55a1774a32c05cdd6e",
+      "ultima_reforma": "2026-02-03",
+      "descargado": "2026-11-23"
+    }
+  },
+  "actualizacion_inpc_art_46_cfm": {
+    "paginas_pdf": "40-41",
+    "formula": "INPC(mes anterior al más reciente del periodo) / INPC(mes anterior al más antiguo del periodo)",
+    "fracciones_mes": false,
+    "piso_factor": 1.0,
+    "ultimo_indice_si_falta": true,
+    "decimales_factor": 4,
+    "nota_redondeo_factor": "El art. 46 (p. 41) indica calcular factores hasta el diezmilésimo y añade una regla literal de ajuste cuando el diezmilésimo es mayor a cinco; documentar el criterio aplicado en el simulador."
+  },
+  "recargos_art_47_cfm": {
+    "paginas_pdf": "43-44",
+    "base": "total del crédito fiscal actualizado, excluyendo los propios recargos, la indemnización del 20% por cheque, los gastos de ejecución y las multas",
+    "causacion": "por cada mes o fracción que transcurra a partir de la fecha de exigibilidad hasta que se efectúe el pago",
+    "tope_anios": 5,
+    "tope_meses": 60,
+    "tasa_cuernavaca_2026_mora_mensual_pct": 1.13,
+    "fuente_tasa_cuernavaca": "Art. 8 de la Ley de Ingresos del Municipio de Cuernavaca para el Ejercicio Fiscal 2026 (se actualiza anualmente)"
+  },
+  "gastos_ejecucion_art_168_cfm": {
+    "pagina_pdf": 168,
+    "tasa_por_diligencia_pct": 1.0,
+    "minimo_uma": 5.0,
+    "diligencias": [
+      "Requerimiento de pago",
+      "Embargo (incluye ampliación y remoción de depositario)",
+      "Remate, enajenación fuera de remate o adjudicación"
+    ],
+    "coincide_con_cuernavaca_art_8": true
+  },
+  "tarifa_y_pago_lghm": {
+    "art_93_ter_5": {
+      "paginas_pdf": "22-23",
+      "urbanos_hasta_70000_al_millar": 2.0,
+      "urbanos_excedente_70000_al_millar": 3.0,
+      "rusticos_al_millar": 2.0,
+      "ajuste_adicional": false,
+      "nota": "Idéntica a la tarifa del art. 6 de la Ley de Ingresos de Cuernavaca 2026; resuelve el pendiente de ajuste de tarifa anotado en la Ronda 10."
+    },
+    "art_93_ter_6": {
+      "pagina_pdf": 23,
+      "periodicidad": "bimestral",
+      "plazo_pago": "dentro del primer mes de cada bimestre (enero, marzo, mayo, julio, septiembre y noviembre)",
+      "excepcion_una_exhibicion": "La cantidad que resulte del inciso a) del art. 93 Ter-5 (predios urbanos hasta $70,000) se paga en una sola exhibición en el mes de enero de cada año."
+    }
+  }
+}

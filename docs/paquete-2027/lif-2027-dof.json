@@ -1,0 +1,172 @@
+{
+  "documento": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027 (LIF 2027)",
+  "estado_legislativo": "Publicada en el Diario Oficial de la Federación el 13 de noviembre de 2026; vigente a partir del 1 de enero de 2027",
+  "nota_vigencia_anual": "Las Leyes de Ingresos (federal y municipales) tienen vigencia anual por ejercicio fiscal (1 de enero a 31 de diciembre de 2027). Hasta el 31 de diciembre de 2026 sigue vigente la LIF 2026.",
+  "fecha_publicacion_dof": "2026-11-13",
+  "vigencia_inicio": "2027-01-01",
+  "vigencia_fin": "2027-12-31",
+  "fuentes": {
+    "diputados_pdf": {
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf",
+      "archivo_local": "investigaciones/leyes/LIF_2027.pdf",
+      "bytes": 763072,
+      "paginas": 51,
+      "sha256": "1c247831459988960cbb9ef86868c9174e1bce7532957e8156b359e214ac10db",
+      "descargado": "2026-11-23"
+    },
+    "dof_nota": {
+      "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803757&fecha=13/11/2026"
+    }
+  },
+  "pef_2027_estado": {
+    "revisado": "2026-11-23",
+    "aprobado_diputados": "2026-11-11",
+    "publicado_dof": false,
+    "nota": "Al 23-11-2026 el PEF 2027 fue aprobado por la Cámara de Diputados el 11-11-2026, pero aún no se publica el decreto definitivo en el DOF ni en LeyesBiblio (PEF_2027.pdf devuelve 404). No se mezclan cifras de dictamen como decreto DOF; se revisará en el corte del 25-11-2026."
+  },
+  "unidad": "millones de pesos (mdp)",
+  "articulo_1": {
+    "paginas_pdf": "1-7 (numeración interna 4-10 de 51)",
+    "total_lif_mdp": 10636488.1,
+    "ingresos_presupuestarios_mdp": 9156528.9,
+    "ingresos_derivados_financiamientos_mdp": 1479959.2,
+    "cuadre_verificado": {
+      "suma_rubros_1_a_9": 9156528.9,
+      "suma_total_con_financiamiento": 10636488.1,
+      "diferencia_mdp": 0.0
+    },
+    "rubros": [
+      {
+        "clave": "1",
+        "concepto": "Impuestos",
+        "mdp": 6263886.8,
+        "desglose": {
+          "11_isr": 3288975.3,
+          "12_patrimonio": 0.0,
+          "13_produccion_consumo_transacciones": 2613699.4,
+          "13_01_iva": 1768017.3,
+          "13_02_ieps": 828256.0,
+          "13_02_01_combustibles_automotrices": 538549.2,
+          "13_02_01_01_art2_frI_D": 494322.6,
+          "13_02_01_02_art2A": 44226.6,
+          "13_02_02_alcohol_cerveza": 76990.0,
+          "13_02_02_01_bebidas_alcoholicas": 25902.6,
+          "13_02_02_02_cervezas_refrescantes": 51087.4,
+          "13_02_03_tabacos": 64889.5,
+          "13_02_04_juegos_sorteos": 4318.8,
+          "13_02_05_telecomunicaciones": 8305.7,
+          "13_02_06_bebidas_energetizantes": 94.8,
+          "13_02_07_bebidas_saborizadas": 76920.5,
+          "13_02_08_alimentos_alta_densidad": 45350.4,
+          "13_02_09_plaguicidas": 1939.6,
+          "13_02_10_combustibles_fosiles": 10897.5,
+          "13_02_11_videojuegos_violencia": 0.0,
+          "13_03_isan": 17426.1,
+          "14_comercio_exterior": 232511.2,
+          "17_accesorios": 120971.3,
+          "18_otros_hidrocarburos": 7501.0,
+          "19_ejercicios_anteriores": 228.6
+        }
+      },
+      {
+        "clave": "2",
+        "concepto": "Cuotas y Aportaciones de Seguridad Social",
+        "mdp": 702564.7,
+        "nota": "Corresponde íntegramente a cuotas del IMSS a cargo de patrones y trabajadores (22.01)."
+      },
+      {
+        "clave": "3",
+        "concepto": "Contribuciones de Mejoras",
+        "mdp": 20.5
+      },
+      {
+        "clave": "4",
+        "concepto": "Derechos",
+        "mdp": 177185.9,
+        "desglose": {
+          "41_dominio_publico": 99941.3,
+          "43_prestacion_servicios": 72209.7,
+          "44_otros_derechos": 5019.4,
+          "45_accesorios": 15.5
+        }
+      },
+      {
+        "clave": "5",
+        "concepto": "Productos",
+        "mdp": 15077.3
+      },
+      {
+        "clave": "6",
+        "concepto": "Aprovechamientos",
+        "mdp": 329479.8,
+        "desglose": {
+          "61_aprovechamientos": 314267.1,
+          "62_patrimoniales": 14439.8,
+          "63_accesorios": 772.9
+        }
+      },
+      {
+        "clave": "7",
+        "concepto": "Ingresos por Ventas de Bienes, Prestación de Servicios y Otros Ingresos",
+        "mdp": 1457539.9,
+        "desglose": {
+          "71_seguridad_social_total": 173911.2,
+          "71_01_imss": 100756.8,
+          "71_02_issste": 73154.4,
+          "72_empresas_publicas_total": 1283628.7,
+          "72_01_pemex": 773765.7,
+          "72_02_cfe": 509863.0
+        }
+      },
+      {
+        "clave": "9",
+        "concepto": "Transferencias, Asignaciones, Subsidios y Subvenciones, y Pensiones y Jubilaciones (FMPED)",
+        "mdp": 210774.0
+      },
+      {
+        "clave": "0",
+        "concepto": "Ingresos Derivados de Financiamientos",
+        "mdp": 1479959.2,
+        "desglose": {
+          "01_01_endeudamiento_interno_gobierno_federal": 1570311.1,
+          "01_02_01_diferimiento_pagos": 121400.4,
+          "02_01_endeudamiento_externo_gobierno_federal": 0.0,
+          "04_deficit_organismos_control_directo": -91600.0,
+          "05_deficit_empresas_publicas": -120152.3,
+          "informativo_endeudamiento_neto_gob_fed": 1691711.5
+        }
+      }
+    ],
+    "recaudacion_federal_participable_mdp": 5722752.0,
+    "pago_especie_concesionarias_mdp": 527.0
+  },
+  "techos_endeudamiento": {
+    "articulo_2_gobierno_federal": {
+      "pagina_pdf": 7,
+      "interno_neto_hasta_mdp": 1700000.0,
+      "externo_neto_hasta_mdd": 13500.0
+    },
+    "articulo_4_pemex": {
+      "pagina_pdf": 8,
+      "interno_neto_hasta_mdp": 160619.5,
+      "externo_neto_hasta_mdd": 5259.4
+    },
+    "articulo_4_cfe": {
+      "pagina_pdf": 8,
+      "interno_neto_hasta_mdp": 16742.0,
+      "externo_neto_hasta_mdd": 725.0
+    },
+    "articulo_6_cdmx": {
+      "pagina_pdf": 9,
+      "endeudamiento_neto_mdp": 3500.0
+    }
+  },
+  "articulo_11_recargos_federales_2027": {
+    "pagina_pdf": 10,
+    "prorroga_mensual_pct": 1.38,
+    "parcialidades_hasta_12m_mensual_pct": 1.42,
+    "parcialidades_13_a_24m_mensual_pct": 1.63,
+    "parcialidades_mas_24m_o_diferido_mensual_pct": 1.97,
+    "nota": "Las tasas de la fracción II incluyen actualización conforme al CFF. Vigentes solo para el ejercicio fiscal 2027."
+  }
+}
