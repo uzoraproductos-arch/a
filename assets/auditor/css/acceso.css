@@ -60,27 +60,18 @@
    ciudad a un lado y, al otro, de qué se trata, lo último verificado, las
    casillas y «Obtén uno» (pedido del autor, 29-10-2026). */
 .ac-entrada-cuerpo { margin: 0; background: #f4f7fd; color: #142033; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.55; }
-.ac-entrada { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(360px, 560px); min-height: 100vh; }
-.ac-foto { position: relative; margin: 0; overflow: hidden; background: #0b2a63; }
-.ac-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
-.ac-foto::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7, 29, 71, 0) 55%, rgba(7, 29, 71, .35) 100%); }
-.ac-foto figcaption { position: absolute; left: 14px; bottom: 12px; z-index: 1; font-size: 13px; color: #fff; background: rgba(7, 29, 71, .7); border-radius: 999px; padding: 3px 10px; }
-.ac-lado { display: grid; align-content: center; gap: 16px; padding: 36px 40px; background: #fff; }
 .ac-marca { display: flex; align-items: center; gap: 10px; margin: 0; color: #0b2a63; }
 .ac-marca span { display: grid; line-height: 1.2; }
 .ac-marca b { font-size: 20px; }
 .ac-marca small { font-size: 14px; color: #5a6782; }
-.ac-lado h1 { margin: 0; font-family: "Playfair Display", Georgia, serif; font-weight: 900; font-size: clamp(28px, 3.2vw, 38px); line-height: 1.15; color: #0b2a63; }
 .ac-lema { margin: 0; font-size: 17px; color: #33415c; }
 .ac-noticias { border-left: 4px solid #4f9be8; background: #f4f7fd; border-radius: 0 12px 12px 0; padding: 10px 14px; }
 .ac-noticias h2 { margin: 0 0 6px; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: #2c579f; }
 .ac-noticias ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
 .ac-noticias li { font-size: 16px; color: #24324d; }
 .ac-n-fecha { font: 600 14px "JetBrains Mono", monospace; color: #5a6782; margin-right: 4px; }
-.ac-lado .ac-canje { padding: 16px; border-color: #c9d3e6; }
-.ac-obtener p { margin: 0; }
 .ac-enlace { font: inherit; font-weight: 700; color: #16408f; background: none; border: 0; padding: 0 4px; min-height: 44px; text-decoration: underline; cursor: pointer; }
-.ac-pedir { display: grid; gap: 8px; margin-top: 8px; background: #f7f9fd; border: 1px solid #dfe5f0; border-radius: 14px; padding: 14px 16px; }
+.ac-pedir { display: grid; gap: 8px; }
 .ac-pedir-txt { color: #33415c; }
 .ac-pedir .ac-et { font-size: 15px; }
 .ac-pedir .ac-et small { font-weight: 400; color: #5a6782; }
@@ -89,7 +80,6 @@
 .ac-pedido { margin: 0; }
 .ac-pedir[hidden] { display: none !important; }
 .ac-tuyo-fin { background: #fff6e0; border-color: #f0d9a0; }
-.ac-pie { margin: 0; font-size: 14px; color: #5a6782; }
 .ac-pie a { color: #16408f; }
 .ac-felicidades { border: 0; border-radius: 20px; padding: 28px 28px 24px; max-width: min(92vw, 420px); text-align: center; box-shadow: 0 24px 60px rgba(7, 29, 71, .35); }
 .ac-felicidades::backdrop { background: rgba(7, 29, 71, .55); }
@@ -102,17 +92,6 @@
 .ac-sol-dur { width: auto; display: inline-block; min-width: 120px; }
 .ac-solicitudes { margin: 18px 0; }
 .ac-solicitudes h3 { color: #0b2a63; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-@media (max-width: 900px) {
-  .ac-entrada { grid-template-columns: 1fr; }
-  .ac-foto { height: 34vh; min-height: 200px; }
-  .ac-foto::after { background: linear-gradient(180deg, rgba(7, 29, 71, 0) 60%, rgba(7, 29, 71, .3) 100%); }
-  .ac-lado { padding: 22px 16px 28px; align-content: start; }
-}
-/* En la entrada, las ocho casillas caben en un renglón (4 – 4). */
-.ac-lado .ac-casillas { gap: 6px; flex-wrap: nowrap; }
-.ac-lado .ac-grupo { gap: 6px; }
-.ac-lado .ac-casilla { width: 46px; height: 56px; font-size: 24px; }
-@media (max-width: 520px) { .ac-lado .ac-casillas { flex-wrap: wrap; } }
 /* El código semanal de la administración (30-10-2026). */
 .ac-semana { margin: 14px 0; background: #fff8e6; border: 1px solid #ecd28c; border-radius: 14px; padding: 12px 16px; }
 .ac-semana h3 { margin: 0 0 6px; }
@@ -175,8 +154,6 @@
 #acFactor code { word-break: break-all; font-size: 16px; }
 
 /* La portada de acceso, limpia y concreta (rediseño del autor, 22-11-2026; referencia: getfinos.com). La acuarela se queda. */
-.ac-lado { gap: 18px; }
-.ac-lado h1 span { display: block; color: #2c579f; }
 .ac-quienes { display: grid; gap: 4px; }
 .ac-quienes h2, .ac-faq h2 { margin: 0; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: #2c579f; }
 .ac-quienes p { margin: 0; font-size: 17px; color: #33415c; max-width: 52ch; }
@@ -207,18 +184,14 @@
 .ac-faq-p { border-bottom: 1px solid #e3e8f2; }
 .ac-faq-p summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font-weight: 600; color: #24324d; }
 .ac-faq-p p { margin: 0 0 10px; color: #33415c; }
-.ac-lado .ac-noticias { padding: 8px 12px; }
 @media (max-width: 900px) {
   .ac-preguntas { min-height: 4.2em; }
   .ac-preguntas li { font-size: 19px; }
 }
 /* Ronda 7 (22-11-2026): los cuatro ejes y el botón para solicitar código, muy a la vista. */
-.ac-obtener-tx { margin: 0 0 6px; font-weight: 600; color: #24324d; }
-.ac-obtener-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 0; }
 .ac-pide-btn { min-height: 48px; padding: 10px 22px; font-size: 17px; font-weight: 700; box-shadow: 0 6px 16px rgba(11, 42, 99, .18); }
 .ac-ejes { display: grid; gap: 10px; }
 .ac-ejes h2 { margin: 0; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: #2c579f; }
-.ac-ejes-rej { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
 .ac-eje { border: 1px solid #d6deea; border-left: 5px solid #0b2a63; border-radius: 12px; padding: 10px 14px; background: #fff; }
 .ac-eje h3 { margin: 0 0 4px; font-size: 18px; color: #0b2a63; }
 .ac-eje p { margin: 0 0 6px; font-size: 16px; color: #33415c; }
@@ -229,3 +202,102 @@
 .ac-ejes-cta { margin: 4px 0 0; }
 /* Ronda 10 (auditoría UX): en celular el texto corrido no baja de 16 px (AGENTS.md §4). */
 @media (max-width: 640px) { .ac-eje li, .ac-ejes-nota { font-size: 16px; } }
+
+/* Ronda 12 (23-11-2026, Paquete de Datos 10): la entrada en dos planos. Plano 1, el hero a pantalla completa con la
+   imagen editorial, la identidad a la izquierda y la tarjeta de acceso con dos pestañas a la derecha; plano 2, los
+   cuatro ejes en rejilla 2×2 y la banda de lo último y las preguntas frecuentes. */
+.ac-entrada { display: block; }
+.ac-hero { position: relative; isolation: isolate; min-height: 100vh; min-height: 100dvh; display: grid; align-items: center; padding: 40px 24px; box-sizing: border-box; background: #0b2a63; overflow: hidden; }
+.ac-hero-foto { position: absolute; inset: 0; margin: 0; z-index: -1; }
+.ac-hero-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; display: block; }
+.ac-hero-foto::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(100deg, rgba(7, 25, 62, .84) 0%, rgba(11, 42, 99, .56) 46%, rgba(11, 42, 99, .14) 100%); }
+.ac-hero-foto figcaption { position: absolute; right: 14px; bottom: 12px; z-index: 1; font-size: 13px; color: #fff; background: rgba(7, 29, 71, .62); border-radius: 999px; padding: 3px 10px; }
+.ac-hero-in { width: 100%; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(360px, 468px); gap: 48px; align-items: center; }
+.ac-ident { display: grid; gap: 20px; color: #f3f6fc; min-width: 0; }
+.ac-ident .ac-marca { color: #fff; }
+.ac-ident .ac-marca small { color: #d5def0; }
+.ac-ident .ac-marca img { filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .3)); }
+.ac-ident h1 { margin: 0; font-family: "Playfair Display", Georgia, serif; font-weight: 900; font-size: clamp(34px, 4.1vw, 54px); line-height: 1.08;
+  letter-spacing: -.02em; text-wrap: balance; color: #fff; text-shadow: 0 2px 18px rgba(7, 25, 62, .45); }
+.ac-ident h1 span { display: block; color: #ebd07f; }
+.ac-ident .ac-quienes h2 { color: #ebd07f; }
+.ac-ident .ac-quienes p { color: #eef2fa; font-size: 17px; max-width: 52ch; }
+.ac-ident .ac-preguntas-caja { border-left: 3px solid #c8a032; padding: 4px 0 4px 16px; max-width: 56ch; }
+.ac-ident .ac-preguntas li { color: #fff; }
+.ac-tira { display: grid; grid-template-columns: repeat(3, minmax(0, auto)); justify-content: start; gap: 8px 28px; margin: 4px 0 0; padding: 14px 0 0; border-top: 1px solid rgba(235, 208, 127, .35); }
+.ac-tira div { display: grid; gap: 2px; min-width: 0; }
+.ac-tira dt { font: 700 22px/1.1 "JetBrains Mono", monospace; font-variant-numeric: tabular-nums; color: #fff; }
+.ac-tira dd { margin: 0; font-size: 14px; color: #d5def0; max-width: 18ch; }
+
+/* La tarjeta protagonista: «Tengo código» y «Solicitar código». */
+.ac-card { background: #fff; color: #142033; border-radius: 20px; box-shadow: 0 30px 70px -20px rgba(7, 29, 71, .34), 0 2px 6px rgba(7, 29, 71, .12);
+  padding: 22px 24px 16px; display: grid; gap: 14px; min-width: 0; scroll-margin: 24px; }
+.ac-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; background: #eef2f8; border-radius: 12px; }
+.ac-tab { font: inherit; font-size: 16px; font-weight: 700; min-height: 44px; border: 0; border-radius: 9px; background: transparent; color: #33415c; cursor: pointer; }
+.ac-tab[aria-selected="true"] { background: #fff; color: #0b2a63; box-shadow: 0 1px 3px rgba(7, 29, 71, .16); }
+.ac-tab:focus-visible { outline: 3px solid rgba(79, 155, 232, .6); outline-offset: 2px; }
+.ac-tabpanel[hidden] { display: none !important; }
+.ac-card .ac-canje { background: none; border: 0; padding: 0; justify-items: stretch; gap: 12px; }
+.ac-card .ac-casillas { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) auto repeat(4, minmax(0, 1fr)); gap: 6px; flex-direction: row; align-items: center; }
+.ac-card .ac-grupo { display: contents; }
+.ac-card .ac-guion { display: block; padding: 0 2px; font-size: 24px; }
+.ac-card .ac-casilla { width: 100%; min-width: 0; height: auto; min-height: 54px; font-size: 24px; }
+.ac-card .ac-casilla.llena { background: #fff; border-color: #2c579f; color: #0b2a63; }
+.ac-card .ac-ayuda { font-size: 15px; max-width: none; }
+.ac-card .ac-boton { width: 100%; min-height: 50px; }
+.ac-card .ac-tuyo { margin-top: 12px; }
+.ac-card .ac-pedir-txt { margin: 0 0 4px; font-size: 16px; }
+.ac-card .ac-aviso { margin-top: 10px; }
+.ac-card-pie { margin: 0; padding-top: 10px; border-top: 1px solid #e3e8f2; text-align: center; }
+
+/* Plano 2: el cuerpo editorial. */
+.ac-cuerpo { max-width: 1200px; margin: 0 auto; padding: 56px 24px 40px; display: grid; gap: 48px; box-sizing: border-box; }
+.ac-cuerpo .ac-ejes { gap: 16px; }
+.ac-cuerpo .ac-ejes > h2 { font-family: "Playfair Display", Georgia, serif; font-size: clamp(24px, 2.6vw, 32px); letter-spacing: 0; text-transform: none; color: #0b2a63; }
+.ac-ejes-rej { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.ac-cuerpo .ac-eje { border: 1px solid #dfe5f0; border-top: 4px solid #0b2a63; border-radius: 14px; padding: 18px 20px; box-shadow: 0 1px 2px rgba(7, 29, 71, .05); }
+.ac-cuerpo .ac-eje h3 { font-size: 20px; margin-bottom: 6px; }
+.ac-cuerpo .ac-eje li { font-size: 16px; }
+.ac-cuerpo .ac-eje li b { font-variant-numeric: tabular-nums; }
+.ac-cuerpo .ac-ejes-nota { font-size: 15px; }
+.ac-banda { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+.ac-banda h2 { margin: 0 0 10px; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: #2c579f; }
+.ac-banda .ac-noticias { background: #fff; border: 1px solid #dfe5f0; border-left: 4px solid #4f9be8; border-radius: 0 14px 14px 0; padding: 16px 18px; }
+.ac-banda .ac-noticias ul { gap: 12px; }
+.ac-banda .ac-n-fecha { display: block; margin: 0 0 2px; }
+.ac-banda .ac-faq { display: block; }
+.ac-faq-p summary { list-style: none; justify-content: space-between; gap: 12px; }
+.ac-faq-p summary::-webkit-details-marker { display: none; }
+.ac-faq-p summary::after { content: "+"; font: 700 20px/1 "JetBrains Mono", monospace; color: #2c579f; flex: none; }
+.ac-faq-p[open] summary::after { content: "−"; }
+.ac-pie { margin: 0; padding: 18px 24px 28px; border-top: 1px solid #dfe5f0; text-align: center; font-size: 14px; color: #5a6782; background: #fff; }
+
+@media (max-width: 960px) {
+  .ac-hero { min-height: 0; padding: 28px 16px 32px; align-items: start; }
+  .ac-hero-foto::after { background: linear-gradient(180deg, rgba(7, 25, 62, .86) 0%, rgba(11, 42, 99, .72) 55%, rgba(11, 42, 99, .5) 100%); }
+  .ac-hero-in { grid-template-columns: 1fr; gap: 28px; }
+  .ac-card { max-width: 520px; width: 100%; justify-self: center; box-sizing: border-box; }
+  .ac-banda { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .ac-ejes-rej { grid-template-columns: 1fr; }
+  .ac-cuerpo { padding: 36px 16px 28px; gap: 36px; }
+  .ac-tira { grid-template-columns: 1fr 1fr 1fr; gap: 8px 14px; }
+  .ac-tira dt { font-size: 18px; }
+  .ac-tira dd { font-size: 16px; }
+  .ac-card { padding: 16px 14px 12px; }
+}
+/* En celular las ocho casillas no caben a 44 px en un renglón: van 4 y 4 (AGENTS.md §4). */
+@media (max-width: 520px) {
+  .ac-card .ac-casillas { grid-template-columns: repeat(4, minmax(44px, 1fr)); gap: 8px; }
+  .ac-card .ac-guion { display: none; }
+  .ac-card .ac-casilla { min-height: 52px; font-size: 22px; }
+  .ac-ident .ac-preguntas li { font-size: 19px; }
+  .ac-pie { font-size: 16px; }
+  .ac-card .ac-pedir .ac-et, .ac-card .ac-check, .ac-cuerpo .ac-ejes-nota { font-size: 16px; }
+}
+/* Esta página no carga auditavision.css: los íconos de trazo (iconos.js) necesitan aquí su tamaño, o salen del ancho de su caja. */
+.ac-entrada-cuerpo svg.ico { display: inline-block; width: 1.15em; height: 1.15em; vertical-align: -0.2em; flex: none; stroke-width: 1.9; overflow: visible; }
+.ac-entrada-cuerpo svg.ico.ico-r { fill: currentColor; stroke-width: 0; }
+.ac-check > span { flex: 1 1 auto; min-width: 0; }
