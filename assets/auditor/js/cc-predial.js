@@ -198,6 +198,7 @@
      fracción desde el día siguiente (art. 52); actualización con el INPC (art. 44 bis). y: {imp, da, db, ha, hb, f:[a,m,d], sit, multa} */
   function adeudo(D, m, y) {
     if (!m.recargo) return { error: m.acc_pend || 'Los recargos de este municipio aún no están integrados.' };
+    if (m.recargo.anual) return adeudoAnual(D, m, y);
     var filas = [], avisos = [], tot = { imp: 0, act: 0, rec: 0 };
     var tope = y.sit === 'esp' ? D.lhm.tope_esp : D.lhm.tope;
     var ult = D.inpc_ult, faltaInpc = false;
@@ -263,6 +264,38 @@
     pasos.push(['Total a pagar (aproximado)', total, 'Suma', 'b']);
     if (y.da < D.anio) avisos.push('Para los años antes de ' + D.anio + ' usamos la tasa de recargos de ' + D.anio + ' y el impuesto que escribiste; cada año tuvo los suyos en su ley, así que el adeudo oficial puede ser distinto.');
     return { pasos: pasos, avisos: avisos, total: total, n: filas.length, multa: multa, notif: notif, ejec: ejec };
+  }
+
+  /* El adeudo de un municipio que cobra el predial por año (Tijuana): el año vence el día que dice su ley
+     (m.recargo.venc = [mes, día]) y es exigible desde el día siguiente; recargos por cada mes o fracción desde ahí
+     hasta el pago, sobre el impuesto sin accesorios, con el tope de meses de su ley (m.recargo.max_meses). Sin
+     actualización (m.recargo.sin_act lo explica) y sin multa ni gastos de cobranza (m.recargo.pend lo explica).
+     y.imp es el impuesto de cada año; y.da y y.ha, los años. */
+  function adeudoAnual(D, m, y) {
+    var R = m.recargo, filas = [], tot = { imp: 0, rec: 0 }, avisos = [];
+    for (var a = y.da; a <= y.ha; a++) {
+      /* exigible el día siguiente al vencimiento: el primer mes (o fracción) empieza ese día */
+      var ex = new Date(Date.UTC(a, R.venc[0] - 1, R.venc[1] + 1)), ea = ex.getUTCFullYear(), em = ex.getUTCMonth() + 1, ed = ex.getUTCDate();
+      var k = (y.f[0] - ea) * 12 + (y.f[1] - em) - (y.f[2] < ed ? 1 : 0);
+      if (y.f[0] * 10000 + y.f[1] * 100 + y.f[2] < ea * 10000 + em * 100 + ed) continue;
+      var n = k + 1, nc = R.max_meses ? Math.min(n, R.max_meses) : n;
+      var rec = r2(y.imp * R.pct / 100 * nc);
+      tot.imp += y.imp; tot.rec += rec;
+      filas.push({ a: a, n: n, nc: nc });
+    }
+    if (!filas.length) return { error: 'Con esa fecha de pago, ningún año de ese periodo está vencido todavía (' + m.nombre + ' cobra el predial por año: ' + (m.venc || '') + ').' };
+    tot.imp = r2(tot.imp); tot.rec = r2(tot.rec);
+    var pasos = [], v = filas[0];
+    pasos.push(['Impuesto omitido: ' + filas.length + ' año' + (filas.length > 1 ? 's' : '') + ' × ' + pesos(y.imp), tot.imp, 'Ley de Ingresos de ' + m.nombre + ', ' + R.art_venc]);
+    pasos.push(['Recargos: ' + R.pct + ' % por mes o fracción desde el día siguiente al vencimiento (el más viejo, ' + v.n + ' mes' + (v.n > 1 ? 'es' : '') +
+      (v.nc < v.n ? '; se cuentan ' + v.nc + ', el tope de su ley' : '') + ')', tot.rec, 'Ley de Ingresos de ' + m.nombre + ', ' + R.art + '; ' + R.ley_rec]);
+    var total = r2(tot.imp + tot.rec);
+    pasos.push(['Total a pagar (aproximado)', total, 'Suma', 'b']);
+    if (R.sin_act) avisos.push(R.sin_act);
+    if (y.sit !== 'esp' && R.pend) avisos.push(R.pend);
+    if (R.nota) avisos.push(R.nota);
+    if (y.da < D.anio) avisos.push('Para los años antes de ' + D.anio + ' usamos la tasa de recargos de ' + D.anio + ' y el impuesto que escribiste; cada año tuvo los suyos en su ley, así que el adeudo oficial puede ser distinto.');
+    return { pasos: pasos, avisos: avisos, total: total, n: filas.length, per: 'año', multa: 0, notif: 0, ejec: 0 };
   }
 
   /* Tu recibo contra la ley: c = {cobro, per: 'bim'|'anual'}; r = lo que dio calcula(). Nunca califica: si no cuadra,
@@ -354,8 +387,16 @@
     sel.innerHTML = ops.map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(o[1]) + (ley(ent, o[0]) ? ' ✓' : '') + '</option>'; }).join('');
   }
 
+  /* Un municipio que cobra por año (m.recargo.anual) pide el impuesto de cada año y años, no bimestres. */
+  function rotulaDeuda(m) {
+    var porAnio = !!(m && m.recargo && m.recargo.anual), et = document.querySelector('label[for="cpImp"]');
+    if (et) et.textContent = porAnio ? 'Impuesto de cada año que debes (pesos)' : 'Impuesto de cada bimestre que debes (pesos)';
+    ['cpDb', 'cpHb'].forEach(function (id) { var c = $(id); if (c && c.parentNode) c.parentNode.hidden = porAnio; });
+    if ($('cpDebeTit')) $('cpDebeTit').textContent = porAnio ? '¿Debes años?' : '¿Debes bimestres?';
+  }
   function ficha() {
     var ent = $('cpEnt').value, cve = $('cpMun').value, m = ley(ent, cve), h = '';
+    rotulaDeuda(m);
     var e = MUN && MUN.ent[ent], r = e ? e.lista.filter(function (x) { return x[0] === cve; })[0] : null;
     /* Homónimos (Ronda 6): el municipio siempre con su entidad, «Puebla, Puebla» o «Benito Juárez, Ciudad de México». */
     var nom = (r ? r[1] : (m ? m.nombre : '')) + (D.ent[ent] ? ', ' + D.ent[ent] : '');
@@ -371,7 +412,7 @@
     }
     if (m) {
       h += '<p class="cp-ok">✓ Su tabla está integrada: <a href="' + esc(m.url) + '">' + esc(m.ley) + '</a>. ' +
-        (m.recargo ? 'Recargos: ' + m.recargo.pct + ' % al mes (' + esc(m.recargo.art) + ').' : '</p><p class="cp-falta"><span class="est-chip est-pendiente">pendiente</span> Recargos y gastos de cobranza: ' + esc(m.acc_pend)) + '</p>';
+        (m.recargo ? 'Recargos: ' + m.recargo.pct + ' % al mes (' + esc(m.recargo.art) + ').' + (m.recargo.pend ? '</p><p class="cp-falta"><span class="est-chip est-pendiente">pendiente</span> ' + esc(m.recargo.pend) : '') : '</p><p class="cp-falta"><span class="est-chip est-pendiente">pendiente</span> Recargos y gastos de cobranza: ' + esc(m.acc_pend)) + '</p>';
     } else if (D.espera && D.espera[ent + '-' + cve]) {
       var w = D.espera[ent + '-' + cve];
       h += '<p class="cp-falta"><span class="est-chip est-pendiente">pendiente</span> Leímos su <a href="' + esc(w.url) + '">ley de ' + D.anio + '</a>, pero no la integramos: ' + esc(w.motivo) + ' No adivinamos una tasa. Mientras, prueba con un municipio marcado con ✓.</p>';
@@ -569,11 +610,13 @@
     $('cpPasos').innerHTML = r.pasos.map(fila).join('');
     var avisos = r.avisos.slice();
     if ($('cpDebe').checked) {
-      if (!$('cpImp').value) $('cpImp').value = String(r2(r.conBen / 6));
+      var porAnio = !!(m.recargo && m.recargo.anual);
+      if (!$('cpImp').value) $('cpImp').value = String(porAnio ? r2(r.conBen) : r2(r.conBen / 6));
       var imp = num('cpImp'), fs = ($('cpF').value || '').split('-').map(Number);
       var y = { imp: imp, da: +$('cpDa').value, db: +$('cpDb').value, ha: +$('cpHa').value, hb: +$('cpHb').value, f: fs, sit: $('cpSit').value, multa: +($('cpMulta').value || 0) };
       var d;
-      if (!(imp > 0) || fs.length !== 3 || !fs[0]) d = { error: 'Para el adeudo escribe el impuesto de cada bimestre y el día que pagarías.' };
+      if (porAnio) { y.db = 1; y.hb = 6; }
+      if (!(imp > 0) || fs.length !== 3 || !fs[0]) d = { error: 'Para el adeudo escribe el impuesto de cada ' + (porAnio ? 'año' : 'bimestre') + ' y el día que pagarías.' };
       else if (y.ha * 6 + y.hb < y.da * 6 + y.db) d = { error: 'El bimestre «hasta» no puede ser antes del bimestre «desde».' };
       else d = adeudo(D, m, y);
       $('cpDeudaCaja').hidden = false;
@@ -582,7 +625,7 @@
         $('cpDeudaPasos').innerHTML = '<tr><td colspan="3" class="ci-error">' + esc(d.error) + '</td></tr>';
       } else {
         $('cpDeudaPasos').innerHTML = d.pasos.map(fila).join('');
-        tot.innerHTML += '<p class="ci-cifra">Para ponerte al corriente (' + d.n + ' bimestre' + (d.n > 1 ? 's' : '') + '): <b>' + pesos(d.total) + '</b></p>';
+        tot.innerHTML += '<p class="ci-cifra">Para ponerte al corriente (' + d.n + ' ' + (d.per || 'bimestre') + (d.n > 1 ? 's' : '') + '): <b>' + pesos(d.total) + '</b></p>';
         avisos = avisos.concat(d.avisos);
       }
     } else {
@@ -646,7 +689,7 @@
       sec.push(cp);
     }
     if (U.d) sec.push({ t: 'Si te pones al corriente', est: 'derivado',
-      p: ['Por ' + U.d.n + ' bimestre' + (U.d.n > 1 ? 's' : '') + ', pagando el ' + U.y.fs.split('-').reverse().join('-') + ': ' + pesos(U.d.total) + '.'],
+      p: ['Por ' + U.d.n + ' ' + (U.d.per || 'bimestre') + (U.d.n > 1 ? 's' : '') + ', pagando el ' + U.y.fs.split('-').reverse().join('-') + ': ' + pesos(U.d.total) + '.'],
       tab: { cab: ['Concepto', 'Pesos', 'Regla'], filas: U.d.pasos } });
     if (E) {
       var P = E.precios, mp = { t: 'Junto al mercado de la vivienda', est: 'oficial',
