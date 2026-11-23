@@ -20,12 +20,15 @@
   if (!caja || !datosEl) return;
   var D = {};
   try { D = JSON.parse(datosEl.textContent); } catch (e) { return; }
+  var ENTS = D._ents || [];
+  delete D._ents;
   var RESP = 'servicios-respuesta.html', PORT = 'av-portafolio';
   var $ = function (id) { return document.getElementById(id); };
   var sel = $('svMostSrv'), q = $('svMostQ'), ay = $('svMostAy'), ej = $('svMostEj'), app = $('svMostApp'), res = $('svMostRes'),
     marco = $('svMostMarco'), carga = $('svMostCarga'), doc = $('svMostDoc'), form = caja.querySelector('form'),
     suelta = $('svMostSuelta'), arch = $('svMostArch'), sueltaTx = $('svMostSueltaTx'), guarda = $('svMostGuarda'),
-    port = $('svPort'), portL = $('svPortLista'), portB = $('svPortBorra');
+    port = $('svPort'), portL = $('svPortLista'), portB = $('svPortBorra'),
+    lugar = $('svMostLugar'), selE = $('svMostEnt'), selM = $('svMostMun');
   var mide = 0, listo = false, pendiente = null, ultimo = null, archivos = null;
 
   function esc(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -43,6 +46,7 @@
     ay.textContent = d.ay;
     ej.innerHTML = d.ej.map(function (x) { return '<button type="button" class="sv-most-chip" data-q="' + esc(x) + '">' + esc(x) + '</button>'; }).join(' ');
     if (d.app) { app.hidden = false; app.textContent = d.bt; app.setAttribute('data-app', d.app); } else app.hidden = true;
+    if (lugar) lugar.hidden = !d.lugar;
     if (suelta) {
       suelta.hidden = !d.suelta;
       if (d.suelta) { sueltaTx.textContent = d.suelta.tx; arch.setAttribute('accept', d.suelta.acepta); }
@@ -81,7 +85,7 @@
     marco.src = src;
   }
 
-  function revisa(texto, abreL, baja) {
+  function revisa(texto, abreL, baja, lug) {
     var sid = sel.value, t = (texto || '').trim() || (D[sid] && D[sid].q) || '';
     if (!t) return;
     q.value = texto ? texto : '';
@@ -90,9 +94,9 @@
     if (guarda) guarda.hidden = true;
     abreRes(baja);
     var b = listo && marco.getAttribute('data-es') === 'resp' && bot();
-    if (b && b.arma) { carga.hidden = true; b.arma(t, abreL || ''); setTimeout(alto, 50); return; }
+    if (b && b.arma) { carga.hidden = true; b.arma(t, abreL || '', lug || null); setTimeout(alto, 50); return; }
     carga.hidden = false;
-    pendiente = [t, abreL || ''];
+    pendiente = [t, abreL || '', lug || null];
     calienta();
   }
 
@@ -101,7 +105,7 @@
     if (marco.getAttribute('data-es') === 'resp') {
       listo = true;
       var b = bot();
-      if (pendiente && b && b.arma) { var p = pendiente; pendiente = null; b.arma(p[0], p[1]); }
+      if (pendiente && b && b.arma) { var p = pendiente; pendiente = null; b.arma(p[0], p[1], p[2]); }
       carga.hidden = true;
       return;
     }
@@ -178,6 +182,49 @@
   });
   if (portB) portB.addEventListener('click', function () { try { localStorage.removeItem(PORT); } catch (e) { /* nada */ } pintaPort(); });
   window.addEventListener('storage', function (ev) { if (ev.key === PORT) pintaPort(); });
+
+  /* El lugar (Ronda 9): entidad y municipio del padrón del INEGI, siempre «Municipio, Entidad» con su clave. El padrón se
+     carga solo al elegir una entidad. La pregunta lleva la palabra «municipio» (o «alcaldía») para que el dictamen, que
+     solo recibe la pregunta, encuentre el mismo lugar. */
+  var padron = null;
+  function traePadron() {
+    if (window.AUDIT_MUNICIPIOS) return Promise.resolve(window.AUDIT_MUNICIPIOS);
+    if (!padron) padron = new Promise(function (ok, mal) {
+      var s = document.createElement('script'), v = /\?v=\w+/.exec((document.querySelector('script[src*="sv-mostrador.js"]') || {}).src || '');
+      s.src = 'assets/auditor/js/municipios-efipem.js' + (v ? v[0] : '');
+      s.onload = function () { ok(window.AUDIT_MUNICIPIOS); };
+      s.onerror = mal;
+      document.head.appendChild(s);
+    });
+    return padron;
+  }
+  function entDe(a) { return ENTS.filter(function (x) { return x[0] === a; })[0]; }
+  function revisaLugar() {
+    var e = entDe(selE.value);
+    if (!e) return;
+    var o = selM.options[selM.selectedIndex], mun = selM.value;
+    var t = mun ? (e[0] === 'CDMX' ? 'Alcaldía ' : 'Municipio de ') + o.getAttribute('data-n') + ', ' + e[2] : e[2];
+    calienta();
+    revisa(t, '', true, { ent: e[0], mun: mun });
+  }
+  if (lugar) {
+    selE.addEventListener('change', function () {
+      var e = entDe(selE.value);
+      selM.innerHTML = '<option value="">Toda la entidad</option>';
+      selM.disabled = true;
+      if (!e) return;
+      calienta();
+      traePadron().then(function (MU) {
+        var L = MU && MU.ent[e[0]] ? MU.ent[e[0]].lista : [];
+        selM.innerHTML = '<option value="">Toda la entidad: ' + esc(e[2]) + '</option>' + L.map(function (r) {
+          return '<option value="' + e[1] + r[0] + '" data-n="' + esc(r[1]) + '">' + esc(r[1] + ', ' + e[2] + ' · ' + e[1] + r[0]) + '</option>';
+        }).join('');
+        selM.disabled = false;
+      }, function () { selM.disabled = true; });
+      revisaLugar();
+    });
+    selM.addEventListener('change', revisaLugar);
+  }
 
   sel.addEventListener('change', function () { pinta(sel.value); anota(sel.value, ''); q.value = ''; q.focus(); calienta(); });
   /* Al mostrar intención (escribir o tocar un ejemplo), el motor empieza a cargar en segundo plano. */

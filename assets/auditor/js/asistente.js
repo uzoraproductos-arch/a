@@ -277,7 +277,7 @@
       '<h2 class="dic-tit"><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h2>' + mira + ejecutivo +
       cap('Planteamiento') + '<p class="pa-nota-q"><span>La pregunta</span> «' + esc(q) + '»</p>' +
       (antes.length ? '<p class="dic-chico">Se hizo en la plática después de: ' + antes.map(function (x) { return '«' + esc(x) + '»'; }).join(' → ') + '.</p>' : '') +
-      cap('Respuesta del Auditor') + '<div class="dic-resp">' + resp + '</div>' +
+      cap('Respuesta del Auditor') + '<div class="dic-resp">' + resp + '</div>' + '<div class="dic-visual" id="dicVisual"></div>' +
       (r.integ ? capD('La revisión completa', '<p class="dic-chico">Todo lo que la base de la plataforma tiene de ' + esc(r.integ.rfcs.join(', ')) +
         ', reunido solo: sus cifras y sus fuentes están en los hallazgos y en el fundamento, y entran a la huella.</p><div class="dic-resp">' + r.integ.html.replace(/<button\b[^>]*>[\s\S]*?<\/button>/g, '') + '</div>') : '') +
       (capa ? capD('La lectura del modo ' + MODO_NOM[m],
@@ -3616,6 +3616,7 @@
       return;
     }
     doc.innerHTML = dictamenHtml(q, r, f, antes);
+    pintaVisual(q, null, document.getElementById('dicVisual'));
     document.title = (esFicha(MODO_DIC) ? 'Ficha: ' : 'Dictamen: ') + f.tit + ' · Auditavisión';
     huella(f).then(function (hx) {
       var fol = hx ? folioDe(hx, 'DP') : null;
@@ -3652,7 +3653,28 @@
   /* La respuesta completa del Inspector de Servicios: todo lo que la respuesta trae
      (las cifras, sus documentos, el expediente, el Planisferio y las demás partes
      de la plataforma, el servicio que toca) y, al final, «Generar dictamen». */
-  function armaRespuesta(qIn, abreIn) {
+  /* El expediente visual (Ronda 9, insp-visual.js): si la revisión toca una entidad o un municipio, su miniatura del mapa
+     y sus gráficas. lug = { ent: 'MÉX', mun: '15033' } cuando el panel ya trae el lugar elegido; si no, se lee de la
+     pregunta como lo hace la charla. Solo dibuja lo que la base ya tiene y no entra a la huella. */
+  function lugarDe(lug) {
+    var MU = window.AUDIT_MUNICIPIOS, E = (B.dat && B.dat.edo) || [];
+    var e = E.filter(function (x) { return x.a === lug.ent; })[0];
+    if (!e) return null;
+    if (!lug.mun || !MU || !MU.ent[lug.ent]) return { e: [e], m: null };
+    var r = MU.ent[lug.ent].lista.filter(function (x) { return MU.ent[lug.ent].cve + x[0] === lug.mun; })[0];
+    return r ? { e: [e], m: { cve: lug.mun, n: r[1], a: e.a, en: e.n, v: r.length > 2 ? r.slice(1) : null } } : { e: [e], m: null };
+  }
+  function pintaVisual(q, lug, el, listo) {
+    if (!el || !window.InspVisual) return;
+    var lu = lug ? lugarDe(lug) : (charla && charla.lugar ? charla.lugar(q) : null);
+    if (!lu) return;
+    window.InspVisual.arma(lu).then(function (h) {
+      if (!el.isConnected) return;
+      el.innerHTML = h;
+      if (listo) listo();
+    }, function () { /* sin datos: no se dibuja */ });
+  }
+  function armaRespuesta(qIn, abreIn, lugIn) {
     var ps = new URLSearchParams(location.search), q = (qIn != null ? qIn : (ps.get('q') || '')).trim().slice(0, 600);
     var antes = qIn != null ? [] : ps.getAll('c').map(function (x) { return x.trim().slice(0, 600); }).filter(Boolean).slice(-4);
     var abreL = qIn != null ? (abreIn || '') : ps.get('abre');
@@ -3682,7 +3704,7 @@
            completa); luego la respuesta entera, con sus cifras, documentos, su aplicación y su expediente, ya abierta; al
            final, «Generar dictamen». Mismos datos que la página completa: nada nuevo entra a la huella. */
         var app = appDe(r).replace(/<small>[^<]*aplicación \d+ de \d+<\/small>/, '');
-        doc.innerHTML = '<h2 class="pa-pag-q">«' + esc(q) + '»</h2>' + vistazoHtml(r, '') +
+        doc.innerHTML = '<h2 class="pa-pag-q">«' + esc(q) + '»</h2>' + vistazoHtml(r, '') + '<div class="pa-visual-caja" id="paVisual"></div>' +
           '<div class="pa-resp">' + r.html + '</div>' + integralHtml(r.integ) + app + expInvHtml(q, r) +
           (r.ficha ? '<section class="pa-pag-dic"><h3><span aria-hidden="true">🧾</span> Tu dictamen</h3>' +
             '<p>El respaldo de esta revisión' + (r.integ ? ', con la revisión completa' : '') + ': cada cifra con su estado, sus fuentes y el método, con folio, sello y huella digital. ' +
@@ -3690,6 +3712,7 @@
         document.title = (r.ficha ? r.ficha.tit : q) + ' · El Inspector · Auditavisión';
         var caja0 = doc.querySelector('.pa-app[data-pa-abre]');
         if (caja0) montaApp(caja0);
+        pintaVisual(q, lugIn, document.getElementById('paVisual'));
         avisaPadre(q, r, dl);
         return;
       }
@@ -3732,7 +3755,7 @@
   if (resp) {
     /* arma(q, abre): vuelve a armar la página con otra pregunta, sin recargar la base (el panel de Servicios la usa). */
     window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo, abre: abre, servicio: servicioHtml,
-      arma: function (q, abreL) { armaRespuesta(String(q || ''), abreL || ''); } };
+      arma: function (q, abreL, lug) { armaRespuesta(String(q || ''), abreL || '', lug || null); } };
     document.getElementById('respDoc').addEventListener('click', clicResp);
     armaRespuesta();
     return;

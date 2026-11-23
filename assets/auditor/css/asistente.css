@@ -657,3 +657,58 @@ html.pa-en-vista .pa-app-marco iframe { min-height: 420px; }
   .dic-sec > summary::after { content: none; }
   .dic-ejecutivo, .dic-tira-i, .dic-clave-i { break-inside: avoid; }
 }
+/* El expediente visual del Inspector (Ronda 9, insp-visual.js): miniatura del mapa y gráficas en SVG, en el panel
+   de Servicios y en el dictamen. Sin librerías; se imprime igual. */
+.pv { margin: 14px 0; padding: 16px 18px; border-radius: 16px; background: #fff; border: 1px solid #d6e0f2; }
+.pv h3 { margin: 0 0 10px; font-size: 18px; color: #0b2a63; }
+.pv h4 { margin: 0 0 8px; font-size: 16px; color: #0b2a63; }
+.pv-rejilla { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 760px) { .pv-rejilla { grid-template-columns: minmax(220px, 2fr) minmax(0, 3fr); align-items: start; } }
+.pv-mapa { margin: 0; }
+.pv-mapa svg { display: block; width: 100%; height: auto; max-height: 340px; }
+.pv-mapa path { stroke: #fff; stroke-width: .35; vector-effect: non-scaling-stroke; }
+.pv-mun { fill: #d6e0f2; }
+.pv-ent { fill: #2f5fb3; }
+.pv-sel { fill: #c2410c; stroke: #7c2d12 !important; stroke-width: 1.5 !important; }
+.pv-mapa figcaption, .pv-pie { margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: #4a5568; }
+.pv-graf { display: grid; gap: 12px; min-width: 0; }
+.pv-caja { padding: 12px 14px; border-radius: 12px; background: #f6f9ff; border: 1px solid #e1e8f5; min-width: 0; }
+.pv-barras { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.pv-barras li { display: grid; gap: 4px; }
+.pv-et { font-size: 15px; color: #24324d; }
+.pv-bar { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; }
+.pv-bar svg { display: block; width: 100%; height: 14px; }
+.pv-bar b { font-variant-numeric: tabular-nums; white-space: nowrap; color: #0b2a63; }
+.pv-fondo { fill: #e6ecf7; }
+.pv-lleno { fill: #2f5fb3; }
+.pv-lleno.pv-sub { fill: #7aa2e3; }
+.pv-lleno.pv-deuda { fill: #6b4fa3; }
+.pv-lleno.pv-asf { fill: #b45309; }
+.pv-lleno.pv-fraude { fill: #be123c; }
+.pv-lleno.pv-verde { fill: #15803d; }
+.pv-lleno.pv-amarillo { fill: #ca8a04; }
+.pv-lleno.pv-rojo { fill: #b91c1c; }
+.pv-obras { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.pv-obras li { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
+.pv-obras small { color: #4a5568; }
+.dic-visual .pv { break-inside: avoid; }
+:root[data-theme="dark"] .pv { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.14); }
+:root[data-theme="dark"] .pv-caja { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); }
+:root[data-theme="dark"] .pv h3, :root[data-theme="dark"] .pv h4, :root[data-theme="dark"] .pv-bar b { color: #dbe6ff; }
+:root[data-theme="dark"] .pv-et, :root[data-theme="dark"] .pv-pie, :root[data-theme="dark"] .pv-mapa figcaption, :root[data-theme="dark"] .pv-obras small { color: #c3cde0; }
+:root[data-theme="dark"] .pv-mun, :root[data-theme="dark"] .pv-fondo { fill: #34425e; }
+:root[data-theme="dark"] .pv-mapa path { stroke: #0f172a; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .pv { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.14); }
+  :root:not([data-theme="light"]) .pv-caja { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); }
+  :root:not([data-theme="light"]) .pv h3, :root:not([data-theme="light"]) .pv h4, :root:not([data-theme="light"]) .pv-bar b { color: #dbe6ff; }
+  :root:not([data-theme="light"]) .pv-et, :root:not([data-theme="light"]) .pv-pie, :root:not([data-theme="light"]) .pv-mapa figcaption, :root:not([data-theme="light"]) .pv-obras small { color: #c3cde0; }
+  :root:not([data-theme="light"]) .pv-mun, :root:not([data-theme="light"]) .pv-fondo { fill: #34425e; }
+  :root:not([data-theme="light"]) .pv-mapa path { stroke: #0f172a; }
+}
+@media print {
+  .pv { background: #fff !important; border-color: #ccc !important; }
+  .pv-caja { background: #fff !important; }
+  .pv-mapa svg { max-height: 260px; }
+  .pv-lleno, .pv-sel, .pv-ent, .pv-mun, .pv-fondo { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
