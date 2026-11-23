@@ -238,6 +238,27 @@
    "ir": "glosario.html#Paquete-Economico"
   },
   {
+   "q": "¿Cuánto estima la Ley de Ingresos 2027 en total?",
+   "ir": "numeros-paquete-2027-cifras.html#peLif",
+   "dice": [
+    "10.64 billones"
+   ]
+  },
+  {
+   "q": "¿Cuánto IVA espera la Ley de Ingresos en 2027?",
+   "ir": "numeros-paquete-2027-cifras.html#peLif",
+   "dice": [
+    "1.77 billones"
+   ]
+  },
+  {
+   "q": "¿Cuál es el techo de endeudamiento 2027?",
+   "ir": "numeros-paquete-2027-cifras.html#peLif",
+   "dice": [
+    "1.70 billones"
+   ]
+  },
+  {
    "q": "Quiero pedir una investigación",
    "ir": "servicios.html"
   },

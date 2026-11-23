@@ -158,6 +158,7 @@ def datos(d):
         fila(id=x['id'], g='ing26', sg=x['grupo'], n=limpio(x['nombreLargo']) if x['nombre'] in ('ISR', 'IVA', 'IEPS', 'ISAN') else limpio(x['nombre']),
              c=limpio(x['nombre']), y='2026', v=x['montoMdp'], e=x['estado'], fu=fu('Ley de Ingresos de la Federación 2026, art. 1o., renglón %s' % x['claveLIF'], 'ref-lif2026'),
              d=limpio(x['quePaga']), ley=limpio(x['ley']), al=al(x['nombre'], ALIAS.get(x['id'], []) + [x['nombreLargo']]),
+             par=x['id'] if x['id'] in ('ing-isr', 'ing-iva', 'ing-ieps') else None,  # con «2027», a su renglón de la Ley de Ingresos 2027
              ir=[ingreso_archivo(x), limpio(x['nombre']) + ' en Números'])
     for sg in ('Impuestos', 'Otras contribuciones', 'No tributarios'):
         xs = [x for x in P['ingresos'] if x['grupo'] == sg]
@@ -357,6 +358,33 @@ def datos(d):
                                                                                        ['rfsp', 'requerimientos financieros', 'deficit amplio'] if x['id'] == 'f-rfsp' else
                                                                                        ['deuda publica', 'deuda del pais', 'shrfsp'] if x['id'] == 'f-shrfsp' else []), **base)
         fila(id='pq26-' + x['id'], y='2026', v=x['m26'], pib=x['pib26'], par='pq-' + x['id'], al=[], **dict(base, ir=[insp_nota.CATALOGO, 'Catálogo de cifras oficiales']))
+    # La Ley de Ingresos 2027 ya publicada (Ronda 11): sus cifras se leen de presupuesto_modulos.lif27(), con su huella y su cuadre.
+    import presupuesto_modulos
+    L27 = presupuesto_modulos.lif27()
+    A27, D27 = L27['articulo_1'], L27['_pres'][0]['desglose']
+    LIF27 = fu('Ley de Ingresos de la Federación 2027, art. 1o. (DOF 13-11-2026)', url=L27['fuentes']['diputados_pdf']['url'])
+    ir27 = [NUM + 'paquete-2027-cifras.html#peLif', 'La Ley de Ingresos 2027']
+    grupos['lif27'] = {'n': 'todo lo que estima la Ley de Ingresos 2027', 'tot': A27['total_lif_mdp'], 'ir': ir27, 'fu': LIF27,
+                       'lista': 'La Ley de Ingresos 2027, publicada en el DOF el 13-11-2026'}
+    VIG = ' Es la Ley de Ingresos 2027, publicada en el Diario Oficial el 13 de noviembre de 2026: rige desde el 1 de enero de 2027; hasta entonces rige la de 2026.'
+    for i, n, v, a, frase in (
+            ('lif27-total', 'Ingreso total estimado de 2027', A27['total_lif_mdp'], ['ley de ingresos 2027', 'ley de ingresos de 2027', 'lif 2027', 'ingreso total 2027', 'ingresos de 2027'],
+             'Para 2027, la Ley de Ingresos estima {V} en total, incluida la deuda nueva.'),
+            ('lif27-isr', 'Impuesto sobre la renta 2027', D27['11_isr'], ['isr 2027', 'isr de 2027', 'impuesto sobre la renta 2027', 'impuesto sobre la renta en 2027'],
+             'Para 2027, la Ley de Ingresos espera {V} del impuesto sobre la renta.'),
+            ('lif27-iva', 'IVA 2027', D27['13_01_iva'], ['iva 2027', 'iva de 2027', 'iva en 2027', 'impuesto al valor agregado 2027'],
+             'Para 2027, la Ley de Ingresos espera {V} del IVA.'),
+            ('lif27-ieps', 'IEPS 2027', D27['13_02_ieps'], ['ieps 2027', 'ieps de 2027', 'ieps en 2027'],
+             'Para 2027, la Ley de Ingresos espera {V} del IEPS.'),
+            ('lif27-rfp', 'Recaudación federal participable 2027', A27['recaudacion_federal_participable_mdp'],
+             ['recaudacion federal participable 2027', 'recaudacion federal participable de 2027', 'rfp 2027'],
+             'Para 2027, la Ley de Ingresos proyecta una recaudación federal participable de {V}: la base de lo que se reparte a estados y municipios.'),
+            ('lif27-deuda', 'Techo de endeudamiento neto interno del Gobierno Federal 2027', L27['techos_endeudamiento']['articulo_2_gobierno_federal']['interno_neto_hasta_mdp'],
+             ['techo de endeudamiento 2027', 'techo de deuda 2027', 'endeudamiento neto 2027', 'endeudamiento interno 2027', 'deuda autorizada para 2027', 'deuda nueva 2027'],
+             'Para 2027, la Ley de Ingresos autoriza al Gobierno Federal un endeudamiento neto interno de hasta {V} (art. 2o.). Es endeudamiento neto, no la deuda total.')):
+        fila(id=i, g='lif27', tot=1 if i == 'lif27-total' else None, n=n, y='2027', v=v, e='oficial', fu=LIF27 if i != 'lif27-deuda' else
+             fu('Ley de Ingresos de la Federación 2027, art. 2o. (DOF 13-11-2026)', url=L27['fuentes']['diputados_pdf']['url']),
+             fr=frase + VIG, al=a, ir=ir27, par={'lif27-isr': 'ing-isr', 'lif27-iva': 'ing-iva', 'lif27-ieps': 'ing-ieps'}.get(i))
     grupos['func27'] = {'n': 'el gasto programable propuesto para 2027', 'ir': [NUM + 'paquete-2027-gasto.html', 'El gasto del Paquete 2027'], 'fu': CGPE,
                         'lista': 'El gasto programable de 2027 por finalidad (propuesta)'}
     egr_par = {'Desarrollo social': 'egr-social', 'Desarrollo económico': 'egr-economico', 'Gobierno': 'egr-gobierno'}

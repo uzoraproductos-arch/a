@@ -1549,14 +1549,38 @@ MUNICIPIOS += _leon_saltillo()
 #    ni el ajuste ni el mínimo se aplican, y la ficha lo dice como pendiente.
 #  - Los estímulos del art. 103 son facultad del ayuntamiento («podrá conceder»): van
 #    como pago anticipado y descuentos, con su condición, y se dice que no son derecho.
-#  - El adeudo no se calcula: los recargos (1.13 %) y la actualización remiten al
-#    Código Fiscal para el Estado de Morelos (arts. 47 y 168), que aún no cotejamos.
+#  - Ronda 11 (Paquete de Datos 9): el art. 93 Ter-5 de la Ley General de Hacienda
+#    Municipal del Estado de Morelos (p. 22-23 de su PDF) trae la misma tarifa (2 y 3
+#    al millar urbanos, 2 al millar rústicos) y ningún porcentaje de ajuste: el «se
+#    ajustará» del art. 6 no cambia la cuenta. El adeudo ya se calcula con el Código
+#    Fiscal para el Estado de Morelos (arts. 46 y 47, p. 40 a 43): ver adeudo_cfm().
+#    Lo que leímos y decidimos a la vista (derivado, y la página lo dice):
+#      · El bimestre vence al terminar su primer mes (art. 6 y art. 93 Ter-6 LGHM) y es
+#        exigible desde el día 1 del mes siguiente; los recargos corren por mes o
+#        fracción desde ahí (art. 47), con 1.13 % al mes (art. 8, 1.7.1.1) y hasta por
+#        cinco años, que leemos como 60 meses.
+#      · Los recargos van sobre el impuesto actualizado: el art. 47 los calcula «sobre el
+#        total del crédito fiscal» y solo excluye recargos, indemnización por cheque,
+#        gastos de ejecución y multas; el art. 46 dice que lo actualizado conserva su
+#        naturaleza.
+#      · El factor del INPC (art. 46) se calcula «hasta el diezmilésimo»: lo truncamos
+#        ahí. Su regla de ajuste del diezmilésimo («se ajustará la decena con un punto
+#        hacia arriba») no es clara; a lo más cambia el factor en 0.0001.
+#      · La multa (55 % a 75 %, 1.7.1.2) y los gastos de ejecución (1 % por diligencia,
+#        nunca menos de 5 UMA: art. 168 del Código y 1.7.1.3) se dicen aparte.
 # ---------------------------------------------------------------------------
 CUE_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'cuernavaca-ley-ingresos-2026.json')
 CUE_PDF = os.path.join(RAIZ, 'investigaciones', 'predial', 'cuernavaca-ley-ingresos-2026.pdf')
 CUE_SHA = '2d0fb00414ed501f875620b401be39580066353630be5fedd14a85888b17d074'
 CUE_LEY = 'Ley de Ingresos del Municipio de Cuernavaca'
 CUE_6 = [(0.01, 0.0, 0.002), (70000.01, 140.0, 0.003)]
+MOR_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'morelos-codigo-fiscal-y-hacienda-2026.json')
+MOR_CFM_PDF = os.path.join(RAIZ, 'investigaciones', 'predial', 'morelos-codigo-fiscal.pdf')
+MOR_LGHM_PDF = os.path.join(RAIZ, 'investigaciones', 'predial', 'morelos-ley-hacienda-municipal.pdf')
+MOR_CFM_SHA = '4ba3d58c6ecc6223b709a711657fe92fe902f9b30a1f65d149d753b36404baf1'
+MOR_LGHM_SHA = 'e7ab5e0b96c9af19702d00fd18c118be8410aecdf1bc3c55a1774a32c05cdd6e'
+MOR_CFM = 'Código Fiscal para el Estado de Morelos'
+MOR_LGHM = 'Ley General de Hacienda Municipal del Estado de Morelos'
 
 
 def _cuernavaca():
@@ -1570,11 +1594,26 @@ def _cuernavaca():
         import hashlib
         if hashlib.sha256(open(CUE_PDF, 'rb').read()).hexdigest() != CUE_SHA:
             raise SystemExit('cc_predial: %s no es el PDF que cotejamos (su huella cambió)' % CUE_PDF)
+    # Ronda 11: las dos leyes permanentes de Morelos (Paquete de Datos 9), cotejadas contra su PDF.
+    M = json.load(open(MOR_ARCHIVO, encoding='utf-8'))
+    F, a46, a47, T5 = M['fuentes'], M['actualizacion_inpc_art_46_cfm'], M['recargos_art_47_cfm'], M['tarifa_y_pago_lghm']['art_93_ter_5']
+    if (F['codigo_fiscal_morelos']['sha256'], F['ley_general_hacienda_municipal_morelos']['sha256']) != (MOR_CFM_SHA, MOR_LGHM_SHA) \
+            or (a46['fracciones_mes'], a46['piso_factor'], a46['decimales_factor']) != (False, 1.0, 4) \
+            or (a47['tope_meses'], a47['tasa_cuernavaca_2026_mora_mensual_pct']) != (60, a8['mora_mensual_pct']) \
+            or (T5['urbanos_hasta_70000_al_millar'], T5['urbanos_excedente_70000_al_millar'], T5['rusticos_al_millar'], T5['ajuste_adicional']) != (2.0, 3.0, 2.0, False):
+        raise SystemExit('cc_predial: %s cambió: vuelve a cotejar los arts. 46 y 47 del Código Fiscal y 93 Ter-5 de la LGHM' % MOR_ARCHIVO)
+    for pdf, sha in ((MOR_CFM_PDF, MOR_CFM_SHA), (MOR_LGHM_PDF, MOR_LGHM_SHA)):
+        if os.path.exists(pdf):
+            import hashlib
+            if hashlib.sha256(open(pdf, 'rb').read()).hexdigest() != sha:
+                raise SystemExit('cc_predial: %s no es el PDF que cotejamos (su huella cambió)' % pdf)
     if dict(_padron_ent('MOR')).get('007') != 'Cuernavaca':
         raise SystemExit('cc_predial: el padrón no trae a Cuernavaca (17007) con su nombre')
     return [{
         'id': 'mor007', 'ent': 'MOR', 'cve': '007', 'nombre': 'Cuernavaca',
         'ley': C['ley'], 'ley_corta': CUE_LEY, 'arts_ley': ', arts. 6, 8 y 103',
+        'ley_extra': [[MOR_CFM, F['codigo_fiscal_morelos']['url_oficial'], MOR_CFM_SHA, 'arts. 46, 47 y 168'],
+                      [MOR_LGHM, F['ley_general_hacienda_municipal_morelos']['url_oficial'], MOR_LGHM_SHA, 'arts. 93 Ter-5 y 93 Ter-6']],
         'url': C['url'], 'sha256': C['sha256_pdf'],
         'art_tarifa': 'art. 6, 1.2.1.1', 'tramos': [[li, round(cf / 6, 6), fa / 6] for li, cf, fa in CUE_6],
         'tramos_nota': ('La ley da la tarifa por año (art. 6): 2 al millar sobre los primeros $70,000.00 del valor y 3 al millar sobre el '
@@ -1591,17 +1630,32 @@ def _cuernavaca():
                                 'por adelantado en enero o febrero)', 'f': 0.5, 'art': 'art. 103, A)'},
             {'id': 'm65', 'et': 'Tienes 65 años o más, o una discapacidad que acreditas (mismas condiciones)', 'f': 0.5, 'art': 'art. 103, B)'}],
         'suma_art': None,
-        'acc_pend': ('Los recargos de Cuernavaca son de 1.13 %% por mes o fracción sobre el saldo insoluto (art. 8, 1.7.1.1 de la %s), la multa '
-                     'por no pagar a tiempo va de 55 %% a 75 %% del crédito (1.7.1.2) y los gastos de ejecución son el 1 %% del crédito, nunca '
-                     'menos de 5 UMA (1.7.1.3). Pero la actualización con el INPC sigue «el procedimiento establecido» en el Código Fiscal para '
-                     'el Estado de Morelos, y los recargos, su art. 47: ese Código aún no lo cotejamos, así que no calculamos el adeudo. '
-                     'Pídelo a la Tesorería Municipal.') % CUE_LEY,
+        # Ronda 11: el adeudo ya se calcula (arts. 46 y 47 del Código Fiscal para el Estado de Morelos; adeudo_cfm()).
+        'recargo': {'pct': 1.13, 'art': 'art. 8, 1.7.1.1', 'cfm': True, 'max_meses': 60,
+                    'ley_rec': MOR_CFM + ', arts. 46 y 47',
+                    'nota': ('Cada bimestre vence al terminar su primer mes (art. 6; art. 93 Ter-6 de la %s) y es exigible desde el día 1 del mes '
+                             'siguiente. Desde ahí corren los recargos, 1.13 %% por mes o fracción (art. 8, 1.7.1.1), hasta por cinco años, que '
+                             'leemos como 60 meses (%s, art. 47). El adeudo se actualiza con el INPC del mes anterior al pago entre el del mes '
+                             'anterior al vencimiento, sin fracciones de mes y con factor de al menos 1 (art. 46); el factor lo truncamos al '
+                             'diezmilésimo, porque la regla de ajuste del art. 46 no es clara (a lo más cambia el factor en 0.0001). Los recargos '
+                             'van sobre el impuesto actualizado: el art. 47 los calcula sobre el total del crédito fiscal y solo excluye los propios '
+                             'recargos, la indemnización por cheque, los gastos de ejecución y las multas. Es nuestra lectura de la ley.') % (MOR_LGHM, MOR_CFM),
+                    'anio_tasa': ('La tasa de 1.13 % es la de la Ley de Ingresos de Cuernavaca 2026, que se renueva cada año (y el art. 8 dice que '
+                                  'cambia si cambian el Código Fiscal o la Ley de Ingresos del Estado de Morelos).'),
+                    'pend': ('La multa y los gastos de ejecución no los sumamos: son del procedimiento de cobro. La multa por no pagar a tiempo va de '
+                             '55 %% a 75 %% del crédito no enterado y se puede reducir hasta 50 %% si pagas dentro de los quince días siguientes '
+                             '(art. 8, 1.7.1.2 de la %s); los gastos de ejecución son 1 %% del crédito por cada diligencia (requerimiento, embargo, '
+                             'remate), nunca menos de 5 UMA (%s, art. 168; art. 8, 1.7.1.3). Pídelos a la Tesorería Municipal.') % (CUE_LEY, MOR_CFM)},
+        'acc_pend': ('La multa (55 %% a 75 %%, art. 8, 1.7.1.2 de la %s) y los gastos de ejecución (1 %% por diligencia, nunca menos de 5 UMA, '
+                     '%s, art. 168) no los calculamos.') % (CUE_LEY, MOR_CFM),
         'nota': ('Cuernavaca cobra por año (art. 6) y se paga por bimestre, dentro del primer mes de cada uno: enero, marzo, mayo, julio, '
-                 'septiembre y noviembre. Dos cosas del art. 6 quedan pendientes y esta cuenta no las aplica: la tarifa «se ajustará» con el '
-                 'porcentaje del art. 93 ter-5 de la Ley General de Hacienda Municipal del Estado de Morelos, que aún no cotejamos, y la cuota '
-                 'mínima («uno por ciento de hasta dos UMA… calculada al año») admite más de una lectura. Tampoco cotejamos la Fe de erratas '
-                 'publicada después de la ley. Los estímulos de jubilados, pensionados, personas de 65 años o más y con discapacidad piden '
-                 'que el terreno registrado en el Catastro no pase de 300 m²: la página no lo revisa.'),
+                 'septiembre y noviembre. El art. 6 dice que la tarifa «se ajustará» con el art. 93 ter-5 de la %s: lo cotejamos y trae la misma '
+                 'tarifa (2 al millar hasta $70,000 y 3 al millar sobre el excedente; rústicos, 2 al millar) sin ningún porcentaje de ajuste, así '
+                 'que la cuenta no cambia. El art. 93 Ter-6 pide pagar en una sola exhibición, en enero, lo que sale de los primeros $70,000 del '
+                 'valor (hasta $140 al año); aquí va repartido entre los seis bimestres, que suman lo mismo. La cuota mínima («uno por ciento de '
+                 'hasta dos UMA… calculada al año») admite más de una lectura y no la aplicamos. Tampoco cotejamos la Fe de erratas publicada '
+                 'después de la ley. Los estímulos de jubilados, pensionados, personas de 65 años o más y con discapacidad piden que el terreno '
+                 'registrado en el Catastro no pase de 300 m²: la página no lo revisa.') % MOR_LGHM,
         'venc': 'que se pagan dentro del primer mes de cada bimestre: enero, marzo, mayo, julio, septiembre y noviembre (art. 6)'}]
 
 
@@ -2840,10 +2894,14 @@ def construir(base, ref):
     for m in MUNICIPIOS:
         porley.setdefault(m['url'], []).append(m)
     quien = lambda ms: '%s, %s' % (ms[0]['nombre'], ENTIDADES[ms[0]['ent']]) if len(ms) == 1 else 'Las %d alcaldías de la %s' % (len(ms), ENTIDADES[ms[0]['ent']]) if ms[0].get('alcaldia') else 'Los %d municipios de %s' % (len(ms), ENTIDADES[ms[0]['ent']])
-    leyes = ''.join('<li><b>%s</b>: <a href="%s">%s</a> (huella SHA-256 <code>%s…</code>)%s</li>'
+    # Las leyes permanentes del estado a las que remite la municipal (Cuernavaca: Código Fiscal y LGHM de Morelos) van con su huella.
+    extra = lambda m: ''.join('; <a href="%s">%s</a> (huella SHA-256 <code>%s…</code>), %s' % (esc(xu), esc(xt), xs[:12], esc(xa))
+                              for xt, xu, xs, xa in m.get('ley_extra', []))
+    leyes = ''.join('<li><b>%s</b>: <a href="%s">%s</a> (huella SHA-256 <code>%s…</code>)%s%s</li>'
                     % ((esc('%s, %s' % (ms[0]['nombre'], ENTIDADES[ms[0]['ent']])) if len(ms) == 1 else esc(quien(ms))),
                        esc(u), esc(ms[0]['ley']), ms[0]['sha256'][:12],
-                       ms[0]['arts_ley'] if ms[0].get('arts_ley') else ', arts. 10 bis y 21 bis-2 a 21 bis-12' if ms[0].get('anual') else ', arts. 42, 130 a 132, 281 y 282' if ms[0].get('alcaldia') else '')
+                       ms[0]['arts_ley'] if ms[0].get('arts_ley') else ', arts. 10 bis y 21 bis-2 a 21 bis-12' if ms[0].get('anual') else ', arts. 42, 130 a 132, 281 y 282' if ms[0].get('alcaldia') else '',
+                       extra(ms[0]))
                     for u, ms in porley.items())
     lista = ', '.join(esc(m['nombre']) for m in MUNICIPIOS if not m.get('ley_corta')) + ''.join(
         ' y ' + esc(quien(ms) if len(ms) == 1 else quien(ms)[0].lower() + quien(ms)[1:]) for u, ms in porley.items() if ms[0].get('ley_corta'))
@@ -3065,6 +3123,40 @@ def adeudo_anual(m, imp, da, ha, f):
         return None
     t_imp, t_rec = round(t_imp, 2), round(t_rec, 2)
     return n_anios, t_imp, t_rec, round(t_imp + t_rec, 2)
+
+
+def adeudo_cfm(m, imp, da, db, ha, hb, f, inpc, ult):
+    """Gemela de adeudoCfm() de cc-predial.js (Ronda 11, Cuernavaca): bimestre por bimestre, vence al terminar el primer mes
+    y es exigible el día 1 del siguiente; recargos por mes o fracción desde ahí (tope max_meses) sobre el impuesto actualizado;
+    factor del INPC (mes anterior al pago ÷ mes anterior al vencimiento) truncado al diezmilésimo y nunca menor que 1.
+    inpc = {año: [12 meses]}; ult = [año, mes] del último publicado. f = (año, mes, día) del pago.
+    Devuelve (bimestres vencidos, impuesto, actualización, recargos, total) o None."""
+    import math
+    R = m['recargo']
+    j2 = lambda v: math.floor(v * 100 + 0.5) / 100  # como Math.round del navegador
+    ix = lambda a, mm: (inpc.get(a) or inpc.get(str(a)) or [None] * 12)[mm - 1]
+    ant = lambda a, mm: (a - 1, 12) if mm == 1 else (a, mm - 1)
+    n_b, t_imp, t_act, t_rec = 0, 0.0, 0.0, 0.0
+    for a in range(da, ha + 1):
+        for b in range(db if a == da else 1, (hb if a == ha else 6) + 1):
+            vm = 2 * b - 1
+            n = (f[0] - a) * 12 + (f[1] - (vm + 1)) + 1
+            if n <= 0:
+                continue
+            nc = min(n, R['max_meses'])
+            iA, iB = ix(*ant(f[0], f[1])), ix(*ant(a, vm))
+            if iA is None:
+                iA = ix(*ult)
+            F = max(1.0, math.floor(iA / iB * 10000) / 10000) if iA and iB else 1.0
+            act = j2(imp * (F - 1))
+            n_b += 1
+            t_imp += imp
+            t_act += act
+            t_rec += j2((imp + act) * R['pct'] / 100 * nc)
+    if not n_b:
+        return None
+    t_imp, t_act, t_rec = j2(t_imp), j2(t_act), j2(t_rec)
+    return n_b, t_imp, t_act, t_rec, j2(t_imp + t_act + t_rec)
 
 
 # ---- Prueba: el caso del mandamiento y que Python y el navegador den lo mismo ----
@@ -3370,9 +3462,41 @@ def prueba():
             if n != esp:
                 mal += 1
                 print('✗ Cuernavaca en el navegador', mid, x, n, 'esperaba', esp)
-        if 'Código Fiscal para el Estado de Morelos' not in json.loads(l13[1]):
+        if json.loads(l13[1]):
             mal += 1
-            print('✗ el adeudo de Cuernavaca debe decir que depende del Código Fiscal para el Estado de Morelos', l13[1])
+            print('✗ desde la Ronda 11 el adeudo de Cuernavaca se calcula (arts. 46 y 47 del Código Fiscal de Morelos)', l13[1])
+    # Ronda 11: el adeudo de Cuernavaca, hecho a mano con un INPC de prueba (valor = 100 + 12 × (año − 2025) + (mes − 1); el de 2026
+    # llega hasta septiembre). Vence al terminar el primer mes del bimestre, exigible el día 1 del siguiente; 1.13 % por mes o fracción
+    # sobre el impuesto actualizado; factor truncado al diezmilésimo; tope de 60 meses.
+    ip = {a: [100 + 12 * (a - 2025) + k for k in range(12)] for a in range(2018, 2026)}
+    ip[2026] = [112 + k for k in range(9)] + [None] * 3
+    cu = [((1000, 2026, 1, 2026, 1, (2026, 6, 10)), (1, 1000.0, 45.0, 59.04, 1104.04)),    # 5 meses; 116/111 = 1.0450
+          ((1000, 2025, 6, 2025, 6, (2026, 1, 5)), (1, 1000.0, 18.3, 23.01, 1041.31)),     # nov-2025: 2 meses; 111/109 = 1.0183
+          ((1000, 2026, 1, 2026, 1, (2026, 1, 31)), None),                                 # aún en plazo
+          ((1000, 2026, 1, 2026, 1, (2026, 2, 1)), (1, 1000.0, 9.0, 11.4, 1020.4)),        # el día que se vuelve exigible: 1 mes
+          ((1000, 2019, 1, 2019, 1, (2026, 6, 10)), (1, 1000.0, 3296.2, 2912.82, 7209.02)),  # 89 meses: se cuentan 60
+          ((1000, 2026, 5, 2026, 5, (2026, 12, 5)), (1, 1000.0, 8.4, 34.18, 1042.58)),     # sin INPC de noviembre: el último (sep)
+          ((1000, 2025, 5, 2025, 6, (2026, 1, 5)), (2, 2000.0, 55.6, 69.9, 2125.5))]       # dos bimestres
+    for (imp, da, db, ha, hb, f), esp in cu:
+        got = adeudo_cfm(M('mor007'), imp, da, db, ha, hb, f, ip, [2026, 9])
+        if got != esp:
+            mal += 1
+            print('✗ adeudo de Cuernavaca', imp, da, db, ha, hb, f, got, 'esperaba', esp)
+    D14 = dict(D, inpc=ip, inpc_ult=[2026, 9])
+    prog14 = ("global.window={};global.document={getElementById:function(){return null}};require(%s);var D=%s;"
+              "var m=D.mun.filter(function(y){return y.id==='mor007'})[0];"
+              "console.log(JSON.stringify(%s.map(function(x){var r=window.AuditorPredial.adeudo(D,m,{imp:x[0],da:x[1],db:x[2],ha:x[3],hb:x[4],f:x[5],multa:0,sit:'req'});"
+              "return r.error?null:[r.n,r.pasos[0][1],r.pasos[1][1],r.pasos[2][1],r.total];})));"
+              % (json.dumps(js), json.dumps(D14), json.dumps([[i, a, b, c, d, list(f)] for (i, a, b, c, d, f), _ in cu])))
+    r14 = subprocess.run(['node'], input=prog14, capture_output=True, text=True)
+    try:
+        for (x, esp), n in zip(cu, json.loads(r14.stdout.strip())):
+            if (tuple(n) if n else None) != esp:
+                mal += 1
+                print('✗ adeudo de Cuernavaca en el navegador', x, n, 'esperaba', esp)
+    except ValueError:
+        mal += 1
+        print('✗ el adeudo de Cuernavaca no corrió en el navegador', r14.stderr[:300])
     # Ronda 9: los recargos de Tijuana (art. 63 de su Ley de Ingresos y art. 108 de la LHM de Baja California), hechos a mano:
     # el año vence el 31 de marzo y es exigible el 1 de abril; 2 % por mes o fracción; tope de 60 meses.
     tj = [((4290, 2025, 2025, (2026, 6, 1)), (1, 4290.0, 1287.0, 5577.0)),        # abr-2025 a jun-2026: 15 meses

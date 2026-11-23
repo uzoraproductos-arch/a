@@ -895,7 +895,7 @@
     var NU = D.num || {}, NF = NU.filas || [], NG = NU.grupos || {}, NPAR = {};
     /* La pestaña Datos (asistente_datos.py) suma sus renglones a los mismos: ambiente, basura, Ramo 16 y la ASF. */
     var DT = D.datos || {}, PSO = DT.peso;
-    var NORD = ['ing26', 'egr26', 'tres26', 'mun26', 'fed26', 'munp', 'ramo26', 'func27', 'pq27', 'soc27', 'inv27', 'colchon', 'cf24', 'cp25', 'r16', 'amb24', 'basura', 'asf', 'asfg', 'asfs'];
+    var NORD = ['ing26', 'egr26', 'tres26', 'mun26', 'fed26', 'munp', 'ramo26', 'func27', 'lif27', 'pq27', 'soc27', 'inv27', 'colchon', 'cf24', 'cp25', 'r16', 'amb24', 'basura', 'asf', 'asfg', 'asfs'];
     NF.forEach(function (f) { f.alp = (f.al || []).map(function (a) { return ' ' + a + ' '; }); if (f.par) (NPAR[f.par] = NPAR[f.par] || []).push(f); });
     var NQUIERE = /cuant|monto|cifra|presupuest|recaud|cobr|gast|cuesta|cuestan|costo|asign|aprob|toca|lana|dinero|varo|porcentaje|parte|de cada|que tanto|propon|recibe|reciben|tiene|vale|suma|ingres|deja|aporta|sale|entra|billon|millon|dime|dato|ejerc|reparte|da |dan |le dan|se va|se van|va a|van a/;
     var NLISTA = /\b(cuales|lista|desglose|desglosa|reparte|se divide|se compone|en que se (gasta|va|van)|a donde va|de donde (sale|viene|vienen|entra)|renglones|rubros|todos los|todas las)\b/;
@@ -910,8 +910,9 @@
       });
       if (!mejor) return null;
       var anio = (/\b(19[89]\d|20[0-3]\d)\b/.exec(t) || [])[1];
-      /* «El presupuesto de 2027» todavía es propuesta: su cifra es la del Paquete Económico. */
-      if (anio === '2027' && (mejor.id === 'egr-total' || mejor.id === 'ing-total')) return NF.filter(function (x) { return x.id === (mejor.id === 'egr-total' ? 'pq-f-gasto' : 'pq-f-ing'); })[0] || mejor;
+      /* «El presupuesto de 2027» todavía es propuesta: su cifra es la del Paquete Económico. La Ley de Ingresos 2027 ya se publicó
+         (DOF 13-11-2026, Ronda 11): «los ingresos de 2027» van a su total. */
+      if (anio === '2027' && (mejor.id === 'egr-total' || mejor.id === 'ing-total')) return NF.filter(function (x) { return x.id === (mejor.id === 'egr-total' ? 'pq-f-gasto' : 'lif27-total'); })[0] || mejor;
       if (anio && mejor.y !== anio && mejor.par) { var otro = (NPAR[mejor.par] || []).filter(function (x) { return x.y === anio; })[0]; if (otro) mejor = otro; }
       return mejor;
     }

@@ -324,13 +324,13 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-los-municipios.html` | Los 2,479 municipios: predial y transferencias · Auditavisión | apartados.py | 55 | 0 | 3 | 4 | 1 |
 | `numeros-mapa-del-gasto-federalizado.html` | El mapa del gasto federalizado · Auditavisión | apartados.py | 43 | 0 | 1 | 1 | 0 |
 | `numeros-margen-del-presupuesto.html` | ¿Cuánto margen tiene el presupuesto? · Auditavisión | apartados.py | 52 | 0 | 3 | 10 | 0 |
-| `numeros-paquete-2027-cifras.html` | Cómo se ve 2027 · Auditavisión | apartados.py | 46 | 0 | 1 | 0 | 0 |
+| `numeros-paquete-2027-cifras.html` | Cómo se ve 2027 · Auditavisión | apartados.py | 46 | 0 | 7 | 1 | 0 |
 | `numeros-paquete-2027-colchon.html` | Colchón y pasivos · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
 | `numeros-paquete-2027-facultad.html` | Con qué facultad · Auditavisión | apartados.py | 50 | 0 | 0 | 0 | 0 |
-| `numeros-paquete-2027-fuentes.html` | Fuentes · Auditavisión | apartados.py | 49 | 0 | 0 | 0 | 0 |
+| `numeros-paquete-2027-fuentes.html` | Fuentes · Auditavisión | apartados.py | 49 | 0 | 2 | 0 | 0 |
 | `numeros-paquete-2027-gasto.html` | En qué se irá · Auditavisión | apartados.py | 47 | 0 | 1 | 0 | 0 |
 | `numeros-paquete-2027-impuestos.html` | Impuestos · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
-| `numeros-paquete-2027-itinerario.html` | El itinerario · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
+| `numeros-paquete-2027-itinerario.html` | El itinerario · Auditavisión | apartados.py | 44 | 0 | 1 | 0 | 0 |
 | `numeros-paquete-2027-puntos-ciegos.html` | Puntos ciegos · Auditavisión | apartados.py | 56 | 0 | 0 | 0 | 0 |
 | `numeros-paquete-2027-ruta-2032.html` | Ruta a 2032 · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `numeros-paquete-2027-simulador.html` | Simulador · Auditavisión | apartados.py | 45 | 0 | 0 | 1 | 0 |
