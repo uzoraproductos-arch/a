@@ -246,7 +246,17 @@
     if (h.get('access_token')) {
       pon({ token: h.get('access_token'), refresh: h.get('refresh_token'), vence: Date.now() + (+h.get('expires_in') || 3600) * 1000 });
       history.replaceState(null, '', location.pathname);
-    } else lee();
+    } else {
+      lee();
+      // Un enlace del correo vencido o ya usado llega con el error en la dirección (Ronda 18).
+      if (h.get('error_description')) {
+        history.replaceState(null, '', location.pathname);
+        setTimeout(function () {
+          var e = $('acEntrarEstado');
+          if (e) e.textContent = 'Ese enlace ya no sirve (vence a la hora y se usa una sola vez). Pide otro aquí abajo y ábrelo desde este navegador.';
+        }, 0);
+      }
+    }
 
     var entrar = $('acEntrar'), admin = $('acAdmin');
     if (!C.supabase || !C.anon) {
@@ -259,7 +269,8 @@
       var correo = $('acCorreo').value.trim(), est = $('acEntrarEstado');
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo)) { est.textContent = 'Escribe un correo válido.'; return; }
       est.textContent = 'Mandando el enlace…';
-      auth('/auth/v1/otp?redirect_to=' + encodeURIComponent(location.href.split('#')[0]), { email: correo, create_user: false })
+      // Sin «?volver=»: la dirección de regreso debe ser idéntica a la que Supabase permite (Ronda 18).
+      auth('/auth/v1/otp?redirect_to=' + encodeURIComponent(location.origin + location.pathname), { email: correo, create_user: false })
         .then(function () { est.textContent = 'Listo: revisa tu correo y abre el enlace desde este mismo navegador.'; })
         .catch(function () { est.textContent = 'No se pudo mandar. Revisa que el correo sea el de la administración.'; });
     });
@@ -798,9 +809,21 @@
           history.replaceState(null, '', location.pathname);
           $('acQuien').textContent += ' Te reconocimos con tu código maestro.';
         }
-        // Entraste a tu panel (con el correo o con el código maestro): este
-        // navegador queda como de la administración y sale la pestaña.
-        return activaPase();
+        // Entraste a tu panel con tus dos factores: las pestañas ya abren por 12 h
+        // (Ronda 17). El pase de la semana ya no se canjea solo al entrar (Ronda 18):
+        // cada canje cuenta en el límite de intentos de la entrada (10 cada 10 min,
+        // 40 al día por conexión) y, gastado, bloqueaba también el código maestro.
+        var est = $('acPaseEstado'), re = $('acPaseReintentar');
+        var p = A.leer();
+        if (p && p.admin && A.vigente(p)) {
+          est.className = 'ac-estado ac-pase ac-pase-ok';
+          est.textContent = esIlimitado(p.hasta) ? 'Pase de administración activo en este navegador.' : 'Pase de administración activo en este navegador hasta el ' + fecha(p.hasta) + '.';
+        } else {
+          est.className = 'ac-estado ac-pase ac-pase-ok';
+          est.textContent = 'Las pestañas ya abren en este navegador por 12 horas. Si quieres que sigan abriendo la semana entera, activa el pase de la semana.';
+          re.textContent = 'Activar el pase de la semana'; re.hidden = false;
+        }
+        if (seguir) { est.textContent += ' Te regresamos a donde ibas…'; location.replace(seguir); }
       })
         .catch(function (e) {
           var no = e && /administraci/.test(e.message || ''), fa = e && e.message === 'factor';

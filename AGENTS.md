@@ -165,6 +165,10 @@ portada para las viejas), `acceso.js` solo las abre en el navegador de la admini
 **Ronda 17 (24-11-2026): la entrada de la administración dura 12 horas.**
 - **El panel, al confirmar la sesión aal2, deja `av-admin-hasta` en `localStorage` por 12 horas** (`marcaAdmin()` de `acceso.js`), porque `sessionStorage` es de una sola pestaña; «Salir» la borra. **Un dato nuevo del navegador va en `_AV_NAVEGADOR`** del aviso de privacidad.
 
+**Ronda 18 (24-11-2026): el enlace del correo y el límite de intentos.**
+- **Una dirección con `#access_token=` o `#error_description=` va al panel antes que cualquier regla del candado** (`acceso.js`), y el panel pide el enlace con `origin + pathname`: **nunca con parámetros**, que Supabase no reconoce como dirección permitida.
+- **El panel no canjea nada al abrir**: cada canje cuenta en el límite de la entrada (`dentroDelLimite` de la función `codigo`) y el código maestro comparte ese límite. El pase de la semana se activa con su botón; **una acción automática nueva que llame a `codigo` necesita otra cuenta en el límite o no va**. Esto matiza la Ronda 13: el pase sigue sin activarse en silencio, y ahora tampoco solo.
+
 **Decisión del autor, 02-11-2026.** El menú (`MENU` de `apartados.py` y su
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Servicios** (segunda desde el 21-11-2026, pedido del autor), **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras
