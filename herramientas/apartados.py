@@ -1701,6 +1701,7 @@ _AV_NAVEGADOR = [
     ('La plática con el Auditor', 'av-chat', 'Se guarda en la pestaña (sessionStorage) y se borra al cerrarla, o antes con «🗑️ Limpiar».'),
     ('«Lo que aún no sé»', 'auditavision.bot.sinRespuesta', 'Las preguntas que el Auditor no supo contestar, hasta 50. Solo las ves tú; si quieres, las copias y nos las mandas.'),
     ('Tu código de acceso', 'av-pase', 'Solo si canjeas un código de la versión de prueba: un número al azar que identifica a este navegador y hasta cuándo abre. En la base queda que ese número canjeó un código, cuándo, los días en que abrió la plataforma y lo que mide «Cómo medimos el uso» (abajo); nada que diga quién eres.'),
+    ('La entrada de la administración', 'av-admin-hasta', 'Solo en el navegador de quien administra la plataforma, al entrar a su panel con sus dos factores: hasta cuándo (12 horas) se abren aquí las páginas sin pedir el código. Es una fecha y nada más; «Salir» la borra.'),
     ('Tu visita', 'av-sesion', 'Un número al azar que dura lo que la pestaña abierta, para contar visitas sin saber de quién son. Se borra al cerrarla.'),
     ('No medir este navegador', 'av-sin-medir', 'Solo si apagas la medición de uso (abajo): recuerda que no quieres que se mida.'),
     ('Tus respuestas', 'av-caso', 'Lo que le preguntaste al Auditor, hasta 60: la pregunta, la fecha, el modo, la respuesta en corto, su página y los servicios que vienen al caso, para armar «Tus respuestas» (mis-respuestas.html). Nunca sale del navegador; la borras ahí mismo, o una por una.'),

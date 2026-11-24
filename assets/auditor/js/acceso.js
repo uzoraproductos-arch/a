@@ -52,8 +52,19 @@
     } catch (e) { return false; }
   }
   window.AvAcceso.sesionAdmin = sesionAdmin;
+  // Ronda 17 (24-11-2026): la sesión de dos factores vive en una sola pestaña y el autor
+  // seguía rebotando al panel. El panel deja además en este navegador una marca de 12 h
+  // (av-admin-hasta) al confirmar la sesión aal2; «Salir» la borra. Solo abre el candado:
+  // los datos los sigue cuidando es_admin() en la base.
+  var MARCA = 'av-admin-hasta';
+  function marcaAdmin() {
+    try { return +localStorage.getItem(MARCA) > Date.now(); } catch (e) { return false; }
+  }
+  window.AvAcceso.marcaAdmin = function (si) {
+    try { if (si) localStorage.setItem(MARCA, String(Date.now() + 12 * 3600 * 1000)); else localStorage.removeItem(MARCA); } catch (e) {}
+  };
   var yo = leer();
-  var admin = (yo && yo.admin && vigente(yo)) || sesionAdmin();
+  var admin = (yo && yo.admin && vigente(yo)) || sesionAdmin() || marcaAdmin();
   if (admin) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pestana); else pestana();
   }

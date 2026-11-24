@@ -263,7 +263,7 @@
         .then(function () { est.textContent = 'Listo: revisa tu correo y abre el enlace desde este mismo navegador.'; })
         .catch(function () { est.textContent = 'No se pudo mandar. Revisa que el correo sea el de la administración.'; });
     });
-    $('acSalir').addEventListener('click', function () { pon(null); location.reload(); });
+    $('acSalir').addEventListener('click', function () { pon(null); if (A.marcaAdmin) A.marcaAdmin(false); location.reload(); });
 
     // El registro: activos o archivados, con buscador, y cada renglón con sus
     // acciones (editar, revocar, archivar y eliminar). El código de la semana
@@ -786,6 +786,9 @@
       token().then(function (t) { return nivel(t) === 'aal2' ? t : segundoPaso(t); })
         .then(function (t) { return auth('/auth/v1/user', null, t, 'GET'); }).then(function (u) {
         s.correo = u.email; pon(s);
+        // Sesión de dos factores confirmada: este navegador abre las pestañas 12 h (Ronda 17).
+        if (A.marcaAdmin) A.marcaAdmin(true);
+        if (A.pestana) A.pestana();
         $('acQuien').textContent = 'Entraste como ' + u.email + '.';
         return Promise.all([carga(), semana(), maestroInfo()]);
       }).then(function () {
@@ -805,6 +808,7 @@
           $('acEntrarEstado').textContent = fa ? 'No se pudo dar de alta el segundo factor: revisa que la autenticación de dos pasos (TOTP) esté encendida en Supabase.'
             : no ? 'Esta cuenta no está dada de alta en la administración.' : 'Tu sesión venció: vuelve a pedir el enlace.';
           if (!no) pon(null);
+          else if (A.marcaAdmin) A.marcaAdmin(false);
         });
     }
     if (s) abre();

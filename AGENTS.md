@@ -162,6 +162,9 @@ portada para las viejas), `acceso.js` solo las abre en el navegador de la admini
 **Ronda 16 (24-11-2026): la sesión de la administración abre las pestañas.**
 - **Con la sesión de dos factores (aal2) de la pestaña, `acceso.js` deja entrar sin el pase de la semana** (`sesionAdmin()`): si el pase no se activa, la administración ya no vuelve al panel en cada pestaña. Una sesión sin el segundo factor sigue mandando al panel. **Lo que protege los datos es `es_admin()` en la base, no el candado del navegador.**
 
+**Ronda 17 (24-11-2026): la entrada de la administración dura 12 horas.**
+- **El panel, al confirmar la sesión aal2, deja `av-admin-hasta` en `localStorage` por 12 horas** (`marcaAdmin()` de `acceso.js`), porque `sessionStorage` es de una sola pestaña; «Salir» la borra. **Un dato nuevo del navegador va en `_AV_NAVEGADOR`** del aviso de privacidad.
+
 **Decisión del autor, 02-11-2026.** El menú (`MENU` de `apartados.py` y su
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Servicios** (segunda desde el 21-11-2026, pedido del autor), **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras
