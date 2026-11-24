@@ -156,6 +156,14 @@
   // Las portadas de la antigua Enciclopedia (Ronda 7, 22-11-2026): solo en el navegador
   // de la administración; a quien llega por una liga vieja, al Planisferio.
   var pagina = location.pathname.split('/').pop() || 'index.html';
+  // Ronda 18 (24-11-2026): el enlace del correo trae la sesión en la dirección
+  // (#access_token=…). Si Supabase lo manda a otra página (la portada o la entrada),
+  // el candado lo perdía al redirigir y el autor quedaba en «Canjea tu código».
+  // Se lleva al panel tal cual, antes que cualquier otra regla.
+  if (pagina !== C.panel && /(^#|&)(access_token|error_description)=/.test(location.hash)) {
+    location.replace(C.panel + location.hash);
+    return;
+  }
   if ((C.privadas || []).indexOf(pagina) >= 0 && !admin &&
       !/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
     /* Una liga vieja con ?abrir= o #ancla: la página la manda primero a su página propia;
