@@ -1,0 +1,90 @@
+{
+  "tema": "Umbrales oficiales del Sistema de Alertas (Ley de Disciplina Financiera de las Entidades Federativas y los Municipios)",
+  "descargado": "2026-11-23",
+  "fuentes": {
+    "reglamento": {
+      "titulo": "Reglamento del Sistema de Alertas",
+      "dof": "2017-03-31",
+      "url": "https://www.disciplinafinanciera.hacienda.gob.mx/work/models/DISCIPLINA_FINANCIERA/Documentos/Normatividad/Reglamento%20del%20Sistema%20de%20Alertas.pdf",
+      "archivo_local": "investigaciones/leyes/reglamento-sistema-alertas.pdf",
+      "bytes": 55119,
+      "paginas": 8,
+      "sha256": "aa3dba3c676cb72c60990f7c879c15e52af64c3611ce673501d83b07609ae4b3"
+    },
+    "acuerdo_entidades": {
+      "titulo": "Acuerdo por el que se dan a conocer los valores que determinan los límites de los rangos bajo, medio y alto (Entidades Federativas)",
+      "dof": "2017-06-30",
+      "url": "https://www.disciplinafinanciera.hacienda.gob.mx/work/models/DISCIPLINA_FINANCIERA/Documentos/Normatividad/1.%20LDF%20Acuerdo%20rangos%20EEFF%2030_06_2017.pdf",
+      "archivo_local": "investigaciones/leyes/acuerdo-rangos-sistema-alertas-eeff-2017.pdf",
+      "bytes": 695085,
+      "paginas": 1,
+      "sha256": "692b3320c705aedbba0376769c1c4922944112c04a7fe7480d676b6d74d202e7"
+    },
+    "acuerdo_municipios": {
+      "titulo": "Acuerdo 112/2017 por el que se dan a conocer los valores que determinan los límites de los rangos bajo, medio y alto de los municipios",
+      "dof": "2017-10-31",
+      "url": "https://www.disciplinafinanciera.hacienda.gob.mx/work/models/DISCIPLINA_FINANCIERA/Documentos/Normatividad/2.%20LDF%20Acuerdo%20Rangos%20MPios%2031_10_2017.pdf",
+      "archivo_local": "investigaciones/leyes/acuerdo-rangos-sistema-alertas-mpios-2017.pdf",
+      "bytes": 775717,
+      "paginas": 1,
+      "sha256": "b17235e8e65951befdc7ea507b369d51d5f07de7626295fc4e141015c5ece420"
+    }
+  },
+  "entidades_federativas": [
+    {
+      "id": "i1",
+      "articulo": "Acuerdo DOF 30-06-2017, art. Primero (Reglamento art. 6, fr. I)",
+      "indicador": "Deuda Pública y Obligaciones sobre Ingresos de Libre Disposición",
+      "bajo": { "texto": "≤ 100%", "max_pct": 100.0 },
+      "medio": { "texto": "> 100% y ≤ 200%", "min_exc_pct": 100.0, "max_pct": 200.0 },
+      "alto": { "texto": "> 200%", "min_exc_pct": 200.0 }
+    },
+    {
+      "id": "i2",
+      "articulo": "Acuerdo DOF 30-06-2017, art. Segundo (Reglamento art. 6, fr. II)",
+      "indicador": "Servicio de la Deuda y Obligaciones sobre Ingresos de Libre Disposición",
+      "bajo": { "texto": "≤ 7.5%", "max_pct": 7.5 },
+      "medio": { "texto": "> 7.5% y ≤ 15%", "min_exc_pct": 7.5, "max_pct": 15.0 },
+      "alto": { "texto": "> 15%", "min_exc_pct": 15.0 }
+    },
+    {
+      "id": "i3",
+      "articulo": "Acuerdo DOF 30-06-2017, art. Tercero (Reglamento art. 6, fr. III)",
+      "indicador": "Obligaciones a Corto Plazo y Proveedores y Contratistas sobre Ingresos Totales",
+      "bajo": { "texto": "≤ 7.5%", "max_pct": 7.5 },
+      "medio": { "texto": "> 7.5% y ≤ 12.5%", "min_exc_pct": 7.5, "max_pct": 12.5 },
+      "alto": { "texto": "> 12.5%", "min_exc_pct": 12.5 }
+    }
+  ],
+  "municipios": [
+    {
+      "id": "i1",
+      "articulo": "Acuerdo 112/2017 DOF 31-10-2017, art. Primero (Reglamento art. 6, fr. I)",
+      "indicador": "Deuda Pública y Obligaciones sobre Ingresos de Libre Disposición",
+      "bajo": { "texto": "≤ 60.0%", "max_pct": 60.0 },
+      "medio": { "texto": "> 60.0% y ≤ 120.0%", "min_exc_pct": 60.0, "max_pct": 120.0 },
+      "alto": { "texto": "> 120.0%", "min_exc_pct": 120.0 }
+    },
+    {
+      "id": "i2",
+      "articulo": "Acuerdo 112/2017 DOF 31-10-2017, art. Segundo (Reglamento art. 6, fr. II)",
+      "indicador": "Servicio de la Deuda y Obligaciones sobre Ingresos de Libre Disposición",
+      "bajo": { "texto": "≤ 5.0%", "max_pct": 5.0 },
+      "medio": { "texto": "> 5.0% y ≤ 10.0%", "min_exc_pct": 5.0, "max_pct": 10.0 },
+      "alto": { "texto": "> 10.0%", "min_exc_pct": 10.0 }
+    },
+    {
+      "id": "i3",
+      "articulo": "Acuerdo 112/2017 DOF 31-10-2017, art. Tercero (Reglamento art. 6, fr. III)",
+      "indicador": "Obligaciones a Corto Plazo y Proveedores y Contratistas sobre Ingresos Totales",
+      "bajo": { "texto": "≤ 15.0%", "max_pct": 15.0 },
+      "medio": { "texto": "> 15.0% y ≤ 25.0%", "min_exc_pct": 15.0, "max_pct": 25.0 },
+      "alto": { "texto": "> 25.0%", "min_exc_pct": 25.0 }
+    }
+  ],
+  "regla_clasificacion_art_14_y_15": {
+    "sostenible": "Indicador 1 en rango bajo, y los indicadores 2 y 3 ambos en bajo, o uno en medio y el otro en bajo (art. 14, fr. I).",
+    "en_observacion": "Indicador 1 en bajo con los otros dos en medio o uno en alto y el otro en medio/bajo; o Indicador 1 en medio con los otros dos en medio o bajo (art. 14, fr. II).",
+    "elevado": "Indicador 1 en alto; o Indicador 1 en bajo/medio con los otros dos en alto (art. 14, fr. III); o automáticamente ante incumplimiento de pago de cualquier financiamiento u obligación (art. 15)."
+  }
+}

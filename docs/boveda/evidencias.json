@@ -94,9 +94,13 @@
     "cifra:limantour-superavit-y-peso-oro",
     "fuente:limantour-superavit-y-peso-oro"
    ],
-   "consultado": "2026-11-18",
-   "estado": "no abrió",
-   "error": "[Errno -2] Name or service not known"
+   "consultado": "2026-11-23",
+   "estado": "copiado",
+   "sha256": "762ff856c374ab5a4999ec37a5b9aaba87ff783db93dc848bf78709ce2e0baf1",
+   "bytes": 378554,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-23"
   },
   "https://centralelectoral.ine.mx/2023/03/31/lorenzo-cordova-adriana-favela-ciro-murayama-y-jose-roberto-ruiz-se-despiden-de-la-herradura-de-la-democracia/": {
    "primera_vez": "2026-10-28",
@@ -655,6 +659,20 @@
    "http": 200,
    "copiado": "2026-11-09"
   },
+  "https://gaceta.diputados.gob.mx/": {
+   "primera_vez": "2026-11-23",
+   "historial": [],
+   "usos": [
+    "fuente:pef-2027-comision-agua-jalisco-6500"
+   ],
+   "consultado": "2026-11-23",
+   "estado": "copiado",
+   "sha256": "2f0da6484ff692a0b10c41be7ee24c3865b3998bd6f84d6228a71120a329d050",
+   "bytes": 695,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-23"
+  },
   "https://gaceta.diputados.gob.mx/Gaceta/57/1999/sep/19990923-I.html": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -936,6 +954,20 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://politico.mx/2026/11/06/aprueban-reasignar-6-mil-500-mdp-a-obras-hidricas-en-jalisco/": {
+   "primera_vez": "2026-11-23",
+   "historial": [],
+   "usos": [
+    "fuente:pef-2027-comision-agua-jalisco-6500"
+   ],
+   "consultado": "2026-11-23",
+   "estado": "copiado",
+   "sha256": "bdb3ba02668ddd6d122e656f53e6c0aa29fd898fbdc53e0c72af11d50154f5f7",
+   "bytes": 148380,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-23"
+  },
   "https://public-inspection.federalregister.gov/2025-23764.pdf": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -956,7 +988,7 @@
    "usos": [
     "biblioteca:ref-conapo-proyecciones"
    ],
-   "consultado": "2026-11-18",
+   "consultado": "2026-11-23",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -966,7 +998,7 @@
    "usos": [
     "biblioteca:ref-sat-padron-rfc"
    ],
-   "consultado": "2026-11-18",
+   "consultado": "2026-11-23",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -2114,9 +2146,9 @@
    "usos": [
     "biblioteca:ref-oaj-trimestre2026"
    ],
-   "consultado": "2026-11-24",
+   "consultado": "2026-11-23",
    "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1035)"
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1010)"
   },
   "https://www.comunicacionpef.hacienda.gob.mx/work/models/COMUNICACION_DEL_PEF/Documentos/2026/distribucion_gasto_UR/r03_apurog.pdf": {
    "primera_vez": "2026-10-27",
@@ -2610,6 +2642,20 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/CCom.pdf": {
+   "primera_vez": "2026-11-23",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-ccom"
+   ],
+   "consultado": "2026-11-23",
+   "estado": "copiado",
+   "sha256": "b99bbf981434011b6351ef308922fea90f6f0f8777b113183cf1737840c5bbef",
+   "bytes": 2630704,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-23"
+  },
   "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -2749,6 +2795,20 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf": {
+   "primera_vez": "2026-11-23",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lfpdppp"
+   ],
+   "consultado": "2026-11-23",
+   "estado": "copiado",
+   "sha256": "04d67464e1efc0472040e2ff8012ced52c73ff4fc3573c8e2d3477fd976359c6",
+   "bytes": 457399,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-23"
+  },
   "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPIORPI.pdf": {
    "primera_vez": "2026-11-04",
    "historial": [],
@@ -2806,6 +2866,20 @@
    "tipo": "application/pdf",
    "http": 200,
    "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGA.pdf": {
+   "primera_vez": "2026-11-23",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lga"
+   ],
+   "consultado": "2026-11-23",
+   "estado": "copiado",
+   "sha256": "2f931111ab2745aa5a3b2ef0a99dc5beaf73d78f7674f2d90b4462319c1fc688",
+   "bytes": 591615,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-23"
   },
   "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGCC.pdf": {
    "primera_vez": "2026-10-27",
@@ -3709,7 +3783,7 @@
    "usos": [
     "auditoria:inversion-megaobras"
    ],
-   "consultado": "2026-11-18",
+   "consultado": "2026-11-23",
    "estado": "no abrió",
    "error": "Not Found"
   },
@@ -4461,6 +4535,20 @@
    "http": 200,
    "copiado": "2026-11-02"
   },
+  "https://www.instagram.com/p/DfYty0lDZKs/": {
+   "primera_vez": "2026-11-23",
+   "historial": [],
+   "usos": [
+    "fuente:pef-2027-comision-agua-jalisco-6500"
+   ],
+   "consultado": "2026-11-23",
+   "estado": "copiado",
+   "sha256": "d56afc742dc3f6de2e6b6c501e5e619285679b937785aa7c0f3048e138cdf0ca",
+   "bytes": 618483,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-23"
+  },
   "https://www.instagram.com/pajaropolitico/": {
    "primera_vez": "2026-11-02",
    "historial": [],
@@ -4495,7 +4583,7 @@
    "usos": [
     "fuente:imss-modalidad-40-gestores"
    ],
-   "consultado": "2026-11-18",
+   "consultado": "2026-11-23",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -4668,7 +4756,7 @@
    "usos": [
     "biblioteca:ref-sat-denuncias"
    ],
-   "consultado": "2026-11-18",
+   "consultado": "2026-11-23",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -4777,7 +4865,7 @@
    "usos": [
     "biblioteca:ref-presidencia-2ig"
    ],
-   "consultado": "2026-11-18",
+   "consultado": "2026-11-23",
    "estado": "no abrió",
    "error": "Forbidden"
   },
