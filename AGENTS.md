@@ -159,6 +159,9 @@ portada para las viejas), `acceso.js` solo las abre en el navegador de la admini
 - **El DOF se liga como `https://dof.gob.mx/`**: su certificado no vale para `www.dof.gob.mx`. `boveda.py` guarda cada dirección con su anfitrión canónico (`CANONICO`); **un anfitrión nuevo con el mismo problema va ahí**, y la ficha vieja queda «sustituida», nunca borrada.
 - **El PEF 2027 entra solo con su decreto**: `pef27()` de `presupuesto_modulos.py` devuelve `None` mientras no exista `docs/paquete-2027/pef-2027-dof.json`; con él, exige la huella en `PEF27_SHA`, la fecha del DOF y los cuadres contra los totales que imprime el decreto. **Ningún total se calcula para llenar el JSON.**
 
+**Ronda 16 (24-11-2026): la sesión de la administración abre las pestañas.**
+- **Con la sesión de dos factores (aal2) de la pestaña, `acceso.js` deja entrar sin el pase de la semana** (`sesionAdmin()`): si el pase no se activa, la administración ya no vuelve al panel en cada pestaña. Una sesión sin el segundo factor sigue mandando al panel. **Lo que protege los datos es `es_admin()` en la base, no el candado del navegador.**
+
 **Decisión del autor, 02-11-2026.** El menú (`MENU` de `apartados.py` y su
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Servicios** (segunda desde el 21-11-2026, pedido del autor), **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras
