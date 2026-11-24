@@ -301,3 +301,9 @@
 .ac-entrada-cuerpo svg.ico { display: inline-block; width: 1.15em; height: 1.15em; vertical-align: -0.2em; flex: none; stroke-width: 1.9; overflow: visible; }
 .ac-entrada-cuerpo svg.ico.ico-r { fill: currentColor; stroke-width: 0; }
 .ac-check > span { flex: 1 1 auto; min-width: 0; }
+
+/* Ronda 13: el pase de la administración se activa a la vista. */
+.ac-pase-fila { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: -4px 0 14px; }
+.ac-pase-fila .ac-pase:empty { display: none; }
+.ac-pase-ok { color: #1f6b3a; }
+.ac-pase-mal { color: #9b2c2c; }

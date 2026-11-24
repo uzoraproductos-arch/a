@@ -124,7 +124,9 @@
             sessionStorage.setItem('av-admin', JSON.stringify({ token: j.access_token, refresh: j.refresh_token,
               vence: Date.now() + (+j.expires_in || 3600) * 1000 }));
           } catch (e) {}
-          location.href = C.panel + '?maestro=1';
+          // Si la entrada te trajo desde otra página, el panel te regresa ahí al activar tu pase (Ronda 13).
+          var ida = new URLSearchParams(location.search).get('volver') ? '&volver=' + encodeURIComponent(volver) : '';
+          location.href = C.panel + '?maestro=1' + ida;
         });
     }
 
@@ -139,7 +141,7 @@
         if (p.admin) {
           // El código de la administración cambió (cada lunes): el aviso lo manda al panel por el nuevo.
           caja.innerHTML = '<p>🔑 <b>Tu código de administración cambió</b> el ' + esc(fecha(p.hasta)) + ', como cada semana. ' +
-            'Entra al panel con tu correo para ver el nuevo.</p><p><a class="sz-btn sz-btn-of" href="' + 'administracion-codigos.html' + '">Ver mi código nuevo</a></p>';
+            'Escribe aquí tu código maestro, o entra al panel con tu correo: tu pase nuevo se activa solo.</p><p><a class="sz-btn sz-btn-of" href="' + 'administracion-codigos.html' + '">Ver mi código nuevo</a></p>';
           return;
         }
         caja.innerHTML = '<p>Tu acceso terminó el <b>' + esc(fecha(p.hasta)) + '</b>. ¿Quieres seguir? Pide otro código en la pestaña «Solicitar código».</p>';
@@ -415,6 +417,7 @@
         var b = $('acSemCod'); b.textContent = bonito(j.codigo); b.dataset.copia = bonito(j.codigo);
         $('acSemVence').innerHTML = 'Es solo tuyo y cambia solo el <b>' + esc(fecha(j.hasta)) + '</b> (hora de tu dispositivo). ' +
           'Cuando cambie, tu acceso termina y la entrada te manda aquí por el nuevo.';
+        return j;
       });
     }
     $('acSemCod').addEventListener('click', function () {
@@ -424,24 +427,78 @@
     $('acSemCambiar').addEventListener('click', function () {
       if (!confirm('¿Cambiar tu código ahora? El actual deja de abrir en todos tus dispositivos.')) return;
       var p = A.leer(); if (p && p.admin) A.guardar(null);
-      semana(true).then(carga).catch(function () { alert('No se pudo cambiar. Intenta de nuevo.'); });
+      semana(true).then(carga).then(activaPase).catch(function () { alert('No se pudo cambiar. Intenta de nuevo.'); });
     });
     // El pase de este navegador con el código de la semana (para el candado).
-    function paseAdmin() {
-      var p = A.leer();
-      if (p && p.admin && A.vigente(p)) return Promise.resolve();
-      return (sem ? Promise.resolve(sem) : semana()).then(function (k) { return A.pide({ accion: 'canjear', codigo: k.codigo, pase: p && p.pase }); })
-        .then(function (j) {
-          if (j && j.motivo === 'ya_canjeado' && j.hasta && Date.parse(j.hasta) > Date.now()) j.ok = true;
-          if (!j || !j.ok) throw j;
-          A.guardar({ pase: j.pase, hasta: j.hasta, visto: Date.now(), admin: true });
-        });
+    // Ronda 13 (23-11-2026): el autor entró con su código maestro y, al pasar a
+    // otra pestaña, la entrada lo regresó. Ahora el pase se activa a la vista,
+    // con su motivo si falla y «Reintentar», nunca en silencio.
+    var MOT_PASE = {
+      espera: 'la entrada recibió muchos intentos desde tu red; espera unos minutos y reintenta',
+      agotado: 'tu código de la semana ya se usó todas las veces que permite: cámbialo en «Mi acceso»',
+      no_valido: 'tu código de la semana ya no abre (quizá lo cambiaste en otro dispositivo)',
+      vencido: 'tu código de la semana ya pasó su lunes',
+      formato: 'tu código de la semana no llegó completo',
+      conexion: 'no hubo conexión con la base',
+      sin_pase: 'la base no devolvió un pase vigente'
+    };
+    function motivoPase(j) { return MOT_PASE[j && j.motivo] || (j && j.message) || MOT_PASE.sin_pase; }
+    function semanaVigente(nueva) {
+      return !nueva && sem && sem.codigo && Date.parse(sem.hasta) > Date.now() ? Promise.resolve(sem) : semana();
     }
+    function canjeaSem(k, pase) {
+      return A.pide({ accion: 'canjear', codigo: k.codigo, pase: pase || null })
+        .catch(function () { throw { motivo: 'conexion' }; });
+    }
+    function paseAdmin(intento) {
+      var p = A.leer(), k;
+      if (p && p.admin && A.vigente(p)) return Promise.resolve(p);
+      return semanaVigente(intento).then(function (x) {
+        if (!x || !x.codigo) throw { motivo: 'sin_pase' };
+        k = x; return canjeaSem(k, p && p.pase);
+      }).then(function (j) {
+        // Ya canjeado en este pase: si sigue vigente, sirve; si venció (un lunes), pase nuevo.
+        if (j && j.motivo === 'ya_canjeado') {
+          if (j.hasta && Date.parse(j.hasta) > Date.now()) j.ok = true;
+          else return canjeaSem(k, null);
+        }
+        return j;
+      }).then(function (j) {
+        // El código cambió en otro dispositivo: se pide el de ahora y se prueba una vez más.
+        if (j && (j.motivo === 'no_valido' || j.motivo === 'vencido') && !intento) { sem = null; return paseAdmin(true); }
+        if (!j || !j.ok || !j.pase || !(Date.parse(j.hasta) > Date.now())) throw (j && j.motivo ? j : { motivo: 'sin_pase' });
+        var nuevo = { pase: j.pase, hasta: j.hasta, visto: Date.now(), admin: true };
+        A.guardar(nuevo);
+        return nuevo;
+      });
+    }
+    // A dónde ibas cuando la entrada te mandó aquí (solo una página de la plataforma).
+    var seguir = new URLSearchParams(location.search).get('volver') || '';
+    if (!/^[\w.-]+\.html([?#][^\s]*)?$/.test(seguir) || /^(canjea-tu-codigo|administracion-codigos)\.html/.test(seguir)) seguir = '';
+    function activaPase() {
+      var est = $('acPaseEstado'), re = $('acPaseReintentar');
+      if (!est) return paseAdmin();
+      re.hidden = true; est.className = 'ac-estado ac-pase';
+      est.textContent = 'Activando tu pase de esta semana en este navegador…';
+      return paseAdmin().then(function (p) {
+        est.className = 'ac-estado ac-pase ac-pase-ok';
+        est.textContent = esIlimitado(p.hasta) ? 'Pase de administración activo en este navegador.'
+          : 'Pase de administración activo en este navegador hasta el ' + fecha(p.hasta) + '.';
+        if (A.pestana) A.pestana();
+        if (seguir) { est.textContent += ' Te regresamos a donde ibas…'; location.replace(seguir); }
+        return p;
+      }).catch(function (j) {
+        est.className = 'ac-estado ac-pase ac-pase-mal';
+        est.textContent = 'No se activó tu pase en este navegador: ' + motivoPase(j) + '. Mientras, las otras páginas te mandan a la entrada.';
+        re.hidden = false;
+      });
+    }
+    $('acPaseReintentar').addEventListener('click', function () { activaPase(); });
     $('acComoAdmin').addEventListener('click', function () {
       var est = $('acComoAdminEstado');
       est.textContent = 'Preparando tu acceso…';
-      paseAdmin().then(function () { location.href = 'index.html'; })
-        .catch(function () { est.textContent = 'No se pudo preparar tu acceso. Intenta de nuevo.'; });
+      paseAdmin().then(function () { location.href = seguir || 'index.html'; })
+        .catch(function (j) { est.textContent = 'No se pudo preparar tu acceso: ' + motivoPase(j) + '.'; });
     });
 
     // El código maestro (pedido del autor, 30-10-2026): con él, la entrada te
@@ -740,7 +797,7 @@
         }
         // Entraste a tu panel (con el correo o con el código maestro): este
         // navegador queda como de la administración y sale la pestaña.
-        paseAdmin().then(function () { if (A.pestana) A.pestana(); }).catch(function () {});
+        return activaPase();
       })
         .catch(function (e) {
           var no = e && /administraci/.test(e.message || ''), fa = e && e.message === 'factor';
