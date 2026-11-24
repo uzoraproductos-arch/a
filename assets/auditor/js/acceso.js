@@ -39,8 +39,22 @@
     barra.insertBefore(d, barra.querySelector('.nav-menu-cuentanos'));
   }
   window.AvAcceso.pestana = pestana;
+  // La sesión de la administración de esta pestaña (Ronda 16, 24-11-2026): el autor
+  // entró con su código maestro y las pestañas lo regresaban al panel cuando el pase
+  // de la semana no se activaba. Con la sesión de dos factores (aal2) ya hecha en
+  // esta pestaña se entra igual que con el pase; el panel sigue pidiendo la sesión.
+  function sesionAdmin() {
+    try {
+      var s = JSON.parse(sessionStorage.getItem('av-admin') || 'null');
+      if (!s || !s.token || !s.refresh) return false;
+      var b = s.token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+      return JSON.parse(atob(b + '==='.slice((b.length + 3) % 4))).aal === 'aal2';
+    } catch (e) { return false; }
+  }
+  window.AvAcceso.sesionAdmin = sesionAdmin;
   var yo = leer();
-  if (yo && yo.admin && vigente(yo)) {
+  var admin = (yo && yo.admin && vigente(yo)) || sesionAdmin();
+  if (admin) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pestana); else pestana();
   }
 
@@ -77,7 +91,7 @@
     var pag = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
     var enMarco = false; try { enMarco = window.top !== window; } catch (e) { enMarco = true; }
     if (!C.funciones || enMarco || /^(localhost|127\.0\.0\.1)$/.test(location.hostname) || !/^[a-z0-9._-]{1,120}\.html$/.test(pag)) return;
-    if (!window.AvAcceso.midiendo() || (yo && yo.admin)) return;
+    if (!window.AvAcceso.midiendo() || admin) return;
     var ses; try { ses = sessionStorage.getItem('av-sesion'); } catch (e) {}
     if (!ses) { ses = (Date.now().toString(36) + Math.random().toString(36).slice(2, 10)).slice(0, 20); try { sessionStorage.setItem('av-sesion', ses); } catch (e) {} }
     var cola = [], visible = 0, desde = document.visibilityState === 'visible' ? Date.now() : 0;
@@ -131,7 +145,7 @@
   // Las portadas de la antigua Enciclopedia (Ronda 7, 22-11-2026): solo en el navegador
   // de la administración; a quien llega por una liga vieja, al Planisferio.
   var pagina = location.pathname.split('/').pop() || 'index.html';
-  if ((C.privadas || []).indexOf(pagina) >= 0 && !(yo && yo.admin && vigente(yo)) &&
+  if ((C.privadas || []).indexOf(pagina) >= 0 && !admin &&
       !/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
     /* Una liga vieja con ?abrir= o #ancla: la página la manda primero a su página propia;
        si no la conoce, al Planisferio. */
@@ -154,6 +168,7 @@
     var ses = null; try { ses = sessionStorage.getItem('av-admin'); } catch (e) {}
     location.replace((ses ? C.panel : C.canje) + '?volver=' + encodeURIComponent(adonde));
   }
+  if (admin) return;
   var p = leer();
   if (!vigente(p)) {
     fuera(pagina + location.search + location.hash);
