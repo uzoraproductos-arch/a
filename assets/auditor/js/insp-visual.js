@@ -99,6 +99,17 @@
     }).join('') + '</ul><p class="pv-pie">De la herramienta Inversión y Megaobras, por entidad: no quiere decir que la obra pase por cada municipio. Lo «por aclarar» es la suma de las auditorías de su expediente de la ASF.</p></section>';
   }
 
+  /* Los rangos del semáforo con su Acuerdo del DOF (Ronda 14, D.sda de sistema_alertas.py): leyenda, sin cifras nuevas.
+     El rango de cada indicador es la cifra oficial puesta junto al límite del Acuerdo (auditada). */
+  function leyendaSda(S, e) {
+    if (!S || !S.e) return '';
+    var N = ['Deuda ÷ ingresos de libre disposición', 'Pago de la deuda ÷ esos ingresos', 'Corto plazo menos caja ÷ ingresos totales'], V = [e.ild, e.sd, e.ocp];
+    var r = function (v, L) { return v <= L[0] ? 'bajo' : (v <= L[1] ? 'medio' : 'alto'); };
+    return '<span class="pv-sda"><b>Rangos del Sistema de Alertas</b> (bajo / medio / alto): ' + S.e.map(function (L, i) {
+      return esc(N[i]) + ' ≤ ' + n(L[0], L[0] % 1 ? 1 : 0) + ' % / hasta ' + n(L[1], L[1] % 1 ? 1 : 0) + ' % / más' + (V[i] == null ? '' : ' (aquí: rango ' + r(V[i], L) + ')');
+    }).join('; ') + ' ' + chip('derivado') + '. ' + fuente(S.fe) + '.</span>';
+  }
+
   function entidad(D, MU, e) {
     var M = D.met || {}, h = [];
     var fi = [{ k: 'r28', et: 'Participaciones (Ramo 28), 2026' }, { k: 'r33', et: 'Aportaciones (Ramo 33), 2026' }, { k: 'propia', et: 'Lo que recaudó por su cuenta, 2024' }]
@@ -109,7 +120,7 @@
       h.push(barras('📉 Su deuda frente a lo que puede gastar libremente', [
         { et: 'Deuda entre ingresos de libre disposición', v: e.ild, tx: e.ild == null ? '' : n(e.ild, 1) + ' %', e: 'oficial', cls: semC },
         { et: 'Pago de la deuda entre ingresos de libre disposición', v: e.sd, tx: e.sd == null ? '' : n(e.sd, 1) + ' %', e: 'oficial', cls: semC }],
-        'Deuda pública: <b>' + mdp(e.deuda) + '</b> ' + chip('oficial') + (e.sem ? '; semáforo <b>' + esc(e.sem) + '</b> del Sistema de Alertas' : '') + '. ' + fuente((M.deuda || {}).fu) + '.'));
+        'Deuda pública: <b>' + mdp(e.deuda) + '</b> ' + chip('oficial') + (e.sem ? '; semáforo <b>' + esc(e.sem) + '</b> del Sistema de Alertas' : '') + '. ' + fuente((M.deuda || {}).fu) + '.' + leyendaSda(D.sda, e)));
     }
     if (e.asf != null) h.push(barras('🔎 Lo que dejó la ASF (Cuenta Pública 2024)', [{ et: 'Monto por aclarar', v: e.asf, tx: mdp(e.asf), e: 'oficial', cls: 'pv-asf' }],
       (e.aud != null ? n(e.aud) + ' auditorías. ' : '') + 'Por aclarar no quiere decir desviado: la entidad puede solventarlo. ' + fuente((M.asf || {}).fu) + '.'));

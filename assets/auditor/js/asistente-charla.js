@@ -1820,6 +1820,13 @@
     }
 
     /* La PROFEPA: lo que cuesta y lo que resuelve (gestion_ambiental.py). Su presupuesto 2026 lo sigue contestando el bloque ambiental. */
+    /* Los rangos del semáforo del Sistema de Alertas, con sus Acuerdos del DOF (sistema_alertas.py, Ronda 14). */
+    var SDA = D.sdaR || null;
+    var SDA_Q = /rangos?|umbral|limites?|criterios?|como se (calcula|clasifica|mide|lee|asigna|decide)|que significa|que quiere decir|como funciona|de que depende|cuando .{0,30}(verde|amarillo|rojo|elevad|sostenible|observacion)/;
+    function sdaResp(t) {
+      if (!SDA || !/semaforo|sistema de alertas/.test(t) || !SDA_Q.test(t)) return null;
+      return { html: SDA.h, fu: SDA.fu, ci: SDA.ci, tit: SDA.tit, ir: SDA.ir, sug: SDA.sug };
+    }
     var AMG = D.amg || null;
     function amgTema(k) { var x = AMG.t[k]; return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug }; }
     function amgResp(t) {
@@ -2502,6 +2509,7 @@
       /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       social: function (q) { var r = socEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'soc' }); },
+      sda: function (q) { var r = sdaResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sda' }); },
       vivienda: function (q) { var r = vivEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'viv' }); },
       administracion: function (q) { var r = apuEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'apu' }); },
       saludEstado: function (q) { var r = salEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },

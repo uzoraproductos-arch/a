@@ -3275,6 +3275,7 @@
     var sae = charla && charla.saludEstado && charla.saludEstado(q);
     if (sae) return sae;
     var sso = charla && charla.social && charla.social(q); if (sso) return sso;
+    var ssa = charla && charla.sda && charla.sda(q); if (ssa) return ssa;
     var svi = charla && charla.vivienda && charla.vivienda(q); if (svi) return svi;
     var sap = charla && charla.administracion && charla.administracion(q); if (sap) return sap;
     var tc = tituloColumna(q);

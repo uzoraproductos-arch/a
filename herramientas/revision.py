@@ -113,6 +113,8 @@ def main():
     revisiones.append(('matriz de riesgos documentales', lambda: corre('insp_riesgos.py', '--prueba')))
     revisiones.append(('simulador del predial', lambda: corre('cc_predial.py', '--prueba')))
     revisiones.append(('simulador laboral', lambda: corre('cc_laboral.py', '--prueba')))
+    # Ronda 14 (24-11-2026): la regla del art. 14 reproduce el color que Hacienda dio a cada estado y municipio.
+    revisiones.append(('rangos del Sistema de Alertas', lambda: corre('sistema_alertas.py', '--prueba')))
     if not a.rapida:
         revisiones.append(('preguntas del Auditor', lambda: corre('prueba_auditor.py')))
         revisiones.append(('la Enciclopedia en el Auditor', lambda: corre('cobertura_auditor.py')))
