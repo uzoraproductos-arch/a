@@ -120,7 +120,7 @@ FUENTES = [
      'quien': 'Cada dependencia', 'cada': 'semanal',
      'publica': 'Se revisa que cada documento siga abriendo y que su huella no haya cambiado.',
      'modo': 'aviso', 'script': 'boveda.py', 'datos': 'docs/boveda/evidencias.json',
-     'corte': 'cada miércoles', 'url': 'https://www.dof.gob.mx/'},
+     'corte': 'cada miércoles', 'url': 'https://dof.gob.mx/'},
 
     # ── A mano ────────────────────────────────────────────────────────────
     {'id': 'donatarias', 'que': 'Donatarias autorizadas (estadísticas del SAT con base en el Anexo 14 de la RMF)', 'quien': 'SAT',
@@ -159,9 +159,9 @@ FUENTES = [
      'corte': lambda: 'corte ' + _lee('docs/seguridad/sesnsp-fraude-estatal.json', r'"corte": "([^"]+)"', 3000), 'revisar': '2026-12-20',
      'url': 'https://www.gob.mx/sesnsp/acciones-y-programas/datos-abiertos-de-incidencia-delictiva'},
     {'id': 'pef', 'que': 'Presupuesto de Egresos de la Federación', 'quien': 'Cámara de Diputados (DOF)',
-     'cada': 'anual', 'publica': 'La Cámara lo aprueba a más tardar el 15 de noviembre (Constitución, art. 74, fr. IV) y sale en el DOF. Al 18-11-2026 el de 2027 aún no sale en el DOF ni en el índice de la Cámara.',
-     'modo': 'mano', 'script': 'módulos de la Enciclopedia (audit-database.js)', 'datos': 'assets/auditor/js/audit-database.js',
-     'corte': 'PEF 2026', 'revisar': '2026-11-25', 'url': 'https://www.dof.gob.mx/'},
+     'cada': 'anual', 'publica': 'La Cámara lo aprueba a más tardar el 15 de noviembre (Constitución, art. 74, fr. IV) y sale en el DOF. Al 24-11-2026 el de 2027 aún no sale en el DOF ni en el índice de la Cámara (PEF_2027.pdf da 404); cuando salga, se lee con pef27() de presupuesto_modulos.py.',
+     'modo': 'mano', 'script': 'módulos de la Enciclopedia (audit-database.js); pef27() de presupuesto_modulos.py para el de 2027', 'datos': 'assets/auditor/js/audit-database.js',
+     'corte': 'PEF 2026', 'revisar': '2026-11-25', 'url': 'https://dof.gob.mx/'},
     {'id': 'cuenta-publica', 'que': 'Cuenta Pública', 'quien': 'SHCP',
      'cada': 'anual', 'publica': 'Se entrega a la Cámara a más tardar el 30 de abril del año siguiente (Constitución, art. 74, fr. VI).',
      'modo': 'mano', 'script': 'integrar_cuenta_publica.py', 'datos': 'assets/auditor/js/audit-database.js',

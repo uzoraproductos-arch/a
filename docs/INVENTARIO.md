@@ -906,10 +906,6 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Bóveda de evidencias
 
-Documentos en `docs/boveda/evidencias.json`: 331 copiado, 9 no abrió, 8 sin copia.
+Documentos en `docs/boveda/evidencias.json`: 331 copiado, 8 no abrió, 8 sin copia, 1 sustituida.
 
 Todos los cotejos «consta» y «matiz» tienen su evidencia.
-
-1 cifras oficiales sin copia todavía (su sitio no abrió donde se corrió la bóveda):
-
-- cifra «$9,156,528.9 millones» de `senado-ley-de-ingresos-2027` → numeros-paquete-2027-cifras.html

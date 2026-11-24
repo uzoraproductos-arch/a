@@ -383,7 +383,14 @@ def _paquete():
         j = t.index(marca, i)
         k = t.index('"%s":' % clave, j) + len(clave) + 3
         return float(t[k:t.index(',', k)].strip())
-    return {'total': campo('"simBase"', 'gastoNeto'), 'ing': campo('"id": "f-ing"', 'm'), 'trib': campo('"id": "f-trib"', 'm')}
+    P = {'total': campo('"simBase"', 'gastoNeto'), 'ing': campo('"id": "f-ing"', 'm'), 'trib': campo('"id": "f-trib"', 'm')}
+    # Ronda 15 (24-11-2026): los ingresos presupuestarios se citan del art. 1o. de la LIF 2027 publicada
+    # (su JSON con huella), así que la cifra de la base debe ser la misma o la generación se detiene.
+    import presupuesto_modulos as pm
+    A = pm.lif27()['articulo_1']
+    if (P['total'], P['ing']) != (A['total_lif_mdp'], A['ingresos_presupuestarios_mdp']):
+        raise SystemExit('integrar_al_momento: el Paquete 2027 de la base no da lo que dice el art. 1o. de la LIF 2027')
+    return P
 
 
 def _mmdp(v):
@@ -487,7 +494,7 @@ def senado_lif_2027():
             {'valor': _mmdp(P['total']), 'etq': 'Ley de Ingresos 2027: el total, con financiamiento', 'estado': 'oficial',
              'fuente': 'Ley de Ingresos de la Federación para 2027, art. 1o. (DOF 13-11-2026)', 'url': LIF27},
             {'valor': _mmdp(P['ing']), 'etq': 'Ingresos presupuestarios 2027: lo que entra sin endeudarse', 'estado': 'oficial',
-             'fuente': 'Criterios Generales de Política Económica 2027 (en la base)', 'url': 'numeros-paquete-2027-cifras.html'},
+             'fuente': 'Criterios Generales de Política Económica 2027; es la misma suma de los rubros 1 a 9 del art. 1o. de la Ley de Ingresos 2027 (DOF 13-11-2026), sin el 0 de financiamientos', 'url': LIF27},
             {'valor': _mmdp(deuda), 'etq': 'Financiamiento dentro del total (total − ingresos presupuestarios)', 'estado': 'derivado',
              'fuente': 'Operación con las dos cifras anteriores', 'url': 'numeros-paquete-2027-cifras.html'},
             {'valor': _mmdp(P['trib']), 'etq': 'Impuestos estimados para 2027', 'estado': 'oficial',
@@ -520,7 +527,7 @@ def senado_lif_2027():
         'sigue': [
             {'que': 'Cómo recauda en 2027 lo que la ley estima: los informes trimestrales de Hacienda comparan lo cobrado con el art. 1o.',
              'url': 'https://www.finanzaspublicas.hacienda.gob.mx/'},
-            {'que': 'Las reglas del SAT para el nuevo límite a las deducciones (art. 78-F de la Ley del ISR)', 'url': 'https://www.dof.gob.mx/'},
+            {'que': 'Las reglas del SAT para el nuevo límite a las deducciones (art. 78-F de la Ley del ISR)', 'url': 'https://dof.gob.mx/'},
             {'que': 'El Presupuesto de Egresos 2027, que la Cámara de Diputados debe aprobar a más tardar el 15 de noviembre', 'url': 'https://gaceta.diputados.gob.mx/'},
         ],
         'fuentes': [

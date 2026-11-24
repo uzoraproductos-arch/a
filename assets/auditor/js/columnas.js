@@ -233,7 +233,7 @@
   ],
   "fecha": "01-11-2026",
   "titulo": "¿Huawei «digitaliza» al gobierno con acceso total al IMSS, al SAT y a Aduanas? En los contratos federales de 2025 y 2026, Huawei no aparece como proveedor",
-  "balazo": "Circula que Morena «recurre a Huawei» y que sus ejecutivos «tendrían total acceso» a los sistemas más sensibles del gobierno, según audios que publicó Código Magenta. Los audios son de un ejecutivo comercial que presume clientes: no son un contrato. En los 217,127 contratos federales de ComprasMX de 2025 y 2026, ningún proveedor se llama Huawei; lo que sí hay son dos compras de equipo de esa marca a otras empresas, las dos del Hospital Juárez de México. Lo de años anteriores está pendiente.",
+  "balazo": "Circula que Morena «recurre a Huawei» y que sus ejecutivos «tendrían total acceso» a los sistemas más sensibles del gobierno, según audios que publicó Código Magenta. Los audios son de un ejecutivo comercial que presume clientes: no son un contrato. En los 221,176 contratos federales de ComprasMX de 2025 y 2026, ningún proveedor se llama Huawei; lo que sí hay son dos compras de equipo de esa marca a otras empresas, las dos del Hospital Juárez de México. Lo de años anteriores está pendiente.",
   "nota": {
    "medio": "Código Magenta",
    "titulo": "Operación Huawei: Grabaciones secretas",
@@ -248,7 +248,7 @@
   },
   "cuerpo": [
    "De dónde sale. Código Magenta publicó una serie, «Operación Huawei», con grabaciones que atribuye a un ejecutivo comercial de Huawei en México. Según las notas que la retoman, en ellas el ejecutivo dice que su empresa es el mayor proveedor tecnológico del IMSS, del SAT, de la Agencia Nacional de Aduanas y de la Conagua, que construyó centros de datos para el IMSS y que su gente ayudó a redactar un contrato marco de servicios tecnológicos. Es lo que dice un vendedor de sus clientes: no es un contrato, y no conocemos una autenticación de los audios. La serie no abre desde la plataforma.",
-   "Lo que dicen los contratos. Cruzamos la base de ComprasMX que tiene la plataforma: los 217,127 contratos que las dependencias federales reportaron en 2025 y 2026 (descarga del 2026-11-04). Ningún proveedor se llama Huawei. Lo que sí aparece son dos compras de equipo de la marca a otras empresas, las dos del Hospital Juárez de México: $36,108,967.10 por «Servicio de infraestructura tecnológica de la marca Huawei 2026 - 2027» (IKUSI MEXICO SA DE CV, licitación pública) y $5,051,932.24 por «Licenciamiento, póliza de servicio y soporte técnico para equipos Huawei» (GLOBAL TELECOMUNICATION GROUP SA DE CV, invitación a cuando menos tres personas). En total, $41,160,899.34 antes de impuestos (derivado). Tener contratos no es una irregularidad.",
+   "Lo que dicen los contratos. Cruzamos la base de ComprasMX que tiene la plataforma: los 221,176 contratos que las dependencias federales reportaron en 2025 y 2026 (descarga del 2026-11-21). Ningún proveedor se llama Huawei. Lo que sí aparece son dos compras de equipo de la marca a otras empresas, las dos del Hospital Juárez de México: $36,108,967.10 por «Servicio de infraestructura tecnológica de la marca Huawei 2026 - 2027» (IKUSI MEXICO SA DE CV, licitación pública) y $5,051,932.24 por «Licenciamiento, póliza de servicio y soporte técnico para equipos Huawei» (GLOBAL TELECOMUNICATION GROUP SA DE CV, invitación a cuando menos tres personas). En total, $41,160,899.34 antes de impuestos (derivado). Tener contratos no es una irregularidad.",
    "El primer punto ciego: el condicional. «Tendrían total acceso», «el control que tendría», «sería peligroso»: la publicación no afirma un hecho, lo supone. Y «total acceso» no es lo que se cita de los audios, que hablan de ser proveedor. Vender equipo o construir un centro de datos no es lo mismo que controlar un sistema: eso depende de quién lo opera y de qué dice el contrato.",
    "El segundo: «Morena recurre». Un partido no contrata servicios del gobierno; contratan las dependencias, y cada contrato queda en ComprasMX con su número. Los audios hablan de dependencias y de funcionarios, no de una decisión del partido.",
    "El tercero: lo que dice el Contrato Marco de Nube Pública de 2024 y lo que todavía no vemos. En el Contrato Marco para la Prestación de Servicios de Nube Pública firmado el 18 de abril de 2024 por la Secretaría de la Función Pública y la Coordinación de Estrategia Digital Nacional (pág. 36, sha256 ad5a29d1044e…), los 11 posibles proveedores firmantes son Amazon Web Services, Axtel, B-Drive IT, Bufete de Soluciones Integrales, E-Ngenium Infraestructura, Google LLC, Insaite, Intellilabs, Hola Innovación, Sitinformación y Triara.com: Huawei no figura con su razón social entre los 11 firmantes iniciales. Sin embargo, nuestra búsqueda de la marca en los títulos solo cubre los cinco contratos más grandes de cada proveedor que guarda la plataforma, y no tenemos el histórico de CompraNet de 2019 a 2024 ni los convenios de adhesión posteriores: ahí podría estar lo que dice el ejecutivo, o una compra por medio de un integrador. Por eso lo de años anteriores queda pendiente, y una acusación no es una condena."
@@ -279,7 +279,7 @@
    {
     "dice": "Morena recurre a Huawei para digitalizar al gobierno",
     "res": "no consta",
-    "explica": "Ningún documento oficial muestra un contrato del gobierno, y menos de un partido, con Huawei para «digitalizar al gobierno». En los 217,127 contratos federales de ComprasMX de 2025 y 2026 no hay ningún proveedor llamado Huawei.",
+    "explica": "Ningún documento oficial muestra un contrato del gobierno, y menos de un partido, con Huawei para «digitalizar al gobierno». En los 221,176 contratos federales de ComprasMX de 2025 y 2026 no hay ningún proveedor llamado Huawei.",
     "fuente": "ComprasMX, Datos Abiertos 2025 y 2026 (Secretaría Anticorrupción y Buen Gobierno), en la base de la plataforma",
     "url": "https://comprasmx.buengobierno.gob.mx/datos-abiertos"
    },
@@ -2656,8 +2656,8 @@
     "valor": "$9,156,528.9 millones",
     "etq": "Ingresos presupuestarios 2027: lo que entra sin endeudarse",
     "estado": "oficial",
-    "fuente": "Criterios Generales de Política Económica 2027 (en la base)",
-    "url": "numeros-paquete-2027-cifras.html"
+    "fuente": "Criterios Generales de Política Económica 2027; es la misma suma de los rubros 1 a 9 del art. 1o. de la Ley de Ingresos 2027 (DOF 13-11-2026), sin el 0 de financiamientos",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
    },
    {
     "valor": "$1,479,959.2 millones",
@@ -2750,7 +2750,7 @@
    },
    {
     "que": "Las reglas del SAT para el nuevo límite a las deducciones (art. 78-F de la Ley del ISR)",
-    "url": "https://www.dof.gob.mx/"
+    "url": "https://dof.gob.mx/"
    },
    {
     "que": "El Presupuesto de Egresos 2027, que la Cámara de Diputados debe aprobar a más tardar el 15 de noviembre",
@@ -4088,7 +4088,7 @@
    },
    {
     "que": "Publicación de la Ley de Ingresos 2027 en el Diario Oficial: el texto final del artículo vigésimo primero transitorio y el porcentaje exacto",
-    "url": "https://www.dof.gob.mx/"
+    "url": "https://dof.gob.mx/"
    }
   ],
   "fuentes": [

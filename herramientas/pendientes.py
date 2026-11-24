@@ -164,7 +164,7 @@ PROPIOS = [
     ('simon-danos', 'Desastres', 'Declaratorias y daños del huracán Simón (octubre de 2026)',
      'Aún es pronto: al 11 de octubre de 2026 no hay declaratoria en el Diario Oficial. La Coordinación Nacional de Protección Civil las emite cuando el estado la solicita, '
      'y CENAPRED publica su estimación de daños alrededor de un año después. Esta ficha se revisará cuando se publiquen.',
-     'Coordinación Nacional de Protección Civil y CENAPRED', 'https://www.dof.gob.mx/', 'Diario Oficial de la Federación', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
+     'Coordinación Nacional de Protección Civil y CENAPRED', 'https://dof.gob.mx/', 'Diario Oficial de la Federación', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
     ('gdl-plan-costos', 'Agua', 'Costo de cada acción del Plan Hídrico de Jalisco',
      'El plan se entregó al Congreso el 14 de julio de 2026 sin decir cómo se financiaría. La prensa citó un total de $42,101 mdp tomado de anexos que el Gobierno de Jalisco '
      'no ha publicado en su portal: falta de transparencia del Gobierno de Jalisco.',
