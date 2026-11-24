@@ -162,6 +162,23 @@ EJES_ENTRADA = [
     ('🏦', 'Deuda pública', 'Cuánto debe cada estado y a qué bancos o instituciones, crédito por crédito, según el Registro Público Único de Hacienda.',
      [('rpu', 'créditos y obligaciones de estados y municipios, con su acreedor')]),
 ]
+# Ronda 12 (23-11-2026, Paquete de Datos 10): la imagen editorial aprobada por el autor (Opción 2), con su huella.
+FOTO_ENTRADA = ('portada-acceso-editorial.webp',
+                'Arquitectura cívica mexicana al amanecer: un muro azul marino a la izquierda y, a la derecha, un paseo arbolado con '
+                'jacarandas en flor, cantera clara y luz cálida de mañana.',
+                '07e1cc48e6e85e2ec9ae7a7bdc5febfeddf024f739da31d957ed76220df6d9f7')
+# La tira del hero: (clave de monetizacion.contadores(), cómo se dice aquí).
+TIRA_ENTRADA = [('69b', 'RFC en la lista 69-B del SAT'), ('contratos', 'contratos públicos de ComprasMX'),
+                ('municipios', 'municipios y alcaldías con su ficha')]
+
+
+def _foto_ok():
+    import hashlib
+    ruta = os.path.join(RAIZ, 'assets', 'auditor', 'img', 'portada', FOTO_ENTRADA[0])
+    if hashlib.sha256(open(ruta, 'rb').read()).hexdigest() != FOTO_ENTRADA[2]:
+        raise SystemExit('acceso.py: la imagen de la entrada no es la aprobada (%s): revisa su huella' % FOTO_ENTRADA[0])
+
+
 FAQ_ENTRADA = [
     ('¿Qué es Auditavisión?', 'Una plataforma cívica que reúne y explica en sencillo el dinero público de México: impuestos, presupuesto, '
      'deuda, contratos y lo que la Auditoría Superior de la Federación dejó por aclarar. Tiene un chat, el Auditor, que contesta con esos datos.'),
@@ -177,7 +194,9 @@ FAQ_ENTRADA = [
 
 
 def entrada_html(sello):
-    """canjea-tu-codigo.html: la entrada de la versión de prueba (pedido del
+    """canjea-tu-codigo.html: la entrada de la versión de prueba. Desde la Ronda 12 (23-11-2026) va en dos
+    planos: el hero con la imagen editorial y la tarjeta de dos pestañas, y el cuerpo con los ejes, lo último
+    y las preguntas frecuentes (docs/ux/REDISENO-PORTAL-ACCESO.md). Origen (pedido del
     autor, 29-10-2026: «de un lado… la imagen de la ciudad… y por la parte de
     que quieres saber sobre las finanzas públicas, descubre el gasto y
     posiblemente alguna noticia… ingresa con tu código promocional. ¿No tienes
@@ -199,10 +218,13 @@ def entrada_html(sello):
     import monetizacion
     cuenta = {c[0]: c for c in monetizacion.contadores()}
     ejes = ''.join(
-        '\n        <article class="ac-eje"><h3><span aria-hidden="true">%s</span> %s</h3><p>%s</p><ul>%s</ul></article>' % (
+        '\n          <article class="ac-eje"><h3><span aria-hidden="true">%s</span> %s</h3><p>%s</p><ul>%s</ul></article>' % (
             ico, esc(tit), esc(tx), ''.join('<li><b>%s</b> %s</li>' % (format(cuenta[k][1], ','), esc(et)) for k, et in cifras))
         for ico, tit, tx, cifras in EJES_ENTRADA)
-    faq = ''.join('\n        <details class="ac-faq-p"><summary>%s</summary><p>%s</p></details>' % (esc(q), esc(r)) for q, r in FAQ_ENTRADA)
+    # Ronda 12: tres cifras contadas de la base, en la tira del hero (ninguna se escribe aquí).
+    tira = ''.join('\n            <div><dt>%s</dt><dd>%s</dd></div>' % (format(cuenta[k][1], ','), esc(et)) for k, et in TIRA_ENTRADA)
+    _foto_ok()
+    faq = ''.join('\n          <details class="ac-faq-p"><summary>%s</summary><p>%s</p></details>' % (esc(q), esc(r)) for q, r in FAQ_ENTRADA)
     url = apartados.SITIO + CANJE
     ld = json.dumps([
         {'@context': 'https://schema.org', '@type': 'WebSite', 'name': 'Auditavisión', 'url': apartados.SITIO, 'inLanguage': 'es-MX',
@@ -230,7 +252,8 @@ def entrada_html(sello):
   <meta property="og:url" content="{url}">
   <meta property="og:title" content="Auditavisión · Fraudes, lavado, desvíos y deuda pública, con documentos">
   <meta property="og:description" content="{desc}">
-  <meta property="og:image" content="{sitio}assets/auditor/img/portada/cabecera-lluvia.webp">
+  <meta property="og:image" content="{sitio}assets/auditor/img/portada/{foto}">
+  <meta property="og:image:alt" content="{foto_alt}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#0b2a63">
   <meta name="color-scheme" content="light">
@@ -246,46 +269,61 @@ def entrada_html(sello):
 </head>
 <body class="ac-entrada-cuerpo">
   <main class="ac-entrada" id="contenido">
-    <figure class="ac-foto">
-      <img src="assets/auditor/img/portada/cabecera-lluvia.webp" alt="Una calle de ciudad bajo la lluvia, con torres entre la niebla, luces azules y gente caminando." width="1376" height="768">
-      <figcaption>Ilustración generada con IA</figcaption>
-    </figure>
-    <section class="ac-lado" aria-labelledby="acTitulo">
-      <p class="ac-marca">{logo}<span><b>Auditavisión</b><small>El gasto público, a la vista</small></span></p>
-      <h1 id="acTitulo">Las cuentas del gobierno, <span>con sus documentos</span></h1>
-      <div class="ac-quienes">
-        <h2>¿Quiénes somos?</h2>
-        <p>{quienes}</p>
+    <section class="ac-hero" aria-labelledby="acTitulo">
+      <figure class="ac-hero-foto">
+        <img src="assets/auditor/img/portada/{foto}" alt="{foto_alt}" width="1376" height="768" fetchpriority="high">
+        <figcaption>Ilustración editorial generada con IA</figcaption>
+      </figure>
+      <div class="ac-hero-in">
+        <div class="ac-ident">
+          <p class="ac-marca">{logo}<span><b>Auditavisión</b><small>El gasto público, a la vista</small></span></p>
+          <h1 id="acTitulo">Las cuentas del gobierno, <span>con sus documentos</span></h1>
+          <div class="ac-quienes">
+            <h2>¿Quiénes somos?</h2>
+            <p>{quienes}</p>
+          </div>
+          <div class="ac-preguntas-caja">
+            <h2 class="ac-vh">Preguntas que aquí se contestan con documentos</h2>
+            <ul class="ac-preguntas">{preguntas}
+            </ul>
+          </div>
+          <dl class="ac-tira" aria-label="La base de la plataforma, contada al generar esta página">{tira}
+          </dl>
+        </div>
+        <div class="ac-card" id="acTarjeta">
+          <div class="ac-tabs" role="tablist" aria-label="Tu acceso">
+            <button class="ac-tab" type="button" role="tab" id="tabTengo" aria-controls="acPanTengo" aria-selected="true">Tengo código</button>
+            <button class="ac-tab" type="button" role="tab" id="tabPedir" aria-controls="acPanPedir" aria-selected="false" tabindex="-1">Solicitar código</button>
+          </div>
+          <div class="ac-tabpanel" role="tabpanel" id="acPanTengo" aria-labelledby="tabTengo">
+            <form class="ac-canje" id="acCanje" novalidate>
+              <label class="ac-et" for="acCasilla0">Entra con tu código de acceso</label>
+              {casillas}
+              <p class="ac-ayuda">Ocho caracteres: números, letras o las dos cosas. Da igual si son mayúsculas o minúsculas. Si lo copiaste, pégalo en la primera casilla.</p>
+              <button class="sz-btn sz-btn-of ac-boton" type="submit" disabled>Ingresar</button>
+              <p class="ac-estado" id="acEstado" role="status" aria-live="polite"></p>
+            </form>{sin_base}
+            <div class="ac-tuyo" id="acTuyo" hidden></div>
+          </div>
+          <div class="ac-tabpanel" role="tabpanel" id="acPanPedir" aria-labelledby="tabPedir" hidden>
+            <form class="ac-pedir" id="acPedir" novalidate>
+              <p class="ac-pedir-txt">Es gratis y por invitación. Déjanos tu correo y te mandamos tu código: la versión de prueba se abre poco a poco.</p>
+              <label class="ac-et" for="acPCorreo">Tu correo</label>
+              <input class="ac-campo" id="acPCorreo" name="correo" type="email" autocomplete="email" required>
+              <label class="ac-et" for="acPNombre">Tu nombre <small>(si quieres)</small></label>
+              <input class="ac-campo" id="acPNombre" name="nombre" type="text" autocomplete="name" maxlength="80">
+              <label class="ac-et" for="acPMotivo">¿A qué te dedicas o para qué lo quieres? <small>(si quieres)</small></label>
+              <input class="ac-campo" id="acPMotivo" name="motivo" type="text" maxlength="300">
+              <label class="ac-check"><input type="checkbox" name="acepta" required> <span>Acepto el <a href="aviso-de-privacidad.html#codigos" target="_blank" rel="noopener">aviso de privacidad</a>: mi correo solo sirve para mandarme el código.</span></label>
+              <button class="sz-btn sz-btn-of ac-boton" type="submit">Pedir mi código</button>
+              <p class="ac-estado" id="acPEstado" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+          <p class="ac-card-pie"><a class="ac-enlace" href="servicios.html">Conoce los Servicios</a></p>
+        </div>
       </div>
-      <div class="ac-preguntas-caja">
-        <h2 class="ac-vh">Preguntas que aquí se contestan con documentos</h2>
-        <ul class="ac-preguntas">{preguntas}
-        </ul>
-      </div>
-      <form class="ac-canje" id="acCanje" novalidate>
-        <label class="ac-et" for="acCasilla0">Entra con tu código de acceso</label>
-        {casillas}
-        <p class="ac-ayuda">Ocho caracteres: números, letras o las dos cosas. Da igual si son mayúsculas o minúsculas. Si lo copiaste, pégalo en la primera casilla.</p>
-        <button class="sz-btn sz-btn-of ac-boton" type="submit" disabled>Ingresar</button>
-        <p class="ac-estado" id="acEstado" role="status" aria-live="polite"></p>
-      </form>{sin_base}
-      <div class="ac-tuyo" id="acTuyo" hidden></div>
-      <div class="ac-obtener">
-        <p class="ac-obtener-tx">¿No tienes código? Es gratis y por invitación.</p>
-        <p class="ac-obtener-btns"><button class="sz-btn sz-btn-of ac-pide-btn" type="button" id="acObtener" aria-expanded="false" aria-controls="acPedir">Solicita tu código</button> <a class="ac-enlace" href="servicios.html">Conoce los Servicios</a></p>
-        <form class="ac-pedir" id="acPedir" novalidate hidden>
-          <p class="ac-pedir-txt">Déjanos tu correo y te mandamos tu código. La versión de prueba es por invitación: la estamos abriendo poco a poco.</p>
-          <label class="ac-et" for="acPCorreo">Tu correo</label>
-          <input class="ac-campo" id="acPCorreo" name="correo" type="email" autocomplete="email" required>
-          <label class="ac-et" for="acPNombre">Tu nombre <small>(si quieres)</small></label>
-          <input class="ac-campo" id="acPNombre" name="nombre" type="text" autocomplete="name" maxlength="80">
-          <label class="ac-et" for="acPMotivo">¿A qué te dedicas o para qué lo quieres? <small>(si quieres)</small></label>
-          <input class="ac-campo" id="acPMotivo" name="motivo" type="text" maxlength="300">
-          <label class="ac-check"><input type="checkbox" name="acepta" required> Acepto el <a href="aviso-de-privacidad.html#codigos" target="_blank" rel="noopener">aviso de privacidad</a>: mi correo solo sirve para mandarme el código.</label>
-          <button class="sz-btn sz-btn-of" type="submit">Pedir mi código</button>
-          <p class="ac-estado" id="acPEstado" role="status" aria-live="polite"></p>
-        </form>
-      </div>
+    </section>
+    <div class="ac-cuerpo">
       <section class="ac-ejes" aria-labelledby="acEjesTit">
         <h2 id="acEjesTit">Lo que puedes revisar, con su documento</h2>
         <div class="ac-ejes-rej">{ejes}
@@ -293,17 +331,19 @@ def entrada_html(sello):
         <p class="ac-ejes-nota">Los números son conteos de la base de la plataforma al generar esta página. Una coincidencia en una lista es una señal para revisar, nunca una acusación.</p>
         <p class="ac-ejes-cta"><button class="sz-btn sz-btn-of ac-pide-btn" type="button" data-pide-codigo>Solicita tu código para entrar</button></p>
       </section>
-      <div class="ac-noticias">
-        <h2>Lo último, verificado</h2>
-        <ul>{notas}
-        </ul>
+      <div class="ac-banda">
+        <section class="ac-noticias" aria-labelledby="acNotTit">
+          <h2 id="acNotTit">Lo último, verificado</h2>
+          <ul>{notas}
+          </ul>
+        </section>
+        <section class="ac-faq" aria-labelledby="acFaqTit">
+          <h2 id="acFaqTit">Preguntas frecuentes</h2>{faq}
+        </section>
       </div>
-      <div class="ac-faq">
-        <h2>Preguntas frecuentes</h2>{faq}
-      </div>
-      <p class="ac-pie">Versión de prueba · gratis · <a href="aviso-de-privacidad.html">Aviso de privacidad</a> · <span>{sello}</span></p>
-    </section>
+    </div>
   </main>
+  <footer class="ac-pie">Versión de prueba · gratis · <a href="aviso-de-privacidad.html">Aviso de privacidad</a> · <span>{sello}</span></footer>
   <dialog class="ac-felicidades" id="acFelicidades" aria-labelledby="acFTit">
     <p class="ac-f-ico" aria-hidden="true">👏</p>
     <h2 id="acFTit">¡Felicidades!</h2>
@@ -315,7 +355,8 @@ def entrada_html(sello):
 </body>
 </html>
 """.format(csp=seguridad.meta(), sello=sello, logo=apartados.LOGO_IMG, notas=notas, casillas=casillas, sin_base=sin_base,
-                  desc=esc(DESC_ENTRADA), url=url, sitio=apartados.SITIO, quienes=esc(QUIENES_ENTRADA), preguntas=preguntas, faq=faq, ld=ld, ejes=ejes)
+                  desc=esc(DESC_ENTRADA), url=url, sitio=apartados.SITIO, quienes=esc(QUIENES_ENTRADA), preguntas=preguntas, faq=faq, ld=ld, ejes=ejes,
+                  foto=FOTO_ENTRADA[0], foto_alt=esc(FOTO_ENTRADA[1]), tira=tira)
 
 
 def escribir_entrada(sello):

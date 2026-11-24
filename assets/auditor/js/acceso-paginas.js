@@ -38,7 +38,10 @@
     if (!/^[\w.-]+\.html([?#][^\s]*)?$/.test(volver)) volver = 'index.html';
 
     function codigo() { return cajas.map(function (c) { return c.value; }).join(''); }
-    function revisa() { boton.disabled = codigo().length !== 8; }
+    function revisa() {
+      boton.disabled = codigo().length !== 8;
+      cajas.forEach(function (c) { c.classList.toggle('llena', !!c.value); });
+    }
     function reparte(desde, texto) {
       var t = limpia(texto), i = desde;
       for (var k = 0; k < t.length && i < 8; k++, i++) cajas[i].value = t[k];
@@ -139,8 +142,7 @@
             'Entra al panel con tu correo para ver el nuevo.</p><p><a class="sz-btn sz-btn-of" href="' + 'administracion-codigos.html' + '">Ver mi código nuevo</a></p>';
           return;
         }
-        caja.innerHTML = '<p>Tu acceso terminó el <b>' + esc(fecha(p.hasta)) + '</b>. ¿Quieres seguir? Pide otro código aquí abajo.</p>';
-        var b = $('acObtener'); if (b && $('acPedir').hidden) b.click();
+        caja.innerHTML = '<p>Tu acceso terminó el <b>' + esc(fecha(p.hasta)) + '</b>. ¿Quieres seguir? Pide otro código en la pestaña «Solicitar código».</p>';
         return;
       }
       caja.className = 'ac-tuyo';
@@ -153,20 +155,41 @@
     if (pega) reparte(0, pega);
   }
 
-  /* ---------------- «¿No tienes código? Obtén uno» ---------------- */
+  /* ---------------- «Tengo código» / «Solicitar código» (Ronda 12) ----------------
+     Dos pestañas accesibles en la tarjeta de la entrada: las flechas cambian de pestaña y
+     cada botón [data-pide-codigo] lleva a la tarjeta con «Solicitar código» abierta. */
   function pedir() {
-    var b = $('acObtener'), f = $('acPedir'); if (!b || !f) return;
-    b.addEventListener('click', function () {
-      f.hidden = !f.hidden; b.setAttribute('aria-expanded', String(!f.hidden));
-      if (!f.hidden) f.correo.focus();
-    });
-    /* Ronda 7: los otros botones «Solicita tu código» abren el mismo formulario. */
-    Array.prototype.forEach.call(document.querySelectorAll('[data-pide-codigo]'), function (x) {
-      x.addEventListener('click', function () {
-        if (f.hidden) b.click(); else f.correo.focus();
-        f.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+    var f = $('acPedir'); if (!f) return;
+    var tabs = [$('tabTengo'), $('tabPedir')].filter(Boolean);
+    function activa(tab, foco) {
+      tabs.forEach(function (x) {
+        var si = x === tab;
+        x.setAttribute('aria-selected', String(si)); x.tabIndex = si ? 0 : -1;
+        var pan = $(x.getAttribute('aria-controls')); if (pan) pan.hidden = !si;
+      });
+      if (foco) tab.focus();
+    }
+    tabs.forEach(function (x, i) {
+      x.addEventListener('click', function () { activa(x, false); });
+      x.addEventListener('keydown', function (e) {
+        var k = { ArrowRight: 1, ArrowLeft: -1, Home: -9, End: 9 }[e.key]; if (!k) return;
+        e.preventDefault();
+        var j = k === -9 ? 0 : k === 9 ? tabs.length - 1 : (i + k + tabs.length) % tabs.length;
+        activa(tabs[j], true);
       });
     });
+    var quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-pide-codigo]'), function (x) {
+      x.addEventListener('click', function () {
+        if ($('tabPedir')) activa($('tabPedir'), false);
+        var t = $('acTarjeta') || f;
+        t.scrollIntoView({ behavior: quieto ? 'auto' : 'smooth', block: 'center' });
+        setTimeout(function () { if (f.correo) f.correo.focus({ preventScroll: true }); }, quieto ? 0 : 450);
+      });
+    });
+    // Un acceso vencido abre de una vez «Solicitar código».
+    var p = A.leer && A.leer();
+    if (p && p.hasta && !p.admin && A.vigente && !A.vigente(p) && $('tabPedir')) activa($('tabPedir'), false);
     f.addEventListener('submit', function (e) {
       e.preventDefault();
       var est = $('acPEstado'), correo = f.correo.value.trim();

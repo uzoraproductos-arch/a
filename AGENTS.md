@@ -142,6 +142,10 @@ portada para las viejas), `acceso.js` solo las abre en el navegador de la admini
 - **Cuernavaca calcula su adeudo con el Código Fiscal para el Estado de Morelos** (`m.recargo.cfm`: `adeudo_cfm()` de `cc_predial.py` y `adeudoCfm()` de `cc-predial.js`, gemelas). Lo que es lectura nuestra (los recargos sobre el impuesto actualizado y el factor truncado al diezmilésimo) va dicho en la nota del municipio. **Un municipio cuya ley remite a un código estatal lleva ese código en `ley_extra`**, con su liga, su huella y sus artículos, y la página lo lista en las fuentes.
 - **La LIF 2027 se lee de su JSON con huella y cuadre** (`lif27()` de `presupuesto_modulos.py`): ninguna cifra de la ley se escribe en el código. **El PEF 2027 no se da por publicado sin su decreto en el DOF**, ni con una fecha de aprobación que no tenga documento.
 
+**Ronda 12 (23-11-2026): el portal de acceso en dos planos** (`docs/ux/REDISENO-PORTAL-ACCESO.md`, aprobado por el autor).
+- **`canjea-tu-codigo.html` va en dos planos**: el hero con la imagen editorial (`FOTO_ENTRADA` de `acceso.py`, con su huella: si el archivo cambia, la generación se detiene), la identidad a la izquierda y la tarjeta de acceso (`.ac-card`) a la derecha; abajo, los cuatro ejes en 2×2 y la banda de lo último y las preguntas frecuentes. **La tarjeta tiene dos pestañas, «Tengo código» y «Solicitar código»** (`pedir()` de `acceso-paginas.js`): un botón nuevo que pida código lleva `data-pide-codigo`, no otro formulario. Las cifras de la tira del hero salen de `monetizacion.contadores()` (`TIRA_ENTRADA`), **nunca escritas a mano**.
+- **La entrada no carga `auditavision.css`**: lo que necesite de ahí (como el tamaño de `svg.ico`) va en `acceso.css`, bajo `.ac-entrada-cuerpo`.
+
 **Decisión del autor, 02-11-2026.** El menú (`MENU` de `apartados.py` y su
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Servicios** (segunda desde el 21-11-2026, pedido del autor), **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras
