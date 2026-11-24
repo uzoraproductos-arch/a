@@ -671,6 +671,7 @@ html.pa-en-vista .pa-app-marco iframe { min-height: 420px; }
 .pv-ent { fill: #2f5fb3; }
 .pv-sel { fill: #c2410c; stroke: #7c2d12 !important; stroke-width: 1.5 !important; }
 .pv-mapa figcaption, .pv-pie { margin: 6px 0 0; font-size: 14px; line-height: 1.45; color: #4a5568; }
+.pv-sda { display: block; margin-top: 6px; }
 .pv-graf { display: grid; gap: 12px; min-width: 0; }
 .pv-caja { padding: 12px 14px; border-radius: 12px; background: #f6f9ff; border: 1px solid #e1e8f5; min-width: 0; }
 .pv-barras { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }

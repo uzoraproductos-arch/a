@@ -151,6 +151,10 @@ portada para las viejas), `acceso.js` solo las abre en el navegador de la admini
 - **El candado manda al panel, no a la entrada, a quien ya tiene la sesión de la administración en esa pestaña** (`fuera()` de `acceso.js`), y el panel regresa a la página de `?volver=` (solo páginas de la plataforma, nunca la entrada ni el panel).
 - **Un rango oficial que no se pudo bajar sigue pendiente con su liga**, aunque se recuerde: los umbrales del Sistema de Alertas esperan el PDF del Reglamento.
 
+**Ronda 14 (24-11-2026): los rangos del semáforo del Sistema de Alertas.**
+- **Los límites de los rangos bajo, medio y alto viven solo en `docs/deuda/sistema-alertas-umbrales.json`**, copiados de los Acuerdos de la SHCP en el DOF; `sistema_alertas.py` revisa la huella de sus tres PDF (`investigaciones/leyes/`) y la continuidad de los límites, y los leen el Planisferio, `insp-visual.js` (`D.sda`) y el chat (`D.sdaR`). **Ningún módulo escribe un límite a mano.**
+- **El color lo da Hacienda; el rango de cada indicador es nuestro** (cifra oficial junto al límite: «auditada»). La regla del art. 14 va al pie de la letra y **su hueco no se rellena** (medio en el primero y solo uno de los otros en alto). `sistema_alertas.py --prueba` (corre en `revision.py`) debe reproducir el color de cada estado y municipio medido: si un corte nuevo no cuadra, se revisa si cambió el Acuerdo antes de tocar nada.
+
 **Decisión del autor, 02-11-2026.** El menú (`MENU` de `apartados.py` y su
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Servicios** (segunda desde el 21-11-2026, pedido del autor), **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras

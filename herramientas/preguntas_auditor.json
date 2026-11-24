@@ -3556,6 +3556,24 @@
     "San Luis Potosí",
     "No adivinamos una tasa"
    ]
+  },
+  {
+   "q": "¿Cuáles son los rangos del semáforo del Sistema de Alertas?",
+   "ir": "planisferio.html?d=deuda",
+   "dice": [
+    "Rangos del Sistema de Alertas · entidades federativas",
+    "200%",
+    "≤ 60.0%",
+    "no dice qué nivel toca"
+   ]
+  },
+  {
+   "q": "¿Cuándo un estado está en rojo en el semáforo de deuda?",
+   "ir": "planisferio.html?d=deuda",
+   "dice": [
+    "Endeudamiento elevado",
+    "art. 15"
+   ]
   }
  ]
 }

@@ -1360,3 +1360,18 @@ body .site-footer .footer-bottom .footer-aviso { color: var(--pie-acento); }
   padding: .75rem 1rem; border-left: 4px solid #1f6f8b; background: rgba(31, 111, 139, .08); border-radius: 6px; font-size: 1rem; line-height: 1.5; }
 .pl-espejo a { display: inline-block; min-height: 44px; line-height: 44px; font-weight: 600; }
 .pl-espejo > span:first-child { flex: 0 0 auto; display: inline-flex; min-width: 1.25em; }
+
+/* Los rangos del semáforo del Sistema de Alertas (Ronda 14, sistema_alertas.py). */
+.tabla-scroll { overflow-x: auto; max-width: 100%; }
+table.sa-rangos { border-collapse: collapse; width: 100%; min-width: 320px; margin: 6px 0 4px; font-variant-numeric: tabular-nums; }
+table.sa-rangos caption { text-align: left; font-weight: 700; padding: 4px 0; }
+table.sa-rangos th, table.sa-rangos td { border: 1px solid rgba(90, 103, 130, .3); padding: 6px 8px; text-align: left; vertical-align: top; }
+table.sa-rangos thead th:nth-child(2) { border-top: 4px solid #2e7d4f; }
+table.sa-rangos thead th:nth-child(3) { border-top: 4px solid #c99a1a; }
+table.sa-rangos thead th:nth-child(4) { border-top: 4px solid #b23a3a; }
+table.sa-rangos tbody th { font-weight: 600; }
+.sa-reglas { margin: 4px 0 8px; padding-left: 1.2em; }
+.sa-reglas li { margin-bottom: 4px; }
+.sa-leyenda { margin: 14px 0; }
+.sa-det { margin-top: 10px; }
+.sa-det summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; }

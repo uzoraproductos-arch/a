@@ -38,6 +38,7 @@ import unicodedata
 from urllib.parse import quote
 
 import territorio_modulos as tm
+import sistema_alertas as sa
 from presupuesto_modulos import chip, mdp, bill, pct
 
 ARCHIVO = 'planisferio.html'
@@ -1577,7 +1578,8 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         cajones.append('<button type="button" class="pl-caj-b" data-dim="%s" data-cajon="%s" data-cajon-tit="%sTit" aria-haspopup="dialog"%s>📏 Cómo leer esta dimensión</button>' % (i, t, t, oculto))
         plantillas.append('<template id="%s">%s</template>' % (t, _cajon(ico, 'Cómo leerla', 'Cómo leer la dimensión «%s»' % nom, t + 'Tit',
             '<section class="glos-drawer-sec"><h4>Qué pinta</h4><p>%s</p></section><section class="glos-drawer-sec"><h4>Qué puedes ver</h4><ul class="pl-des-l">%s</ul>'
-            '<p>%s Toca una entidad para ver su ficha; tócala otra vez para entrar a su portal.</p></section>' % (leer[i], ls, cuantil))))
+            '<p>%s Toca una entidad para ver su ficha; tócala otra vez para entrar a su portal.</p></section>%s' % (leer[i], ls, cuantil,
+                ('<section class="glos-drawer-sec">%s</section>' % sa.leyenda_html('e', chip)) if i == 'deuda' else ''))))
         cajones.append(_ctx_botones(i, oculto))
         if notas.get(i):
             t = 'plTplNota-' + i
@@ -2109,14 +2111,14 @@ def _deuda_portal(base, ref, e, pm=''):
         l2, n2 = _lugar(E, a, 'deudaIld', med=True)
         p2 = ('<article class="pl-piso pl-piso-deuda"><p class="pl-piso-n">Cuánto le pesa · los tres indicadores</p>'
               '<p class="pl-piso-v"><b>%s</b> %s</p>'
-              '<dl class="pl-dl"><dt>1 · Deuda ÷ ingresos de libre disposición</dt><dd>%s %s <small>%d.º de %d estados medidos; sus ingresos de libre disposición fueron %s %s</small></dd>'
-              '<dt>2 · Lo que pagó por ella ÷ esos ingresos</dt><dd>%s %s <small>de cada $100 de su dinero libre, %s se fueron en pagar deuda y obligaciones</small></dd>'
-              '<dt>3 · Deudas de corto plazo, menos lo que tiene en caja, ÷ ingresos totales</dt><dd>%s %s <small>%s</small></dd></dl>'
+              '<dl class="pl-dl"><dt>1 · Deuda ÷ ingresos de libre disposición</dt><dd>%s %s <small>%s; %d.º de %d estados medidos; sus ingresos de libre disposición fueron %s %s</small></dd>'
+              '<dt>2 · Lo que pagó por ella ÷ esos ingresos</dt><dd>%s %s <small>%s; de cada $100 de su dinero libre, %s se fueron en pagar deuda y obligaciones</small></dd>'
+              '<dt>3 · Deudas de corto plazo, menos lo que tiene en caja, ÷ ingresos totales</dt><dd>%s %s <small>%s; %s</small></dd></dl>'
               '<p class="pl-piso-f">%s</p></article>' % (
                   SEMAFORO[e['semaforoDeuda']], chip('oficial'),
-                  pct(e['deudaIld']), chip('oficial'), l2, n2, mdp(e['ildMdp']), chip('oficial'),
-                  pct(e['deudaSd']), chip('oficial'), '$' + format(e['deudaSd'], '.1f'),
-                  pct(e['deudaOcp']), chip('oficial'),
+                  pct(e['deudaIld']), chip('oficial'), sa.rango_txt('e', 'i1', e['deudaIld'], chip), l2, n2, mdp(e['ildMdp']), chip('oficial'),
+                  pct(e['deudaSd']), chip('oficial'), sa.rango_txt('e', 'i2', e['deudaSd'], chip), '$' + format(e['deudaSd'], '.1f'),
+                  pct(e['deudaOcp']), chip('oficial'), sa.rango_txt('e', 'i3', e['deudaOcp'], chip),
                   'negativo: tenía en efectivo, bancos e inversiones temporales más de lo que debía a corto plazo' if e['deudaOcp'] < 0 else
                   'lo que debía a corto plazo superaba lo que tenía en caja',
                   fu['ild']))
@@ -2147,7 +2149,8 @@ def _deuda_portal(base, ref, e, pm=''):
               '<li>Su propia ley de deuda pública se publica en: %s. <a href="%s#fed-deuda">⚖️ Las leyes de la deuda en los tres niveles</a></li></ul></div>') % (
         ln._a(ln.CPEUM, 'Constitución'), r_techo, ln._a(ln.pdf('LDFEFM.pdf'), 'LDF'),
         '<span class="est-chip est-pendiente" data-pend="deuda-municipios">pendiente</span>', html.escape(ln.ESTADOS[a][0]), ln.ARCHIVO)
-    return '<div class="pl-pisos">%s%s%s%s</div>%s%s' % (p1, p2, pm, _rpu_piso(e), ciego, reglas)
+    # Los rangos del semáforo con su Acuerdo del DOF (Ronda 14, sistema_alertas.py).
+    return '<div class="pl-pisos">%s%s%s%s</div>%s%s%s' % (p1, p2, pm, _rpu_piso(e), ciego, sa.leyenda_html('e', chip), reglas)
 
 
 def _rpu_piso(e):
@@ -2249,13 +2252,14 @@ def _deuda_mun(ref, e, m, dv, con_mapa):
             '<dt>Adeudos de años anteriores (ADEFAS 2024)</dt><dd>%s %s <small>lo que quedó a deber el año anterior, sobre todo a proveedores: no es un crédito</small></dd>%s</dl>'
             '<p class="pl-piso-f">Pagos y empréstitos de 2024: INEGI, finanzas públicas municipales %d %s. '
             'Saldo al cierre de 2025 y semáforo: SHCP, Sistema de Alertas de los Municipios, evaluación de la Cuenta Pública 2025 (<a href="%s">variables por municipio, XLSX</a>; huella SHA-256 <code>%s…</code>) %s. '
-            'Los municipios que no aparecen en el Sistema de Alertas no tienen financiamientos inscritos en el Registro Público Único (LDF, art. 43); en el país, 41 municipios con deuda inscrita no entregaron su información a Hacienda %s.</p>%s</article>' % (
+            'Los municipios que no aparecen en el Sistema de Alertas no tienen financiamientos inscritos en el Registro Público Único (LDF, art. 43); en el país, 41 municipios con deuda inscrita no entregaron su información a Hacienda %s.</p>%s'
+            '<details class="sa-det"><summary>📏 Los rangos del semáforo de los municipios</summary>%s</details></article>' % (
                 tit, mdp(tot / 1e6), chip('derivado'), mdp(dyo_edo), chip('derivado'),
                 bloque_sda, n_pago, len(filas), m['n'], desglose,
                 mdp(emp / 1e6), chip('derivado'),
                 'ninguno recibió préstamos' if not n_emp else ('%d %s' % (n_emp, 'municipio recibió préstamos' if n_emp == 1 else 'municipios recibieron préstamos')),
                 mdp(adef / 1e6), chip('derivado'), top, dv['anio'], ref('ref-inegi-efipem'),
-                html.escape(sda.get('url', '')), (sda.get('sha256') or '')[:12], ref('ref-shcp-alertas'), pend, ir))
+                html.escape(sda.get('url', '')), (sda.get('sha256') or '')[:12], ref('ref-shcp-alertas'), pend, ir, sa.leyenda_html('m', chip)))
 
 
 def _inversion_mun(ref, e, m, iv, con_mapa):
