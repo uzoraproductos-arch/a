@@ -146,6 +146,11 @@ portada para las viejas), `acceso.js` solo las abre en el navegador de la admini
 - **`canjea-tu-codigo.html` va en dos planos**: el hero con la imagen editorial (`FOTO_ENTRADA` de `acceso.py`, con su huella: si el archivo cambia, la generación se detiene), la identidad a la izquierda y la tarjeta de acceso (`.ac-card`) a la derecha; abajo, los cuatro ejes en 2×2 y la banda de lo último y las preguntas frecuentes. **La tarjeta tiene dos pestañas, «Tengo código» y «Solicitar código»** (`pedir()` de `acceso-paginas.js`): un botón nuevo que pida código lleva `data-pide-codigo`, no otro formulario. Las cifras de la tira del hero salen de `monetizacion.contadores()` (`TIRA_ENTRADA`), **nunca escritas a mano**.
 - **La entrada no carga `auditavision.css`**: lo que necesite de ahí (como el tamaño de `svg.ico`) va en `acceso.css`, bajo `.ac-entrada-cuerpo`.
 
+**Ronda 13 (24-11-2026): el pase de la administración se activa a la vista.**
+- **El pase de la semana nunca se activa en silencio**: `activaPase()` de `acceso-paginas.js` dice en el panel si se activó, hasta cuándo, o por qué no (`MOT_PASE`), con «Reintentar». **Un motivo nuevo que devuelva el canje lleva ahí su frase.** Cambiar el código de la semana vuelve a activar el pase.
+- **El candado manda al panel, no a la entrada, a quien ya tiene la sesión de la administración en esa pestaña** (`fuera()` de `acceso.js`), y el panel regresa a la página de `?volver=` (solo páginas de la plataforma, nunca la entrada ni el panel).
+- **Un rango oficial que no se pudo bajar sigue pendiente con su liga**, aunque se recuerde: los umbrales del Sistema de Alertas esperan el PDF del Reglamento.
+
 **Decisión del autor, 02-11-2026.** El menú (`MENU` de `apartados.py` y su
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Servicios** (segunda desde el 21-11-2026, pedido del autor), **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras

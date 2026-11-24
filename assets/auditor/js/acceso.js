@@ -147,9 +147,16 @@
   // Dentro del marco del chat manda la página de arriba.
   try { if (window.top !== window && window.top.AvAcceso) return; } catch (e) {}
 
+  // Sin pase vigente, a la entrada. Pero si en esta pestaña ya entraste al panel
+  // (sesión de la administración, Ronda 13), al panel: ahí se activa tu pase de la
+  // semana y te regresa a donde ibas, en vez de pedirte el código otra vez.
+  function fuera(adonde) {
+    var ses = null; try { ses = sessionStorage.getItem('av-admin'); } catch (e) {}
+    location.replace((ses ? C.panel : C.canje) + '?volver=' + encodeURIComponent(adonde));
+  }
   var p = leer();
   if (!vigente(p)) {
-    location.replace(C.canje + '?volver=' + encodeURIComponent(pagina + location.search + location.hash));
+    fuera(pagina + location.search + location.hash);
     return;
   }
   // Con pase vigente se entra de inmediato; de vez en cuando se confirma con
@@ -158,7 +165,7 @@
     pide({ accion: 'consultar', pase: p.pase }).then(function (j) {
       if (!j || !j.ok) return;
       p.hasta = j.hasta; p.visto = Date.now(); guardar(p);
-      if (!vigente(p)) location.replace(C.canje + '?volver=' + encodeURIComponent(pagina));
+      if (!vigente(p)) fuera(pagina);
     }).catch(function () {});
   }
 })();

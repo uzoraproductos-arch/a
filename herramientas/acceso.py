@@ -466,6 +466,8 @@ def pagina_panel():
               '  </form>\n'
               '  <div class="ac-admin" id="acAdmin" hidden>\n'
               '    <p class="ac-sesion"><span id="acQuien"></span> <button class="sz-btn ac-chico" type="button" id="acSalir">Salir</button></p>\n'
+              '    <p class="ac-pase-fila"><span class="ac-estado ac-pase" id="acPaseEstado" role="status" aria-live="polite"></span> '
+              '<button class="sz-btn ac-chico" type="button" id="acPaseReintentar" hidden>Reintentar</button></p>\n'
               + _pestanas() +
               '    <section class="ac-hoja" id="ac-hoja-tablero" role="tabpanel" aria-labelledby="ac-tab-tablero" data-sin-medir>\n'
               + _tablero() +
