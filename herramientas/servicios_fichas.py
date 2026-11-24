@@ -415,7 +415,9 @@ def chat_liga(q, modo):
 # El índice general cuelga del Auditor (decisión del autor, 19-11-2026).
 # Con él, las dos páginas que cuelgan del índice: el Registro de pendientes y la base al día.
 EXCEPCIONES = {'periodismo-en-riesgo.html': 'Noticiero', 'indice.html': 'Auditor', 'pendientes.html': 'Auditor', 'base-al-dia.html': 'Auditor',
-               'mis-respuestas.html': 'Auditor'}
+               'mis-respuestas.html': 'Auditor',
+               # Ronda 20: el panel es de la administración, como las portadas privadas que liga.
+               'administracion-codigos.html': 'Administración'}
 _GENERICO = re.compile(r'^(ábrelo|abrir|abre|ver|ver más|ver la página|ver la ficha|aquí|esta página|la página|➔|saber más)\W*$', re.I)
 _A = re.compile(r'<a\b([^>]*?)\bhref="([^"]+)"([^>]*)>(.*?)</a>', re.S)
 

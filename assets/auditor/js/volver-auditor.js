@@ -32,7 +32,7 @@
      arma el navegador (la ficha del Planisferio, por ejemplo): al tocar una liga a
      otra pestaña, se cambia por la del chat con la pregunta y ?abre=. La regla de
      cada pestaña es la de pestana_de() en servicios_fichas.py. */
-  var EXC = { 'periodismo-en-riesgo.html': 'Noticiero', 'indice.html': 'Auditor', 'pendientes.html': 'Auditor', 'base-al-dia.html': 'Auditor', 'mis-respuestas.html': 'Auditor' };
+  var EXC = { 'periodismo-en-riesgo.html': 'Noticiero', 'indice.html': 'Auditor', 'pendientes.html': 'Auditor', 'base-al-dia.html': 'Auditor', 'mis-respuestas.html': 'Auditor', 'administracion-codigos.html': 'Administración' };
   /* traslado */
   /* La Enciclopedia se volvió Planisferio (Ronda 7, 22-11-2026): la regla gemela de
      herramientas/traslado.py (la prueba con `traslado.py --prueba`). */

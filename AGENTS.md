@@ -171,6 +171,8 @@ portada para las viejas), `acceso.js` solo las abre en el navegador de la admini
 
 **Ronda 19 (24-11-2026): el código maestro, sin límites** (decisión del autor). **El código maestro se revisa antes que `dentroDelLimite` y no cuenta en él**, y al entrar deja `av-admin-hasta` por 365 días (`marcaAdmin(true, 365)`): abre todas las pestañas sin el segundo factor. **El candado sigue para todos los demás, y el panel y los datos siguen pidiendo aal2**: «sin límites» es para entrar, no para saltarse `es_admin()`.
 
+**Ronda 20 (24-11-2026): las pestañas del panel salen de sus botones.** `acceso-paginas.js` lee las hojas de `[data-hoja]`: **una hoja nueva va solo en `HOJAS` de `acceso.py`**. El panel es pestaña «Administración» (`EXCEPCIONES` y `EXC`), así que sus ligas a las portadas privadas no pasan por el chat.
+
 **Decisión del autor, 02-11-2026.** El menú (`MENU` de `apartados.py` y su
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Servicios** (segunda desde el 21-11-2026, pedido del autor), **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras
