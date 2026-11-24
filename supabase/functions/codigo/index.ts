@@ -25,13 +25,12 @@ sirve(async (req) => {
 
   if (accion === "canjear") {
     const codigo = j && typeof j.codigo === "string" ? j.codigo.slice(0, 40) : "";
-    // Diez intentos cada diez minutos por IP, buenos o malos.
-    if (!(await dentroDelLimite(db, huella, "codigo-canje", 10, 600))) return responde(req, { ok: false, motivo: "espera" }, 429);
-    // Y cuarenta al día: el código maestro son 8 números y no debe poder
-    // adivinarse probando fechas (migración 20261030000009).
-    if (!(await dentroDelLimite(db, huella, "codigo-canje-dia", 40, 86400))) return responde(req, { ok: false, motivo: "espera" }, 429);
-    // El código maestro de la administración: si coincide, se abre su sesión
-    // sin correo. Se le devuelve un enlace de un solo uso (token_hash) que el
+    // El código maestro de la administración (Ronda 19, 24-11-2026, decisión del
+    // autor: «mi código maestro tiene todos los poderes y libertades sin límites»):
+    // se revisa antes que los límites de intentos y no cuenta en ellos, así que
+    // entra siempre aunque esa conexión ya haya gastado sus intentos. Adivinarlo
+    // sigue siendo caro: son 8 letras o números (36^8) y cada prueba es un bcrypt.
+    // Si coincide se le devuelve un enlace de un solo uso (token_hash) que el
     // navegador cambia por la sesión en /auth/v1/verify; el correo no viaja.
     const maestro = await db.rpc("revisar_codigo_admin", { p_codigo: codigo });
     if (maestro.error) throw maestro.error;
@@ -42,6 +41,10 @@ sirve(async (req) => {
       if (l.error) throw l.error;
       return responde(req, { ok: true, admin: true, token_hash: l.data.properties.hashed_token });
     }
+    // Los demás códigos: diez intentos cada diez minutos por IP, buenos o malos,
+    // y cuarenta al día.
+    if (!(await dentroDelLimite(db, huella, "codigo-canje", 10, 600))) return responde(req, { ok: false, motivo: "espera" }, 429);
+    if (!(await dentroDelLimite(db, huella, "codigo-canje-dia", 40, 86400))) return responde(req, { ok: false, motivo: "espera" }, 429);
     const { data, error } = await db.rpc("canjear_codigo", { p_codigo: codigo, p_pase: pase });
     if (error) throw error;
     return responde(req, data);

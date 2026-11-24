@@ -60,8 +60,14 @@
   function marcaAdmin() {
     try { return +localStorage.getItem(MARCA) > Date.now(); } catch (e) { return false; }
   }
-  window.AvAcceso.marcaAdmin = function (si) {
-    try { if (si) localStorage.setItem(MARCA, String(Date.now() + 12 * 3600 * 1000)); else localStorage.removeItem(MARCA); } catch (e) {}
+  // Ronda 19: el código maestro la deja por un año (decisión del autor: «todos los poderes
+  // y libertades sin límites»); una marca nunca acorta otra más larga. «Salir» la borra.
+  window.AvAcceso.marcaAdmin = function (si, dias) {
+    try {
+      if (!si) { localStorage.removeItem(MARCA); return; }
+      var hasta = Date.now() + (dias ? dias * 864e5 : 12 * 3600 * 1000);
+      if (hasta > (+localStorage.getItem(MARCA) || 0)) localStorage.setItem(MARCA, String(hasta));
+    } catch (e) {}
   };
   var yo = leer();
   var admin = (yo && yo.admin && vigente(yo)) || sesionAdmin() || marcaAdmin();

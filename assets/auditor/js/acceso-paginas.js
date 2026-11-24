@@ -124,6 +124,9 @@
             sessionStorage.setItem('av-admin', JSON.stringify({ token: j.access_token, refresh: j.refresh_token,
               vence: Date.now() + (+j.expires_in || 3600) * 1000 }));
           } catch (e) {}
+          // El código maestro abre las pestañas de este navegador por un año, sin
+          // esperar al segundo factor (Ronda 19). El panel sigue pidiendo los dos pasos.
+          if (A.marcaAdmin) A.marcaAdmin(true, 365);
           // Si la entrada te trajo desde otra página, el panel te regresa ahí al activar tu pase (Ronda 13).
           var ida = new URLSearchParams(location.search).get('volver') ? '&volver=' + encodeURIComponent(volver) : '';
           location.href = C.panel + '?maestro=1' + ida;
@@ -272,7 +275,13 @@
       // Sin «?volver=»: la dirección de regreso debe ser idéntica a la que Supabase permite (Ronda 18).
       auth('/auth/v1/otp?redirect_to=' + encodeURIComponent(location.origin + location.pathname), { email: correo, create_user: false })
         .then(function () { est.textContent = 'Listo: revisa tu correo y abre el enlace desde este mismo navegador.'; })
-        .catch(function () { est.textContent = 'No se pudo mandar. Revisa que el correo sea el de la administración.'; });
+        .catch(function (e) {
+          // Ronda 19: el motivo a la vista. El correo de Supabase manda pocos enlaces por hora.
+          var m = String((e && (e.error_code || e.code || e.msg || e.message)) || '');
+          est.textContent = /rate|limit|seconds/i.test(m)
+            ? 'Ya se mandaron varios enlaces y Supabase pide esperar antes de mandar otro. Mientras, entra con tu código maestro en la entrada.'
+            : 'No se pudo mandar. Revisa que el correo sea el de la administración.';
+        });
     });
     $('acSalir').addEventListener('click', function () { pon(null); if (A.marcaAdmin) A.marcaAdmin(false); location.reload(); });
 
