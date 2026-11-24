@@ -118,7 +118,7 @@ EST_OTIS_EJ = ('https://www.gob.mx/amlo/articulos/version-estenografica-conferen
                'andres-manuel-lopez-obrador-del-13-de-septiembre-de-2024')
 DOF_OTIS_EMERG = 'https://dof.gob.mx/nota_detalle.php?codigo=5707225&fecha=30/10/2023'
 DOF_OTIS_ACLARA = 'https://dof.gob.mx/nota_detalle.php?codigo=5707645&fecha=03/11/2023'
-DOF = 'https://www.dof.gob.mx/'
+DOF = 'https://dof.gob.mx/'
 JAL = 'https://www.jalisco.gob.mx/prensa/noticias/'
 JAL_ROTACION = JAL + 'acuerdan-gobierno-de-jalisco-y-alcaldes-metropoli-48478'
 JAL_PLAN = JAL + 'anuncia-gobierno-de-jalisco-plan-integral-para-me-47113'

@@ -7276,7 +7276,7 @@
         categoria_nombre: 'Fundamento Oficial',
         cita_apa: 'Documento Presupuestal Oficial del Estado Mexicano (PEF / LIF / ASF / DOF).',
         descripcion: 'Registro documental del catálogo de fuentes oficiales de Auditavisión.',
-        url: 'https://www.dof.gob.mx/'
+        url: 'https://dof.gob.mx/'
       };
     }
 

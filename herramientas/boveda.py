@@ -57,6 +57,27 @@ SALIDA = os.path.join(RAIZ, 'docs', 'boveda', 'evidencias.json')
 AGENTE = 'Mozilla/5.0 (compatible; Auditavision-boveda/1.0; +https://auditavision.com.mx/)'
 LIMITE = 80 * 1024 * 1024  # un PDF de la Cuenta Pública rara vez pasa de esto
 RES_CON_PRUEBA = ('consta', 'matiz')
+# Ronda 15 (24-11-2026): el certificado del DOF vale para dof.gob.mx y no para www.dof.gob.mx
+# («Hostname mismatch»). Toda dirección se guarda con su anfitrión canónico, y la ficha vieja con
+# «www.» queda como «sustituida» (con la dirección que la reemplaza), nunca borrada.
+CANONICO = {'www.dof.gob.mx': 'dof.gob.mx'}
+
+
+def canonica(url):
+    p = urllib.parse.urlsplit(url)
+    h = CANONICO.get(p.netloc.lower())
+    return urllib.parse.urlunsplit(p._replace(netloc=h)) if h else url
+
+
+def sustituidas(b):
+    """Marca «sustituida» la ficha de un anfitrión no canónico cuya gemela canónica ya tiene copia.
+    Su error queda en el historial; la bóveda es memoria, no un espejo."""
+    ev = b['evidencias']
+    for url, e in ev.items():
+        c = canonica(url)
+        if c != url and e.get('estado') == 'no abrió' and (ev.get(c) or {}).get('estado') == 'copiado':
+            e['historial'].append({'estado': 'no abrió', 'error': e.pop('error', ''), 'hasta': e.get('consultado')})
+            e.update({'estado': 'sustituida', 'por': c})
 
 
 def hoy():
@@ -75,7 +96,7 @@ def direcciones():
 
     def anota(url, uso):
         if url and re.match(r'^https?://', url):
-            usos.setdefault(url.strip(), set()).add(uso)
+            usos.setdefault(canonica(url.strip()), set()).add(uso)
 
     s = open(DB, encoding='utf-8').read()
     db = json.loads(s[s.index('{'):s.rindex('}') + 1])
@@ -117,6 +138,7 @@ def cargar():
 
 
 def guardar(b):
+    sustituidas(b)
     os.makedirs(os.path.dirname(SALIDA), exist_ok=True)
     b['evidencias'] = dict(sorted(b['evidencias'].items()))
     with open(SALIDA, 'w', encoding='utf-8', newline='\n') as f:
@@ -211,7 +233,7 @@ def faltantes(b):
     ev = b['evidencias']
     out = []
     for col, n, url in cotejos_con_prueba():
-        e = ev.get(url)
+        e = ev.get(canonica(url)) if url else None
         if not url or not e or e.get('estado') == 'no abrió':
             out.append((col, n, url, (e or {}).get('error', 'sin ficha en la bóveda')))
     return out
@@ -298,7 +320,7 @@ def main(argv=None):
         guardar(b)
         print('bóveda: anotada sin copia %s' % a.sin_copia)
         return 0
-    lista = [a.url] if a.url else sorted(dirs)
+    lista = [canonica(a.url)] if a.url else sorted(dirs)
     hechas = 0
     for url in lista:
         e = b['evidencias'].get(url)

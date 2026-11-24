@@ -155,6 +155,10 @@ portada para las viejas), `acceso.js` solo las abre en el navegador de la admini
 - **Los límites de los rangos bajo, medio y alto viven solo en `docs/deuda/sistema-alertas-umbrales.json`**, copiados de los Acuerdos de la SHCP en el DOF; `sistema_alertas.py` revisa la huella de sus tres PDF (`investigaciones/leyes/`) y la continuidad de los límites, y los leen el Planisferio, `insp-visual.js` (`D.sda`) y el chat (`D.sdaR`). **Ningún módulo escribe un límite a mano.**
 - **El color lo da Hacienda; el rango de cada indicador es nuestro** (cifra oficial junto al límite: «auditada»). La regla del art. 14 va al pie de la letra y **su hueco no se rellena** (medio en el primero y solo uno de los otros en alto). `sistema_alertas.py --prueba` (corre en `revision.py`) debe reproducir el color de cada estado y municipio medido: si un corte nuevo no cuadra, se revisa si cambió el Acuerdo antes de tocar nada.
 
+**Ronda 15 (24-11-2026): el DOF sin «www.» y el PEF 2027 en espera.**
+- **El DOF se liga como `https://dof.gob.mx/`**: su certificado no vale para `www.dof.gob.mx`. `boveda.py` guarda cada dirección con su anfitrión canónico (`CANONICO`); **un anfitrión nuevo con el mismo problema va ahí**, y la ficha vieja queda «sustituida», nunca borrada.
+- **El PEF 2027 entra solo con su decreto**: `pef27()` de `presupuesto_modulos.py` devuelve `None` mientras no exista `docs/paquete-2027/pef-2027-dof.json`; con él, exige la huella en `PEF27_SHA`, la fecha del DOF y los cuadres contra los totales que imprime el decreto. **Ningún total se calcula para llenar el JSON.**
+
 **Decisión del autor, 02-11-2026.** El menú (`MENU` de `apartados.py` y su
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Servicios** (segunda desde el 21-11-2026, pedido del autor), **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras

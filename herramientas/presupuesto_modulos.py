@@ -326,8 +326,50 @@ _RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LIF27_JSON = os.path.join(_RAIZ, 'docs', 'paquete-2027', 'lif-2027-dof.json')
 LIF27_PDF = os.path.join(_RAIZ, 'investigaciones', 'leyes', 'LIF_2027.pdf')
 LIF27_SHA = '1c247831459988960cbb9ef86868c9174e1bce7532957e8156b359e214ac10db'
-PEF27_REVISADO = '23 de noviembre de 2026'
+PEF27_REVISADO = '24 de noviembre de 2026'
 _LIF27 = []
+
+# Ronda 15 (24-11-2026): el lector del Presupuesto de Egresos 2027, listo para cuando se publique. Al revisarlo el
+# 24-11-2026, PEF_2027.pdf de la Cámara de Diputados y PEF_2027.html del DOF daban 404 (el PEF 2026, de control,
+# abría): no hay JSON y pef27() devuelve None, así que nada cambia. Cuando el decreto salga en el DOF:
+#   1. se baja el PDF a investigaciones/leyes/PEF_2027.pdf y se escribe su huella en PEF27_SHA (aquí, a mano);
+#   2. se copia a docs/paquete-2027/pef-2027-dof.json lo que dice el decreto, con esta forma:
+#      {"fecha_publicacion_dof": "AAAA-MM-DD", "vigencia_inicio": "2027-01-01",
+#       "fuentes": {"diputados_pdf": {"url", "sha256", ...}, "dof_nota": {"url"}},
+#       "gasto_neto_total_mdp", "programable_mdp", "no_programable_mdp",
+#       "ramos": [{"clave", "nombre", "mdp"}], "ramos_total_mdp",
+#       "funcional": [{"finalidad", "mdp"}], "funcional_total_mdp"}
+#      Los totales «_total_mdp» se copian tal como el decreto los imprime, nunca se calculan.
+#   3. pef27() revisa la huella del JSON y del PDF, que programable + no programable dé el gasto neto total y que
+#      los ramos y la clasificación funcional sumen el total que el decreto imprime para cada uno (diferencia 0.0).
+# Ninguna cifra del PEF 2027 se escribe en este archivo, y hasta el 31-12-2026 «hoy» sigue siendo el PEF 2026.
+PEF27_JSON = os.path.join(_RAIZ, 'docs', 'paquete-2027', 'pef-2027-dof.json')
+PEF27_PDF = os.path.join(_RAIZ, 'investigaciones', 'leyes', 'PEF_2027.pdf')
+PEF27_SHA = None
+_PEF27 = []
+
+
+def pef27():
+    """El PEF 2027 publicado, revisado; None mientras no exista su JSON."""
+    if _PEF27:
+        return _PEF27[0]
+    if not os.path.exists(PEF27_JSON):
+        return None
+    P = json.load(open(PEF27_JSON, encoding='utf-8'))
+    if not PEF27_SHA or P['fuentes']['diputados_pdf']['sha256'] != PEF27_SHA:
+        raise SystemExit('presupuesto_modulos: %s no trae la huella anotada en PEF27_SHA: cotéjalo contra el PDF' % PEF27_JSON)
+    if os.path.exists(PEF27_PDF) and hashlib.sha256(open(PEF27_PDF, 'rb').read()).hexdigest() != PEF27_SHA:
+        raise SystemExit('presupuesto_modulos: %s no es el PDF que cotejamos' % PEF27_PDF)
+    if P.get('vigencia_inicio') != '2027-01-01' or not re.fullmatch(r'2026-1[12]-\d\d', P.get('fecha_publicacion_dof') or ''):
+        raise SystemExit('presupuesto_modulos: el PEF 2027 necesita su fecha de publicación en el DOF y su vigencia')
+    cuadres = [('programable + no programable', P['programable_mdp'] + P['no_programable_mdp'], P['gasto_neto_total_mdp']),
+               ('ramos', sum(r['mdp'] for r in P['ramos']), P['ramos_total_mdp']),
+               ('clasificación funcional', sum(r['mdp'] for r in P['funcional']), P['funcional_total_mdp'])]
+    for nombre, suma, total in cuadres:
+        if round(suma - total, 1) != 0.0:
+            raise SystemExit('presupuesto_modulos: el PEF 2027 no cuadra en %s (%.1f contra %.1f)' % (nombre, suma, total))
+    _PEF27.append(P)
+    return P
 
 
 def lif27():
@@ -356,9 +398,18 @@ def lif27_estado():
     """Una línea para el itinerario y las fuentes: qué ya es ley y qué no."""
     lif27()
     return ('<b>Dónde va:</b> la <b>Ley de Ingresos 2027 ya es ley</b>: se publicó en el Diario Oficial el 13 de noviembre de 2026 y rige del '
-            '1 de enero al 31 de diciembre de 2027; hasta entonces sigue rigiendo la de 2026 %s. El <b>Presupuesto de Egresos 2027</b> no estaba '
-            'publicado en el Diario Oficial al revisarlo el %s: lo que se lee aquí del gasto sigue siendo el proyecto. Las leyes de ingresos, la '
-            'federal y las municipales, valen un año: cada una se cambia por la del año siguiente.' % (chip('oficial'), PEF27_REVISADO))
+            '1 de enero al 31 de diciembre de 2027; hasta entonces sigue rigiendo la de 2026 %s. %s Las leyes de ingresos, la '
+            'federal y las municipales, valen un año: cada una se cambia por la del año siguiente.' % (chip('oficial'), pef27_estado()))
+
+
+def pef27_estado():
+    P = pef27()
+    if not P:
+        return ('El <b>Presupuesto de Egresos 2027</b> no estaba publicado en el Diario Oficial al revisarlo el %s: lo que se lee aquí '
+                'del gasto sigue siendo el proyecto.' % PEF27_REVISADO)
+    a, m, d = P['fecha_publicacion_dof'].split('-')
+    return ('El <b>Presupuesto de Egresos 2027</b> se publicó en el Diario Oficial el %s-%s-%s y rige del 1 de enero de 2027: hasta entonces '
+            'el gasto de «hoy» sigue siendo el del PEF 2026 %s.' % (d, m, a, chip('oficial')))
 
 
 LIF27_PLANTILLA = """<h3 class="pm-sub" id="peLif">La Ley de Ingresos 2027, ya publicada</h3>
