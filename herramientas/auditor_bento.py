@@ -83,18 +83,62 @@ def _lado():
     </aside>''' % nav
 
 
-def _protagonista(chat):
-    seg = '\n'.join('          <button type="button" data-avb-modo="%s" aria-pressed="%s"><span aria-hidden="true">%s</span> %s</button>' % (
+# Las preguntas de ejemplo de la tarjeta del hero: cada una ya la contesta el chat (preguntas_auditor.json).
+CHIPS = [('¿Mi proveedor está en la lista negra del SAT?', '🧾'), ('¿Cuánto debe Jalisco?', '🗺️'),
+         ('¿Cuánto costó el Tren Maya?', '🚆'), ('Diagnóstico de Pemex', '🏛️')]
+
+
+def _hero():
+    """El hero editorial (ajuste del autor a la Ronda 21): la misma imagen de la entrada, con su huella
+    (acceso.FOTO_ENTRADA), «¿Quiénes somos?» y las ocho preguntas, que aquí se tocan y se preguntan;
+    a la derecha, la tarjeta con los cuatro modos y la caja de pregunta. La entrada no cambia."""
+    import hashlib
+    import acceso
+    foto, alt, huella = acceso.FOTO_ENTRADA
+    ruta = os.path.join(RAIZ, 'assets', 'auditor', 'img', 'portada', foto)
+    if hashlib.sha256(open(ruta, 'rb').read()).hexdigest() != huella:
+        raise SystemExit('auditor_bento.py: la imagen editorial no es la aprobada (%s)' % foto)
+    seg = '\n'.join('            <button type="button" data-avb-modo="%s" aria-pressed="%s"><span aria-hidden="true">%s</span> %s</button>' % (
         m, 'true' if m == 'inspector' else 'false', ico, n) for m, ico, n in SEGMENTOS)
-    return '''<section class="avb-card avb-prota" aria-labelledby="avbTit">
-        <div class="avb-seg" role="group" aria-label="Modo del Auditor">
+    preg = '\n'.join('            <li%s><button type="button" data-avb-q="%s">%s</button></li>' % (
+        '' if i == 0 else ' hidden', _e(q), html.escape(q)) for i, q in enumerate(acceso.PREGUNTAS_ENTRADA))
+    chips = '\n'.join('            <button type="button" class="avb-chip" data-avb-q="%s"><span aria-hidden="true">%s</span> %s</button>' % (
+        _e(q), i, html.escape(q)) for q, i in CHIPS)
+    return '''<section class="avb-hero" aria-labelledby="avbTit">
+        <figure class="avb-hero-foto"><img src="assets/auditor/img/portada/%s" alt="%s" width="1376" height="768" fetchpriority="high">
+          <figcaption>Ilustración editorial generada con IA</figcaption></figure>
+        <div class="avb-hero-in">
+          <div class="avb-ident">
+            <h2 class="avb-tit" id="avbTit">Las cuentas del gobierno, <span>con sus documentos</span></h2>
+            <div class="avb-quienes"><h3>¿Quiénes somos?</h3><p>%s</p></div>
+            <div class="avb-preguntas"><h3 class="sr-only">Preguntas que aquí se contestan con documentos: tócala y te la contesto</h3>
+            <ul id="avbPreg">
 %s
+            </ul></div>
+          </div>
+          <div class="avb-card avb-prota">
+            <div class="avb-seg" role="group" aria-label="Modo del Auditor">
+%s
+            </div>
+            <p class="avb-insignia">✓ Cero CIEC · Sin contraseñas del SAT</p>
+            <form class="avb-form" id="avbForm" autocomplete="off">
+              <label for="avbQ">Pregunta por un RFC, un municipio, una megaobra o una nota</label>
+              <textarea id="avbQ" rows="3" maxlength="600" placeholder="Por ejemplo: ¿quién ganó los contratos de la obra de mi ciudad?" required></textarea>
+              <button type="submit" id="avbEnvia">Dictaminar ➔</button>
+            </form>
+            <div class="avb-chips" role="group" aria-label="Preguntas de ejemplo">
+%s
+            </div>
+          </div>
         </div>
-        <p class="avb-insignia">✓ Cero CIEC · Sin contraseñas del SAT</p>
-        <h2 class="avb-tit" id="avbTit">Investiga el dinero público con sus documentos</h2>
-        <p class="avb-sub">Pregunta por un RFC, un municipio, una megaobra o una nota. Cada cifra sale con su fuente oficial y su estado.</p>
+      </section>''' % (foto, _e(alt), html.escape(acceso.QUIENES_ENTRADA), preg, seg, chips)
+
+
+def _chat(chat):
+    return '''<section class="avb-card avb-chatcard" id="avbChat" aria-labelledby="avbChatT">
+        <h2 id="avbChatT">Tu plática con el Auditor</h2>
 %s
-      </section>''' % (seg, chat)
+      </section>''' % chat
 
 
 def _escaner():
@@ -146,6 +190,7 @@ def bloque(chat):
     <div class="avb-lienzo">
       %s
       %s
+      %s
       <div class="avb-fila">
 %s
       </div>
@@ -155,4 +200,4 @@ def bloque(chat):
       </section>
       %s
     </div>
-  </div>''' % (_lado(), _protagonista(chat), _escaner(), _puertas(), _conteos())
+  </div>''' % (_lado(), _hero(), _chat(chat), _escaner(), _puertas(), _conteos())

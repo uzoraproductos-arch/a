@@ -51,7 +51,7 @@
 .avb-lienzo { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 20px; min-width: 0; }
 .avb-card { background: #ffffff; border-radius: 20px; box-shadow: var(--avb-sombra); padding: 22px; min-width: 0; box-sizing: border-box; }
 .avb-card h2 { margin: 0 0 10px; font-size: 20px; color: #0b2a63; }
-.avb-prota { grid-column: span 8; }
+.avb-chatcard { grid-column: span 8; }
 .avb-esc { grid-column: span 4; align-self: start; position: sticky; top: 16px; }
 .avb-fila { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .avb-lector, .avb-conteos { grid-column: 1 / -1; }
@@ -66,10 +66,37 @@
   display: inline-block; margin: 14px 0 0; padding: 6px 12px; border-radius: 999px; background: #e3f5ea; color: #145c32;
   font-size: 14px; font-weight: 700;
 }
-.avb-tit { margin: 10px 0 6px; font-family: 'Playfair Display', Georgia, serif; font-size: 34px; line-height: 1.15; color: #091c42; }
-.avb-card .avb-tit { font-size: 34px; }
-.avb-sub { margin: 0 0 16px; font-size: 17px; line-height: 1.55; color: #3b4a66; }
-.avb-prota .pa-chat { box-shadow: none; }
+/* El hero editorial: la imagen de la entrada (acceso.FOTO_ENTRADA) con su velo azul marino desde la izquierda. */
+.avb-hero { grid-column: 1 / -1; position: relative; isolation: isolate; overflow: hidden; border-radius: 20px; background: #0b2a63; box-shadow: var(--avb-sombra); }
+.avb-hero-foto { position: absolute; inset: 0; margin: 0; z-index: -1; }
+.avb-hero-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; display: block; }
+.avb-hero-foto::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(100deg, rgba(7, 25, 62, .88) 0%, rgba(11, 42, 99, .62) 48%, rgba(11, 42, 99, .18) 100%); }
+.avb-hero-foto figcaption { position: absolute; right: 14px; bottom: 12px; z-index: 1; font-size: 13px; color: #ffffff; background: rgba(7, 29, 71, .62); border-radius: 999px; padding: 3px 10px; }
+.avb-hero-in { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(340px, 460px); gap: 36px; align-items: center; padding: 40px 36px 48px; }
+.avb-ident { color: #ffffff; }
+.avb-tit { margin: 0 0 18px; font-family: 'Playfair Display', Georgia, serif; font-weight: 900; font-size: 46px; line-height: 1.08; color: #ffffff; }
+.avb-tit span { color: #f1cf6b; }
+.avb-quienes h3 { margin: 0 0 6px; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: #f1cf6b; }
+.avb-quienes p { margin: 0 0 18px; max-width: 56ch; font-size: 17px; line-height: 1.6; color: #e8eefc; }
+.avb-preguntas { border-left: 3px solid #c8a032; padding: 4px 0 4px 16px; max-width: 56ch; }
+.avb-preguntas ul { list-style: none; margin: 0; padding: 0; min-height: 3.2em; }
+.avb-preguntas li { animation: avbAparece .5s ease both; }
+.avb-preguntas button { padding: 6px 0; min-height: 44px; border: 0; background: none; color: #ffffff; text-align: left; cursor: pointer;
+  font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 21px; line-height: 1.3; }
+.avb-preguntas button:hover, .avb-preguntas button:focus-visible { text-decoration: underline; text-decoration-color: #c8a032; }
+@keyframes avbAparece { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.avb-prota { box-shadow: 0 18px 40px rgba(4, 14, 36, .35); }
+.avb-form { display: grid; gap: 8px; margin-top: 14px; }
+.avb-form label { font-size: 16px; font-weight: 700; color: #0b2a63; }
+.avb-form textarea { width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1px solid #c9d3e4; border-radius: 12px; font: inherit; font-size: 16px; line-height: 1.5; resize: vertical; }
+.avb-form button { min-height: 48px; border: 0; border-radius: 12px; background: #0b2a63; color: #ffffff; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; }
+.avb-form button:hover, .avb-form button:focus-visible { background: #1d5fd6; }
+.avb-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.avb-chip { min-height: 44px; padding: 8px 12px; border: 1px solid #d3dcec; border-radius: 999px; background: #f6f8fc; color: #1c2a44; font: inherit; font-size: 15px; text-align: left; cursor: pointer; }
+.avb-chip:hover, .avb-chip:focus-visible { border-color: #1d5fd6; }
+.avb-chatcard .pa-chat { box-shadow: none; }
+@media (prefers-reduced-motion: reduce) { .avb-preguntas li { animation: none; } }
 
 .avb-navy { background: linear-gradient(160deg, var(--avb-marino), var(--avb-marino-2)); color: #e8eefc; }
 .avb-navy h2 { color: #ffffff; }
@@ -100,7 +127,9 @@
 .avb-con-nota { margin: 12px 0 0; font-size: 15px; color: #3b4a66; }
 
 @media (max-width: 1200px) {
-  .avb-prota, .avb-esc { grid-column: 1 / -1; }
+  .avb-hero-in { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 28px 22px 36px; }
+  .avb-hero-foto::after { background: linear-gradient(180deg, rgba(7, 25, 62, .88) 0%, rgba(11, 42, 99, .76) 55%, rgba(11, 42, 99, .6) 100%); }
+  .avb-chatcard, .avb-esc { grid-column: 1 / -1; }
   .avb-esc { position: static; }
   .avb-conteos ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
@@ -114,8 +143,11 @@
 @media (max-width: 600px) {
   .avb-card { padding: 16px; border-radius: 16px; }
   .avb-foto { width: calc(100% + 32px); margin: -16px -16px 6px; }
-  .avb-card .avb-tit, .avb-tit { font-size: 26px; }
+  .avb-tit { font-size: 32px; }
+  .avb-hero-in { padding: 22px 16px 32px; }
+  .avb-preguntas button { font-size: 19px; }
   .avb-conteos ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .avb-seg button { flex-basis: 40%; }
 }
 @media (prefers-reduced-motion: reduce) { .avb-puerta { transition: none; } }
+.avb-prota .avb-seg { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }

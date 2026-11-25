@@ -21,15 +21,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261125b">
-  <script src="assets/auditor/js/iconos.js?v=20261125b"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261125b"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261125b" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261125b">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261125b">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261125b">
-  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261125b">
-  <link rel="stylesheet" href="assets/auditor/css/auditor-bento.css?v=20261125b">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261125d">
+  <script src="assets/auditor/js/iconos.js?v=20261125d"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261125d"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261125d" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261125d">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261125d">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261125d">
+  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261125d">
+  <link rel="stylesheet" href="assets/auditor/css/auditor-bento.css?v=20261125d">
 </head>
 <body data-pagina="apartado" class="avb-pagina">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -214,16 +214,49 @@
       </details>
     </aside>
     <div class="avb-lienzo">
-      <section class="avb-card avb-prota" aria-labelledby="avbTit">
-        <div class="avb-seg" role="group" aria-label="Modo del Auditor">
-          <button type="button" data-avb-modo="inspector" aria-pressed="true"><span aria-hidden="true">🔍</span> Inspector</button>
-          <button type="button" data-avb-modo="ciudadano" aria-pressed="false"><span aria-hidden="true">🙋</span> Ciudadano</button>
-          <button type="button" data-avb-modo="periodista" aria-pressed="false"><span aria-hidden="true">📰</span> Periodista</button>
-          <button type="button" data-avb-modo="ambientalista" aria-pressed="false"><span aria-hidden="true">🌎</span> Ambientalista</button>
+      <section class="avb-hero" aria-labelledby="avbTit">
+        <figure class="avb-hero-foto"><img src="assets/auditor/img/portada/portada-acceso-editorial.webp" alt="Arquitectura cívica mexicana al amanecer: un muro azul marino a la izquierda y, a la derecha, un paseo arbolado con jacarandas en flor, cantera clara y luz cálida de mañana." width="1376" height="768" fetchpriority="high">
+          <figcaption>Ilustración editorial generada con IA</figcaption></figure>
+        <div class="avb-hero-in">
+          <div class="avb-ident">
+            <h2 class="avb-tit" id="avbTit">Las cuentas del gobierno, <span>con sus documentos</span></h2>
+            <div class="avb-quienes"><h3>¿Quiénes somos?</h3><p>Somos una plataforma cívica e independiente que sigue el dinero público de México: de dónde sale, quién lo gasta y quién revisa que se use bien. Cada cifra trae su documento oficial (DOF, Hacienda, ASF, INEGI) y lo que no se puede comprobar se dice como pendiente.</p></div>
+            <div class="avb-preguntas"><h3 class="sr-only">Preguntas que aquí se contestan con documentos: tócala y te la contesto</h3>
+            <ul id="avbPreg">
+            <li><button type="button" data-avb-q="¿Tu proveedor está en la lista 69-B del SAT o en el directorio de sancionados?">¿Tu proveedor está en la lista 69-B del SAT o en el directorio de sancionados?</button></li>
+            <li hidden><button type="button" data-avb-q="¿Cuántas denuncias por fraude hubo en tu municipio el año pasado?">¿Cuántas denuncias por fraude hubo en tu municipio el año pasado?</button></li>
+            <li hidden><button type="button" data-avb-q="¿Revisas a tus clientes y proveedores antes de pagar, como pide la prevención de lavado?">¿Revisas a tus clientes y proveedores antes de pagar, como pide la prevención de lavado?</button></li>
+            <li hidden><button type="button" data-avb-q="¿Tu contraparte aparece en las listas de sanciones de la OFAC o de la ONU?">¿Tu contraparte aparece en las listas de sanciones de la OFAC o de la ONU?</button></li>
+            <li hidden><button type="button" data-avb-q="¿Cuánto dinero dejó por aclarar la Auditoría Superior en la Cuenta Pública?">¿Cuánto dinero dejó por aclarar la Auditoría Superior en la Cuenta Pública?</button></li>
+            <li hidden><button type="button" data-avb-q="¿Quién ganó los contratos de la obra de tu ciudad?">¿Quién ganó los contratos de la obra de tu ciudad?</button></li>
+            <li hidden><button type="button" data-avb-q="¿Cuánto debe tu estado y a qué bancos le debe?">¿Cuánto debe tu estado y a qué bancos le debe?</button></li>
+            <li hidden><button type="button" data-avb-q="¿Qué créditos firmó tu municipio y con quién?">¿Qué créditos firmó tu municipio y con quién?</button></li>
+            </ul></div>
+          </div>
+          <div class="avb-card avb-prota">
+            <div class="avb-seg" role="group" aria-label="Modo del Auditor">
+            <button type="button" data-avb-modo="inspector" aria-pressed="true"><span aria-hidden="true">🔍</span> Inspector</button>
+            <button type="button" data-avb-modo="ciudadano" aria-pressed="false"><span aria-hidden="true">🙋</span> Ciudadano</button>
+            <button type="button" data-avb-modo="periodista" aria-pressed="false"><span aria-hidden="true">📰</span> Periodista</button>
+            <button type="button" data-avb-modo="ambientalista" aria-pressed="false"><span aria-hidden="true">🌎</span> Ambientalista</button>
+            </div>
+            <p class="avb-insignia">✓ Cero CIEC · Sin contraseñas del SAT</p>
+            <form class="avb-form" id="avbForm" autocomplete="off">
+              <label for="avbQ">Pregunta por un RFC, un municipio, una megaobra o una nota</label>
+              <textarea id="avbQ" rows="3" maxlength="600" placeholder="Por ejemplo: ¿quién ganó los contratos de la obra de mi ciudad?" required></textarea>
+              <button type="submit" id="avbEnvia">Dictaminar ➔</button>
+            </form>
+            <div class="avb-chips" role="group" aria-label="Preguntas de ejemplo">
+            <button type="button" class="avb-chip" data-avb-q="¿Mi proveedor está en la lista negra del SAT?"><span aria-hidden="true">🧾</span> ¿Mi proveedor está en la lista negra del SAT?</button>
+            <button type="button" class="avb-chip" data-avb-q="¿Cuánto debe Jalisco?"><span aria-hidden="true">🗺️</span> ¿Cuánto debe Jalisco?</button>
+            <button type="button" class="avb-chip" data-avb-q="¿Cuánto costó el Tren Maya?"><span aria-hidden="true">🚆</span> ¿Cuánto costó el Tren Maya?</button>
+            <button type="button" class="avb-chip" data-avb-q="Diagnóstico de Pemex"><span aria-hidden="true">🏛️</span> Diagnóstico de Pemex</button>
+            </div>
+          </div>
         </div>
-        <p class="avb-insignia">✓ Cero CIEC · Sin contraseñas del SAT</p>
-        <h2 class="avb-tit" id="avbTit">Investiga el dinero público con sus documentos</h2>
-        <p class="avb-sub">Pregunta por un RFC, un municipio, una megaobra o una nota. Cada cifra sale con su fuente oficial y su estado.</p>
+      </section>
+      <section class="avb-card avb-chatcard" id="avbChat" aria-labelledby="avbChatT">
+        <h2 id="avbChatT">Tu plática con el Auditor</h2>
 <div class="pa" id="paApp" data-canal="" data-funcion="https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1/pregunta-bot" data-modo="inspector">
         <div class="pa-chat">
           <div class="pa-chat-cab">
@@ -527,21 +560,21 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261125b</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261125d</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261125b"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261125b"></script>
-  <script src="assets/auditor/js/auditor-bento.js?v=20261125b"></script>
-  <script src="assets/auditor/js/municipios-efipem.js?v=20261125b"></script>
-  <script src="assets/auditor/js/municipios-inversion.js?v=20261125b"></script>
-  <script src="assets/auditor/js/municipios-deuda.js?v=20261125b"></script>
-  <script src="assets/auditor/js/municipios-poblacion.js?v=20261125b"></script>
-  <script src="assets/auditor/js/municipios-fraude.js?v=20261125b"></script>
-  <script src="assets/auditor/js/asistente-base.js?v=20261125b"></script>
-  <script src="assets/auditor/js/verificador.js?v=20261125b"></script>
-  <script src="assets/auditor/js/asistente-charla.js?v=20261125b"></script>
-  <script src="assets/auditor/js/asistente.js?v=20261125b"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261125d"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261125d"></script>
+  <script src="assets/auditor/js/auditor-bento.js?v=20261125d"></script>
+  <script src="assets/auditor/js/municipios-efipem.js?v=20261125d"></script>
+  <script src="assets/auditor/js/municipios-inversion.js?v=20261125d"></script>
+  <script src="assets/auditor/js/municipios-deuda.js?v=20261125d"></script>
+  <script src="assets/auditor/js/municipios-poblacion.js?v=20261125d"></script>
+  <script src="assets/auditor/js/municipios-fraude.js?v=20261125d"></script>
+  <script src="assets/auditor/js/asistente-base.js?v=20261125d"></script>
+  <script src="assets/auditor/js/verificador.js?v=20261125d"></script>
+  <script src="assets/auditor/js/asistente-charla.js?v=20261125d"></script>
+  <script src="assets/auditor/js/asistente.js?v=20261125d"></script>
 </body>
 </html>

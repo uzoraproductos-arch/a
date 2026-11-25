@@ -13,10 +13,39 @@
     if (!avb) return;
 
     /* Los cuatro modos. */
-    var segs = avb.querySelectorAll('[data-avb-modo]'), envia = app && app.querySelector('.pa-form button[type="submit"]');
+    var segs = avb.querySelectorAll('[data-avb-modo]'),
+      envia = [app && app.querySelector('.pa-form button[type="submit"]'), document.getElementById('avbEnvia')];
     function marca(m) {
       Array.prototype.forEach.call(segs, function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-avb-modo') === m ? 'true' : 'false'); });
-      if (envia) envia.textContent = m === 'inspector' ? 'Dictaminar ➔' : 'Investigar ➔';
+      envia.forEach(function (b) { if (b) b.textContent = m === 'inspector' ? 'Dictaminar ➔' : 'Investigar ➔'; });
+    }
+
+    /* La caja del hero, sus ejemplos y las ocho preguntas preguntan en el chat de abajo. */
+    var campo = document.getElementById('paPregunta'), forma = document.getElementById('paForm'), chat = document.getElementById('avbChat');
+    function pregunta(q) {
+      q = (q || '').trim();
+      if (!q || !campo || !forma) return;
+      campo.value = q.slice(0, 600);
+      if (forma.requestSubmit) forma.requestSubmit(); else forma.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+      if (chat) chat.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    var hf = document.getElementById('avbForm'), hq = document.getElementById('avbQ');
+    if (hf) hf.addEventListener('submit', function (ev) { ev.preventDefault(); pregunta(hq.value); hq.value = ''; });
+    if (hq) hq.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' && !ev.shiftKey) { ev.preventDefault(); hf.requestSubmit ? hf.requestSubmit() : pregunta(hq.value); } });
+    avb.addEventListener('click', function (ev) { var b = ev.target.closest('[data-avb-q]'); if (b) pregunta(b.getAttribute('data-avb-q')); });
+    /* Una pregunta a la vez cada 4 s; con el movimiento reducido, todas a la vista y quietas. */
+    var ps = document.querySelectorAll('#avbPreg li'), quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (quieto) Array.prototype.forEach.call(ps, function (li) { li.hidden = false; });
+    else if (ps.length > 1) {
+      var k = 0, para = false, caja = document.getElementById('avbPreg');
+      caja.addEventListener('mouseenter', function () { para = true; });
+      caja.addEventListener('mouseleave', function () { para = false; });
+      caja.addEventListener('focusin', function () { para = true; });
+      caja.addEventListener('focusout', function () { para = false; });
+      setInterval(function () {
+        if (para || document.hidden) return;
+        ps[k].hidden = true; k = (k + 1) % ps.length; ps[k].hidden = false;
+      }, 4000);
     }
     Array.prototype.forEach.call(segs, function (b) {
       b.addEventListener('click', function () {
