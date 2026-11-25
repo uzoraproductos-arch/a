@@ -1375,3 +1375,8 @@ table.sa-rangos tbody th { font-weight: 600; }
 .sa-leyenda { margin: 14px 0; }
 .sa-det { margin-top: 10px; }
 .sa-det summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; }
+
+/* Ronda 22 (25-11-2026): la cuenta en el menú. «Ingresar» / «Mi acceso» para el público (acceso.js)
+   y el ∞ de la administración junto a su pestaña. */
+.nav-menu-ingresar .mega-menu-trigger { font-weight: 700; }
+.av-inf { color: #c8a032; font-weight: 800; }

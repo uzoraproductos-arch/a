@@ -22,14 +22,40 @@
 
     /* La caja del hero, sus ejemplos y las ocho preguntas preguntan en el chat de abajo. */
     var campo = document.getElementById('paPregunta'), forma = document.getElementById('paForm'), chat = document.getElementById('avbChat');
+    /* Ronda 22 (25-11-2026): una sola caja, la del hero. La tarjeta de la plática aparece solo cuando ya hay una
+       pregunta (también al volver con la plática guardada) y se esconde con «Limpiar». */
+    var hilo = document.getElementById('paHilo');
+    function verChat() { if (chat && hilo) chat.hidden = !hilo.querySelector('.pa-yo'); }
+    if (hilo && window.MutationObserver) new MutationObserver(verChat).observe(hilo, { childList: true });
+    verChat();
+    setTimeout(verChat, 0);
     function pregunta(q) {
       q = (q || '').trim();
       if (!q || !campo || !forma) return;
       campo.value = q.slice(0, 600);
       if (forma.requestSubmit) forma.requestSubmit(); else forma.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
-      if (chat) chat.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      verChat();
+      var yo = hilo && hilo.querySelectorAll('.pa-yo'), ult = yo && yo[yo.length - 1];
+      var quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (ult || chat) (ult || chat).scrollIntoView({ behavior: quieto ? 'auto' : 'smooth', block: 'start' });
     }
     var hf = document.getElementById('avbForm'), hq = document.getElementById('avbQ');
+    /* Lo que el chat deja escrito en su caja (escondida) pasa a la del hero: «Regresar» y las ligas con ?p=. */
+    function alHero() {
+      if (!campo || !hq || !campo.value) return;
+      hq.value = campo.value; campo.value = '';
+      hf.scrollIntoView({ block: 'center' });
+      hq.focus({ preventScroll: true });
+    }
+    var reg = document.getElementById('paRegresa');
+    if (reg) reg.addEventListener('click', function () { setTimeout(alHero, 0); });
+    if (/[?&]p=/.test(location.search)) setTimeout(alHero, 0);
+    /* «Hacer otra pregunta» regresa a la única caja. */
+    var otra = document.getElementById('avbOtra');
+    if (otra && hq) otra.addEventListener('click', function () {
+      hf.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      hq.focus({ preventScroll: true });
+    });
     if (hf) hf.addEventListener('submit', function (ev) { ev.preventDefault(); pregunta(hq.value); hq.value = ''; });
     if (hq) hq.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' && !ev.shiftKey) { ev.preventDefault(); hf.requestSubmit ? hf.requestSubmit() : pregunta(hq.value); } });
     avb.addEventListener('click', function (ev) { var b = ev.target.closest('[data-avb-q]'); if (b) pregunta(b.getAttribute('data-avb-q')); });

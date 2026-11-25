@@ -7,7 +7,8 @@
   Comunidad; la pestaña «Administración» la agrega acceso.js en el navegador de la
   administración), «Tu portafolio reciente» (lo lee auditor-bento.js de av-portafolio, solo en
   el navegador) y la puerta dorada a Servicios. **Nunca un monto.**
-- El lienzo: la tarjeta protagonista con el chat y sus cuatro modos, el Escáner Cero CIEC (los
+- El lienzo: la tarjeta protagonista con la única caja de pregunta y los cuatro modos (Ronda 22: la plática
+  aparece debajo solo cuando ya hay una pregunta), el Escáner Cero CIEC (los
   XML o el CSV pasan al Lector de facturas o a la matriz del padrón en el mismo navegador: nada
   se sube), tres puertas (Semáforo patrimonial, Vigía 69-B, Auditorías en imágenes) y la tira de
   conteos de la base, que sale de monetizacion.contadores(): **ninguna cifra escrita a mano**.
@@ -48,7 +49,7 @@ def _e(x):
 
 def revisa():
     """Detiene la generación si una liga, una imagen o un conteo no existen."""
-    for u in [n[0] for n in NAV] + [p[3] for p in PUERTAS]:
+    for u in [n[0] for n in NAV] + [p[3] for p in PUERTAS] + [CANJE]:
         if not os.path.exists(os.path.join(RAIZ, u.split('#')[0].split('?')[0])):
             raise SystemExit('auditor_bento.py: la liga %s no existe' % u)
     for p in PUERTAS:
@@ -63,6 +64,10 @@ def _lado():
         u, ' aria-current="true"' if i == 0 else '', ico, html.escape(t)) for i, (u, ico, t) in enumerate(NAV))
     return '''<aside class="avb-lado" aria-label="Navegación del Auditor">
       <a class="avb-marca" href="index.html"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="40" height="31"> <b>Auditavisión</b></a>
+      <div class="avb-acceso" id="avbAcceso">
+        <a class="avb-ingresa" href="%s"><span aria-hidden="true">🔑</span> Ingresar / Activar acceso</a>
+        <small>La consulta es libre. Tu código abre los Servicios.</small>
+      </div>
       <nav class="avb-nav" aria-label="Destinos">
 %s
       </nav>
@@ -80,11 +85,12 @@ def _lado():
           <a class="avb-cuenta" href="comunidad.html">📢 Cuéntanos lo que viste</a>
         </section>
       </details>
-    </aside>''' % nav
+    </aside>''' % (CANJE, nav)
 
 
 # Ajuste del autor (25-11-2026): la imagen de la entrada va de fondo del encabezado del menú (auditor-bento.css) y el
 # hero lleva la del encabezado de Servicios del diseño anterior.
+CANJE = 'canjea-tu-codigo.html'
 HERO_ALT = 'Imagen ilustrativa del encabezado de Servicios de Auditavisión'
 # Las preguntas de ejemplo de la tarjeta del hero: cada una ya la contesta el chat (preguntas_auditor.json).
 CHIPS = [('¿Mi proveedor está en la lista negra del SAT?', '🧾'), ('¿Cuánto debe Jalisco?', '🗺️'),
@@ -139,9 +145,13 @@ def _hero():
 
 
 def _chat(chat):
-    return '''<section class="avb-card avb-chatcard" id="avbChat" aria-labelledby="avbChatT">
+    """Ronda 22 (25-11-2026, el autor: «hay dos cajas de chat… se ve saturado»): una sola caja, la del hero. La plática
+    original sigue aquí con su motor, pero sin su cabecera, su selector de modos, sus ejemplos ni su caja
+    (auditor-bento.css), y la tarjeta solo aparece cuando ya hay una pregunta (auditor-bento.js)."""
+    return '''<section class="avb-card avb-chatcard" id="avbChat" aria-labelledby="avbChatT" hidden>
         <h2 id="avbChatT">Tu plática con el Auditor</h2>
 %s
+        <p class="avb-otra"><button type="button" id="avbOtra"><span aria-hidden="true">✍️</span> Hacer otra pregunta</button></p>
       </section>''' % chat
 
 
@@ -194,8 +204,8 @@ def bloque(chat):
     <div class="avb-lienzo">
       %s
       %s
-      %s
       <div class="avb-fila">
+      %s
 %s
       </div>
       <section class="avb-card avb-lector" id="avbLector" hidden aria-labelledby="avbLecT">
