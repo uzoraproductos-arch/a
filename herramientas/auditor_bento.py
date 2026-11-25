@@ -5,7 +5,7 @@ Ronda 21 (25-11-2026): barra lateral en azul marino y lienzo modular. Ronda 22: 
 Ronda 23 (25-11-2026, «Solo barra lateral, tipo Claude.ai»): una sola navegación, sin emojis.
 Ronda 24 (25-11-2026, decisión del autor): **la Estación de Auditoría en tres paneles**.
 
-- **Izquierda**: la barra lateral de la Ronda 23 (marca, «Nueva revisión», los cinco destinos, «Tu portafolio»,
+- **Izquierda**: la barra lateral de la Ronda 23 (marca, «Nueva revisión», los seis destinos, con la Biblioteca al final, «Tu portafolio»,
   «Cómo funciona (3 pasos)» y la cuenta que llena acceso.js).
 - **Centro**: el Auditor, con la imagen de la entrada de fondo bajo un velo claro (su huella es la de
   acceso.FOTO_ENTRADA), una barra fina (insignia y «Mostrar / Ocultar mesa derecha»), el encabezado editorial (logo,
@@ -59,6 +59,7 @@ TRAZOS = {
     'liga': '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
     'herramientas': '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/>',
     'pausa': '<path d="M9 5v14M15 5v14"/>',
+    'libro': '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 7h6"/>',
 }
 
 
@@ -68,12 +69,18 @@ def ico(nombre, tam=18, clase='avb-i'):
             'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">%s</svg>') % (clase, tam, tam, TRAZOS[nombre])
 
 
-# Los cinco destinos de la barra lateral, en el orden del menú (el primero es esta página).
+# Los destinos de la barra lateral, en el orden del menú (el primero es esta página). **La Biblioteca va siempre al
+# final** (decisión del autor, 25-11-2026): un destino nuevo entra antes que ella, y revisa() lo comprueba.
+BIBLIOTECA = 'diccionario.html'
 NAV = [('herramienta-inspector-pregunta.html', 'lupa', 'Auditor'),
        ('servicios.html', 'maletin', 'Servicios y Planes'),
        ('planisferio.html', 'mapa', 'Planisferio'),
        ('noticias-relevantes.html', 'periodico', 'Noticiero'),
-       ('participa.html', 'personas', 'Comunidad')]
+       ('participa.html', 'personas', 'Comunidad'),
+       (BIBLIOTECA, 'libro', 'Biblioteca')]
+# Las imágenes del formato anterior: no van ni en esta página ni en servicios.html (Ronda 24, decisión del autor).
+# La única imagen editorial del Auditor es la de la entrada (acceso.FOTO_ENTRADA), de fondo del centro.
+IMAGENES_VIEJAS = ('servicios-encabezado', 'herr-auditor-foroptero', 'herr-inspector-ilustracion', 'showcase_')
 # Los cuatro modos (el orden de asistente.ORDEN_AUDITOR) y su pista corta.
 SEGMENTOS = [('inspector', 'lupa', 'Inspector', 'Investigación completa, con dictamen sellado'),
              ('ciudadano', 'usuario', 'Ciudadano', 'En corto, como te lo diría un amigo'),
@@ -139,6 +146,8 @@ def revisa(servicios):
     """Detiene la generación si una liga, un servicio, la imagen o un paso del recorrido no existen."""
     import acceso
     acceso._foto_ok()
+    if NAV[-1][0] != BIBLIOTECA:
+        raise SystemExit('auditor_bento.py: la Biblioteca (%s) debe ir al final de la barra lateral' % BIBLIOTECA)
     for u in [n[0] for n in NAV] + [_liga(a[4]) for a in ACCESOS] + [CANJE, PANEL, 'base-al-dia.html', 'indice.html', 'servicios.html']:
         if not os.path.exists(os.path.join(RAIZ, u.split('#')[0].split('?')[0])):
             raise SystemExit('auditor_bento.py: la liga %s no existe' % u)
@@ -150,6 +159,13 @@ def revisa(servicios):
         raise SystemExit('auditor_bento.py: servicio-seguimiento.html ya no tiene #vigia')
     if not acceso.PREGUNTAS_ENTRADA or not acceso.QUIENES_ENTRADA:
         raise SystemExit('auditor_bento.py: faltan las preguntas o el «¿Quiénes somos?» de la entrada (acceso.py)')
+
+
+def sin_imagenes_viejas(nombre, texto):
+    """Detiene la generación si la página trae una imagen del formato anterior."""
+    for v in IMAGENES_VIEJAS:
+        if v in texto:
+            raise SystemExit('auditor_bento.py: %s trae una imagen del formato anterior (%s)' % (nombre, v))
 
 
 def _lado(n_serv):
@@ -248,18 +264,19 @@ def _planes():
     """El resumen de planes de la Mesa: sale de monetizacion.PRECIO_FUNDADOR, dentro de su marca."""
     import monetizacion as mo
     F, M = mo.PRECIO_FUNDADOR, mo.MARCA_PRECIO
-    pro, paq = F['planes'][0], F['paquetes'][0]
+    pro, pyme, paq = mo.plan('pro'), mo.plan('pyme'), F['paquetes'][0]
     return '''%s<div class="avb-mplan">
           <p class="avb-mplan-t">%s Planes y Precio Fundador</p>
           <ul>
             <li><b>%s</b> %s · %s</li>
             <li><b>Tokens</b> desde %s (%d tokens)</li>
             <li><b>%s</b> %s al mes · Precio Fundador</li>
+            <li><b>%s</b> %s al mes · Precio Fundador</li>
           </ul>
           <p class="avb-mplan-n">Los pagos en línea se activan próximamente; hoy se opera con códigos piloto y promocionales.</p>
           <a href="%s">Ver planes y códigos promocionales %s</a>
         </div>%s''' % (M[0], ico('boleto', 16), F['libre']['nombre'], mo.pesos(0), F['libre']['nota'].lower(), mo.pesos(paq['precio']),
-                       paq['tokens'], pro['nombre'], mo.pesos(pro['precio']), PLANES_LIGA, ico('flecha', 14), M[1])
+                       paq['tokens'], pro['nombre'], mo.pesos(pro['precio']), pyme['nombre'], mo.pesos(pyme['precio']), PLANES_LIGA, ico('flecha', 14), M[1])
 
 
 def _mesa():

@@ -55,7 +55,7 @@ PLANES = [
 # donde vive un monto de la plataforma**: lo leen servicios.html (#precio-fundador) y la Mesa de Trabajo del Auditor
 # (auditor_bento.py), y apartados.pagina() detiene la generación si aparece un monto en MXN fuera de los bloques
 # marcados con <!--precio-fundador-->. Los pagos en línea siguen apagados (MONETIZACION): hoy se opera con códigos
-# piloto y promocionales; el cobro en línea entra con su pasarela (Ronda 26). Matiza la Ronda 10: los paquetes piloto
+# piloto y promocionales; el cobro en línea entra con su pasarela (Ronda 27). Matiza la Ronda 10: los paquetes piloto
 # (PAQUETES de apartados.py) siguen sin monto.
 PRECIO_FUNDADOR = {
     'decision': '25-11-2026',

@@ -74,7 +74,7 @@
 /* El centro: la imagen de la entrada bajo un velo claro (acceso.FOTO_ENTRADA, revisada por su huella). */
 .avb-centro {
   min-width: 0; min-height: 100vh;
-  background: linear-gradient(180deg, rgba(255, 255, 255, .78), rgba(248, 250, 252, .97)),
+  background: linear-gradient(180deg, rgba(255, 255, 255, .78) 0%, rgba(248, 250, 252, .88) 55%, rgba(248, 250, 252, .97) 100%),
     url('../img/portada/portada-acceso-editorial.webp') center top / cover no-repeat;
 }
 .avb-barra {
