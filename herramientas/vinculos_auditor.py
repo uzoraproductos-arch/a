@@ -41,7 +41,7 @@ _FUERA = [re.compile(p, re.S) for p in (
     r'<nav class="apartado-migas".*?</nav>',
     # El cajón «Cuéntanos lo que viste» es de la cabecera: va en todas las páginas.
     r'<aside class="pt-cajon".*?</aside>', r'<script\b.*?</script>', r'<noscript\b.*?</noscript>')]
-_A = re.compile(r'<a\b[^>]*\bhref="([^"#?:]+\.html)[^"]*"')
+_A = re.compile(r'<a\b([^>]*)\bhref="([^"#?:]+\.html)[^"]*"([^>]*)')
 
 
 def pestana(texto):
@@ -64,6 +64,8 @@ def mapa():
 
 def saltos(pest):
     """[(origen, destino, archivo, liga)] de las ligas directas entre pestañas."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import servicios_fichas as sf
     out = []
     for arch, t in sorted(pest.items()):
         if t == 'Auditor':
@@ -71,7 +73,9 @@ def saltos(pest):
         s = open(os.path.join(RAIZ, arch), encoding='utf-8').read()
         for r in _FUERA:
             s = r.sub('', s)
-        for liga in _A.findall(s):
+        for antes, liga, despues in _A.findall(s):
+            if sf.directa(t, liga, antes + despues):
+                continue  # Ronda 21: la liga directa del Noticiero a una Auditoría en imágenes (SEO)
             d = pest.get(liga)
             if d and d != t and d != 'Auditor':
                 out.append((t, d, arch, liga))

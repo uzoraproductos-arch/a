@@ -958,7 +958,7 @@
     var t = modoToca(q, r), m = modoVivo();
     if (!t || t === m || !MODO_ICO[m]) return '';
     /* Entre los dos chats, la remisión es una liga al otro, con la misma pregunta. */
-    if (t === 'inspector' || SOLO || resp) {
+    if (SOLO || resp) {
       var al = t === 'inspector' ? SV_CHAT + '?q=' + encodeURIComponent(q) : CHAT_AV + '?q=' + encodeURIComponent(q) + '&modo=' + t;
       return '<div class="pa-remite pa-remite-' + t + '"><p><span aria-hidden="true">' + MODO_ICO[t] + '</span> <b>Esto le toca al modo ' + MODO_NOM[t] + '.</b> ' +
         'Te lo contesto aquí con los mismos datos; ' + MODO_COMO[t] + '.</p>' +
@@ -4026,13 +4026,8 @@
        viejas (?modo=reportero) y lo que guardó el navegador siguen sirviendo. */
     var viejo = function (x) { return x === 'reportero' ? 'periodista' : x; };
     var m = viejo(ps.get('modo'));
-    /* El modo Inspector vive en Servicios (21-11-2026): una liga vieja al Auditor con
-       ?modo=inspector se muda allá con su pregunta. */
-    if (m === 'inspector' && !SOLO) {
-      ps.delete('modo');
-      location.replace(SV_CHAT + (ps.toString() ? '?' + ps.toString() : '') + location.hash);
-      return true;
-    }
+    /* Ronda 21 (25-11-2026): el Auditor reúne otra vez sus cuatro modos, con el Inspector
+       primero; ?modo=inspector ya no se muda a Servicios. */
     if (!MODOS_OK[m]) { try { m = viejo(localStorage.getItem('av-modo')); } catch (e) { m = null; } }
     poneModo(MODOS_OK[m] ? m : modoActual());
   })();

@@ -313,10 +313,56 @@ def cierre_indice():
     return '<div class="nt-indice">\n%s\n</div>' % puente(ARCHIVO)
 
 
+# Ronda 21 (25-11-2026, Propuesta E del autor: «Diario Digital de Investigación»): la portada abre con una
+# Auditoría en imágenes como gran reportaje, lo último verificado a su lado y la galería de todas.
+DESTACADA = 'deuda-congreso-2027'
+
+
+def _galeria():
+    """La galería de Auditorías en imágenes: cada una con su liga directa (data-directa="seo",
+    servicios_fichas.DIRECTAS) para que Google lea el caso sin pasar por el chat."""
+    import html as h
+    import auditorias as au
+    tarj = []
+    for id_, img, _nota, alt, etq, tit, _q in au.AUDITORIAS:
+        tarj.append('    <li><a href="%s" data-directa="seo"><img src="%s" alt="%s" loading="lazy" width="640" height="360">'
+                    '<small>%s</small><b>%s</b></a></li>' % (au.archivo(id_), img, h.escape(alt, quote=True), h.escape(etq), h.escape(tit)))
+    return ('<section class="nt-galeria" id="auditorias" aria-labelledby="ntGalTit">\n'
+            '  <h2 class="nt-ix-tit" id="ntGalTit"><span aria-hidden="true">🖼️</span> Auditorías en imágenes</h2>\n'
+            '  <p class="nt-galeria-txt">Las grandes investigaciones, cada una con su lectura breve, sus cifras y sus documentos.</p>\n'
+            '  <ul>\n%s\n  </ul>\n</section>') % '\n'.join(tarj)
+
+
+def _destacada():
+    import html as h
+    import auditorias as au
+    a = next((x for x in au.AUDITORIAS if x[0] == DESTACADA), None)
+    if not a:
+        raise SystemExit('noticias.py: DESTACADA (%s) no está en AUDITORIAS' % DESTACADA)
+    id_, img, nota, alt, etq, tit, q = a
+    que = au._datos(id_)['que']
+    return ('<article class="nt-destacada" aria-labelledby="ntDestTit">\n'
+            '    <a href="%s" data-directa="seo"><img src="%s" alt="%s" width="1200" height="675"></a>\n'
+            '    <small class="nt-dest-cred">%s</small>\n'
+            '    <p class="nt-kicker">%s</p>\n'
+            '    <h2 id="ntDestTit"><a href="%s" data-directa="seo">%s</a></h2>\n'
+            '    <p class="nt-dest-res">%s</p>\n'
+            '    <p class="nt-acciones"><a class="nt-btn" href="%s" data-directa="seo">Leer la investigación ➔</a> '
+            '<a class="nt-btn nt-btn-sec" href="%s">📰 Profundizar con el Auditor (Modo Periodista)</a></p>\n'
+            '  </article>') % (au.archivo(id_), img, h.escape(alt, quote=True), h.escape(nota), h.escape(etq), au.archivo(id_), h.escape(tit),
+                               h.escape(que), au.archivo(id_), h.escape(au.chat_url(q), quote=True))
+
+
 def portada():
     """El arranque del portal (Ronda 7, decisión del autor: «que arranque directamente desde arriba como el portal del
-    periódico»): la cabeza del periódico y lo último, verificado, antes de las tarjetas."""
-    return '<div class="nt-indice nt-portal">\n%s\n</div>' % ultimas()
+    periódico»). Desde la Ronda 21, como diario de investigación: la Auditoría en imágenes destacada, lo último
+    verificado a su lado y la galería de todas, antes de las tarjetas."""
+    return ('<div class="nt-indice nt-portal nt-diario">\n'
+            '<p class="nt-fecha"><time id="ntHoy"></time></p>\n'
+            '<script>(function () { var t = document.getElementById(\'ntHoy\'); if (t) t.textContent = new Date().toLocaleDateString(\'es-MX\', '
+            '{ weekday: \'long\', day: \'numeric\', month: \'long\', year: \'numeric\' }); })();</script>\n'
+            '<div class="nt-portada">\n  %s\n  <div class="nt-filete" aria-hidden="true"></div>\n%s\n</div>\n%s\n</div>') % (
+        _destacada(), ultimas(5), _galeria())
 
 
 def datos():

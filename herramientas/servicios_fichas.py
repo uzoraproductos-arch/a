@@ -505,6 +505,16 @@ def _titulo(archivo):
     return html.unescape(re.split(r' [·|—-] ', m.group(1))[0]).strip() if m else ''
 
 
+# La única liga directa entre pestañas (Ronda 21, 25-11-2026, decisión del autor): el Noticiero, diario
+# de investigación, lleva a cada Auditoría en imágenes sin pasar por el chat, para que Google la lea.
+# Va marcada con data-directa="seo"; vinculos_auditor.py acepta solo esa marca y solo hacia auditoria-*.html.
+DIRECTAS = {('Noticiero', 'auditoria-')}
+
+
+def directa(origen, liga, atributos):
+    return 'data-directa="seo"' in atributos and any(o == origen and liga.startswith(p) for o, p in DIRECTAS)
+
+
 def por_auditor_html(texto, origen='Servicios', modo=None, modo_de=None):
     """Cambia, dentro de <main>, cada liga directa a otra pestaña por su liga al chat."""
     i, j = texto.find('<main'), texto.rfind('</main>')
@@ -516,7 +526,7 @@ def por_auditor_html(texto, origen='Servicios', modo=None, modo_de=None):
         if re.match(r'[a-z]+:|#|//', liga) or not liga.split('#')[0].split('?')[0].endswith('.html'):
             return m.group(0)
         t = pestana_de(liga)
-        if t in (None, origen, 'Auditor'):
+        if t in (None, origen, 'Auditor') or directa(origen, liga, antes + despues):
             return m.group(0)
         b = re.search(r'<b>(.*?)</b>', dentro, re.S)
         q = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', b.group(1) if b else dentro))).strip(' ➔→›»')

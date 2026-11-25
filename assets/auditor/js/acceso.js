@@ -37,6 +37,14 @@
     d.innerHTML = '<a class="mega-menu-trigger" href="' + C.panel + '" title="Tus códigos, las solicitudes y tu código de la semana"' +
       (aqui ? ' aria-current="page"' : '') + '>Administración</a>';
     barra.insertBefore(d, barra.querySelector('.nav-menu-cuentanos'));
+    // Ronda 21: la barra lateral del Auditor también la lleva.
+    var lado = document.querySelector('.avb-nav');
+    if (lado && !lado.querySelector('.avb-admin')) {
+      var a = document.createElement('a');
+      a.className = 'avb-admin'; a.href = C.panel;
+      a.innerHTML = '<span aria-hidden="true">🔐</span> Administración';
+      lado.appendChild(a);
+    }
   }
   window.AvAcceso.pestana = pestana;
   // La sesión de la administración de esta pestaña (Ronda 16, 24-11-2026): el autor

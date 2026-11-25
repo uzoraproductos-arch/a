@@ -919,7 +919,9 @@ EJEMPLOS.extend([('¿Qué pasó con Dos Bocas?', '🛢️'), ('¿Qué es el huac
 # las cifras salen de la misma base, con su fuente y su estado (AGENTS.md §2).
 # (id, icono, nombre, lema, qué hace, herramientas cuyas aplicaciones usa,
 #  preguntas extra para sus aplicaciones, saludo)
-MODO_INICIAL = 'ciudadano'
+# Ronda 21 (25-11-2026, decisión del autor): el Auditor reúne otra vez sus cuatro modos y abre en el Inspector.
+MODO_INICIAL = 'inspector'
+ORDEN_AUDITOR = ('inspector', 'ciudadano', 'periodista', 'ambientalista')
 MODOS = [
     ('inspector', '🔍', 'Inspector', 'La investigación más completa',
      'Toda la base de datos, a fondo: expedientes de la ASF, entes públicos, estados de cuenta, RFC y lista negra del SAT, '
@@ -1027,8 +1029,11 @@ def _ejemplos():
 
 
 def modos_de(solo=None):
-    """Los modos de cada chat: el de Servicios, solo el Inspector; el del Auditor, los otros tres."""
-    return [m for m in MODOS if (m[0] == solo if solo else m[0] != 'inspector')]
+    """Los modos de cada chat: el de Servicios, solo el Inspector; el del Auditor, los cuatro con el
+    Inspector primero (Ronda 21, decisión del autor, 25-11-2026: Inspector · Ciudadano · Periodista · Ambientalista)."""
+    if solo:
+        return [m for m in MODOS if m[0] == solo]
+    return sorted(MODOS, key=lambda m: ORDEN_AUDITOR.index(m[0]))
 
 
 def _modos_html(solo=None):
@@ -1087,13 +1092,12 @@ def pagina(cuenta, canal='', herramientas=(), solo=None):
         cab = ('<div><b>Pregúntale al Auditor</b><small><span class="pa-enlinea" aria-hidden="true"></span> En línea · contesta con datos oficiales</small></div>\n'
                '            <span class="pa-cab-acc">\n'
                '            <button type="button" class="pa-como-abre pa-herr-abre" id="paHerrAbre" aria-controls="paHerr" aria-expanded="false" aria-label="Cambiar el modo del Auditor">'
-               '<span class="pa-modo-actual" id="paModoActual">🙋 Modo Ciudadano</span> <span class="pa-herr-flecha" aria-hidden="true">▾</span></button>')
-        modos_tx = ('<li><b>Elige mi modo</b> con el botón de arriba: <b>📰 Periodista</b> (un tema contado como nota, con las Noticias), <b>🙋 Ciudadano</b> (en corto, como un amigo) '
-                    'o <b>🌎 Ambientalista</b> (el costo y el daño ambiental). Cada modo trae sus aplicaciones y sus preguntas de ejemplo; los datos son los mismos en los tres. '
-                    'La investigación a fondo, con el <b>🔍 modo Inspector</b> y sus aplicaciones, vive en <a href="%s">Servicios</a>.</li>' % SV_CHAT)
+               '<span class="pa-modo-actual" id="paModoActual">🔍 Modo Inspector</span> <span class="pa-herr-flecha" aria-hidden="true">▾</span></button>')
+        modos_tx = ('<li><b>Elige mi modo</b> arriba: <b>🔍 Inspector</b> (la investigación más completa, con todas sus aplicaciones), <b>🙋 Ciudadano</b> (en corto, como un amigo), '
+                    '<b>📰 Periodista</b> (un tema contado como nota, con las Noticias) o <b>🌎 Ambientalista</b> (el costo y el daño ambiental). Cada modo trae sus aplicaciones y sus preguntas de ejemplo; '
+                    'los datos son los mismos en los cuatro. El Inspector también te atiende en <a href="%s">Servicios</a>, con la respuesta completa en su propia página.</li>' % SV_CHAT)
         resp_tx = ''
-    insp_tx = INSP_LI if solo else ('<li><b>¿Quieres investigar a fondo?</b> Un <b>RFC</b>, un <b>folio</b>, un <b>expediente de la ASF</b>, los <b>contratos</b> de una empresa '
-                                    'o el <b>diagnóstico de un ente</b> los contesta el <a href="%s">🔍 Inspector de Servicios</a>, con todas sus aplicaciones.</li>' % SV_CHAT)
+    insp_tx = INSP_LI
     return '''<div class="pa" id="paApp" data-canal="%s"%s data-modo="%s"%s>
         <div class="pa-chat">
           <div class="pa-chat-cab">

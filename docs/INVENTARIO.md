@@ -229,7 +229,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-nota-veredicto.html` | Contrasta una nota · el veredicto · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-nota.html` | Contrasta una nota · Auditavisión | apartados.py | 52 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-padron.html` | Revisa a tu contraparte · Auditavisión | apartados.py | 46 | 0 | 12 | 0 | 0 |
-| `herramienta-inspector-pregunta.html` | Auditor Virtual · Auditavisión | apartados.py | 44 | 0 | 1 | 1 | 1 |
+| `herramienta-inspector-pregunta.html` | Auditor Virtual · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
 | `herramienta-inspector-radar.html` | Radar por entidad · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-resultados.html` | Revisa tu estado de resultados · Auditavisión | apartados.py | 45 | 0 | 0 | 2 | 0 |
 | `herramienta-inspector-riesgos.html` | Tu matriz de riesgos documentales · Auditavisión | apartados.py | 51 | 0 | 2 | 1 | 0 |
@@ -248,7 +248,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras-tabla.html` | En qué invirtió cada presidente · Auditavisión | apartados.py | 93 | 0 | 19 | 38 | 6 |
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 53 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 67 | 0 | 3 | 6 | 1 |
+| `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 68 | 0 | 3 | 6 | 1 |
 | `indice.html` | Índice general · Auditavisión | apartados.py | 409 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
@@ -273,7 +273,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `noticias-al-momento-senado-ley-de-ingresos-2027.html` | El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son dinero prestado · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `noticias-al-momento-servidores-ia-exportaciones-contenido-nacional.html` | ¿México ya exporta más servidores que autos? Lo dice una consultora privada, no el INEGI, y el «3 a 7 % mexicano» no tiene documento · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 4 |
 | `noticias-auditavision.html` | Auditavisión Noticias · Auditavisión | apartados.py | 51 | 0 | 0 | 0 | 0 |
-| `noticias-relevantes.html` | Noticiero · Auditavisión | apartados.py | 66 | 0 | 0 | 0 | 0 |
+| `noticias-relevantes.html` | Noticiero · Auditavisión | apartados.py | 95 | 0 | 0 | 0 | 0 |
 | `noticias-seguimiento.html` | Seguimiento: el caso no se olvida · Auditavisión | apartados.py | 54 | 0 | 8 | 4 | 6 |
 | `noticias-verifica.html` | Verifica una noticia · Auditavisión | apartados.py | 85 | 0 | 0 | 0 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 57 | 0 | 0 | 5 | 1 |
