@@ -7192,6 +7192,10 @@ def pagina(a, sello):
                                                 or monetizacion.MARCA_PRECIO[0] in texto) else []
     if fuera:
         raise SystemExit('apartados.py: %s trae montos fuera de la tabla del Precio Fundador: %s' % (a['archivo'], ', '.join(fuera[:3])))
+    if a['archivo'] in ('servicios.html', 'herramienta-inspector-pregunta.html'):
+        # Ronda 24: sin las imágenes del formato anterior; la única editorial del Auditor es la de la entrada.
+        import auditor_bento
+        auditor_bento.sin_imagenes_viejas(a['archivo'], texto)
     return texto
 
 
