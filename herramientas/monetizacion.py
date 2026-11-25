@@ -51,6 +51,83 @@ PLANES = [
      'agrega': ['Licencia del Auditor Virtual', 'Talleres, como «Documentar para sancionar»', 'Entrega de datos en tu formato, con aviso de cambios']},
 ]
 
+# Ronda 24 (25-11-2026, decisión del autor): la tabla del Precio Fundador se publica en servicios.html. **Es el único lugar
+# donde vive un monto de la plataforma**: lo leen servicios.html (#precio-fundador) y la Mesa de Trabajo del Auditor
+# (auditor_bento.py), y apartados.pagina() detiene la generación si aparece un monto en MXN fuera de los bloques
+# marcados con <!--precio-fundador-->. Los pagos en línea siguen apagados (MONETIZACION): hoy se opera con códigos
+# piloto y promocionales; el cobro en línea entra con su pasarela (Ronda 26). Matiza la Ronda 10: los paquetes piloto
+# (PAQUETES de apartados.py) siguen sin monto.
+PRECIO_FUNDADOR = {
+    'decision': '25-11-2026',
+    'fundadores': 100,
+    'libre': {'nombre': 'Libre', 'precio': 0, 'nota': 'Siempre, sin tarjeta', 'bienvenida': 5,
+              'incluye': ['El Auditor, en sus cuatro modos', 'El Planisferio', 'El Noticiero y las Auditorías en imágenes',
+                          'La consulta de un RFC en la lista 69-B', 'El simulador del predial']},
+    'paquetes': [{'id': 't20', 'tokens': 20, 'precio': 149}, {'id': 't100', 'tokens': 100, 'precio': 499}],
+    # (clave, qué, tokens): lo que gasta cada acción.
+    'consumo': [('dictamen', 'Dictamen con huella SHA-256', 1), ('lote', 'Lote XML / CSV · Cero CIEC', 2),
+                ('semaforo', 'Semáforo Patrimonial completo', 3)],
+    'planes': [
+        {'id': 'pro', 'nombre': 'Plan Pro', 'precio': 149, 'regular': 249, 'anual': 1490, 'tokens_mes': 30,
+         'para': 'Personas, profesionales independientes y contadores.',
+         'incluye': ['30 tokens al mes', 'Vigía semanal de hasta 25 RFC', 'Portafolio ampliado']},
+        {'id': 'pyme', 'nombre': 'Plan PyME / Despacho', 'precio': 699, 'regular': 999, 'anual': 6990, 'tokens_mes': 200,
+         'para': 'Empresas, despachos contables y áreas de cumplimiento.',
+         'incluye': ['200 tokens al mes', 'Escudo Cero CIEC masivo', 'Vigía semanal de hasta 250 RFC', 'Dictámenes ilimitados']},
+    ],
+    'medida': {'nombre': 'Gobierno / Corporativo', 'desde': 2500,
+               'incluye': ['Radiografías municipales', 'Entrega-recepción', 'Soporte dedicado']},
+}
+
+
+def pesos(n):
+    """Un monto de la tabla del Precio Fundador, como se escribe en la página."""
+    return '$%s MXN' % format(n, ',')
+
+
+def consumo(clave):
+    """Los tokens que gasta una acción de la tabla (detiene la generación si no existe)."""
+    for k, _q, t in PRECIO_FUNDADOR['consumo']:
+        if k == clave:
+            return t
+    raise SystemExit('monetizacion.py: el consumo «%s» no está en PRECIO_FUNDADOR' % clave)
+
+
+def plan(pid):
+    for p in PRECIO_FUNDADOR['planes']:
+        if p['id'] == pid:
+            return p
+    raise SystemExit('monetizacion.py: el plan «%s» no está en PRECIO_FUNDADOR' % pid)
+
+
+def revisa_fundador():
+    """La tabla cuadra consigo misma: el anual son diez meses (dos gratis), el precio de fundador es menor al regular,
+    los tokens de cada plan son los que dice su primera línea y nada es negativo."""
+    F = PRECIO_FUNDADOR
+    for p in F['planes']:
+        if p['anual'] != p['precio'] * 10:
+            raise SystemExit('monetizacion.py: el anual de %s no son diez meses (dos gratis)' % p['nombre'])
+        if not 0 < p['precio'] < p['regular']:
+            raise SystemExit('monetizacion.py: el Precio Fundador de %s no es menor al regular' % p['nombre'])
+        if p['incluye'][0] != '%d tokens al mes' % p['tokens_mes']:
+            raise SystemExit('monetizacion.py: %s no dice sus tokens al mes en su primera línea' % p['nombre'])
+    if any(x['precio'] <= 0 or x['tokens'] <= 0 for x in F['paquetes']) or F['medida']['desde'] <= 0:
+        raise SystemExit('monetizacion.py: un paquete o el plan a medida no tiene monto')
+    if F['libre']['precio'] != 0 or any(t <= 0 for _k, _q, t in F['consumo']):
+        raise SystemExit('monetizacion.py: el plan Libre cobra o una acción no gasta tokens')
+
+
+# Los montos en MXN solo viven dentro de estos bloques (apartados.pagina() lo revisa).
+MARCA_PRECIO = ('<!--precio-fundador-->', '<!--/precio-fundador-->')
+_MONTO = re.compile(r'\$\s?\d[\d,.]*\s*MXN')
+
+
+def montos_fuera(texto):
+    """Los montos en MXN que aparecen fuera de los bloques del Precio Fundador (debe ser una lista vacía)."""
+    a, b = (re.escape(x) for x in MARCA_PRECIO)
+    return _MONTO.findall(re.sub(a + '.*?' + b, '', texto, flags=re.S))
+
+
 # ¿Cómo nos sostenemos? (idea tomada de getquin, «How does getquin make
 # money?», docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md §3.4).
 SOSTEN = [
@@ -175,6 +252,7 @@ def planes_migracion():
 def revisar():
     """Detiene la generación si el interruptor está encendido y algo falta, o si
     los planes de aquí y los de la base no coinciden."""
+    revisa_fundador()
     ids = [p['id'] for p in PLANES]
     if planes_migracion() != ids:
         raise SystemExit('monetizacion.py: los planes de PLANES (%s) no son los de la migración (%s)'
@@ -203,6 +281,8 @@ def hecho():
 
 def prueba():
     revisar()
+    revisa_fundador()
+    assert montos_fuera('a $149 MXN b') == ['$149 MXN'] and not montos_fuera(MARCA_PRECIO[0] + '$149 MXN' + MARCA_PRECIO[1])
     c = contadores()
     assert len(c) == 13 and all(isinstance(x[1], int) and x[1] > 0 for x in c), c
     assert [p['id'] for p in PLANES][0] == 'gratis' and PLANES[0]['precio'] == 0

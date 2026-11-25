@@ -2,18 +2,23 @@
 """La página del Auditor (herramienta-inspector-pregunta.html).
 
 Ronda 21 (25-11-2026): barra lateral en azul marino y lienzo modular. Ronda 22: una sola caja de pregunta.
-Ronda 23 (25-11-2026, diseño aprobado por el autor, «Solo barra lateral, tipo Claude.ai»): la página se limpia.
+Ronda 23 (25-11-2026, «Solo barra lateral, tipo Claude.ai»): una sola navegación, sin emojis.
+Ronda 24 (25-11-2026, decisión del autor): **la Estación de Auditoría en tres paneles**.
 
-- **Una sola navegación**: la barra lateral (marca, «Nueva revisión», los cinco destinos, «Tu portafolio» de
-  av-portafolio y, al fondo, la cuenta que llena acceso.js). La página no lleva la barra superior del sitio
-  (apartados.pagina() la quita) ni la franja de módulo del Modo Inspector.
-- **El lienzo**, en blanco y a ~820 px: el encabezado sobrio, la única caja (los cuatro modos arriba, la pregunta
-  al centro, «Adjuntar XML / CSV · Cero CIEC» y «Dictaminar» abajo: los archivos se leen en este navegador, nada
-  se sube), cuatro ejemplos, la plática (solo con una pregunta), el lector local y seis accesos directos a
-  Servicios. **Sin emojis**: íconos SVG de trazo, sin librerías.
-- **El pie** trae los cinco conteos de monetizacion.contadores() (**ninguna cifra escrita a mano**) y sus ligas.
+- **Izquierda**: la barra lateral de la Ronda 23 (marca, «Nueva revisión», los cinco destinos, «Tu portafolio»,
+  «Cómo funciona (3 pasos)» y la cuenta que llena acceso.js).
+- **Centro**: el Auditor, con la imagen de la entrada de fondo bajo un velo claro (su huella es la de
+  acceso.FOTO_ENTRADA), una barra fina (insignia y «Mostrar / Ocultar mesa derecha»), el encabezado editorial (logo,
+  «¿Quiénes somos?» de acceso.QUIENES_ENTRADA y las preguntas de acceso.PREGUNTAS_ENTRADA, una cada 4 s: **se cambian
+  allá, nunca aquí**), la única caja (con «Probar XML de muestra», que arma en el navegador un CFDI ficticio con RFC
+  genéricos del SAT), los ejemplos, la plática y el lector local.
+- **Derecha, la Mesa de Trabajo**: «Herramientas» (los seis accesos a Servicios con su etiqueta, leída de
+  monetizacion.PRECIO_FUNDADOR, y el resumen de planes) y «Expediente vivo» (auditor-bento.js lee las fuentes de la
+  última respuesta del chat: no escribe ninguna).
+- **El pie** trae los cinco conteos de monetizacion.contadores() (**ninguna cifra escrita a mano**).
 
-Nunca un monto. No trae datos propios ni entra a la huella del dictamen.
+Los únicos montos van dentro de <!--precio-fundador--> y salen de monetizacion.PRECIO_FUNDADOR. No trae datos propios ni
+entra a la huella del dictamen. Sin emojis: íconos SVG de trazo, sin librerías.
 """
 import html
 import os
@@ -21,6 +26,7 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CANJE = 'canjea-tu-codigo.html'
 PANEL = 'administracion-codigos.html'
+PLANES_LIGA = 'servicios.html#precio-fundador'
 
 # Íconos de trazo (24 × 24, stroke="currentColor"): solo trazos propios, sin librerías.
 TRAZOS = {
@@ -43,6 +49,16 @@ TRAZOS = {
     'usuario': '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>',
     'pluma': '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
     'hoja': '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5.2-6"/>',
+    'panel': '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/>',
+    'ayuda': '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 4.9.7c0 1.7-2.4 2.3-2.4 3.8"/><path d="M12 17h.01"/>',
+    'boleto': '<path d="M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-2a2 2 0 0 0 0-4z"/><path d="M14 6v12" stroke-dasharray="2 2"/>',
+    'matraz': '<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M7.5 15h9"/>',
+    'cerrar': '<path d="M6 6l12 12M18 6 6 18"/>',
+    'carpeta': '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+    'marcador': '<path d="M6 3h12v18l-6-4-6 4z"/>',
+    'liga': '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+    'herramientas': '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/>',
+    'pausa': '<path d="M9 5v14M15 5v14"/>',
 }
 
 
@@ -54,7 +70,7 @@ def ico(nombre, tam=18, clase='avb-i'):
 
 # Los cinco destinos de la barra lateral, en el orden del menú (el primero es esta página).
 NAV = [('herramienta-inspector-pregunta.html', 'lupa', 'Auditor'),
-       ('servicios.html', 'maletin', 'Servicios'),
+       ('servicios.html', 'maletin', 'Servicios y Planes'),
        ('planisferio.html', 'mapa', 'Planisferio'),
        ('noticias-relevantes.html', 'periodico', 'Noticiero'),
        ('participa.html', 'personas', 'Comunidad')]
@@ -66,21 +82,33 @@ SEGMENTOS = [('inspector', 'lupa', 'Inspector', 'Investigación completa, con di
 # Las preguntas de ejemplo: cada una ya la contesta el chat (preguntas_auditor.json).
 CHIPS = ['¿Mi proveedor está en la lista negra del SAT?', '¿Cuánto debe Jalisco?',
          '¿Cuánto costó el Tren Maya?', 'Diagnóstico de Pemex']
-# Los accesos directos a Servicios: (ícono, etiqueta, título, una línea, servicio o liga). Sin montos.
+TITULO = 'Las cuentas del gobierno, con sus documentos'
+# Los accesos de la Mesa de Trabajo: (ícono, etiqueta, título, una línea, servicio o liga, precio). El precio es
+# ('gratis',), ('consumo', clave de PRECIO_FUNDADOR['consumo']) o ('plan', id de PRECIO_FUNDADOR['planes']): la
+# etiqueta se arma de la tabla, nunca se escribe aquí.
 ACCESOS = [
     ('escudo', 'Prevención', 'Contrapartes y 69-B',
-     'Tu cartera contra las listas del SAT, Sancionados, la OFAC y la ONU.', 'contrapartes'),
-    ('factura', 'Facturas', 'Facturas XML y nómina',
-     'Tus CFDI y recibos revisados por proveedor, con su cruce con la 69-B.', 'facturas'),
-    ('casa', 'Simuladores', 'Semáforo patrimonial',
-     'Antes de comprar o rentar: el predial de su ley, el Índice SHF y con quién firmas.', 'simulacion'),
+     'Tu cartera contra las listas del SAT, Sancionados, la OFAC y la ONU.', 'contrapartes', ('gratis',)),
+    ('factura', 'Facturas', 'Facturas XML · Cero CIEC',
+     'Tus CFDI y recibos revisados por proveedor, con su cruce con la 69-B.', 'facturas', ('consumo', 'lote')),
+    ('casa', 'Simuladores', 'Semáforo Patrimonial',
+     'Antes de comprar o rentar: el predial de su ley, el Índice SHF y con quién firmas.', 'simulacion', ('consumo', 'semaforo')),
     ('mapa', 'Gobiernos', 'Estados y municipios',
-     'Lo que le entra y lo que gasta, su deuda, su inversión y lo pendiente ante la ASF.', 'radiografia'),
+     'Lo que le entra y lo que gasta, su deuda, su inversión y lo pendiente ante la ASF.', 'radiografia', ('gratis',)),
     ('edificio', 'Proveedores', 'Contratos y ASF',
-     'Los contratos de una empresa en ComprasMX, la 69-B, Sancionados y la ASF.', 'diligencia'),
-    ('campana', 'Vigilancia', 'Vigía 69-B y dictámenes',
-     'Cada semana, las altas, los cambios de situación y las bajas de la lista del SAT.', 'servicio-seguimiento.html#vigia'),
+     'Los contratos de una empresa en ComprasMX, la 69-B, Sancionados y la ASF.', 'diligencia', ('gratis',)),
+    ('campana', 'Vigilancia', 'Vigía 69-B',
+     'Cada semana, las altas, los cambios de situación y las bajas de la lista del SAT.', 'servicio-seguimiento.html#vigia', ('plan', 'pro')),
 ]
+# Los tres pasos del recorrido «Cómo funciona» (auditor-bento.js): (a qué apunta, título, texto).
+TOUR = [('avbForm', 'La caja del Auditor y sus cuatro modos',
+         'Escribe tu pregunta en tus palabras. Arriba eliges el modo: Inspector, Ciudadano, Periodista o Ambientalista. '
+         'El modo cambia la forma de contestar, nunca los datos.'),
+        ('avbAdjuntos', 'Tus archivos, sin Contraseña del SAT',
+         'Adjunta tus XML o un CSV de RFC, o prueba con el XML de muestra. Se leen en este navegador: nada se sube.'),
+        ('avbMesa', 'La Mesa de Trabajo',
+         'Aquí están las Herramientas y el Expediente vivo: las fuentes de cada respuesta, tu dictamen y tu portafolio. '
+         'En pantallas angostas se abre con «Mostrar mesa derecha».')]
 # Los conteos del pie (claves de monetizacion.contadores()).
 CONTEOS = ('69b', 'contratos', 'municipios', 'predial', 'boveda')
 ACEPTA = '.xml,.csv,.txt,text/xml,application/xml,text/csv,text/plain'
@@ -94,16 +122,34 @@ def _liga(destino):
     return destino if '.html' in destino else 'servicios-revisa.html?s=' + destino
 
 
+def etiqueta(precio):
+    """La etiqueta de un acceso, leída de monetizacion.PRECIO_FUNDADOR."""
+    import monetizacion
+    if precio[0] == 'gratis':
+        return 'Gratis'
+    if precio[0] == 'consumo':
+        t = monetizacion.consumo(precio[1])
+        return '%d token%s' % (t, '' if t == 1 else 's')
+    if precio[0] == 'plan':
+        return monetizacion.plan(precio[1])['nombre']
+    raise SystemExit('auditor_bento.py: precio desconocido %r' % (precio,))
+
+
 def revisa(servicios):
-    """Detiene la generación si una liga o un servicio no existen."""
-    for u in [n[0] for n in NAV] + [_liga(a[4]) for a in ACCESOS] + [CANJE, PANEL, 'base-al-dia.html', 'indice.html']:
+    """Detiene la generación si una liga, un servicio, la imagen o un paso del recorrido no existen."""
+    import acceso
+    acceso._foto_ok()
+    for u in [n[0] for n in NAV] + [_liga(a[4]) for a in ACCESOS] + [CANJE, PANEL, 'base-al-dia.html', 'indice.html', 'servicios.html']:
         if not os.path.exists(os.path.join(RAIZ, u.split('#')[0].split('?')[0])):
             raise SystemExit('auditor_bento.py: la liga %s no existe' % u)
     for a in ACCESOS:
         if '.html' not in a[4] and a[4] not in servicios:
             raise SystemExit('auditor_bento.py: el servicio %s no está en SERVICIOS' % a[4])
+        etiqueta(a[5])
     if not open(os.path.join(RAIZ, 'servicio-seguimiento.html'), encoding='utf-8').read().count('id="vigia"'):
         raise SystemExit('auditor_bento.py: servicio-seguimiento.html ya no tiene #vigia')
+    if not acceso.PREGUNTAS_ENTRADA or not acceso.QUIENES_ENTRADA:
+        raise SystemExit('auditor_bento.py: faltan las preguntas o el «¿Quiénes somos?» de la entrada (acceso.py)')
 
 
 def _lado(n_serv):
@@ -120,24 +166,50 @@ def _lado(n_serv):
       <details class="avb-port" id="avbPort" open>
         <summary>Tu portafolio</summary>
         <ol id="avbPortLista" hidden></ol>
-        <p class="avb-port-vacio" id="avbPortVacio">Aún no guardas investigaciones. En el Inspector de Servicios, «Guardar en mi portafolio» las deja aquí, solo en tu navegador.</p>
+        <p class="avb-port-vacio" id="avbPortVacio">Aún no guardas investigaciones. «Guardar en mi portafolio», en el Expediente vivo o en el Inspector de Servicios, las deja aquí, solo en tu navegador.</p>
       </details>
+      <button type="button" class="avb-tour-btn" id="avbTourBtn">%s Cómo funciona (3 pasos)</button>
       <div class="avb-acceso" id="avbAcceso">
-        <a class="avb-ingresa" href="%s">%s Ingresar</a>
+        <a class="avb-ingresa" href="%s">%s Ingresar / Canjear código</a>
       </div>
-    </aside>''' % (ico('mas'), '\n'.join(nav), CANJE, ico('llave'))
+    </aside>''' % (ico('mas'), '\n'.join(nav), ico('ayuda'), CANJE, ico('llave'))
+
+
+def _barra():
+    return '''<div class="avb-barra">
+        <p class="avb-insignia">%s Plataforma abierta · Cero CIEC · Datos oficiales</p>
+        <button type="button" class="avb-mesa-btn" id="avbMesaBtn" aria-controls="avbMesa" aria-expanded="true">%s<span>Ocultar mesa derecha</span><i class="avb-aviso" id="avbAviso" hidden></i></button>
+      </div>''' % (ico('check', 16), ico('panel'))
+
+
+def _cab():
+    import acceso
+    pre = '\n'.join('            <li><button type="button" class="avb-rota-q" data-avb-q="%s">%s</button></li>' % (_e(q), html.escape(q))
+                    for q in acceso.PREGUNTAS_ENTRADA)
+    return '''<header class="avb-cab">
+        <div class="avb-cab-tit">
+          <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="52" height="40">
+          <h1 class="avb-tit" id="avbTit">%s</h1>
+        </div>
+        <div class="avb-quienes">
+          <h2>¿Quiénes somos?</h2>
+          <p>%s</p>
+        </div>
+        <div class="avb-rota" id="avbRota">
+          <p class="avb-rota-et" id="avbRotaEt">Pregúntale al Auditor</p>
+          <ul aria-labelledby="avbRotaEt">
+%s
+          </ul>
+        </div>
+      </header>''' % (html.escape(TITULO), html.escape(acceso.QUIENES_ENTRADA), pre)
 
 
 def _caja():
-    seg = '\n'.join('              <button type="button" data-avb-modo="%s" data-pista="%s" aria-pressed="%s">%s<span>%s</span></button>' % (
-        m, _e(p), 'true' if m == 'inspector' else 'false', ico(i), n) for m, i, n, p in SEGMENTOS)
+    seg = '\n'.join('              <button type="button" data-avb-modo="%s" data-pista="%s" title="%s" aria-pressed="%s">%s<span>%s</span></button>' % (
+        m, _e(p), _e(p), 'true' if m == 'inspector' else 'false', ico(i), n) for m, i, n, p in SEGMENTOS)
     chips = '\n'.join('        <button type="button" class="avb-chip" data-avb-q="%s">%s</button>' % (_e(q), html.escape(q)) for q in CHIPS)
-    return '''<header class="avb-cab">
-        <p class="avb-insignia">%s Plataforma abierta · Cero CIEC · Datos oficiales</p>
-        <h1 class="avb-tit" id="avbTit">¿Qué quieres auditar hoy?</h1>
-        <p class="avb-sub">Pregunta en lenguaje normal o adjunta tus XML/CSV. El Auditor investiga en toda la base oficial y te lleva al servicio exacto.</p>
-      </header>
-      <form class="avb-box" id="avbForm" autocomplete="off" aria-labelledby="avbTit">
+    return '''<form class="avb-box" id="avbForm" autocomplete="off" aria-labelledby="avbCajaT">
+        <p class="avb-caja-t" id="avbCajaT">¿Qué quieres auditar hoy?</p>
         <div class="avb-box-arriba">
           <div class="avb-seg" role="group" aria-label="Modo del Auditor">
 %s
@@ -147,16 +219,19 @@ def _caja():
         <label class="sr-only" for="avbQ">Pregunta por un RFC, un municipio, una megaobra o una nota</label>
         <textarea id="avbQ" rows="3" maxlength="600" placeholder="Por ejemplo: ¿quién ganó los contratos de la obra de mi ciudad?" required></textarea>
         <div class="avb-box-abajo">
-          <label class="avb-adjunta" id="avbSuelta" for="avbArch" title="Se leen en tu navegador: nada se sube y nunca te pedimos la Contraseña del SAT">
-            %s<span>Adjuntar XML / CSV <small>· Cero CIEC</small></span>
-            <input type="file" id="avbArch" multiple accept="%s">
-          </label>
+          <div class="avb-adjuntos" id="avbAdjuntos">
+            <label class="avb-adjunta" id="avbSuelta" for="avbArch" title="Se leen en tu navegador: nada se sube y nunca te pedimos la Contraseña del SAT">
+              %s<span>Adjuntar XML / CSV <small>· Cero CIEC</small></span>
+              <input type="file" id="avbArch" multiple accept="%s">
+            </label>
+            <button type="button" class="avb-muestra" id="avbMuestra" title="Una factura ficticia, armada en tu navegador con RFC genéricos de prueba del SAT">%s<span>Probar XML de muestra</span></button>
+          </div>
           <button type="submit" id="avbEnvia"><span>Dictaminar</span>%s</button>
         </div>
       </form>
       <div class="avb-chips" role="group" aria-label="Preguntas de ejemplo">
 %s
-      </div>''' % (ico('check', 16), seg, html.escape(SEGMENTOS[0][3]), ico('clip'), ACEPTA, ico('flecha'), chips)
+      </div>''' % (seg, html.escape(SEGMENTOS[0][3]), ico('clip'), ACEPTA, ico('matraz'), ico('flecha'), chips)
 
 
 def _chat(chat):
@@ -169,22 +244,81 @@ def _chat(chat):
       </section>''' % (chat, ico('pluma'))
 
 
-def _servicios():
-    tarjetas = '\n'.join('''        <a class="avb-acc" href="%s">
-          <span class="avb-acc-ico">%s</span>
-          <small>%s</small>
-          <b>%s</b>
-          <span>%s</span>
-        </a>''' % (_e(_liga(d)), ico(i, 20), html.escape(et), html.escape(t), html.escape(tx)) for i, et, t, tx, d in ACCESOS)
-    return '''<section class="avb-serv" aria-labelledby="avbServT">
-        <div class="avb-serv-cab">
-          <h2 id="avbServT">Accesos directos a Servicios</h2>
-          <a href="servicios.html">Ver catálogo completo %s</a>
-        </div>
+def _planes():
+    """El resumen de planes de la Mesa: sale de monetizacion.PRECIO_FUNDADOR, dentro de su marca."""
+    import monetizacion as mo
+    F, M = mo.PRECIO_FUNDADOR, mo.MARCA_PRECIO
+    pro, paq = F['planes'][0], F['paquetes'][0]
+    return '''%s<div class="avb-mplan">
+          <p class="avb-mplan-t">%s Planes y Precio Fundador</p>
+          <ul>
+            <li><b>%s</b> %s · %s</li>
+            <li><b>Tokens</b> desde %s (%d tokens)</li>
+            <li><b>%s</b> %s al mes · Precio Fundador</li>
+          </ul>
+          <p class="avb-mplan-n">Los pagos en línea se activan próximamente; hoy se opera con códigos piloto y promocionales.</p>
+          <a href="%s">Ver planes y códigos promocionales %s</a>
+        </div>%s''' % (M[0], ico('boleto', 16), F['libre']['nombre'], mo.pesos(0), F['libre']['nota'].lower(), mo.pesos(paq['precio']),
+                       paq['tokens'], pro['nombre'], mo.pesos(pro['precio']), PLANES_LIGA, ico('flecha', 14), M[1])
+
+
+def _mesa():
+    tarjetas = '\n'.join('''          <a class="avb-acc" href="%s">
+            <span class="avb-acc-ico">%s</span>
+            <span class="avb-acc-tx"><small>%s</small><b>%s</b><span>%s</span></span>
+            <em class="avb-et%s">%s</em>
+          </a>''' % (_e(_liga(d)), ico(i, 20), html.escape(et), html.escape(t), html.escape(tx),
+                     ' avb-et-libre' if pr[0] == 'gratis' else '', html.escape(etiqueta(pr))) for i, et, t, tx, d, pr in ACCESOS)
+    return '''<aside class="avb-mesa" id="avbMesa" aria-labelledby="avbMesaT">
+      <div class="avb-mesa-cab">
+        <h2 id="avbMesaT">Mesa de Trabajo</h2>
+        <button type="button" class="avb-mesa-x" id="avbMesaX" aria-label="Cerrar la mesa">%s</button>
+      </div>
+      <div class="avb-tabs" role="tablist" aria-label="Mesa de Trabajo">
+        <button type="button" role="tab" id="avbTabH" aria-controls="avbPanH" aria-selected="true">%s Herramientas</button>
+        <button type="button" role="tab" id="avbTabE" aria-controls="avbPanE" aria-selected="false" tabindex="-1">%s Expediente vivo</button>
+      </div>
+      <div class="avb-tabpanel" role="tabpanel" id="avbPanH" aria-labelledby="avbTabH">
         <div class="avb-accs">
 %s
         </div>
-      </section>''' % (ico('flecha', 16), tarjetas)
+        %s
+        <a class="avb-catal" href="servicios.html#necesitas">Ver los servicios %s</a>
+      </div>
+      <div class="avb-tabpanel" role="tabpanel" id="avbPanE" aria-labelledby="avbTabE" hidden>
+        <div class="avb-exp-vacio" id="avbExpVacio">%s<p>Haz una pregunta al centro para ver aquí sus fuentes oficiales y generar tu dictamen.</p></div>
+        <div class="avb-exp" id="avbExp" hidden>
+          <p class="avb-exp-q" id="avbExpQ"></p>
+          <p class="avb-exp-chips" id="avbExpChips"></p>
+          <h3>Fuentes y documentos de la respuesta</h3>
+          <ol class="avb-exp-fu" id="avbExpFu"></ol>
+          <p class="avb-exp-sin" id="avbExpSin" hidden>Esta respuesta no cita un documento externo; ábrela con «Saber más» para ver sus fuentes.</p>
+          <div class="avb-exp-acc">
+            <a class="avb-exp-dic" id="avbExpDic" href="#" target="_blank" rel="noopener" hidden>%s<span>Generar dictamen</span></a>
+            <a class="avb-exp-ver" id="avbExpVer" href="#" hidden>%s<span>Saber más</span></a>
+            <button type="button" class="avb-exp-guarda" id="avbExpGuarda">%s<span>Guardar en mi portafolio</span></button>
+          </div>
+          <p class="avb-exp-nota">Lo que ves aquí es lo que citó la respuesta del chat: no agregamos cifras ni documentos.</p>
+        </div>
+      </div>
+    </aside>
+    <div class="avb-velo" id="avbVelo" hidden></div>''' % (ico('cerrar'), ico('herramientas', 16), ico('carpeta', 16), tarjetas, _planes(),
+                                                       ico('flecha', 14), ico('documento', 28), ico('documento', 16), ico('liga', 16), ico('marcador', 16))
+
+
+def _tour():
+    import json
+    datos = json.dumps([{'id': i, 't': t, 'x': x} for i, t, x in TOUR], ensure_ascii=False).replace('</', '<\\/')
+    return '''<div class="avb-tour" id="avbTour" role="dialog" aria-modal="true" aria-labelledby="avbTourT" hidden>
+      <div class="avb-tour-luz" id="avbTourLuz"></div>
+      <div class="avb-tour-card" id="avbTourCard">
+        <p class="avb-tour-n" id="avbTourN"></p>
+        <h2 id="avbTourT"></h2>
+        <p id="avbTourX"></p>
+        <p class="avb-tour-acc"><button type="button" id="avbTourCierra">Cerrar</button><button type="button" id="avbTourSig">Siguiente</button></p>
+      </div>
+      <script type="application/json" id="avbTourDatos">%s</script>
+    </div>''' % datos
 
 
 def pie(sello):
@@ -214,17 +348,22 @@ def pie(sello):
 
 
 def bloque(chat, servicios):
-    """El lienzo completo alrededor del chat del Auditor. `servicios`: los id de SERVICIOS de apartados.py."""
+    """La Estación completa alrededor del chat del Auditor. `servicios`: los id de SERVICIOS de apartados.py."""
     revisa(servicios)
     return '''<div class="avb" id="avb">
     %s
-    <div class="avb-lienzo">
+    <div class="avb-centro">
+      %s
+      <div class="avb-lienzo">
+      %s
       %s
       %s
       <section class="avb-lector" id="avbLector" hidden aria-labelledby="avbLecT">
         <h2 id="avbLecT">Tu revisión, en este navegador</h2>
         <iframe id="avbMarco" class="av-en-chat" title="Lector de tus archivos"></iframe>
       </section>
-      %s
+      </div>
     </div>
-  </div>''' % (_lado(len(servicios)), _caja(), _chat(chat), _servicios())
+    %s
+    %s
+  </div>''' % (_lado(len(servicios)), _barra(), _cab(), _caja(), _chat(chat), _mesa(), _tour())
