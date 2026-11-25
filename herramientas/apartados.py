@@ -1738,7 +1738,7 @@ AVISO = {
                     '<p>Lo que sí se guarda <b>en tu propio navegador</b>, para que la plataforma recuerde lo que hiciste, es esto. '
                     'Salvo donde se dice, nunca nos llega, y lo borras al borrar los datos del sitio en tu navegador:</p>\n'
                     '<ul>\n%s\n</ul>') % '\n'.join('<li><b>%s</b> (<code>%s</code>): %s</li>' % x for x in _AV_NAVEGADOR)},
-        {'id': 'codigos', 'titulo': 'Si pides o canjeas un código de acceso', 'texto': 'La versión de prueba, por invitación (29-10-2026).', 'tarjetas': [],
+        {'id': 'codigos', 'titulo': 'Si pides o canjeas un código de acceso', 'texto': 'La plataforma abre sin código desde el 25-11-2026; el código sigue para ingresar y para pedir los Servicios.', 'tarjetas': [],
          'bloque': ('<p><b>Al canjear un código</b> no te pedimos nada tuyo: en la base de datos queda que un código se canjeó, cuándo, y un número '
                     'al azar que identifica a tu navegador (<code>av-pase</code>). Sirve para saber hasta cuándo tienes acceso. '
                     'También anotamos <b>la fecha de cada día en que abres la plataforma</b> (solo el día: ni la hora ni las páginas), para que la '

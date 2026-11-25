@@ -21,9 +21,12 @@ puerta. Tres piezas:
   canjea-tu-codigo.html. Su configuración la escribe este módulo.
 
 La base vive en supabase/migrations/20261030000001_codigos.sql y la función
-que canjea, en supabase/functions/codigo. **El candado está encendido**
-desde el 30-10-2026 («enciende el código», pedido del autor); se apaga con
-CANDADO = False. En localhost no se pide código, para las pruebas.
+que canjea, en supabase/functions/codigo. El candado se encendió el 30-10-2026
+(«enciende el código», pedido del autor) y **se apagó el 25-11-2026 (Ronda 22,
+decisión del autor: abrir la plataforma al público y a Google)**: cualquiera
+entra sin código. La entrada sigue como página para ingresar, las cuatro
+portadas privadas y el panel siguen solo para la administración, y los
+Servicios siguen pidiendo un código vigente (SERVICIOS_OPERAN de apartados.py).
 
 Ojo, y se le dice al autor: en un sitio estático el candado es del
 navegador. Detiene a quien entra por la puerta, no a quien lee el código de
@@ -39,7 +42,8 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JS = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'acceso.js')
 
 # El candado: True = sin un código vigente no se entra a la plataforma.
-CANDADO = True
+# Ronda 22 (25-11-2026, decisión del autor): apagado, la plataforma abre al público y a Google.
+CANDADO = False
 # El proyecto de Supabase (creado por el autor el 29-10-2026) y su llave
 # PÚBLICA (publishable). Va en la página por diseño; la llave de servicio
 # (secret), nunca. Va aparte de FUNCIONES de apartados.py: los códigos se

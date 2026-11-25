@@ -4,7 +4,7 @@
    La configuración la escribe herramientas/acceso.py entre sus marcas: no la
    edites a mano. Las páginas del canje y del panel usan acceso-paginas.js. */
 (function () {
-  var C = /*config*/{"candado":true,"funciones":"https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1","supabase":"https://nuqiyzcilbrrlezmesnf.supabase.co","anon":"sb_publishable_gf28FUrT1zcoaGl4C2f_aQ_exkzAQ9g","canje":"canjea-tu-codigo.html","panel":"administracion-codigos.html","libres":["canjea-tu-codigo.html","administracion-codigos.html","aviso-de-privacidad.html","derecho-de-replica.html","servicios.html","servicios-por-que.html","servicios-fraude-y-lavado.html","servicios-catalogo.html","servicios-tu-perfil.html","servicios-empieza-gratis.html","servicios-como-se-cobra.html","servicios-calendario.html","servicios-preguntas.html","servicios-cotiza.html"],"privadas":["enciclopedia-auditavision.html","sigue-el-dinero.html","descarga-los-datos.html","aprende.html"],"fuera":"planisferio.html"}/*fin-config*/;
+  var C = /*config*/{"candado":false,"funciones":"https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1","supabase":"https://nuqiyzcilbrrlezmesnf.supabase.co","anon":"sb_publishable_gf28FUrT1zcoaGl4C2f_aQ_exkzAQ9g","canje":"canjea-tu-codigo.html","panel":"administracion-codigos.html","libres":["canjea-tu-codigo.html","administracion-codigos.html","aviso-de-privacidad.html","derecho-de-replica.html","servicios.html","servicios-por-que.html","servicios-fraude-y-lavado.html","servicios-catalogo.html","servicios-tu-perfil.html","servicios-empieza-gratis.html","servicios-como-se-cobra.html","servicios-calendario.html","servicios-preguntas.html","servicios-cotiza.html"],"privadas":["enciclopedia-auditavision.html","sigue-el-dinero.html","descarga-los-datos.html","aprende.html"],"fuera":"planisferio.html"}/*fin-config*/;
   var CLAVE = 'av-pase';
   var DIA = 12 * 3600 * 1000;  // cada cuánto se vuelve a preguntar a la base (por si se revocó)
 
@@ -82,6 +82,44 @@
   if (admin) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pestana); else pestana();
   }
+
+  // La cuenta (Ronda 22, 25-11-2026, decisión del autor): la plataforma abre sin código, y
+  // la entrada queda como la página para ingresar. Quien no trae pase ve «Ingresar»; quien
+  // lo trae, «Mi acceso»; la administración navega como cualquiera, pero con su estado
+  // ilimitado (∞) y su pestaña «Administración». Es el lugar donde después irá el saldo de
+  // tokens de cada usuario: hoy no se cobra nada y aquí nunca va un monto.
+  function cuenta() {
+    var aqui = location.pathname.split('/').pop() || 'index.html';
+    if (aqui === C.canje || aqui === C.panel) return;
+    var conPase = !admin && vigente(yo);
+    var barra = document.querySelector('.site-top-nav .nav-center-links');
+    if (admin) {
+      var t = barra && barra.querySelector('.nav-menu-admin > a');
+      if (t && !t.querySelector('.av-inf')) {
+        t.insertAdjacentHTML('beforeend', ' <span class="av-inf" aria-hidden="true">∞</span>');
+        t.title = 'Administración · Servicios y tokens ilimitados (∞)';
+      }
+    } else if (barra && !barra.querySelector('.nav-menu-ingresar')) {
+      var d = document.createElement('div');
+      d.className = 'nav-menu-item nav-menu-pagina nav-menu-ingresar';
+      d.innerHTML = '<a class="mega-menu-trigger" href="' + C.canje + '" title="' +
+        (conPase ? 'Tu código de acceso y hasta cuándo abre' : 'Canjea tu código o pide uno: abre los Servicios') + '">' +
+        (conPase ? '🔑 Mi acceso' : '🔑 Ingresar') + '</a>';
+      barra.insertBefore(d, barra.querySelector('.nav-menu-cuentanos'));
+    }
+    var caja = document.getElementById('avbAcceso');
+    if (!caja) return;
+    if (admin) {
+      caja.className = 'avb-acceso avb-ilimitado';
+      caja.innerHTML = '<span class="avb-inf" aria-hidden="true">∞</span><b>Administración</b>' +
+        '<small>Servicios y tokens ilimitados (∞)</small>';
+    } else if (conPase) {
+      var f = new Date(yo.hasta);
+      caja.innerHTML = '<a class="avb-ingresa" href="' + C.canje + '"><span aria-hidden="true">🔑</span> Mi acceso</a>' +
+        '<small>Tu código abre los Servicios hasta el ' + f.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) + '.</small>';
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', cuenta); else cuenta();
 
   // La medición de uso (pedido del autor, 18-11-2026: «el tiempo que ha
   // consumido los usuarios, qué tema les ha interesado… dónde le da clic»).

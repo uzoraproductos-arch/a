@@ -25,7 +25,7 @@ body.avb-pagina .site-top-nav {
 }
 /* En escritorio la navegación vive en la barra lateral. */
 @media (min-width: 981px) {
-  .avb-pagina .site-top-nav .nav-center-links > .nav-menu-item:not(.nav-menu-cuentanos):not(.nav-menu-admin) { display: none; }
+  .avb-pagina .site-top-nav .nav-center-links > .nav-menu-item:not(.nav-menu-cuentanos):not(.nav-menu-admin):not(.nav-menu-ingresar) { display: none; }
 }
 
 .avb { display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 24px; align-items: start; margin: 24px 0; }
@@ -56,13 +56,33 @@ body.avb-pagina .site-top-nav {
 }
 .avb-oro:hover, .avb-oro:focus-visible { background: #e6bd3a; }
 .avb-cuenta { display: flex; align-items: center; min-height: 44px; color: #d3ddf3; font-size: 16px; }
+/* Ronda 22: la cuenta. Sin sesión, «Ingresar»; con la administración, su estado ilimitado (acceso.js). */
+.avb-acceso { display: grid; gap: 4px; padding: 12px; border-radius: 14px; background: rgba(255, 255, 255, .08); }
+.avb-acceso small { font-size: 14px; line-height: 1.45; color: #b9c6e4; }
+.avb-ingresa { display: flex; align-items: center; gap: 8px; min-height: 44px; color: #ffffff; font-size: 16px; font-weight: 700; text-decoration: none; }
+.avb-ingresa:hover, .avb-ingresa:focus-visible { text-decoration: underline; text-decoration-color: var(--avb-oro); }
+.avb-ilimitado b { display: block; color: #ffffff; font-size: 16px; }
+.avb-ilimitado .avb-inf { color: var(--avb-oro); font-size: 22px; font-weight: 800; }
 
-.avb-lienzo { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 20px; min-width: 0; }
-.avb-card { background: #ffffff; border-radius: 20px; box-shadow: var(--avb-sombra); padding: 22px; min-width: 0; box-sizing: border-box; }
-.avb-card h2 { margin: 0 0 10px; font-size: 20px; color: #0b2a63; }
-.avb-chatcard { grid-column: span 8; }
-.avb-esc { grid-column: span 4; align-self: start; position: sticky; top: 16px; }
-.avb-fila { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.avb-lienzo { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px; min-width: 0; }
+.avb-card { background: #ffffff; border-radius: 20px; box-shadow: var(--avb-sombra); padding: 26px; min-width: 0; box-sizing: border-box; }
+.avb-card h2 { margin: 0 0 12px; font-size: 20px; color: #0b2a63; }
+/* Ronda 22 (25-11-2026): una sola caja de pregunta, la del hero. La plática ocupa todo el ancho y solo aparece
+   cuando ya hay una pregunta; de la plática original se esconden su cabecera (con su selector de modos), sus
+   ejemplos y su caja: su motor sigue trabajando por debajo (auditor-bento.js). */
+.avb-chatcard { grid-column: 1 / -1; }
+.avb-chatcard[hidden] { display: none; }
+.avb-chatcard .pa-chat-cab, .avb-chatcard .pa-ejs, .avb-chatcard .pa-form, .avb-chatcard .pa-hola { display: none; }
+.avb-chatcard .pa-pie { border-top: 0; padding-top: 0; }
+.avb-otra { margin: 16px 0 0; }
+.avb-otra button {
+  min-height: 48px; padding: 10px 18px; border: 0; border-radius: 12px; background: #0b2a63; color: #ffffff;
+  font: inherit; font-size: 16px; font-weight: 700; cursor: pointer;
+}
+.avb-otra button:hover, .avb-otra button:focus-visible { background: #1d5fd6; }
+/* El escáner y las tres puertas, en una sola fila ordenada. */
+.avb-fila { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
+.avb-fila .avb-esc { margin: 0; }
 .avb-lector, .avb-conteos { grid-column: 1 / -1; }
 
 .avb-seg { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px; border-radius: 14px; background: #eef2f9; }
@@ -126,7 +146,7 @@ body.avb-pagina .site-top-nav {
 .avb-puerta span { font-size: 16px; line-height: 1.5; }
 .avb-puerta-ico { font-size: 26px; }
 .avb-puerta-ir { margin-top: auto; font-weight: 700; color: #1d5fd6; }
-.avb-foto { display: block; width: calc(100% + 44px); max-width: none; height: 150px; object-fit: cover; margin: -22px -22px 6px; }
+.avb-foto { display: block; width: calc(100% + 52px); max-width: none; height: 150px; object-fit: cover; margin: -26px -26px 6px; }
 
 .avb-lector iframe { width: 100%; min-height: 720px; border: 0; border-radius: 12px; background: #ffffff; }
 .avb-conteos ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
@@ -138,8 +158,7 @@ body.avb-pagina .site-top-nav {
 @media (max-width: 1200px) {
   .avb-hero-in { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 28px 22px 36px; }
   .avb-hero-foto::after { background: linear-gradient(180deg, rgba(7, 25, 62, .88) 0%, rgba(11, 42, 99, .76) 55%, rgba(11, 42, 99, .6) 100%); }
-  .avb-chatcard, .avb-esc { grid-column: 1 / -1; }
-  .avb-esc { position: static; }
+  .avb-fila { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .avb-conteos ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (max-width: 980px) {
@@ -147,11 +166,13 @@ body.avb-pagina .site-top-nav {
   .avb-lado { position: static; padding: 14px; gap: 12px; }
   .avb-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .avb-mas > summary { display: flex; align-items: center; min-height: 44px; font-weight: 700; cursor: pointer; }
-  .avb-fila { grid-template-columns: minmax(0, 1fr); }
+  .avb-lienzo { gap: 24px; }
 }
 @media (max-width: 600px) {
-  .avb-card { padding: 16px; border-radius: 16px; }
-  .avb-foto { width: calc(100% + 32px); margin: -16px -16px 6px; }
+  .avb-card { padding: 18px; border-radius: 16px; }
+  .avb-lienzo, .avb-fila { gap: 20px; }
+  .avb-fila { grid-template-columns: minmax(0, 1fr); }
+  .avb-foto { width: calc(100% + 36px); margin: -18px -18px 6px; }
   .avb-tit { font-size: 32px; }
   .avb-hero-in { padding: 22px 16px 32px; }
   .avb-preguntas button { font-size: 19px; }
