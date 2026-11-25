@@ -988,7 +988,7 @@
    "usos": [
     "biblioteca:ref-conapo-proyecciones"
    ],
-   "consultado": "2026-11-23",
+   "consultado": "2026-11-25",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -998,7 +998,7 @@
    "usos": [
     "biblioteca:ref-sat-padron-rfc"
    ],
-   "consultado": "2026-11-23",
+   "consultado": "2026-11-25",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -2146,9 +2146,9 @@
    "usos": [
     "biblioteca:ref-oaj-trimestre2026"
    ],
-   "consultado": "2026-11-23",
+   "consultado": "2026-11-25",
    "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1010)"
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1011)"
   },
   "https://www.comunicacionpef.hacienda.gob.mx/work/models/COMUNICACION_DEL_PEF/Documentos/2026/distribucion_gasto_UR/r03_apurog.pdf": {
    "primera_vez": "2026-10-27",
@@ -3789,7 +3789,7 @@
    "usos": [
     "auditoria:inversion-megaobras"
    ],
-   "consultado": "2026-11-23",
+   "consultado": "2026-11-25",
    "estado": "no abrió",
    "error": "Not Found"
   },
@@ -4589,7 +4589,7 @@
    "usos": [
     "fuente:imss-modalidad-40-gestores"
    ],
-   "consultado": "2026-11-23",
+   "consultado": "2026-11-25",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -4762,7 +4762,7 @@
    "usos": [
     "biblioteca:ref-sat-denuncias"
    ],
-   "consultado": "2026-11-23",
+   "consultado": "2026-11-25",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -4871,7 +4871,7 @@
    "usos": [
     "biblioteca:ref-presidencia-2ig"
    ],
-   "consultado": "2026-11-23",
+   "consultado": "2026-11-25",
    "estado": "no abrió",
    "error": "Forbidden"
   },
