@@ -14,6 +14,15 @@
 .avb-pagina .apartado-cab .herr-cab-credito { display: none; }
 .avb-pagina .apartado-cab .apartado-titulo { margin: 4px 0 0; }
 .avb-pagina .apartado-cuerpo { max-width: 1560px; }
+/* El encabezado del menú lleva la imagen de la entrada (ajuste del autor), con velo azul marino para que se lea. */
+[data-theme="light"] body.avb-pagina .site-top-nav,
+body.avb-pagina .site-top-nav {
+  background:
+    linear-gradient(90deg, rgba(7, 25, 62, .92) 0%, rgba(11, 42, 99, .70) 45%, rgba(11, 42, 99, .35) 100%),
+    url("../img/portada/portada-acceso-editorial.webp") center 45% / cover no-repeat,
+    #0b2a63;
+  animation: none;
+}
 /* En escritorio la navegación vive en la barra lateral. */
 @media (min-width: 981px) {
   .avb-pagina .site-top-nav .nav-center-links > .nav-menu-item:not(.nav-menu-cuentanos):not(.nav-menu-admin) { display: none; }
@@ -69,9 +78,9 @@
 /* El hero editorial: la imagen de la entrada (acceso.FOTO_ENTRADA) con su velo azul marino desde la izquierda. */
 .avb-hero { grid-column: 1 / -1; position: relative; isolation: isolate; overflow: hidden; border-radius: 20px; background: #0b2a63; box-shadow: var(--avb-sombra); }
 .avb-hero-foto { position: absolute; inset: 0; margin: 0; z-index: -1; }
-.avb-hero-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; display: block; }
+.avb-hero-foto picture, .avb-hero-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 72% 50%; display: block; }
 .avb-hero-foto::after { content: ""; position: absolute; inset: 0;
-  background: linear-gradient(100deg, rgba(7, 25, 62, .88) 0%, rgba(11, 42, 99, .62) 48%, rgba(11, 42, 99, .18) 100%); }
+  background: linear-gradient(100deg, rgba(7, 25, 62, .93) 0%, rgba(11, 42, 99, .82) 52%, rgba(11, 42, 99, .35) 100%); }
 .avb-hero-foto figcaption { position: absolute; right: 14px; bottom: 12px; z-index: 1; font-size: 13px; color: #ffffff; background: rgba(7, 29, 71, .62); border-radius: 999px; padding: 3px 10px; }
 .avb-hero-in { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(340px, 460px); gap: 36px; align-items: center; padding: 40px 36px 48px; }
 .avb-ident { color: #ffffff; }

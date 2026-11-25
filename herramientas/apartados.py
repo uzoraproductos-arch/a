@@ -7131,6 +7131,10 @@ def pagina(a, sello):
         # Ronda 7: las portadas de la antigua Enciclopedia, solo para la administración (ni buscadores).
         a = dict(a, noindex=True)
     texto = _pagina(a, sello)
+    if a.get('bento'):
+        # Ronda 21 (pedido del autor: «quitar la imagen gris que está en el encabezado del Auditor»): sin la franja
+        # de cabeza; el título de la página es el del hero del lienzo (auditor_bento.py).
+        texto = re.sub(r'\n    <header class="apartado-cab[^"]*"[^>]*>.*?</header>\n', '\n', texto, count=1, flags=re.S)
     if a['archivo'] not in traslado.PRIVADAS and a['archivo'] != 'administracion-codigos.html':
         # Ninguna liga pública a esas portadas: cada una va a su sustituta.
         texto = traslado.sin_privadas(texto)

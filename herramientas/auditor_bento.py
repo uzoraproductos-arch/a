@@ -83,14 +83,17 @@ def _lado():
     </aside>''' % nav
 
 
+# Ajuste del autor (25-11-2026): la imagen de la entrada va de fondo del encabezado del menú (auditor-bento.css) y el
+# hero lleva la del encabezado de Servicios del diseño anterior.
+HERO_ALT = 'Imagen ilustrativa del encabezado de Servicios de Auditavisión'
 # Las preguntas de ejemplo de la tarjeta del hero: cada una ya la contesta el chat (preguntas_auditor.json).
 CHIPS = [('¿Mi proveedor está en la lista negra del SAT?', '🧾'), ('¿Cuánto debe Jalisco?', '🗺️'),
          ('¿Cuánto costó el Tren Maya?', '🚆'), ('Diagnóstico de Pemex', '🏛️')]
 
 
 def _hero():
-    """El hero editorial (ajuste del autor a la Ronda 21): la misma imagen de la entrada, con su huella
-    (acceso.FOTO_ENTRADA), «¿Quiénes somos?» y las ocho preguntas, que aquí se tocan y se preguntan;
+    """El hero editorial (ajuste del autor a la Ronda 21): la imagen de la entrada, revisada por su huella
+    (acceso.FOTO_ENTRADA), va de fondo del encabezado; aquí la de Servicios, «¿Quiénes somos?» y las ocho preguntas, que aquí se tocan y se preguntan;
     a la derecha, la tarjeta con los cuatro modos y la caja de pregunta. La entrada no cambia."""
     import hashlib
     import acceso
@@ -105,11 +108,12 @@ def _hero():
     chips = '\n'.join('            <button type="button" class="avb-chip" data-avb-q="%s"><span aria-hidden="true">%s</span> %s</button>' % (
         _e(q), i, html.escape(q)) for q, i in CHIPS)
     return '''<section class="avb-hero" aria-labelledby="avbTit">
-        <figure class="avb-hero-foto"><img src="assets/auditor/img/portada/%s" alt="%s" width="1376" height="768" fetchpriority="high">
-          <figcaption>Ilustración editorial generada con IA</figcaption></figure>
+        <figure class="avb-hero-foto"><picture><source media="(max-width: 700px)" srcset="assets/auditor/img/servicios-encabezado-movil.webp">
+          <img src="assets/auditor/img/servicios-encabezado.webp" alt="%s" width="1280" height="720" fetchpriority="high"></picture>
+          <figcaption>Imagen ilustrativa</figcaption></figure>
         <div class="avb-hero-in">
           <div class="avb-ident">
-            <h2 class="avb-tit" id="avbTit">Las cuentas del gobierno, <span>con sus documentos</span></h2>
+            <h1 class="avb-tit" id="avbTit">Las cuentas del gobierno, <span>con sus documentos</span></h1>
             <div class="avb-quienes"><h3>¿Quiénes somos?</h3><p>%s</p></div>
             <div class="avb-preguntas"><h3 class="sr-only">Preguntas que aquí se contestan con documentos: tócala y te la contesto</h3>
             <ul id="avbPreg">
@@ -131,7 +135,7 @@ def _hero():
             </div>
           </div>
         </div>
-      </section>''' % (foto, _e(alt), html.escape(acceso.QUIENES_ENTRADA), preg, seg, chips)
+      </section>''' % (_e(HERO_ALT), html.escape(acceso.QUIENES_ENTRADA), preg, seg, chips)
 
 
 def _chat(chat):
