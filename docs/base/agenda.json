@@ -1,7 +1,9 @@
 {
  "que_es": "Lo que toca revisar de la base de datos. La escribe herramientas/fuentes.py --agenda en el flujo «Base al día».",
- "revisado": "2026-11-22",
- "toca": [],
+ "revisado": "2026-11-25",
+ "toca": [
+  "pef"
+ ],
  "fuentes": [
   {
    "id": "sat-69b",
@@ -69,7 +71,7 @@
    "quien": "Banco de México",
    "modo": "sola",
    "cada": "semanal",
-   "corte": "al 25-11-2026",
+   "corte": "al 10-12-2026",
    "revisar": "",
    "toca": false,
    "script": "anclar_udi.py",
@@ -109,7 +111,7 @@
    "revisar": "",
    "toca": false,
    "script": "boveda.py",
-   "url": "https://www.dof.gob.mx/"
+   "url": "https://dof.gob.mx/"
   },
   {
    "id": "donatarias",
@@ -160,6 +162,18 @@
    "url": "https://www.disciplinafinanciera.hacienda.gob.mx/"
   },
   {
+   "id": "sda-rangos",
+   "que": "Rangos del semáforo del Sistema de Alertas (límites bajo, medio y alto de los tres indicadores, estados y municipios)",
+   "quien": "SHCP",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "Acuerdos DOF 30-06-2017 y 31-10-2017",
+   "revisar": "2027-06-30",
+   "toca": false,
+   "script": "sistema_alertas.py",
+   "url": "https://www.disciplinafinanciera.hacienda.gob.mx/"
+  },
+  {
    "id": "shf-vivienda",
    "que": "Índice SHF de Precios de la Vivienda: precios de avalúo por entidad y variación anual por entidad y municipio",
    "quien": "Sociedad Hipotecaria Federal",
@@ -191,9 +205,9 @@
    "cada": "anual",
    "corte": "PEF 2026",
    "revisar": "2026-11-25",
-   "toca": false,
-   "script": "módulos de la Enciclopedia (audit-database.js)",
-   "url": "https://www.dof.gob.mx/"
+   "toca": true,
+   "script": "módulos de la Enciclopedia (audit-database.js); pef27() de presupuesto_modulos.py para el de 2027",
+   "url": "https://dof.gob.mx/"
   },
   {
    "id": "cuenta-publica",
@@ -230,6 +244,174 @@
    "toca": false,
    "script": "cc_predial.py",
    "url": "https://congresoweb.congresojal.gob.mx/BibliotecaVirtual/busquedasleyes/Listado%272.cfm"
+  },
+  {
+   "id": "predial-nuevo-leon",
+   "que": "El predial de los 51 municipios de Nuevo León (Ley de Hacienda para los Municipios del Estado, arts. 21 bis-2 a 21 bis-12) y sus recargos (Ley de Ingresos de los Municipios del Estado)",
+   "quien": "Congreso del Estado de Nuevo León",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "Ley de Hacienda, última reforma P.O. 25-01-2023 (consultada el 21-11-2026)",
+   "revisar": "2026-12-31",
+   "toca": false,
+   "script": "cc_predial.py",
+   "url": "https://www.hcnl.gob.mx/trabajo_legislativo/leyes/paquete_fiscal.php"
+  },
+  {
+   "id": "predial-cdmx",
+   "que": "El predial de las 16 alcaldías de la Ciudad de México (Código Fiscal de la Ciudad de México, arts. 130 a 132, 281 y 282) y sus recargos (art. 42 y Ley de Ingresos de la Ciudad)",
+   "quien": "Congreso de la Ciudad de México (Gaceta Oficial; texto vigente de la Consejería Jurídica)",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "Código Fiscal, última reforma G.O. CDMX 08-10-2026 (consultado el 22-11-2026)",
+   "revisar": "2026-12-31",
+   "toca": false,
+   "script": "cc_predial.py",
+   "url": "https://data.consejeria.cdmx.gob.mx/index.php/leyes/codigos"
+  },
+  {
+   "id": "predial-puebla",
+   "que": "El predial del municipio de Puebla (Ley de Ingresos del Municipio de Puebla 2026, arts. 4, 75, 90, 91 y transitorio tercero)",
+   "quien": "Congreso del Estado de Puebla (Periódico Oficial del Estado)",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "Ley de Ingresos 2026 (consultada el 22-11-2026)",
+   "revisar": "2027-01-31",
+   "toca": false,
+   "script": "cc_predial.py",
+   "url": "https://archivo.pueblacapital.gob.mx/media/com_dpattachments/attachments/com_content.article/8-Ley-de-Ingresos-del-Estado-de-Puebla-Ejercicio-2026.pdf"
+  },
+  {
+   "id": "predial-queretaro",
+   "que": "El predial del municipio de Querétaro (Ley de Ingresos del Municipio de Querétaro 2026, arts. 14 y 50)",
+   "quien": "Legislatura del Estado de Querétaro (La Sombra de Arteaga)",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "Ley de Ingresos 2026 (consultada el 22-11-2026)",
+   "revisar": "2027-01-31",
+   "toca": false,
+   "script": "cc_predial.py",
+   "url": "https://portalfiscal.municipiodequeretaro.gob.mx/CONAC/dist-assets/pdf/b1/ley-de-ingresos-2026.pdf"
+  },
+  {
+   "id": "predial-leon",
+   "que": "El predial del municipio de León, Guanajuato (Ley de Ingresos 2026, Decreto 159, arts. 5, 38, 39, 43 y 44)",
+   "quien": "Congreso del Estado de Guanajuato (Periódico Oficial del Estado)",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "Ley de Ingresos 2026 (cotejada contra su PDF el 22-11-2026)",
+   "revisar": "2027-01-31",
+   "toca": false,
+   "script": "cc_predial.py",
+   "url": "https://normatividadestatalymunicipal.guanajuato.gob.mx/archivos/687fe34a901a03abed262a62e22f90db.pdf"
+  },
+  {
+   "id": "predial-tijuana",
+   "que": "El predial de Tijuana, Baja California (Ley de Ingresos del Municipio de Tijuana 2026, arts. 4 a 7 y 63)",
+   "quien": "Congreso del Estado de Baja California (Periódico Oficial del Estado)",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "Ley de Ingresos 2026 (cotejada el 22-11-2026)",
+   "revisar": "2027-01-31",
+   "toca": false,
+   "script": "cc_predial.py",
+   "url": "https://www.tijuana.gob.mx/Dependencias/tesoreria/cp/2026/LI-TJBC_E-2026.pdf"
+  },
+  {
+   "id": "predial-cuernavaca",
+   "que": "El predial de Cuernavaca, Morelos (Ley de Ingresos del Municipio de Cuernavaca 2026, arts. 6, 8 y 103)",
+   "quien": "Congreso del Estado de Morelos (Periódico Oficial «Tierra y Libertad»)",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "Ley de Ingresos 2026 (cotejada contra su PDF el 23-11-2026)",
+   "revisar": "2027-01-31",
+   "toca": false,
+   "script": "cc_predial.py",
+   "url": "https://marcojuridico.morelos.gob.mx/documentos/2911/download"
+  },
+  {
+   "id": "predial-merida",
+   "que": "El predial de Mérida, Yucatán (Ley de Hacienda del Municipio de Mérida, arts. 47 y 48)",
+   "quien": "Congreso del Estado de Yucatán (Diario Oficial del Estado)",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "Ley de Hacienda vigente en 2026 (cotejada el 22-11-2026)",
+   "revisar": "2027-01-31",
+   "toca": false,
+   "script": "cc_predial.py",
+   "url": "https://portalciudadano.merida.gob.mx/regulaciones_archivos/73/1793133510_LeyHacienda26.pdf"
+  },
+  {
+   "id": "predial-edomex",
+   "que": "El predial de los 125 municipios del Estado de México (Código Financiero del Estado de México y Municipios, arts. 109 y 112)",
+   "quien": "Legislatura del Estado de México (Gaceta del Gobierno)",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "Código Financiero, última reforma POGG 01-10-2026 (cotejado contra su PDF el 22-11-2026)",
+   "revisar": "2027-01-31",
+   "toca": false,
+   "script": "cc_predial.py",
+   "url": "https://legislacion.edomex.gob.mx/sites/legislacion.edomex.gob.mx/files/files/pdf/cod/vig/codvig007.pdf"
+  },
+  {
+   "id": "predial-saltillo",
+   "que": "El predial de Saltillo, Coahuila (Ley de Ingresos del Municipio de Saltillo 2026, Decreto 369, arts. 2, 48 y 49)",
+   "quien": "Congreso del Estado de Coahuila (Periódico Oficial del Estado)",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "Ley de Ingresos 2026 (cotejada contra su PDF el 22-11-2026)",
+   "revisar": "2027-01-31",
+   "toca": false,
+   "script": "cc_predial.py",
+   "url": "https://saltillo.gob.mx/wp-content/uploads/2026/01/LEY-DE-INGRESOS-SALTILLO-2026_1.pdf"
+  },
+  {
+   "id": "predial-slp",
+   "que": "El predial de San Luis Potosí, capital (Ley de Ingresos del Municipio 2026, Decreto 0410, arts. 7 y 62): leída y en espera, por tres ambigüedades de su tarifa",
+   "quien": "Congreso del Estado de San Luis Potosí (Periódico Oficial «Plan de San Luis»)",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "Ley de Ingresos 2026 (leída el 22-11-2026; en espera)",
+   "revisar": "2027-01-31",
+   "toca": false,
+   "script": "cc_predial.py",
+   "url": "https://sitio.sanluis.gob.mx/pagAyuntamientoCMS/storage/Medios//2026/01/226-DECRETO%200410-%20Que%20expide%20la%20Ley%20de%20Ingresos%20para%20el%20Municipio%20de%20San%20Luis%20Potosi%CC%81,%20SLP,%20para%20el%20ejercicio%20fiscal%202026.pdf"
+  },
+  {
+   "id": "codigos-predial-pue-qro",
+   "que": "Los plazos y recargos del predial en los códigos fiscales: Código Fiscal y Presupuestario para el Municipio de Puebla (arts. 43, 118 y 180) y Código Fiscal del Estado de Querétaro (art. 44)",
+   "quien": "Congreso del Estado de Puebla y Legislatura del Estado de Querétaro",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "textos vigentes (cotejados contra su PDF el 22-11-2026)",
+   "revisar": "2027-01-31",
+   "toca": false,
+   "script": "cc_predial.py",
+   "url": "https://gobiernoabierto.pueblacapital.gob.mx/transparencia_file/tesoreria/77.fracc01/codigo_fiscal_puebla.pdf"
+  },
+  {
+   "id": "lhm-bc-recargos",
+   "que": "Los recargos del predial de Tijuana: Ley de Hacienda Municipal del Estado de Baja California (art. 108, con el art. 63 de la Ley de Ingresos)",
+   "quien": "Congreso del Estado de Baja California (Periódico Oficial del Estado)",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "texto vigente, reforma del 04-11-2024 (cotejado contra su PDF el 22-11-2026)",
+   "revisar": "2027-01-31",
+   "toca": false,
+   "script": "cc_predial.py",
+   "url": "https://www.congresobc.gob.mx/Documentos/ProcesoParlamentario/Leyes/TOMO_II/20241104_LEYHAMUN.PDF"
+  },
+  {
+   "id": "leyes-fiscales-morelos",
+   "que": "El adeudo del predial de Cuernavaca: Código Fiscal para el Estado de Morelos (arts. 46, 47 y 168) y Ley General de Hacienda Municipal del Estado de Morelos (arts. 93 Ter-5 y 93 Ter-6)",
+   "quien": "Congreso del Estado de Morelos (Periódico Oficial «Tierra y Libertad»)",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "textos vigentes (cotejados contra su PDF el 23-11-2026)",
+   "revisar": "2027-01-31",
+   "toca": false,
+   "script": "cc_predial.py",
+   "url": "https://marcojuridico.morelos.gob.mx/documentos/1773/download"
   },
   {
    "id": "uma",
