@@ -1380,8 +1380,10 @@ def herramienta_asistente(bloque):
         'lema': 'Pregúntale al Auditor · el chat de Auditavisión', 'sin_icono_lema': True, 'icono_cab': '💬',
         'entrada': '<b>%s.</b> %s' % (ASISTENTE[2], ASISTENTE[3]),
         'fondo': FOTO_AUDITOR, 'rubro': rubro, 'foto_clase': 'foto-auditor',
-        'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
-        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'municipios-fraude.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
+        # Ronda 21 (25-11-2026, diseño D + F del autor): barra lateral y lienzo modular (auditor_bento.py).
+        'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': __import__('auditor_bento').bloque(bloque)}],
+        'bento': True,
+        'estilos': ['asistente.css', 'auditor-bento.css'], 'scripts': ['auditor-bento.js', 'municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'municipios-fraude.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
         # Sin la fila de las cuatro herramientas: el chat ya es sus modos.
         'pie_extra': nav,
     }
@@ -1549,8 +1551,9 @@ def noticias(base, ref):
     # cuelga de Aprende, aunque Aprende conserva su tarjeta hacia aquí. Desde
     # el 02-11-2026 se llama «Noticiero» (pedido del autor).
     'icono': '📰',
-    'titulo': 'Auditavisión Noticias',
-    'lema': 'El periódico del dinero público',
+    # Ronda 21 (Propuesta E): la cabeza es la de un diario, con doble filete.
+    'titulo': 'Noticiero Auditavisión',
+    'lema': 'Diario digital de investigación del dinero público',
     # Ronda 7 (22-11-2026): el portal arranca desde arriba, como periódico: cabeza corta, lo último
     # verificado y luego las tarjetas (con Garantías cívicas).
     'entrada': 'Que ninguna noticia sobre el dinero público se quede sin cotejar.',
@@ -7128,6 +7131,10 @@ def pagina(a, sello):
         # Ronda 7: las portadas de la antigua Enciclopedia, solo para la administración (ni buscadores).
         a = dict(a, noindex=True)
     texto = _pagina(a, sello)
+    if a.get('bento'):
+        # Ronda 21 (pedido del autor: «quitar la imagen gris que está en el encabezado del Auditor»): sin la franja
+        # de cabeza; el título de la página es el del hero del lienzo (auditor_bento.py).
+        texto = re.sub(r'\n    <header class="apartado-cab[^"]*"[^>]*>.*?</header>\n', '\n', texto, count=1, flags=re.S)
     if a['archivo'] not in traslado.PRIVADAS and a['archivo'] != 'administracion-codigos.html':
         # Ninguna liga pública a esas portadas: cada una va a su sustituta.
         texto = traslado.sin_privadas(texto)
@@ -7397,7 +7404,7 @@ def _pagina(a, sello):
   <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/puerta.css?v={sello}">{estilos}{redirige}
 </head>
-<body data-pagina="apartado">
+<body data-pagina="apartado"{body_clase}>
 {cabecera}
 
   <main class="apartado" id="contenido">
@@ -7430,7 +7437,7 @@ def _pagina(a, sello):
   <script src="assets/auditor/js/comunidad.js?v={sello}"></script>{scripts}
 </body>
 </html>
-'''.format(csp=seguridad.meta(), titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
+'''.format(body_clase=' class="avb-pagina"' if a.get('bento') else '', csp=seguridad.meta(), titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
            sociales=sociales(a['archivo'], titulo_doc, descripcion) + ('\n  <meta name="robots" content="noindex, nofollow">' if a.get('noindex') else ''),
            cabecera=cabecera(marca, sello), menu=a['menu'],
            volver='' if a.get('pie_corto') else (

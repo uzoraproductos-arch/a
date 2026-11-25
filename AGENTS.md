@@ -173,6 +173,8 @@ portada para las viejas), `acceso.js` solo las abre en el navegador de la admini
 
 **Ronda 20 (24-11-2026): las pestañas del panel salen de sus botones.** `acceso-paginas.js` lee las hojas de `[data-hoja]`: **una hoja nueva va solo en `HOJAS` de `acceso.py`**. El panel es pestaña «Administración» (`EXCEPCIONES` y `EXC`), así que sus ligas a las portadas privadas no pasan por el chat.
 
+**Ronda 21 (25-11-2026): el Auditor reúne sus cuatro modos, con el Inspector primero** (decisión del autor; matiza el §0 quinquies: el Inspector vive también en Servicios). Orden fijo: Inspector, Ciudadano, Periodista y Ambientalista (`ORDEN_AUDITOR` de `asistente.py`). **La página del Auditor va con barra lateral y lienzo modular** (`herramientas/auditor_bento.py`), sin franja de cabeza, con la imagen de la entrada de fondo del encabezado (se revisa por la huella de `acceso.FOTO_ENTRADA`) y la de Servicios en el hero, cuyas preguntas son `PREGUNTAS_ENTRADA`: **se cambian allá, nunca aquí**, y la entrada no se toca): **ningún número de esa página se escribe a mano** (salen de `monetizacion.contadores()`), **nunca un monto**, y el Escáner Cero CIEC **nunca sube un archivo ni pide la Contraseña del SAT**. **La única liga directa entre pestañas es la del Noticiero a una Auditoría en imágenes** (`DIRECTAS` de `servicios_fichas.py`, con `data-directa="seo"`): otra excepción necesita decisión del autor y su renglón ahí.
+
 **Decisión del autor, 02-11-2026.** El menú (`MENU` de `apartados.py` y su
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Servicios** (segunda desde el 21-11-2026, pedido del autor), **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras
