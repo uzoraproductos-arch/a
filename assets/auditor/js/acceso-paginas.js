@@ -549,7 +549,9 @@
     // ---------------------------------------------------------------------
     // Las pestañas del panel (18-11-2026). La elegida se recuerda en la pestaña
     // del navegador y en la dirección (#tablero, #codigos…).
-    var HOJAS = ['tablero', 'codigos', 'solicitudes', 'bitacora', 'acceso'], cargado = {};
+    // Ronda 20: la lista sale de los botones del panel (HOJAS de acceso.py), para que
+    // una pestaña nueva no rebote al tablero.
+    var HOJAS = [].map.call(raiz.querySelectorAll('[data-hoja]'), function (b) { return b.dataset.hoja; }), cargado = {};
     function hoja(id, foco) {
       if (HOJAS.indexOf(id) < 0) id = 'tablero';
       raiz.querySelectorAll('[data-hoja]').forEach(function (b) {
