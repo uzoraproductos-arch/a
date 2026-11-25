@@ -37,14 +37,7 @@
     d.innerHTML = '<a class="mega-menu-trigger" href="' + C.panel + '" title="Tus códigos, las solicitudes y tu código de la semana"' +
       (aqui ? ' aria-current="page"' : '') + '>Administración</a>';
     barra.insertBefore(d, barra.querySelector('.nav-menu-cuentanos'));
-    // Ronda 21: la barra lateral del Auditor también la lleva.
-    var lado = document.querySelector('.avb-nav');
-    if (lado && !lado.querySelector('.avb-admin')) {
-      var a = document.createElement('a');
-      a.className = 'avb-admin'; a.href = C.panel;
-      a.innerHTML = '<span aria-hidden="true">🔐</span> Administración';
-      lado.appendChild(a);
-    }
+    // Ronda 23: en el Auditor no hay barra superior; la administración entra por la tarjeta de su cuenta (cuenta()).
   }
   window.AvAcceso.pestana = pestana;
   // La sesión de la administración de esta pestaña (Ronda 16, 24-11-2026): el autor
@@ -107,16 +100,21 @@
         (conPase ? '🔑 Mi acceso' : '🔑 Ingresar') + '</a>';
       barra.insertBefore(d, barra.querySelector('.nav-menu-cuentanos'));
     }
+    // La barra lateral del Auditor (Ronda 23: íconos de trazo, sin emojis). La administración, tarjeta compacta que
+    // lleva a su panel; quien trae pase, «Mi acceso» con su vigencia.
     var caja = document.getElementById('avbAcceso');
     if (!caja) return;
+    var LLAVE = '<svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" ' +
+      'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="15" r="4"/>' +
+      '<path d="m10.8 12.2 9.2-9.2"/><path d="m17 6 3 3"/><path d="m14.5 8.5 2 2"/></svg>';
     if (admin) {
       caja.className = 'avb-acceso avb-ilimitado';
-      caja.innerHTML = '<span class="avb-inf" aria-hidden="true">∞</span><b>Administración</b>' +
-        '<small>Servicios y tokens ilimitados (∞)</small>';
+      caja.innerHTML = '<a class="avb-adm" href="' + C.panel + '" title="Tus códigos, las solicitudes y tu código de la semana">' +
+        '<span><b>Administración <span class="avb-inf">∞</span></b><small>Servicios y tokens ilimitados</small></span></a>';
     } else if (conPase) {
       var f = new Date(yo.hasta);
-      caja.innerHTML = '<a class="avb-ingresa" href="' + C.canje + '"><span aria-hidden="true">🔑</span> Mi acceso</a>' +
-        '<small>Tu código abre los Servicios hasta el ' + f.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) + '.</small>';
+      caja.innerHTML = '<a class="avb-ingresa" href="' + C.canje + '">' + LLAVE + ' Mi acceso</a>' +
+        '<small class="avb-vence">Tu código abre los Servicios hasta el ' + f.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) + '.</small>';
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', cuenta); else cuenta();

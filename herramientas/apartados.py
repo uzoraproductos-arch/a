@@ -1381,11 +1381,12 @@ def herramienta_asistente(bloque):
         'entrada': '<b>%s.</b> %s' % (ASISTENTE[2], ASISTENTE[3]),
         'fondo': FOTO_AUDITOR, 'rubro': rubro, 'foto_clase': 'foto-auditor',
         # Ronda 21 (25-11-2026, diseño D + F del autor): barra lateral y lienzo modular (auditor_bento.py).
-        'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': __import__('auditor_bento').bloque(bloque)}],
+        'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': __import__('auditor_bento').bloque(bloque, [s[0] for s in SERVICIOS])}],
         'bento': True,
         'estilos': ['asistente.css', 'auditor-bento.css'], 'scripts': ['auditor-bento.js', 'municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'municipios-fraude.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
-        # Sin la fila de las cuatro herramientas: el chat ya es sus modos.
-        'pie_extra': nav,
+        # Ronda 23 (25-11-2026, decisión del autor): sin la franja «Volver al índice / La otra división» del Modo
+        # Inspector; la barra lateral es la única navegación.
+        'pie_extra': '',
     }
 
 
@@ -7135,6 +7136,12 @@ def pagina(a, sello):
         # Ronda 21 (pedido del autor: «quitar la imagen gris que está en el encabezado del Auditor»): sin la franja
         # de cabeza; el título de la página es el del hero del lienzo (auditor_bento.py).
         texto = re.sub(r'\n    <header class="apartado-cab[^"]*"[^>]*>.*?</header>\n', '\n', texto, count=1, flags=re.S)
+        # Ronda 23 (25-11-2026, diseño «Solo barra lateral» del autor): una sola navegación, la barra lateral; sin la
+        # barra superior del sitio, con el logo de favicon y el pie con los conteos de la base (auditor_bento.pie()).
+        import auditor_bento
+        texto = re.sub(r'\n  <nav class="site-top-nav".*?\n  </nav>\n', '\n', texto, count=1, flags=re.S)
+        texto = texto.replace('<link rel="icon" href="%s">' % FAVICON, '<link rel="icon" href="assets/auditor/img/logo-auditavision.svg" type="image/svg+xml">', 1)
+        texto = re.sub(r'  <footer class="apartado-pie">.*?</footer>', lambda m: auditor_bento.pie(sello), texto, count=1, flags=re.S)
     if a['archivo'] not in traslado.PRIVADAS and a['archivo'] != 'administracion-codigos.html':
         # Ninguna liga pública a esas portadas: cada una va a su sustituta.
         texto = traslado.sin_privadas(texto)
