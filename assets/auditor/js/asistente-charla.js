@@ -1827,6 +1827,117 @@
       if (!SDA || !/semaforo|sistema de alertas/.test(t) || !SDA_Q.test(t)) return null;
       return { html: SDA.h, fu: SDA.fu, ci: SDA.ci, tit: SDA.tit, ir: SDA.ir, sug: SDA.sug };
     }
+    /* ---------- El Semáforo Patrimonial Inmobiliario (Ronda 25, Plan Maestro del autor, 25-11-2026) ----------
+       «Voy a comprar casa en Zapopan, ¿qué reviso?»: tres bloques con lo que la base ya tiene del lugar, sin cifras nuevas.
+       a) ¿Con quién firmas? (la revisión completa de la desarrolladora la junta integral() de asistente.js con su RFC);
+       b) su predial: con qué ley se cobra, si está cotejada, y la liga al simulador con el municipio puesto;
+       c) el contexto: el Índice SHF, las carpetas por fraude del SESNSP y el Sistema de Alertas de Hacienda.
+       Las tres advertencias van siempre: el Índice SHF no es un avalúo, una carpeta no es una condena y una coincidencia en
+       una lista es una señal para revisar, nunca una acusación. Ningún color es nuestro: el del Sistema de Alertas es de Hacienda. */
+    var PATRI_RX = /semaforo patrimonial|(compr|adquir|invert|invierto|apart|enganche|escritur|hipotec|credito infonavit|credito fovissste|rent(ar|o|a) )[a-z]*.{0,40}\b(casa|casas|terreno|terrenos|depa|depas|departamento|departamentos|vivienda|inmueble|inmuebles|lote|lotes|predio|predios|propiedad|condominio|local comercial|bodega)\b|\b(casa|terreno|depa|departamento|vivienda|inmueble|lote|predio)\b.{0,40}(comprar|compro|comprare|adquirir|invertir|apartar)/;
+    var PRED = (B.dat && B.dat.calc) || {};
+    function patrimonial(q) {
+      var t = plano(q);
+      if (!PATRI_RX.test(t) || /\b(vend[oeií]|vendemos|vender|venta de mi)\b/.test(t) && !/semaforo patrimonial/.test(t)) return null;
+      var ES = estados(t), mm = municipio(ES.resto, /municipi|alcaldi/.test(t), ES.e), m = mm && mm.m, e = m ? porA[m.a] : (ES.e.length === 1 ? ES.e[0] : null);
+      var rz = /(?:desarrolladora|inmobiliaria|constructora)\s*:\s*([^·\n]{3,80})/i.exec(String(q)), razon = rz ? rz[1].trim().replace(/[¿?¡!.]+$/, '') : '';
+      var rfc = (String(q).match(/\b[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}\b/gi) || [])[0], fu = [], ci = [], h = [];
+      var CAJA = function (ico, tit, cuerpo) { return '<section class="pa-patri-b"><h4><span aria-hidden="true">' + ico + '</span> ' + tit + '</h4>' + cuerpo + '</section>'; };
+      var preg = function (tx, et) { return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc(tx) + '">' + esc(et || tx) + '</button>'; };
+      if (!e) {
+        return { html: '<p>🏠 El <b>Semáforo Patrimonial</b> revisa el lugar donde vas a comprar y con quién vas a firmar. Dime el <b>municipio y su estado</b> ' +
+          '(por ejemplo, «voy a comprar casa en Zapopan, Jalisco») y, si la tienes, el <b>RFC de la desarrolladora o inmobiliaria</b>.</p>' +
+          '<p>Te junto tres cosas que ya están en la base: si la empresa aparece en las listas del SAT, de Sancionados, de la OFAC o de la ONU y sus contratos públicos; con qué ley se cobra el predial ahí; ' +
+          'y el precio de la vivienda (Índice SHF), las carpetas por fraude del SESNSP y el semáforo de deuda de Hacienda.</p>' +
+          '<p>' + preg('Voy a comprar casa en Zapopan, ¿qué reviso?') + ' ' + preg('Semáforo patrimonial en Cuernavaca') + '</p>',
+          tit: 'Semáforo Patrimonial', ir: ['servicios-revisa.html?s=simulacion', 'el Semáforo Patrimonial en el Inspector'], sug: ['Voy a comprar un terreno en Tijuana', '¿Qué es la lista 69-B?'] };
+      }
+      var nom = m ? m.n + ', ' + m.en : e.n;
+      /* a) ¿Con quién firmas? */
+      var a;
+      if (rfc && rfc.length === 12) {
+        rfc = rfc.toUpperCase();
+        a = '<p>La desarrolladora o inmobiliaria con RFC <code>' + esc(rfc) + '</code>: en la <b>respuesta completa</b> y en tu <b>dictamen</b> va su revisión entera, sola: las listas del SAT (art. 69, 17-H Bis, 69-B y 69-B Bis), el Directorio de Sancionados, la OFAC y la ONU, y sus contratos de ComprasMX. ' +
+          preg('Revisa ' + rfc, 'Revísala aquí') + '</p>';
+      } else if (rfc) {
+        a = '<p>Ese RFC es de una <b>persona física</b>: no publicamos datos de personas. En <a href="herramienta-inspector-padron.html">Revisa a tu contraparte</a> te decimos solo si su RFC coincide con alguna lista, sin su nombre.</p>';
+      } else if (razon) {
+        a = '<p>Con el nombre <b>' + esc(razon) + '</b> puedo buscarla en ComprasMX y en las listas de la OFAC y la ONU; las listas del SAT se revisan por RFC, porque un nombre parecido no es la misma empresa. ' +
+          preg('Contratos de ' + razon) + ' ' + preg('¿Está en la OFAC ' + razon + '?', 'Búscala en la OFAC y la ONU') + '</p>' +
+          '<p class="pa-chico">Si tienes su RFC (viene en su factura o en el contrato de promesa), escríbelo y la reviso entera.</p>';
+      } else {
+        a = '<p>Escríbeme el <b>RFC de la desarrolladora o la inmobiliaria</b> (viene en su factura, en el contrato de promesa o en la escritura) y te digo si aparece en las listas del SAT, de Sancionados, de la OFAC o de la ONU, y si tiene contratos con el gobierno. ' +
+          '<a href="herramienta-inspector-padron.html">Abre Revisa a tu contraparte</a>.</p>';
+      }
+      h.push(CAJA('🤝', '¿Con quién firmas?', a));
+      /* b) Su predial: con qué ley, si está cotejada. */
+      var b, p0 = m && (PRED.pred || []).filter(function (x) { return x.e === m.a && x.c && m.cve.slice(2) === x.c; })[0];
+      var esp = m && (PRED.predEsp || []).filter(function (w) { return w.k === m.a + '-' + m.cve.slice(2); })[0];
+      if (p0) {
+        b = '<p>El predial de <b>' + esc(nom) + '</b> lo cobra ' + (m.a === 'CDMX' ? 'la Tesorería de la Ciudad de México' : 'el municipio') + '. La ley que lo rige: <b>' + esc(p0.ley) + '</b> (tarifa: ' + esc(p0.art) + ') ' + chip('oficial') + '. ' +
+          '<a href="herramienta-calculadora-predial.html?mun=' + esc(p0.id) + '">Calcula tu predial con esa ley</a>: escribe el valor fiscal del predio y te da el impuesto del año, sus descuentos y, si hay adeudo, sus accesorios, cada uno con su artículo.</p>' +
+          '<p class="pa-chico">Antes de firmar, pide el último recibo pagado del predio: si el vendedor debe bimestres, su adeudo sigue al inmueble.</p>';
+        fu.push({ que: 'Ley con que ' + nom + ' cobra el predial', e: 'oficial', fu: { tx: p0.ley, url: p0.url } });
+      } else if (!m) {
+        b = '<p>El predial no lo cobra el estado: lo cobra cada municipio con su propia ley' + (e.a === 'CDMX' ? ' (en la Ciudad de México, la Tesorería, con el Código Fiscal)' : '') + '. Dime el municipio y te digo con qué ley se cobra ahí, si ya la cotejamos. ' +
+          '<a href="herramienta-calculadora-predial.html?ent=' + encodeURIComponent(e.a) + '">Ve los municipios de ' + esc(e.n) + ' en el simulador del predial</a>.</p>';
+      } else {
+        var pr = m && mv(m, 'predial');
+        b = '<p>' + (esp ? 'Leímos la ley de <b>' + esc(nom) + '</b>, pero quedó en espera: ' + esc(esp.m) + ' ' : 'Aún no cotejamos la ley con que <b>' + esc(nom) + '</b> cobra el predial ') + chip('pendiente') +
+          ': es falta de la plataforma, no del municipio. No calculamos una tasa que no leímos.' +
+          (pr != null ? ' Lo que sí está: en 2024 cobró <b>' + grande(pr, 1) + '</b> de predial ' + chip('oficial') + ' (INEGI).' : '') + '</p>' +
+          '<p><a href="herramienta-calculadora-predial.html' + (m ? '?ent=' + encodeURIComponent(m.a) + '&cve=' + m.cve.slice(2) : '?ent=' + encodeURIComponent(e.a)) + '">Abre el simulador del predial</a> para ver los municipios cotejados.</p>';
+        if (pr != null) fu.push(munFu('predial'));
+      }
+      h.push(CAJA('🧾', '¿Cuánto paga de predial ahí?', b));
+      /* c) El contexto: vivienda, fraude y deuda. */
+      var c = [];
+      var vm = m && VIV && (VIV.mun || []).filter(function (x) { return x[0] === m.a && plano(x[1]) === plano(m.n); })[0];
+      var ve = VIV && VIV.est.filter(function (x) { return x[0] === e.a; })[0];
+      if (vm) {
+        c.push('<li><b>Vivienda:</b> en ' + esc(nom) + ' el Índice SHF subió <b>' + n(vm[3], 1) + ' %</b> en un año ' + chip('oficial') + ' (' + esc(VIV.corte) + ', cifras preliminares).</li>');
+        fu.push(vivFu(nom)); ci.push({ v: n(vm[3], 1) + ' %', etq: 'variación anual del Índice SHF en ' + nom, e: 'oficial' });
+      } else if (ve) {
+        c.push('<li><b>Vivienda:</b> la SHF no publica el índice de ' + (m ? esc(m.n) : 'cada municipio') + '; en ' + esc(e.n) + ' subió <b>' + n(ve[3], 1) + ' %</b> en un año ' + chip('oficial') + ' (' + esc(VIV.corte) + ').</li>');
+        fu.push(vivFu(e.n)); ci.push({ v: n(ve[3], 1) + ' %', etq: 'variación anual del Índice SHF en ' + e.n, e: 'oficial' });
+      }
+      var fr = m ? fraDe(m) : (MFRA && MFRA.ent ? MFRA.ent[MU && MU.ent[e.a] ? MU.ent[e.a].cve : ''] : null), pb = m ? pobDe(m) : null;
+      if (fr) {
+        c.push('<li><b>Fraude:</b> ' + n(fr[0]) + ' carpetas de investigación por fraude en 2025 y ' + n(fr[1]) + ' de ' + esc(MFRA.corte2026) + ' ' + chip('oficial') +
+          (pb ? '; son ' + n(fr[0] * 100000 / pb, 1) + ' por cada 100 mil habitantes en 2025 ' + chip('derivado') : '') + '.</li>');
+        fu.push({ que: 'Carpetas por fraude en ' + nom, e: 'oficial', fu: { tx: MFRA.fuente, url: MFRA.pagina } });
+        if (pb) fu.push({ que: 'Carpetas por cada 100 mil habitantes', e: 'derivado', op: 'carpetas de 2025 × 100,000 ÷ población del Censo 2020' });
+        ci.push({ v: n(fr[0]), etq: 'carpetas por fraude en 2025 en ' + nom, e: 'oficial' });
+      }
+      var S = MDEU && MDEU.sda, sm = m && S && S.m ? S.m[m.cve] : null, L = D.sda;
+      var rango = function (v, Lx) { return v <= Lx[0] ? 'bajo' : (v <= Lx[1] ? 'medio' : 'alto'); };
+      if (m && sm && sm[0] > 0) {
+        c.push('<li><b>Deuda del municipio:</b> semáforo <b>' + ['', 'endeudamiento sostenible (verde)', 'endeudamiento en observación (amarillo)', 'endeudamiento elevado (rojo)'][sm[0]] + '</b> en el Sistema de Alertas de Hacienda (Cuenta Pública ' + esc(S.anio || 2025) + ') ' + chip('oficial') +
+          '. Su deuda es el ' + n(sm[3], 1) + ' % de sus ingresos de libre disposición' + (L && L.m ? ' (rango ' + rango(sm[3], L.m[0]) + ' del Acuerdo ' + chip('derivado') + ')' : '') + '.</li>');
+        fu.push({ que: 'Semáforo del Sistema de Alertas de ' + nom, e: 'oficial', fu: { tx: S.fuente, url: S.pagina } });
+        if (L && L.m) fu.push({ que: 'Rango del indicador frente al Acuerdo', e: 'derivado', op: 'cifra oficial puesta junto al límite del Acuerdo publicado en el DOF', fu: L.fm });
+      } else if (m && sm && sm[0] === 0) {
+        c.push('<li><b>Deuda del municipio:</b> tiene deuda inscrita, pero no entregó información suficiente para que Hacienda lo evaluara ' + chip('pendiente', 'deuda-municipios') + '.</li>');
+      } else if (m) {
+        c.push('<li><b>Deuda del municipio:</b> no figura en el Sistema de Alertas con financiamientos inscritos en el Registro Público Único ' + chip('oficial') + ': no se mide (LDF, art. 43), lo que no quiere decir que no deba a proveedores.</li>');
+        if (S) fu.push({ que: 'Sistema de Alertas de los municipios', e: 'oficial', fu: { tx: S.fuente, url: S.pagina } });
+      } else if (e.sem) {
+        c.push('<li><b>Deuda del estado:</b> semáforo <b>' + esc(e.sem) + '</b> en el Sistema de Alertas de Hacienda ' + chip('oficial') + (e.ild != null ? '; su deuda es el ' + n(e.ild, 1) + ' % de sus ingresos de libre disposición' : '') + '.</li>');
+        if (M.deuda && M.deuda.fu) fu.push({ que: 'Semáforo del Sistema de Alertas de ' + e.n, e: 'oficial', fu: M.deuda.fu });
+      }
+      h.push(CAJA('🏘️', 'El contexto de ' + esc(nom), '<ul class="pa-lista">' + c.join('') + '</ul>'));
+      var homo = mm && mm.otros && mm.otros.length ? '<p class="pa-chico">Ojo con el homónimo: hay ' + (mm.otros.length === 1 ? 'otro municipio' : mm.otros.length + ' municipios más') + ' que se llama' + (mm.otros.length === 1 ? '' : 'n') + ' así (' +
+        esc(mm.otros.slice(0, 4).map(function (x) { return x.en; }).join(', ')) + '). Te di <b>' + esc(nom) + '</b>, el de más habitantes; si es otro, dime su estado.</p>' : '';
+      var html = '<p>🏠 <b>Semáforo Patrimonial de ' + esc(nom) + '.</b> Lo que la base ya tiene del lugar donde vas a comprar y de con quién vas a firmar, en tres bloques.</p>' + homo +
+        '<div class="pa-patri">' + h.join('') + '</div>' +
+        '<p class="pa-ojo">Tres advertencias: el Índice SHF sale de avalúos de vivienda con crédito y <b>no es un avalúo</b> de tu inmueble ni se compara con su valor catastral; ' +
+        'una carpeta de investigación <b>no es una condena</b> ni un fraude probado; y una coincidencia en una lista es una <b>señal para revisar, nunca una acusación</b>. ' +
+        'Esto no sustituye al notario, al avalúo ni al certificado de libertad de gravámenes del Registro Público de la Propiedad.</p>';
+      return { html: html, fu: fu, ci: ci, tit: 'Semáforo Patrimonial: ' + nom + (rfc && rfc.length === 12 ? ' · ' + rfc : ''),
+        ir: p0 ? ['herramienta-calculadora-predial.html?mun=' + p0.id, 'el simulador del predial de ' + nom] : ['servicios-revisa.html?s=simulacion', 'el Semáforo Patrimonial en el Inspector'],
+        sug: [m ? '¿Cuánto debe el municipio de ' + m.n + ', ' + m.en + '?' : '¿Cuánto debe ' + e.n + '?', '¿Qué es la lista 69-B?', 'Simulador del impuesto predial'] };
+    }
+
     var AMG = D.amg || null;
     function amgTema(k) { var x = AMG.t[k]; return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug }; }
     function amgResp(t) {
@@ -2510,6 +2621,7 @@
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       social: function (q) { var r = socEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'soc' }); },
       sda: function (q) { var r = sdaResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sda' }); },
+      patrimonial: function (q) { var r = patrimonial(q); if (!r) return null; ultima = q; return fin(r, { tipo: 'patri' }); },
       vivienda: function (q) { var r = vivEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'viv' }); },
       administracion: function (q) { var r = apuEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'apu' }); },
       saludEstado: function (q) { var r = salEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },

@@ -1414,7 +1414,8 @@ def servicios_chat(bloque, resp=False):
     todo el modo Inspector con sus aplicaciones»). Mismo motor y misma base que el chat
     del Auditor; contesta en corto y la respuesta completa abre en su propia página."""
     import asistente
-    scripts = ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js']
+    # Ronda 25: con la población y el fraude, como el chat del Auditor y el dictamen, para que el panel diga lo mismo que el dictamen.
+    scripts = ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'municipios-fraude.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js']
     if resp:
         # Ronda 9: el expediente visual (miniatura del mapa y gráficas en SVG) solo en la respuesta completa y el panel.
         scripts = scripts[:-1] + ['insp-visual.js', 'asistente.js']
@@ -2912,8 +2913,9 @@ SV_ENTRADA = {
                      ['¿Cómo se audita?', '¿Qué es el control interno?'], '🎓 Abre cómo se audita'),
     'licencia': ('pregunta', '¿Qué herramienta te interesa?', 'Prueba cualquiera aquí; la licencia es para usarlas en tu organización.',
                  ['Herramientas del Auditor'], '🛠️ Abre las herramientas'),
-    'simulacion': ('pregunta', 'Tu sueldo o tu caso', 'El simulador hace la cuenta con su artículo; no es asesoría ni declaración.',
-                   ['Gano 15 mil al mes, ¿cuánto me retienen?', 'Me despidieron, ¿cuánto me toca?'], '🧮 Abre tu estado de cuenta cívico'),
+    'simulacion': ('pregunta', 'Tu sueldo, tu caso o la casa que vas a comprar', 'El simulador hace la cuenta con su artículo; no es asesoría ni declaración. '
+                   'Si vas a comprar, elige el lugar abajo: el Semáforo Patrimonial junta su predial, el precio de la vivienda, el fraude y la deuda.',
+                   ['Voy a comprar casa en Zapopan, ¿qué reviso?', 'Gano 15 mil al mes, ¿cuánto me retienen?', 'Me despidieron, ¿cuánto me toca?'], '🧮 Abre tu estado de cuenta cívico'),
     'escenarios': ('pregunta', 'El escenario que quieres ver', 'Reparte el presupuesto o mueve una obra: es un escenario, nunca un pronóstico.',
                    ['¿Cuánto cuesta el Tren Maya?'], '🧩 Abre el simulador del presupuesto'),
 }
@@ -2952,6 +2954,8 @@ def sv_mostrador(sf):
                        'app': monta[x[0]][1], 'bt': bt, 'cobro': COBRO[x[0]]}
         if x[0] in SV_LUGAR:
             datos[x[0]]['lugar'] = 1
+        if x[0] in SV_PATRI:
+            datos[x[0]]['patri'] = 1
         if x[0] in SV_SUELTA:
             u, campo, acepta, tx = SV_SUELTA[x[0]]
             pag = os.path.join(RAIZ, u.split('#')[0])
@@ -2963,6 +2967,9 @@ def sv_mostrador(sf):
     lugar = ('            <fieldset class="sv-most-lugar" id="svMostLugar" hidden><legend>O elige el lugar</legend>'
              '<div><label for="svMostEnt">Entidad</label><select id="svMostEnt"><option value="">Elige una de las 32 entidades</option>%s</select></div>'
              '<div><label for="svMostMun">Municipio o alcaldía</label><select id="svMostMun" disabled><option value="">Toda la entidad</option></select></div>'
+             '<div class="sv-most-rfc" id="svMostRfcCaja" hidden><label for="svMostRfc">RFC o razón social de la desarrolladora (opcional)</label>'
+             '<input id="svMostRfc" type="text" maxlength="80" autocomplete="off" placeholder="Por ejemplo, el RFC de su factura" aria-describedby="svMostRfcAy">'
+             '<small id="svMostRfcAy">Solo empresas: de una persona física no publicamos nada. Una coincidencia en una lista es una señal para revisar, nunca una acusación.</small></div>'
              '<small>Cada municipio va con su entidad y su clave del INEGI, para que no se confunda con otro del mismo nombre.</small></fieldset>\n') % ''.join(
         '<option value="%s">%s</option>' % (esc_attr(a), html.escape(nm)) for a, c, nm in ents)
     opciones = ''.join('<optgroup label="%s">%s</optgroup>' % (esc_attr(tit), ''.join(
@@ -2998,7 +3005,11 @@ def sv_mostrador(sf):
 
 
 # Ronda 9 (pedido del autor, 22-11-2026): los servicios del territorio traen el selector «Entidad + Municipio».
-SV_LUGAR = ('radiografia', 'temporada', 'entrega')
+SV_LUGAR = ('radiografia', 'temporada', 'entrega', 'simulacion')
+# Ronda 25 (Plan Maestro del autor, 25-11-2026): el Semáforo Patrimonial Inmobiliario. En estos servicios el lugar arma la
+# pregunta «Semáforo patrimonial: …» y suma el campo opcional del RFC o la razón social de la desarrolladora; la respuesta la da
+# patrimonial() de asistente-charla.js con lo que la base ya tiene. **Nunca un RFC de persona física en el ejemplo.**
+SV_PATRI = ('simulacion',)
 
 
 def sv_entidades():

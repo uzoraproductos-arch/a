@@ -77,3 +77,7 @@
   body.cp-print { background: #fff; }
   .cp-informe a { color: inherit; }
 }
+/* Ronda 25: la liga al Semáforo Patrimonial del municipio elegido. */
+.cp-patri { margin: 10px 0 0; font-size: 16px; line-height: 1.5; }
+.cp-patri a { font-weight: 700; }
+.cp-patri small { display: block; font-size: 16px; opacity: .85; }

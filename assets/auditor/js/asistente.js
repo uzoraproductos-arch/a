@@ -3259,6 +3259,8 @@
       return charla.lectura(q, hm || tituloColumna(tx0) || temaColumna(tx0));
     }
     if (hm) return hm;
+    /* El Semáforo Patrimonial (Ronda 25): «voy a comprar casa en Zapopan» antes que el grupo de la desarrolladora, el precio de la vivienda, el padrón y el predial. */
+    var spa = charla && charla.patrimonial && charla.patrimonial(q); if (spa) return spa;
     var ge = grupoEmp(q);
     if (ge) return ge;
     var xi = expInvResp(q);

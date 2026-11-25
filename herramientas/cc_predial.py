@@ -2650,7 +2650,14 @@ def chat_shf():
     return {'est': [[a, v['i'], v['i0'], v['var'], v['precios']['p50'], v['precios']['medio']] for a, v in sorted(S['est'].items())],
             'nac': [S['nac']['i'], S['nac']['i0'], S['nac']['precios']['p50']],
             'corte': _corte_txt(S), 'base': S['dat']['base'], 'pag': S['inf']['precios_pag'], 'pv': S['inf']['var_pag_ent'],
-            'fu': {'tx': '%s, %s' % (S['fuente'], _corte_txt(S)), 'url': S['inf']['url']}, 'dat': S['dat']['url']}
+            'fu': {'tx': '%s, %s' % (S['fuente'], _corte_txt(S)), 'url': S['inf']['url']}, 'dat': S['dat']['url'],
+            # Ronda 25: los municipios que la SHF publica [entidad, municipio, índice, variación anual], para el Semáforo Patrimonial.
+            'mun': [[{'México': 'MÉX'}.get(x['ent']) or {v: k for k, v in ENTIDADES.items()}[x['ent']], x['nombre'], x['i'], x['var']] for x in _shf_json()['municipios']]}
+
+
+def _shf_json():
+    with open(SHF_JSON, encoding='utf-8') as f:
+        return json.load(f)
 
 
 def _corte_txt(S):

@@ -28,7 +28,7 @@
     marco = $('svMostMarco'), carga = $('svMostCarga'), doc = $('svMostDoc'), form = caja.querySelector('form'),
     suelta = $('svMostSuelta'), arch = $('svMostArch'), sueltaTx = $('svMostSueltaTx'), guarda = $('svMostGuarda'),
     port = $('svPort'), portL = $('svPortLista'), portB = $('svPortBorra'),
-    lugar = $('svMostLugar'), selE = $('svMostEnt'), selM = $('svMostMun');
+    lugar = $('svMostLugar'), selE = $('svMostEnt'), selM = $('svMostMun'), rfcCaja = $('svMostRfcCaja'), rfcIn = $('svMostRfc');
   var mide = 0, listo = false, pendiente = null, ultimo = null, archivos = null;
 
   function esc(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -47,6 +47,7 @@
     ej.innerHTML = d.ej.map(function (x) { return '<button type="button" class="sv-most-chip" data-q="' + esc(x) + '">' + esc(x) + '</button>'; }).join(' ');
     if (d.app) { app.hidden = false; app.textContent = d.bt; app.setAttribute('data-app', d.app); } else app.hidden = true;
     if (lugar) lugar.hidden = !d.lugar;
+    if (rfcCaja) rfcCaja.hidden = !d.patri;
     if (suelta) {
       suelta.hidden = !d.suelta;
       if (d.suelta) { sueltaTx.textContent = d.suelta.tx; arch.setAttribute('accept', d.suelta.acepta); }
@@ -204,6 +205,12 @@
     if (!e) return;
     var o = selM.options[selM.selectedIndex], mun = selM.value;
     var t = mun ? (e[0] === 'CDMX' ? 'Alcaldía ' : 'Municipio de ') + o.getAttribute('data-n') + ', ' + e[2] : e[2];
+    /* El Semáforo Patrimonial (Ronda 25): la pregunta lo nombra y lleva el RFC o la razón social, si se escribió. */
+    var d = D[sel.value];
+    if (d && d.patri) {
+      var rz = rfcIn ? rfcIn.value.trim() : '';
+      t = 'Semáforo patrimonial: ' + t + (rz ? (/^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$/i.test(rz) ? ' · RFC de la desarrolladora ' + rz.toUpperCase() : ' · desarrolladora: ' + rz) : '');
+    }
     calienta();
     revisa(t, '', true, { ent: e[0], mun: mun });
   }
@@ -224,6 +231,7 @@
       revisaLugar();
     });
     selM.addEventListener('change', revisaLugar);
+    if (rfcIn) rfcIn.addEventListener('change', function () { if (selE.value) revisaLugar(); });
   }
 
   sel.addEventListener('change', function () { pinta(sel.value); anota(sel.value, ''); q.value = ''; q.focus(); calienta(); });

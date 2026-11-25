@@ -713,3 +713,12 @@ html.pa-en-vista .pa-app-marco iframe { min-height: 420px; }
   .pv-mapa svg { max-height: 260px; }
   .pv-lleno, .pv-sel, .pv-ent, .pv-mun, .pv-fondo { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+/* Ronda 25: el Semáforo Patrimonial Inmobiliario (patrimonial() de asistente-charla.js), tres bloques. */
+.pa-patri { display: grid; gap: 10px; margin: 8px 0; }
+.pa-patri-b { padding: 10px 14px; border: 1px solid #dbe4f3; border-left: 4px solid #1d4fa3; border-radius: 12px; background: #fbfcff; }
+.pa-patri-b h4 { margin: 0 0 6px; font-size: 18px; color: #0b2a63; }
+.pa-patri-b p, .pa-patri-b li { font-size: 16px; line-height: 1.5; }
+.pa-patri-b .pa-chico { font-size: 16px; }
+.pa-patri-b code { overflow-wrap: anywhere; }
+[data-theme="dark"] .pa-patri-b { background: #142238; border-color: #2a3b57; border-left-color: #6f9cf0; }
+[data-theme="dark"] .pa-patri-b h4 { color: #e8eefa; }

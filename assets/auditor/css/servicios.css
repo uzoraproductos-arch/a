@@ -613,3 +613,7 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 [data-theme="dark"] .sv-paquete { background: #16233a; border-color: #2a3b57; border-top-color: #f2b63d; color: #e8eefa; }
 /* Ronda 10 (auditoría UX): en celular el texto corrido no baja de 16 px (AGENTS.md §4). */
 @media (max-width: 640px) { .sv-aviso, .sv-quien, .sv-most-pie { font-size: 16px; } }
+/* Ronda 25: el RFC o la razón social de la desarrolladora, en el Semáforo Patrimonial (simulacion). */
+.sv-most-rfc { display: grid; gap: 4px; min-width: 0; grid-column: 1 / -1; }
+.sv-most-rfc[hidden] { display: none; }
+.sv-most-rfc input { min-height: 44px; width: 100%; max-width: 100%; box-sizing: border-box; border-radius: 12px; border: 0; padding: 6px 12px; font: 16px 'Inter', system-ui, sans-serif; color: #0b2a63; background: #fff; }
