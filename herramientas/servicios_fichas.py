@@ -508,7 +508,9 @@ def _titulo(archivo):
 # La única liga directa entre pestañas (Ronda 21, 25-11-2026, decisión del autor): el Noticiero, diario
 # de investigación, lleva a cada Auditoría en imágenes sin pasar por el chat, para que Google la lea.
 # Va marcada con data-directa="seo"; vinculos_auditor.py acepta solo esa marca y solo hacia auditoria-*.html.
-DIRECTAS = {('Noticiero', 'auditoria-')}
+# Ronda 24 (25-11-2026, decisión del autor): «Canjear código / Solicitar acceso» y «Canjear mi código promocional» de
+# servicios.html van directo a la entrada (canjea-tu-codigo.html), con data-directa="seo" como la del Noticiero.
+DIRECTAS = {('Noticiero', 'auditoria-'), ('Servicios', 'canjea-tu-codigo.html')}
 
 
 def directa(origen, liga, atributos):

@@ -1710,7 +1710,8 @@ _AV_NAVEGADOR = [
     ('No medir este navegador', 'av-sin-medir', 'Solo si apagas la medición de uso (abajo): recuerda que no quieres que se mida.'),
     ('Tus respuestas', 'av-caso', 'Lo que le preguntaste al Auditor, hasta 60: la pregunta, la fecha, el modo, la respuesta en corto, su página y los servicios que vienen al caso, para armar «Tus respuestas» (mis-respuestas.html). Nunca sale del navegador; la borras ahí mismo, o una por una.'),
     ('Tus dictámenes de cada expediente', 'av-dics', 'La pregunta, el folio y el enlace de los dictámenes que generas y tocan una investigación, hasta 60, para listarlos en su expediente. Los borras ahí mismo.'),
-    ('Tu portafolio de investigaciones', 'av-portafolio', 'Las revisiones que guardas en el Inspector de Servicios, hasta 60: el servicio, la pregunta, la fecha, su título y el enlace de su dictamen, para reabrirlas desde Servicios o los Expedientes de control interno. Nunca sale del navegador; las borras ahí mismo, una por una o todas.'),
+    ('Tu portafolio de investigaciones', 'av-portafolio', 'Las revisiones que guardas en el Inspector de Servicios o en el Expediente vivo del Auditor, hasta 60: el servicio, la pregunta, la fecha, su título y el enlace de su dictamen, para reabrirlas desde el Auditor, Servicios o los Expedientes de control interno. Nunca guarda la respuesta. Nunca sale del navegador; las borras ahí mismo, una por una o todas.'),
+    ('El recorrido del Auditor', 'av-tour-visto', 'Solo si abres «Cómo funciona (3 pasos)» en el Auditor: recuerda que ya lo viste. Es un «1» y nada más.'),
     ('Mi Auditavisión', 'av-mia', 'Los RFC de tus proveedores, el resumen de las revisiones que guardas y, para el aviso del Vigía de proveedores, la situación en la lista 69-B que viste de cada uno y el corte del SAT de tu última visita. Nunca sale del navegador; lo borras con «🗑️ Borrar todo mi tablero».'),
     ('Las columnas que sigues', 'av-sigo', 'Cuáles casos de Verificamos sigues y qué versión viste, para avisarte cuando cambian.'),
     ('Ágora cívica', 'auditavision_foro_debates y otras', 'Tus hilos, tus apoyos y el seudónimo que elijas. No se publican: viven solo en tu navegador.'),
@@ -2416,9 +2417,9 @@ LIENZO = [
 # sección, va junto a «¿Mis facturas o mis datos se publican?». Nunca un monto.
 PREGUNTAS = [
     ('¿Cuánto cuesta y cuánto tarda?', 'La consulta es gratis y lo seguirá siendo: lo que ves en el sitio no se cobra. Se cobra que lo hagamos por ti, '
-     'que lo recordemos o que te avisemos, y cada servicio dice cómo: por ficha, por mes, por documento, por taller o por cotización. Todavía no hay '
-     'tarifas publicadas, y no vamos a inventarlas: saldrán de los primeros encargos piloto y serán iguales para todos. Antes de empezar recibes por '
-     'escrito el costo y el plazo; si no te conviene, ahí termina y no pagas nada.'),
+     'que lo recordemos o que te avisemos: con tokens de pago único o con un plan mensual, a Precio Fundador, y los precios están publicados en '
+     'Servicios (iguales para todos). Mientras se activan los pagos en línea, se opera con códigos piloto y promocionales. Un encargo a la medida '
+     'se cotiza: antes de empezar recibes por escrito el costo y el plazo; si no te conviene, ahí termina y no pagas nada.'),
     ('¿El entregable es un dictamen o un peritaje?', 'No. Es investigación documental y análisis de indicios: señalamos lo que dicen los documentos públicos y las inconsistencias, sin acusar a nadie. Un encargo que requiera dictamen pericial se cotiza aparte, con su responsable profesional.'),
     ('¿Qué pasa si no encuentran lo que yo esperaba?', 'El entregable lo dice. Quien encarga define la pregunta, no la respuesta, y las conclusiones no se negocian.'),
     ('¿Es seguro? ¿Mis facturas o mis datos se publican?', 'No se publican: tu encargo es confidencial y no decimos quién encargó qué sin su permiso. '
@@ -3590,18 +3591,21 @@ def servicios():
             raise SystemExit('Servicios: la consecuencia «%s» cita una ley o un servicio que no existen' % c[1])
         if not os.path.exists(os.path.join(RAIZ, c[6][1].partition('#')[0])):
             raise SystemExit('Servicios: la consecuencia «%s» lleva a %s, que no existe' % (c[1], c[6][1]))
+    import auditor_bento as _ab
+    # Ronda 24: sin emojis en servicios.html; cada consecuencia con su ícono de trazo.
+    SV_CON_ICO = {'🧾': 'factura', '💸': 'factura', '⛓️': 'liga', '🪪': 'usuario', '📝': 'pluma', '🏦': 'edificio'}
     arriesga = ('<div class="sv-cons">\n%s\n        </div>\n'
-                '        <p class="sv-limite"><span aria-hidden="true">⚖️</span> Citamos el artículo y su texto vigente, nunca un monto de multa: la ley la fija '
+                '        <p class="sv-limite">' + _ab.ico('escudo', 16) + ' Citamos el artículo y su texto vigente, nunca un monto de multa: la ley la fija '
                 'en UMA y la autoridad la individualiza. Una infracción no es una sanción, y que una lista te nombre no es una condena (Constitución, art. 20, B, fr. I). '
                 'No es asesoría legal.</p>') % '\n'.join(
         '          <article class="sv-con">\n'
-        '            <p class="sv-con-cab"><span class="sv-card-ico" aria-hidden="true">%s</span><b>%s</b></p>\n'
+        '            <p class="sv-con-cab"><span class="sv-card-ico">%s</span><b>%s</b></p>\n'
         '            <p class="sv-con-pasa">%s</p>\n'
         '            <details class="sv-con-ley"><summary>%s, %s <span class="est-chip est-oficial">oficial</span></summary>'
         '<blockquote>«%s»</blockquote><small><a href="%s" target="_blank" rel="noopener">%s</a>, texto vigente (Cámara de Diputados, última reforma %s; huella SHA-256 <code>%s…</code>).</small></details>\n'
-        '            <p class="sv-con-acc"><a href="%s"><span aria-hidden="true">🔍</span> %s con el Inspector ➔</a><span class="sv-con-srv">Servicio: %s</span></p>\n'
-        '          </article>' % (ico, tit, pasa, leyes_sv[ley][1], art, cita, esc_attr(leyes_sv[ley][3]), leyes_sv[ley][0], leyes_sv[ley][2], leyes_sv[ley][4][:12],
-                                  esc_attr(sf.revisa_liga(sid)), rev[0], nom[sid])
+        '            <p class="sv-con-acc"><a href="%s">%s %s con el Inspector %s</a><span class="sv-con-srv">Servicio: %s</span></p>\n'
+        '          </article>' % (_ab.ico(SV_CON_ICO.get(ico, 'escudo'), 20), tit, pasa, leyes_sv[ley][1], art, cita, esc_attr(leyes_sv[ley][3]), leyes_sv[ley][0], leyes_sv[ley][2], leyes_sv[ley][4][:12],
+                                  esc_attr(sf.revisa_liga(sid)), _ab.ico('lupa', 16), rev[0], _ab.ico('flecha', 14), nom[sid])
         for ico, tit, pasa, ley, art, cita, rev, sid in SV_CONSECUENCIAS)
     import fuentes as fu
     fte = {f['id']: f for f in fu.FUENTES}
@@ -3626,7 +3630,8 @@ def servicios():
     # familia (pedido del autor, 21-11-2026: «cada una de esas novedades… a los
     # servicios que ofrecemos… dividido en las secciones que correspondan»).
     import servicios_fichas as sf
-    necesitas = '<span id="nuevo"></span>' + sv_servicios_y_nuevo(sf, puertas)
+    import servicios_planes as sp
+    sp.revisa(SERVICIOS, PERFILES, LINEAS)
     # Las ligas viejas a una sección que se mudó, y las que traen el tema o el
     # servicio (?tema=, ?servicio=, ?plan=), se mandan a su página.
     redir = ('<script>(function () { var m = %s, h = decodeURIComponent(location.hash.slice(1)), q = location.search, '
@@ -3646,16 +3651,24 @@ def servicios():
                     'Los Servicios y las <a href="donaciones.html">donaciones</a> sostienen el trabajo; ninguno compra lo que publicamos.'),
         'sin_saltos': True, 'redirige': redir,
         'scripts': ['servicios.js'],  # las pestañas por familia; el Inspector de cada servicio vive en servicios-revisa.html
+        'estilos': ['servicios.css', 'servicios-planes.css'],
         'antes': aviso,
+        # Ronda 24 (25-11-2026, decisión del autor): cinco bloques (servicios_planes.py), sin emojis: qué puedes hacer,
+        # a quién va dirigido, qué es gratis y los planes con el Precio Fundador, el código promocional y el catálogo
+        # por objetivo. «La base al día» quedó en la tira del encabezado y «Cómo funciona», en el recorrido del Auditor.
         'secciones': [
-            bloque_sec('propuesta', 'Lo que te ofrecemos', '', sv_liga(portada, 'servicios.html'), sin_cab=True),
-            bloque_sec('al-dia', 'La base, al día', 'Lo que ya puedes revisar hoy, gratis, y de cuándo es cada fuente.', aldia, pre='Nuestra base de datos'),
-            bloque_sec('como', 'Cómo funciona', 'Tres pasos. Todo empieza con una pregunta en tus palabras.', como3, pre='Del chat al servicio'),
-            bloque_sec('para-quien', '¿Para quién es?', 'Cada perfil, para qué le sirve y con qué fundamento; toca el tuyo y abre sus servicios.',
-                       sv_para_quien(sf), pre='A quién servimos'),
-            bloque_sec('necesitas', 'Los servicios: qué necesitas',
-                       '%s servicios en cinco familias. Cada uno dice cómo se cobra; tócalo y se abre su Inspector, '
-                       'en su propia página.' % numero(len(SERVICIOS)), necesitas, pre='Los servicios'),
+            bloque_sec('propuesta', 'Servicios y Planes', '', sp.hero(monetizacion.contadores()), sin_cab=True),
+            bloque_sec('que-haces', '¿Qué puedes hacer y para qué te sirve?', 'Cuatro cosas que la plataforma hace por ti, cada una con sus documentos.',
+                       sp.que_haces(), pre='Bloque 1'),
+            bloque_sec('para-quien', '¿A quién va dirigido?', 'Cuatro perfiles y los servicios que más les sirven; toca uno y se abre su Inspector.',
+                       sp.para_quien(SERVICIOS, PERFILES, sf), pre='Bloque 2'),
+            bloque_sec('precio-fundador', 'Qué es gratis y los planes, con Precio Fundador',
+                       'La consulta es libre y lo seguirá siendo. Para ir más a fondo: tokens de pago único o un plan mensual.',
+                       sp.precios(), pre='Bloque 3'),
+            bloque_sec('codigo-promocional', 'Tu código promocional o de cortesía', '', sp.codigo(), pre='Bloque 4'),
+            bloque_sec('necesitas', 'Los %d servicios, por objetivo' % len(SERVICIOS),
+                       'Cada uno dice si es gratis o va con tokens o plan, y cómo se cobra el encargo; tócalo y se abre su Inspector.',
+                       '<span id="nuevo"></span>' + sp.catalogo(SERVICIOS, LINEAS, COBRO, sf), pre='Bloque 5'),
             bloque_sec('arriesgas', 'Lo que arriesgas si no revisas',
                        'Lo que dice la ley cuando un proveedor o un cliente no es lo que parece. Toca el artículo para leer su texto.', arriesga, pre='Por qué revisar'),
             bloque_sec('preguntas-f', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.', faq),
@@ -7165,6 +7178,20 @@ def pagina(a, sello):
             texto = texto.replace('href="%s?q=' % sf.SV_CHAT, 'href="%s?s=%s&amp;q=' % (sf.SV_REVISA, sid))
         elif origen == 'Servicios' and a['archivo'] not in (sf.SV_CHAT, sf.SV_RESP, sf.SV_REVISA):
             texto = sf.a_revisa(texto)
+    if a['archivo'] == 'servicios.html':
+        # Ronda 24 (25-11-2026): el logo de favicon, como en el Auditor, y sin emojis dentro de <main> (íconos de trazo).
+        import auditor_bento
+        texto = texto.replace('<link rel="icon" href="%s">' % FAVICON, '<link rel="icon" href="assets/auditor/img/logo-auditavision.svg" type="image/svg+xml">', 1)
+        i, j = texto.find('<main'), texto.rfind('</main>')
+        cuerpo = texto[i:j].replace('<span class="apartado-lema">🔎 ', '<span class="apartado-lema">').replace(' ➔', ' ' + auditor_bento.ico('flecha', 14))
+        texto = texto[:i] + cuerpo + texto[j:]
+    # Ronda 24 (decisión del autor, 25-11-2026): los únicos montos de la plataforma son los de la tabla del Precio
+    # Fundador (monetizacion.PRECIO_FUNDADOR), dentro de su marca. Uno fuera de ella detiene la generación.
+    import monetizacion
+    fuera = monetizacion.montos_fuera(texto) if ('MXN' in texto and a['archivo'] in ('servicios.html', 'herramienta-inspector-pregunta.html')
+                                                or monetizacion.MARCA_PRECIO[0] in texto) else []
+    if fuera:
+        raise SystemExit('apartados.py: %s trae montos fuera de la tabla del Precio Fundador: %s' % (a['archivo'], ', '.join(fuera[:3])))
     return texto
 
 
