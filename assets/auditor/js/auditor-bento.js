@@ -239,6 +239,17 @@
       setTimeout(function () { marca(app.getAttribute('data-modo')); }, 0);
     }
 
+    /* Ronda 26C: el velo editorial del centro llega hasta el pie del encabezado y se desvanece en los 120 px que siguen. */
+    var centro = document.querySelector('.avb-centro'), cab = document.querySelector('.avb-cab');
+    function midecab() {
+      if (!centro || !cab) return;
+      var h = cab.getBoundingClientRect().bottom - centro.getBoundingClientRect().top + 120;
+      if (h > 0) centro.style.setProperty('--avb-cab-h', Math.round(h) + 'px');
+    }
+    midecab();
+    if (window.ResizeObserver && cab) new ResizeObserver(midecab).observe(cab);
+    window.addEventListener('resize', midecab);
+
     /* Las preguntas de la entrada, una cada 4 s. */
     var rota = document.getElementById('avbRota'), rq = rota ? rota.querySelectorAll('li') : [], ri = 0, rt = 0, pausa = false;
     if (rq.length > 1 && !quieto()) {

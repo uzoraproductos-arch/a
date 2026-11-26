@@ -1177,8 +1177,18 @@ a.nav-brand-text:focus-visible { outline: 3px solid var(--civ-celeste); outline-
 .av-volver { position: fixed; left: 16px; bottom: 16px; z-index: 900; display: flex; align-items: stretch; border-radius: 999px; background: #2f3640; color: #ffffff; box-shadow: 0 10px 28px rgba(11, 42, 99, .28); animation: av-volver-entra .35s ease both; }
 .av-volver-ir { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 6px 8px 6px 8px; color: #ffffff; text-decoration: none; border-radius: 999px 0 0 999px; }
 .av-volver-ir img { flex: none; width: 40px; height: 40px; padding: 5px 4px; box-sizing: border-box; border-radius: 50%; background: #ffffff; object-fit: contain; }
+.av-volver-ico { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 255, 255, .12); }
+.av-volver-x svg { display: block; margin: 0 auto; }
+/* Ronda 26C: sin plática guardada, el acceso es discreto. */
+.av-volver.av-volver-sutil { background: #ffffff; color: #0b2a63; border: 1px solid #c9d3e6; box-shadow: 0 6px 18px rgba(11, 42, 99, .16); }
+.av-volver-sutil .av-volver-ir { min-height: 48px; color: #0b2a63; padding-right: 14px; }
+.av-volver-sutil .av-volver-ico { width: 34px; height: 34px; background: #eef3fb; }
+.av-volver-sutil .av-volver-ir:hover, .av-volver-sutil .av-volver-ir:focus-visible { background: #f2f6fc; }
+.av-volver-sutil .av-volver-x { color: #5a6782; border-left-color: #dde3ee; }
+.av-volver-sutil .av-volver-x:hover, .av-volver-sutil .av-volver-x:focus-visible { background: #f2f6fc; color: #0b2a63; }
 .av-volver-ir b { display: block; font: 700 16px/1.2 Inter, system-ui, sans-serif; }
 .av-volver-ir small { display: block; font: 500 13px/1.2 Inter, system-ui, sans-serif; color: #d6dbe4; }
+@media (max-width: 600px) { .av-volver-ir small { display: none; } }
 .av-volver-ir:hover, .av-volver-ir:focus-visible { background: #3d4652; }
 .av-volver-x { flex: none; min-width: 44px; min-height: 44px; border: 0; border-left: 1px solid rgba(255, 255, 255, .18); border-radius: 0 999px 999px 0; background: transparent; color: #d6dbe4; font-size: 16px; cursor: pointer; }
 .av-volver-x:hover, .av-volver-x:focus-visible { background: #3d4652; color: #ffffff; }
@@ -1189,6 +1199,8 @@ a.nav-brand-text:focus-visible { outline: 3px solid var(--civ-celeste); outline-
 html.av-en-chat, html.av-en-chat body { background: #ffffff; }
 html.av-en-chat .site-top-nav, html.av-en-chat .apartado-cab, html.av-en-chat .apartado-pie, html.av-en-chat .herr-nav-min,
 html.av-en-chat .herr-mod-nav, html.av-en-chat .apartado-subir, html.av-en-chat .av-volver { display: none !important; }
+html.pa-en-vista .av-volver, html.modo-visor .av-volver { display: none !important; }
+@media print { .av-volver { display: none !important; } }
 html.av-en-chat .apartado-cuerpo { padding-top: 4px; padding-bottom: 8px; }
 
 @media print { .av-volver { display: none; } }
@@ -1406,9 +1418,18 @@ table.sa-rangos tbody th { font-weight: 600; }
 .avb-lado .avb-i { flex: none; display: block; }
 .avb-lado-cab { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .avb-lado-cuerpo { display: flex; flex-direction: column; gap: 14px; flex: 1 1 auto; }
-.avb-marca { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 6px; color: #ffffff; text-decoration: none; }
-.avb-marca img { background: #ffffff; border-radius: 8px; padding: 3px; }
-.avb-marca b { font-family: 'Playfair Display', Georgia, serif; font-size: 20px; }
+/* Ronda 26C: el logo, grande y sin caja blanca, es el botón de «Quiénes somos» (apartados.js abre el cajón); el nombre
+   sigue siendo la liga al Auditor. */
+.avb-marca { display: flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 2px; }
+.avb-logo-btn {
+  flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 2px;
+  border: 0; border-radius: 10px; background: transparent; cursor: pointer;
+}
+.avb-logo-btn img { display: block; width: 64px; height: 50px; background: transparent; padding: 0; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .35)); }
+.avb-logo-btn:hover, .avb-logo-btn:focus-visible { background: rgba(255, 255, 255, .1); }
+.avb-marca-tx { display: inline-flex; align-items: center; min-height: 44px; color: #ffffff; text-decoration: none; }
+.avb-marca-tx:hover, .avb-marca-tx:focus-visible { text-decoration: underline; color: #ffffff; }
+.avb-marca b { font-family: 'Playfair Display', Georgia, serif; font-size: 21px; }
 .avb-lado-menu {
   display: none; align-items: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 6px 12px; border: 1px solid rgba(255, 255, 255, .22);
   border-radius: 10px; background: rgba(255, 255, 255, .06); color: #ffffff; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer;
@@ -1471,9 +1492,9 @@ table.sa-rangos tbody th { font-weight: 600; }
 /* «Cuéntanos lo que viste», dentro de Comunidad. */
 .avc-cuentanos a { font-weight: 700; }
 @media (min-width: 981px) {
-  body:has(> .avb-lado), body.avb-pagina { padding-left: 236px; }
-  .avb-lado { position: fixed; top: 0; bottom: 0; left: 0; width: 236px; overflow-y: auto; z-index: 20; }
-  body:has(> .avb-lado) .av-volver, body.avb-pagina .av-volver { left: 252px; }
+  body:has(> .avb-lado), body.avb-pagina { padding-left: 268px; }
+  .avb-lado { position: fixed; top: 0; bottom: 0; left: 0; width: 268px; overflow-y: auto; z-index: 20; }
+  body:has(> .avb-lado) .av-volver, body.avb-pagina .av-volver { left: 284px; }
 }
 @media (max-width: 980px) {
   .avb-lado { gap: 10px; padding: 10px 16px; }
