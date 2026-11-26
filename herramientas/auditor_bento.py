@@ -195,7 +195,10 @@ def lado(actual, n_serv, en_auditor=False, pestana=''):
 
 LADO = '''<aside class="avb-lado" id="avbLado" data-pestana="%s" aria-label="Navegación de Auditavisión">
       <div class="avb-lado-cab">
-        <a class="avb-marca" href="%s"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="36" height="28"> <b>Auditavisión</b></a>
+        <div class="avb-marca">
+          <button type="button" class="avb-logo-btn" id="apartadoPresentacion" title="Quiénes somos: abrir la presentación de Auditavisión" aria-label="Quiénes somos: abrir la presentación de Auditavisión"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="64" height="50"></button>
+          <a class="avb-marca-tx" href="%s"><b>Auditavisión</b></a>
+        </div>
         <button type="button" class="avb-lado-menu" id="avbLadoMenu" aria-controls="avbLadoCuerpo" aria-expanded="false">%s<span>Menú</span></button>
       </div>
       <div class="avb-lado-cuerpo" id="avbLadoCuerpo">
@@ -240,7 +243,7 @@ def _cab():
                     for q in acceso.PREGUNTAS_ENTRADA)
     return '''<header class="avb-cab">
         <div class="avb-cab-tit">
-          <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="52" height="40">
+          <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="76" height="60">
           <h1 class="avb-tit" id="avbTit">%s</h1>
         </div>
         <div class="avb-quienes">

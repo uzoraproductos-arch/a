@@ -3,7 +3,8 @@
    más», un expediente, una página de la plataforma), la página a la que
    llega le ofrece regresar: un botón flotante abajo a la izquierda. La
    plática lo espera tal como la dejó (asistente.js la guarda en la pestaña).
-   La seña vive en sessionStorage y se borra al volver al chat o con ✕. */
+   La seña vive en sessionStorage y se borra al volver al chat o con la equis. Desde la Ronda 26C sale en toda página
+   fuera del Auditor (ver pon()). */
 (function () {
   'use strict';
   var CHAT = 'herramienta-inspector-pregunta.html', SENA = 'av-volver';
@@ -83,19 +84,32 @@
       a.href = CHAT + '?q=' + encodeURIComponent(q) + '&abre=' + encodeURIComponent(f + a.search + a.hash);
     }, true);
   }
+  /* Ronda 26C (26-11-2026): el botón flotante sale en toda página fuera del Auditor, no solo al llegar desde una
+     respuesta. Si la pestaña guarda una plática (av-chat), invita a volver a ella; si no, es un acceso discreto para
+     preguntar. Se oculta con la equis por lo que dure la pestaña (av-volver-oculto). Nunca en la entrada, el dictamen,
+     el panel de la administración ni dentro de un marco. */
+  var SIN_VOLVER = ['canjea-tu-codigo.html', 'herramienta-inspector-dictamen.html', 'administracion-codigos.html'];
+  var platica = false;
   try {
-
-    if (aqui === CHAT) { sessionStorage.removeItem(SENA); return; }
-    if (!sessionStorage.getItem(SENA)) return;
+    if (aqui === CHAT || aqui === '' ) { sessionStorage.removeItem(SENA); return; }
+    if (SIN_VOLVER.indexOf(aqui) >= 0 || window.self !== window.top) return;
+    if (sessionStorage.getItem('av-volver-oculto')) return;
+    platica = !!sessionStorage.getItem('av-chat') || !!sessionStorage.getItem(SENA);
   } catch (e) { return; }
+  var SVG = '<svg viewBox="0 0 24 24" width="%s" height="%s" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">';
+  function svg(n, d) { return SVG.replace(/%s/g, String(n)) + d + '</svg>'; }
+  var ICO_VUELVE = svg(22, '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M12 9l-3 3 3 3"/><path d="M9 12h6"/>');
+  var ICO_PREGUNTA = svg(22, '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M10 9.5a2 2 0 1 1 2.8 1.8c-.5.3-.8.7-.8 1.2"/><path d="M12 15.5h.01"/>');
+  var ICO_X = svg(18, '<path d="M6 6l12 12"/><path d="M18 6L6 18"/>');
   function pon() {
     if (document.querySelector('.av-volver')) return;
     var caja = document.createElement('div');
-    caja.className = 'av-volver';
+    caja.className = 'av-volver' + (platica ? '' : ' av-volver-sutil');
     caja.innerHTML = '<a class="av-volver-ir" href="' + CHAT + '">' +
-      '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="34" height="26">' +
-      '<span><b>Volver al Auditor</b><small>Tu plática sigue ahí</small></span></a>' +
-      '<button type="button" class="av-volver-x" aria-label="Ocultar «Volver al Auditor»">✕</button>';
+      '<span class="av-volver-ico">' + (platica ? ICO_VUELVE : ICO_PREGUNTA) + '</span>' +
+      (platica ? '<span><b>Volver a tu plática en el Auditor</b><small>Sigue tal como la dejaste</small></span>'
+               : '<span><b>Preguntar al Auditor</b></span>') + '</a>' +
+      '<button type="button" class="av-volver-x" aria-label="Ocultar este botón">' + ICO_X + '</button>';
     caja.querySelector('.av-volver-ir').addEventListener('click', function (ev) {
       /* Si se llegó directo del chat, «atrás» lo recupera con todo y su lugar. */
       if (document.referrer && document.referrer.split('?')[0].split('#')[0].slice(-CHAT.length) === CHAT && history.length > 1) {
@@ -104,7 +118,7 @@
       }
     });
     caja.querySelector('.av-volver-x').addEventListener('click', function () {
-      try { sessionStorage.removeItem(SENA); } catch (e) { /* nada */ }
+      try { sessionStorage.removeItem(SENA); sessionStorage.setItem('av-volver-oculto', '1'); } catch (e) { /* nada */ }
       caja.parentNode.removeChild(caja);
     });
     document.body.appendChild(caja);
