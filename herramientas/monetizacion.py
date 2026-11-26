@@ -60,13 +60,22 @@ PLANES = [
 PRECIO_FUNDADOR = {
     'decision': '25-11-2026',
     'fundadores': 100,
-    'libre': {'nombre': 'Libre', 'precio': 0, 'nota': 'Siempre, sin tarjeta', 'bienvenida': 5,
+    'libre': {'nombre': 'Libre', 'precio': 0, 'nota': 'Siempre, sin tarjeta', 'bienvenida': 35,
               'incluye': ['El Auditor, en sus cuatro modos', 'El Planisferio', 'El Noticiero y las Auditorías en imágenes',
                           'La consulta de un RFC en la lista 69-B', 'El simulador del predial']},
     'paquetes': [{'id': 't20', 'tokens': 20, 'precio': 149}, {'id': 't100', 'tokens': 100, 'precio': 499}],
-    # (clave, qué, tokens): lo que gasta cada acción.
-    'consumo': [('dictamen', 'Dictamen con huella SHA-256', 1), ('lote', 'Lote XML / CSV · Cero CIEC', 2),
-                ('semaforo', 'Semáforo Patrimonial completo', 3)],
+    # (clave, qué, tokens): lo que gasta cada acción. Ronda 27A (26-11-2026, decisión del autor): la billetera de tokens
+    # (assets/auditor/js/tokens.js) cobra con esta misma tabla, que escribir_tokens() le pasa al generar: un cambio aquí
+    # cambia la billetera, servicios.html y la Mesa de Trabajo a la vez.
+    'consumo': [('pregunta', 'Pregunta al Auditor en modo Ciudadano, Periodista o Ambientalista', 2),
+                ('dictamen', 'Ficha o dictamen sellado con huella SHA-256', 10),
+                ('inspector', 'Pregunta en el Modo Inspector · Pro', 17),
+                ('servicio', 'Revisión de un servicio avanzado en el Inspector de Servicios', 17),
+                ('semaforo', 'Semáforo Patrimonial completo', 17),
+                ('lote', 'Lote XML / CSV · Cero CIEC, con tus archivos', 17)],
+    # Lo que nunca gasta tokens: la lectura abierta (y lo que Google indexa).
+    'gratis': ['Probar el XML de muestra', 'El Planisferio', 'El Noticiero', 'Las Auditorías en imágenes', 'La Biblioteca',
+               'Abrir una página de la plataforma desde el Auditor'],
     'planes': [
         {'id': 'pro', 'nombre': 'Plan Pro', 'precio': 149, 'regular': 249, 'anual': 1490, 'tokens_mes': 30,
          'para': 'Personas, profesionales independientes y contadores.',
@@ -115,6 +124,36 @@ def revisa_fundador():
         raise SystemExit('monetizacion.py: un paquete o el plan a medida no tiene monto')
     if F['libre']['precio'] != 0 or any(t <= 0 for _k, _q, t in F['consumo']):
         raise SystemExit('monetizacion.py: el plan Libre cobra o una acción no gasta tokens')
+    # Ronda 27A: la bienvenida alcanza para probar una vez el Modo Inspector, y la pregunta sencilla es lo más barato.
+    c = {k: t for k, _q, t in F['consumo']}
+    falta = {'pregunta', 'dictamen', 'inspector', 'servicio', 'semaforo', 'lote'} - set(c)
+    if falta:
+        raise SystemExit('monetizacion.py: la billetera necesita el consumo de %s' % ', '.join(sorted(falta)))
+    if F['libre']['bienvenida'] < c['inspector'] or c['pregunta'] != min(c.values()):
+        raise SystemExit('monetizacion.py: la bienvenida no alcanza para probar el Modo Inspector o la pregunta no es lo más barato')
+
+
+TOKENS_JS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'auditor', 'js', 'tokens.js')
+
+
+def tokens_config():
+    """Lo que la billetera (tokens.js) necesita de la tabla: la bienvenida, el costo de cada acción y lo gratis."""
+    revisa_fundador()
+    F = PRECIO_FUNDADOR
+    return {'bienvenida': F['libre']['bienvenida'], 'costo': {k: t for k, _q, t in F['consumo']},
+            'nombre': {k: q for k, q, _t in F['consumo']}, 'gratis': F['gratis'],
+            'canje': 'canjea-tu-codigo.html', 'planes': 'servicios.html#precio-fundador'}
+
+
+def escribir_tokens():
+    """Pone la tabla dentro de tokens.js, entre sus marcas de «tokens» y «fin-tokens»."""
+    t = open(TOKENS_JS, encoding='utf-8').read()
+    nuevo = '/*tokens*/%s/*fin-tokens*/' % json.dumps(tokens_config(), ensure_ascii=False, separators=(',', ':'))
+    t2 = re.sub(r'/\*tokens\*/.*?/\*fin-tokens\*/', lambda m: nuevo, t, count=1, flags=re.S)
+    if t2 == t and nuevo not in t:
+        raise SystemExit('monetizacion.py: no encontré las marcas /*tokens*/ … /*fin-tokens*/ en tokens.js')
+    if t2 != t:
+        open(TOKENS_JS, 'w', encoding='utf-8', newline='').write(t2)
 
 
 # Los montos en MXN solo viven dentro de estos bloques (apartados.pagina() lo revisa).

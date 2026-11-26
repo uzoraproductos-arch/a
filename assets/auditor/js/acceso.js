@@ -72,6 +72,19 @@
   };
   var yo = leer();
   var admin = (yo && yo.admin && vigente(yo)) || sesionAdmin() || marcaAdmin();
+  window.AvAcceso.admin = !!admin;
+  // Ronda 27A: la billetera de tokens (tokens.js) va en el <head> de las páginas generadas, justo después de este archivo.
+  // Si una página no la trae (la portada hecha a mano, un generador viejo), se carga aquí con el mismo sello.
+  (function () {
+    var yoSrc = (document.currentScript && document.currentScript.src) || '';
+    function pon() {
+      if (window.AvTokens || document.querySelector('script[src*="js/tokens.js"]')) return;
+      var s = document.createElement('script');
+      s.src = yoSrc ? yoSrc.replace(/acceso\.js(\?|$)/, 'tokens.js$1') : 'assets/auditor/js/tokens.js';
+      document.head.appendChild(s);
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pon); else pon();
+  })();
   if (admin) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pestana); else pestana();
   }
@@ -79,8 +92,8 @@
   // La cuenta (Ronda 22, 25-11-2026, decisión del autor): la plataforma abre sin código, y
   // la entrada queda como la página para ingresar. Quien no trae pase ve «Ingresar»; quien
   // lo trae, «Mi acceso»; la administración navega como cualquiera, pero con su estado
-  // ilimitado (∞) y su pestaña «Administración». Es el lugar donde después irá el saldo de
-  // tokens de cada usuario: hoy no se cobra nada y aquí nunca va un monto.
+  // ilimitado (∞) y su pestaña «Administración». Desde la Ronda 27A, el saldo de tokens del público lo pinta
+  // tokens.js en la misma tarjeta (#avbAcceso); aquí nunca va un monto.
   function cuenta() {
     var aqui = location.pathname.split('/').pop() || 'index.html';
     if (aqui === C.canje || aqui === C.panel) return;

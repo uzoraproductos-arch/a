@@ -226,6 +226,26 @@
     var nueva = document.getElementById('avbNueva');
     if (nueva) nueva.addEventListener('click', function () { if (hq) hq.value = ''; pestana(0); aLaCaja(true); });
     if (hf) hf.addEventListener('submit', function (ev) { ev.preventDefault(); pregunta(hq.value); hq.value = ''; });
+    /* Ronda 27A: sin saldo para la pregunta, vuelve a la caja tal como se escribió (asistente.js la deja en su campo). */
+    document.addEventListener('av-tokens-falta', function (ev) {
+      if (campo) campo.value = '';
+      /* Después de que el envío vacía la caja. */
+      if (hq && ev.detail && ev.detail.q) { var vq = ev.detail.q; setTimeout(function () { hq.value = vq; }, 0); }
+      verChat();
+    });
+    /* El costo a la vista antes de preguntar: lo que gasta la pregunta en el modo elegido, el dictamen y el saldo. */
+    var cto = document.getElementById('avbCosto');
+    function pintaCosto() {
+      var K = window.AvTokens;
+      if (!cto || !K) return;
+      var m = app && app.getAttribute('data-modo'), c = m === 'inspector' ? 'inspector' : 'pregunta';
+      cto.innerHTML = K.ilimitado() ? '<b>Sin límite de tokens</b> en este navegador.'
+        : (m === 'inspector' ? 'Inspector <span class="avb-pro">Pro</span>: ' : 'Esta pregunta: ') + '<b>' + K.costo(c) + ' tokens</b> · ficha o dictamen: ' +
+          K.costo('dictamen') + ' · tienes <b>' + K.saldo() + '</b>';
+    }
+    document.addEventListener('av-tokens', pintaCosto);
+    if (app) app.addEventListener('pa-modo', function () { setTimeout(pintaCosto, 0); });
+    setTimeout(pintaCosto, 0);
     if (hq) hq.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' && !ev.shiftKey) { ev.preventDefault(); if (hf.requestSubmit) hf.requestSubmit(); else pregunta(hq.value); } });
     avb.addEventListener('click', function (ev) { var b = ev.target.closest('[data-avb-q]'); if (b) pregunta(b.getAttribute('data-avb-q')); });
     Array.prototype.forEach.call(segs, function (b) {
@@ -354,8 +374,12 @@
         c.dispatchEvent(new Event('change', { bubbles: true }));
       } catch (e) { /* el navegador no deja pasar archivos: se eligen dentro de la aplicación */ }
     }
-    function recibe(fs) {
+    function recibe(fs, muestra) {
       if (!fs || !fs.length) return;
+      /* Ronda 27A: tus propios archivos son un lote Cero CIEC (tokens.js); el XML de muestra es gratis. El mismo lote dos
+         veces no se cobra dos veces (la huella es de los nombres y tamaños, nunca del contenido). */
+      var firma = Array.prototype.map.call(fs, function (f) { return f.name + ':' + (f.size || 0); }).sort().join('|');
+      if (!muestra && window.AvTokens && !window.AvTokens.cobra('lote', firma)) { if (arch) arch.value = ''; return; }
       var todosXml = Array.prototype.every.call(fs, function (f) { return /\.xml$/i.test(f.name) || /xml/.test(f.type); });
       var a = todosXml ? APPS.xml : APPS.csv;
       campoId = a[1];
@@ -392,7 +416,7 @@
       var nombre = 'cfdi-muestra-ficticio.xml', archivo;
       try { archivo = new File([xmlMuestra()], nombre, { type: 'text/xml' }); }
       catch (e) { archivo = new Blob([xmlMuestra()], { type: 'text/xml' }); archivo.name = nombre; }
-      recibe([archivo]);
+      recibe([archivo], true);
     });
 
     /* «Cómo funciona (3 pasos)»: solo abre con su botón. */

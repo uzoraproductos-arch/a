@@ -497,4 +497,35 @@ set role service_role;
 select pg_temp.igual((public.pase_hasta(:'pr') > now() + interval '6 days')::int, 1, 'el pase vencido abre siete días desde la renovación');
 reset role;
 
+-- Ronda 27A: códigos con tokens y temporalidad.
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select pg_temp.igual((select tokens from public.crear_codigo('TOKN2345', interval '30 days', 1, null, 'Tokens', 100)), 100, 'un código propio con 100 tokens');
+select pg_temp.igual((select tokens_ilimitado::int from public.crear_codigo('ILIM2345', interval '7 days', 1, null, 'Ilimitados', null, true)), 1, 'un código con tokens ilimitados');
+select pg_temp.igual((select count(*) from public.generar_codigos(2, interval '30 days', 1, null, 'Tokens al azar', 250) where tokens = 250), 2, 'códigos al azar con 250 tokens');
+select pg_temp.debe_fallar($$select public.crear_codigo('AMBO2345', interval '7 days', 1, null, null, 35, true)$$, 'un código con tokens y también ilimitado');
+select pg_temp.debe_fallar($$select public.crear_codigo('CERO2345', interval '7 days', 1, null, null, 0)$$, 'un código con cero tokens');
+select pg_temp.igual((select tokens from public.codigos_lista() where codigo = 'TOKN2345'), 100, 'la lista dice los tokens del código');
+select public.editar_codigo((select id from public.codigos where codigo = 'TOKN2345'), 'Tokens', 1, null, interval '30 days', 500);
+select pg_temp.igual((select tokens from public.codigos where codigo = 'TOKN2345'), 500, 'editar cambia los tokens');
+select public.editar_codigo((select id from public.codigos where codigo = 'TOKN2345'), 'Tokens', 1, null, interval '30 days');
+select pg_temp.igual((select tokens from public.codigos where codigo = 'TOKN2345'), 500, 'editar sin tokens los deja como estaban');
+select pg_temp.igual((select count(*) from public.bitacora_lista() where objeto = 'TOKN2345' and accion = 'editó' and detalle ? 'tokens'), 1, 'la bitácora anota el cambio de tokens');
+select pg_temp.debe_fallar($$select public.editar_codigo((select id from public.codigos where codigo = 'TOKN2345'), 'x', 1, null, interval '30 days', -1, true)$$,
+  'editar a ilimitado un código que da tokens');
+reset role;
+reset request.jwt.claim.sub;
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+select pg_temp.debe_fallar($$select public.crear_codigo('COMU2345', interval '1 day', 1, null, null, 35)$$, 'que una cuenta común cree un código con tokens');
+reset role;
+reset request.jwt.claim.sub;
+set role service_role;
+select public.canjear_codigo('TOKN2345') as ct \gset
+select pg_temp.igual(((:'ct')::jsonb ->> 'tokens')::int, 500, 'el canje dice cuántos tokens da el código');
+select pg_temp.igual((((:'ct')::jsonb ->> 'codigo_id') is not null)::int, 1, 'el canje dice qué código fue (para no sumarlo dos veces)');
+select pg_temp.igual((((public.canjear_codigo('TOKN2345', ((:'ct')::jsonb ->> 'pase')::uuid)) ->> 'tokens') is null)::int, 1, 'el mismo pase no recibe dos veces los tokens');
+select pg_temp.igual(((public.canjear_codigo('ILIM2345')) ->> 'ilimitado')::boolean::int, 1, 'el canje dice que el código es de tokens ilimitados');
+reset role;
+
 \echo 'Todas las pruebas de permisos pasaron.'
