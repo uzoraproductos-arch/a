@@ -4208,7 +4208,7 @@ AGORA_COLORES = ['#1a56b8', '#0f7b4f', '#b45309', '#b3261e', '#6d28d9', '#be185d
 
 
 # Ronda 26D: páginas rediseñadas sin un solo emoji dentro de <main> (pagina() los limpia).
-SIN_EMOJI = ('participa.html', 'agora.html', 'diccionario.html')
+SIN_EMOJI = ('participa.html', 'agora.html', 'diccionario.html', 'administracion-codigos.html')
 EMOJI_RE = '(?:[\U0001F000-\U0001FAFF\u2600-\u27BF\u2B00-\u2BFF\u2300-\u23FF][\uFE0F\u200D]*)+'
 
 
