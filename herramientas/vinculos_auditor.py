@@ -37,14 +37,21 @@ MUDADAS = ('Planisferio', 'Comunidad', 'Noticiero', 'Servicios')
 
 _CUR = re.compile(r'<a [^>]*aria-current="page"[^>]*>([^<]*)</a>')
 _FUERA = [re.compile(p, re.S) for p in (
-    r'<header\b.*?</header>', r'<footer\b.*?</footer>', r'<nav class="site-top-nav".*?</nav>',
+    r'<header\b.*?</header>', r'<footer\b.*?</footer>', r'<nav class="site-top-nav".*?</nav>', r'<!--carcasa-->.*?<!--/carcasa-->', r'<aside class="avb-lado".*?</aside>',
     r'<nav class="apartado-migas".*?</nav>',
     # El cajón «Cuéntanos lo que viste» es de la cabecera: va en todas las páginas.
     r'<aside class="pt-cajon".*?</aside>', r'<script\b.*?</script>', r'<noscript\b.*?</noscript>')]
 _A = re.compile(r'<a\b([^>]*)\bhref="([^"#?:]+\.html)[^"]*"([^>]*)')
 
 
+_LADO = re.compile(r'<aside class="avb-lado"[^>]*\bdata-pestana="([^"]*)"')
+
+
 def pestana(texto):
+    # Ronda 26B: la barra lateral dice la pestaña que marca (la de MENU, como la barra superior vieja).
+    m = _LADO.search(texto)
+    if m:
+        return m.group(1) if m.group(1) in PESTANAS else None
     for m in _CUR.finditer(texto):
         t = m.group(1).strip()
         if t in PESTANAS:

@@ -21,60 +21,55 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261126b">
-  <script src="assets/auditor/js/iconos.js?v=20261126b"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261126b"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261126b" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261126b">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261126b">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261126b">
-  <link rel="stylesheet" href="assets/auditor/css/servicios.css?v=20261126b">
-  <link rel="stylesheet" href="assets/auditor/css/servicios-planes.css?v=20261126b">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261126e">
+  <script src="assets/auditor/js/iconos.js?v=20261126e"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261126e"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261126e" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261126e">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261126e">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261126e">
+  <link rel="stylesheet" href="assets/auditor/css/servicios.css?v=20261126e">
+  <link rel="stylesheet" href="assets/auditor/css/servicios-planes.css?v=20261126e">
   <script>(function () { var m = {"riesgo": "servicios-fraude-y-lavado.html", "oferta": "servicios-catalogo.html", "sectores": "servicios-tu-perfil.html", "modulos": "servicios-empieza-gratis.html", "cobro": "servicios-como-se-cobra.html", "calendario": "servicios-calendario.html", "preguntas": "servicios-preguntas.html", "solicitud": "servicios-cotiza.html", "precio": "servicios-como-se-cobra.html", "planes": "servicios-como-se-cobra.html", "paquetes": "servicios-como-se-cobra.html", "proceso": "servicios-cotiza.html", "independencia": "servicios-cotiza.html", "sv-*": "servicios-catalogo.html", "fam-*": "servicios-catalogo.html"}, h = decodeURIComponent(location.hash.slice(1)), q = location.search, d = m[h] || (/^(sv|fam)-/.test(h) ? m[h.split('-')[0] + '-*'] : ''); if (d) { location.replace(d + q + '#' + h); return; } if (/^revisa-[a-z]+$/.test(h)) { location.replace("servicios-revisa.html" + '?s=' + h.slice(7)); return; } if (/[?&](tema|servicio|plan)=/.test(q)) location.replace(m.solicitud + q + '#solicitud'); })();</script>
 </head>
 <body data-pagina="apartado">
-  <nav class="site-top-nav" aria-label="Navegación principal">
-    <div class="nav-brand-group">
-      <button type="button" class="brand-logo-btn" id="apartadoPresentacion" title="Quiénes somos: qué es Auditavisión" aria-label="Quiénes somos: abrir la presentación de Auditavisión"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="72" height="56"></button>
-      <a class="nav-brand-text" href="index.html" title="Ir a la página principal">
-        <span class="nav-brand-title">Auditavisión</span>
-        <span class="nav-brand-sub">El gasto público, a la vista</span>
-      </a>
-    </div>
-
-    <button type="button" class="nav-hamburguesa" id="navHamburguesa" aria-expanded="false" aria-controls="navIndiceMovil" aria-label="Abrir el menú">
-      <span class="nav-hamb-rayas" aria-hidden="true"><span></span><span></span><span></span></span>
-      <span class="nav-hamb-txt">Menú</span>
-    </button>
-
-    <div class="nav-indice" id="navIndiceMovil">
-    <div class="nav-center-links">
-      <div class="nav-menu-item"><a class="mega-menu-trigger" href="herramienta-inspector-pregunta.html">Auditor</a></div>
-      <div class="nav-menu-item"><a class="mega-menu-trigger" href="servicios.html" aria-current="page">Servicios</a></div>
-      <div class="nav-menu-item"><a class="mega-menu-trigger" href="planisferio.html">Planisferio</a></div>
-      <div class="nav-menu-item"><a class="mega-menu-trigger" href="participa.html">Comunidad</a></div>
-      <div class="nav-menu-item"><a class="mega-menu-trigger" href="noticias-relevantes.html">Noticiero</a></div>
-      <div class="nav-menu-item nav-menu-cuentanos"><a class="mega-menu-trigger nav-cuentanos" href="comunidad.html" data-puerta>📢 Cuéntanos lo que viste</a></div>
-    </div>
-
-    <div class="nav-right-container">
-      <div class="nav-right-actions">
-        <a class="nav-action-btn nav-feedback-btn" href="comunidad.html" data-puerta title="Cuéntanos lo que viste: algo raro con el dinero público, un dato mal, un tema para investigar, compartir y fe de erratas">
-          <span>📢</span>
-          <span>Cuéntanos lo que viste</span>
-        </a>
-        <button type="button" class="nav-action-btn nav-share-btn" id="apartadoCompartir" title="Compartir esta página o copiar su enlace">
-          <span>🔗</span>
-          <span>Compartir</span>
-        </button>
-        <a href="diccionario.html" class="nav-action-btn nav-creator-badge" title="Creado por Inspector Meteoro · Biblioteca del Erario Público">
-          <span>🪐</span>
-          <span>Inspector Meteoro</span>
-        </a>
+  <!--carcasa-->
+  <aside class="avb-lado" id="avbLado" data-pestana="Servicios" aria-label="Navegación de Auditavisión">
+      <div class="avb-lado-cab">
+        <a class="avb-marca" href="herramienta-inspector-pregunta.html"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="36" height="28"> <b>Auditavisión</b></a>
+        <button type="button" class="avb-lado-menu" id="avbLadoMenu" aria-controls="avbLadoCuerpo" aria-expanded="false"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></svg><span>Menú</span></button>
       </div>
-    </div>
-    </div>
-  </nav>
+      <div class="avb-lado-cuerpo" id="avbLadoCuerpo">
+      <a class="avb-nueva" href="herramienta-inspector-pregunta.html"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg> Nueva revisión</a>
+      <nav class="avb-nav" aria-label="Destinos">
+        <a href="herramienta-inspector-pregunta.html"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Auditor</span></a>
+        <a href="servicios.html" aria-current="page"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg><span>Servicios y Planes</span> <span class="avb-pastilla" title="15 servicios">15</span></a>
+        <a href="planisferio.html"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg><span>Planisferio</span></a>
+        <a href="noticias-relevantes.html"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h12v14a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2z"/><path d="M16 9h4v10a2 2 0 0 1-2 2"/><path d="M8 9h4M8 13h4M8 17h2"/></svg><span>Noticiero</span></a>
+        <a href="participa.html"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8"/><path d="M18 14.6c1.8.8 3 2.7 3 5.4"/></svg><span>Comunidad</span></a>
+        <a href="diccionario.html"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 7h6"/></svg><span>Biblioteca</span></a>
+      </nav>
+      <details class="avb-leyenda">
+        <summary>Cómo clasificamos los datos</summary>
+        <ul>
+          <li><span class="est-chip est-oficial">oficial</span> Cifra textual de un documento público: DOF, SHCP, SAT, ASF, INEGI.</li>
+          <li><span class="est-chip est-derivado">auditada</span> Cruce o cálculo verificable que hacemos sobre documentos oficiales, con su operación.</li>
+          <li><span class="est-chip est-pendiente">pendiente</span> La autoridad no lo ha publicado o la ley aún no está cotejada: nunca lo inventamos.</li>
+        </ul>
+        <a href="base-al-dia.html">Cómo se alimenta la base <svg class="avb-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </details>
+      <details class="avb-port" id="avbPort" open>
+        <summary>Tu portafolio</summary>
+        <ol id="avbPortLista" hidden></ol>
+        <p class="avb-port-vacio" id="avbPortVacio">Aún no guardas investigaciones. «Guardar en mi portafolio», en el Expediente vivo o en el Inspector de Servicios, las deja aquí, solo en tu navegador.</p>
+      </details>
+      <a class="avb-tour-btn" href="herramienta-inspector-pregunta.html?tour=1"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 4.9.7c0 1.7-2.4 2.3-2.4 3.8"/><path d="M12 17h.01"/></svg> Cómo funciona (3 pasos)</a>
+      <div class="avb-acceso" id="avbAcceso">
+        <a class="avb-ingresa" href="canjea-tu-codigo.html"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 9.2-9.2"/><path d="m17 6 3 3"/><path d="m14.5 8.5 2 2"/></svg> Ingresar / Canjear código</a>
+      </div>
+      </div>
+    </aside>
+  <!--/carcasa-->
   <div class="pt-velo" id="ptVelo" hidden></div>
   <aside class="pt-cajon" id="ptCajon" role="dialog" aria-modal="true" aria-labelledby="ptTit" hidden>
     <div class="pt-cab">
@@ -395,12 +390,12 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261126b</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261126e</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261126b"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261126b"></script>
-  <script src="assets/auditor/js/servicios.js?v=20261126b"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261126e"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261126e"></script>
+  <script src="assets/auditor/js/servicios.js?v=20261126e"></script>
 </body>
 </html>

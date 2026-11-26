@@ -33,7 +33,8 @@ import seguridad
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='12' fill='%23ffffff' stroke='%231d5fd6' stroke-width='4'/%3E%3Cg fill='%23ffffff' stroke='%234f6286' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M20 37 C14 28 9 23 3 22 C6 30 9 34 13 37 C9 36 6 37 4 39 C9 41 14 41 19 41 Z'/%3E%3Cpath d='M44 37 C50 28 55 23 61 22 C58 30 55 34 51 37 C55 36 58 37 60 39 C55 41 50 41 45 41 Z'/%3E%3C/g%3E%3Ccircle cx='32' cy='39' r='15' fill='%23d9a21a' stroke='%237a5206' stroke-width='2'/%3E%3Ccircle cx='32' cy='39' r='11' fill='%23f7cf45' stroke='%23a8740c' stroke-width='1.2'/%3E%3Cpath d='M27 44 Q32 47 37 44' fill='none' stroke='%235a3a02' stroke-width='1.8' stroke-linecap='round'/%3E%3Ccircle cx='28' cy='38' r='1.9' fill='%2310202e'/%3E%3Ccircle cx='36' cy='38' r='1.9' fill='%2310202e'/%3E%3Cg transform='rotate(-8 32 22)'%3E%3Cellipse cx='32' cy='24.5' rx='14' ry='3' fill='%231b2433'/%3E%3Cpath d='M23 24.5 C23 14 25 11 32 11 C39 11 41 14 41 24.5 Z' fill='%231b2433'/%3E%3Crect x='23.2' y='19.5' width='17.6' height='3.4' fill='%23d4a826'/%3E%3C/g%3E%3C/svg%3E")
+# Ronda 26B (26-11-2026): el logo de la plataforma como favicon en todas las páginas (antes, un SVG en línea).
+FAVICON = 'assets/auditor/img/logo-auditavision.svg'
 
 
 
@@ -1383,7 +1384,12 @@ def herramienta_asistente(bloque):
         # Ronda 21 (25-11-2026, diseño D + F del autor): barra lateral y lienzo modular (auditor_bento.py).
         'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': __import__('auditor_bento').bloque(bloque, [s[0] for s in SERVICIOS])}],
         'bento': True,
-        'estilos': ['asistente.css', 'auditor-bento.css'], 'scripts': ['auditor-bento.js', 'municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'municipios-fraude.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
+        # Ronda 26B (26-11-2026): la raíz del sitio abre aquí; el título y la descripción dicen qué es la plataforma hoy.
+        'titulo_doc': 'Auditavisión · Auditor del gasto público con documentos oficiales',
+        'descripcion': ('Pregúntale al Auditor del gasto público en México: revisa a tu proveedor contra la lista 69-B del SAT sin '
+                        'Contraseña del SAT (Cero CIEC), consulta el Semáforo Patrimonial Inmobiliario antes de comprar o rentar, '
+                        'y genera un dictamen con sus documentos oficiales.'),
+        'estilos': ['asistente.css', 'auditor-bento.css'], 'scripts': ['auditor-bento.js', 'municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'municipios-fraude.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'insp-visual.js', 'asistente.js'],
         # Ronda 23 (25-11-2026, decisión del autor): sin la franja «Volver al índice / La otra división» del Modo
         # Inspector; la barra lateral es la única navegación.
         'pie_extra': '',
@@ -6107,7 +6113,29 @@ def esc_attr(s):
     return html.escape(s, quote=True)
 
 
-def cabecera(actual, sello):
+# Ronda 26B (26-11-2026, decisión del autor): la carcasa unificada. Toda página lleva la barra lateral del Auditor
+# (auditor_bento.lado) en lugar de la barra superior vieja; solo el dictamen la conserva, para no tocar su diseño.
+SIN_LADO = ('herramienta-inspector-dictamen.html',)
+CARCASA = ('<!--carcasa-->', '<!--/carcasa-->')
+
+
+def destino_lado(actual, archivo):
+    """(destino de la barra lateral que se marca, nombre de su pestaña), por las marcas de MENU, como marcaba la barra
+    superior vieja; las páginas de la Biblioteca del Erario marcan «Biblioteca» (son de Comunidad)."""
+    import traslado
+    for arch, nombre, marcan in MENU:
+        if actual in marcan:
+            if arch == 'participa.html' and re.match(traslado.BIBLIOTECA, archivo.split('#')[0].split('?')[0]):
+                return 'diccionario.html', nombre
+            return arch, nombre
+    return '', ''
+
+
+def cabecera(actual, sello, archivo=None):
+    if archivo and archivo not in SIN_LADO:
+        import auditor_bento
+        dest, pest = destino_lado(actual, archivo)
+        return '  %s\n  %s\n  %s\n%s' % (CARCASA[0], auditor_bento.lado(dest, len(SERVICIOS), pestana=pest), CARCASA[1], puerta())
     items = []
     for archivo, nombre, marcan in MENU:
         cur = ' aria-current="page"' if actual in marcan else ''
@@ -7166,7 +7194,7 @@ def pagina(a, sello):
         # Ronda 23 (25-11-2026, diseño «Solo barra lateral» del autor): una sola navegación, la barra lateral; sin la
         # barra superior del sitio, con el logo de favicon y el pie con los conteos de la base (auditor_bento.pie()).
         import auditor_bento
-        texto = re.sub(r'\n  <nav class="site-top-nav".*?\n  </nav>\n', '\n', texto, count=1, flags=re.S)
+        texto = re.sub(r'\n  <!--carcasa-->.*?<!--/carcasa-->\n', '\n', texto, count=1, flags=re.S)
         texto = texto.replace('<link rel="icon" href="%s">' % FAVICON, '<link rel="icon" href="assets/auditor/img/logo-auditavision.svg" type="image/svg+xml">', 1)
         texto = re.sub(r'  <footer class="apartado-pie">.*?</footer>', lambda m: auditor_bento.pie(sello), texto, count=1, flags=re.S)
     if a['archivo'] not in traslado.PRIVADAS and a['archivo'] != 'administracion-codigos.html':
@@ -7192,6 +7220,12 @@ def pagina(a, sello):
             texto = texto.replace('href="%s?q=' % sf.SV_CHAT, 'href="%s?s=%s&amp;q=' % (sf.SV_REVISA, sid))
         elif origen == 'Servicios' and a['archivo'] not in (sf.SV_CHAT, sf.SV_RESP, sf.SV_REVISA):
             texto = sf.a_revisa(texto)
+    if a['archivo'] == 'participa.html':
+        # Ronda 26B: sin la barra superior vieja, «Cuéntanos lo que viste» vive dentro de Comunidad (abre el cajón de puerta()).
+        texto = texto.replace('</p>\n        \n      </div>\n    </header>', '</p>\n        <p class="apartado-entrada avc-cuentanos"><a href="comunidad.html" data-puerta>Cuéntanos lo que viste</a>: '
+                              'algo raro con el dinero público, un dato mal, un tema para investigar o una fe de erratas.</p>\n      </div>\n    </header>', 1)
+        if 'avc-cuentanos' not in texto:
+            raise SystemExit('apartados.py: participa.html ya no tiene dónde poner «Cuéntanos lo que viste»')
     if a['archivo'] == 'servicios.html':
         # Ronda 24 (25-11-2026): el logo de favicon, como en el Auditor, y sin emojis dentro de <main> (íconos de trazo).
         import auditor_bento
@@ -7377,8 +7411,8 @@ def _pagina(a, sello):
         guia = (guia + '\n      ' if guia else '') + libro_html(a)
     estilos = ''.join('\n  <link rel="stylesheet" href="assets/auditor/css/%s?v=%s">' % (css, sello) for css in a.get('estilos', []))
     scripts = ''.join('\n  <script src="assets/auditor/js/%s?v=%s"></script>' % (js, sello) for js in a.get('scripts', []))
-    titulo_doc = '%s · Auditavisión' % re.sub('<[^>]+>', '', a['menu'])
-    descripcion = re.sub('<[^>]+>', '', a['entrada'])
+    titulo_doc = a.get('titulo_doc') or '%s · Auditavisión' % re.sub('<[^>]+>', '', a['menu'])
+    descripcion = a.get('descripcion') or re.sub('<[^>]+>', '', a['entrada'])
     padre = ('<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a['padre']) if a.get('padre') else ''
     if (a.get('menu_archivo', a['archivo']) in ENCICLO_MARCAN and a['archivo'] != ENCICLOPEDIA
             and (a.get('padre') or (None,))[0] != ENCICLOPEDIA):
@@ -7491,7 +7525,7 @@ def _pagina(a, sello):
 </html>
 '''.format(body_clase=' class="avb-pagina"' if a.get('bento') else '', csp=seguridad.meta(), titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
            sociales=sociales(a['archivo'], titulo_doc, descripcion) + ('\n  <meta name="robots" content="noindex, nofollow">' if a.get('noindex') else ''),
-           cabecera=cabecera(marca, sello), menu=a['menu'],
+           cabecera=cabecera(marca, sello, a['archivo']), menu=a['menu'],
            volver='' if a.get('pie_corto') else (
                '      <a class="apartado-volver" href="index.html">← Volver al auditor</a>\n'
                '      <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>\n'),

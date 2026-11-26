@@ -89,6 +89,12 @@ def _reflejo(base, texto, titulo):
     texto = re.sub(r' aria-current="page"(>(?:Auditor|Comunidad|Noticiero|Servicios)</a>)', r'\1', texto)
     texto = texto.replace('<a class="mega-menu-trigger" href="planisferio.html">',
                           '<a class="mega-menu-trigger" href="planisferio.html" aria-current="page">', 1)
+    # Ronda 26B: la barra lateral (auditor_bento.lado) marca el Planisferio.
+    def _lado(m):
+        s = m.group(0).replace(' aria-current="page"', '')
+        s = re.sub(r'data-pestana="[^"]*"', 'data-pestana="Planisferio"', s, count=1)
+        return s.replace('<a href="planisferio.html">', '<a href="planisferio.html" aria-current="page">', 1)
+    texto = re.sub(r'<aside class="avb-lado".*?</aside>', _lado, texto, count=1, flags=re.S)
     # Las migas: Inicio › Planisferio › la página.
     texto = re.sub(r'<nav class="apartado-migas".*?</nav>',
                    lambda m: ('<nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> '
