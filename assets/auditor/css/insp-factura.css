@@ -51,3 +51,22 @@
 .mia-aviso-ok { background: #eef3fa; border: 1px solid #bcd0ea; color: #1d3a5f; }
 .mia-aviso-alerta { background: #fff6e6; border: 2px solid #e0a43a; color: #4a3008; }
 .mia-hist { color: inherit; opacity: .85; }
+/* Ronda 26 (26-11-2026): los avisos para el proveedor (insp-factura.js) y el seguimiento de hallazgos (insp-mia.js). */
+.cf-avisos h3 { margin: 0 0 6px; }
+.cf-avisos-lista { list-style: none; margin: 10px 0 0; padding: 0; }
+.cf-avisos-lista > li { padding: 12px 0; border-top: 1px solid #dde4ee; }
+.cf-avisos-lista p { margin: 4px 0; overflow-wrap: anywhere; }
+.cf-aviso-txt { width: 100%; box-sizing: border-box; font-size: 1rem; line-height: 1.45; }
+.mia-hall { list-style: none; margin: 10px 0; padding: 0; }
+.mia-hall-it { margin: 10px 0; padding: 12px 14px; border-radius: 12px; border: 1px solid #dde4ee; border-left-width: 6px; background: #fff; overflow-wrap: anywhere; }
+.mia-hall-it p { margin: 4px 0; }
+.mia-hall-revisar { border-left-color: #c98a12; }
+.mia-hall-aclarado { border-left-color: #1f7a45; }
+.mia-hall-descartado { border-left-color: #8a94a3; }
+.mia-hall-campos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin: 8px 0; }
+.mia-hall-campos > div { display: grid; gap: 4px; min-width: 0; }
+.mia-hall-campos label { font-weight: 700; font-size: 1rem; }
+.mia-hall-campos select, .mia-hall-campos input, .mia-hall-in { min-height: 44px; font-size: 1rem; width: 100%; box-sizing: border-box; }
+.mia-hall-nota { grid-column: 1 / -1; }
+:root[data-theme="dark"] .mia-hall-it { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.14); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .mia-hall-it { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.14); } }

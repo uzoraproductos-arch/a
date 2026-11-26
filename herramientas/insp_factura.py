@@ -25,6 +25,21 @@ import lector_cfdi
 from presupuesto_modulos import chip
 
 ESTILOS = ['insp-efos.css', 'insp-factura.css']
+
+# Ronda 26 (Plan Maestro del autor, 26-11-2026): el sello «Cero CIEC». Lo llevan esta página y el panel de
+# servicios-revisa.html en los servicios que reciben archivos (SV_SUELTA de apartados.py). Ícono de trazo en SVG,
+# sin emojis; su estilo vive en civico.css (.cero-ciec), que cargan todas las páginas. **Nunca se pide la Contraseña
+# del SAT (CIEC) ni la e.firma, y ningún XML se sube.**
+CERO_CIEC_SVG = ('<svg class="cero-ciec-ico" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false" fill="none" '
+                 'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+                 '<path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>')
+
+
+def cero_ciec(id_='', oculto=False):
+    """El sello «Cero CIEC · 100 % en tu navegador»."""
+    return ('<p class="cero-ciec"%s%s>%s<span><b>Cero CIEC · 100 %% en tu navegador</b>'
+            '<small>No te pedimos la Contraseña del SAT (CIEC) ni tu e.firma. Tus XML se leen aquí y no se suben a ningún servidor.</small></span></p>'
+            % (' id="%s"' % id_ if id_ else '', ' hidden' if oculto else '', CERO_CIEC_SVG))
 SCRIPTS = ['insp-factura.js']
 
 ANEXO20 = 'http://omawww.sat.gob.mx/tramitesyservicios/Paginas/anexo_20.htm'
@@ -85,6 +100,7 @@ def construir(base, ref):
   <section class="ef-hero" aria-labelledby="cf-tit">
     <h2 class="ef-hero-tit" id="cf-tit">¿Esta factura es de una empresa en la lista negra del SAT?</h2>
     <p class="ef-hero-txt">Elige el XML de una factura electrónica (CFDI 4.0, o 3.3 si es anterior a 2022). La leemos, rehacemos su cuenta y cruzamos al emisor con los <b>%(total)s</b> registros %(chip_of)s del listado del artículo 69-B del Código Fiscal%(r_cff)s, con corte del SAT al <b>%(corte)s</b>%(r_sat)s.</p>
+    %(ciec)s
     <p class="cf-privado" id="cfPrivado">🔒 <b>Tu factura no sale de tu equipo.</b> Se lee aquí, en tu navegador: no la subimos a ningún servidor ni la guardamos. Al cerrar la página, se borra.</p>
 
     <div class="cf-entrada">
@@ -150,6 +166,6 @@ def construir(base, ref):
 </div>''' % {
         'datos': json.dumps(datos, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/'),
         'total': format(m['total'], ','), 'corte': html.escape(m['corte']), 'chip_of': chip('oficial'), 'chip_de': chip('derivado'),
-        'r_cff': ref('ref-cff'), 'r_sat': ref('ref-sat-69b'), 'pasos': pasos, 'ley': ley, 'reforma': CFF_REFORMA,
+        'r_cff': ref('ref-cff'), 'r_sat': ref('ref-sat-69b'), 'pasos': pasos, 'ley': ley, 'reforma': CFF_REFORMA, 'ciec': cero_ciec('cfCiec'),
         'cff': _ext(CFF, 'Cámara de Diputados'), 'anexo': _ext(ANEXO20, 'Anexo 20 del SAT'), 'xsd': _ext(XSD40, 'esquema del CFDI 4.0'),
     }

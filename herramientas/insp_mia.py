@@ -73,6 +73,15 @@ def construir(base, ref):
     <div id="miaRev" aria-live="polite"></div>
   </section>
 
+  <section class="ef-sec" aria-labelledby="mia-hall">
+    <h2 id="mia-hall">Seguimiento de mis hallazgos</h2>
+    <p>Las señales que guardaste desde el <a href="herramienta-inspector-factura.html">Lector de facturas</a>, o las que anotes tú, con su estado: <b>Por revisar</b>, <b>Aclarado</b> o <b>Descartado</b>, la fecha y una nota breve. Es tu bitácora: el estado lo pones tú y no le dice nada al SAT ni a nadie.</p>
+    <label class="ef-lbl" for="miaHallNuevo">Anotar un hallazgo a mano</label>
+    <input id="miaHallNuevo" class="ef-area mia-hall-in" type="text" maxlength="200" autocomplete="off" placeholder="Por ejemplo: falta el complemento de pago de la factura de marzo">
+    <p class="ef-busca-fila"><button type="button" class="ef-btn" id="miaHallAgregar">Anotar</button></p>
+    <div id="miaHall" aria-live="polite"></div>
+  </section>
+
   <section class="ef-sec" aria-labelledby="mia-sig">
     <h2 id="mia-sig">Lo que viene</h2>
     <ul>

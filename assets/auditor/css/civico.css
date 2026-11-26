@@ -1380,3 +1380,18 @@ table.sa-rangos tbody th { font-weight: 600; }
    y el ∞ de la administración junto a su pestaña. */
 .nav-menu-ingresar .mega-menu-trigger { font-weight: 700; }
 .av-inf { color: #c8a032; font-weight: 800; }
+
+/* Ronda 26 (26-11-2026): el sello «Cero CIEC · 100 % en tu navegador» (cero_ciec() de insp_factura.py).
+   Lo llevan el Lector de facturas y el panel de servicios-revisa.html en facturas, nómina y contrapartes. */
+.cero-ciec { display: flex; align-items: center; gap: 12px; margin: 12px 0; padding: 12px 14px; border-radius: 12px;
+  background: #eef6f0; border: 1px solid #9fcfae; color: #17432a; line-height: 1.45; text-align: left; }
+.cero-ciec[hidden] { display: none; }
+.cero-ciec-ico { flex: 0 0 28px; color: #1f7a45; }
+.cero-ciec b { display: block; font-size: 1.0625rem; letter-spacing: .01em; }
+.cero-ciec small { display: block; font-size: 1rem; }
+:root[data-theme="dark"] .cero-ciec { background: rgba(80,180,120,.12); border-color: rgba(120,200,150,.4); color: #d6f0df; }
+:root[data-theme="dark"] .cero-ciec-ico { color: #8fd6a8; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cero-ciec { background: rgba(80,180,120,.12); border-color: rgba(120,200,150,.4); color: #d6f0df; }
+  :root:not([data-theme="light"]) .cero-ciec-ico { color: #8fd6a8; }
+}
