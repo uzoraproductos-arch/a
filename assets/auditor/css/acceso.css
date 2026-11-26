@@ -307,3 +307,91 @@
 .ac-pase-fila .ac-pase:empty { display: none; }
 .ac-pase-ok { color: #1f6b3a; }
 .ac-pase-mal { color: #9b2c2c; }
+
+/* ── Ronda 28 (26-11-2026): el panel como cabina de control ─────────────────────────────────────────────────
+   El encabezado va compacto para que el panel empiece en la primera pantalla; arriba, una barra con quién entró,
+   el pase y «Salir»; las pestañas con íconos de trazo (en celular, una tira que se desliza); las ayudas largas,
+   plegadas; y las tablas, en tarjetas cuando no caben. Nada baja de 16 px ni de 44 px al tacto. */
+main.apartado .ac-cab { padding: 14px 0 12px; }
+main.apartado .ac-cab .apartado-migas, main.apartado .ac-cab .apartado-entrada,
+main.apartado:has(.ac-cab) #panel .apartado-seccion-cab {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+main.apartado .ac-cab .apartado-ancho { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+main.apartado .ac-cab .apartado-lema { margin: 0; order: 2; }
+main.apartado .ac-cab .apartado-titulo { margin: 0; font-size: 26px; line-height: 1.2; }
+main.apartado:has(.ac-cab) .apartado-cuerpo { padding-top: 16px; }
+.ac-i { flex: none; vertical-align: -3px; }
+
+.ac-panel > .ac-entrar { max-width: 480px; margin: 24px auto; padding: 24px; gap: 12px; box-shadow: 0 8px 24px rgba(11, 42, 99, .08); }
+.ac-panel > .ac-entrar .ac-ayuda { max-width: none; }
+.ac-ojo { background: #fff8e6; border: 1px solid #ecd28c; border-radius: 10px; padding: 8px 12px; }
+
+.ac-tope { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px 12px; background: #fff; border: 1px solid #dfe5f0;
+  border-radius: 16px; padding: 10px 16px; margin-bottom: 12px; }
+.ac-tope p { margin: 0; }
+.ac-tope-yo { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 16px; color: #24324d; min-width: 0; }
+.ac-tope-yo #acQuien { overflow-wrap: anywhere; }
+.ac-insignia { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; background: #0b2a63; color: #fff; font-weight: 700; font-size: 16px; }
+.ac-tope .ac-pase-fila, .ac-tope #acAviso { grid-column: 1 / -1; margin: 0; }
+.ac-tope .ac-pase-fila:has(.ac-pase:empty):not(:has(button:not([hidden]))) { display: none; }
+.ac-tope .ac-estado { min-height: 0; }
+
+.ac-pestanas { gap: 4px; margin: 0 0 16px; padding: 4px; border: 1px solid #dfe5f0; border-radius: 14px; background: #eef2f8; }
+.ac-pestana { display: inline-flex; align-items: center; gap: 8px; border-color: transparent; background: transparent; white-space: nowrap; }
+.ac-pestana:not([aria-selected="true"]):hover { background: #fff; }
+.ac-pestana-n { min-width: 22px; padding: 0 6px; border-radius: 999px; background: #b42318; color: #fff; font-size: 14px; line-height: 22px; text-align: center; }
+.ac-pestana[aria-selected="true"] .ac-pestana-n { background: #fff; color: #0b2a63; }
+
+.ac-hoja > h3, .ac-reg-tit, .ac-solicitudes h3 { font-size: 20px; }
+.ac-nota { margin: 0 0 10px; }
+.ac-nota > summary { display: inline-flex; align-items: center; min-height: 44px; cursor: pointer; color: #0b2a63; font-weight: 600; font-size: 16px; }
+.ac-nota > .ac-ayuda { max-width: 72ch; margin: 0 0 8px; }
+.ac-largo { max-width: 72ch; }
+.ac-fila label, .ac-tabla, .ac-tabla th, .ac-chip, .ac-chico, .ac-kpi span, .ac-kpi small, .ac-graf figcaption .ac-ayuda { font-size: 16px; }
+.ac-panel .sz-btn, .ac-barras li, .ac-barras small { font-size: 16px; }
+.ac-tope .ac-pase-fila { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.ac-kpi b { font-family: "JetBrains Mono", ui-monospace, monospace; }
+.ac-tabla { font-variant-numeric: tabular-nums; }
+.ac-tabla tbody tr:hover > td { background: #f6f9fd; }
+.ac-generar .ac-fila { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.ac-orden .ac-busca { flex: 1 1 240px; max-width: 420px; font-weight: 600; color: #24324d; font-size: 16px; }
+
+.ac-dos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.ac-dos > .ac-semana { margin: 0; padding: 18px 20px; display: grid; gap: 10px; }
+.ac-dos .ac-semana h3 { margin: 0; }
+.ac-dos .ac-semana-cod { margin: 0; }
+.ac-dos .ac-ayuda { max-width: none; }
+
+.ac-enc { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.ac-enc a { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: center; min-height: 44px; padding: 16px 18px; background: #fff;
+  border: 1px solid #dfe5f0; border-radius: 14px; color: #0b2a63; text-decoration: none; }
+.ac-enc a:hover, .ac-enc a:focus-visible { border-color: #0b2a63; box-shadow: 0 6px 18px rgba(11, 42, 99, .1); }
+.ac-enc a b { font-size: 18px; }
+.ac-enc a small { grid-column: 2; font-size: 16px; color: #33415c; }
+
+@media (max-width: 760px) {
+  main.apartado .ac-cab .apartado-titulo { font-size: 22px; }
+  main.apartado .ac-cab .apartado-lema { display: none; }
+  .ac-pestanas { flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; }
+  .ac-pestana { flex: none; scroll-snap-align: start; }
+  .ac-dos, .ac-enc { grid-template-columns: minmax(0, 1fr); }
+  .ac-orden .ac-busca { max-width: none; flex-basis: 100%; }
+  /* Las tablas, en tarjetas: cada renglón es una ficha y cada dato dice qué es. */
+  .ac-tabla-caja { overflow: visible; border: 0; background: none; }
+  .ac-tabla, .ac-tabla tbody, .ac-tabla tr, .ac-tabla td { display: block; width: auto; }
+  .ac-tabla thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .ac-tabla tr { background: #fff; border: 1px solid #dfe5f0; border-radius: 14px; padding: 8px 12px; margin-bottom: 10px; }
+  .ac-tabla td { border: 0; padding: 4px 0; overflow-wrap: anywhere; }
+  .ac-tabla td:empty { display: none; }
+  .ac-tabla td:not([colspan])::before { display: block; color: #5a6782; font-weight: 700; font-size: 14px; }
+  #acTabla td:nth-child(2):not([colspan])::before { content: "Duración"; }
+  #acTabla td:nth-child(3):not([colspan])::before { content: "Usos"; }
+  #acTabla td:nth-child(5):not([colspan])::before { content: "Nota"; }
+  #acSol td:nth-child(2):not([colspan])::before { content: "Quién y para qué"; }
+  #acSol td:nth-child(3):not([colspan])::before { content: "Pidió"; }
+  #acBit td:nth-child(1):not([colspan])::before { content: "Cuándo"; }
+  #acBit td:nth-child(2):not([colspan])::before { content: "Quién"; }
+  #acBit td:nth-child(4):not([colspan])::before { content: "Sobre"; }
+  #acBit td:nth-child(5):not([colspan])::before { content: "Detalle"; }
+}

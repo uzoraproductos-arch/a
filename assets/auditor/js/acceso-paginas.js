@@ -388,6 +388,7 @@
     function pintaSol() {
       var nuevas = sols.filter(function (x) { return x.estado === 'nueva'; }).length;
       $('acSolCuenta').textContent = nuevas ? nuevas + (nuevas === 1 ? ' nueva' : ' nuevas') : 'sin pendientes';
+      var nTab = $('acSolN'); if (nTab) { nTab.textContent = nuevas; nTab.hidden = !nuevas; nTab.title = nuevas + ' por atender'; }
       $('acSol').querySelector('tbody').innerHTML = sols.map(function (x) {
         var quien = [x.nombre, x.motivo].filter(Boolean).map(esc).join(' · ') + (x.veces > 1 ? ' <span class="ac-chip">pidió ' + x.veces + ' veces</span>' : '');
         var accion = x.estado === 'nueva'
@@ -799,7 +800,16 @@
               pon({ token: j.access_token, refresh: j.refresh_token, vence: Date.now() + j.expires_in * 1000, correo: s.correo });
               caja.hidden = true; est.textContent = ''; cod.value = '';
               ok(j.access_token);
-            }).catch(function () { est.textContent = 'El código no coincide o ya cambió: escribe el que se ve ahora.'; cod.select(); });
+            }).catch(function (e) {
+              // Ronda 28 (26-11-2026): el motivo a la vista. El autor quedó fuera con «no coincide» cuando el factor
+              // confirmado en Supabase ya no era el de su aplicación.
+              var m = String((e && (e.error_code || e.code || e.msg || e.message)) || '');
+              est.textContent = /rate|too_many|limit/i.test(m) ? 'Demasiados intentos seguidos: espera un minuto y escribe el código que se vea entonces.'
+                : /expired|session|jwt|not_found|401|403/i.test(m) ? 'Tu sesión venció mientras escribías: recarga la página y vuelve a entrar.'
+                : f.totp ? 'El código no coincide. Revisa que escaneaste el QR de esta pantalla (borra la entrada anterior de tu aplicación) y que la hora de tu celular sea la automática.'
+                : 'El código no coincide o ya cambió. Si cambiaste de celular o de aplicación, el factor se borra en Supabase (Authentication, Users, «Remove MFA factors») y aquí lo das de alta otra vez.';
+              cod.select();
+            });
           };
         });
       });
@@ -811,14 +821,25 @@
         // Sesión de dos factores confirmada: este navegador abre las pestañas 12 h (Ronda 17).
         if (A.marcaAdmin) A.marcaAdmin(true);
         if (A.pestana) A.pestana();
-        $('acQuien').textContent = 'Entraste como ' + u.email + '.';
-        return Promise.all([carga(), semana(), maestroInfo()]);
+        $('acQuien').textContent = u.email;
+        // Ronda 28: si falla una lectura (códigos, pase o código maestro) se dice cuál y el panel abre; solo «no eres
+        // de la administración» sigue cerrando la puerta. Antes cualquier falla decía «Tu sesión venció» y borraba la sesión.
+        var fallas = [];
+        function lee(nombre, p) {
+          return p.catch(function (e) { if (e && /administraci/.test(e.message || '')) throw e; fallas.push(nombre); });
+        }
+        return Promise.all([lee('los códigos y las solicitudes', carga()), lee('tu código de la semana', semana()), lee('tu código maestro', maestroInfo())])
+          .then(function () {
+            var av = $('acAviso'); if (!av) return;
+            av.hidden = !fallas.length;
+            av.textContent = fallas.length ? 'No se pudo leer ' + fallas.join(', ') + '. Tu sesión sigue abierta: recarga la página para reintentar.' : '';
+          });
       }).then(function () {
         entrar.hidden = true; admin.hidden = false;
         hoja(hojaInicial());
         if (/[?&]maestro=1/.test(location.search)) {
           history.replaceState(null, '', location.pathname);
-          $('acQuien').textContent += ' Te reconocimos con tu código maestro.';
+          $('acQuien').textContent += ' · con tu código maestro';
         }
         // Entraste a tu panel con tus dos factores: las pestañas ya abren por 12 h
         // (Ronda 17). El pase de la semana ya no se canjea solo al entrar (Ronda 18):

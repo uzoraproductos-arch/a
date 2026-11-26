@@ -71,16 +71,19 @@ def _enciclopedia():
     """La antigua Enciclopedia, en privado (Ronda 7, decisión del autor, 22-11-2026): sus cuatro portadas ya no tienen
     liga pública (traslado.py) y acceso.js solo las abre en el navegador de la administración."""
     import traslado
-    nom = {'enciclopedia-auditavision.html': ('📚', 'La Enciclopedia', 'Su portada, con Números, Datos y Aprende.'),
-           'sigue-el-dinero.html': ('💰', 'Números', 'El índice de Presupuesto, Gasto público, Cuentas claras, Baja al territorio y las Herramientas.'),
-           'descarga-los-datos.html': ('🗂️', 'Datos', 'El índice de los Poderes, la salud, el ambiente, el padrón del SAT y los informes.'),
-           'aprende.html': ('🎓', 'Aprende', 'El índice de la Biblioteca del Erario, cómo se audita, el fraude en números y los recursos naturales.')}
+    import auditor_bento
+    nom = {'enciclopedia-auditavision.html': ('libro', 'La Enciclopedia', 'Su portada, con Números, Datos y Aprende.'),
+           'sigue-el-dinero.html': ('panel', 'Números', 'El índice de Presupuesto, Gasto público, Cuentas claras, Baja al territorio y las Herramientas.'),
+           'descarga-los-datos.html': ('carpeta', 'Datos', 'El índice de los Poderes, la salud, el ambiente, el padrón del SAT y los informes.'),
+           'aprende.html': ('pluma', 'Aprende', 'El índice de la Biblioteca del Erario, cómo se audita, el fraude en números y los recursos naturales.')}
     return ('      <h3>La Enciclopedia, en privado</h3>\n'
+            '      <details class="ac-nota"><summary>Por qué está aquí</summary>\n'
             '      <p class="ac-ayuda">Desde la Ronda 7 sus páginas viven en el Planisferio (cada una en su dimensión) y la Biblioteca del Erario en '
             'Comunidad. Sus cuatro portadas quedan aquí, solo para ti: el público ya no tiene ligas a ellas y, si alguien llega por una vieja, '
-            'la página lo manda al Planisferio.</p>\n'
+            'la página lo manda al Planisferio.</p></details>\n'
             '      <ul class="ac-enc">\n%s      </ul>\n') % ''.join(
-        '        <li><a href="%s"><span aria-hidden="true">%s</span> <b>%s</b></a> <small>%s</small></li>\n' % ((f,) + nom[f])
+        '        <li><a href="%s">%s <b>%s</b> <small>%s</small></a></li>\n'
+        % (f, auditor_bento.ico(nom[f][0], 22, 'ac-i'), nom[f][1], nom[f][2])
         for f in traslado.PRIVADAS)
 
 
@@ -371,14 +374,16 @@ def escribir_entrada(sello):
 # control interno dentro de nuestra plataforma»): el tablero de uso con sus
 # gráficas, los códigos, las solicitudes, la bitácora y el acceso propio.
 HOJAS = [
-    ('tablero', '📊', 'Tablero de uso'),
-    ('codigos', '🗝️', 'Códigos'),
-    ('solicitudes', '📨', 'Solicitudes'),
-    ('bitacora', '📋', 'Bitácora'),
-    ('acceso', '🔐', 'Mi acceso'),
+    ('tablero', 'panel', 'Tablero de uso'),
+    ('codigos', 'llave', 'Códigos'),
+    ('solicitudes', 'campana', 'Solicitudes'),
+    ('bitacora', 'documento', 'Bitácora'),
+    ('acceso', 'escudo', 'Mi acceso'),
     # Ronda 7 (22-11-2026): la antigua Enciclopedia, solo para la administración (traslado.py).
-    ('enciclopedia', '📚', 'Enciclopedia'),
+    ('enciclopedia', 'libro', 'Enciclopedia'),
 ]
+# Ronda 28 (26-11-2026): el panel va sin emojis. El segundo dato de cada hoja es un trazo de auditor_bento.TRAZOS
+# (si no existe, la generación se detiene) y la hoja de solicitudes lleva en su pestaña el número de pendientes.
 # Las gráficas del tablero: id, título y qué responde. Las pinta
 # acceso-paginas.js con lo que devuelve uso_tablero() de la base.
 GRAFICAS = [
@@ -394,10 +399,13 @@ GRAFICAS = [
 
 
 def _pestanas():
+    import auditor_bento
     return ('    <div class="ac-pestanas" role="tablist" aria-label="Partes del panel">\n'
             + ''.join('      <button class="ac-pestana" type="button" role="tab" id="ac-tab-%s" aria-controls="ac-hoja-%s" '
-                      'aria-selected="%s" data-hoja="%s">%s %s</button>\n'
-                      % (i, i, 'true' if n == 0 else 'false', i, ico, t) for n, (i, ico, t) in enumerate(HOJAS))
+                      'aria-selected="%s" data-hoja="%s">%s <span>%s</span>%s</button>\n'
+                      % (i, i, 'true' if n == 0 else 'false', i, auditor_bento.ico(ico, 18, 'ac-i'), t,
+                         ' <b class="ac-pestana-n" id="acSolN" hidden></b>' if i == 'solicitudes' else '')
+                      for n, (i, ico, t) in enumerate(HOJAS))
             + '    </div>\n')
 
 
@@ -406,16 +414,17 @@ def _tablero():
                    '<div class="ac-graf-cuerpo"><p class="ac-ayuda">Cargando…</p></div></figure>\n'
                    % (' ac-graf-ancha' if i in ('dia', 'horas') else '', i, t, d) for i, t, d in GRAFICAS)
     return ('      <h3>Tablero de uso</h3>\n'
+            '      <details class="ac-nota"><summary>Qué se mide y qué no</summary>\n'
             '      <p class="ac-ayuda">Cómo se usa la plataforma, para saber dónde poner atención y qué falta en la base. '
             'Se mide por navegador (el número al azar de su pase), nunca por persona: no se guarda la IP, lo que se escribe ni las preguntas al chat. '
-            'Tu navegador de administración no se cuenta. Las cifras son conteos de la plataforma, no estimaciones.</p>\n'
+            'Tu navegador de administración no se cuenta. Las cifras son conteos de la plataforma, no estimaciones.</p></details>\n'
             '      <div class="ac-orden">\n'
             '        <div class="ac-vista" role="group" aria-label="Periodo">\n'
             + ''.join('          <button class="sz-btn ac-chico ac-claro" type="button" data-periodo="%d" aria-pressed="%s">%s</button>\n'
                       % (d, 'true' if d == 30 else 'false', t) for d, t in ((7, '7 días'), (30, '30 días'), (90, '90 días'), (365, '1 año')))
             + '        </div>\n'
-            '        <button class="sz-btn ac-chico ac-claro" type="button" id="acTabCsv">Descargar el tablero (CSV)</button>\n'
             '        <button class="sz-btn ac-chico ac-claro" type="button" id="acTabRecargar">Actualizar</button>\n'
+            '        <button class="sz-btn ac-chico ac-claro" type="button" id="acTabCsv">Descargar CSV</button>\n'
             '      </div>\n'
             '      <p class="ac-estado" id="acTabEstado" role="status" aria-live="polite"></p>\n'
             '      <div class="ac-kpis" id="acKpis"></div>\n'
@@ -425,12 +434,13 @@ def _tablero():
 
 def _bitacora():
     return ('      <h3>Bitácora de la administración</h3>\n'
+            '      <details class="ac-nota"><summary>Qué queda anotado</summary>\n'
             '      <p class="ac-ayuda">El control interno: cada cosa que se hace con los códigos, las solicitudes y el código maestro queda anotada sola, '
-            'con quién y cuándo. No se edita ni se borra desde aquí. «sistema» es lo que hace la plataforma sola, como el código de la semana.</p>\n'
+            'con quién y cuándo. No se edita ni se borra desde aquí. «sistema» es lo que hace la plataforma sola, como el código de la semana.</p></details>\n'
             '      <div class="ac-orden">\n'
             '        <label class="ac-busca">Qué <select class="ac-campo" id="acBitQue"><option value="">Todo</option></select></label>\n'
             '        <label class="ac-busca">Buscar <input class="ac-campo" id="acBitBusca" type="search" placeholder="Código, correo o detalle" autocomplete="off"></label>\n'
-            '        <button class="sz-btn ac-chico ac-claro" type="button" id="acBitCsv">Descargar la bitácora (CSV)</button>\n'
+            '        <button class="sz-btn ac-chico ac-claro" type="button" id="acBitCsv">Descargar CSV</button>\n'
             '      </div>\n'
             '      <div class="ac-resumen" id="acBitResumen"></div>\n'
             '      <div class="ac-tabla-caja"><table class="ac-tabla" id="acBit">\n'
@@ -439,6 +449,7 @@ def _bitacora():
 
 
 def pagina_panel():
+    import auditor_bento
     opciones = ''.join('<option value="%s"%s>%s</option>' % (v, ' selected' if v == '7 days' else '', t) for v, t in DURACIONES)
     bloque = ('<div class="ac-panel" id="acPanel">\n'
               '  <form class="ac-entrar" id="acEntrar" novalidate>\n'
@@ -455,23 +466,30 @@ def pagina_panel():
               '  <form class="ac-entrar" id="acFactor" novalidate hidden>\n'
               '    <h2 class="ac-et">Segundo paso: tu código de seis números</h2>\n'
               '    <div id="acFactorAlta" hidden>\n'
-              '      <p class="ac-ayuda">Es la primera vez: escanea este código con tu aplicación de autenticación '
-              '(Google Authenticator, Microsoft Authenticator, 1Password, Authy…) y escribe los seis números que te da.</p>\n'
+              '      <p class="ac-ayuda">Este código QR es nuevo: escanéalo con tu aplicación de autenticación '
+              '(Google Authenticator, Microsoft Authenticator, 1Password, Authy…) y escribe los seis números que te da, sin recargar la página.</p>\n'
+              '      <p class="ac-ayuda ac-ojo">Si en tu aplicación ya había una entrada «Panel Auditavisión» de un intento anterior, bórrala antes: '
+              'sus números ya no sirven.</p>\n'
               '      <img class="ac-qr" id="acFactorQr" alt="Código QR para dar de alta el segundo factor" width="200" height="200">\n'
               '      <p class="ac-ayuda">¿No puedes escanearlo? Escribe esta clave en la aplicación: <code id="acFactorSecreto"></code></p>\n'
-              '      <p class="ac-ayuda"><a class="sz-btn" id="acFactorUri" href="#" hidden>📱 Ábrelo en tu aplicación (si estás en el celular)</a></p>\n'
+              '      <p class="ac-ayuda"><a class="sz-btn" id="acFactorUri" href="#" hidden>Ábrelo en tu aplicación (si estás en el celular)</a></p>\n'
               '    </div>\n'
               '    <label class="ac-et" for="acFactorCodigo">Código de tu aplicación</label>\n'
               '    <input class="ac-campo" id="acFactorCodigo" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required>\n'
               '    <button class="sz-btn sz-btn-of" type="submit">Entrar al panel</button>\n'
               '    <p class="ac-estado" id="acFactorEstado" role="status" aria-live="polite"></p>\n'
               '    <p class="ac-ayuda">El panel pide los dos pasos por seguridad (LFPDPPP, art. 18). '
-              'Si perdiste tu aplicación, la llave de servicio de Supabase borra el factor y lo das de alta otra vez.</p>\n'
+              'Si perdiste tu aplicación o cambiaste de celular, el factor se borra en Supabase (Authentication, Users, «Remove MFA factors») '
+              'y lo das de alta otra vez.</p>\n'
               '  </form>\n'
               '  <div class="ac-admin" id="acAdmin" hidden>\n'
-              '    <p class="ac-sesion"><span id="acQuien"></span> <button class="sz-btn ac-chico" type="button" id="acSalir">Salir</button></p>\n'
-              '    <p class="ac-pase-fila"><span class="ac-estado ac-pase" id="acPaseEstado" role="status" aria-live="polite"></span> '
-              '<button class="sz-btn ac-chico" type="button" id="acPaseReintentar" hidden>Reintentar</button></p>\n'
+              '    <div class="ac-tope">\n'
+              '      <p class="ac-tope-yo"><span class="ac-insignia">%s Administración</span> <span id="acQuien"></span></p>\n'
+              '      <button class="sz-btn ac-chico ac-claro" type="button" id="acSalir">Salir</button>\n'
+              '      <p class="ac-pase-fila"><span class="ac-estado ac-pase" id="acPaseEstado" role="status" aria-live="polite"></span> '
+              '<button class="sz-btn ac-chico ac-claro" type="button" id="acPaseReintentar" hidden>Reintentar</button></p>\n'
+              '      <p class="ac-estado ac-pase-mal" id="acAviso" role="status" aria-live="polite" hidden></p>\n'
+              '    </div>\n'
               + _pestanas() +
               '    <section class="ac-hoja" id="ac-hoja-tablero" role="tabpanel" aria-labelledby="ac-tab-tablero" data-sin-medir>\n'
               + _tablero() +
@@ -483,6 +501,7 @@ def pagina_panel():
               + _bitacora() +
               '    </section>\n'
               '    <section class="ac-hoja" id="ac-hoja-acceso" role="tabpanel" aria-labelledby="ac-tab-acceso" hidden>\n'
+              '    <div class="ac-dos">\n'
               '    <section class="ac-semana" aria-labelledby="acSemTit">\n'
               '      <h3 id="acSemTit">Tu código de la semana</h3>\n'
               '      <p class="ac-semana-cod"><button class="ac-cod" type="button" id="acSemCod" title="Copiar">····-····</button></p>\n'
@@ -490,13 +509,14 @@ def pagina_panel():
               'Cuando cambie, tu acceso termina y la entrada te manda aquí por el nuevo.</p>\n'
               '      <p class="ac-acciones"><button class="sz-btn sz-btn-of" type="button" id="acComoAdmin">Abrir la plataforma con mi código</button> '
               '<button class="sz-btn ac-chico ac-claro" type="button" id="acSemCambiar">Cambiarlo ahora</button></p>\n'
+              '      <p class="ac-estado" id="acComoAdminEstado" role="status" aria-live="polite"></p>\n'
               '    </section>\n'
-              '    <p class="ac-estado" id="acComoAdminEstado" role="status" aria-live="polite"></p>\n'
               '    <form class="ac-semana ac-maestro" id="acMaestro" novalidate>\n'
               '      <h3>Tu código maestro</h3>\n'
-              '      <p class="ac-ayuda">Son 8 números o letras que solo tú sabes. Escríbelos en la entrada de la plataforma, desde cualquier '
-              'dispositivo, y te reconoce como administración sin pedirte el correo. No cambia solo: lo cambias aquí cuando quieras. Si ese número ya era uno de tus códigos comunes, se archiva y pasa a ser tu código maestro. '
-              'No uses una fecha ni un número que alguien pueda adivinar, y no lo mandes por chat ni por correo.</p>\n'
+              '      <p class="ac-ayuda">Son 8 números o letras que solo tú sabes: en la entrada te reconocen como administración, sin correo.</p>\n'
+              '      <details class="ac-nota"><summary>Cómo elegirlo y cuidarlo</summary>\n'
+              '      <p class="ac-ayuda">Escríbelo en la entrada de la plataforma, desde cualquier dispositivo. No cambia solo: lo cambias aquí cuando quieras. Si ese número ya era uno de tus códigos comunes, se archiva y pasa a ser tu código maestro. '
+              'No uses una fecha ni un número que alguien pueda adivinar, y no lo mandes por chat ni por correo.</p></details>\n'
               '      <p class="ac-ayuda" id="acMaeEstado"></p>\n'
               '      <div class="ac-fila">\n'
               '        <label>Código maestro nuevo <input class="ac-campo" name="nuevo" type="password" autocapitalize="characters" maxlength="9" autocomplete="new-password" required></label>\n'
@@ -506,11 +526,12 @@ def pagina_panel():
               '      <p class="ac-estado" id="acMaeGuardar" role="status" aria-live="polite"></p>\n'
               '      <p class="ac-ayuda" id="acMaeEntradas"></p>\n'
               '    </form>\n'
+              '    </div>\n'
               '    </section>\n'
               '    <section class="ac-hoja" id="ac-hoja-solicitudes" role="tabpanel" aria-labelledby="ac-tab-solicitudes" hidden>\n'
               '    <section class="ac-solicitudes" aria-labelledby="acSolTit">\n'
               '      <h3 id="acSolTit">Solicitudes de código <span class="ac-chip ac-sin_usar" id="acSolCuenta"></span></h3>\n'
-              '      <p class="ac-ayuda">Quien pidió código desde la entrada. Elige cuánto le das, asigna y mándaselo desde tu correo.</p>\n'
+              '      <p class="ac-ayuda ac-largo">Quien pidió código desde la entrada. Elige cuánto le das, asigna y mándaselo desde tu correo.</p>\n'
               '      <div class="ac-tabla-caja"><table class="ac-tabla" id="acSol">\n'
               '        <thead><tr><th>Correo</th><th>Quién y para qué</th><th>Pidió</th><th>Estado</th><th></th></tr></thead>\n'
               '        <tbody></tbody></table></div>\n'
@@ -527,12 +548,11 @@ def pagina_panel():
               '        <label>Canjear antes del <input class="ac-campo" name="antes" type="date"></label>\n'
               '        <label class="ac-ancho">Nota (opcional) <input class="ac-campo" name="nota" type="text" maxlength="120" placeholder="Para quién son: «Taller», «Prensa»…"></label>\n'
               '        <label class="ac-ancho">Código propio (opcional) <input class="ac-campo" name="propio" type="text" autocapitalize="characters" maxlength="9" autocomplete="off" spellcheck="false" placeholder="Vacío: salen al azar. Ejemplo: 2026-1029 o PASE-TALL"></label>\n'
-              '        <p class="ac-ayuda ac-ancho">Si escribes un código propio se crea solo ese, con la duración y los usos de arriba. Lleva 8 caracteres: puros números, puras letras o revueltos, como tú quieras. Los que salen al azar siempre revuelven letras y números, así que uno de puros números o de puras letras es uno que diste tú. La nota es opcional.</p>\n'
+              '        <details class="ac-nota ac-ancho"><summary>Ayuda sobre los códigos</summary>\n'
+              '        <p class="ac-ayuda">Si escribes un código propio se crea solo ese, con la duración y los usos de arriba. Lleva 8 caracteres: puros números, puras letras o revueltos, como tú quieras. Los que salen al azar siempre revuelven letras y números, así que uno de puros números o de puras letras es uno que diste tú. La nota es opcional.</p>\n'
+              '        <p class="ac-ayuda">Archivar solo ordena: el código sigue abriendo si alguien lo usa. Renovar le devuelve la vida: quita la revocación y el archivo, suma personas o fecha y, si quieres, da más tiempo a quien ya lo canjeó (desde hoy, si ya se le había acabado). Eliminar lo borra para siempre y quien lo canjeó pierde su tiempo. Todo queda en la Bitácora.</p></details>\n'
               '      </div>\n'
-              '      <p class="ac-acciones"><button class="sz-btn sz-btn-of" type="submit">Generar</button>\n'
-              '        <button class="sz-btn ac-claro" type="button" id="acCsv">Descargar CSV</button>\n'
-              '        <button class="sz-btn ac-claro" type="button" id="acCsvUso">Descargar el registro de uso</button>\n'
-              '        <button class="sz-btn ac-claro" type="button" id="acRecargar">Actualizar la lista</button></p>\n'
+              '      <p class="ac-acciones"><button class="sz-btn sz-btn-of" type="submit">Generar</button></p>\n'
               '      <p class="ac-estado" id="acGenerarEstado" role="status" aria-live="polite"></p>\n'
               '    </form>\n'
               '    <h3 class="ac-reg-tit">Registro de códigos</h3>\n'
@@ -542,25 +562,28 @@ def pagina_panel():
               '        <button class="sz-btn ac-chico ac-claro" type="button" data-vista="activos" aria-pressed="true">Activos <b id="acNAct">0</b></button>\n'
               '        <button class="sz-btn ac-chico ac-claro" type="button" data-vista="archivados" aria-pressed="false">Archivados <b id="acNArc">0</b></button></div>\n'
               '      <label class="ac-busca">Buscar <input class="ac-campo" id="acBusca" type="search" placeholder="Código o nota" autocomplete="off"></label>\n'
+              '      <button class="sz-btn ac-chico ac-claro" type="button" id="acRecargar">Actualizar</button>\n'
               '      <button class="sz-btn ac-chico ac-claro" type="button" id="acArchInact" title="Revocados, terminados y vencidos">Archivar los que ya no abren</button>\n'
+              '      <button class="sz-btn ac-chico ac-claro" type="button" id="acCsv">Descargar CSV</button>\n'
+              '      <button class="sz-btn ac-chico ac-claro" type="button" id="acCsvUso">Descargar el registro de uso</button>\n'
               '    </div>\n'
-              '    <p class="ac-ayuda">Archivar solo ordena: el código sigue abriendo si alguien lo usa. Renovar le devuelve la vida: quita la revocación y el archivo, suma personas o fecha y, si quieres, da más tiempo a quien ya lo canjeó (desde hoy, si ya se le había acabado). Eliminar lo borra para siempre y quien lo canjeó pierde su tiempo. Todo queda en la Bitácora.</p>\n'
               '    <p class="ac-estado" id="acTablaEstado" role="status" aria-live="polite"></p>\n'
               '    <div class="ac-tabla-caja"><table class="ac-tabla" id="acTabla">\n'
               '      <thead><tr><th>Código</th><th>Duración</th><th>Usos</th><th>Estado</th><th>Nota</th><th>Acciones</th></tr></thead>\n'
               '      <tbody></tbody></table></div>\n'
               '    </section>\n'
               '  </div>\n'
-              '</div>') % opciones
+              '</div>') % (auditor_bento.ico('escudo', 16, 'ac-i'), opciones)
     return {
         'archivo': PANEL,
         'menu': 'Administración de códigos',
         'icono': '🗝️',
         'titulo': 'Administración y control interno',
         'lema': 'Solo para la administración',
-        'entrada': ('El control interno de la plataforma: el tablero de uso con sus gráficas (qué temas interesan, cuánto tiempo y dónde dan clic), '
-                    'los códigos de invitación (los generas, editas, renuevas, archivas, revocas o eliminas), las solicitudes, la bitácora de todo '
-                    'lo que hace la administración y tu acceso. Solo abre con una cuenta dada de alta en la administración.'),
+        'entrada': ('El control interno de la plataforma: el tablero de uso, los códigos de invitación, las solicitudes, la bitácora '
+                    'y tu acceso. Solo abre con una cuenta dada de alta en la administración.'),
+        # Ronda 28: el encabezado va compacto (acceso.css, .ac-cab) para que el panel empiece en la primera pantalla.
+        'cab_extra': 'ac-cab', 'sin_icono_lema': True,
         'noindex': True,
         'estilos': ['acceso.css'],
         'scripts': ['acceso-paginas.js'],
