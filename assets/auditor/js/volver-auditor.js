@@ -112,3 +112,47 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pon);
   else pon();
 })();
+
+/* La carcasa unificada (Ronda 26B, 26-11-2026): la barra lateral de todas las páginas (auditor_bento.lado). En el
+   celular se pliega bajo «Menú»; fuera del Auditor, «Tu portafolio» lista los tres últimos de av-portafolio (en el
+   Auditor lo hace auditor-bento.js). Nada sale del navegador. */
+(function () {
+  'use strict';
+  function pon() {
+    var lado = document.getElementById('avbLado');
+    if (!lado) return;
+    var btn = document.getElementById('avbLadoMenu');
+    if (btn) btn.addEventListener('click', function () {
+      var abre = !lado.classList.contains('avb-lado-abierto');
+      lado.classList.toggle('avb-lado-abierto', abre);
+      btn.setAttribute('aria-expanded', abre ? 'true' : 'false');
+      btn.querySelector('span').textContent = abre ? 'Cerrar' : 'Menú';
+    });
+    var angosta = window.matchMedia && window.matchMedia('(max-width: 980px)').matches;
+    var pd = document.getElementById('avbPort');
+    if (pd && angosta) pd.open = false;
+    if (document.getElementById('avb')) return;
+    var lista = document.getElementById('avbPortLista'), vacio = document.getElementById('avbPortVacio');
+    if (!lista || !vacio) return;
+    function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+    var DOC = '<svg class="avb-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" ' +
+      'stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>';
+    function port() {
+      var l = [];
+      try { l = JSON.parse(localStorage.getItem('av-portafolio') || '[]'); } catch (e) { l = []; }
+      if (!Array.isArray(l)) l = [];
+      l = l.filter(function (x) { return x && x.q; }).slice(0, 3);
+      lista.hidden = !l.length;
+      vacio.hidden = !!l.length;
+      lista.innerHTML = l.map(function (x) {
+        var u = x.o === 'auditor' ? 'herramienta-inspector-pregunta.html?q=' + encodeURIComponent(x.q)
+          : 'servicios-revisa.html?s=' + encodeURIComponent(x.s || '') + '&q=' + encodeURIComponent(x.q);
+        return '<li><a href="' + esc(u) + '" title="' + esc((x.t || x.q) + (x.f ? ' · ' + x.f : '')) + '">' + DOC + '<span>' + esc(x.t || x.q) + '</span></a></li>';
+      }).join('');
+    }
+    port();
+    window.addEventListener('storage', function (ev) { if (ev.key === 'av-portafolio') port(); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pon);
+  else pon();
+})();

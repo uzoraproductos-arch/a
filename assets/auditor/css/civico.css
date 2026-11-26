@@ -1395,3 +1395,98 @@ table.sa-rangos tbody th { font-weight: 600; }
   :root:not([data-theme="light"]) .cero-ciec { background: rgba(80,180,120,.12); border-color: rgba(120,200,150,.4); color: #d6f0df; }
   :root:not([data-theme="light"]) .cero-ciec-ico { color: #8fd6a8; }
 }
+
+/* La carcasa unificada (Ronda 26B, 26-11-2026, decisión del autor): la barra lateral del Auditor en todas las páginas
+   (auditor_bento.lado, puesta por cabecera() de apartados.py). Fija a la izquierda desde 981 px; arriba y plegable en el
+   celular. Sin emojis: íconos SVG de trazo. */
+.avb-lado {
+  display: flex; flex-direction: column; gap: 14px; padding: 18px 14px; box-sizing: border-box;
+  background: linear-gradient(180deg, #091c42, #0b2457); color: #e8eefc; font-family: 'Inter', system-ui, sans-serif;
+}
+.avb-lado .avb-i { flex: none; display: block; }
+.avb-lado-cab { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.avb-lado-cuerpo { display: flex; flex-direction: column; gap: 14px; flex: 1 1 auto; }
+.avb-marca { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 6px; color: #ffffff; text-decoration: none; }
+.avb-marca img { background: #ffffff; border-radius: 8px; padding: 3px; }
+.avb-marca b { font-family: 'Playfair Display', Georgia, serif; font-size: 20px; }
+.avb-lado-menu {
+  display: none; align-items: center; gap: 8px; min-height: 44px; min-width: 44px; padding: 6px 12px; border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 10px; background: rgba(255, 255, 255, .06); color: #ffffff; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer;
+}
+.avb-nueva {
+  display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 12px; border: 1px solid rgba(255, 255, 255, .22); box-sizing: border-box;
+  border-radius: 10px; background: rgba(255, 255, 255, .06); color: #ffffff; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer; text-decoration: none;
+}
+.avb-nueva:hover, .avb-nueva:focus-visible, .avb-lado-menu:hover, .avb-lado-menu:focus-visible { background: rgba(255, 255, 255, .14); color: #ffffff; }
+.avb-nav { display: grid; gap: 2px; }
+.avb-nav a {
+  display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 12px; border-radius: 10px; box-sizing: border-box;
+  color: #d9e2f5; text-decoration: none; font-size: 16px; font-weight: 500;
+}
+.avb-nav a > span:first-of-type { flex: 1 1 auto; }
+.avb-nav a:hover, .avb-nav a:focus-visible { background: rgba(255, 255, 255, .09); color: #ffffff; }
+.avb-nav a[aria-current] { background: rgba(255, 255, 255, .14); color: #ffffff; font-weight: 600; }
+.avb-pastilla {
+  flex: none; min-width: 24px; padding: 1px 7px; border-radius: 999px; background: rgba(255, 255, 255, .16);
+  color: #ffffff; font-size: 13px; font-weight: 700; text-align: center;
+}
+.avb-leyenda, .avb-port { border-top: 1px solid rgba(255, 255, 255, .12); padding-top: 12px; }
+.avb-leyenda > summary, .avb-port > summary {
+  display: flex; align-items: center; min-height: 32px; padding: 0 6px; list-style: none; cursor: pointer;
+  font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: #a9b8da; font-weight: 700;
+}
+.avb-leyenda > summary::-webkit-details-marker, .avb-port > summary::-webkit-details-marker { display: none; }
+.avb-leyenda > summary::after, .avb-port > summary::after { content: '+'; margin-left: auto; font-size: 16px; letter-spacing: 0; }
+.avb-leyenda[open] > summary::after, .avb-port[open] > summary::after { content: '–'; }
+.avb-leyenda ul { list-style: none; margin: 8px 0 0; padding: 0 6px; display: grid; gap: 8px; }
+.avb-leyenda li { font-size: 14px; line-height: 1.45; color: #d9e2f5; }
+.avb-leyenda li .est-chip { margin-right: 4px; background: #ffffff; }
+.avb-leyenda li .est-pendiente { color: #4a5568; border-color: #8a94a6; }
+.avb-leyenda > a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 6px; color: #f3d77a; font-size: 14px; text-decoration: none; }
+.avb-leyenda > a:hover, .avb-leyenda > a:focus-visible { text-decoration: underline; }
+.avb-port ol { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 2px; }
+.avb-port li a {
+  display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 10px; border-radius: 8px;
+  color: #d9e2f5; text-decoration: none; font-size: 15px;
+}
+.avb-port li a:hover, .avb-port li a:focus-visible { background: rgba(255, 255, 255, .09); color: #ffffff; }
+.avb-port li a span { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.avb-port-vacio { margin: 6px 6px 0; font-size: 14px; line-height: 1.5; color: #a9b8da; }
+.avb-tour-btn {
+  display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 12px; border: 0; border-radius: 10px; background: transparent;
+  color: #a9b8da; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; text-align: left; text-decoration: none; margin-top: auto;
+}
+.avb-tour-btn:hover, .avb-tour-btn:focus-visible { background: rgba(255, 255, 255, .09); color: #ffffff; }
+.avb-acceso { padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, .12); }
+.avb-ingresa, .avb-adm {
+  display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 12px; border-radius: 10px;
+  color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600;
+}
+.avb-ingresa:hover, .avb-ingresa:focus-visible, .avb-adm:hover, .avb-adm:focus-visible { background: rgba(255, 255, 255, .09); color: #ffffff; }
+.avb-adm { background: rgba(212, 168, 38, .12); border: 1px solid rgba(212, 168, 38, .45); }
+.avb-adm b { display: block; font-size: 16px; }
+.avb-adm small { display: block; font-size: 13px; font-weight: 500; color: #d9e2f5; }
+.avb-inf { color: #d4a826; font-size: 20px; font-weight: 800; line-height: 1; }
+.avb-acceso small.avb-vence { display: block; padding: 0 12px; font-size: 13px; color: #a9b8da; }
+/* «Cuéntanos lo que viste», dentro de Comunidad. */
+.avc-cuentanos a { font-weight: 700; }
+@media (min-width: 981px) {
+  body:has(> .avb-lado), body.avb-pagina { padding-left: 236px; }
+  .avb-lado { position: fixed; top: 0; bottom: 0; left: 0; width: 236px; overflow-y: auto; z-index: 20; }
+  body:has(> .avb-lado) .av-volver, body.avb-pagina .av-volver { left: 252px; }
+}
+@media (max-width: 980px) {
+  .avb-lado { gap: 10px; padding: 10px 16px; }
+  .avb-lado-menu { display: inline-flex; }
+  .avb-lado-cuerpo { display: none; gap: 10px; padding-bottom: 6px; }
+  .avb-lado.avb-lado-abierto .avb-lado-cuerpo { display: flex; }
+  .avb-nav { display: flex; flex-wrap: wrap; gap: 4px; }
+  .avb-nav a { flex: 1 1 auto; padding: 8px 10px; background: rgba(255, 255, 255, .06); }
+  .avb-tour-btn { margin-top: 0; }
+  .avb-acceso { padding-top: 10px; }
+  .avb-leyenda li, .avb-leyenda > a, .avb-port li a, .avb-port-vacio, .avb-tour-btn { font-size: 16px; }
+}
+/* Dentro de un marco (el chat o la vista del panel de Servicios) y al imprimir, sin barra lateral. */
+html.av-en-chat .avb-lado, html.pa-en-vista .avb-lado, html.modo-visor .avb-lado { display: none !important; }
+html.av-en-chat body, html.pa-en-vista body, html.modo-visor body { padding-left: 0 !important; }
+@media print { .avb-lado { display: none !important; } body:has(> .avb-lado) { padding-left: 0 !important; } }

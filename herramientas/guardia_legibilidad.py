@@ -146,6 +146,16 @@ def servir_repo():
     return f"http://127.0.0.1:{srv.server_address[1]}/", srv
 
 
+def portada(url):
+    """La portada que se mide. Desde la Ronda 26B (26-11-2026) la raíz manda al Auditor; la portada vieja, con su
+    motor y sus módulos, se sigue abriendo con ?visor=1 (o ?ir=), y es la que mide esta guardia."""
+    if url.endswith('/'):
+        return url + 'index.html?visor=1'
+    if url.endswith('index.html'):
+        return url + '?visor=1'
+    return url
+
+
 def medir_vista(navegador, url, vista):
     ctx = navegador.new_context(viewport={"width": 390, "height": 844},
                                 device_scale_factor=2, is_mobile=True, has_touch=True)
@@ -153,7 +163,7 @@ def medir_vista(navegador, url, vista):
     errores = []
     pagina.on("pageerror", lambda e: errores.append(str(e)[:200]))
     pagina.on("console", lambda m: errores.append(m.text[:200]) if m.type == "error" else None)
-    pagina.goto(url, wait_until="load", timeout=60000)
+    pagina.goto(portada(url), wait_until="load", timeout=60000)
     pagina.wait_for_function("() => window.AuditEngine", timeout=30000)
     pagina.wait_for_timeout(1500)
     if vista != "portada":
@@ -179,7 +189,7 @@ def medir_tiempo_interactivo(navegador, url):
         "offline": False, "latency": 150,
         "downloadThroughput": 1.6 * 1024 * 1024 / 8, "uploadThroughput": 750 * 1024 / 8})
     t0 = time.monotonic()
-    pagina.goto(url, wait_until="load", timeout=180000)
+    pagina.goto(portada(url), wait_until="load", timeout=180000)
     pagina.wait_for_function("() => window.AuditEngine", timeout=180000)
     segundos = round(time.monotonic() - t0, 1)
     ctx.close()

@@ -168,27 +168,63 @@ def sin_imagenes_viejas(nombre, texto):
             raise SystemExit('auditor_bento.py: %s trae una imagen del formato anterior (%s)' % (nombre, v))
 
 
-def _lado(n_serv):
+AUDITOR = NAV[0][0]
+# Ronda 26B (26-11-2026, decisión del autor): la misma barra lateral en todas las páginas (cabecera() de apartados.py
+# la pone en lugar de la barra superior vieja). Bajo la Biblioteca va «Cómo clasificamos los datos»: los tres sellos.
+LEYENDA = [('oficial', 'oficial', 'Cifra textual de un documento público: DOF, SHCP, SAT, ASF, INEGI.'),
+           ('derivado', 'auditada', 'Cruce o cálculo verificable que hacemos sobre documentos oficiales, con su operación.'),
+           ('pendiente', 'pendiente', 'La autoridad no lo ha publicado o la ley aún no está cotejada: nunca lo inventamos.')]
+
+
+def lado(actual, n_serv, en_auditor=False, pestana=''):
+    """La barra lateral: en el Auditor, con sus botones («Nueva revisión», «Cómo funciona»); en las demás páginas,
+    esos dos son ligas al Auditor. `actual`: el destino de NAV que se marca (aria-current), o '' si ninguno."""
     nav = []
-    for i, (u, i_, t) in enumerate(NAV):
+    for u, i_, t in NAV:
         pastilla = ' <span class="avb-pastilla" title="%d servicios">%d</span>' % (n_serv, n_serv) if u == 'servicios.html' else ''
-        nav.append('        <a href="%s"%s>%s<span>%s</span>%s</a>' % (u, ' aria-current="page"' if i == 0 else '', ico(i_), t, pastilla))
-    return '''<aside class="avb-lado" aria-label="Navegación del Auditor">
-      <a class="avb-marca" href="index.html"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="36" height="28"> <b>Auditavisión</b></a>
-      <button type="button" class="avb-nueva" id="avbNueva">%s Nueva revisión</button>
+        nav.append('        <a href="%s"%s>%s<span>%s</span>%s</a>' % (u, ' aria-current="page"' if u == actual else '', ico(i_), t, pastilla))
+    ley = '\n'.join('          <li><span class="est-chip est-%s">%s</span> %s</li>' % (c, n, html.escape(x)) for c, n, x in LEYENDA)
+    if en_auditor:
+        nueva = '<button type="button" class="avb-nueva" id="avbNueva">%s Nueva revisión</button>' % ico('mas')
+        tour = '<button type="button" class="avb-tour-btn" id="avbTourBtn">%s Cómo funciona (3 pasos)</button>' % ico('ayuda')
+    else:
+        nueva = '<a class="avb-nueva" href="%s">%s Nueva revisión</a>' % (AUDITOR, ico('mas'))
+        tour = '<a class="avb-tour-btn" href="%s?tour=1">%s Cómo funciona (3 pasos)</a>' % (AUDITOR, ico('ayuda'))
+    return LADO % (_e(pestana or ('Auditor' if en_auditor else '')), AUDITOR, ico('panel'), nueva, '\n'.join(nav), ley, ico('flecha', 14), tour, CANJE, ico('llave'))
+
+
+LADO = '''<aside class="avb-lado" id="avbLado" data-pestana="%s" aria-label="Navegación de Auditavisión">
+      <div class="avb-lado-cab">
+        <a class="avb-marca" href="%s"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="36" height="28"> <b>Auditavisión</b></a>
+        <button type="button" class="avb-lado-menu" id="avbLadoMenu" aria-controls="avbLadoCuerpo" aria-expanded="false">%s<span>Menú</span></button>
+      </div>
+      <div class="avb-lado-cuerpo" id="avbLadoCuerpo">
+      %s
       <nav class="avb-nav" aria-label="Destinos">
 %s
       </nav>
+      <details class="avb-leyenda">
+        <summary>Cómo clasificamos los datos</summary>
+        <ul>
+%s
+        </ul>
+        <a href="base-al-dia.html">Cómo se alimenta la base %s</a>
+      </details>
       <details class="avb-port" id="avbPort" open>
         <summary>Tu portafolio</summary>
         <ol id="avbPortLista" hidden></ol>
         <p class="avb-port-vacio" id="avbPortVacio">Aún no guardas investigaciones. «Guardar en mi portafolio», en el Expediente vivo o en el Inspector de Servicios, las deja aquí, solo en tu navegador.</p>
       </details>
-      <button type="button" class="avb-tour-btn" id="avbTourBtn">%s Cómo funciona (3 pasos)</button>
+      %s
       <div class="avb-acceso" id="avbAcceso">
         <a class="avb-ingresa" href="%s">%s Ingresar / Canjear código</a>
       </div>
-    </aside>''' % (ico('mas'), '\n'.join(nav), ico('ayuda'), CANJE, ico('llave'))
+      </div>
+    </aside>'''
+
+
+def _lado(n_serv):
+    return lado(AUDITOR, n_serv, True)
 
 
 def _barra():
@@ -307,6 +343,9 @@ def _mesa():
         <div class="avb-exp" id="avbExp" hidden>
           <p class="avb-exp-q" id="avbExpQ"></p>
           <p class="avb-exp-chips" id="avbExpChips"></p>
+          <div class="avb-exp-vis" id="avbExpVis" hidden></div>
+          <h3 id="avbExpPorT" hidden>Portales para profundizar</h3>
+          <ul class="avb-exp-por" id="avbExpPor" hidden></ul>
           <h3>Fuentes y documentos de la respuesta</h3>
           <ol class="avb-exp-fu" id="avbExpFu"></ol>
           <p class="avb-exp-sin" id="avbExpSin" hidden>Esta respuesta no cita un documento externo; ábrela con «Saber más» para ver sus fuentes.</p>
@@ -315,7 +354,7 @@ def _mesa():
             <a class="avb-exp-ver" id="avbExpVer" href="#" hidden>%s<span>Saber más</span></a>
             <button type="button" class="avb-exp-guarda" id="avbExpGuarda">%s<span>Guardar en mi portafolio</span></button>
           </div>
-          <p class="avb-exp-nota">Lo que ves aquí es lo que citó la respuesta del chat: no agregamos cifras ni documentos.</p>
+          <p class="avb-exp-nota">Lo que ves aquí es lo que citó la respuesta del chat, y el lugar que toca dibujado con lo que la base ya trae: no agregamos cifras ni documentos.</p>
         </div>
       </div>
     </aside>

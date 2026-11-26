@@ -4018,8 +4018,10 @@
     if (u && hilo.scrollHeight > hilo.clientHeight) hilo.scrollTop = hilo.scrollHeight;
   })();
 
-  /* Para revisar cómo puntúa una pregunta desde la consola. */
-  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo, abre: abre, servicio: servicioHtml };
+  /* Para revisar cómo puntúa una pregunta desde la consola. visual (Ronda 26B): el expediente visual de una pregunta,
+     para el «Expediente vivo» de la Mesa de Trabajo (auditor-bento.js); no entra a la huella. */
+  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo, abre: abre, servicio: servicioHtml,
+    visual: function (q, el, listo) { pintaVisual(q, null, el, listo); } };
   pintaLista();
   if (canal) document.getElementById('paSinRespNota').innerHTML = 'La lista se guarda solo en tu navegador y no se envía sola: con «Enviarlas a Auditavisión» nos la haces llegar tú.';
   var ps = new URLSearchParams(location.search), pre = ps.get('q'), lista = ps.get('p');

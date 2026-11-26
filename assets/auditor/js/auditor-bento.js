@@ -101,6 +101,30 @@
     var exp = { vacio: document.getElementById('avbExpVacio'), caja: document.getElementById('avbExp'), q: document.getElementById('avbExpQ'),
       chips: document.getElementById('avbExpChips'), fu: document.getElementById('avbExpFu'), sin: document.getElementById('avbExpSin'),
       dic: document.getElementById('avbExpDic'), ver: document.getElementById('avbExpVer'), guarda: document.getElementById('avbExpGuarda') };
+    exp.vis = document.getElementById('avbExpVis');
+    exp.por = document.getElementById('avbExpPor');
+    exp.porT = document.getElementById('avbExpPorT');
+    /* Ronda 26B: las páginas de la plataforma que la respuesta ya liga, como portales para ir a fondo (y volver con
+       «Volver al Auditor»). Se reconoce su sección por el nombre del archivo; no se agrega ninguna liga nueva. */
+    var PORTALES = [[/^planisferio/, 'Planisferio'], [/^(herramienta-calculadora|cc-|calculadora)/, 'Simulador'], [/^auditoria-/, 'Auditoría en imágenes'],
+      [/^expedientes?(-|\.)/, 'Expediente'], [/^servicio/, 'Servicio'], [/^noticias/, 'Noticiero'], [/^herramienta-/, 'Aplicación'],
+      [/^(diccionario|glosario|fuentes-oficiales|marco-legal)/, 'Biblioteca']];
+    var MAPA = SVG('<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>');
+    function portales(bot) {
+      var vistos = {}, out = [], aqui = location.pathname.split('/').pop();
+      Array.prototype.forEach.call(bot.querySelectorAll('a[href]'), function (a) {
+        var h = a.getAttribute('href') || '';
+        if (/^(https?:|mailto:|#|javascript:)/i.test(h) || a.matches('.pa-genera, .pa-ver') || out.length >= 6) return;
+        var arch = h.split('#')[0].split('?')[0].split('/').pop();
+        if (!/\.html$/.test(arch) || arch === aqui || arch === 'herramienta-inspector-dictamen.html' || vistos[arch]) return;
+        vistos[arch] = 1;
+        var tipo = 'Página de la plataforma';
+        PORTALES.some(function (p) { if (p[0].test(arch)) { tipo = p[1]; return true; } return false; });
+        var t = texto(a).slice(0, 90) || arch;
+        out.push('<li><a href="' + esc(h) + '">' + MAPA + '<span><small>' + esc(tipo) + '</small><b>' + esc(t) + '</b></span></a></li>');
+      });
+      return out;
+    }
     var ultimo = null, visto = '';
     function texto(el) { return el ? (el.textContent || '').replace(/\s+/g, ' ').trim() : ''; }
     function leeExpediente() {
@@ -140,6 +164,21 @@
       if (dic) { exp.dic.href = dic.getAttribute('href'); exp.dic.querySelector('span').textContent = /ficha/i.test(texto(dic)) ? 'Generar ficha' : 'Generar dictamen'; }
       exp.ver.hidden = !ver;
       if (ver) exp.ver.href = ver.getAttribute('href');
+      if (exp.por) {
+        var pt = portales(bot);
+        exp.por.innerHTML = pt.join('');
+        exp.por.hidden = exp.porT.hidden = !pt.length;
+      }
+      if (nueva && exp.vis && window.AuditorBot && window.AuditorBot.visual) {
+        /* El mini-mapa del INEGI y el semáforo del lugar de la pregunta (insp-visual.js): lo que la base ya trae, dibujado. */
+        exp.vis.innerHTML = '';
+        exp.vis.hidden = true;
+        window.AuditorBot.visual(q, exp.vis, function () {
+          var h3 = exp.vis.querySelector('.pv h3 span[aria-hidden]');
+          if (h3) h3.parentNode.removeChild(h3);
+          exp.vis.hidden = !exp.vis.innerHTML;
+        });
+      }
       if (nueva) { exp.guarda.disabled = false; exp.guarda.querySelector('span').textContent = 'Guardar en mi portafolio'; }
       ultimo = { q: q, dic: dic ? dic.getAttribute('href') : '' };
       exp.vacio.hidden = true;
@@ -351,6 +390,11 @@
         if (ev.key === 'Escape') { ev.preventDefault(); cierraTour(); }
         if (ev.key === 'Tab') { ev.preventDefault(); (document.activeElement === tSig ? tCie : tSig).focus(); }
       });
+      /* Ronda 26B: «Cómo funciona» de la barra lateral de otra página trae ?tour=1 (el lector lo pidió con su botón). */
+      if (/[?&]tour=1(&|$)/.test(location.search)) {
+        try { history.replaceState(null, '', location.pathname + location.search.replace(/([?&])tour=1(&|$)/, function (m, a, b) { return b ? a : ''; }) + location.hash); } catch (e) { /* nada */ }
+        setTimeout(function () { tBtn.click(); }, 300);
+      }
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', listo); else listo();

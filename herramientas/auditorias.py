@@ -472,7 +472,7 @@ def pagina(a, sello):
 </body>
 </html>
 '''.format(csp=seguridad.meta(), titulo_doc=re.sub('<[^>]+>', '', titulo), pregunta_attr=esc_attr(pregunta), favicon=FAVICON,
-           sello=sello, cabecera=cabecera(archivo(id_), sello), img=img, alt=esc_attr(alt), nota_img=nota_img,
+           sello=sello, cabecera=cabecera(archivo(id_), sello, archivo(id_)), img=img, alt=esc_attr(alt), nota_img=nota_img,
            titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), temas=temas(id_), extra=extra, ruta=ruta(id_), lectura=lectura(id_), servicio=expediente_puerta(id_) + '\n' + servicio(titulo),
            sociales=sociales(archivo(id_), re.sub('<[^>]+>', '', titulo) + ' · Auditavisión', pregunta, img))
 
