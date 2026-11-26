@@ -481,6 +481,10 @@
           ' (lo buscamos ejemplar por ejemplar, de ' + esc(dv.buscado) + '). Con qué valores se calcula tu predial lo debe aclarar su catastro municipal.</p>';
       }
     }
+    /* Ronda 25: el Semáforo Patrimonial del municipio elegido. Va por el Auditor (§0 quinquies: entre pestañas, todo pasa por el chat),
+       con la pregunta ya puesta: su predial, el precio de la vivienda, el fraude y la deuda, en tres bloques. */
+    if (r && D.ent[ent]) h += '<p class="cp-patri"><a href="herramienta-inspector-pregunta.html?q=' + encodeURIComponent('Semáforo patrimonial: ' + (ent === 'CDMX' ? 'Alcaldía ' : 'Municipio de ') + r[1] + ', ' + D.ent[ent]) +
+      '">Ver el Semáforo Patrimonial completo de este municipio</a> <small>(¿vas a comprar ahí? Su predial, el precio de la vivienda, el fraude y la deuda, con sus documentos)</small></p>';
     $('cpMunFicha').innerHTML = h;
     $('cpPredio').disabled = !m;
     /* «Comercial» solo donde la ley le da su propia tasa (Nuevo León, art. 21 bis-8, tercer párrafo). */

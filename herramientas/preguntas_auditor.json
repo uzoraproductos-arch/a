@@ -3574,6 +3574,59 @@
     "Endeudamiento elevado",
     "art. 15"
    ]
+  },
+  {
+   "q": "Voy a comprar casa en Zapopan, ¿qué reviso?",
+   "ir": "herramienta-calculadora-predial.html?mun=zapopan",
+   "dice": [
+    "Semáforo Patrimonial de Zapopan, Jalisco",
+    "Ley de Ingresos del Municipio de Zapopan",
+    "no es un avalúo",
+    "no es una condena",
+    "nunca una acusación"
+   ]
+  },
+  {
+   "q": "Voy a comprar un terreno en Tapachula",
+   "ir": "servicios-revisa.html?s=simulacion",
+   "dice": [
+    "Semáforo Patrimonial de Tapachula, Chiapas",
+    "Aún no cotejamos la ley",
+    "No calculamos una tasa que no leímos"
+   ]
+  },
+  {
+   "q": "Semáforo patrimonial en Guadalupe",
+   "ir": "herramienta-calculadora-predial.html?mun=nl026",
+   "dice": [
+    "Guadalupe, Nuevo León",
+    "Ojo con el homónimo"
+   ]
+  },
+  {
+   "q": "Voy a comprar un departamento en Cuernavaca con la desarrolladora SEP111205K48",
+   "ir": "herramienta-calculadora-predial.html?mun=mor007",
+   "dice": [
+    "Semáforo Patrimonial de Cuernavaca, Morelos",
+    "SEP111205K48",
+    "su revisión entera"
+   ]
+  },
+  {
+   "q": "Semáforo patrimonial: Municipio de Tijuana, Baja California · desarrolladora: Grupo Prodi",
+   "ir": "herramienta-calculadora-predial.html?mun=bc004",
+   "dice": [
+    "Semáforo Patrimonial de Tijuana, Baja California",
+    "Con el nombre Grupo Prodi"
+   ]
+  },
+  {
+   "q": "Semáforo patrimonial: Jalisco",
+   "ir": "servicios-revisa.html?s=simulacion",
+   "dice": [
+    "El predial no lo cobra el estado",
+    "Índice SHF"
+   ]
   }
  ]
 }

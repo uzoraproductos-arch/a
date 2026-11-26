@@ -780,6 +780,12 @@ def escribir_base():
                             'nom': porm[r[0]]['nombre'] if r[0] in porm else r[1].title(),
                             'h': sorted(x for x in donde.get(_pl(porm[r[0]]['nombre']) if r[0] in porm else r[1], ()) if x != (porm[r[0]]['ent'] if r[0] in porm else 'JAL')),
                             'n': r[1:]} for r in pred]
+    # Ronda 25 (Semáforo Patrimonial): la clave del INEGI, la ley y el artículo de su tarifa, para decir con qué ley se cobra
+    # el predial del municipio elegido (los mismos campos que lee el simulador; ninguna cifra).
+    for x in dat['calc']['pred']:
+        m = porm.get(x['id'])
+        if m:
+            x.update({'c': m['cve'], 'ley': m['ley'], 'url': m['url'], 'art': m['art_tarifa']})
     dat['calc']['predEnt'] = {e: n for e, n in cc_predial.ENTIDADES.items()}
     # El nombre corto de un municipio en espera («Ecatepec» por «Ecatepec de Morelos») solo si en todo el padrón lo lleva uno solo.
     cortos = {}
