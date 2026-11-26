@@ -159,13 +159,41 @@
       lista.hidden = !l.length;
       vacio.hidden = !!l.length;
       lista.innerHTML = l.map(function (x) {
-        var u = x.o === 'auditor' ? 'herramienta-inspector-pregunta.html?q=' + encodeURIComponent(x.q)
+        var u = x.u ? x.u : x.o === 'auditor' ? 'herramienta-inspector-pregunta.html?q=' + encodeURIComponent(x.q)
           : 'servicios-revisa.html?s=' + encodeURIComponent(x.s || '') + '&q=' + encodeURIComponent(x.q);
         return '<li><a href="' + esc(u) + '" title="' + esc((x.t || x.q) + (x.f ? ' · ' + x.f : '')) + '">' + DOC + '<span>' + esc(x.t || x.q) + '</span></a></li>';
       }).join('');
     }
     port();
-    window.addEventListener('storage', function (ev) { if (ev.key === 'av-portafolio') port(); });
+    window.addEventListener('storage', function (ev) { if (ev.key === 'av-portafolio') port(); guardas(); });
+    /* Ronda 26E: «Guardar en mi portafolio» de una página (las Auditorías en imágenes: [data-av-guarda] con su título y su
+       dirección). Guarda solo el título, la fecha y la dirección; la barra se pone al día al instante. */
+    var MARCA = '<svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" ' +
+      'stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 3h12v18l-6-4-6 4z"%s/></svg>';
+    function lee() { try { var l = JSON.parse(localStorage.getItem('av-portafolio') || '[]'); return Array.isArray(l) ? l : []; } catch (e) { return []; } }
+    function pinta(b, si) {
+      b.disabled = si;
+      b.setAttribute('aria-pressed', si ? 'true' : 'false');
+      b.innerHTML = MARCA.replace('%s', si ? ' fill="currentColor"' : '') + '<span>' + (si ? 'Guardado' : 'Guardar en mi portafolio') + '</span>';
+    }
+    function guardas() {
+      var l = lee();
+      Array.prototype.forEach.call(document.querySelectorAll('[data-av-guarda]'), function (b) {
+        var u = b.getAttribute('data-u');
+        pinta(b, l.some(function (x) { return x && x.u === u; }));
+      });
+    }
+    guardas();
+    document.addEventListener('click', function (ev) {
+      var b = ev.target.closest ? ev.target.closest('[data-av-guarda]') : null;
+      if (!b || b.disabled) return;
+      var u = b.getAttribute('data-u'), q = b.getAttribute('data-q') || document.title;
+      var l = lee().filter(function (x) { return !(x && x.u === u); });
+      l.unshift({ s: '', o: 'auditoria', q: q, t: q, u: u, dic: '', f: new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' }) });
+      try { localStorage.setItem('av-portafolio', JSON.stringify(l.slice(0, 60))); pinta(b, true); }
+      catch (e) { b.querySelector('span').textContent = 'Tu navegador no deja guardar aquí'; }
+      port();
+    });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pon);
   else pon();

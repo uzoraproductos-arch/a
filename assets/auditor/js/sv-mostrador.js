@@ -160,8 +160,8 @@
     var l = lee();
     port.hidden = !l.length;
     portL.innerHTML = l.map(function (x, i) {
-      var reabre = location.pathname.split('/').pop() + '?s=' + encodeURIComponent(x.s) + '&q=' + encodeURIComponent(x.q);
-      return '<li><div><b>' + esc(x.t || x.q) + '</b><small>' + esc((D[x.s] ? D[x.s].n : x.s) + ' · ' + x.f) + '</small>' +
+      var reabre = x.u || (location.pathname.split('/').pop() + '?s=' + encodeURIComponent(x.s) + '&q=' + encodeURIComponent(x.q));
+      return '<li><div><b>' + esc(x.t || x.q) + '</b><small>' + esc((x.o === 'auditoria' ? 'Auditoría en imágenes' : D[x.s] ? D[x.s].n : x.s) + ' · ' + x.f) + '</small>' +
         (x.t && x.t !== x.q ? '<small>«' + esc(x.q) + '»</small>' : '') + '</div><p>' +
         '<a href="' + esc(reabre) + '">↩️ Reabrir</a>' + (x.dic ? '<a href="' + esc(x.dic) + '" target="_blank" rel="noopener">🧾 Dictamen</a>' : '') +
         '<button type="button" data-port-borra="' + i + '">✕ Quitar</button></p></li>';

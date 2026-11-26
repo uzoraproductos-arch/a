@@ -449,3 +449,9 @@
 .au-tema [aria-current] { font-weight: 700; color: #24324d; }
 .au-tema a + a::before, .au-tema a + span::before, .au-tema span[aria-current] + a::before { content: "·"; margin-right: 10px; color: #9aa7bf; }
 .au-metodo { margin: 16px 0 0; font-size: 14.5px; line-height: 1.7; color: #24324d; }
+/* Ronda 26E: «Guardar en mi portafolio» de cada investigación, en la portada de la página (volver-auditor.js). */
+.au-guarda { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 14px; padding: 8px 16px; border: 1px solid rgba(255, 255, 255, .55); border-radius: 10px;
+  background: rgba(7, 25, 62, .55); color: #ffffff; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer; }
+.au-guarda:hover, .au-guarda:focus-visible { background: rgba(7, 25, 62, .78); border-color: #ffffff; }
+.au-guarda:disabled { background: #f1faf4; border-color: #cfe6d8; color: #1d6a3d; cursor: default; }
+.au-guarda .avb-i { flex: none; display: block; }

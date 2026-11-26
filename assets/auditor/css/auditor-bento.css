@@ -21,16 +21,17 @@
 
 /* La barra lateral vive en civico.css desde la Ronda 26B: es la misma en todas las páginas. */
 
-/* El centro (Ronda 26C): la imagen de la entrada (acceso.FOTO_ENTRADA, revisada por su huella) arriba, bajo un velo azul
-   marino que deja leer el encabezado en blanco, y se desvanece a blanco justo donde arranca la caja. Su alto es el del
-   encabezado más 120 px: auditor-bento.js lo mide en --avb-cab-h (sin él, 720 px). */
-.avb-centro { position: relative; isolation: isolate; min-width: 0; min-height: 100vh; background: #ffffff; }
+/* El centro (Ronda 26E, decisión del autor): la imagen de la entrada (acceso.FOTO_ENTRADA, revisada por su huella) cubre
+   todo el fondo, con el mismo degradado diagonal de canjea-tu-codigo.html (acceso.css, .ac-hero-foto::after) y sin
+   corte a blanco: la caja, los ejemplos, la plática y el lector flotan encima en tarjetas blancas. En escritorio la
+   imagen se queda quieta al desplazarse; en el celular se desplaza con la página. */
+.avb-centro { position: relative; isolation: isolate; min-width: 0; min-height: 100vh; background: #0b2a63; }
 .avb-centro::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: var(--avb-cab-h, 720px); z-index: -1; pointer-events: none;
-  /* Ronda 26D: la imagen se recorre hacia el corredor arbolado y los edificios, y el velo deja ver sus colores (como en la entrada). */
-  background: linear-gradient(180deg, rgba(9, 28, 66, .52) 0%, rgba(9, 28, 66, .38) 52%, rgba(255, 255, 255, .94) 88%, #ffffff 100%),
-    url('../img/portada/portada-acceso-editorial.webp') 62% 58% / cover no-repeat;
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(100deg, rgba(7, 25, 62, .84) 0%, rgba(11, 42, 99, .56) 46%, rgba(11, 42, 99, .14) 100%),
+    url('../img/portada/portada-acceso-editorial.webp') 62% 50% / cover no-repeat;
 }
+@media (min-width: 981px) { .avb-centro::before { background-attachment: fixed, fixed; } }
 .avb-barra {
   display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
   padding: 10px 32px; border-bottom: 1px solid rgba(255, 255, 255, .14); background: rgba(9, 28, 66, .25);
@@ -77,9 +78,9 @@
 /* La única caja. */
 .avb-box {
   display: grid; gap: 12px; padding: 18px 20px; border: 1px solid var(--avb-borde); border-radius: 18px; background: #ffffff;
-  box-shadow: 0 6px 24px rgba(9, 28, 66, .07); transition: border-color .15s, box-shadow .15s;
+  box-shadow: 0 10px 34px rgba(5, 16, 40, .28); transition: border-color .15s, box-shadow .15s;
 }
-.avb-box:focus-within { border-color: #9db6e6; box-shadow: 0 6px 28px rgba(29, 95, 214, .12); }
+.avb-box:focus-within { border-color: #9db6e6; box-shadow: 0 10px 34px rgba(5, 16, 40, .28), 0 0 0 3px rgba(157, 182, 230, .55); }
 .avb-box.avb-sobre { border-color: var(--avb-azul); background: #f6f9ff; }
 .avb-caja-t { margin: 2px 6px 6px; font-size: 18px; font-weight: 700; color: var(--avb-tinta); }
 .avb-adjuntos { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
@@ -122,11 +123,12 @@
   min-height: 44px; padding: 8px 14px; border: 1px solid var(--avb-borde); border-radius: 999px; background: #ffffff;
   color: #33415e; font: inherit; font-size: 15px; cursor: pointer;
 }
+.avb-chip { box-shadow: 0 2px 10px rgba(5, 16, 40, .2); }
 .avb-chip:hover, .avb-chip:focus-visible { border-color: var(--avb-azul); color: var(--avb-tinta); }
 
 /* La plática (Ronda 22): una sola caja, la de arriba; de la plática original se esconden su cabecera, sus ejemplos y
    su caja, y su motor sigue trabajando por debajo. Solo aparece cuando ya hay una pregunta. */
-.avb-chatcard, .avb-lector { border: 1px solid var(--avb-borde); border-radius: 18px; padding: 22px; background: rgba(255, 255, 255, .97); min-width: 0; }
+.avb-chatcard, .avb-lector { border: 1px solid var(--avb-borde); border-radius: 18px; padding: 22px; background: #ffffff; min-width: 0; box-shadow: 0 10px 34px rgba(5, 16, 40, .28); }
 .avb-chatcard[hidden], .avb-lector[hidden] { display: none; }
 .avb-chatcard h2, .avb-lector h2 { margin: 0 0 10px; font-size: 18px; color: var(--avb-tinta); }
 .avb-chatcard .pa-chat-cab, .avb-chatcard .pa-ejs, .avb-chatcard .pa-form, .avb-chatcard .pa-hola { display: none; }
@@ -215,6 +217,14 @@
 .avb-chatcard #paHilo .pa-bot th, .avb-chatcard #paHilo .pa-bot td { padding: 6px 10px; border-bottom: 1px solid var(--avb-borde); text-align: left; vertical-align: top; }
 .avb-chatcard #paHilo .pa-bot .est-chip { vertical-align: 1px; }
 .avb-chatcard #paHilo .pa-bot details { margin: .5em 0; }
+/* Ronda 26E: «Guardar en mi portafolio» al pie de cada respuesta. */
+.avb-chatcard #paHilo .pa-bot .avb-rguarda-p { margin: 12px 0 0; }
+.avb-rguarda {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 14px; border: 1px solid var(--avb-borde); border-radius: 10px;
+  background: #ffffff; color: #0b2a63; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer;
+}
+.avb-rguarda:hover, .avb-rguarda:focus-visible { border-color: var(--avb-azul); }
+.avb-rguarda:disabled { border-color: #cfe6d8; background: #f1faf4; color: #1d6a3d; cursor: default; }
 .avb-exp-sin, .avb-exp-nota { margin: 0; font-size: 13px; line-height: 1.45; color: var(--avb-gris); }
 .avb-exp-acc { display: grid; gap: 6px; }
 .avb-exp-acc a, .avb-exp-guarda {
@@ -291,7 +301,7 @@
   .avb-pista { width: 100%; text-align: left; margin: 0 4px; }
   .avb-adjunta, .avb-adjunta small { font-size: 16px; }
   #avbEnvia { flex: 1 1 auto; justify-content: center; }
-  .avb-chip { font-size: 16px; }
+  .avb-chip, .avb-rguarda { font-size: 16px; }
   .avb-conteos li, .avb-pie-ligas { font-size: 16px; }
   .avb-chatcard, .avb-lector { padding: 16px; }
 }
