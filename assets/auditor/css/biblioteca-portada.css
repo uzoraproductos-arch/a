@@ -1,0 +1,84 @@
+/* =========================================================================
+   Biblioteca del Erario Público (diccionario.html), Ronda 26D (26-11-2026).
+   Centro de referencia editorial: el encabezado es una tarjeta blanca elevada
+   (etiqueta dorada, título en serif, buscador y barra A–Z), las cuatro
+   colecciones con su borde de acento y la rejilla de términos que pinta
+   biblioteca-portada.js. Sin emojis: íconos de trazo de auditor_bento.ico().
+   ========================================================================= */
+.bib-cab { background: #f4f6fb; border-bottom: 0; padding: 24px 0 8px; }
+.bib-cab > .apartado-ancho { background: #ffffff; border: 1px solid #dfe5f0; border-radius: 22px; padding: 26px 32px 24px;
+  box-shadow: 0 1px 2px rgba(11, 42, 99, .05), 0 14px 36px rgba(11, 42, 99, .08); max-width: 1120px; }
+.bib-cab .apartado-lema { font-family: Inter, system-ui, sans-serif; color: #6b4f00; background: #fbf3da; border-color: #e8d48f; letter-spacing: .08em; }
+.bib-cab .apartado-titulo { font-family: 'Playfair Display', var(--font-serif), Georgia, serif; font-weight: 700; color: #0b2a63;
+  font-size: clamp(30px, 3.6vw, 46px); letter-spacing: -.01em; margin: 14px 0 10px; }
+.bib-cab .apartado-entrada { color: #33415c; font-size: 17px; max-width: 78ch; }
+.bib-cab .avb-i { flex: none; }
+.bib-busca { margin: 20px 0 0; }
+.bib-busca-caja { position: relative; display: flex; align-items: center; }
+.bib-busca-caja .avb-i { position: absolute; left: 18px; color: #1a56b8; pointer-events: none; }
+.bib-busca input { width: 100%; box-sizing: border-box; font: inherit; font-size: 18px; color: #142033; padding: 16px 20px 16px 54px; min-height: 58px;
+  border: 2px solid #c9d3e6; border-radius: 16px; background: #f9fbff; }
+.bib-busca input:focus { outline: none; border-color: #1a56b8; background: #ffffff; box-shadow: 0 0 0 4px rgba(26, 86, 184, .14); }
+.bib-az { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 12px; }
+.bib-letra { font: inherit; font-size: 15px; font-weight: 700; min-width: 34px; min-height: 36px; padding: 0 6px; border-radius: 10px;
+  border: 1px solid transparent; background: transparent; color: #0b2a63; cursor: pointer; }
+.bib-letra:hover, .bib-letra:focus-visible { background: #eef3fc; border-color: #c9d3e6; }
+.bib-letra[aria-pressed="true"] { background: #0b2a63; color: #ffffff; }
+.bib-letra:disabled { color: #a3adbf; cursor: default; background: transparent; border-color: transparent; }
+.bib-letra-todas { padding: 0 12px; }
+
+/* Las colecciones */
+.bib-cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.bib-col { --acento: #1a56b8; display: grid; grid-template-rows: auto auto auto 1fr auto; gap: 6px; background: #ffffff; border: 1px solid #dfe5f0;
+  border-top: 4px solid var(--acento); border-radius: 16px; padding: 18px 18px 16px; color: #24324d; text-decoration: none;
+  box-shadow: 0 1px 2px rgba(11, 42, 99, .05); transition: box-shadow .2s, transform .2s; min-width: 0; }
+.bib-col:hover, .bib-col:focus-visible { box-shadow: 0 10px 28px rgba(11, 42, 99, .12); transform: translateY(-2px); }
+.bib-col-ico { display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; color: var(--acento);
+  background: color-mix(in srgb, var(--acento) 10%, #ffffff); }
+.bib-col-nom { font-family: 'Playfair Display', var(--font-serif), Georgia, serif; font-size: 21px; font-weight: 700; color: #0b2a63; line-height: 1.2; margin-top: 4px; }
+.bib-col-lema { font-size: 13px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #5a6782; }
+.bib-col-desc { font-size: 15px; line-height: 1.55; color: #33415c; }
+.bib-col-ir { display: inline-flex; gap: 6px; align-items: center; font-weight: 700; color: #1a56b8; font-size: 15px; margin-top: 6px; }
+.bib-faq { display: flex; gap: 14px; align-items: center; margin-top: 16px; background: #fbf8ee; border: 1px solid #ecdfb4; border-radius: 16px;
+  padding: 14px 18px; color: #33415c; text-decoration: none; font-size: 15px; line-height: 1.5; }
+.bib-faq > .avb-i { color: #9a7400; }
+.bib-faq b { color: #0b2a63; }
+.bib-faq .bib-col-ir { margin: 0 0 0 auto; flex: none; }
+.bib-faq:hover, .bib-faq:focus-visible { border-color: #c9a227; }
+
+/* La rejilla de términos */
+.bib-cuenta { margin: 0 0 12px; font-size: 15px; color: #5a6782; font-weight: 600; }
+.bib-terminos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; scroll-margin-top: 24px; }
+.bib-ficha { background: #ffffff; border: 1px solid #dfe5f0; border-radius: 16px; padding: 18px 20px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.bib-ficha-cat { justify-self: start; font-size: 12.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #1a56b8;
+  background: #eef3fc; border-radius: 999px; padding: 3px 10px; }
+.bib-ficha-tit { margin: 0; font-family: 'Playfair Display', var(--font-serif), Georgia, serif; font-size: 21px; line-height: 1.25; overflow-wrap: anywhere; }
+.bib-ficha-tit a { color: #0b2a63; text-decoration: none; }
+.bib-ficha-tit a:hover, .bib-ficha-tit a:focus-visible { text-decoration: underline; }
+.bib-ficha-def { margin: 0; font-size: 16px; line-height: 1.6; color: #24324d; overflow-wrap: anywhere; }
+.bib-ficha-ley { margin: 0; font-size: 14.5px; line-height: 1.5; color: #44526b; border-top: 1px solid #eef1f6; padding-top: 8px; overflow-wrap: anywhere; }
+.bib-sello-of { display: inline-block; font-size: 11.5px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: #0f5132;
+  background: #e5f5ec; border-radius: 6px; padding: 2px 7px; margin-right: 4px; }
+.bib-vacio { grid-column: 1 / -1; background: #ffffff; border: 2px dashed #c9d3e6; border-radius: 16px; padding: 22px; color: #33415c; font-size: 16px; margin: 0; }
+.bib-mas { display: block; margin: 18px auto 0; font: inherit; font-size: 16px; font-weight: 700; min-height: 46px; padding: 0 22px; border-radius: 999px;
+  border: 1px solid #0b2a63; background: #ffffff; color: #0b2a63; cursor: pointer; }
+.bib-mas:hover, .bib-mas:focus-visible { background: #0b2a63; color: #ffffff; }
+.bib-mas[hidden] { display: none; }
+
+@media (max-width: 1100px) { .bib-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+  .bib-terminos { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .bib-cab { padding: 12px 0 4px; }
+  .bib-cab > .apartado-ancho { border-radius: 18px; padding: 18px 16px; margin: 0 8px; width: auto; }
+  .bib-cols { grid-template-columns: minmax(0, 1fr); }
+  .bib-busca input { font-size: 17px; padding-left: 50px; }
+  .bib-az { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+  .bib-letra { flex: none; min-width: 44px; min-height: 44px; font-size: 16px; }
+  .apartado-tarjeta-desc, .apartado-tarjeta-accion { font-size: 16px; }
+  .bib-col-lema, .bib-ficha-cat, .bib-ficha-ley, .bib-sello-of, .bib-cuenta, .bib-col-desc, .bib-faq, .bib-col-ir { font-size: 16px; }
+  .bib-faq { flex-wrap: wrap; }
+  .bib-faq .bib-col-ir { margin-left: 0; }
+}
+.apartado-tarjeta-icono:empty { display: none; }
