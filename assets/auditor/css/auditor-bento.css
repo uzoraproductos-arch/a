@@ -126,6 +126,16 @@
 .avb-chip { box-shadow: 0 2px 10px rgba(5, 16, 40, .2); }
 .avb-chip:hover, .avb-chip:focus-visible { border-color: var(--avb-azul); color: var(--avb-tinta); }
 
+/* Ronda 27A: la insignia «Pro» del Modo Inspector y el costo a la vista antes de preguntar. */
+.avb-pro { display: inline-block; margin-left: 2px; padding: 1px 7px; border-radius: 999px; background: #fdf6e3; border: 1px solid #ecd9a0; color: #7a5d08;
+  font-size: 12px; font-style: normal; font-weight: 800; letter-spacing: .04em; line-height: 1.4; vertical-align: 1px; }
+.avb-costo { margin: 0 6px; font-size: 14px; color: var(--avb-gris); }
+.avb-costo b { color: var(--avb-tinta); }
+.avb-costo:empty { display: none; }
+.avb-tabu { list-style: none; margin: 0 0 4px; padding: 0 !important; display: grid; gap: 4px; }
+.avb-tabu li { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; line-height: 1.4; }
+.avb-tabu b { white-space: nowrap; color: #f3d27a; }
+.avb-mplan-t2 { margin-top: 10px !important; }
 /* La plática (Ronda 22): una sola caja, la de arriba; de la plática original se esconden su cabecera, sus ejemplos y
    su caja, y su motor sigue trabajando por debajo. Solo aparece cuando ya hay una pregunta. */
 .avb-chatcard, .avb-lector { border: 1px solid var(--avb-borde); border-radius: 18px; padding: 22px; background: #ffffff; min-width: 0; box-shadow: 0 10px 34px rgba(5, 16, 40, .28); }
@@ -301,7 +311,7 @@
   .avb-pista { width: 100%; text-align: left; margin: 0 4px; }
   .avb-adjunta, .avb-adjunta small { font-size: 16px; }
   #avbEnvia { flex: 1 1 auto; justify-content: center; }
-  .avb-chip, .avb-rguarda { font-size: 16px; }
+  .avb-chip, .avb-rguarda, .avb-costo, .avb-tabu li { font-size: 16px; }
   .avb-conteos li, .avb-pie-ligas { font-size: 16px; }
   .avb-chatcard, .avb-lector { padding: 16px; }
 }

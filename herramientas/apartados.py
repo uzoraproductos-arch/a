@@ -1682,6 +1682,7 @@ _AV_NAVEGADOR = [
     ('No medir este navegador', 'av-sin-medir', 'Solo si apagas la medición de uso (abajo): recuerda que no quieres que se mida.'),
     ('Tus respuestas', 'av-caso', 'Lo que le preguntaste al Auditor, hasta 60: la pregunta, la fecha, el modo, la respuesta en corto, su página y los servicios que vienen al caso, para armar «Tus respuestas» (mis-respuestas.html). Nunca sale del navegador; la borras ahí mismo, o una por una.'),
     ('Tus dictámenes de cada expediente', 'av-dics', 'La pregunta, el folio y el enlace de los dictámenes que generas y tocan una investigación, hasta 60, para listarlos en su expediente. Los borras ahí mismo.'),
+    ('Tu billetera de tokens', 'av-tokens', 'Tu saldo de tokens (empieza con los de bienvenida), los últimos 30 movimientos (cuánto y por qué acción), las huellas de lo que ya pagaste (un número sacado de la pregunta o del enlace, para no cobrarte dos veces lo mismo: nunca la pregunta escrita), los números de los códigos de recarga que canjeaste y, si uno te dio tokens ilimitados, hasta cuándo. Es una medida de uso, no una cuenta ni dinero; nunca sale del navegador y se borra con los datos del sitio (con ello vuelves a la bienvenida, y lo que ya canjeaste no se vuelve a sumar).'),
     ('Tu portafolio de investigaciones', 'av-portafolio', 'Las revisiones que guardas en el Inspector de Servicios, en el Expediente vivo o bajo cada respuesta del Auditor, y las Auditorías en imágenes que guardas, hasta 60: el servicio, la pregunta, la fecha, su título, el enlace de su dictamen y, de una investigación, su dirección, para reabrirlas desde el Auditor, Servicios o los Expedientes de control interno. Nunca guarda la respuesta. Nunca sale del navegador; las borras ahí mismo, una por una o todas.'),
     ('«Volver al Auditor»', 'av-volver y av-volver-oculto', 'Viven en la pestaña (sessionStorage): si llegaste desde una respuesta del Auditor y si ocultaste su botón flotante. Son un «1» y se borran al cerrarla.'),
     ('El recorrido del Auditor', 'av-tour-visto', 'Solo si abres «Cómo funciona (3 pasos)» en el Auditor: recuerda que ya lo viste. Es un «1» y nada más.'),
@@ -2987,6 +2988,10 @@ def sv_mostrador(sf):
         k, ph, ay, ej, bt = SV_ENTRADA[x[0]]
         datos[x[0]] = {'n': x[2], 'k': k, 'ph': ph, 'ay': ay, 'ej': ej, 'q': sv_pregunta(x[0])[0],
                        'app': monta[x[0]][1], 'bt': bt, 'cobro': COBRO[x[0]]}
+        # Ronda 27A: los servicios «Con tokens / Plan» del catálogo (servicios_planes.ACCESO) gastan lo de 'servicio' en
+        # el panel (sv-mostrador.js con tokens.js); los «Gratis», nada. Así el panel, servicios.html y la Mesa dicen lo mismo.
+        if __import__('servicios_planes').ACCESO[x[0]] == 'tokens':
+            datos[x[0]]['pago'] = 1
         if x[0] in SV_LUGAR:
             datos[x[0]]['lugar'] = 1
         if x[0] in SV_PATRI:
@@ -7584,6 +7589,7 @@ def _pagina(a, sello):
   <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v={sello}">
   <script src="assets/auditor/js/iconos.js?v={sello}"></script>
   <script src="assets/auditor/js/acceso.js?v={sello}"></script>
+  <script src="assets/auditor/js/tokens.js?v={sello}"></script>
   <script src="assets/auditor/js/volver-auditor.js?v={sello}" defer></script>
   <link rel="stylesheet" href="assets/auditor/css/civico.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">

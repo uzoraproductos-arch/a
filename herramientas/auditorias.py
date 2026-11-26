@@ -412,6 +412,7 @@ def pagina(a, sello):
   <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v={sello}">
   <script src="assets/auditor/js/iconos.js?v={sello}"></script>
   <script src="assets/auditor/js/acceso.js?v={sello}"></script>
+  <script src="assets/auditor/js/tokens.js?v={sello}"></script>
   <script src="assets/auditor/js/volver-auditor.js?v={sello}" defer></script>
   <link rel="stylesheet" href="assets/auditor/css/civico.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">

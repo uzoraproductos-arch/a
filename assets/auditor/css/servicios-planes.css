@@ -102,3 +102,4 @@ a.svp-card:hover, a.svp-card:focus-visible { border-color: #9db6e6; box-shadow: 
   .svp-linea li .svp-et { justify-self: start; }
   .svp-btn { width: 100%; justify-content: center; box-sizing: border-box; }
 }
+.svp-consumo tr.svp-gratis td { color: #1d6a3d; font-weight: 700; }

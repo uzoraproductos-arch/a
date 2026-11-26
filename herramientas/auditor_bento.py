@@ -261,8 +261,10 @@ def _cab():
 
 
 def _caja():
-    seg = '\n'.join('              <button type="button" data-avb-modo="%s" data-pista="%s" title="%s" aria-pressed="%s">%s<span>%s</span></button>' % (
-        m, _e(p), _e(p), 'true' if m == 'inspector' else 'false', ico(i), n) for m, i, n, p in SEGMENTOS)
+    # Ronda 27A: el Modo Inspector lleva su insignia «Pro» (gasta lo de 'inspector' en monetizacion.PRECIO_FUNDADOR).
+    seg = '\n'.join('              <button type="button" data-avb-modo="%s" data-pista="%s" title="%s" aria-pressed="%s">%s<span>%s</span>%s</button>' % (
+        m, _e(p), _e(p), 'true' if m == 'inspector' else 'false', ico(i), n,
+        ' <i class="avb-pro" aria-label="Pro">Pro</i>' if m == 'inspector' else '') for m, i, n, p in SEGMENTOS)
     chips = '\n'.join('        <button type="button" class="avb-chip" data-avb-q="%s">%s</button>' % (_e(q), html.escape(q)) for q in CHIPS)
     return '''<form class="avb-box" id="avbForm" autocomplete="off" aria-labelledby="avbCajaT">
         <p class="avb-caja-t" id="avbCajaT">¿Qué quieres auditar hoy?</p>
@@ -284,6 +286,7 @@ def _caja():
           </div>
           <button type="submit" id="avbEnvia"><span>Dictaminar</span>%s</button>
         </div>
+        <p class="avb-costo" id="avbCosto" aria-live="polite"></p>
       </form>
       <div class="avb-chips" role="group" aria-label="Preguntas de ejemplo">
 %s
@@ -313,10 +316,25 @@ def _planes():
             <li><b>%s</b> %s al mes · Precio Fundador</li>
             <li><b>%s</b> %s al mes · Precio Fundador</li>
           </ul>
-          <p class="avb-mplan-n">Los pagos en línea se activan próximamente; hoy se opera con códigos piloto y promocionales.</p>
+          <p class="avb-mplan-t avb-mplan-t2">%s Lo que gasta cada acción</p>
+          <ul class="avb-tabu">
+%s
+          </ul>
+          <p class="avb-mplan-n">Al llegar recibes %d tokens de bienvenida en este navegador. Gratis siempre: %s. Los pagos en línea se activan próximamente; hoy se recarga con códigos piloto y promocionales.</p>
           <a href="%s">Ver planes y códigos promocionales %s</a>
         </div>%s''' % (M[0], ico('boleto', 16), F['libre']['nombre'], mo.pesos(0), F['libre']['nota'].lower(), mo.pesos(paq['precio']),
-                       paq['tokens'], pro['nombre'], mo.pesos(pro['precio']), pyme['nombre'], mo.pesos(pyme['precio']), PLANES_LIGA, ico('flecha', 14), M[1])
+                       paq['tokens'], pro['nombre'], mo.pesos(pro['precio']), pyme['nombre'], mo.pesos(pyme['precio']), ico('check', 16), tabulador(),
+                       F['libre']['bienvenida'], html.escape(_lista([x[0].lower() + x[1:] for x in F['gratis']])), PLANES_LIGA, ico('flecha', 14), M[1])
+
+
+def _lista(xs):
+    return ', '.join(xs[:-1]) + ' y ' + xs[-1] if len(xs) > 1 else ''.join(xs)
+
+
+def tabulador():
+    """Ronda 27A: lo que gasta cada acción, leído de monetizacion.PRECIO_FUNDADOR (el mismo que cobra tokens.js)."""
+    import monetizacion as mo
+    return '\n'.join('            <li>%s <b>%d tokens</b></li>' % (html.escape(q), t) for _k, q, t in mo.PRECIO_FUNDADOR['consumo'])
 
 
 def _mesa():

@@ -82,16 +82,29 @@
       var antes = A.leer() || {};
       A.guardar({ pase: p.pase, hasta: p.hasta, visto: Date.now(), admin: !!antes.admin });
       estado.textContent = '';
-      felicidades(p.duracion, p.hasta, texto);
+      felicidades(p.duracion, p.hasta, texto, recarga(p));
       muestraTuyo();
     }
+    /* Ronda 27A: lo que el código suma a la billetera (tokens.js). Un mismo código no suma dos veces en este navegador. */
+    function recarga(p) {
+      var K = window.AvTokens;
+      if (!K || !p) return '';
+      if (p.ilimitado && p.hasta && K.ilimitadoHasta(p.hasta, p.codigo_id)) {
+        return 'Tu código da <b>tokens ilimitados</b> hasta el <b>' + esc(fecha(p.hasta)) + '</b>.';
+      }
+      if (p.tokens && K.suma(p.tokens, 'codigo', p.codigo_id)) {
+        return 'Tu código sumó <b>' + esc(p.tokens) + ' tokens</b>: ahora tienes <b>' + esc(K.saldo()) + '</b>' +
+          (p.hasta && !esIlimitado(p.hasta) ? ', y tu acceso vence el <b>' + esc(fecha(p.hasta)) + '</b>' : '') + '.';
+      }
+      return '';
+    }
     // «¡Felicidades! Cuentas con…» (pedido del autor, 29-10-2026).
-    function felicidades(dur, hasta, nota) {
+    function felicidades(dur, hasta, nota, tokens) {
       var d = $('acFelicidades');
       var cuanto = esIlimitado(hasta) ? 'Cuentas con <b>acceso ilimitado</b> a toda la plataforma.'
         : dur ? 'Cuentas con <b>' + esc(duracion(dur).toLowerCase()) + '</b> de acceso a toda la plataforma.'
         : 'Tu código ya estaba activo en este navegador.';
-      $('acFCuanto').innerHTML = cuanto;
+      $('acFCuanto').innerHTML = cuanto + (tokens ? ' ' + tokens : '');
       $('acFHasta').innerHTML = esIlimitado(hasta) ? '' : 'Tu acceso dura hasta el <b>' + esc(fecha(hasta)) + '</b>' +
         (nota ? '. ' + esc(nota) : '') + '.';
       $('acFEntrar').setAttribute('href', volver);
@@ -192,6 +205,8 @@
         setTimeout(function () { if (f.correo) f.correo.focus({ preventScroll: true }); }, quieto ? 0 : 450);
       });
     });
+    // Ronda 27A: el aviso de la billetera («Solicitar código para más tokens») llega con ?pedir=1.
+    if (/[?&]pedir=1/.test(location.search) && $('tabPedir')) activa($('tabPedir'), false);
     // Un acceso vencido abre de una vez «Solicitar código».
     var p = A.leer && A.leer();
     if (p && p.hasta && !p.admin && A.vigente && !A.vigente(p) && $('tabPedir')) activa($('tabPedir'), false);
@@ -322,6 +337,20 @@
     function boton(txt, datos, clase) {
       return '<button class="sz-btn ac-chico ' + (clase || 'ac-claro') + '" type="button" ' + datos + '>' + txt + '</button>';
     }
+    // Ronda 27A: los tokens de un código. '' = sin tokens (solo abre); 'ilim' = ilimitados durante su vigencia.
+    var TOKENS = ['35', '100', '250', '500'];
+    function opcionesTokens(k) {
+      var v = k && k.tokens_ilimitado ? 'ilim' : k && k.tokens ? (TOKENS.indexOf(String(k.tokens)) >= 0 ? String(k.tokens) : 'otra') : '';
+      return [['', 'Sin tokens (solo abre)']].concat(TOKENS.map(function (t) { return [t, t + ' tokens']; }), [['otra', 'Otra cantidad'], ['ilim', 'Ilimitados durante su vigencia']])
+        .map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === v ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('');
+    }
+    function tokensDe(f) {
+      var v = f.tokens ? f.tokens.value : '';
+      if (v === 'ilim') return { n: null, ilim: true };
+      if (v === 'otra') return { n: Math.max(1, Math.min(100000, Math.floor(+f.tokensN.value || 0))), ilim: false };
+      return { n: v ? +v : null, ilim: false };
+    }
+    function tokensTxt(k) { return k.tokens_ilimitado ? 'tokens ilimitados' : k.tokens ? k.tokens + ' tokens' : ''; }
     function editor(k) {
       var ops = Object.keys(DUR).map(function (d) { return '<option value="' + d + '"' + (d === k.duracion ? ' selected' : '') + '>' + DUR[d] + '</option>'; }).join('');
       if (!DUR[k.duracion]) ops = '<option value="' + esc(k.duracion) + '" selected>' + esc(duracion(k.duracion)) + '</option>' + ops;
@@ -330,6 +359,8 @@
         '<label>Duración <select class="ac-campo" name="duracion">' + ops + '</select></label>' +
         '<label>Personas por código <input class="ac-campo" name="usos" type="number" min="' + Math.max(1, k.usos) + '" max="10000" value="' + k.usos_max + '" required></label>' +
         '<label>Canjear antes del <input class="ac-campo" name="antes" type="date" value="' + fechaCampo(k.canjear_antes) + '"></label>' +
+        (k.tokens !== undefined ? '<label>Tokens que da <select class="ac-campo" name="tokens">' + opcionesTokens(k) + '</select></label>' +
+          '<label class="ac-otros" ' + (TOKENS.indexOf(String(k.tokens)) >= 0 || !k.tokens ? 'hidden' : '') + '>Cuántos tokens <input class="ac-campo" name="tokensN" type="number" min="1" max="100000" value="' + (k.tokens || 35) + '"></label>' : '') +
         '<label class="ac-ancho">Nota <input class="ac-campo" name="nota" type="text" maxlength="120" value="' + esc(k.nota || '') + '"></label>' +
         '<p class="ac-acciones ac-ancho"><button class="sz-btn sz-btn-of" type="submit">Guardar</button>' +
         boton('Cancelar', 'data-cancelar="1"') + '</p></form></td></tr>';
@@ -376,7 +407,7 @@
             boton(k.archivado ? 'Desarchivar' : 'Archivar', 'data-accion="archivar" data-id="' + k.id + '" data-archivar="' + (k.archivado ? '0' : '1') + '"') +
             boton('Eliminar', 'data-accion="eliminar" data-id="' + k.id + '"', 'ac-peligro');
         return '<tr' + (k.semanal ? ' class="ac-fila-semana"' : '') + '><td><button class="ac-cod" type="button" data-copia="' + esc(bonito(k.codigo)) + '" title="Copiar">' + esc(bonito(k.codigo)) + '</button></td>' +
-          '<td>' + esc(duracion(k.duracion)) + '</td><td>' + k.usos + ' de ' + k.usos_max + '</td>' +
+          '<td>' + esc(duracion(k.duracion)) + (tokensTxt(k) ? '<br><small class="ac-tk">' + esc(tokensTxt(k)) + '</small>' : '') + '</td><td>' + k.usos + ' de ' + k.usos_max + '</td>' +
           '<td><span class="ac-chip ac-' + k.estado + '">' + esc(est) + '</span></td><td>' + esc(k.nota || '') + '</td>' +
           '<td><div class="ac-acciones">' + acc + '</div></td></tr>' + (editando === k.id ? editor(k) : '') + (renovando === k.id ? renovador(k) : '') + registro(k);
       }).join('') || '<tr><td colspan="6">' + (q ? 'Ningún código coincide con la búsqueda.' : vista === 'archivados' ? 'No hay códigos archivados.' : 'Todavía no hay códigos.') + '</td></tr>';
@@ -691,7 +722,7 @@
     // La bitácora: lo anota la base sola; aquí solo se lee, filtra y baja.
     var bit = [];
     var CAMPO = { duracion: 'duración', personas: 'personas', canjear_antes: 'canjear antes del', nota: 'nota', tiempo_extra: 'tiempo extra',
-      personas_con_mas_tiempo: 'personas con más tiempo', personas_mas: 'personas de más', estaba: 'estaba', lo_habian_usado: 'lo habían usado', codigo: 'código' };
+      tokens: 'tokens', personas_con_mas_tiempo: 'personas con más tiempo', personas_mas: 'personas de más', estaba: 'estaba', lo_habian_usado: 'lo habían usado', codigo: 'código' };
     function valor(k, v) {
       if (v == null || v === '') return '—';
       if (/^\d{4}-\d{2}-\d{2}T/.test(String(v))) return fecha(v);
@@ -870,19 +901,31 @@
 
     var g = $('acGenerar');
     g.duracion.addEventListener('change', function () { g.querySelector('.ac-otra').hidden = g.duracion.value !== 'otra'; });
+    if (g.tokens) {
+      g.tokens.innerHTML = opcionesTokens(null);
+      g.tokens.addEventListener('change', function () { g.querySelector('.ac-otros').hidden = g.tokens.value !== 'otra'; });
+    }
+    // En el editor de un código, «Otra cantidad» muestra su campo.
+    document.addEventListener('change', function (ev) {
+      var t = ev.target;
+      if (t && t.name === 'tokens' && t.form && t.form.dataset.editar) t.form.querySelector('.ac-otros').hidden = t.value !== 'otra';
+    });
     g.addEventListener('submit', function (e) {
       e.preventDefault();
       var est = $('acGenerarEstado');
       var dur = g.duracion.value === 'otra' ? (Math.max(1, Math.min(1825, +g.dias.value || 0)) + ' days') : g.duracion.value;
       var antes = g.antes.value ? new Date(g.antes.value + 'T23:59:59').toISOString() : null;
       var propio = g.propio.value.trim();
+      // Ronda 27A: los tokens solo viajan si se eligieron (así el panel sigue sirviendo antes de subir la migración).
+      var tk = tokensDe(g), extra = function (o) { if (tk.ilim) o.p_ilimitado = true; else if (tk.n) o.p_tokens = tk.n; return o; };
+      var tkTxt = tk.ilim ? ' con tokens ilimitados' : tk.n ? ' con ' + tk.n + ' tokens' : '';
       est.textContent = 'Generando…';
       // Con código propio se crea solo ese (crear_codigo); sin él, salen al azar.
       var pide = propio
-        ? rpc('crear_codigo', { p_codigo: propio, p_duracion: dur, p_usos: +g.usos.value || 1, p_antes: antes, p_nota: g.nota.value || null })
-            .then(function (k) { g.propio.value = ''; return 'Listo: el código ' + bonito(k.codigo) + ' de ' + duracion(dur) + ' está arriba de la lista.'; })
-        : rpc('generar_codigos', { p_cantidad: +g.cantidad.value, p_duracion: dur, p_usos: +g.usos.value || 1, p_antes: antes, p_nota: g.nota.value || null })
-            .then(function (nuevos) { return 'Listo: ' + nuevos.length + ' códigos nuevos de ' + duracion(dur) + '. Están arriba de la lista.'; });
+        ? rpc('crear_codigo', extra({ p_codigo: propio, p_duracion: dur, p_usos: +g.usos.value || 1, p_antes: antes, p_nota: g.nota.value || null }))
+            .then(function (k) { g.propio.value = ''; return 'Listo: el código ' + bonito(k.codigo) + ' de ' + duracion(dur) + tkTxt + ' está arriba de la lista.'; })
+        : rpc('generar_codigos', extra({ p_cantidad: +g.cantidad.value, p_duracion: dur, p_usos: +g.usos.value || 1, p_antes: antes, p_nota: g.nota.value || null }))
+            .then(function (nuevos) { return 'Listo: ' + nuevos.length + ' códigos nuevos de ' + duracion(dur) + tkTxt + '. Están arriba de la lista.'; });
       pide.then(function (msj) {
           est.textContent = msj;
           return carga();
@@ -951,10 +994,12 @@
       var f = e.target.closest('[data-editar]'); if (!f) return;
       e.preventDefault();
       var id = +f.dataset.editar, k = lista.filter(function (x) { return x.id === id; })[0];
-      rpc('editar_codigo', {
+      var args = {
         p_id: id, p_nota: f.nota.value, p_usos_max: +f.usos.value || 1, p_duracion: f.duracion.value,
         p_antes: f.antes.value ? new Date(f.antes.value + 'T23:59:59').toISOString() : null
-      }).then(function () { editando = null; return hecho((k ? bonito(k.codigo) : 'El código') + ' guardado.')(); }).catch(falla);
+      };
+      if (f.tokens) { var tk = tokensDe(f); args.p_tokens = tk.n || 0; args.p_ilimitado = tk.ilim; }
+      rpc('editar_codigo', args).then(function () { editando = null; return hecho((k ? bonito(k.codigo) : 'El código') + ' guardado.')(); }).catch(falla);
     });
     function bajaCsv(nombre, filas) {
       var csv = filas.map(function (f) { return f.map(function (x) { return '"' + String(x == null ? '' : x).replace(/"/g, '""') + '"'; }).join(','); }).join('\r\n');
@@ -963,8 +1008,8 @@
       a.download = nombre; a.click();
     }
     $('acCsv').addEventListener('click', function () {
-      bajaCsv('codigos-auditavision.csv', [['codigo', 'duracion', 'usos', 'usos_max', 'estado', 'hasta', 'canjear_antes', 'nota', 'creado', 'archivado']].concat(lista.map(function (k) {
-        return [bonito(k.codigo), duracion(k.duracion), k.usos, k.usos_max, EST[k.estado], k.hasta || '', k.canjear_antes || '', k.nota || '', k.creado, k.archivado ? 'sí' : 'no'];
+      bajaCsv('codigos-auditavision.csv', [['codigo', 'duracion', 'tokens', 'usos', 'usos_max', 'estado', 'hasta', 'canjear_antes', 'nota', 'creado', 'archivado']].concat(lista.map(function (k) {
+        return [bonito(k.codigo), duracion(k.duracion), k.tokens_ilimitado ? 'ilimitados' : (k.tokens || ''), k.usos, k.usos_max, EST[k.estado], k.hasta || '', k.canjear_antes || '', k.nota || '', k.creado, k.archivado ? 'sí' : 'no'];
       })));
     });
     $('acCsvUso').addEventListener('click', function () {

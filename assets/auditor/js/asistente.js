@@ -3480,6 +3480,15 @@
   function responde(q, quieto, ya) {
     q = String(q || '').trim().slice(0, 600);
     if (!q) return;
+    /* Ronda 27A: la billetera (tokens.js). Una pregunta gasta lo de su modo (el Inspector, «Pro»); abrir una página desde
+       otra pestaña (?q=&abre=) y volver a preguntar lo que no se contestó no gastan. Sin saldo, la pregunta se queda en la
+       caja y el aviso ofrece canjear o pedir un código. */
+    var tk = modoActual() === 'inspector' ? 'inspector' : 'pregunta';
+    if (!ya && window.AvTokens && !window.AvTokens.cobra(tk, tk + '|' + q, { libre: !!(quieto && abreUna) })) {
+      campo.value = q;
+      try { document.dispatchEvent(new CustomEvent('av-tokens-falta', { detail: { q: q, accion: tk } })); } catch (e) { /* nada */ }
+      return;
+    }
     /* Ya empezó la plática: los ejemplos del arranque se guardan, como en cualquier chat. */
     var ejs = document.querySelector('.pa-ejs');
     if (ejs) ejs.hidden = true;
@@ -3495,6 +3504,8 @@
       /* La medición de uso (18-11-2026): solo el modo y la página a la que llevó la respuesta; la pregunta no sale. */
       if (!ya && window.AvUso) window.AvUso.marca('pregunta', { modo: modoActual(), destino: r.sin ? 'sin respuesta' : String((r.ir && r.ir[0]) || (r.ficha && r.ficha.ir && r.ficha.ir[0]) || '').split(/[?#]/)[0].slice(0, 160) });
       if (r.sin) {
+        /* Ronda 27A: lo que el Auditor no supo contestar no gasta tokens. */
+        if (!ya && window.AvTokens) window.AvTokens.devuelve(tk, tk + '|' + q);
         li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + pideExpHtml() + iaHtml(q) + (r.web ? webHtml(r.web) : fueraHtml(q));
         if (!ya) { anota(q, 'sin'); caso(q, r, previas, true); }
         return;

@@ -307,6 +307,7 @@
 .ac-pase-fila .ac-pase:empty { display: none; }
 .ac-pase-ok { color: #1f6b3a; }
 .ac-pase-mal { color: #9b2c2c; }
+.ac-tk { color: #7a5d08; font-weight: 600; }
 
 /* ── Ronda 28 (26-11-2026): el panel como cabina de control ─────────────────────────────────────────────────
    El encabezado va compacto para que el panel empiece en la primera pantalla; arriba, una barra con quién entró,
