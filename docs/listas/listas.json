@@ -147,12 +147,12 @@
   "fuente": "OFAC, Specially Designated Nationals and Blocked Persons List (sdn.csv, alt.csv y add.csv)",
   "url": "https://www.treasury.gov/ofac/downloads/sdn.csv",
   "pagina": "https://sanctionslist.ofac.treas.gov/Home/SdnList",
-  "sha256": "728c0490b2ab5f808be3b3e828bc823df7b64e07b67bc453bd794cccbc570d0b",
-  "sha256_alt": "729b0c8dde3ea1d69eb3c77e42614621ddaff29c785bf8dcd47704e320d83dbc",
-  "sha256_add": "c695cb022115dfd3481fb517495de3748761b766b1429e9635abf4fb100a0081",
+  "sha256": "89b2a6d6d825d3a0a5033c9d523ef8a5e05a0b766ccff1ad934aea7436da49b9",
+  "sha256_alt": "2e342dc26cd1df3e11efba14d54d61d9290e255b502667b5eb2244e203b3ff5a",
+  "sha256_add": "58f0cf56d797937de3f1bc7365646e38a440636bbaaed3a3d9cfe8db7e5c2579",
   "archivo": "sdn.csv",
-  "corte": "2026-11-21",
-  "registros": 17687,
+  "corte": "2026-11-25",
+  "registros": 17717,
   "mexico": 1228,
   "conRfc": 253
  },
@@ -163,11 +163,11 @@
   "fuente": "ONU, Lista consolidada del Consejo de Seguridad (XML en español)",
   "url": "https://scsanctions.un.org/resources/xml/sp/consolidated.xml",
   "pagina": "https://www.un.org/securitycouncil/es/content/un-sc-consolidated-list",
-  "sha256": "3501f5ff7c2a9e4261a51b623b4e87f09aa12e403e362626bfdc7a1f050342b6",
+  "sha256": "ccf53af06f070fb4e9b754adfd65f7b3a9fc931a1b537eff78e942a9d204a2c7",
   "archivo": "consolidated.xml",
-  "corte": "2026-11-21",
-  "registros": 1007,
+  "corte": "2026-11-25",
+  "registros": 1008,
   "personas": 733,
-  "entidades": 274
+  "entidades": 275
  }
 }
