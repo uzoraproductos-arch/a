@@ -72,10 +72,10 @@
   if (port) {
     var leeP = function () { try { var l = JSON.parse(localStorage.getItem('av-portafolio') || '[]'); return Array.isArray(l) ? l : []; } catch (e) { return []; } };
     var pintaP = function () {
-      var l = leeP().filter(function (x) { return x && x.q && x.s; }), ol = document.getElementById('xiPortLista');
+      var l = leeP().filter(function (x) { return x && x.q && (x.s || x.u); }), ol = document.getElementById('xiPortLista');
       document.getElementById('xiPortVacio').hidden = l.length > 0;
       ol.innerHTML = l.map(function (x) {
-        return '<li><a href="' + esc(port.getAttribute('data-revisa') + '?s=' + encodeURIComponent(x.s) + '&q=' + encodeURIComponent(x.q)) + '">' +
+        return '<li><a href="' + esc(x.u || (port.getAttribute('data-revisa') + '?s=' + encodeURIComponent(x.s) + '&q=' + encodeURIComponent(x.q))) + '">' +
           '<span class="xi-dic-de">' + esc(x.f || '') + '</span>' + esc(x.t || x.q) + ' <span aria-hidden="true">➔</span></a>' +
           (x.dic ? ' · <a href="' + esc(x.dic) + '" target="_blank" rel="noopener">🧾 dictamen</a>' : '') + '</li>';
       }).join('');

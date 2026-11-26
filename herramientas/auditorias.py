@@ -431,6 +431,7 @@ def pagina(a, sello):
         <span class="au-hero-badge">{badge}</span>
         <h1 class="au-hero-tit">{titulo}</h1>
         <p class="au-hero-preg">{pregunta}</p>
+{guarda}
       </div>
     </header>
 
@@ -473,9 +474,18 @@ def pagina(a, sello):
 </html>
 '''.format(csp=seguridad.meta(), titulo_doc=re.sub('<[^>]+>', '', titulo), pregunta_attr=esc_attr(pregunta), favicon=FAVICON,
            sello=sello, cabecera=cabecera(archivo(id_), sello, archivo(id_)), img=img, alt=esc_attr(alt), nota_img=nota_img,
-           titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), temas=temas(id_), extra=extra, ruta=ruta(id_), lectura=lectura(id_), servicio=expediente_puerta(id_) + '\n' + servicio(titulo),
+           titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), temas=temas(id_), extra=extra, ruta=ruta(id_), lectura=lectura(id_), guarda=guarda(id_, titulo), servicio=expediente_puerta(id_) + '\n' + servicio(titulo),
            sociales=sociales(archivo(id_), re.sub('<[^>]+>', '', titulo) + ' · Auditavisión', pregunta, img))
 
+
+
+def guarda(id_, titulo):
+    """Ronda 26E: «Guardar en mi portafolio» de cada investigación. Lo mueve volver-auditor.js: guarda en av-portafolio
+    (solo en el navegador) el título, la fecha y la dirección de la investigación; nunca una cifra. Ícono SVG de trazo."""
+    from auditor_bento import ico
+    t = html.unescape(re.sub('<[^>]+>', '', titulo)).strip()
+    return ('        <button type="button" class="au-guarda" data-av-guarda data-q="%s" data-u="%s" aria-pressed="false">'
+            '%s<span>Guardar en mi portafolio</span></button>') % (esc_attr(t), esc_attr(archivo(id_)), ico('marcador', 18))
 
 
 def expediente_puerta(id_):

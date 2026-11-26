@@ -21,14 +21,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261126h">
-  <script src="assets/auditor/js/iconos.js?v=20261126h"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261126h"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261126h" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261126h">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261126h">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261126h">
-  <link rel="stylesheet" href="assets/auditor/css/numeros.css?v=20261126h">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261126i">
+  <script src="assets/auditor/js/iconos.js?v=20261126i"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261126i"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261126i" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261126i">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261126i">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261126i">
+  <link rel="stylesheet" href="assets/auditor/css/numeros.css?v=20261126i">
 </head>
 <body data-pagina="apartado">
   <!--carcasa-->
@@ -41,7 +41,6 @@
         <button type="button" class="avb-lado-menu" id="avbLadoMenu" aria-controls="avbLadoCuerpo" aria-expanded="false"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></svg><span>Menú</span></button>
       </div>
       <div class="avb-lado-cuerpo" id="avbLadoCuerpo">
-      <a class="avb-nueva" href="herramienta-inspector-pregunta.html"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg> Nueva revisión</a>
       <nav class="avb-nav" aria-label="Destinos">
         <a href="herramienta-inspector-pregunta.html"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Auditor</span></a>
         <a href="servicios.html"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg><span>Servicios y Planes</span> <span class="avb-pastilla" title="15 servicios">15</span></a>
@@ -61,8 +60,9 @@
       </details>
       <details class="avb-port" id="avbPort" open>
         <summary>Tu portafolio</summary>
+        <a class="avb-nueva" href="herramienta-inspector-pregunta.html"><svg class="avb-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg> Nueva investigación</a>
         <ol id="avbPortLista" hidden></ol>
-        <p class="avb-port-vacio" id="avbPortVacio">Aún no guardas investigaciones. «Guardar en mi portafolio», en el Expediente vivo o en el Inspector de Servicios, las deja aquí, solo en tu navegador.</p>
+        <p class="avb-port-vacio" id="avbPortVacio">Aún no guardas investigaciones. «Guardar en mi portafolio», bajo cada respuesta del Auditor, en una Auditoría en imágenes o en el Inspector de Servicios, las deja aquí, solo en tu navegador.</p>
       </details>
       <a class="avb-tour-btn" href="herramienta-inspector-pregunta.html?tour=1"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 4.9.7c0 1.7-2.4 2.3-2.4 3.8"/><path d="M12 17h.01"/></svg> Cómo funciona (3 pasos)</a>
       <div class="avb-acceso" id="avbAcceso">
@@ -251,12 +251,12 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261126h</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261126i</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261126h"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261126h"></script>
-  <script src="assets/auditor/js/resultados.js?v=20261126h"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261126i"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261126i"></script>
+  <script src="assets/auditor/js/resultados.js?v=20261126i"></script>
 </body>
 </html>

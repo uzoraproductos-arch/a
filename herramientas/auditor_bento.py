@@ -5,7 +5,7 @@ Ronda 21 (25-11-2026): barra lateral en azul marino y lienzo modular. Ronda 22: 
 Ronda 23 (25-11-2026, «Solo barra lateral, tipo Claude.ai»): una sola navegación, sin emojis.
 Ronda 24 (25-11-2026, decisión del autor): **la Estación de Auditoría en tres paneles**.
 
-- **Izquierda**: la barra lateral de la Ronda 23 (marca, «Nueva revisión», los seis destinos, con la Biblioteca al final, «Tu portafolio»,
+- **Izquierda**: la barra lateral de la Ronda 23 (marca, los seis destinos, con la Biblioteca al final, «Tu portafolio»,
   «Cómo funciona (3 pasos)» y la cuenta que llena acceso.js).
 - **Centro**: el Auditor, con la imagen de la entrada de fondo bajo un velo claro (su huella es la de
   acceso.FOTO_ENTRADA), una barra fina (insignia y «Mostrar / Ocultar mesa derecha»), el encabezado editorial (logo,
@@ -177,20 +177,21 @@ LEYENDA = [('oficial', 'oficial', 'Cifra textual de un documento público: DOF, 
 
 
 def lado(actual, n_serv, en_auditor=False, pestana=''):
-    """La barra lateral: en el Auditor, con sus botones («Nueva revisión», «Cómo funciona»); en las demás páginas,
-    esos dos son ligas al Auditor. `actual`: el destino de NAV que se marca (aria-current), o '' si ninguno."""
+    """La barra lateral: en el Auditor, con sus botones («Nueva investigación», «Cómo funciona»); en las demás páginas,
+    esos dos son ligas al Auditor. Ronda 26E: la barra arranca con la marca y los seis destinos, y «+ Nueva
+    investigación» va dentro de «Tu portafolio». `actual`: el destino de NAV que se marca (aria-current), o '' si ninguno."""
     nav = []
     for u, i_, t in NAV:
         pastilla = ' <span class="avb-pastilla" title="%d servicios">%d</span>' % (n_serv, n_serv) if u == 'servicios.html' else ''
         nav.append('        <a href="%s"%s>%s<span>%s</span>%s</a>' % (u, ' aria-current="page"' if u == actual else '', ico(i_), t, pastilla))
     ley = '\n'.join('          <li><span class="est-chip est-%s">%s</span> %s</li>' % (c, n, html.escape(x)) for c, n, x in LEYENDA)
     if en_auditor:
-        nueva = '<button type="button" class="avb-nueva" id="avbNueva">%s Nueva revisión</button>' % ico('mas')
+        nueva = '<button type="button" class="avb-nueva" id="avbNueva">%s Nueva investigación</button>' % ico('mas', 16)
         tour = '<button type="button" class="avb-tour-btn" id="avbTourBtn">%s Cómo funciona (3 pasos)</button>' % ico('ayuda')
     else:
-        nueva = '<a class="avb-nueva" href="%s">%s Nueva revisión</a>' % (AUDITOR, ico('mas'))
+        nueva = '<a class="avb-nueva" href="%s">%s Nueva investigación</a>' % (AUDITOR, ico('mas', 16))
         tour = '<a class="avb-tour-btn" href="%s?tour=1">%s Cómo funciona (3 pasos)</a>' % (AUDITOR, ico('ayuda'))
-    return LADO % (_e(pestana or ('Auditor' if en_auditor else '')), AUDITOR, ico('panel'), nueva, '\n'.join(nav), ley, ico('flecha', 14), tour, CANJE, ico('llave'))
+    return LADO % (_e(pestana or ('Auditor' if en_auditor else '')), AUDITOR, ico('panel'), '\n'.join(nav), ley, ico('flecha', 14), nueva, tour, CANJE, ico('llave'))
 
 
 LADO = '''<aside class="avb-lado" id="avbLado" data-pestana="%s" aria-label="Navegación de Auditavisión">
@@ -202,7 +203,6 @@ LADO = '''<aside class="avb-lado" id="avbLado" data-pestana="%s" aria-label="Nav
         <button type="button" class="avb-lado-menu" id="avbLadoMenu" aria-controls="avbLadoCuerpo" aria-expanded="false">%s<span>Menú</span></button>
       </div>
       <div class="avb-lado-cuerpo" id="avbLadoCuerpo">
-      %s
       <nav class="avb-nav" aria-label="Destinos">
 %s
       </nav>
@@ -215,8 +215,9 @@ LADO = '''<aside class="avb-lado" id="avbLado" data-pestana="%s" aria-label="Nav
       </details>
       <details class="avb-port" id="avbPort" open>
         <summary>Tu portafolio</summary>
+        %s
         <ol id="avbPortLista" hidden></ol>
-        <p class="avb-port-vacio" id="avbPortVacio">Aún no guardas investigaciones. «Guardar en mi portafolio», en el Expediente vivo o en el Inspector de Servicios, las deja aquí, solo en tu navegador.</p>
+        <p class="avb-port-vacio" id="avbPortVacio">Aún no guardas investigaciones. «Guardar en mi portafolio», bajo cada respuesta del Auditor, en una Auditoría en imágenes o en el Inspector de Servicios, las deja aquí, solo en tu navegador.</p>
       </details>
       %s
       <div class="avb-acceso" id="avbAcceso">

@@ -11,7 +11,8 @@
      (EKU9003173C9 y XAXX010101000) y lo abre en el Lector de facturas. Nada se sube.
    - «Cómo funciona (3 pasos)»: un recorrido que solo abre con su botón; deja av-tour-visto en este navegador.
    - El selector de modos usa los mismos botones del chat (poneModo de asistente.js): el modo se recuerda (av-modo).
-   - «Tu portafolio» lee av-portafolio (lo escriben sv-mostrador.js y el Expediente vivo): solo este navegador.
+   - «Tu portafolio» lee av-portafolio (lo escriben sv-mostrador.js, el Expediente vivo, el botón de cada respuesta y las
+     Auditorías en imágenes, Ronda 26E): solo este navegador.
    Se carga antes que asistente.js y espera al DOM. */
 (function () {
   'use strict';
@@ -239,17 +240,6 @@
       setTimeout(function () { marca(app.getAttribute('data-modo')); }, 0);
     }
 
-    /* Ronda 26C: el velo editorial del centro llega hasta el pie del encabezado y se desvanece en los 120 px que siguen. */
-    var centro = document.querySelector('.avb-centro'), cab = document.querySelector('.avb-cab');
-    function midecab() {
-      if (!centro || !cab) return;
-      var h = cab.getBoundingClientRect().bottom - centro.getBoundingClientRect().top + 120;
-      if (h > 0) centro.style.setProperty('--avb-cab-h', Math.round(h) + 'px');
-    }
-    midecab();
-    if (window.ResizeObserver && cab) new ResizeObserver(midecab).observe(cab);
-    window.addEventListener('resize', midecab);
-
     /* Las preguntas de la entrada, una cada 4 s. */
     var rota = document.getElementById('avbRota'), rq = rota ? rota.querySelectorAll('li') : [], ri = 0, rt = 0, pausa = false;
     if (rq.length > 1 && !quieto()) {
@@ -269,7 +259,7 @@
       lista.hidden = !l.length;
       vacio.hidden = !!l.length;
       lista.innerHTML = l.map(function (x) {
-        var u = x.o === 'auditor' ? 'herramienta-inspector-pregunta.html?q=' + encodeURIComponent(x.q)
+        var u = x.u ? x.u : x.o === 'auditor' ? 'herramienta-inspector-pregunta.html?q=' + encodeURIComponent(x.q)
           : 'servicios-revisa.html?s=' + encodeURIComponent(x.s || '') + '&q=' + encodeURIComponent(x.q);
         return '<li><a href="' + esc(u) + '" title="' + esc((x.t || x.q) + (x.f ? ' · ' + x.f : '')) + '">' + DOC + '<span>' + esc(x.t || x.q) + '</span></a></li>';
       }).join('');
@@ -288,7 +278,64 @@
       exp.guarda.querySelector('span').textContent = ok ? 'Guardado en tu portafolio' : 'Tu navegador no deja guardar aquí';
       exp.guarda.disabled = true;
       if (lista) port();
+      if (typeof marcaRespuestas === 'function') marcaRespuestas();
     });
+
+    /* Ronda 26E: «Guardar en mi portafolio» bajo cada respuesta del hilo. Guarda la pregunta, la fecha y el enlace de su
+       dictamen (nunca la respuesta) y pone al día «Tu portafolio» de la barra al instante. Al tocarlo dice «Guardado». */
+    var MARCA = SVG('<path d="M6 3h12v18l-6-4-6 4z"/>'), MARCA_LLENA = SVG('<path d="M6 3h12v18l-6-4-6 4z" fill="currentColor"/>');
+    function preguntaDe(li) {
+      for (var p = li.previousElementSibling; p; p = p.previousElementSibling) if (p.classList.contains('pa-yo')) return texto(p);
+      return '';
+    }
+    function yaGuardada(q) { return leePort().some(function (x) { return x && x.o === 'auditor' && x.q === q; }); }
+    function pintaGuarda(b, si) {
+      b.disabled = si;
+      b.setAttribute('aria-pressed', si ? 'true' : 'false');
+      b.innerHTML = (si ? MARCA_LLENA : MARCA) + '<span>' + (si ? 'Guardado' : 'Guardar en mi portafolio') + '</span>';
+    }
+    var marcando = false;
+    function marcaRespuestas() {
+      if (!hilo || marcando) return;
+      marcando = true;
+      Array.prototype.forEach.call(hilo.querySelectorAll('.pa-bot:not(.pa-escribe):not(.pa-modo-aviso)'), function (li) {
+        var q = preguntaDe(li);
+        if (!q) return;
+        var b = li.querySelector('.avb-rguarda');
+        if (!b) {
+          var cont = li.querySelector('.pa-burbuja') || li, p = document.createElement('p');
+          p.className = 'avb-rguarda-p';
+          b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'avb-rguarda';
+          p.appendChild(b);
+          cont.appendChild(p);
+        }
+        pintaGuarda(b, yaGuardada(q));
+      });
+      marcando = false;
+    }
+    if (hilo) {
+      hilo.addEventListener('click', function (ev) {
+        var b = ev.target.closest ? ev.target.closest('.avb-rguarda') : null;
+        if (!b || b.disabled) return;
+        var li = b.closest('.pa-bot'), q = li ? preguntaDe(li) : '';
+        if (!q) return;
+        var dic = li.querySelector('a.pa-genera');
+        var l = leePort().filter(function (x) { return !(x.o === 'auditor' && x.q === q); });
+        l.unshift({ s: 'revision', o: 'auditor', q: q, t: '', dic: dic ? dic.getAttribute('href') : '', f: new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' }) });
+        var ok = true;
+        try { localStorage.setItem('av-portafolio', JSON.stringify(l.slice(0, 60))); } catch (e) { ok = false; }
+        if (ok) pintaGuarda(b, true);
+        else b.querySelector('span').textContent = 'Tu navegador no deja guardar aquí';
+        if (lista) port();
+        if (ok && ultimo && ultimo.q === q && exp.guarda) { exp.guarda.querySelector('span').textContent = 'Guardado en tu portafolio'; exp.guarda.disabled = true; }
+      });
+      var esperaM = 0;
+      if (window.MutationObserver) new MutationObserver(function () { if (marcando) return; clearTimeout(esperaM); esperaM = setTimeout(marcaRespuestas, 120); }).observe(hilo, { childList: true, subtree: true });
+      setTimeout(marcaRespuestas, 0);
+      window.addEventListener('storage', function (ev) { if (ev.key === 'av-portafolio') marcaRespuestas(); });
+    }
 
     /* Adjuntar XML / CSV · Cero CIEC: el botón de la caja, soltarlos sobre la caja o el XML de muestra. */
     var arch = document.getElementById('avbArch'), caja = document.getElementById('avbLector'), marco = document.getElementById('avbMarco'),
