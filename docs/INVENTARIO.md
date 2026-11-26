@@ -17,7 +17,7 @@ La Enciclopedia queda fuera porque está congelada.
 | Página | Título | Generador | Enlaces internos | Módulos embebidos | oficial | derivado | pendiente |
 |---|---|---|---:|---:|---:|---:|---:|
 | `administracion-codigos.html` | Administración de códigos · Auditavisión | apartados.py | 44 | 0 | 1 | 1 | 1 |
-| `agora.html` | Ágora cívica · Auditavisión | apartados.py | 46 | 0 | 1 | 1 | 1 |
+| `agora.html` | Ágora cívica · Auditavisión | apartados.py | 49 | 0 | 1 | 1 | 1 |
 | `aprende-auditoria.html` | Cómo se audita · Auditavisión | apartados.py | 58 | 0 | 21 | 1 | 1 |
 | `aprende-fraude-en-numeros.html` | El fraude en números · Auditavisión | apartados.py | 50 | 0 | 14 | 4 | 7 |
 | `aprende-recursos-naturales.html` | Los recursos naturales · Auditavisión | apartados.py | 66 | 0 | 128 | 67 | 2 |
@@ -143,7 +143,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-salud-sistema.html` | Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE · Auditavisión | apartados.py | 50 | 0 | 27 | 12 | 3 |
 | `derecho-de-replica.html` | Derecho de réplica · Auditavisión | apartados.py | 43 | 0 | 2 | 1 | 1 |
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 50 | 0 | 1 | 1 | 1 |
-| `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 60 | 0 | 1 | 1 | 1 |
+| `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 62 | 0 | 1 | 1 | 1 |
 | `donaciones.html` | Donaciones · Auditavisión | apartados.py | 43 | 0 | 1 | 1 | 1 |
 | `enciclopedia-auditavision.html` | Enciclopedia · Auditavisión | apartados.py | 44 | 0 | 1 | 1 | 1 |
 | `enciclopedia.html` | La Enciclopedia antigua · Auditavisión | apartados.py | 2 | 0 | 0 | 0 | 0 |
@@ -342,7 +342,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-recauda.html` | Se recauda · Auditavisión | apartados.py | 2 | 0 | 0 | 0 | 0 |
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 2 | 0 | 0 | 0 | 0 |
 | `numeros-trivia-presidentes.html` | El examen de los presidentes · Auditavisión | apartados.py | 41 | 0 | 1 | 1 | 1 |
-| `participa.html` | Comunidad · Auditavisión | apartados.py | 42 | 0 | 1 | 1 | 1 |
+| `participa.html` | Comunidad · Auditavisión | apartados.py | 48 | 0 | 1 | 1 | 1 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 2 | 0 | 0 | 0 | 0 |
 | `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 240 | 0 | 1 | 1 | 127 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 41 | 0 | 12 | 6 | 1 |

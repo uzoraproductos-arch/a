@@ -25,6 +25,26 @@
   var DATOS = JSON.parse(datosEl.textContent);
   var TEMAS = {};
   DATOS.temas.forEach(function (t) { TEMAS[t[0]] = { ico: t[1], nombre: t[2], url: t[3] }; });
+  /* Ronda 26D: sin emojis. Íconos de trazo (los mismos de auditor_bento.py) y un punto de color por postura. */
+  var TRAZO = {
+    oficial: '<path d="M3 21h18"/><path d="M5 21V10M9.5 21V10M14.5 21V10M19 21V10"/><path d="M2 10l10-6 10 6"/>',
+    liga: '<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>',
+    nota: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+    voz: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+    doc: '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/>',
+    repite: '<path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/>',
+    personas: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/>',
+    lugar: '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+    lupa: '<circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/>',
+    apoyo: '<path d="M7 10v11H3V10z"/><path d="M7 10l4-8a3 3 0 0 1 3 3v4h6a2 2 0 0 1 2 2.3l-1.4 8a2 2 0 0 1-2 1.7H7"/>',
+    datos: '<path d="M3 3v18h18"/><path d="M8 17v-5M13 17V8M18 17v-9"/>',
+    borrar: '<path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/>'
+  };
+  function ic(n, t) {
+    return '<svg class="ag-ic" width="' + (t || 16) + '" height="' + (t || 16) + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" '
+      + 'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + TRAZO[n] + '</svg>';
+  }
+  function punto(id) { return '<i class="ag-dot ag-dot-' + esc(id || 'matiz') + '" aria-hidden="true"></i>'; }
   var POSTURAS = {};
   DATOS.posturas.forEach(function (p) { POSTURAS[p[0]] = { ico: p[1], nombre: p[2] }; });
 
@@ -113,9 +133,9 @@
     var u = url || (esUrl(f) ? f : '');
     var dom = u ? dominio(u) : '';
     var chip = u ? (OFICIALES.test(dom)
-      ? '<span class="ag-chip ag-chip-of" title="El enlace es de un dominio oficial; aun así, revisa que diga lo que se afirma.">🏛️ dominio oficial</span>'
-      : '<span class="ag-chip" title="El enlace no es de un dominio oficial.">🔗 otra fuente</span>')
-      : '<span class="ag-chip ag-chip-sin" title="Se citó sin enlace.">📝 sin enlace</span>';
+      ? '<span class="ag-chip ag-chip-of" title="El enlace es de un dominio oficial; aun así, revisa que diga lo que se afirma.">' + ic('oficial', 14) + ' dominio oficial</span>'
+      : '<span class="ag-chip" title="El enlace no es de un dominio oficial.">' + ic('liga', 14) + ' otra fuente</span>')
+      : '<span class="ag-chip ag-chip-sin" title="Se citó sin enlace.">' + ic('nota', 14) + ' sin enlace</span>';
     return '<div class="ag-fuente">' + chip + ' ' + (u
       ? '<a href="' + esc(u) + '" target="_blank" rel="noopener noreferrer nofollow">' + esc(dom || u) + '</a>'
       : esc(f)) + '</div>';
@@ -144,11 +164,11 @@
     return {
       stats: [['Hilos', mios.length], ['Réplicas', reps], ['Apoyos dados', apoyos], ['Con fuente', conFuente.length]],
       lista: [
-        ['🗣️', 'Primera voz', 'Publicaste tu primer hilo.', mios.length >= 1],
-        ['📄', 'Cita su fuente', 'Un hilo tuyo enlaza su documento.', conFuente.length >= 1],
-        ['🏛️', 'Fuente oficial', 'Enlazaste un documento de un dominio oficial.', oficial],
-        ['🔁', 'Replicador', 'Escribiste tres réplicas.', reps >= 3],
-        ['🤝', 'Escucha activa', 'Apoyaste tres argumentos.', apoyos >= 3]
+        ['voz', 'Primera voz', 'Publicaste tu primer hilo.', mios.length >= 1],
+        ['doc', 'Cita su fuente', 'Un hilo tuyo enlaza su documento.', conFuente.length >= 1],
+        ['oficial', 'Fuente oficial', 'Enlazaste un documento de un dominio oficial.', oficial],
+        ['repite', 'Replicador', 'Escribiste tres réplicas.', reps >= 3],
+        ['personas', 'Escucha activa', 'Apoyaste tres argumentos.', apoyos >= 3]
       ]
     };
   }
@@ -160,7 +180,7 @@
     document.getElementById('agAvatar').outerHTML = avatar(p.nick || '?', p.color, 'ag-avatar-xl').replace('<span ', '<span id="agAvatar" ');
     document.getElementById('agAvatarMini').outerHTML = avatar(p.nick || '?', p.color).replace('<span ', '<span id="agAvatarMini" ');
     document.getElementById('agPerfilNick').textContent = nick;
-    document.getElementById('agPerfilLugar').textContent = p.lugar ? '📍 ' + p.lugar : (p.nick ? 'Miembro del Ágora' : 'Elige cómo firmar');
+    document.getElementById('agPerfilLugar').textContent = p.lugar ? p.lugar : (p.nick ? 'Miembro del Ágora' : 'Elige cómo firmar');
     var bio = document.getElementById('agPerfilBio');
     bio.textContent = p.bio || '';
     bio.hidden = !p.bio;
@@ -170,7 +190,7 @@
     }).join('');
     document.getElementById('agInsignias').innerHTML = ins.lista.map(function (i) {
       return '<span class="ag-insignia' + (i[3] ? ' ag-ganada' : '') + '" title="' + esc(i[1] + ': ' + i[2] + (i[3] ? '' : ' (todavía no)')) + '">'
-        + '<span aria-hidden="true">' + i[0] + '</span><span class="sr-only">' + esc(i[1]) + (i[3] ? ', ganada' : ', pendiente') + '</span></span>';
+        + ic(i[0], 20) + '<span class="sr-only">' + esc(i[1]) + (i[3] ? ', ganada' : ', pendiente') + '</span></span>';
     }).join('');
     var f = document.getElementById('agPerfilForm');
     f.agNick.value = p.nick || '';
@@ -196,7 +216,7 @@
 
   function tarjeta(d, p, apoyos, pedidas) {
     var tema = TEMAS[d.tema_id] || TEMAS.general;
-    var post = POSTURAS[d.postura] || { ico: d.postura_icono || '⚖️', nombre: d.postura_nombre || 'Postura' };
+    var post = POSTURAS[d.postura] || { ico: '', nombre: d.postura_nombre || 'Postura' };
     var reps = d.replicas || [];
     var mio = d.propio || esMio(d.autor_nick, p);
     var ap = apoyos.indexOf(d.id) > -1;
@@ -209,18 +229,18 @@
       + '<div class="ag-post-quien"><b>' + esc(d.autor_nick || '@Ciudadano') + '</b>' + (mio ? ' <span class="ag-tu">tú</span>' : '')
       + '<span class="ag-post-meta"><time datetime="' + (ts ? new Date(ts).toISOString() : '') + '" title="' + esc(fechaLarga(ts)) + '">' + hace(ts) + '</time> · '
       + '<button type="button" class="ag-link" data-acc="tema" data-tema="' + esc(d.tema_id || 'general') + '">' + esc(etiqueta(tema.nombre)) + '</button></span></div>'
-      + '<span class="ag-postura-chip">' + post.ico + ' ' + esc(post.nombre) + '</span></header>'
+      + '<span class="ag-postura-chip">' + punto(d.postura) + esc(post.nombre) + '</span></header>'
       + '<h3 class="ag-post-tesis">' + esc(d.tesis) + '</h3>'
       + '<div class="ag-post-texto">' + enlaces(d.contenido) + '</div>'
       + fuenteHtml(d.fuente, d.fuente_url)
-      + (!tieneFuente && (d.pide_fuente || 0) > 0 ? '<p class="ag-pide">🔍 ' + d.pide_fuente + (d.pide_fuente === 1 ? ' persona pidió' : ' personas pidieron') + ' la fuente de este hilo.</p>' : '')
+      + (!tieneFuente && (d.pide_fuente || 0) > 0 ? '<p class="ag-pide">' + ic('lupa', 14) + ' ' + d.pide_fuente + (d.pide_fuente === 1 ? ' persona pidió' : ' personas pidieron') + ' la fuente de este hilo.</p>' : '')
       + '<footer class="ag-acciones">'
-      + '<button type="button" class="ag-acc' + (ap ? ' ag-on' : '') + '" data-acc="apoyar" aria-pressed="' + ap + '">👍 Apoyar <b>' + (d.apoyos || 0) + '</b></button>'
-      + '<button type="button" class="ag-acc" data-acc="replicar" aria-expanded="' + abierto + '" aria-controls="hilo-' + esc(d.id) + '">💬 Replicar <b>' + reps.length + '</b></button>'
-      + (tieneFuente ? '' : '<button type="button" class="ag-acc' + (pid ? ' ag-on' : '') + '" data-acc="fuente" aria-pressed="' + pid + '" title="Pide al autor el documento que sostiene su argumento">🔍 Pedir fuente</button>')
-      + '<button type="button" class="ag-acc" data-acc="compartir">🔗 Compartir</button>'
-      + '<a class="ag-acc" href="' + esc(tema.url) + '">📊 Ver los datos</a>'
-      + (mio ? '<button type="button" class="ag-acc ag-borrar" data-acc="borrar" title="Borrar este hilo de tu navegador">🗑️</button>' : '')
+      + '<button type="button" class="ag-acc' + (ap ? ' ag-on' : '') + '" data-acc="apoyar" aria-pressed="' + ap + '">' + ic('apoyo') + ' Apoyar <b>' + (d.apoyos || 0) + '</b></button>'
+      + '<button type="button" class="ag-acc" data-acc="replicar" aria-expanded="' + abierto + '" aria-controls="hilo-' + esc(d.id) + '">' + ic('voz') + ' Replicar <b>' + reps.length + '</b></button>'
+      + (tieneFuente ? '' : '<button type="button" class="ag-acc' + (pid ? ' ag-on' : '') + '" data-acc="fuente" aria-pressed="' + pid + '" title="Pide al autor el documento que sostiene su argumento">' + ic('lupa') + ' Pedir fuente</button>')
+      + '<button type="button" class="ag-acc" data-acc="compartir">' + ic('liga') + ' Compartir</button>'
+      + '<a class="ag-acc" href="' + esc(tema.url) + '">' + ic('datos') + ' Ver los datos</a>'
+      + (mio ? '<button type="button" class="ag-acc ag-borrar" data-acc="borrar" title="Borrar este hilo de tu navegador" aria-label="Borrar este hilo de tu navegador">' + ic('borrar') + '</button>' : '')
       + '</footer>'
       + '<div class="ag-hilo" id="hilo-' + esc(d.id) + '"' + (abierto ? '' : ' hidden') + '>'
       + (reps.length ? reps.map(function (r) {
@@ -264,14 +284,21 @@
       if (orden === 'replicados') return ((b.replicas || []).length - (a.replicas || []).length) || momento(b) - momento(a);
       return momento(b) - momento(a);
     });
+    /* «Abrir en el Auditor» (Ronda 26D): lleva al chat la búsqueda o el tema que tienes a la vista, para contrastarlo
+       con los documentos de la base. El Auditor es el centro: no es una liga entre pestañas. */
+    var aud = document.getElementById('agAuditor');
+    if (aud) {
+      var qa = busqueda || (filtroTema && TEMAS[filtroTema] ? TEMAS[filtroTema].nombre : '');
+      aud.href = 'herramienta-inspector-pregunta.html' + (qa ? '?q=' + encodeURIComponent(qa) : '');
+    }
     var feed = document.getElementById('agFeed');
     if (!l.length) {
       feed.innerHTML = h.length
-        ? '<div class="ag-vacio"><div class="ag-vacio-ico">🔎</div><h3>Nada con ese filtro</h3><p>Prueba con otro tema u orden, o borra la búsqueda.</p></div>'
-        : '<div class="ag-vacio"><div class="ag-vacio-ico">🗣️</div><h3>El muro está esperando la primera voz</h3>'
+        ? '<div class="ag-vacio"><div class="ag-vacio-ico">' + ic('lupa', 32) + '</div><h3>Nada con ese filtro</h3><p>Prueba con otro tema u orden, o borra la búsqueda.</p></div>'
+        : '<div class="ag-vacio"><div class="ag-vacio-ico">' + ic('voz', 32) + '</div><h3>El muro está esperando la primera voz</h3>'
           + '<p>Escribe arriba qué quieres poner a debate, o elige una de las <b>preguntas para empezar</b>. '
-          + 'Tu primer hilo te da la insignia 🗣️ «Primera voz».</p>'
-          + '<button type="button" class="ag-btn ag-btn-of" data-acc="escribir">✍️ Escribir mi primer hilo</button></div>';
+          + 'Tu primer hilo te da la insignia «Primera voz».</p>'
+          + '<button type="button" class="ag-btn ag-btn-of" data-acc="escribir">' + ic('nota') + ' Escribir mi primer hilo</button></div>';
       return;
     }
     feed.innerHTML = l.map(function (d) { return tarjeta(d, p, apoyos, pedidas); }).join('');
@@ -342,7 +369,7 @@
     cuenta.textContent = '0 / 1200';
     comp.classList.remove('ag-comp-abierto');
     if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
-    estado('✓ Publicado en tu navegador como ' + p.nick + '.');
+    estado('Publicado en tu navegador como ' + p.nick + '.');
     orden = 'recientes'; filtroTema = ''; busqueda = '';
     document.getElementById('agBuscar').value = '';
     marcarOrden();
@@ -399,7 +426,7 @@
       if (navigator.share) {
         navigator.share({ title: d.tesis + ' · Ágora cívica', url: url }).catch(function () {});
       } else if (navigator.clipboard) {
-        navigator.clipboard.writeText(url).then(function () { t.textContent = '✓ Enlace copiado'; }, function () { prompt('Copia este enlace:', url); });
+        navigator.clipboard.writeText(url).then(function () { t.textContent = 'Enlace copiado'; }, function () { prompt('Copia este enlace:', url); });
       } else {
         prompt('Copia este enlace:', url);
       }

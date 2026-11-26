@@ -162,3 +162,67 @@
   .ag-post-cab { flex-wrap: wrap; }
   .ag-postura-chip { margin-left: 0; }
 }
+
+/* =====================================================================
+   Ronda 26D (26-11-2026, decisión del autor): el Ágora como red social cívica.
+   Comunidad (participa.html) y agora.html llevan el mismo bloque (agora_red() de apartados.py):
+   el muro al centro (1fr) y las acciones cívicas a la derecha (310 px) desde 1024 px; una columna en celular.
+   Sin emojis: íconos de trazo (.ag-ic, .ag-tit-i) y un punto de color por postura (.ag-dot).
+   ===================================================================== */
+.ag.ag-red { grid-template-columns: minmax(0, 1fr) 310px; grid-template-areas: "centro der"; gap: 22px; }
+.ag-red .ag-der { position: static; grid-template-columns: none; gap: 16px; }
+.ag-red .ag-card { border-radius: 18px; padding: 18px 20px; box-shadow: 0 1px 2px rgba(11, 42, 99, .05), 0 8px 24px rgba(11, 42, 99, .06); }
+.ag-red .ag-card-tit { display: flex; gap: 10px; align-items: center; font-size: 17px; }
+.ag-tit-i { flex: none; color: #1a56b8; }
+.ag-ic { flex: none; vertical-align: -3px; }
+.ag-red .ag-card-sub { margin: 0 0 12px; font-size: 15px; line-height: 1.5; }
+.ag-accion { border-top: 4px solid #c9a227; }
+.ag-accion-oro .ag-tit-i { color: #9a7400; }
+.ag-accion-marino { border-top-color: #0b2a63; }
+.ag-accion-marino .ag-tit-i { color: #0b2a63; }
+.ag-btn { display: inline-flex; gap: 8px; align-items: center; justify-content: center; min-height: 44px; box-sizing: border-box; }
+.ag-btn-bloque { width: 100%; }
+.ag-garantias { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 8px; font-size: 15px; line-height: 1.45; color: #24324d; }
+.ag-garantias li { display: flex; gap: 8px; align-items: flex-start; }
+.ag-garantias .avb-i { flex: none; color: #0f7b4f; margin-top: 2px; }
+.ag-reglas-mas > summary { cursor: pointer; font-weight: 700; color: #1a56b8; font-size: 15px; min-height: 44px; display: flex; align-items: center; }
+.ag-reglas-mas .ag-reglas { margin-top: 6px; }
+.ag-editar > summary { display: flex; gap: 8px; align-items: center; min-height: 44px; }
+.ag-insignia { font-size: 0; color: #5a6782; }
+.ag-insignia.ag-ganada { color: #7a5a00; }
+.ag-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: 0; background: #c9a227; }
+.ag-dot-a_favor { background: #1d8a4e; }
+.ag-dot-en_contra { background: #c0392b; }
+.ag-dot-aporte { background: #1a56b8; }
+.ag-dot-pregunta { background: #6d28d9; }
+.ag-postura input:checked + span .ag-dot { box-shadow: 0 0 0 2px #fff; }
+.ag-red .ag-barra { background: #fff; border: 1px solid #dfe5f0; border-radius: 16px; padding: 10px 12px; }
+.ag-barra-der { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.ag-buscar-caja { position: relative; display: flex; align-items: center; }
+.ag-buscar-caja .avb-i { position: absolute; left: 12px; color: #5a6782; pointer-events: none; }
+.ag-red .ag-buscar { max-width: 240px; padding-left: 38px !important; min-height: 44px; }
+.ag-auditor { background: #f6efd8; border-color: #e3cf8f; color: #3d2f00; }
+.ag-auditor:hover, .ag-auditor:focus-visible { background: #efe2b5; border-color: #9a7400; color: #3d2f00; }
+.ag-red .ag-orden-btn, .ag-red .ag-chip-tema { min-height: 40px; }
+.ag-red .ag-acc { display: inline-flex; gap: 6px; align-items: center; min-height: 40px; }
+.ag-red .ag-post { border-radius: 18px; padding: 18px 20px; box-shadow: 0 1px 2px rgba(11, 42, 99, .05); }
+.ag-vacio-ico { color: #1a56b8; line-height: 1; }
+.ag-preg-datos { display: inline-flex; gap: 4px; align-items: center; }
+@media (max-width: 1023px) {
+  .ag.ag-red { grid-template-columns: minmax(0, 1fr); grid-template-areas: "centro" "der"; }
+  .ag-red .ag-der { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+}
+@media (max-width: 600px) {
+  .ag-red .ag-der { grid-template-columns: minmax(0, 1fr); }
+  .ag-red .ag-card, .ag-red .ag-post { padding: 16px; }
+  .ag-red .ag-buscar { max-width: none; }
+  .ag-barra-der, .ag-buscar-caja { width: 100%; }
+  .ag-buscar-caja { flex: 1 1 100%; }
+  .ag-auditor { width: 100%; }
+  .ag-red .ag-orden-btn, .ag-red .ag-chip-tema, .ag-red .ag-acc, .ag-red .ag-card-sub, .ag-red .ag-post-meta, .ag-red .ag-reglas, .ag-red .ag-como,
+  .ag-red .ag-pronto ul, .ag-red .ag-preg, .ag-red .ag-preg-datos, .ag-red .ag-cuenta, .ag-red .ag-estado, .ag-red .ag-campo label,
+  .ag-red .ag-posturas legend, .ag-red .ag-colores legend, .ag-red .ag-postura span, .ag-red .ag-perfil-id span, .ag-red .ag-perfil-bio,
+  .ag-red .ag-tend-btn, .ag-red .ag-rep-cab, .ag-red .ag-stats dt, .ag-red .ag-chip, .ag-red .ag-rep p, .ag-red .ag-fuente, .ag-red .ag-pide, .ag-red .ag-vacio-mini, .ag-red .ag-btn,
+  .ag-red .ag-garantias, .ag-red .ag-reglas-mas > summary, .ag-red .ag-editar > summary, .ag-red .ag-preg-tema, .ag-red .ag-postura-chip { font-size: 16px; }
+  .ag-red .ag-orden-btn, .ag-red .ag-chip-tema, .ag-red .ag-acc { min-height: 44px; }
+}
