@@ -43,7 +43,7 @@
 .avb-mesa-btn:hover, .avb-mesa-btn:focus-visible { border-color: var(--avb-azul); }
 .avb-aviso { position: absolute; top: 6px; right: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--avb-oro); }
 .avb-aviso[hidden] { display: none; }
-.avb-lienzo { display: grid; gap: 28px; max-width: 960px; margin: 0 auto; padding: 36px 32px 72px; box-sizing: border-box; min-width: 0; }
+.avb-lienzo { display: grid; gap: 28px; max-width: 1140px; margin: 0 auto; padding: 28px 24px 64px; box-sizing: border-box; min-width: 0; }
 .avb-cab { display: grid; gap: 18px; color: #ffffff; }
 .avb-cab-tit { display: flex; align-items: center; justify-content: center; gap: 14px; text-align: left; }
 /* Ronda 26D: con el fondo más vívido, un velo suave solo detrás del título mantiene el blanco por encima de 4.5:1 sin apagar la imagen. */
@@ -58,6 +58,8 @@
   padding: 18px 24px; border: 1px solid rgba(255, 255, 255, .22); border-radius: 14px; background: rgba(9, 28, 66, .58);
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
 }
+.avb-quienes > summary { list-style: none; cursor: default; pointer-events: none; }
+.avb-quienes > summary::-webkit-details-marker { display: none; }
 .avb-quienes h2 { margin: 0 0 6px; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: #c9d6f2; }
 .avb-quienes p { margin: 0; font-size: 17px; line-height: 1.65; color: #f4f7ff; }
 .avb-rota { padding: 12px 20px; border-left: 4px solid var(--avb-oro); border-radius: 0 12px 12px 0; background: rgba(9, 28, 66, .6); }
@@ -118,13 +120,6 @@
   background: #0b2a63; color: #ffffff; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer;
 }
 #avbEnvia:hover, #avbEnvia:focus-visible { background: var(--avb-azul); }
-.avb-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: -8px; }
-.avb-chip {
-  min-height: 44px; padding: 8px 14px; border: 1px solid var(--avb-borde); border-radius: 999px; background: #ffffff;
-  color: #33415e; font: inherit; font-size: 15px; cursor: pointer;
-}
-.avb-chip { box-shadow: 0 2px 10px rgba(5, 16, 40, .2); }
-.avb-chip:hover, .avb-chip:focus-visible { border-color: var(--avb-azul); color: var(--avb-tinta); }
 
 /* Ronda 27A: la insignia «Pro» del Modo Inspector y el costo a la vista antes de preguntar. */
 .avb-pro { display: inline-block; margin-left: 2px; padding: 1px 7px; border-radius: 999px; background: #fdf6e3; border: 1px solid #ecd9a0; color: #7a5d08;
@@ -300,6 +295,18 @@
   .avb-box { padding: 14px 14px; }
   .avb-barra { padding: 8px 16px; }
 }
+/* Ronda 28B: en celular «¿Quiénes somos?» se pliega (auditor-bento.js lo cierra al abrir) para que la caja quede en la
+   primera pantalla; su título es el botón, de 44 px. */
+@media (max-width: 700px) {
+  .avb-lienzo { gap: 14px; padding-top: 14px; }
+  .avb-cab { gap: 10px; }
+  .avb-quienes { padding: 0 16px; }
+  .avb-quienes > summary { pointer-events: auto; cursor: pointer; display: flex; align-items: center; justify-content: space-between; min-height: 44px; }
+  .avb-quienes > summary::after { content: ""; width: 9px; height: 9px; border-right: 2px solid #c9d6f2; border-bottom: 2px solid #c9d6f2; transform: rotate(45deg); margin: 0 4px 4px 12px; }
+  .avb-quienes[open] > summary::after { transform: rotate(225deg); margin-bottom: -4px; }
+  .avb-quienes h2 { margin: 0; font-size: 16px; }
+  .avb-quienes p { padding-bottom: 14px; font-size: 16px; }
+}
 @media (max-width: 600px) {
   .avb-tit { font-size: 26px; }
   .avb-cab-tit img { width: 60px; height: 47px; }
@@ -311,7 +318,7 @@
   .avb-pista { width: 100%; text-align: left; margin: 0 4px; }
   .avb-adjunta, .avb-adjunta small { font-size: 16px; }
   #avbEnvia { flex: 1 1 auto; justify-content: center; }
-  .avb-chip, .avb-rguarda, .avb-costo, .avb-tabu li { font-size: 16px; }
+  .avb-rguarda, .avb-costo, .avb-tabu li { font-size: 16px; }
   .avb-conteos li, .avb-pie-ligas { font-size: 16px; }
   .avb-chatcard, .avb-lector { padding: 16px; }
 }

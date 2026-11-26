@@ -86,9 +86,10 @@ SEGMENTOS = [('inspector', 'lupa', 'Inspector', 'Investigación completa, con di
              ('ciudadano', 'usuario', 'Ciudadano', 'En corto, como te lo diría un amigo'),
              ('periodista', 'pluma', 'Periodista', 'Contado como nota, con sus documentos'),
              ('ambientalista', 'hoja', 'Ambientalista', 'El costo y el daño ambiental')]
-# Las preguntas de ejemplo: cada una ya la contesta el chat (preguntas_auditor.json).
+# Las preguntas de ejemplo: cada una ya la contesta el chat (preguntas_auditor.json). Ronda 28B: ya no van como fila de
+# botones bajo la caja; rotan en «Pregúntale al Auditor», después de las de acceso.PREGUNTAS_ENTRADA (que no se tocan).
 CHIPS = ['¿Mi proveedor está en la lista negra del SAT?', '¿Cuánto debe Jalisco?',
-         '¿Cuánto costó el Tren Maya?', 'Diagnóstico de Pemex']
+         '¿Cuánto costó el Tren Maya?', 'Diagnóstico de Pemex', 'Semáforo Patrimonial de Zapopan, Jalisco']
 TITULO = 'Las cuentas del gobierno, con sus documentos'
 # Los accesos de la Mesa de Trabajo: (ícono, etiqueta, título, una línea, servicio o liga, precio). El precio es
 # ('gratis',), ('consumo', clave de PRECIO_FUNDADOR['consumo']) o ('plan', id de PRECIO_FUNDADOR['planes']): la
@@ -241,16 +242,16 @@ def _barra():
 def _cab():
     import acceso
     pre = '\n'.join('            <li><button type="button" class="avb-rota-q" data-avb-q="%s">%s</button></li>' % (_e(q), html.escape(q))
-                    for q in acceso.PREGUNTAS_ENTRADA)
+                    for q in list(acceso.PREGUNTAS_ENTRADA) + [c for c in CHIPS if c not in acceso.PREGUNTAS_ENTRADA])
     return '''<header class="avb-cab">
         <div class="avb-cab-tit">
           <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="76" height="60">
           <h1 class="avb-tit" id="avbTit">%s</h1>
         </div>
-        <div class="avb-quienes">
-          <h2>¿Quiénes somos?</h2>
+        <details class="avb-quienes" id="avbQuienes" open>
+          <summary><h2>¿Quiénes somos?</h2></summary>
           <p>%s</p>
-        </div>
+        </details>
         <div class="avb-rota" id="avbRota">
           <p class="avb-rota-et" id="avbRotaEt">Pregúntale al Auditor</p>
           <ul aria-labelledby="avbRotaEt">
@@ -262,10 +263,11 @@ def _cab():
 
 def _caja():
     # Ronda 27A: el Modo Inspector lleva su insignia «Pro» (gasta lo de 'inspector' en monetizacion.PRECIO_FUNDADOR).
+    import asistente
+    ini = asistente.MODO_INICIAL
     seg = '\n'.join('              <button type="button" data-avb-modo="%s" data-pista="%s" title="%s" aria-pressed="%s">%s<span>%s</span>%s</button>' % (
-        m, _e(p), _e(p), 'true' if m == 'inspector' else 'false', ico(i), n,
+        m, _e(p), _e(p), 'true' if m == ini else 'false', ico(i), n,
         ' <i class="avb-pro" aria-label="Pro">Pro</i>' if m == 'inspector' else '') for m, i, n, p in SEGMENTOS)
-    chips = '\n'.join('        <button type="button" class="avb-chip" data-avb-q="%s">%s</button>' % (_e(q), html.escape(q)) for q in CHIPS)
     return '''<form class="avb-box" id="avbForm" autocomplete="off" aria-labelledby="avbCajaT">
         <p class="avb-caja-t" id="avbCajaT">¿Qué quieres auditar hoy?</p>
         <div class="avb-box-arriba">
@@ -287,10 +289,7 @@ def _caja():
           <button type="submit" id="avbEnvia"><span>Dictaminar</span>%s</button>
         </div>
         <p class="avb-costo" id="avbCosto" aria-live="polite"></p>
-      </form>
-      <div class="avb-chips" role="group" aria-label="Preguntas de ejemplo">
-%s
-      </div>''' % (seg, html.escape(SEGMENTOS[0][3]), ico('clip'), ACEPTA, ico('matraz'), ico('flecha'), chips)
+      </form>''' % (seg, html.escape(next(p for m, _i, _n, p in SEGMENTOS if m == ini)), ico('clip'), ACEPTA, ico('matraz'), ico('flecha'))
 
 
 def _chat(chat):
@@ -320,7 +319,7 @@ def _planes():
           <ul class="avb-tabu">
 %s
           </ul>
-          <p class="avb-mplan-n">Al llegar recibes %d tokens de bienvenida en este navegador. Gratis siempre: %s. Los pagos en línea se activan próximamente; hoy se recarga con códigos piloto y promocionales.</p>
+          <p class="avb-mplan-n">Recibes %d tokens gratis cada mes en este navegador. Gratis siempre: %s. Los pagos en línea se activan próximamente; hoy se recarga con códigos piloto y promocionales.</p>
           <a href="%s">Ver planes y códigos promocionales %s</a>
         </div>%s''' % (M[0], ico('boleto', 16), F['libre']['nombre'], mo.pesos(0), F['libre']['nota'].lower(), mo.pesos(paq['precio']),
                        paq['tokens'], pro['nombre'], mo.pesos(pro['precio']), pyme['nombre'], mo.pesos(pyme['precio']), ico('check', 16), tabulador(),

@@ -3837,7 +3837,7 @@
   var app = document.getElementById('paApp'), MODOS_OK = {};
   Array.prototype.forEach.call(app.querySelectorAll('.pa-modo-op'), function (b) { MODOS_OK[b.getAttribute('data-pa-modo')] = 1; });
   function modoActual() { return app.getAttribute('data-modo'); }
-  function poneModo(m, avisa) {
+  function poneModo(m, avisa, sinGuardar) {
     if (!MODOS_OK[m]) return;
     var antes = modoActual();
     app.setAttribute('data-modo', m);
@@ -3854,7 +3854,8 @@
     /* El ícono se copia como está: iconos.js ya cambió el emoji por su trazo. */
     var ico = op ? '<span aria-hidden="true">' + op.querySelector('.pa-modo-ico').innerHTML + '</span> ' : '';
     if (et && op) et.innerHTML = ico + esc(op.getAttribute('data-nom'));
-    try { localStorage.setItem('av-modo', m); } catch (e) { /* sin almacenamiento: dura esta vista */ }
+    /* Ronda 28B: solo se recuerda el modo que el lector eligió; el de arranque no se guarda. */
+    if (!sinGuardar) { try { localStorage.setItem('av-modo', m); } catch (e) { /* sin almacenamiento: dura esta vista */ } }
     app.dispatchEvent(new CustomEvent('pa-modo', { detail: m }));
     if (avisa && antes !== m && historial.length && op) {
       hilo.insertAdjacentHTML('beforeend', '<li class="pa-msg pa-bot pa-modo-aviso"><div class="pa-burbuja"><p>' +
@@ -4044,7 +4045,7 @@
     /* Ronda 21 (25-11-2026): el Auditor reúne otra vez sus cuatro modos, con el Inspector
        primero; ?modo=inspector ya no se muda a Servicios. */
     if (!MODOS_OK[m]) { try { m = viejo(localStorage.getItem('av-modo')); } catch (e) { m = null; } }
-    poneModo(MODOS_OK[m] ? m : modoActual());
+    poneModo(MODOS_OK[m] ? m : modoActual(), false, !MODOS_OK[m]);
   })();
   if (muda) return;
   abreUna = ps.get('abre');

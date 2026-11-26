@@ -124,7 +124,7 @@ def precios():
     L = F['libre']
     lis = lambda xs: ''.join('<li>%s<span>%s</span></li>' % (ico('check', 16), html.escape(x)) for x in xs)
     libre = ('<article class="svp-plan"><h3>%s</h3><p class="svp-precio">%s <small>%s</small></p>'
-             '<ul>%s<li>%s<span>%d tokens de bienvenida al llegar, en tu navegador, sin cuenta ni tarjeta</span></li></ul></article>') % (
+             '<ul>%s<li>%s<span>%d tokens gratis cada mes, en tu navegador, sin cuenta ni tarjeta</span></li></ul></article>') % (
         L['nombre'], mo.pesos(0), html.escape(L['nota'].lower()), lis(L['incluye']), ico('check', 16), L['bienvenida'])
     paq = ('<article class="svp-plan"><h3>Paquetes de tokens</h3><p class="svp-precio">Pago único</p><ul>%s</ul>'
            '<p class="svp-plan-n">Lo que gasta cada acción está en la tabla de abajo.</p></article>') % ''.join(

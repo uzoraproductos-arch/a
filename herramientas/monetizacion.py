@@ -60,10 +60,10 @@ PLANES = [
 PRECIO_FUNDADOR = {
     'decision': '25-11-2026',
     'fundadores': 100,
-    'libre': {'nombre': 'Libre', 'precio': 0, 'nota': 'Siempre, sin tarjeta', 'bienvenida': 35,
+    'libre': {'nombre': 'Libre', 'precio': 0, 'nota': 'Siempre, sin tarjeta', 'bienvenida': 35, 'renueva': 'mes',
               'incluye': ['El Auditor, en sus cuatro modos', 'El Planisferio', 'El Noticiero y las Auditorías en imágenes',
                           'La consulta de un RFC en la lista 69-B', 'El simulador del predial']},
-    'paquetes': [{'id': 't20', 'tokens': 20, 'precio': 149}, {'id': 't100', 'tokens': 100, 'precio': 499}],
+    'paquetes': [{'id': 't100', 'tokens': 100, 'precio': 149}, {'id': 't400', 'tokens': 400, 'precio': 499}],
     # (clave, qué, tokens): lo que gasta cada acción. Ronda 27A (26-11-2026, decisión del autor): la billetera de tokens
     # (assets/auditor/js/tokens.js) cobra con esta misma tabla, que escribir_tokens() le pasa al generar: un cambio aquí
     # cambia la billetera, servicios.html y la Mesa de Trabajo a la vez.
@@ -77,12 +77,13 @@ PRECIO_FUNDADOR = {
     'gratis': ['Probar el XML de muestra', 'El Planisferio', 'El Noticiero', 'Las Auditorías en imágenes', 'La Biblioteca',
                'Abrir una página de la plataforma desde el Auditor'],
     'planes': [
-        {'id': 'pro', 'nombre': 'Plan Pro', 'precio': 149, 'regular': 249, 'anual': 1490, 'tokens_mes': 30,
+        {'id': 'pro', 'nombre': 'Plan Pro', 'precio': 149, 'regular': 249, 'anual': 1490, 'tokens_mes': 150,
          'para': 'Personas, profesionales independientes y contadores.',
-         'incluye': ['30 tokens al mes', 'Vigía semanal de hasta 25 RFC', 'Portafolio ampliado']},
-        {'id': 'pyme', 'nombre': 'Plan PyME / Despacho', 'precio': 699, 'regular': 999, 'anual': 6990, 'tokens_mes': 200,
+         'incluye': ['150 tokens al mes', 'Avisos del Vigía por correo, hasta 25 RFC (próximamente)', 'Portafolio ampliado en la nube (próximamente)']},
+        {'id': 'pyme', 'nombre': 'Plan PyME / Despacho', 'precio': 699, 'regular': 999, 'anual': 6990, 'tokens_mes': 1000,
          'para': 'Empresas, despachos contables y áreas de cumplimiento.',
-         'incluye': ['200 tokens al mes', 'Escudo Cero CIEC masivo', 'Vigía semanal de hasta 250 RFC', 'Dictámenes ilimitados']},
+         'incluye': ['1,000 tokens al mes', 'Escudo Cero CIEC masivo', 'Avisos del Vigía por correo, hasta 250 RFC (próximamente)',
+                     'Hasta 100 dictámenes al mes con tus 1,000 tokens']},
     ],
     'medida': {'nombre': 'Gobierno / Corporativo', 'desde': 2500,
                'incluye': ['Radiografías municipales', 'Entrega-recepción', 'Soporte dedicado']},
@@ -118,7 +119,7 @@ def revisa_fundador():
             raise SystemExit('monetizacion.py: el anual de %s no son diez meses (dos gratis)' % p['nombre'])
         if not 0 < p['precio'] < p['regular']:
             raise SystemExit('monetizacion.py: el Precio Fundador de %s no es menor al regular' % p['nombre'])
-        if p['incluye'][0] != '%d tokens al mes' % p['tokens_mes']:
+        if p['incluye'][0] != '%s tokens al mes' % format(p['tokens_mes'], ','):
             raise SystemExit('monetizacion.py: %s no dice sus tokens al mes en su primera línea' % p['nombre'])
     if any(x['precio'] <= 0 or x['tokens'] <= 0 for x in F['paquetes']) or F['medida']['desde'] <= 0:
         raise SystemExit('monetizacion.py: un paquete o el plan a medida no tiene monto')
@@ -131,6 +132,17 @@ def revisa_fundador():
         raise SystemExit('monetizacion.py: la billetera necesita el consumo de %s' % ', '.join(sorted(falta)))
     if F['libre']['bienvenida'] < c['inspector'] or c['pregunta'] != min(c.values()):
         raise SystemExit('monetizacion.py: la bienvenida no alcanza para probar el Modo Inspector o la pregunta no es lo más barato')
+    # Ronda 28B: pagar siempre da más que lo gratis, y el token sale más barato mientras más se compra.
+    dan = [x['tokens'] for x in F['paquetes']] + [p['tokens_mes'] for p in F['planes']]
+    if any(n <= F['libre']['bienvenida'] for n in dan):
+        raise SystemExit('monetizacion.py: un paquete o un plan no da más tokens que los gratis del plan Libre')
+    for grupo, clave in ((F['paquetes'], 'tokens'), (F['planes'], 'tokens_mes')):
+        por = [x['precio'] / x[clave] for x in grupo]
+        if any(b >= a for a, b in zip(por, por[1:])):
+            raise SystemExit('monetizacion.py: el precio por token no baja del chico al grande (paquetes o planes)')
+    dic = plan('pyme')['tokens_mes'] // c['dictamen']
+    if not any(x.startswith('Hasta %d dictámenes' % dic) for x in plan('pyme')['incluye']):
+        raise SystemExit('monetizacion.py: el Plan PyME no dice los %d dictámenes que dan sus tokens' % dic)
 
 
 TOKENS_JS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'auditor', 'js', 'tokens.js')
@@ -140,7 +152,7 @@ def tokens_config():
     """Lo que la billetera (tokens.js) necesita de la tabla: la bienvenida, el costo de cada acción y lo gratis."""
     revisa_fundador()
     F = PRECIO_FUNDADOR
-    return {'bienvenida': F['libre']['bienvenida'], 'costo': {k: t for k, _q, t in F['consumo']},
+    return {'bienvenida': F['libre']['bienvenida'], 'renueva': F['libre']['renueva'], 'costo': {k: t for k, _q, t in F['consumo']},
             'nombre': {k: q for k, q, _t in F['consumo']}, 'gratis': F['gratis'],
             'canje': 'canjea-tu-codigo.html', 'planes': 'servicios.html#precio-fundador'}
 

@@ -528,4 +528,24 @@ select pg_temp.igual((((public.canjear_codigo('TOKN2345', ((:'ct')::jsonb ->> 'p
 select pg_temp.igual(((public.canjear_codigo('ILIM2345')) ->> 'ilimitado')::boolean::int, 1, 'el canje dice que el código es de tokens ilimitados');
 reset role;
 
+-- Ronda 28B: la solicitud se atiende con tokens.
+set role service_role;
+select public.solicitar_codigo('tokens@ejemplo.mx', 'Tokens', 'Quiero probar', true);
+select public.solicitar_codigo('ilim@ejemplo.mx', null, null, true);
+reset role;
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+select pg_temp.debe_fallar($$select public.atender_solicitud(1, interval '1 day', 100)$$, 'que una cuenta común atienda una solicitud con tokens');
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select public.atender_solicitud((select id from public.solicitudes_codigo where correo = 'tokens@ejemplo.mx'), interval '30 days', 250) as st \gset
+select pg_temp.igual(((:'st')::jsonb ->> 'tokens')::int, 250, 'atender una solicitud dice los tokens de su código');
+select pg_temp.igual((select tokens from public.codigos where codigo = (:'st')::jsonb ->> 'codigo'), 250, 'el código de la solicitud da 250 tokens');
+select pg_temp.igual((select count(*) from public.bitacora_lista() where objeto = (:'st')::jsonb ->> 'codigo' and detalle ->> 'tokens' = '250'), 1, 'la bitácora anota los tokens del código de una solicitud');
+select pg_temp.debe_fallar($$select public.atender_solicitud((select id from public.solicitudes_codigo where correo = 'ilim@ejemplo.mx'), interval '7 days', 35, true)$$,
+  'atender una solicitud con tokens y también ilimitados');
+select pg_temp.igual(((public.atender_solicitud((select id from public.solicitudes_codigo where correo = 'ilim@ejemplo.mx'), interval '7 days', null, true)) ->> 'ilimitado')::boolean::int, 1,
+  'atender una solicitud con tokens ilimitados');
+reset role;
+reset request.jwt.claim.sub;
+
 \echo 'Todas las pruebas de permisos pasaron.'

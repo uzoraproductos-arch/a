@@ -15,7 +15,7 @@
 (function () {
   'use strict';
   if (window.AvTokens) return;
-  var T = /*tokens*/{"bienvenida":35,"costo":{"pregunta":2,"dictamen":10,"inspector":17,"servicio":17,"semaforo":17,"lote":17},"nombre":{"pregunta":"Pregunta al Auditor en modo Ciudadano, Periodista o Ambientalista","dictamen":"Ficha o dictamen sellado con huella SHA-256","inspector":"Pregunta en el Modo Inspector · Pro","servicio":"Revisión de un servicio avanzado en el Inspector de Servicios","semaforo":"Semáforo Patrimonial completo","lote":"Lote XML / CSV · Cero CIEC, con tus archivos"},"gratis":["Probar el XML de muestra","El Planisferio","El Noticiero","Las Auditorías en imágenes","La Biblioteca","Abrir una página de la plataforma desde el Auditor"],"canje":"canjea-tu-codigo.html","planes":"servicios.html#precio-fundador"}/*fin-tokens*/;
+  var T = /*tokens*/{"bienvenida":35,"renueva":"mes","costo":{"pregunta":2,"dictamen":10,"inspector":17,"servicio":17,"semaforo":17,"lote":17},"nombre":{"pregunta":"Pregunta al Auditor en modo Ciudadano, Periodista o Ambientalista","dictamen":"Ficha o dictamen sellado con huella SHA-256","inspector":"Pregunta en el Modo Inspector · Pro","servicio":"Revisión de un servicio avanzado en el Inspector de Servicios","semaforo":"Semáforo Patrimonial completo","lote":"Lote XML / CSV · Cero CIEC, con tus archivos"},"gratis":["Probar el XML de muestra","El Planisferio","El Noticiero","Las Auditorías en imágenes","La Biblioteca","Abrir una página de la plataforma desde el Auditor"],"canje":"canjea-tu-codigo.html","planes":"servicios.html#precio-fundador"}/*fin-tokens*/;
   var CLAVE = 'av-tokens', MOVS = 30, PAGOS = 150;
 
   function ahora() { return Date.now(); }
@@ -31,10 +31,26 @@
     memoria = b;
     try { localStorage.setItem(CLAVE, JSON.stringify(b)); return true; } catch (e) { return false; }
   }
+  /* Ronda 28B: los tokens gratis se renuevan cada mes calendario. Quien tiene menos vuelve a la bienvenida; a quien tiene
+     más (canjeó un código) nunca se le resta. b.m es el mes de la última renovación (AAAA-MM, hora del navegador). */
+  function mes(t) { var d = new Date(t || ahora()); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2); }
+  function renueva(b) {
+    if (T.renueva !== 'mes') return b;
+    if (!b.m) b.m = mes(b.d);
+    if (b.m === mes()) return b;
+    b.m = mes();
+    if (b.s < T.bienvenida) {
+      b.h.unshift({ f: ahora(), n: T.bienvenida - b.s, c: 'renovacion' });
+      if (b.h.length > MOVS) b.h.length = MOVS;
+      b.s = T.bienvenida;
+    }
+    guarda(b);
+    return b;
+  }
   function billetera() {
     var b = lee() || memoria;
-    if (b) return b;
-    b = { v: 1, s: T.bienvenida, d: ahora(), h: [{ f: ahora(), n: T.bienvenida, c: 'bienvenida' }], p: {}, k: [] };
+    if (b) return renueva(b);
+    b = { v: 1, s: T.bienvenida, d: ahora(), m: mes(), h: [{ f: ahora(), n: T.bienvenida, c: 'bienvenida' }], p: {}, k: [] };
     guarda(b);
     return b;
   }

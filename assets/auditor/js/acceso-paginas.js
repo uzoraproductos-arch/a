@@ -324,7 +324,7 @@
             '<td>' + queda + '</td><td>' + (u.ultimo ? new Date(u.ultimo + 'T12:00:00').toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) : '—') + '</td><td>' + u.dias + '</td>' +
             '<td>' + num(u.minutos) + '</td><td>' + num(u.vistas) + '</td></tr>';
         }).join('') + '</tbody></table>';
-      return '<tr class="ac-editor"><td colspan="6"><div class="ac-tabla-caja"><p class="ac-ancho"><b>Uso del ' + esc(bonito(k.codigo)) + '</b> · ' + k.usos + ' de ' + k.usos_max + ' personas</p>' + cuerpo +
+      return '<tr class="ac-editor"><td colspan="7"><div class="ac-tabla-caja"><p class="ac-ancho"><b>Uso del ' + esc(bonito(k.codigo)) + '</b> · ' + k.usos + ' de ' + k.usos_max + ' personas</p>' + cuerpo +
         '<p class="ac-ayuda">«Días que entró» cuenta los días distintos en que abrió la plataforma. «Minutos de uso» suma el tiempo con una página a la vista y «Páginas vistas», ' +
         'las que abrió (de lo medido desde el 18-11-2026, últimos 12 meses; no cuenta si su navegador pide no ser medido). Nada dice quién es: ' +
         'el nombre y el correo solo salen si el código vino de una solicitud.</p>' +
@@ -354,7 +354,7 @@
     function editor(k) {
       var ops = Object.keys(DUR).map(function (d) { return '<option value="' + d + '"' + (d === k.duracion ? ' selected' : '') + '>' + DUR[d] + '</option>'; }).join('');
       if (!DUR[k.duracion]) ops = '<option value="' + esc(k.duracion) + '" selected>' + esc(duracion(k.duracion)) + '</option>' + ops;
-      return '<tr class="ac-editor"><td colspan="6"><form class="ac-fila" data-editar="' + k.id + '">' +
+      return '<tr class="ac-editor"><td colspan="7"><form class="ac-fila" data-editar="' + k.id + '">' +
         '<p class="ac-ancho"><b>Editar ' + esc(bonito(k.codigo)) + '</b>' + (k.usos ? ' · ya lo usaron ' + k.usos + ': si cambias la duración, cambia también su tiempo.' : '') + '</p>' +
         '<label>Duración <select class="ac-campo" name="duracion">' + ops + '</select></label>' +
         '<label>Personas por código <input class="ac-campo" name="usos" type="number" min="' + Math.max(1, k.usos) + '" max="10000" value="' + k.usos_max + '" required></label>' +
@@ -370,13 +370,14 @@
     function renovador(k) {
       var ops = '<option value="">Sin tiempo extra</option>' + Object.keys(DUR).map(function (d) { return '<option value="' + d + '"' + (d === k.duracion ? ' selected' : '') + '>' + DUR[d] + '</option>'; }).join('');
       var antes = k.canjear_antes && Date.parse(k.canjear_antes) <= Date.now();
-      return '<tr class="ac-editor"><td colspan="6"><form class="ac-fila" data-renovar="' + k.id + '">' +
+      return '<tr class="ac-editor"><td colspan="7"><form class="ac-fila" data-renovar="' + k.id + '">' +
         '<p class="ac-ancho"><b>Renovar ' + esc(bonito(k.codigo)) + '</b>' + (k.revocado ? ' · está revocado: al renovarlo vuelve a abrir.' : '') +
         (k.archivado ? ' · vuelve a Activos.' : '') + (antes ? ' · su fecha para canjear ya pasó: si no pones otra, queda sin fecha.' : '') + '</p>' +
         '<label>Tiempo extra para quien ya lo canjeó (' + k.usos + ') <select class="ac-campo" name="lapso">' + ops + '</select></label>' +
         '<label>Personas de más <input class="ac-campo" name="mas" type="number" min="0" max="10000" value="' + (k.usos >= k.usos_max ? 1 : 0) + '"></label>' +
         '<label>Nueva fecha para canjear <input class="ac-campo" name="antes" type="date"></label>' +
-        '<p class="ac-ayuda ac-ancho">El tiempo extra se suma al final de lo que le quede a cada persona, o desde hoy si ya se le había acabado. Queda anotado en la Bitácora.</p>' +
+        '<p class="ac-ayuda ac-ancho">El tiempo extra se suma al final de lo que le quede a cada persona, o desde hoy si ya se le había acabado. Queda anotado en la Bitácora.' +
+        (tokensTxt(k) ? ' Renovar no cambia sus tokens (' + esc(tokensTxt(k)) + '): se cambian con «Editar», y quien ya lo canjeó en su navegador no los recibe dos veces.' : '') + '</p>' +
         '<p class="ac-acciones ac-ancho"><button class="sz-btn sz-btn-of" type="submit">Renovar</button>' +
         boton('Cancelar', 'data-cancelar="1"') + '</p></form></td></tr>';
     }
@@ -407,10 +408,10 @@
             boton(k.archivado ? 'Desarchivar' : 'Archivar', 'data-accion="archivar" data-id="' + k.id + '" data-archivar="' + (k.archivado ? '0' : '1') + '"') +
             boton('Eliminar', 'data-accion="eliminar" data-id="' + k.id + '"', 'ac-peligro');
         return '<tr' + (k.semanal ? ' class="ac-fila-semana"' : '') + '><td><button class="ac-cod" type="button" data-copia="' + esc(bonito(k.codigo)) + '" title="Copiar">' + esc(bonito(k.codigo)) + '</button></td>' +
-          '<td>' + esc(duracion(k.duracion)) + (tokensTxt(k) ? '<br><small class="ac-tk">' + esc(tokensTxt(k)) + '</small>' : '') + '</td><td>' + k.usos + ' de ' + k.usos_max + '</td>' +
+          '<td>' + esc(duracion(k.duracion)) + '</td><td>' + (tokensTxt(k) ? '<span class="ac-tk">' + esc(tokensTxt(k)) + '</span>' : '<span class="ac-tk-no">Solo abre</span>') + '</td><td>' + k.usos + ' de ' + k.usos_max + '</td>' +
           '<td><span class="ac-chip ac-' + k.estado + '">' + esc(est) + '</span></td><td>' + esc(k.nota || '') + '</td>' +
           '<td><div class="ac-acciones">' + acc + '</div></td></tr>' + (editando === k.id ? editor(k) : '') + (renovando === k.id ? renovador(k) : '') + registro(k);
-      }).join('') || '<tr><td colspan="6">' + (q ? 'Ningún código coincide con la búsqueda.' : vista === 'archivados' ? 'No hay códigos archivados.' : 'Todavía no hay códigos.') + '</td></tr>';
+      }).join('') || '<tr><td colspan="7">' + (q ? 'Ningún código coincide con la búsqueda.' : vista === 'archivados' ? 'No hay códigos archivados.' : 'Todavía no hay códigos.') + '</td></tr>';
     }
     function limpiaBusca(t) { return String(t || '').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim(); }
     var sols = [];
@@ -424,19 +425,24 @@
         var quien = [x.nombre, x.motivo].filter(Boolean).map(esc).join(' · ') + (x.veces > 1 ? ' <span class="ac-chip">pidió ' + x.veces + ' veces</span>' : '');
         var accion = x.estado === 'nueva'
           ? '<select class="ac-campo ac-sol-dur" data-sol="' + x.id + '" aria-label="Duración para ' + esc(x.correo) + '">' + opciones + '</select> ' +
+            '<select class="ac-campo ac-sol-tk" data-sol-tk="' + x.id + '" aria-label="Tokens para ' + esc(x.correo) + '">' + opcionesTokens({ tokens: 35 }) + '</select> ' +
+            '<input class="ac-campo ac-sol-tkn" data-sol-tkn="' + x.id + '" type="number" min="1" max="100000" value="35" aria-label="Cuántos tokens para ' + esc(x.correo) + '" hidden> ' +
             '<button class="sz-btn sz-btn-of ac-chico" type="button" data-asignar="' + x.id + '">Asignar código</button> ' +
             '<button class="sz-btn ac-chico ac-claro" type="button" data-descartar="' + x.id + '">Descartar</button>'
-          : x.codigo ? '<a class="sz-btn ac-chico ac-claro" href="' + esc(correoA(x.correo, x.nombre, x.codigo, x.duracion)) + '">Escribirle otra vez</a>' : '';
+          : x.codigo ? '<a class="sz-btn ac-chico ac-claro" href="' + esc(correoA(x.correo, x.nombre, x.codigo, x.duracion, deCodigo(x.codigo))) + '">Escribirle otra vez</a>' : '';
         return '<tr><td>' + esc(x.correo) + '</td><td>' + (quien || '—') + '</td><td>' + esc(fecha(x.creado)) + '</td>' +
-          '<td>' + esc(SOL[x.estado]) + (x.codigo ? ': <b>' + esc(bonito(x.codigo)) + '</b> (' + esc(duracion(x.duracion)) + ')' : '') + '</td><td>' + accion + '</td></tr>';
+          '<td>' + esc(SOL[x.estado]) + (x.codigo ? ': <b>' + esc(bonito(x.codigo)) + '</b> (' + esc(duracion(x.duracion)) + (tokensTxt(deCodigo(x.codigo)) ? ', ' + esc(tokensTxt(deCodigo(x.codigo))) : '') + ')' : '') + '</td><td>' + accion + '</td></tr>';
       }).join('') || '<tr><td colspan="5">Todavía nadie ha pedido código.</td></tr>';
     }
     // El correo lo manda el autor desde el suyo: aquí solo se arma el mensaje.
-    function correoA(correo, nombre, cod, dur) {
+    // Los tokens del código de una solicitud salen de la lista de códigos (solicitudes_lista no los trae).
+    function deCodigo(cod) { return lista.filter(function (k) { return k.codigo === cod; })[0] || {}; }
+    function correoA(correo, nombre, cod, dur, tk) {
       var sitio = location.href.replace(/[^/]*$/, '');
       var cuerpo = 'Hola' + (nombre ? ' ' + nombre : '') + ':\n\nGracias por querer probar Auditavisión, el gasto público a la vista.\n\n' +
         'Tu código de acceso es: ' + bonito(cod) + '\n' +
-        (dur === '100 years' ? 'Tu acceso es ilimitado.' : 'Te da ' + duracion(dur).toLowerCase() + ' de acceso a toda la plataforma, contados desde que lo ingreses.') + '\n\n' +
+        (dur === '100 years' ? 'Tu acceso es ilimitado.' : 'Te da ' + duracion(dur).toLowerCase() + ' de acceso a toda la plataforma, contados desde que lo ingreses.') + '\n' +
+        (tk && tk.tokens_ilimitado ? 'Además, no gastas tokens mientras dure tu acceso.\n' : tk && tk.tokens ? 'Además, suma ' + tk.tokens + ' tokens a tu billetera, una sola vez, en el navegador donde lo ingreses.\n' : '') + '\n' +
         'Entra aquí: ' + sitio + 'canjea-tu-codigo.html?c=' + cod + '\n\n' +
         'Cuando se te acabe el tiempo, pide otro desde la misma página. Y si ves algo que mejorar, cuéntanos: tu opinión nos ayuda mucho.\n';
       return 'mailto:' + encodeURIComponent(correo) + '?subject=' + encodeURIComponent('Tu código de acceso a Auditavisión') + '&body=' + encodeURIComponent(cuerpo);
@@ -451,9 +457,13 @@
       var b = e.target.closest('button'); if (!b) return;
       if (b.dataset.asignar) {
         var dur = $('acSol').querySelector('select[data-sol="' + b.dataset.asignar + '"]').value;
+        // Ronda 28B: los tokens solo viajan si se eligieron (el panel sigue sirviendo antes de subir la migración).
+        var tk = tokensDe({ tokens: $('acSol').querySelector('[data-sol-tk="' + b.dataset.asignar + '"]'), tokensN: $('acSol').querySelector('[data-sol-tkn="' + b.dataset.asignar + '"]') });
+        var args = { p_id: +b.dataset.asignar, p_duracion: dur };
+        if (tk.ilim) args.p_ilimitado = true; else if (tk.n) args.p_tokens = tk.n;
         b.disabled = true;
-        rpc('atender_solicitud', { p_id: +b.dataset.asignar, p_duracion: dur }).then(function (r) {
-          location.href = correoA(r.correo, r.nombre, r.codigo, r.duracion);
+        rpc('atender_solicitud', args).then(function (r) {
+          location.href = correoA(r.correo, r.nombre, r.codigo, r.duracion, { tokens: r.tokens, tokens_ilimitado: r.ilimitado });
           return carga();
         }).catch(function () { b.disabled = false; alert('No se pudo asignar el código. Intenta de nuevo.'); });
       } else if (b.dataset.descartar && confirm('¿Descartar esta solicitud?')) {
@@ -909,6 +919,7 @@
     document.addEventListener('change', function (ev) {
       var t = ev.target;
       if (t && t.name === 'tokens' && t.form && t.form.dataset.editar) t.form.querySelector('.ac-otros').hidden = t.value !== 'otra';
+      if (t && t.dataset && t.dataset.solTk) $('acSol').querySelector('[data-sol-tkn="' + t.dataset.solTk + '"]').hidden = t.value !== 'otra';
     });
     g.addEventListener('submit', function (e) {
       e.preventDefault();

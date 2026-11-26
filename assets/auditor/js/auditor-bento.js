@@ -260,7 +260,11 @@
       setTimeout(function () { marca(app.getAttribute('data-modo')); }, 0);
     }
 
-    /* Las preguntas de la entrada, una cada 4 s. */
+    /* Ronda 28B: en celular «¿Quiénes somos?» abre plegado, para que la caja quede en la primera pantalla. */
+    var qs = document.getElementById('avbQuienes');
+    if (qs && window.matchMedia && window.matchMedia('(max-width: 700px)').matches) qs.removeAttribute('open');
+
+    /* Las preguntas de la entrada y las de ejemplo, una cada 4 s. */
     var rota = document.getElementById('avbRota'), rq = rota ? rota.querySelectorAll('li') : [], ri = 0, rt = 0, pausa = false;
     if (rq.length > 1 && !quieto()) {
       rota.classList.add('avb-rota-viva');
