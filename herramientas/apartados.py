@@ -1714,6 +1714,7 @@ _AV_NAVEGADOR = [
     ('Tu portafolio de investigaciones', 'av-portafolio', 'Las revisiones que guardas en el Inspector de Servicios o en el Expediente vivo del Auditor, hasta 60: el servicio, la pregunta, la fecha, su título y el enlace de su dictamen, para reabrirlas desde el Auditor, Servicios o los Expedientes de control interno. Nunca guarda la respuesta. Nunca sale del navegador; las borras ahí mismo, una por una o todas.'),
     ('El recorrido del Auditor', 'av-tour-visto', 'Solo si abres «Cómo funciona (3 pasos)» en el Auditor: recuerda que ya lo viste. Es un «1» y nada más.'),
     ('Mi Auditavisión', 'av-mia', 'Los RFC de tus proveedores, el resumen de las revisiones que guardas y, para el aviso del Vigía de proveedores, la situación en la lista 69-B que viste de cada uno y el corte del SAT de tu última visita. Nunca sale del navegador; lo borras con «🗑️ Borrar todo mi tablero».'),
+    ('El seguimiento de tus hallazgos', 'av-hallazgos', 'Las señales que guardas desde el Lector de facturas o que anotas a mano en Mi Auditavisión, hasta 200: su título, su detalle, el RFC (tapado si es de una persona física), los folios fiscales, y el estado que tú le pones (por revisar, aclarado o descartado) con su fecha y tu nota. Nunca guarda el XML. Nunca sale del navegador; lo borras ahí mismo, uno por uno o todo.'),
     ('Las columnas que sigues', 'av-sigo', 'Cuáles casos de Verificamos sigues y qué versión viste, para avisarte cuando cambian.'),
     ('Ágora cívica', 'auditavision_foro_debates y otras', 'Tus hilos, tus apoyos y el seudónimo que elijas. No se publican: viven solo en tu navegador.'),
     ('Preferencias de las herramientas', 'av-am-reloj, crReloj y otras', 'Cómo dejaste un reloj, una unidad o un filtro.'),
@@ -2987,6 +2988,7 @@ def sv_mostrador(sf):
             '            <p class="sv-most-ej"><span>Pruébalo:</span> <span id="svMostEj"></span> <button type="button" class="sv-most-app" id="svMostApp"></button></p>\n'
             '            <label class="sv-most-suelta" id="svMostSuelta" hidden><input type="file" id="svMostArch" multiple class="sr-only">'
             '<span aria-hidden="true">📥</span><span id="svMostSueltaTx"></span><small>Se leen en tu navegador: nada se sube.</small></label>\n'
+            '            %s\n'
             '%s'
             '          </form>\n'
             '          <div class="sv-most-res" id="svMostRes" hidden aria-live="polite">'
@@ -3001,7 +3003,8 @@ def sv_mostrador(sf):
             '<button type="button" class="sv-port-borra" id="svPortBorra">🗑️ Borrar todo mi portafolio</button></section>\n'
             '          <p class="sv-most-pie">Los archivos se leen en tu navegador y no se suben. Cada cifra trae su documento; la revisión no es un documento oficial ni un peritaje, '
             'y una coincidencia en una lista es una señal para revisar, nunca una acusación. ¿Prefieres platicar? <a href="%s">Abre el Inspector completo ➔</a></p>\n'
-            '        </div>') % (json.dumps(datos, ensure_ascii=False).replace('</', '<\\/'), sf.SV_RESP, opciones, lugar, 'expedientes-investigacion.html', sf.SV_CHAT)
+            '        </div>') % (json.dumps(datos, ensure_ascii=False).replace('</', '<\\/'), sf.SV_RESP, opciones,
+                               __import__('insp_factura').cero_ciec('svMostCiec', oculto=True), lugar, 'expedientes-investigacion.html', sf.SV_CHAT)
 
 
 # Ronda 9 (pedido del autor, 22-11-2026): los servicios del territorio traen el selector «Entidad + Municipio».

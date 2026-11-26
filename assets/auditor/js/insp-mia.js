@@ -170,6 +170,63 @@
       '<p class="ef-busca-fila"><a class="ef-btn ef-btn-sec" href="' + esc(r.ir) + '">Abrir la herramienta</a> <button type="button" class="ef-btn ef-btn-sec" data-quita-rev="' + i + '">Quitar</button></p></article>').join('');
   }
 
+  /* El seguimiento de hallazgos (Ronda 26, 26-11-2026): localStorage «av-hallazgos», una lista de
+     { id, o, t, d, u: [UUID], alta, st: 'revisar' | 'aclarado' | 'descartado', f: AAAA-MM-DD, n: nota }.
+     La escribe el Lector de facturas (hallGuardar() de insp-factura.js) o el lector a mano; aquí se cambia el estado,
+     la fecha y la nota. Nunca un XML; nunca sale del navegador. Hasta 200. */
+  const HALL = 'av-hallazgos';
+  const ESTADOS = [['revisar', 'Por revisar'], ['aclarado', 'Aclarado'], ['descartado', 'Descartado']];
+  const hoy = () => new Date().toISOString().slice(0, 10);
+  function leerHall() { try { const l = JSON.parse(localStorage.getItem(HALL) || '[]'); return Array.isArray(l) ? l : []; } catch (e) { return []; } }
+  function guardarHall(l) {
+    try { localStorage.setItem(HALL, JSON.stringify(l.slice(0, 200))); return true; }
+    catch (e) { $('miaEstado').textContent = 'Tu navegador no deja guardar aquí (modo privado o datos bloqueados).'; return false; }
+  }
+  function pintarHall() {
+    const l = leerHall(), caja = $('miaHall');
+    if (!l.length) { caja.innerHTML = '<p class="cf-nota">Todavía no tienes hallazgos. Lee tus facturas en el Lector y guarda el resumen, o anota uno arriba.</p>'; return; }
+    const cuenta = ESTADOS.map(e => '<b>' + l.filter(h => h.st === e[0]).length + '</b> ' + e[1].toLowerCase()).join(' · ');
+    caja.innerHTML = '<p>' + cuenta + '.</p><ol class="mia-hall">' + l.map((h, i) =>
+      '<li class="mia-hall-it mia-hall-' + esc(h.st) + '" data-hall="' + i + '"><p><b>' + esc(h.t) + '</b>' + (h.d ? '<br>' + esc(h.d) : '') + '</p>' +
+      (h.u && h.u.length ? '<p class="cf-nota">Folios: <code>' + h.u.slice(0, 5).map(esc).join('</code>, <code>') + '</code>' + (h.u.length > 5 ? ' y ' + (h.u.length - 5) + ' más' : '') + '</p>' : '') +
+      '<p class="cf-nota">' + (h.o === 'facturas' ? 'Del Lector de facturas' : 'Anotado a mano') + ' el ' + esc(fecha(h.alta)) + '.</p>' +
+      '<div class="mia-hall-campos"><div><label for="miaHallSt' + i + '">Estado</label><select id="miaHallSt' + i + '" data-campo="st">' +
+      ESTADOS.map(e => '<option value="' + e[0] + '"' + (h.st === e[0] ? ' selected' : '') + '>' + e[1] + '</option>').join('') + '</select></div>' +
+      '<div><label for="miaHallF' + i + '">Fecha</label><input type="date" id="miaHallF' + i + '" data-campo="f" value="' + esc(h.f || '') + '"></div>' +
+      '<div class="mia-hall-nota"><label for="miaHallN' + i + '">Nota breve</label><input type="text" id="miaHallN' + i + '" data-campo="n" maxlength="200" value="' + esc(h.n || '') + '" placeholder="Por ejemplo: mandó el complemento el día 12"></div></div>' +
+      '<p class="ef-busca-fila"><button type="button" class="ef-btn" data-hall-guarda="' + i + '">Guardar</button> <button type="button" class="ef-btn ef-btn-sec" data-hall-quita="' + i + '">Quitar</button></p></li>').join('') + '</ol>' +
+      '<p class="ef-busca-fila"><button type="button" class="ef-btn ef-btn-sec" id="miaHallBorra">Borrar todo mi seguimiento</button></p>';
+  }
+  $('miaHallAgregar').addEventListener('click', () => {
+    const t = $('miaHallNuevo').value.trim();
+    if (!t) return;
+    const l = leerHall();
+    l.unshift({ id: 'mano:' + Date.now(), o: 'mano', t: t.slice(0, 200), d: '', u: [], alta: hoy(), st: 'revisar', f: hoy(), n: '' });
+    if (guardarHall(l)) $('miaEstado').textContent = 'Hallazgo anotado «Por revisar». Se guarda solo en este navegador.';
+    $('miaHallNuevo').value = '';
+    pintarHall();
+  });
+  $('miaHall').addEventListener('click', ev => {
+    if (ev.target.closest('#miaHallBorra')) {
+      try { localStorage.removeItem(HALL); } catch (e) { /* nada que borrar */ }
+      $('miaEstado').textContent = 'Borrado. Tu seguimiento quedó vacío.';
+      pintarHall();
+      return;
+    }
+    const g = ev.target.closest('[data-hall-guarda]'), q = ev.target.closest('[data-hall-quita]');
+    if (!g && !q) return;
+    const l = leerHall(), i = parseInt((g || q).getAttribute(g ? 'data-hall-guarda' : 'data-hall-quita'), 10);
+    if (!l[i]) return;
+    if (q) { l.splice(i, 1); guardarHall(l); pintarHall(); return; }
+    const li = g.closest('[data-hall]'), v = c => li.querySelector('[data-campo="' + c + '"]').value;
+    const st = v('st');
+    l[i].st = ESTADOS.some(e => e[0] === st) ? st : 'revisar';
+    l[i].f = /^\d{4}-\d\d-\d\d$/.test(v('f')) ? v('f') : hoy();
+    l[i].n = v('n').trim().slice(0, 200);
+    if (guardarHall(l)) $('miaEstado').textContent = 'Guardado: «' + l[i].t + '» quedó ' + ESTADOS.filter(e => e[0] === l[i].st)[0][1].toLowerCase() + ' al ' + fecha(l[i].f) + '.';
+    pintarHall();
+  });
+
   $('miaAgregar').addEventListener('click', () => {
     const nuevos = ($('miaRfc').value.toUpperCase().match(RFC_RE) || []);
     if (!nuevos.length) { $('miaEstado').textContent = 'No encontramos RFC: uno de empresa tiene 12 caracteres (3 letras, 6 números de la fecha y 3 de homoclave).'; return; }
@@ -192,9 +249,10 @@
   });
   $('miaBorrar').addEventListener('click', () => {
     try { localStorage.removeItem(CLAVE); } catch (e) { /* nada que borrar */ }
-    $('miaEstado').textContent = 'Borrado. Tu tablero quedó vacío.';
+    $('miaEstado').textContent = 'Borrado. Tu tablero quedó vacío (tu seguimiento de hallazgos se borra con su propio botón).';
     pintarProv(); pintarRev();
   });
   pintarProv();
   pintarRev();
+  pintarHall();
 })();

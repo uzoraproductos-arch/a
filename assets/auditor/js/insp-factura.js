@@ -345,6 +345,80 @@
       '</tbody></table></div>';
   }
 
+  /* El aviso para el proveedor (Ronda 26, Plan Maestro del autor, 26-11-2026). Por cada emisor con un hallazgo
+     (lista 69-B como presunto o definitivo, complemento de pago que falta, forma de pago, régimen o cuenta que no
+     cuadra), un borrador respetuoso con su fundamento para que el lector lo copie y lo mande él: **Auditavisión no
+     envía correos ni mensajes a nombre de nadie**. Las mismas señales de revisar() y cruce(): nada nuevo. La retención
+     de IVA no entra (le toca a quien recibe la factura) ni los recibos de nómina (no son de un proveedor). */
+  const folio = f => f.uuid || f.folio || 'sin timbre';
+  function hallazgos(rfc) {
+    const fs = facturas.filter(x => !x.error && x.f.emRfc === rfc && x.f.tipo !== 'Nómina').map(x => x.f), pg = pagosLote(), out = [];
+    if (!fs.length) return out;
+    const c = cruce(rfc, '');
+    if (c && (c.r[2] === 'F' || c.r[2] === 'P')) {
+      const tras = fs.filter(f => (cruce(rfc, f.fecha) || { sen: [] }).sen.some(z => z[0] === 'senal'));
+      out.push({ k: '69b-' + c.r[2], t: 'Lista 69-B del SAT: ' + c.s.t,
+        d: 'Su RFC aparece en la lista del artículo 69-B del Código Fiscal como «' + c.s.t + '», oficio ' + c.r[3] + ', publicado el ' + c.r[4] + ' (' + c.r[5] + ').' +
+          (tras.length ? ' ' + (tras.length === 1 ? 'Una factura es' : tras.length + ' facturas son') + ' de fecha posterior a esa publicación.' : ''),
+        u: tras.map(folio),
+        f: c.r[2] === 'F' ? 'Código Fiscal de la Federación, art. 69-B, párrafos quinto y octavo: las operaciones de esos comprobantes no producen ni produjeron efecto fiscal, y quien los recibió puede acreditar que sí recibió los bienes o servicios.'
+          : 'Código Fiscal de la Federación, art. 69-B, párrafos primero y segundo: la publicación como presunto abre un plazo para que el contribuyente desvirtúe ante el SAT los hechos que se le notificaron.',
+        p: c.r[2] === 'F' ? 'Les pedimos la documentación que respalde que las operaciones se realizaron (contrato, entregables, evidencia del servicio o de la entrega) y que nos informen si promovieron algún medio de defensa.'
+          : 'Les pedimos que nos informen si ya presentaron ante el SAT la documentación para desvirtuar la presunción y en qué estado se encuentra.' });
+    }
+    const porRegla = {};
+    fs.forEach(f => revisar(f, pg).forEach(r => {
+      if (r[1] !== 'senal' || ['rep', 'forma99', 'regimen'].indexOf(r[0]) < 0) return;
+      if (r[0] === 'regimen' && !/emisor/.test(r[2])) return;
+      (porRegla[r[0]] = porRegla[r[0]] || { d: r[2], u: [] }).u.push(folio(f));
+    }));
+    const PIDE = { rep: 'Les pedimos el complemento de pago (CFDI de tipo Pago) de cada pago que les hayamos hecho, o que nos confirmen si alguno sigue pendiente.',
+      forma99: 'Les pedimos revisar el método y la forma de pago del comprobante y, si procede, sustituirlo.',
+      regimen: 'Les pedimos confirmar su régimen fiscal y, si procede, sustituir el comprobante.' };
+    ['rep', 'forma99', 'regimen'].forEach(k => {
+      const x = porRegla[k];
+      if (x) out.push({ k: k, t: D.reglas[k].t, d: x.u.length > 1 ? x.u.length + ' facturas. Por ejemplo: ' + x.d : x.d, u: x.u, f: D.reglas[k].f + '.', p: PIDE[k] });
+    });
+    const mal = fs.filter(f => cuadra(f).length);
+    if (mal.length) out.push({ k: 'cuadre', t: 'Importes que no cuadran', d: (mal.length === 1 ? 'En una factura, ' : 'En ' + mal.length + ' facturas; por ejemplo, ') + cuadra(mal[0]).join('; ') + '.',
+      u: mal.map(folio), f: 'Guía de llenado del CFDI (Anexo 20): el total es el subtotal menos los descuentos, más los impuestos trasladados y menos los retenidos.',
+      p: 'Les pedimos revisar los importes y, si procede, sustituir el comprobante.' });
+    return out;
+  }
+  function avisoTexto(p, H) {
+    const nom = quien(p.rfc, p.nom);
+    return ['Asunto: Aclaración de comprobantes fiscales (CFDI) · RFC ' + tapa(p.rfc), '',
+      'Estimado proveedor (' + nom + '):', '',
+      'Al revisar los comprobantes fiscales que nos emitieron (' + p.n + (p.n === 1 ? ' factura' : ' facturas') + '), encontramos los puntos siguientes. No los tomamos como una irregularidad: son señales que salen de comparar el XML con la ley y con las listas públicas del SAT, y queremos aclararlas con ustedes.', '']
+      .concat(H.map((h, i) => (i + 1) + '. ' + h.t + '. ' + h.d + (h.u.length ? '\n   Folios fiscales (UUID): ' + h.u.slice(0, 10).join(', ') + (h.u.length > 10 ? ' y ' + (h.u.length - 10) + ' más' : '') + '.' : '') +
+        '\n   Fundamento: ' + h.f + '\n   ' + h.p))
+      .concat(['', 'Les agradeceremos su respuesta para mantener en orden la contabilidad de ambas partes. Quedamos atentos.', '', 'Atentamente,', '[Tu nombre, cargo y empresa]', '', '---',
+        'Borrador preparado con el Lector de facturas de Auditavisión: las facturas se leyeron en mi navegador y no se subieron a ningún servidor. No es un documento oficial ni una asesoría.']).join('\n');
+  }
+  let avisos = [];
+  function bloqueAvisos() {
+    avisos = proveedores().map(p => ({ p: p, h: hallazgos(p.rfc) })).filter(a => a.h.length);
+    if (!avisos.length) return '';
+    return '<div class="cf-tabla-caja cf-avisos"><h3>Avisos para tus proveedores</h3><p>' + (avisos.length === 1 ? 'Un proveedor trae' : avisos.length + ' proveedores traen') +
+      ' algo que conviene aclarar con ellos. Cada borrador lleva sus folios y su fundamento ' + chip('derivado') + '. <b>Auditavisión no envía correos ni mensajes</b>: lo copias, lo revisas y lo mandas tú, por correo o por WhatsApp. Para darle seguimiento, guarda el resumen en Mi Auditavisión: cada hallazgo queda «Por revisar».</p><ul class="cf-avisos-lista">' +
+      avisos.map((a, i) => '<li><p><b>' + esc(quien(a.p.rfc, a.p.nom)) + '</b> · RFC <code>' + esc(tapa(a.p.rfc)) + '</code> · ' + a.h.map(h => esc(h.t)).join(' · ') + '</p>' +
+        '<p class="ef-busca-fila"><button type="button" class="ef-btn" data-aviso="' + i + '">Copiar aviso para el proveedor</button></p>' +
+        '<details class="cf-con"><summary>Ver el borrador</summary><label class="ef-lbl" for="cfAviso' + i + '">Borrador del aviso</label><textarea class="ef-area cf-aviso-txt" id="cfAviso' + i + '" rows="12" readonly>' +
+        esc(avisoTexto(a.p, a.h)) + '</textarea></details></li>').join('') + '</ul></div>';
+  }
+  function copiar(txt, area) {
+    const ok = () => { estado.textContent = 'Aviso copiado. Pégalo en tu correo o en WhatsApp, revísalo y mándalo tú.'; };
+    const viejo = () => { try { area.select(); if (document.execCommand('copy')) { ok(); return; } } catch (e) { /* sin portapapeles */ }
+      estado.textContent = 'Tu navegador no dejó copiar: abre «Ver el borrador», selecciónalo y cópialo.'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, viejo); else viejo();
+  }
+  res.addEventListener('click', ev => {
+    const b = ev.target.closest('[data-aviso]');
+    if (!b) return;
+    const i = parseInt(b.getAttribute('data-aviso'), 10), a = avisos[i];
+    if (a) { const area = $('cfAviso' + i); area.closest('details').open = true; copiar(area.value, area); }
+  });
+
   /* Con muchas facturas, las tarjetas de las que no traen señal se pliegan. */
   const conSenal = x => x.error || cuadra(x.f).length || cruce(x.f.emRfc, x.f.fecha) || cruce(x.f.reRfc, x.f.fecha) || nRev(x.f, pagosLote());
   function pintar() {
@@ -354,7 +428,7 @@
       cuerpo = (si.length ? '<h3>⚠️ ' + (si.length === 1 ? 'La factura' : 'Las ' + si.length + ' facturas') + ' con algo que revisar</h3>' + si.map(tarjeta).join('') : '<p>✅ Ninguna factura trae algo que revisar.</p>') +
         (no.length ? '<details class="cf-con"><summary>Ver ' + (no.length === 1 ? 'la factura' : 'las ' + no.length + ' facturas') + ' sin señales</summary>' + no.map(tarjeta).join('') + '</details>' : '');
     } else cuerpo = facturas.map(tarjeta).join('');
-    res.innerHTML = tablaProv() + tabla() + cuerpo;
+    res.innerHTML = bloqueAvisos() + tablaProv() + tabla() + cuerpo;
     acciones.hidden = !facturas.length;
   }
 
@@ -406,6 +480,22 @@
       return true;
     } catch (e) { return false; }
   }
+  /* El seguimiento de hallazgos (Ronda 26): clave «av-hallazgos», que lee y edita insp-mia.js. Guarda el título, el
+     detalle, el RFC (tapado si es de persona física) y los folios; nunca el XML. Un hallazgo que ya está no se repite. */
+  function hallGuardar() {
+    try {
+      const L = JSON.parse(localStorage.getItem('av-hallazgos') || '[]'), hoy = new Date().toISOString().slice(0, 10);
+      let n = 0;
+      proveedores().forEach(p => hallazgos(p.rfc).forEach(h => {
+        const id = 'cfdi:' + tapa(p.rfc) + ':' + h.k;
+        if (L.some(x => x.id === id)) return;
+        L.unshift({ id: id, o: 'facturas', t: h.t, d: quien(p.rfc, p.nom) + ' (' + tapa(p.rfc) + '): ' + h.d, u: h.u.slice(0, 20), alta: hoy, st: 'revisar', f: hoy, n: '' });
+        n++;
+      }));
+      localStorage.setItem('av-hallazgos', JSON.stringify(L.slice(0, 200)));
+      return n;
+    } catch (e) { return 0; }
+  }
   $('cfMia').addEventListener('click', () => {
     const ok_ = facturas.filter(x => !x.error);
     if (!ok_.length) return;
@@ -417,7 +507,9 @@
     const senales = mal + pv.reduce((a, p) => a + p.sen + p.rev, 0) + en.length;
     const g = miaGuardar({ tipo: 'facturas', fecha: new Date().toISOString().slice(0, 10), titulo: 'Facturas · ' + pl(ok_.length, 'revisada', 'revisadas'),
       lineas: lineas, senales: senales, ir: 'herramienta-inspector-factura.html' }, pv.map(p => p.rfc).filter(r => !fisica(r)));
-    estado.textContent = g ? '📌 Guardado en Mi Auditavisión, con sus emisores en «Mis proveedores» (solo en este navegador; las personas físicas no se guardan).' : 'Tu navegador no deja guardar aquí (modo privado o datos bloqueados).';
+    const nh = g ? hallGuardar() : 0;
+    estado.textContent = g ? '📌 Guardado en Mi Auditavisión, con sus emisores en «Mis proveedores»' + (nh ? ' y ' + (nh === 1 ? '1 hallazgo nuevo' : nh + ' hallazgos nuevos') + ' en «Seguimiento de mis hallazgos»' : '') +
+      ' (solo en este navegador; las personas físicas no se guardan).' : 'Tu navegador no deja guardar aquí (modo privado o datos bloqueados).';
   });
   $('cfCsvProv').addEventListener('click', () => {
     const q = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';

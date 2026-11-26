@@ -722,3 +722,15 @@ html.pa-en-vista .pa-app-marco iframe { min-height: 420px; }
 .pa-patri-b code { overflow-wrap: anywhere; }
 [data-theme="dark"] .pa-patri-b { background: #142238; border-color: #2a3b57; border-left-color: #6f9cf0; }
 [data-theme="dark"] .pa-patri-b h4 { color: #e8eefa; }
+/* Ronda 26 (26-11-2026): el indicador 3 del Sistema de Alertas en el expediente visual (ind3() de insp-visual.js). */
+.pv-i3 p { margin: 6px 0; overflow-wrap: anywhere; }
+.pv-i3 b.pv-verde { color: #15803d; }
+.pv-i3 b.pv-amarillo { color: #a16207; }
+.pv-i3 b.pv-rojo { color: #b91c1c; }
+.pv-i3-regla { display: block; width: 100%; height: 18px; margin: 8px 0; }
+.pv-i3-b { fill: #86c99b; }
+.pv-i3-m { fill: #e8c46a; }
+.pv-i3-a { fill: #e39a9a; }
+.pv-i3-v { fill: #1f2937; }
+:root[data-theme="dark"] .pv-i3-v { fill: #f3f4f6; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pv-i3-v { fill: #f3f4f6; } }

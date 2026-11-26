@@ -110,6 +110,24 @@
     }).join('; ') + ' ' + chip('derivado') + '. ' + fuente(S.fe) + '.</span>';
   }
 
+  /* Ronda 26 (Plan Maestro del autor, 26-11-2026): el Indicador 3 del Sistema de Alertas, para quien le vende o le
+     construye a ese gobierno. La cifra es la de la base (D.edo de la entidad o AUDIT_MUN_DEUDA.sda del municipio) y su
+     rango sale de los límites del Acuerdo (D.sda, Ronda 14): auditada. Sin cifras nuevas y fuera de la huella del dictamen.
+     Un rango alto es una señal para revisar el plazo de pago, nunca un pronóstico de que no pagará. */
+  function ind3(v, L, fu, quien) {
+    if (v == null || !L) return '';
+    var rg = v <= L[0] ? 'bajo' : (v <= L[1] ? 'medio' : 'alto'), cls = { bajo: 'pv-verde', medio: 'pv-amarillo', alto: 'pv-rojo' }[rg];
+    var top = Math.max(L[1] * 1.5, v, 1), x = function (p) { return Math.max(0, Math.min(100, p / top * 100)); };
+    var regla = '<svg class="pv-i3-regla" viewBox="0 0 100 14" preserveAspectRatio="none" role="img" aria-label="Rango ' + rg + ' del indicador 3">' +
+      '<rect x="0" y="3" width="' + x(L[0]) + '" height="8" class="pv-i3-b"/><rect x="' + x(L[0]) + '" y="3" width="' + (x(L[1]) - x(L[0])) + '" height="8" class="pv-i3-m"/>' +
+      '<rect x="' + x(L[1]) + '" y="3" width="' + (100 - x(L[1])) + '" height="8" class="pv-i3-a"/><rect x="' + Math.max(0, x(v) - 0.8) + '" y="0" width="1.6" height="14" class="pv-i3-v"/></svg>';
+    return '<section class="pv-caja pv-i3"><h4>Si le vendes o le construyes: el indicador 3 del Sistema de Alertas</h4>' +
+      '<p><b>' + esc(quien) + '</b>: obligaciones a corto plazo y con proveedores y contratistas, menos lo que tiene en caja, entre sus ingresos totales: <b class="' + cls + '">' + n(v, 1) + ' %</b> ' + chip('oficial') +
+      ', <b>rango ' + rg + '</b> ' + chip('derivado') + ' (bajo hasta ' + n(L[0], 1) + ' %, medio hasta ' + n(L[1], 1) + ' %, alto arriba).</p>' + regla +
+      '<p class="pv-pie">' + (v < 0 ? 'Negativo quiere decir que tenía en caja más de lo que debía a corto plazo. ' : '') +
+      'Un rango alto es una señal para revisar el plazo y la forma de pago de tu contrato, nunca un pronóstico de que no te pagará. ' + fu + '</p></section>';
+  }
+
   function entidad(D, MU, e) {
     var M = D.met || {}, h = [];
     var fi = [{ k: 'r28', et: 'Participaciones (Ramo 28), 2026' }, { k: 'r33', et: 'Aportaciones (Ramo 33), 2026' }, { k: 'propia', et: 'Lo que recaudó por su cuenta, 2024' }]
@@ -122,6 +140,7 @@
         { et: 'Pago de la deuda entre ingresos de libre disposición', v: e.sd, tx: e.sd == null ? '' : n(e.sd, 1) + ' %', e: 'oficial', cls: semC }],
         'Deuda pública: <b>' + mdp(e.deuda) + '</b> ' + chip('oficial') + (e.sem ? '; semáforo <b>' + esc(e.sem) + '</b> del Sistema de Alertas' : '') + '. ' + fuente((M.deuda || {}).fu) + '.' + leyendaSda(D.sda, e)));
     }
+    if (e.ocp != null && D.sda && D.sda.e) h.push(ind3(e.ocp, D.sda.e[2], fuente((M.deuda || {}).fu) + '; límites: ' + fuente(D.sda.fe) + '.', e.n));
     if (e.asf != null) h.push(barras('🔎 Lo que dejó la ASF (Cuenta Pública 2024)', [{ et: 'Monto por aclarar', v: e.asf, tx: mdp(e.asf), e: 'oficial', cls: 'pv-asf' }],
       (e.aud != null ? n(e.aud) + ' auditorías. ' : '') + 'Por aclarar no quiere decir desviado: la entidad puede solventarlo. ' + fuente((M.asf || {}).fu) + '.'));
     return h;
@@ -147,6 +166,11 @@
       { et: 'Pagó de intereses', v: d[2], tx: mdp(d[2] / 1e6), e: 'oficial', cls: 'pv-deuda' },
       { et: 'Préstamos que recibió', v: d[5], tx: mdp(d[5] / 1e6), e: 'oficial', cls: 'pv-deuda' }],
       'Es lo que pagó y pidió prestado en el año, no lo que debe. ' + esc(MD.fuente || 'INEGI, EFIPEM')));
+    var S = MD && MD.sda, sm = S && S.m && S.m[m.cve], D3 = ((window.AUDITOR_BASE || {}).dat || {}).sda;
+    if (sm && D3 && D3.m && S.campos) {
+      var i3 = sm[S.campos.indexOf('ocpPct')];
+      if (i3 != null && sm[S.campos.indexOf('sem')] > 0) h.push(ind3(i3, D3.m[2], '<a href="' + esc(S.pagina || S.url || '') + '" target="_blank" rel="noopener">' + esc(S.fuente || 'SHCP, Sistema de Alertas') + '</a>; límites: ' + fuente(D3.fm) + '.', m.n));
+    }
     return h;
   }
 

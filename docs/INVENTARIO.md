@@ -222,7 +222,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-entes.html` | Auditor de entes públicos · Auditavisión | apartados.py | 59 | 0 | 49 | 3 | 0 |
 | `herramienta-inspector-factura.html` | Lector de facturas CFDI · Auditavisión | apartados.py | 47 | 0 | 2 | 1 | 0 |
 | `herramienta-inspector-investigaciones.html` | Grandes investigaciones · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-mia.html` | Mi Auditavisión · Auditavisión | apartados.py | 48 | 0 | 1 | 1 | 0 |
+| `herramienta-inspector-mia.html` | Mi Auditavisión · Auditavisión | apartados.py | 49 | 0 | 1 | 1 | 0 |
 | `herramienta-inspector-nepotismo.html` | Nepotismo y parentesco · Auditavisión | apartados.py | 46 | 0 | 0 | 1 | 0 |
 | `herramienta-inspector-nota-cifras.html` | Contrasta una nota · las cifras · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-nota-liga.html` | Contrasta una nota · la nota · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |

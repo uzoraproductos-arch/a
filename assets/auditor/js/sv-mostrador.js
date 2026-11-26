@@ -48,6 +48,8 @@
     if (d.app) { app.hidden = false; app.textContent = d.bt; app.setAttribute('data-app', d.app); } else app.hidden = true;
     if (lugar) lugar.hidden = !d.lugar;
     if (rfcCaja) rfcCaja.hidden = !d.patri;
+    var ciec = $('svMostCiec');
+    if (ciec) ciec.hidden = !d.suelta;  // Ronda 26: el sello «Cero CIEC» va con los servicios que reciben archivos
     if (suelta) {
       suelta.hidden = !d.suelta;
       if (d.suelta) { sueltaTx.textContent = d.suelta.tx; arch.setAttribute('accept', d.suelta.acepta); }
