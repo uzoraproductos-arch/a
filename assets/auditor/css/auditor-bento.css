@@ -170,7 +170,10 @@
 }
 .avb-acc:hover, .avb-acc:focus-visible { border-color: #9db6e6; box-shadow: 0 4px 16px rgba(9, 28, 66, .08); }
 .avb-acc-ico { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 9px; background: #eef3fc; color: #0b2a63; }
-.avb-acc-tx { display: grid; gap: 2px; min-width: 0; }
+/* Ronda 28B: la etiqueta va en el renglón de la categoría; el título y el texto usan todo el ancho de la tarjeta. */
+.avb-acc-tx { display: grid; gap: 2px; min-width: 0; grid-column: 2 / -1; grid-row: 1; }
+.avb-acc-tx > small { padding-right: 92px; min-height: 22px; }
+.avb-acc > .avb-et { grid-column: 3; grid-row: 1; justify-self: end; }
 .avb-acc small { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--avb-gris); font-weight: 600; }
 .avb-acc b { font-size: 16px; color: #0b2a63; }
 .avb-acc-tx > span { font-size: 14px; line-height: 1.45; color: var(--avb-gris); }
