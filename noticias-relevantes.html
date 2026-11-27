@@ -21,18 +21,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261127k">
-  <script src="assets/auditor/js/iconos.js?v=20261127k"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261127k"></script>
-  <script src="assets/auditor/js/tokens.js?v=20261127k"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261127k" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261127k">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261127k">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261127k">
-  <link rel="stylesheet" href="assets/auditor/css/noticias.css?v=20261127k">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261127l">
+  <script src="assets/auditor/js/iconos.js?v=20261127l"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261127l"></script>
+  <script src="assets/auditor/js/tokens.js?v=20261127l"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261127l" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261127l">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261127l">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261127l">
+  <link rel="stylesheet" href="assets/auditor/css/noticias.css?v=20261127l">
   <script>(function () { var m = {"portada": "noticias-auditavision.html#portada", "al-momento": "noticias-auditavision.html#al-momento", "columnas": "noticias-auditavision.html#columnas", "replica": "noticias-auditavision.html#replica", "verifica": "noticias-verifica.html#verifica", "puntos-ciegos": "noticias-verifica.html#puntos-ciegos", "hemeroteca": "noticias-verifica.html#hemeroteca", "mesa": "noticias-verifica.html#mesa", "metodo": "noticias-verifica.html#metodo", "seguir": "noticias-seguimiento.html#seguir", "promesas": "noticias-seguimiento.html#promesas", "agenda": "noticias-seguimiento.html#agenda", "propon": "noticias-verifica.html#propon", "seguimientos": "noticias-seguimiento.html#seguimientos", "col-*": "noticias-auditavision.html"}, h = location.hash.slice(1); if (m[h]) { location.replace(m[h] + (/[?#]/.test(m[h]) ? '' : location.search)); return; } for (var k in m) if (k.slice(-1) === '*' && h && h.indexOf(k.slice(0, -1)) === 0) { location.replace(m[k] + '#' + h); return; } })();</script>
 </head>
-<body data-pagina="apartado">
+<body data-pagina="apartado" class="nt-papel">
   <!--carcasa-->
   <aside class="avb-lado" id="avbLado" data-pestana="Noticiero" aria-label="Navegación de Auditavisión">
       <div class="avb-lado-cab">
@@ -175,121 +175,133 @@
     <header class="apartado-cab nt-portal-cab">
       <div class="apartado-ancho">
         <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <span>Noticiero</span></nav>
-        <span class="apartado-lema">📰 Diario digital de investigación del dinero público</span>
+        <span class="apartado-lema">Diario digital de investigación del dinero público</span>
         <h1 class="apartado-titulo">Noticiero Auditavisión</h1>
         <p class="apartado-entrada">Que ninguna noticia sobre el dinero público se quede sin cotejar.</p>
-        <a class="apartado-auditor" href="herramienta-inspector-pregunta.html?modo=periodista&amp;q=Noticiero" data-modo="periodista"><span aria-hidden="true">📰</span><span>Pregúntale al Auditor · <b>Modo Periodista</b></span></a>
+        <a class="apartado-auditor" href="herramienta-inspector-pregunta.html?modo=periodista&amp;q=Noticiero" data-modo="periodista"><span aria-hidden="true"></span><span>Pregúntale al Auditor · <b>Modo Periodista</b></span></a><p class="nt-cab-fecha"><time id="ntHoy"></time></p><p class="nt-cab-edic">México · Edición verificada</p><nav class="nt-cab-nav" aria-label="Secciones del diario"><a href="noticias-relevantes.html" aria-current="page">Portada</a><a href="#auditorias">Auditorías en imágenes</a><a href="noticias-auditavision.html">El periódico</a><a href="noticias-verifica.html">Verifica</a><a href="noticias-seguimiento.html">Seguimiento</a><a href="garantias.html">Garantías</a></nav>
       </div>
     </header>
 
     <div class="apartado-ancho apartado-cuerpo">
 <div class="nt-indice nt-portal nt-diario">
-<p class="nt-fecha"><time id="ntHoy"></time></p>
 <script>(function () { var t = document.getElementById('ntHoy'); if (t) t.textContent = new Date().toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }); })();</script>
 <div class="nt-portada">
   <article class="nt-destacada" aria-labelledby="ntDestTit">
     <a href="auditoria-deuda-congreso-2027.html" data-directa="seo"><img src="assets/auditor/img/showcase_deuda_2027.jpg" alt="Ilustración del tablero de votación en el Congreso con el techo de deuda 2027 y la nota soberana BBB" width="1200" height="675"></a>
     <small class="nt-dest-cred">Ilustración provisional</small>
-    <p class="nt-kicker">🧾 Paquete Económico 2027 · Congreso, deuda y calificación BBB</p>
+    <p class="nt-kicker">Paquete Económico 2027 · Congreso, deuda y calificación BBB</p>
     <h2 id="ntDestTit"><a href="auditoria-deuda-congreso-2027.html" data-directa="seo">Diputados aprobó la deuda de 2027: Ley de Ingresos y nota soberana</a></h2>
     <p class="nt-dest-res">El 15 de octubre de 2026 el pleno de la Cámara de Diputados aprobó la Ley de Ingresos de la Federación para 2027 (331 votos a favor y 118 en contra en lo general), el 28 de octubre la aprobó el pleno del Senado (75 a 34 en lo general y 73 a 33 en lo particular) y el 13 de noviembre se publicó en el Diario Oficial; rige desde el 1 de enero de 2027. La ley estima ingresos totales por $10,636,488.1 millones de pesos (art. 1o.) y autoriza un techo de endeudamiento neto interno del Gobierno Federal hasta por $1,700,000.0 millones ($1.7 billones, art. 2o.). Además, aprobó una reserva al artículo vigésimo primero transitorio que quita el tope de $300 millones de pesos de ingresos anuales (el texto publicado ya no trae ningún tope de ingresos) y permite a grandes contribuyentes obtener la reducción de multas, recargos y gastos de ejecución si pagan completo su adeudo principal. Ese mismo 15 de octubre, HR Ratings bajó la calificación soberana de largo plazo de México de HR BBB+ (G) a HR BBB (G), con perspectiva estable, por deterioro en los balances fiscales, bajo crecimiento (1.30 % real para 2026 y 1.50 % anual para 2027-2033) y rigidez del gasto, estimando un déficit de los RFSP de 4.61 % del PIB en 2026 y un Saldo Histórico de los RFSP de 61.17 % del PIB en 2030.</p>
-    <p class="nt-acciones"><a class="nt-btn" href="auditoria-deuda-congreso-2027.html" data-directa="seo">Leer la investigación ➔</a> <a class="nt-btn nt-btn-sec" href="herramienta-inspector-pregunta.html?p=%C2%BFCu%C3%A1nta%20deuda%20autoriz%C3%B3%20la%20C%C3%A1mara%20de%20Diputados%20para%202027%2C%20qu%C3%A9%20cambi%C3%B3%20en%20las%20multas%20fiscales%20y%20qu%C3%A9%20dijo%20Hacienda%20sobre%20la%20nota%20BBB%3F&amp;modo=periodista">📰 Profundizar con el Auditor (Modo Periodista)</a></p>
+    <p class="nt-acciones"><a class="nt-btn" href="auditoria-deuda-congreso-2027.html" data-directa="seo">Leer la investigación </a> <a class="nt-btn nt-btn-sec" href="herramienta-inspector-pregunta.html?p=%C2%BFCu%C3%A1nta%20deuda%20autoriz%C3%B3%20la%20C%C3%A1mara%20de%20Diputados%20para%202027%2C%20qu%C3%A9%20cambi%C3%B3%20en%20las%20multas%20fiscales%20y%20qu%C3%A9%20dijo%20Hacienda%20sobre%20la%20nota%20BBB%3F&amp;modo=periodista">Profundizar con el Auditor (Modo Periodista)</a></p>
   </article>
   <div class="nt-filete" aria-hidden="true"></div>
 <section class="nt-ix" aria-labelledby="ntUltTit">
-  <h2 class="nt-ix-tit" id="ntUltTit"><span aria-hidden="true">⏱️</span> Lo último, verificado</h2>
+  <h2 class="nt-ix-tit" id="ntUltTit"><span aria-hidden="true"></span> Lo último, verificado</h2>
   <ol class="nt-ix-ult">
-    <li><a href="noticias-al-momento-pef-2027-comision-agua-jalisco-6500.html"><time>07-11-2026</time><b>Los 6,500 millones para el agua de Jalisco: es menos de la mitad de lo prometido, va en un dictamen de comisión y todavía no es el Presupuesto aprobado</b><small>✅ 1 con documento · ⏳ 2 por probar · a partir de Político MX</small></a></li>
-    <li><a href="noticias-al-momento-huawei-gobierno-codigo-magenta.html"><time>01-11-2026</time><b>¿Huawei «digitaliza» al gobierno con acceso total al IMSS, al SAT y a Aduanas? En los contratos federales de 2025 y 2026, Huawei no aparece como proveedor</b><small>✅ 1 con documento · ⏳ 2 por probar · a partir de Código Magenta</small></a></li>
-    <li><a href="noticias-al-momento-agua-guadalajara-14500-federal.html"><time>01-11-2026</time><b>El agua de Guadalajara: la Federación anuncia 14,500 millones «sin deuda», pero el dinero todavía no aparece en el Presupuesto 2027</b><small>✅ 3 con documento · ⏳ 2 por probar · a partir de Presidencia de la República (comunicado)</small></a></li>
-    <li><a href="noticias-al-momento-servidores-ia-exportaciones-contenido-nacional.html"><time>01-11-2026</time><b>¿México ya exporta más servidores que autos? Lo dice una consultora privada, no el INEGI, y el «3 a 7 % mexicano» no tiene documento</b><small>✅ 0 con documento · ⏳ 4 por probar · a partir de Imagen Radio</small></a></li>
-    <li><a href="noticias-al-momento-pemex-3t-2026-perdida-neta.html"><time>01-11-2026</time><b>Pemex vuelve a perder en el tercer trimestre: lo que dice su Boletín 86, el punto ciego de la pérdida neta y su deuda de 77.6 mil mdd</b><small>✅ 4 con documento · ⏳ 0 por probar · a partir de EFE (vía Infobae)</small></a></li>
+    <li><a href="noticias-al-momento-pef-2027-comision-agua-jalisco-6500.html"><time>07-11-2026</time><b>Los 6,500 millones para el agua de Jalisco: es menos de la mitad de lo prometido, va en un dictamen de comisión y todavía no es el Presupuesto aprobado</b><small>1 con documento · 2 por probar · a partir de Político MX</small></a></li>
+    <li><a href="noticias-al-momento-huawei-gobierno-codigo-magenta.html"><time>01-11-2026</time><b>¿Huawei «digitaliza» al gobierno con acceso total al IMSS, al SAT y a Aduanas? En los contratos federales de 2025 y 2026, Huawei no aparece como proveedor</b><small>1 con documento · 2 por probar · a partir de Código Magenta</small></a></li>
+    <li><a href="noticias-al-momento-agua-guadalajara-14500-federal.html"><time>01-11-2026</time><b>El agua de Guadalajara: la Federación anuncia 14,500 millones «sin deuda», pero el dinero todavía no aparece en el Presupuesto 2027</b><small>3 con documento · 2 por probar · a partir de Presidencia de la República (comunicado)</small></a></li>
+    <li><a href="noticias-al-momento-servidores-ia-exportaciones-contenido-nacional.html"><time>01-11-2026</time><b>¿México ya exporta más servidores que autos? Lo dice una consultora privada, no el INEGI, y el «3 a 7 % mexicano» no tiene documento</b><small>0 con documento · 4 por probar · a partir de Imagen Radio</small></a></li>
+    <li><a href="noticias-al-momento-pemex-3t-2026-perdida-neta.html"><time>01-11-2026</time><b>Pemex vuelve a perder en el tercer trimestre: lo que dice su Boletín 86, el punto ciego de la pérdida neta y su deuda de 77.6 mil mdd</b><small>4 con documento · 0 por probar · a partir de EFE (vía Infobae)</small></a></li>
   </ol>
-  <p class="nt-acciones"><a class="nt-btn nt-btn-sec" href="noticias-auditavision.html#al-momento">Todas las noticias ➔</a></p>
+  <p class="nt-acciones"><a class="nt-btn nt-btn-sec" href="noticias-auditavision.html#al-momento">Todas las noticias </a></p>
 </section>
 </div>
 <section class="nt-galeria" id="auditorias" aria-labelledby="ntGalTit">
-  <h2 class="nt-ix-tit" id="ntGalTit"><span aria-hidden="true">🖼️</span> Auditorías en imágenes</h2>
+  <h2 class="nt-ix-tit" id="ntGalTit"><span aria-hidden="true"></span> Auditorías en imágenes</h2>
   <p class="nt-galeria-txt">Las grandes investigaciones, cada una con su lectura breve, sus cifras y sus documentos.</p>
   <ul>
-    <li><a href="auditoria-tren-maya.html" data-directa="seo"><img src="assets/img/showcase_tren_maya.jpg" alt="Ilustración generada con IA de un tren sobre vías en la selva" loading="lazy" width="640" height="360"><small>🚅 Megaobra ferroviaria · FONATUR y Tren Maya</small><b>Tren Maya</b></a></li>
-    <li><a href="auditoria-dos-bocas.html" data-directa="seo"><img src="assets/img/showcase_dos_bocas.jpg" alt="Ilustración generada con IA de una refinería junto al mar" loading="lazy" width="640" height="360"><small>🏭 Refinación · Pemex, Paraíso, Tabasco</small><b>Refinería Olmeca (Dos Bocas)</b></a></li>
-    <li><a href="auditoria-deuda-soberana.html" data-directa="seo"><img src="assets/img/showcase_deuda_soberana.jpg" alt="Ilustración generada con IA de un edificio de gobierno" loading="lazy" width="640" height="360"><small>🏛️ Costo financiero de la deuda · PEF 2026</small><b>Los intereses de la deuda pública</b></a></li>
-    <li><a href="auditoria-aifa.html" data-directa="seo"><img src="assets/img/showcase_aifa.jpg" alt="Ilustración generada con IA de una terminal aérea" loading="lazy" width="640" height="360"><small>✈️ Infraestructura aeroportuaria · Defensa</small><b>Aeropuerto Internacional Felipe Ángeles (AIFA)</b></a></li>
-    <li><a href="auditoria-ramo-33.html" data-directa="seo"><img src="assets/img/showcase_ramo33.jpg" alt="Ilustración generada con IA de un centro de salud" loading="lazy" width="640" height="360"><small>🏥 Gasto federalizado · Ramo 33</small><b>Ramo 33: el dinero para estados y municipios</b></a></li>
-    <li><a href="auditoria-lego-cienega.html" data-directa="seo"><img src="assets/img/showcase_lego_expansion.jpg" alt="Imagen ilustrativa de una planta industrial" loading="lazy" width="640" height="360"><small>🧱 Inversión privada y obra pública · Nuevo León</small><b>Ciénega de Flores: el dinero público alrededor de LEGO</b></a></li>
-    <li><a href="auditoria-tren-toluca.html" data-directa="seo"><img src="assets/img/showcase_tren_toluca.jpg" alt="Imagen ilustrativa de un tren sobre un viaducto elevado" loading="lazy" width="640" height="360"><small>🚄 Transporte ferroviario · SICT</small><b>Tren Interurbano México-Toluca «El Insurgente»</b></a></li>
-    <li><a href="auditoria-megafarmacia.html" data-directa="seo"><img src="assets/img/showcase_megafarmacia.jpg" alt="Imagen ilustrativa de un almacén de medicamentos" loading="lazy" width="640" height="360"><small>💊 Almacén de medicamentos · Birmex, Huehuetoca</small><b>Megafarmacia del Bienestar (Huehuetoca)</b></a></li>
-    <li><a href="auditoria-huachicol-fiscal.html" data-directa="seo"><img src="assets/auditor/img/showcase_huachicol.jpg" alt="Ilustración de pipas de combustible frente a una aduana portuaria al atardecer" loading="lazy" width="640" height="360"><small>⛽ Evasión en combustibles · IEPS, aduanas y SAT</small><b>Huachicol fiscal: el impuesto que no entra</b></a></li>
-    <li><a href="auditoria-ine-contratos.html" data-directa="seo"><img src="assets/auditor/img/showcase_ine_contratos.jpg" alt="Ilustración del edificio del Instituto Nacional Electoral, urnas y carpetas de licitación bajo revisión" loading="lazy" width="640" height="360"><small>🗳️ Órgano autónomo · Ramo 22, ASF y licitaciones</small><b>El INE: su presupuesto, lo auditado y los contratos en revisión</b></a></li>
-    <li><a href="auditoria-guaymas-gas.html" data-directa="seo"><img src="assets/auditor/img/showcase_guaymas_gas.jpg" alt="Ilustración de tanques de gas y un buque metanero frente a la costa de Guaymas y la Gaceta Parlamentaria de Sonora" loading="lazy" width="640" height="360"><small>🚢 Energía y medio ambiente · Guaymas, Sonora y Golfo de California</small><b>Guaymas y la Gaceta Parlamentaria: el proyecto de gas y su revisión ambiental</b></a></li>
-    <li><a href="auditoria-medicamentos-imss.html" data-directa="seo"><img src="assets/auditor/img/showcase_medicamentos_imss.jpg" alt="Ilustración de un almacén de medicamentos y expedientes de contratos de salud bajo revisión" loading="lazy" width="640" height="360"><small>💊 Contratos de salud · IMSS, IMSS-Bienestar y Birmex</small><b>Compras de medicamentos y contratos del sector salud</b></a></li>
-    <li><a href="auditoria-deuda-congreso-2027.html" data-directa="seo"><img src="assets/auditor/img/showcase_deuda_2027.jpg" alt="Ilustración del tablero de votación en el Congreso con el techo de deuda 2027 y la nota soberana BBB" loading="lazy" width="640" height="360"><small>🧾 Paquete Económico 2027 · Congreso, deuda y calificación BBB</small><b>Diputados aprobó la deuda de 2027: Ley de Ingresos y nota soberana</b></a></li>
-    <li><a href="auditoria-inversion-megaobras.html" data-directa="seo"><img src="assets/auditor/img/showcase_inversion_megaobras.jpg" alt="Ilustración panorámica de grandes obras de infraestructura, trenes, refinerías y el balance financiero de seis sexenios" loading="lazy" width="640" height="360"><small>🏗️ Inversión pública y rescates · 1988–2024</small><b>Inversión en megaobras y rescates: 11 obras, 2 rescates y 6 sexenios</b></a></li>
-    <li><a href="auditoria-agronitrogenados.html" data-directa="seo"><img src="assets/auditor/img/showcase_agronitrogenados.jpg" alt="Ilustración de la planta petroquímica de fertilizantes Agronitrogenados en Pajaritos, Coatzacoalcos, con torres oxidadas y carpetas de auditoría" loading="lazy" width="640" height="360"><small>🏭 Megaobras y compras de Pemex · Coatzacoalcos, Veracruz</small><b>Plantas de fertilizantes Agronitrogenados</b></a></li>
-    <li><a href="auditoria-fertinal.html" data-directa="seo"><img src="assets/auditor/img/showcase_fertinal.jpg" alt="Ilustración de la mina de roca fosfórica y planta industrial de Grupo Fertinal junto al mar con documentos de deuda y pérdidas" loading="lazy" width="640" height="360"><small>⛏️ Megaobras y compras de Pemex · Baja California Sur y Michoacán</small><b>Compra de Grupo Fertinal</b></a></li>
-    <li><a href="auditoria-estela-luz.html" data-directa="seo"><img src="assets/auditor/img/showcase_estela_luz.jpg" alt="Ilustración de la torre de cuarzo y acero inoxidable de la Estela de Luz en Paseo de la Reforma al atardecer" loading="lazy" width="640" height="360"><small>🗼 Obras conmemorativas · Paseo de la Reforma, CDMX</small><b>Estela de Luz (Bicentenario)</b></a></li>
-    <li><a href="auditoria-bunker-garcia-luna.html" data-directa="seo"><img src="assets/auditor/img/showcase_bunker.jpg" alt="Ilustración del edificio subterráneo de inteligencia de Plataforma México en Constituyentes con pantallas y carpetas reservadas" loading="lazy" width="640" height="360"><small>📡 Seguridad e inteligencia · Plataforma México, CDMX</small><b>El Búnker de Seguridad de García Luna (SSPC)</b></a></li>
-    <li><a href="auditoria-refineria-tula.html" data-directa="seo"><img src="assets/auditor/img/showcase_refineria_tula.jpg" alt="Ilustración de la barda perimetral solitaria en el terreno semiárido de Tula, Hidalgo, donde se proyectó la Refinería Bicentenario" loading="lazy" width="640" height="360"><small>🧱 Proyectos cancelados · Atitalaquia y Tula, Hidalgo</small><b>Refinería Bicentenario en Tula (Barda Perimetral)</b></a></li>
-    <li><a href="auditoria-enciclomedia.html" data-directa="seo"><img src="assets/auditor/img/showcase_enciclomedia.jpg" alt="Ilustración de un salón de primaria en México con pizarrón electrónico interactivo, proyector y expedientes de auditoría" loading="lazy" width="640" height="360"><small>💻 Equipamiento educativo · SEP, 2001–2011</small><b>Programa Enciclomedia</b></a></li>
-    <li><a href="auditoria-fobaproa.html" data-directa="seo"><img src="assets/auditor/img/showcase_fobaproa.jpg" alt="Ilustración de bóvedas bancarias de los años noventa y bonos de deuda del rescate bancario FOBAPROA-IPAB" loading="lazy" width="640" height="360"><small>🏦 Rescate financiero · FOBAPROA-IPAB y Ramo 34 (1998–2025)</small><b>FOBAPROA / IPAB (Rescate Bancario de 1998)</b></a></li>
-    <li><a href="auditoria-farac-carretero.html" data-directa="seo"><img src="assets/auditor/img/showcase_farac.jpg" alt="Ilustración de una autopista de cuota y caseta de peaje en México con carpetas del rescate carretero FARAC-FONADIN" loading="lazy" width="640" height="360"><small>🛣️ Rescate financiero · FARAC y FONADIN en Banobras (1997–2025)</small><b>FARAC (Rescate Carretero de 1997)</b></a></li>
-    <li><a href="auditoria-seguro-popular.html" data-directa="seo"><img src="assets/auditor/img/showcase_seguro_popular.jpg" alt="Ilustración de un centro de salud con personas en la sala de espera, una póliza de afiliación y una gráfica de la gente sin acceso a la salud de 2016 a 2024" loading="lazy" width="640" height="360"><small>🏥 Salud pública · Seguro Popular, INSABI e IMSS-Bienestar (2004–2024)</small><b>Seguro Popular: 53.5 millones de afiliados y lo que pasó después</b></a></li>
+    <li><a href="auditoria-tren-maya.html" data-directa="seo"><img src="assets/img/showcase_tren_maya.jpg" alt="Ilustración generada con IA de un tren sobre vías en la selva" loading="lazy" width="640" height="360"><small>Megaobra ferroviaria · FONATUR y Tren Maya</small><b>Tren Maya</b></a></li>
+    <li><a href="auditoria-dos-bocas.html" data-directa="seo"><img src="assets/img/showcase_dos_bocas.jpg" alt="Ilustración generada con IA de una refinería junto al mar" loading="lazy" width="640" height="360"><small>Refinación · Pemex, Paraíso, Tabasco</small><b>Refinería Olmeca (Dos Bocas)</b></a></li>
+    <li><a href="auditoria-deuda-soberana.html" data-directa="seo"><img src="assets/img/showcase_deuda_soberana.jpg" alt="Ilustración generada con IA de un edificio de gobierno" loading="lazy" width="640" height="360"><small>Costo financiero de la deuda · PEF 2026</small><b>Los intereses de la deuda pública</b></a></li>
+    <li><a href="auditoria-aifa.html" data-directa="seo"><img src="assets/img/showcase_aifa.jpg" alt="Ilustración generada con IA de una terminal aérea" loading="lazy" width="640" height="360"><small>Infraestructura aeroportuaria · Defensa</small><b>Aeropuerto Internacional Felipe Ángeles (AIFA)</b></a></li>
+    <li><a href="auditoria-ramo-33.html" data-directa="seo"><img src="assets/img/showcase_ramo33.jpg" alt="Ilustración generada con IA de un centro de salud" loading="lazy" width="640" height="360"><small>Gasto federalizado · Ramo 33</small><b>Ramo 33: el dinero para estados y municipios</b></a></li>
+    <li><a href="auditoria-lego-cienega.html" data-directa="seo"><img src="assets/img/showcase_lego_expansion.jpg" alt="Imagen ilustrativa de una planta industrial" loading="lazy" width="640" height="360"><small>Inversión privada y obra pública · Nuevo León</small><b>Ciénega de Flores: el dinero público alrededor de LEGO</b></a></li>
+    <li><a href="auditoria-tren-toluca.html" data-directa="seo"><img src="assets/img/showcase_tren_toluca.jpg" alt="Imagen ilustrativa de un tren sobre un viaducto elevado" loading="lazy" width="640" height="360"><small>Transporte ferroviario · SICT</small><b>Tren Interurbano México-Toluca «El Insurgente»</b></a></li>
+    <li><a href="auditoria-megafarmacia.html" data-directa="seo"><img src="assets/img/showcase_megafarmacia.jpg" alt="Imagen ilustrativa de un almacén de medicamentos" loading="lazy" width="640" height="360"><small>Almacén de medicamentos · Birmex, Huehuetoca</small><b>Megafarmacia del Bienestar (Huehuetoca)</b></a></li>
+    <li><a href="auditoria-huachicol-fiscal.html" data-directa="seo"><img src="assets/auditor/img/showcase_huachicol.jpg" alt="Ilustración de pipas de combustible frente a una aduana portuaria al atardecer" loading="lazy" width="640" height="360"><small>Evasión en combustibles · IEPS, aduanas y SAT</small><b>Huachicol fiscal: el impuesto que no entra</b></a></li>
+    <li><a href="auditoria-ine-contratos.html" data-directa="seo"><img src="assets/auditor/img/showcase_ine_contratos.jpg" alt="Ilustración del edificio del Instituto Nacional Electoral, urnas y carpetas de licitación bajo revisión" loading="lazy" width="640" height="360"><small>Órgano autónomo · Ramo 22, ASF y licitaciones</small><b>El INE: su presupuesto, lo auditado y los contratos en revisión</b></a></li>
+    <li><a href="auditoria-guaymas-gas.html" data-directa="seo"><img src="assets/auditor/img/showcase_guaymas_gas.jpg" alt="Ilustración de tanques de gas y un buque metanero frente a la costa de Guaymas y la Gaceta Parlamentaria de Sonora" loading="lazy" width="640" height="360"><small>Energía y medio ambiente · Guaymas, Sonora y Golfo de California</small><b>Guaymas y la Gaceta Parlamentaria: el proyecto de gas y su revisión ambiental</b></a></li>
+    <li><a href="auditoria-medicamentos-imss.html" data-directa="seo"><img src="assets/auditor/img/showcase_medicamentos_imss.jpg" alt="Ilustración de un almacén de medicamentos y expedientes de contratos de salud bajo revisión" loading="lazy" width="640" height="360"><small>Contratos de salud · IMSS, IMSS-Bienestar y Birmex</small><b>Compras de medicamentos y contratos del sector salud</b></a></li>
+    <li><a href="auditoria-deuda-congreso-2027.html" data-directa="seo"><img src="assets/auditor/img/showcase_deuda_2027.jpg" alt="Ilustración del tablero de votación en el Congreso con el techo de deuda 2027 y la nota soberana BBB" loading="lazy" width="640" height="360"><small>Paquete Económico 2027 · Congreso, deuda y calificación BBB</small><b>Diputados aprobó la deuda de 2027: Ley de Ingresos y nota soberana</b></a></li>
+    <li><a href="auditoria-inversion-megaobras.html" data-directa="seo"><img src="assets/auditor/img/showcase_inversion_megaobras.jpg" alt="Ilustración panorámica de grandes obras de infraestructura, trenes, refinerías y el balance financiero de seis sexenios" loading="lazy" width="640" height="360"><small>Inversión pública y rescates · 1988–2024</small><b>Inversión en megaobras y rescates: 11 obras, 2 rescates y 6 sexenios</b></a></li>
+    <li><a href="auditoria-agronitrogenados.html" data-directa="seo"><img src="assets/auditor/img/showcase_agronitrogenados.jpg" alt="Ilustración de la planta petroquímica de fertilizantes Agronitrogenados en Pajaritos, Coatzacoalcos, con torres oxidadas y carpetas de auditoría" loading="lazy" width="640" height="360"><small>Megaobras y compras de Pemex · Coatzacoalcos, Veracruz</small><b>Plantas de fertilizantes Agronitrogenados</b></a></li>
+    <li><a href="auditoria-fertinal.html" data-directa="seo"><img src="assets/auditor/img/showcase_fertinal.jpg" alt="Ilustración de la mina de roca fosfórica y planta industrial de Grupo Fertinal junto al mar con documentos de deuda y pérdidas" loading="lazy" width="640" height="360"><small>Megaobras y compras de Pemex · Baja California Sur y Michoacán</small><b>Compra de Grupo Fertinal</b></a></li>
+    <li><a href="auditoria-estela-luz.html" data-directa="seo"><img src="assets/auditor/img/showcase_estela_luz.jpg" alt="Ilustración de la torre de cuarzo y acero inoxidable de la Estela de Luz en Paseo de la Reforma al atardecer" loading="lazy" width="640" height="360"><small>Obras conmemorativas · Paseo de la Reforma, CDMX</small><b>Estela de Luz (Bicentenario)</b></a></li>
+    <li><a href="auditoria-bunker-garcia-luna.html" data-directa="seo"><img src="assets/auditor/img/showcase_bunker.jpg" alt="Ilustración del edificio subterráneo de inteligencia de Plataforma México en Constituyentes con pantallas y carpetas reservadas" loading="lazy" width="640" height="360"><small>Seguridad e inteligencia · Plataforma México, CDMX</small><b>El Búnker de Seguridad de García Luna (SSPC)</b></a></li>
+    <li><a href="auditoria-refineria-tula.html" data-directa="seo"><img src="assets/auditor/img/showcase_refineria_tula.jpg" alt="Ilustración de la barda perimetral solitaria en el terreno semiárido de Tula, Hidalgo, donde se proyectó la Refinería Bicentenario" loading="lazy" width="640" height="360"><small>Proyectos cancelados · Atitalaquia y Tula, Hidalgo</small><b>Refinería Bicentenario en Tula (Barda Perimetral)</b></a></li>
+    <li><a href="auditoria-enciclomedia.html" data-directa="seo"><img src="assets/auditor/img/showcase_enciclomedia.jpg" alt="Ilustración de un salón de primaria en México con pizarrón electrónico interactivo, proyector y expedientes de auditoría" loading="lazy" width="640" height="360"><small>Equipamiento educativo · SEP, 2001–2011</small><b>Programa Enciclomedia</b></a></li>
+    <li><a href="auditoria-fobaproa.html" data-directa="seo"><img src="assets/auditor/img/showcase_fobaproa.jpg" alt="Ilustración de bóvedas bancarias de los años noventa y bonos de deuda del rescate bancario FOBAPROA-IPAB" loading="lazy" width="640" height="360"><small>Rescate financiero · FOBAPROA-IPAB y Ramo 34 (1998–2025)</small><b>FOBAPROA / IPAB (Rescate Bancario de 1998)</b></a></li>
+    <li><a href="auditoria-farac-carretero.html" data-directa="seo"><img src="assets/auditor/img/showcase_farac.jpg" alt="Ilustración de una autopista de cuota y caseta de peaje en México con carpetas del rescate carretero FARAC-FONADIN" loading="lazy" width="640" height="360"><small>Rescate financiero · FARAC y FONADIN en Banobras (1997–2025)</small><b>FARAC (Rescate Carretero de 1997)</b></a></li>
+    <li><a href="auditoria-seguro-popular.html" data-directa="seo"><img src="assets/auditor/img/showcase_seguro_popular.jpg" alt="Ilustración de un centro de salud con personas en la sala de espera, una póliza de afiliación y una gráfica de la gente sin acceso a la salud de 2016 a 2024" loading="lazy" width="640" height="360"><small>Salud pública · Seguro Popular, INSABI e IMSS-Bienestar (2004–2024)</small><b>Seguro Popular: 53.5 millones de afiliados y lo que pasó después</b></a></li>
   </ul>
 </section>
 </div>
 
-      <h2 class="apartado-pestanas-grupo">🗞️ Lee: el periódico</h2>
-      <nav class="apartado-pestanas" aria-label="Lee: el periódico">
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-ir-portada" href="noticias-auditavision.html#portada"><span class="apartado-pestana-ico" aria-hidden="true">🗞️</span><span class="apartado-pestana-tx"><b>Portada</b><small>Lo más reciente, de un vistazo</small></span></a>
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-ir-al-momento" href="noticias-auditavision.html#al-momento"><span class="apartado-pestana-ico" aria-hidden="true">📰</span><span class="apartado-pestana-tx"><b>Noticias</b><small>Las notas del día y el cotejo de lo que circula</small></span></a>
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-ir-columnas" href="noticias-auditavision.html#columnas"><span class="apartado-pestana-ico" aria-hidden="true">✒️</span><span class="apartado-pestana-tx"><b>Opinión</b><small>La Columna del Erario: nuestro argumento, con documentos</small></span></a>
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-ir-replica" href="noticias-auditavision.html#replica"><span class="apartado-pestana-ico" aria-hidden="true">✉️</span><span class="apartado-pestana-tx"><b>Réplica y postura</b><small>Lo que responde quien fue aludido</small></span></a>
-      </nav>
-      <h2 class="apartado-pestanas-grupo">⚖️ Verifica: del rumor al documento</h2>
-      <nav class="apartado-pestanas" aria-label="Verifica: del rumor al documento">
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-ir-verifica" href="noticias-verifica.html#verifica"><span class="apartado-pestana-ico" aria-hidden="true">⚖️</span><span class="apartado-pestana-tx"><b>Verifica</b><small>Pega la liga o el texto y lo cotejamos</small></span></a>
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-ir-puntos-ciegos" href="noticias-verifica.html#puntos-ciegos"><span class="apartado-pestana-ico" aria-hidden="true">🔦</span><span class="apartado-pestana-tx"><b>Puntos ciegos</b><small>Lo que una nota suele esconder</small></span></a>
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-ir-hemeroteca" href="noticias-verifica.html#hemeroteca"><span class="apartado-pestana-ico" aria-hidden="true">🗂️</span><span class="apartado-pestana-tx"><b>Hemeroteca</b><small>Las notas de los medios que ya cotejamos</small></span></a>
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-ir-mesa" href="noticias-verifica.html#mesa"><span class="apartado-pestana-ico" aria-hidden="true">📡</span><span class="apartado-pestana-tx"><b>Mesa de redacción</b><small>Los titulares que estamos jalando, sin verificar</small></span></a>
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-ir-metodo" href="noticias-verifica.html#metodo"><span class="apartado-pestana-ico" aria-hidden="true">🧭</span><span class="apartado-pestana-tx"><b>Cómo trabajamos</b><small>Del rumor al documento, en siete pasos, y propón una nota</small></span></a>
-      </nav>
-      <h2 class="apartado-pestanas-grupo">🔔 Sigue: el caso no se olvida</h2>
-      <nav class="apartado-pestanas" aria-label="Sigue: el caso no se olvida">
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-ir-seguir" href="noticias-seguimiento.html#seguir"><span class="apartado-pestana-ico" aria-hidden="true">🔔</span><span class="apartado-pestana-tx"><b>Casos abiertos</b><small>Qué documento falta para cerrar cada caso</small></span></a>
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-ir-promesas" href="noticias-seguimiento.html#promesas"><span class="apartado-pestana-ico" aria-hidden="true">📣</span><span class="apartado-pestana-tx"><b>Promesas</b><small>Lo que se anunció y lo que llegó</small></span></a>
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-ir-agenda" href="noticias-seguimiento.html#agenda"><span class="apartado-pestana-ico" aria-hidden="true">🗓️</span><span class="apartado-pestana-tx"><b>Agenda</b><small>Las fechas que la ley fija para el dinero público</small></span></a>
-      </nav>
-      <h2 class="apartado-pestanas-grupo">🛡️ Quienes informan</h2>
-      <nav class="apartado-pestanas" aria-label="Quienes informan">
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-ir-periodismo" href="periodismo-en-riesgo.html"><span class="apartado-pestana-ico" aria-hidden="true">🛡️</span><span class="apartado-pestana-tx"><b>Periodismo en riesgo</b><small>Las agresiones a la prensa, con el informe del Mecanismo de Protección</small></span></a>
-      </nav>
-      <h2 class="apartado-pestanas-grupo">🧭 Tus garantías</h2>
-      <nav class="apartado-pestanas" aria-label="Tus garantías">
-          <a class="apartado-pestana apartado-pestana-pagina" id="pestana-ir-garantias" href="garantias.html"><span class="apartado-pestana-ico" aria-hidden="true">🧭</span><span class="apartado-pestana-tx"><b>Garantías cívicas</b><small>A qué puerta tocar si viste algo raro con el dinero público, y qué te protege</small></span></a>
-      </nav>
-      <p class="apartado-pestanas-pista" id="pestanasPista">Cada tarjeta abre su sección.</p>
+      <section class="nt-secs" aria-labelledby="ntSecsTit">
+        <h2 class="nt-secs-tit" id="ntSecsTit">Secciones y archivo del diario</h2>
+        <div class="nt-secs-cols">
+        <div class="nt-secs-col">
+          <p class="nt-secs-k">Sección I · Lee</p>
+          <h3>El periódico</h3>
+          <ul>
+          <li><a id="pestana-ir-portada" href="noticias-auditavision.html#portada"><b>Portada</b><small>Lo más reciente, de un vistazo</small></a></li>
+          <li><a id="pestana-ir-al-momento" href="noticias-auditavision.html#al-momento"><b>Noticias</b><small>Las notas del día y el cotejo de lo que circula</small></a></li>
+          <li><a id="pestana-ir-columnas" href="noticias-auditavision.html#columnas"><b>Opinión</b><small>La Columna del Erario: nuestro argumento, con documentos</small></a></li>
+          <li><a id="pestana-ir-replica" href="noticias-auditavision.html#replica"><b>Réplica y postura</b><small>Lo que responde quien fue aludido</small></a></li>
+          </ul>
+        </div>
+        <div class="nt-secs-col">
+          <p class="nt-secs-k">Sección II · Verifica</p>
+          <h3>Del rumor al documento</h3>
+          <ul>
+          <li><a id="pestana-ir-verifica" href="noticias-verifica.html#verifica"><b>Verifica</b><small>Pega la liga o el texto y lo cotejamos</small></a></li>
+          <li><a id="pestana-ir-puntos-ciegos" href="noticias-verifica.html#puntos-ciegos"><b>Puntos ciegos</b><small>Lo que una nota suele esconder</small></a></li>
+          <li><a id="pestana-ir-hemeroteca" href="noticias-verifica.html#hemeroteca"><b>Hemeroteca</b><small>Las notas de los medios que ya cotejamos</small></a></li>
+          <li><a id="pestana-ir-mesa" href="noticias-verifica.html#mesa"><b>Mesa de redacción</b><small>Los titulares que estamos jalando, sin verificar</small></a></li>
+          <li><a id="pestana-ir-metodo" href="noticias-verifica.html#metodo"><b>Cómo trabajamos</b><small>Del rumor al documento, en siete pasos, y propón una nota</small></a></li>
+          </ul>
+        </div>
+        <div class="nt-secs-col">
+          <p class="nt-secs-k">Sección III · Sigue</p>
+          <h3>El caso no se olvida</h3>
+          <ul>
+          <li><a id="pestana-ir-seguir" href="noticias-seguimiento.html#seguir"><b>Casos abiertos</b><small>Qué documento falta para cerrar cada caso</small></a></li>
+          <li><a id="pestana-ir-promesas" href="noticias-seguimiento.html#promesas"><b>Promesas</b><small>Lo que se anunció y lo que llegó</small></a></li>
+          <li><a id="pestana-ir-agenda" href="noticias-seguimiento.html#agenda"><b>Agenda</b><small>Las fechas que la ley fija para el dinero público</small></a></li>
+          </ul>
+        </div>
+        <div class="nt-secs-col">
+          <p class="nt-secs-k">Sección IV · Protección</p>
+          <h3>Prensa y garantías</h3>
+          <ul>
+          <li><a id="pestana-ir-periodismo" href="periodismo-en-riesgo.html"><b>Periodismo en riesgo</b><small>Las agresiones a la prensa, con el informe del Mecanismo de Protección</small></a></li>
+          <li><a id="pestana-ir-garantias" href="garantias.html"><b>Garantías cívicas</b><small>A qué puerta tocar si viste algo raro con el dinero público, y qué te protege</small></a></li>
+          </ul>
+        </div>
+        </div>
+      </section>
       
 
 
       <div class="nt-indice">
-<aside class="nt-puente" aria-label="El modo Periodista y los servicios">
+<aside class="nt-puente nt-colofon" aria-label="El modo Periodista y los servicios">
   <div class="nt-pu-modo">
-    <h2 class="nt-pu-tit"><span aria-hidden="true">📰</span> Pregúntaselo al Auditor en modo Periodista</h2>
+    <h2 class="nt-pu-tit"><span aria-hidden="true"></span> Pregúntaselo al Auditor en modo Periodista</h2>
     <p>Te cuenta <b>lo que casi nadie te cuenta, con documento</b>: lo que la ASF dejó por aclarar, lo que una dependencia no ha publicado y quién lo debe, y qué consta de lo que circula. Nunca un rumor ni una filtración.</p>
     <p class="nt-pu-chips"><a class="nt-chip" href="herramienta-inspector-pregunta.html?modo=periodista&amp;q=Noticias%20de%20hoy">Noticias de hoy</a> <a class="nt-chip" href="herramienta-inspector-pregunta.html?modo=periodista&amp;q=%C2%BFQu%C3%A9%20pas%C3%B3%20con%20Dos%20Bocas%3F">¿Qué pasó con Dos Bocas?</a> <a class="nt-chip" href="herramienta-inspector-pregunta.html?modo=periodista&amp;q=Segalmex">Segalmex</a> <a class="nt-chip" href="herramienta-inspector-pregunta.html?modo=periodista&amp;q=%C2%BFQu%C3%A9%20obras%20no%20han%20publicado%20sus%20cifras%3F">¿Qué obras no han publicado sus cifras?</a></p>
-    <p class="nt-acciones"><a class="nt-btn" href="herramienta-inspector-pregunta.html?modo=periodista">📰 Abrir el modo Periodista</a></p>
+    <p class="nt-acciones"><a class="nt-btn" href="herramienta-inspector-pregunta.html?modo=periodista">Abrir el modo Periodista</a></p>
   </div>
   <div class="nt-pu-servs">
-    <h2 class="nt-pu-tit"><span aria-hidden="true">🧰</span> ¿Trabajas en una redacción o investigas por tu cuenta?</h2>
+    <h2 class="nt-pu-tit"><span aria-hidden="true"></span> ¿Trabajas en una redacción o investigas por tu cuenta?</h2>
     <p>Cotejar rápido una cifra antes de publicarla y tener a la mano el documento que la sostiene, para no exponerse a una réplica.</p>
     <ul class="nt-pu-lista">
-      <li><a class="nt-pu-serv" href="herramienta-inspector-pregunta.html?q=Licencia%20de%20temporada%20para%20redacciones&amp;modo=inspector&amp;abre=servicios-catalogo.html%23sv-temporada"><span aria-hidden="true">📰</span><span><b>Licencia de temporada para redacciones</b><small>El verificador de notas y la memoria de promesas para tu redacción durante la campaña: cada promesa de gasto, con su fecha, seguida hasta el Presupuesto, la Cuenta Pública y la ASF.</small><em>Precio por temporada</em></span></a></li>
-      <li><a class="nt-pu-serv" href="herramienta-inspector-pregunta.html?q=Revisi%C3%B3n%20documental%20puntual&amp;modo=inspector&amp;abre=servicios-catalogo.html%23sv-revision"><span aria-hidden="true">📄</span><span><b>Revisión documental puntual</b><small>Una pregunta delimitada, revisada contra los documentos públicos que la responden.</small><em>Cotización por escrito</em></span></a></li>
-      <li><a class="nt-pu-serv" href="herramienta-inspector-pregunta.html?q=Expediente%20de%20investigaci%C3%B3n&amp;modo=inspector&amp;abre=servicios-catalogo.html%23sv-expediente"><span aria-hidden="true">🗂️</span><span><b>Expediente de investigación</b><small>Un caso completo: quién, cuánto, cuándo y qué documento lo acredita.</small><em>Cotización por escrito</em></span></a></li>
-      <li><a class="nt-pu-serv" href="herramienta-inspector-pregunta.html?q=Vig%C3%ADa%20y%20seguimiento%20peri%C3%B3dico&amp;modo=inspector&amp;abre=servicios-catalogo.html%23sv-seguimiento"><span aria-hidden="true">📡</span><span><b>Vigía y seguimiento periódico</b><small>Tu cartera de proveedores revisada contra la lista 69-B cada semana, o un tema que cambia (contratos, presupuesto, auditorías) vigilado por ti.</small><em>Suscripción mensual, según cuántos RFC vigilas</em></span></a></li>
+      <li><a class="nt-pu-serv" href="herramienta-inspector-pregunta.html?q=Licencia%20de%20temporada%20para%20redacciones&amp;modo=inspector&amp;abre=servicios-catalogo.html%23sv-temporada"><span aria-hidden="true"></span><span><b>Licencia de temporada para redacciones</b><small>El verificador de notas y la memoria de promesas para tu redacción durante la campaña: cada promesa de gasto, con su fecha, seguida hasta el Presupuesto, la Cuenta Pública y la ASF.</small><em>Precio por temporada</em></span></a></li>
+      <li><a class="nt-pu-serv" href="herramienta-inspector-pregunta.html?q=Revisi%C3%B3n%20documental%20puntual&amp;modo=inspector&amp;abre=servicios-catalogo.html%23sv-revision"><span aria-hidden="true"></span><span><b>Revisión documental puntual</b><small>Una pregunta delimitada, revisada contra los documentos públicos que la responden.</small><em>Cotización por escrito</em></span></a></li>
+      <li><a class="nt-pu-serv" href="herramienta-inspector-pregunta.html?q=Expediente%20de%20investigaci%C3%B3n&amp;modo=inspector&amp;abre=servicios-catalogo.html%23sv-expediente"><span aria-hidden="true"></span><span><b>Expediente de investigación</b><small>Un caso completo: quién, cuánto, cuándo y qué documento lo acredita.</small><em>Cotización por escrito</em></span></a></li>
+      <li><a class="nt-pu-serv" href="herramienta-inspector-pregunta.html?q=Vig%C3%ADa%20y%20seguimiento%20peri%C3%B3dico&amp;modo=inspector&amp;abre=servicios-catalogo.html%23sv-seguimiento"><span aria-hidden="true"></span><span><b>Vigía y seguimiento periódico</b><small>Tu cartera de proveedores revisada contra la lista 69-B cada semana, o un tema que cambia (contratos, presupuesto, auditorías) vigilado por ti.</small><em>Suscripción mensual, según cuántos RFC vigilas</em></span></a></li>
     </ul>
-    <p class="nt-acciones"><a class="nt-btn nt-btn-sec" href="herramienta-inspector-pregunta.html?q=%F0%9F%91%A4%20Servicios%20para%20periodismo&amp;modo=inspector&amp;abre=servicios-tu-perfil.html">👤 Servicios para periodismo</a> <a class="nt-btn nt-btn-sec" href="herramienta-inspector-pregunta.html?q=%F0%9F%93%9D%20Solicita%20una%20cotizaci%C3%B3n&amp;modo=inspector&amp;abre=servicios-cotiza.html">📝 Solicita una cotización</a></p>
+    <p class="nt-acciones"><a class="nt-btn nt-btn-sec" href="herramienta-inspector-pregunta.html?q=%F0%9F%91%A4%20Servicios%20para%20periodismo&amp;modo=inspector&amp;abre=servicios-tu-perfil.html">Servicios para periodismo</a> <a class="nt-btn nt-btn-sec" href="herramienta-inspector-pregunta.html?q=%F0%9F%93%9D%20Solicita%20una%20cotizaci%C3%B3n&amp;modo=inspector&amp;abre=servicios-cotiza.html">Solicita una cotización</a></p>
     <p class="nt-pie">Leer, verificar y seguir un caso aquí es gratis. Lo de pago es el trabajo a la medida, y nunca cambia lo que publicamos.</p>
   </div>
 </aside>
@@ -303,11 +315,11 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261127k</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261127l</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261127k"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261127k"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261127l"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261127l"></script>
 </body>
 </html>

@@ -273,7 +273,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `noticias-al-momento-senado-ley-de-ingresos-2027.html` | El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son dinero prestado · Auditavisión | apartados.py | 45 | 0 | 1 | 1 | 1 |
 | `noticias-al-momento-servidores-ia-exportaciones-contenido-nacional.html` | ¿México ya exporta más servidores que autos? Lo dice una consultora privada, no el INEGI, y el «3 a 7 % mexicano» no tiene documento · Auditavisión | apartados.py | 45 | 0 | 1 | 1 | 5 |
 | `noticias-auditavision.html` | Auditavisión Noticias · Auditavisión | apartados.py | 54 | 0 | 1 | 1 | 1 |
-| `noticias-relevantes.html` | Noticiero · Auditavisión | apartados.py | 98 | 0 | 1 | 1 | 1 |
+| `noticias-relevantes.html` | Noticiero · Auditavisión | apartados.py | 103 | 0 | 1 | 1 | 1 |
 | `noticias-seguimiento.html` | Seguimiento: el caso no se olvida · Auditavisión | apartados.py | 57 | 0 | 9 | 5 | 7 |
 | `noticias-verifica.html` | Verifica una noticia · Auditavisión | apartados.py | 88 | 0 | 1 | 1 | 1 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 60 | 0 | 1 | 6 | 2 |
