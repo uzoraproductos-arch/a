@@ -2227,13 +2227,32 @@
       '</ul>' + erHtml(o) +
       (o.asf && foco !== 'asf' ? '<p>🔍 <b>Lo que dijo la ASF:</b> ' + esc(o.asf) + '</p>' : '') +
       '<p class="pa-chico">' + o.sico + ' ' + esc(o.sec) + ' · Estatus: ' + esc(o.est) + '. «Gana o pierde» no descuenta lo que costó construirla.</p>' +
-      portalesHtml(o.fu) + (charla && charla.deDonde ? charla.deDonde(moFuentes(o)) : '');
+      portalesHtml(o.fu);
+    /* Ronda 32, entrega C (Revisión): lo que revisamos, lo que la base no cubre de la obra y qué sigue. Va fuera de la ficha: no entra a la huella. */
+    var tR = '';
+    if (charla && charla.tiempos) {
+      var fuR = moFuentes(o).filter(function (x) { return x.que.indexOf(' en pesos de ') < 0; })
+        .map(function (x) { return { que: x.que.split(': ')[0], e: x.e, fu: x.fu || o.fu[0] }; });
+      var noR = [
+        ['Sus contratos, uno por uno', 'De contratos solo traemos los expedientes federales de ComprasMX que están integrados (<a href="contratos-publicos.html">ve qué años cubren ➔</a>): no son todo lo que se contrató para la obra.'],
+        ['Lo que pasó después del año de cada renglón', 'Cada cifra trae su año; lo ejercido después entra cuando su documento se publica.'],
+        ['Otras auditorías de la ASF', 'Decimos las que cita su ficha; la ASF pudo practicar otras.']];
+      if (o.amb && o.amb.miaEst === 'pendiente') noR.push(['Su permiso ambiental (MIA)', 'No tenemos su resolutivo: sigue pendiente, con quién lo debe y dónde debería estar, en el <a href="pendientes.html' + (o.amb.miaPend ? '#' + esc(o.amb.miaPend) : '') + '">Registro de pendientes ➔</a>.']);
+      var exR = invToca(o.n, null);
+      tR = charla.tiempos(fuR, noR, [
+        exR ? charla.preg('Expediente de ' + exR.tit, 'Abre su expediente ' + exR.exn) + ': la bitácora del caso, lo que sigue y lo que falta' : 'Toca «Saber más»: su ficha en Inversión y Megaobras, renglón por renglón',
+        '¿Oíste otra cifra? Pégala como «¿es cierto que…?» y la cotejo contra estas',
+        '<b>¿Necesitas una pregunta delimitada, con sus límites por escrito?</b> Es la <a href="servicio-revision.html">Revisión documental puntual ➔</a>'
+      ]);
+    }
+    var hR = h + tR + (charla && charla.deDonde ? charla.deDonde(moFuentes(o)) : '');
+    h += (charla && charla.deDonde ? charla.deDonde(moFuentes(o)) : '');
     var ci = [{ v: c.pres.vt, etq: nomP, e: c.pres.e }, { v: c.real.vt, etq: nomR, e: c.real.e }, { v: c.sob.vt, etq: c.sob.et, e: c.sob.e }];
     if (o.res.tipo === 'dato') ci.push({ v: (o.res.v < 0 ? '−' : '+') + o.res.vt, etq: 'Gana o pierde al año (' + o.res.anio + ')', e: o.res.e });
     var otras = MO.obras.filter(function (x) { return x !== o && !x.resc === !o.resc; });
     var irDest = foco === 'amb' && o.amb ? [o.amb.mapa, 'el mapa ambiental de megaobras en ' + o.amb.sede] : [o.ir.ficha, 'su ficha en Inversión y Megaobras'];
     return {
-      html: h, ir: irDest, app: sim ? { id: 'mosector', url: o.sim, abre: true } : foco === 'salud' ? { id: 'mocuenta', url: o.ir.cuenta } : { id: 'mosector', url: o.ir.ficha }, rec: moRec(o),
+      html: hR, ir: irDest, app: sim ? { id: 'mosector', url: o.sim, abre: true } : foco === 'salud' ? { id: 'mocuenta', url: o.ir.cuenta } : { id: 'mosector', url: o.ir.ficha }, rec: moRec(o),
       ficha: moFicha(o.n + ': lo que costó y lo que deja', h, ci, o.fu.concat(o.res.fu || []), irDest),
       sug: [foco !== 'amb' && o.amb ? '¿Cuál es el impacto ambiental de ' + o.n.split(' (')[0] + '?' : '¿Y su sobrecosto?', s && s.ids.length > 1 ? 'Obras de ' + s.n : '¿Qué megaobra tiene más sobrecosto?',
         otras.length ? 'Compara ' + o.n.split(' (')[0] + ' con ' + otras[0].n : 'Mapa ambiental de megaobras por estado']
@@ -3468,6 +3487,20 @@
       r.ir = [f.ex, 'su expediente'];
       r.html = '<p>🗂️ Es el <b>expediente ' + esc(f.exn) + '</b> de la Biblioteca del Erario Público: todo lo que la plataforma sabe del caso, en un solo lugar, ' +
         (f.ab ? 'y <b>sigue abierto</b>' : 'ya <b>documentado</b>') + (f.nov ? '. El último registro de su bitácora es del ' + esc(f.nov) : '') + '.</p>' + r.html.replace(/<p>Es una de las investigaciones[\s\S]*?<\/p>/, '');
+      /* Ronda 32, entrega C (Expediente): de qué está hecho, lo que no cubre y qué sigue. No agrega cifras. */
+      if (charla.tiempos) {
+        var fuX = (f.ci || []).slice(0, 4).map(function (c) { return { que: c.etq, e: c.e, fu: (f.fu || [])[0] }; });
+        var tX = charla.tiempos(fuX, [
+          ['Lo que pasó después de su último registro', 'Su bitácora llega ' + (f.nov ? 'al ' + esc(f.nov) : 'hasta su último registro') + '; el expediente se arma de nuevo cada mañana con la base.'],
+          ['Los titulares «en el radar»', 'Vienen de la Mesa de redacción, sin verificar: un titular nunca entra como dato.'],
+          ['Lo que la autoridad no ha publicado', 'Está, con quién lo debe y dónde debería estar, en el <a href="pendientes.html">Registro de pendientes ➔</a>.'],
+          ['Responsabilidades de personas', '«Abierto» quiere decir que hay pendientes o algo por seguir, nunca una acusación.']
+        ], [
+          '<a href="' + esc(f.ex) + '">Abre el expediente ' + esc(f.exn) + ' ➔</a>: el caso en cinco preguntas, su bitácora, lo que sigue y su sello',
+          '<b>¿Tu caso no está, o lo necesitas a fondo?</b> Se pide como <a href="servicio-expediente.html">Expediente de investigación ➔</a>'
+        ]);
+        r.html = r.html.indexOf('<details class="pa-dedonde">') >= 0 ? r.html.replace('<details class="pa-dedonde">', tX + '<details class="pa-dedonde">') : r.html + tX;
+      }
       r.sug = ['Expedientes de investigación', '¿Cómo pido un expediente?'];
       return r;
     }
