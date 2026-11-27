@@ -2311,6 +2311,15 @@
           }).join('') + '</ul>';
         var sin = ext.cifras.length - juzgadas.length;
         if (sin) h += '<p class="pa-chico">' + sin + ' cifra' + (sin > 1 ? 's' : '') + ' no tuvo con qué documento contrastarse: queda sin calificar, no cuenta como falsa.</p>';
+        /* Ronda 32, entrega C (Temporada): tras el veredicto, lo que se revisó, lo que un cotejo de cifras no cubre y qué sigue. */
+        h += tiempos(fu, [
+          ['Lo que la nota afirma sin cifra', 'Causas, intenciones y adjetivos no se cotejan: aquí solo se contrastan cifras contra su documento.'],
+          ['Una cifra sin documento integrado', 'Queda sin calificar y no cuenta como falsa: puede constar en un documento que todavía no integramos.'],
+          ['La nota completa', 'Pega su liga en <a href="' + esc(D.nota.pagina) + '">Contrasta una nota ➔</a>: lee cada cifra de la nota y dice sus puntos ciegos.']
+        ], [
+          '<b>¿Es una promesa de gasto?</b> Síguela del anuncio al Presupuesto, la Cuenta Pública y la ASF en <a href="noticias-seguimiento.html#promesas">la memoria de promesas ➔</a>',
+          '<b>¿Cubres una campaña?</b> El cotejo de cada cifra para tu redacción es la <a href="servicio-temporada.html">Licencia de temporada ➔</a>'
+        ]);
         fu.push({ que: 'Veredicto', e: 'derivado', op: 'diferencia entre la cifra que dices y la del documento; se acepta el redondeo' });
         return { html: h, fu: fu, ci: ci, tit: 'Verificación: ' + claim.slice(0, 80), ir: [D.nota.pagina, 'el verificador de notas'] };
       }
@@ -2698,6 +2707,15 @@
         (ci.length ? '<ul class="pa-lista">' + ci.map(function (c) { return '<li><b>' + esc(c.v) + '</b> · ' + esc(c.etq) + '</li>'; }).join('') + '</ul>' : '');
       ci.forEach(function (c) { fu.push({ que: c.etq, e: c.e, op: c.op, fu: (f.fu || [])[0] }); });
       if (!ci.length && f.fu && f.fu[0]) fu.push({ que: 'Fuente', e: 'oficial', fu: f.fu[0] });
+      /* Ronda 32, entrega C (Expediente): el caso de la ASF dice además lo que reúne, lo que no y qué sigue. */
+      if (f.t === 'expediente') h += tiempos(fu, [
+        ['Auditorías que no están en el caso', 'Reúne solo los informes individuales que enlista; la ASF pudo practicar otras al mismo ente.'],
+        ['Lo que se aclaró después de cada informe', 'El monto «por aclarar» es el del cierre de cada auditoría. Cómo va la solventación lo reporta la ASF cada semestre: <a href="informes-semestral-asf.html">el informe semestral ➔</a>.'],
+        ['Responsabilidades de personas', 'Un monto por aclarar no es un daño probado, y una acusación no es una condena: eso lo resuelve la autoridad, no este caso.']
+      ], [
+        (f.ir ? '<a href="' + esc(f.ir[0]) + '">Abre el caso ➔</a>: cada informe con su número, su monto y su documento' : 'Abre el caso con «Saber más»: cada informe con su documento'),
+        '<b>¿Necesitas el caso completo?</b> Cronología, documentos y relaciones verificadas son el <a href="servicio-expediente.html">Expediente de investigación ➔</a>'
+      ]);
       return { html: h + (fu.length ? deDonde(fu) : ''), ficha: f, ir: f.ir, sug: [] };
     }
 
@@ -2721,6 +2739,8 @@
 
     return {
       cotejo: cotejo,
+      /* Los tiempos 2 a 4 de una respuesta (Ronda 32): los usan las respuestas que arma asistente.js. */
+      tiempos: tiempos, preg: preg,
       contesta: function (q) { try { return contesta(q); } catch (e) { if (window.console) console.warn('AuditorCharla', e); return null; } },
       /* El veredicto de una cifra dicha contra un valor oficial (lo usa Inversión y Megaobras). */
       juzga: function (claim, val) { var d = cifraDicha(norm(claim).replace(/[¿?¡!]/g, ' ')), j = d && juzgaDicho(d, val); return j ? { dicho: d, v: j } : null; },

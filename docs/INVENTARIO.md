@@ -229,7 +229,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-nota-veredicto.html` | Contrasta una nota · el veredicto · Auditavisión | apartados.py | 2 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-nota.html` | Contrasta una nota · Auditavisión | apartados.py | 55 | 0 | 1 | 1 | 1 |
 | `herramienta-inspector-padron.html` | Revisa a tu contraparte · Auditavisión | apartados.py | 49 | 0 | 13 | 1 | 1 |
-| `herramienta-inspector-pregunta.html` | Auditavisión · Auditor del gasto público con documentos oficiales | apartados.py | 50 | 0 | 2 | 3 | 2 |
+| `herramienta-inspector-pregunta.html` | Auditavisión · Auditor del gasto público con documentos oficiales | apartados.py | 51 | 0 | 2 | 3 | 2 |
 | `herramienta-inspector-radar.html` | Radar por entidad · Auditavisión | apartados.py | 2 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-resultados.html` | Revisa tu estado de resultados · Auditavisión | apartados.py | 48 | 0 | 1 | 3 | 1 |
 | `herramienta-inspector-riesgos.html` | Tu matriz de riesgos documentales · Auditavisión | apartados.py | 54 | 0 | 3 | 2 | 1 |

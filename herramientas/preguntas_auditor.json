@@ -3707,6 +3707,41 @@
    "dice": [
     "Sí: en los documentos que tenemos integrados, la deuda del país sube"
    ]
+  },
+  {
+   "q": "Dos Bocas",
+   "dice": [
+    "Lo que revisamos",
+    "Sus contratos, uno por uno",
+    "Lo que no está integrado, no lo afirmamos ni lo negamos",
+    "Revisión documental puntual"
+   ]
+  },
+  {
+   "q": "Expediente de Dos Bocas",
+   "dice": [
+    "EXP-002",
+    "Los titulares «en el radar»",
+    "Registro de pendientes",
+    "Qué sigue"
+   ]
+  },
+  {
+   "q": "Caso de Segalmex en la ASF",
+   "dice": [
+    "Auditorías que no están en el caso",
+    "el informe semestral",
+    "Qué sigue"
+   ]
+  },
+  {
+   "q": "¿Es cierto que el gasto neto total de 2026 es de 10.1 billones de pesos?",
+   "dice": [
+    "Lo que revisamos",
+    "Lo que la nota afirma sin cifra",
+    "la memoria de promesas",
+    "Licencia de temporada"
+   ]
   }
  ]
 }
