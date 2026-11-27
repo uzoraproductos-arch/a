@@ -143,7 +143,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-salud-sistema.html` | Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE · Auditavisión | apartados.py | 50 | 0 | 27 | 12 | 3 |
 | `derecho-de-replica.html` | Derecho de réplica · Auditavisión | apartados.py | 43 | 0 | 2 | 1 | 1 |
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 50 | 0 | 1 | 1 | 1 |
-| `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 62 | 0 | 1 | 1 | 1 |
+| `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 76 | 0 | 2 | 2 | 1 |
 | `donaciones.html` | Donaciones · Auditavisión | apartados.py | 43 | 0 | 1 | 1 | 1 |
 | `enciclopedia-auditavision.html` | Enciclopedia · Auditavisión | apartados.py | 44 | 0 | 1 | 1 | 1 |
 | `enciclopedia.html` | La Enciclopedia antigua · Auditavisión | apartados.py | 2 | 0 | 0 | 0 | 0 |
