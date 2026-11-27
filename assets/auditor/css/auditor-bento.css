@@ -139,12 +139,6 @@
 .avb-chatcard .pa-chat-cab, .avb-chatcard .pa-ejs, .avb-chatcard .pa-form, .avb-chatcard .pa-hola { display: none; }
 .avb-chatcard .pa-pie { border-top: 0; padding-top: 0; }
 .avb-chatcard .pa-chat { box-shadow: none; border: 0; }
-.avb-otra { margin: 14px 0 0; }
-.avb-otra button {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border: 1px solid var(--avb-borde);
-  border-radius: 10px; background: #ffffff; color: #0b2a63; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer;
-}
-.avb-otra button:hover, .avb-otra button:focus-visible { border-color: var(--avb-azul); }
 .avb-lector iframe { width: 100%; min-height: 720px; border: 0; border-radius: 12px; background: #ffffff; }
 
 /* La Mesa de Trabajo (derecha): Herramientas y Expediente vivo. */
@@ -326,3 +320,77 @@
   .avb-chatcard, .avb-lector { padding: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { .avb-box, .avb-acc, .avb-mesa, .avb-tour-luz { transition: none; } .avb-rota-viva li.avb-rota-on { animation: none; } }
+
+/* Ronda 29: la hoja de resultado. Con una pregunta (`avb-hay`), el encabezado se guarda, la plática sube arriba de la caja
+   y crece con la página (sin ventana con barra propia); su barra fija dice la última pregunta y lo último que se gastó. */
+.avb-hay .avb-cab { display: none; }
+.avb-hay .avb-chatcard { order: 1; padding: 0; border-radius: 18px 18px 0 0; border-bottom: 0; }
+/* Un solo chat: con una pregunta, la caja es el pie de la misma tarjeta de la plática (sin separación, compacta) y se
+   queda pegada abajo de la pantalla, como en cualquier chat. */
+.avb-hay .avb-lienzo { gap: 0; }
+.avb-hay .avb-box { order: 2; position: sticky; bottom: 0; z-index: 4; gap: 8px; padding: 12px 22px 14px; border-radius: 0 0 18px 18px; box-shadow: 0 -10px 24px rgba(5, 16, 40, .10), 0 10px 34px rgba(5, 16, 40, .28); }
+.avb-hay .avb-caja-t, .avb-hay .avb-pista { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.avb-hay .avb-box textarea { min-height: 52px; height: 52px; }
+.avb-hay .avb-lector { order: 3; margin-top: 28px; }
+.avb-rbar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 12px 22px; border-radius: 18px 18px 0 0; border-bottom: 1px solid var(--avb-borde); background: #ffffff; }
+.avb-rbar-q { flex: 1 1 260px; min-width: 0; }
+.avb-chatcard .avb-rbar h2 { margin: 0; font: 800 13px/1.2 Inter, system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #5a6578; }
+.avb-rbar-q p { margin: 2px 0 0; font-size: 18px; font-weight: 700; line-height: 1.3; color: var(--avb-tinta); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.avb-rbar-tk { margin: 0; font-size: 14px; color: #44526b; }
+.avb-rbar-tk:empty { display: none; }
+.avb-rbar-tk b { color: var(--avb-tinta); }
+.avb-rbar-otra { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 1px solid var(--avb-borde); border-radius: 12px; background: #ffffff; color: var(--avb-tinta); font: 700 15px/1.2 Inter, system-ui, sans-serif; cursor: pointer; }
+.avb-rbar-otra:hover, .avb-rbar-otra:focus-visible { border-color: var(--avb-azul); }
+.avb-chatcard .pa-hilo { max-height: none; overflow: visible; min-height: 0; padding: 20px 22px 6px; background: #ffffff; }
+.avb-chatcard .pa-msg { scroll-margin-top: 96px; }
+.avb-chatcard .pa-pie { padding: 8px 22px 18px; }
+.avb-chatcard .pa-bot:not(.pa-escribe) .pa-burbuja { flex: 1 1 auto; max-width: 100%; padding: 20px 22px; border: 1px solid var(--avb-borde); border-radius: 16px; box-shadow: none; background: #ffffff; }
+.avb-chatcard .pa-bot .pa-burbuja::before { display: none; }
+.avb-chatcard .pa-bot .pa-clave-v { font-size: 22px; }
+.avb-chatcard .pa-bot .pa-acc { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 14px 0 0; }
+.avb-chatcard #paHilo .pa-bot .pa-acc .avb-rguarda { margin: 0; }
+/* La espera: los tres pasos, uno tras otro. */
+.avb-chatcard .pa-escribe .pa-burbuja { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.avb-chatcard .pa-pasos { display: flex; flex-wrap: wrap; gap: 6px 14px; list-style: none; margin: 0; padding: 0; font-size: 15px; font-weight: 600; color: #44526b; }
+.avb-chatcard #paHilo .pa-pasos li { margin: 0; opacity: 0; animation: avb-paso .3s ease-out forwards; }
+.avb-chatcard #paHilo .pa-pasos li:nth-child(2) { animation-delay: .33s; }
+.avb-chatcard #paHilo .pa-pasos li:nth-child(3) { animation-delay: .66s; }
+.avb-chatcard .pa-pasos li + li::before { content: '→'; margin-right: 14px; color: #8a94a6; }
+@keyframes avb-paso { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+/* Las pestañas de la respuesta. */
+.avb-hoja { margin: 18px 0 0; border-top: 1px solid var(--avb-borde); }
+.avb-htabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: thin; padding: 10px 0 0; border-bottom: 1px solid var(--avb-borde); }
+.avb-htab { flex: none; min-height: 44px; padding: 0 16px; border: 0; border-bottom: 3px solid transparent; background: none; color: #44526b; font: 700 15px/1.2 Inter, system-ui, sans-serif; cursor: pointer; white-space: nowrap; }
+.avb-htab:hover { color: var(--avb-tinta); }
+.avb-htab[aria-selected="true"] { color: var(--avb-azul); border-bottom-color: var(--avb-azul); }
+.avb-htab:focus-visible { outline: 2px solid var(--avb-azul); outline-offset: -2px; border-radius: 6px; }
+.avb-tp { padding: 16px 0 4px; min-width: 0; }
+.avb-tp[hidden] { display: none; }
+.avb-tp > :first-child { margin-top: 0; }
+.avb-tp .pv { max-width: 100%; }
+.avb-docs-t { margin: 0 0 8px; font-weight: 700; color: var(--avb-tinta); }
+.avb-chatcard #paHilo .pa-bot .avb-docs ul { list-style: none; margin: 0 0 12px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }
+.avb-chatcard #paHilo .pa-bot .avb-docs li { margin: 0; }
+.avb-docs a { display: flex; align-items: flex-start; gap: 10px; min-height: 44px; padding: 10px 12px; border: 1px solid var(--avb-borde); border-radius: 12px; background: #f6f8fc; color: var(--avb-tinta); text-decoration: none; }
+.avb-docs a:hover, .avb-docs a:focus-visible { border-color: var(--avb-azul); background: #ffffff; }
+.avb-docs a .avb-i { flex: none; margin-top: 3px; }
+.avb-docs a span { display: grid; gap: 2px; min-width: 0; }
+.avb-docs a b { font-size: 16px; line-height: 1.35; overflow-wrap: anywhere; }
+.avb-docs a small { font-size: 14px; color: #5a6578; }
+@media (prefers-reduced-motion: reduce) { .avb-chatcard #paHilo .pa-pasos li { animation: none; opacity: 1; } }
+@media (max-width: 700px), (max-height: 640px) {
+  .avb-hay .avb-box { position: static; }
+}
+@media (max-width: 700px) {
+  .avb-rbar { padding: 10px 14px; gap: 8px; }
+  .avb-hay .avb-box { padding: 12px 14px 14px; }
+  .avb-rbar-q p { font-size: 16px; }
+  .avb-rbar-otra span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .avb-rbar-otra { padding: 0 13px; }
+  .avb-chatcard .pa-hilo { padding: 14px 12px 4px; }
+  .avb-chatcard .pa-bot:not(.pa-escribe) .pa-burbuja { padding: 14px; }
+  .avb-chatcard .pa-clave { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .avb-chatcard .pa-bot .pa-clave-v { font-size: 19px; }
+  .avb-chatcard .pa-clave-i { padding: 10px; }
+  .avb-chatcard .pa-pie { padding: 8px 12px 14px; }
+}

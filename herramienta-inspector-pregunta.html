@@ -21,16 +21,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261126l">
-  <script src="assets/auditor/js/iconos.js?v=20261126l"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261126l"></script>
-  <script src="assets/auditor/js/tokens.js?v=20261126l"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261126l" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261126l">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261126l">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261126l">
-  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261126l">
-  <link rel="stylesheet" href="assets/auditor/css/auditor-bento.css?v=20261126l">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261127c">
+  <script src="assets/auditor/js/iconos.js?v=20261127c"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261127c"></script>
+  <script src="assets/auditor/js/tokens.js?v=20261127c"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261127c" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261127c">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261127c">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261127c">
+  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261127c">
+  <link rel="stylesheet" href="assets/auditor/css/auditor-bento.css?v=20261127c">
 </head>
 <body data-pagina="apartado" class="avb-pagina">
   <div class="pt-velo" id="ptVelo" hidden></div>
@@ -238,7 +238,14 @@
         <p class="avb-costo" id="avbCosto" aria-live="polite"></p>
       </form>
       <section class="avb-chatcard" id="avbChat" aria-labelledby="avbChatT" hidden>
-        <h2 id="avbChatT">Tu plática con el Auditor</h2>
+        <div class="avb-rbar" id="avbRbar">
+          <div class="avb-rbar-q">
+            <h2 id="avbChatT">Tu plática con el Auditor</h2>
+            <p id="avbRQ"></p>
+          </div>
+          <p class="avb-rbar-tk" id="avbRTk" aria-live="polite"></p>
+          <button type="button" class="avb-rbar-otra" id="avbOtra"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span>Hacer otra pregunta</span></button>
+        </div>
 <div class="pa" id="paApp" data-canal="" data-funcion="https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1/pregunta-bot" data-modo="ciudadano">
         <div class="pa-chat">
           <div class="pa-chat-cab">
@@ -477,7 +484,6 @@
           </div>
         </aside>
       </div>
-        <p class="avb-otra"><button type="button" id="avbOtra"><svg class="avb-i" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg> Hacer otra pregunta</button></p>
       </section>
       <section class="avb-lector" id="avbLector" hidden aria-labelledby="avbLecT">
         <h2 id="avbLecT">Tu revisión, en este navegador</h2>
@@ -602,23 +608,23 @@
         <a href="indice.html">Índice general</a>
         <a href="aviso-de-privacidad.html">Aviso de privacidad</a>
         <a href="derecho-de-replica.html">Derecho de réplica</a>
-        <span>Auditavisión · Toda cifra lleva su fuente oficial · Versión publicada: <b>20261126l</b></span>
+        <span>Auditavisión · Toda cifra lleva su fuente oficial · Versión publicada: <b>20261127c</b></span>
       </nav>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261126l"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261126l"></script>
-  <script src="assets/auditor/js/auditor-bento.js?v=20261126l"></script>
-  <script src="assets/auditor/js/municipios-efipem.js?v=20261126l"></script>
-  <script src="assets/auditor/js/municipios-inversion.js?v=20261126l"></script>
-  <script src="assets/auditor/js/municipios-deuda.js?v=20261126l"></script>
-  <script src="assets/auditor/js/municipios-poblacion.js?v=20261126l"></script>
-  <script src="assets/auditor/js/municipios-fraude.js?v=20261126l"></script>
-  <script src="assets/auditor/js/asistente-base.js?v=20261126l"></script>
-  <script src="assets/auditor/js/verificador.js?v=20261126l"></script>
-  <script src="assets/auditor/js/asistente-charla.js?v=20261126l"></script>
-  <script src="assets/auditor/js/insp-visual.js?v=20261126l"></script>
-  <script src="assets/auditor/js/asistente.js?v=20261126l"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261127c"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261127c"></script>
+  <script src="assets/auditor/js/auditor-bento.js?v=20261127c"></script>
+  <script src="assets/auditor/js/municipios-efipem.js?v=20261127c"></script>
+  <script src="assets/auditor/js/municipios-inversion.js?v=20261127c"></script>
+  <script src="assets/auditor/js/municipios-deuda.js?v=20261127c"></script>
+  <script src="assets/auditor/js/municipios-poblacion.js?v=20261127c"></script>
+  <script src="assets/auditor/js/municipios-fraude.js?v=20261127c"></script>
+  <script src="assets/auditor/js/asistente-base.js?v=20261127c"></script>
+  <script src="assets/auditor/js/verificador.js?v=20261127c"></script>
+  <script src="assets/auditor/js/asistente-charla.js?v=20261127c"></script>
+  <script src="assets/auditor/js/insp-visual.js?v=20261127c"></script>
+  <script src="assets/auditor/js/asistente.js?v=20261127c"></script>
 </body>
 </html>

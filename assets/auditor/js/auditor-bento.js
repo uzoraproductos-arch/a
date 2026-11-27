@@ -96,7 +96,151 @@
        aparece solo cuando ya hay una pregunta (también al volver con la plática guardada) y se esconde con «Limpiar». */
     var campo = document.getElementById('paPregunta'), forma = document.getElementById('paForm'), chat = document.getElementById('avbChat'),
       hilo = document.getElementById('paHilo');
-    function verChat() { if (chat && hilo) chat.hidden = !hilo.querySelector('.pa-yo'); }
+    /* Ronda 29: con una pregunta, la página cambia de estado (`avb-hay`): el encabezado se guarda, la plática sube arriba
+       de la caja y su barra fija dice la última pregunta. Con «Limpiar» vuelve la portada. */
+    var cajaT = document.getElementById('avbCajaT'), rpq = document.getElementById('avbRQ'), rtk = document.getElementById('avbRTk');
+    var CAJA_T = cajaT ? cajaT.textContent : '';
+    var hq = document.getElementById('avbQ'), PISTA_Q = hq ? hq.placeholder : '';
+    function verChat() {
+      if (!chat || !hilo) return;
+      var yo = hilo.querySelectorAll('.pa-yo'), hay = !!yo.length;
+      chat.hidden = !hay;
+      avb.classList.toggle('avb-hay', hay);
+      if (cajaT) cajaT.textContent = hay ? 'Sigue la investigación' : CAJA_T;
+      if (hq) hq.placeholder = hay ? 'Sigue preguntando: escribe aquí tu siguiente pregunta' : PISTA_Q;
+      if (rpq) rpq.textContent = hay ? '«' + (yo[yo.length - 1].textContent || '').replace(/\s+/g, ' ').trim() + '»' : '';
+      if (!hay && rtk) rtk.textContent = '';
+    }
+    /* Lo último que se gastó, junto a la pregunta: la diferencia del saldo que avisa la billetera (tokens.js). */
+    var saldoAntes = null;
+    setTimeout(function () { saldoAntes = leeSaldo(); }, 0);
+    function leeSaldo() { try { return window.AvTokens && !window.AvTokens.ilimitado() ? window.AvTokens.saldo() : null; } catch (e) { return null; } }
+    document.addEventListener('av-tokens', function (ev) {
+      if (!rtk || !ev.detail) return;
+      if (ev.detail.ilimitado) { rtk.textContent = 'Tokens ilimitados'; return; }
+      var s = ev.detail.saldo, d = saldoAntes != null ? saldoAntes - s : 0;
+      if (d > 0) rtk.innerHTML = 'Último gasto: <b>' + d + ' token' + (d === 1 ? '' : 's') + '</b> · te quedan <b>' + s + '</b>';
+      else if (d < 0) rtk.innerHTML = 'No se cobró · tienes <b>' + s + '</b> tokens';
+      saldoAntes = s;
+    });
+
+    /* Ronda 29: la hoja de resultado. Cada respuesta con datos deja arriba lo que se preguntó (su cabecera, los hallazgos
+       clave, la respuesta con su fuente y sus acciones) y reparte lo demás en pestañas: la lectura del modo, las gráficas
+       del lugar, los documentos y por dónde seguir (las aplicaciones, el Planisferio y, al final, el servicio que toca).
+       Solo mueve lo que el chat ya pintó: no agrega cifras ni ligas. Una aplicación ya abierta se queda a la vista. */
+    var NOM_LECTURA = [['pa-reportero', 'La nota'], ['pa-capa-ciudadano', 'En corto'], ['pa-capa-inspector', 'La revisión'], ['pa-capa-ambientalista', 'Mirada ambiental']];
+    var nHoja = 0;
+    function activa(hoja, id, foco) {
+      Array.prototype.forEach.call(hoja.querySelectorAll('[data-avb-tab]'), function (t) {
+        var on = t.getAttribute('data-avb-tab') === id;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        if (on && foco) t.focus();
+      });
+      Array.prototype.forEach.call(hoja.querySelectorAll('[data-avb-tp]'), function (p) { p.hidden = p.getAttribute('data-avb-tp') !== id; });
+    }
+    function ponTab(hoja, id, nombre, nodos, antes) {
+      var tabs = hoja.querySelector('.avb-htabs'), uid = hoja.getAttribute('data-avb-hoja');
+      var t = document.createElement('button');
+      t.type = 'button'; t.className = 'avb-htab'; t.setAttribute('role', 'tab'); t.setAttribute('data-avb-tab', id);
+      t.id = 'avbT' + uid + id; t.setAttribute('aria-controls', 'avbP' + uid + id); t.textContent = nombre;
+      var p = document.createElement('div');
+      p.className = 'avb-tp'; p.setAttribute('role', 'tabpanel'); p.setAttribute('data-avb-tp', id);
+      p.id = 'avbP' + uid + id; p.setAttribute('aria-labelledby', t.id);
+      nodos.forEach(function (n) { p.appendChild(n); });
+      var ref = antes ? tabs.querySelector('[data-avb-tab="' + antes + '"]') : null;
+      tabs.insertBefore(t, ref);
+      hoja.insertBefore(p, ref ? hoja.querySelector('[data-avb-tp="' + antes + '"]') : null);
+      activa(hoja, (tabs.querySelector('[aria-selected="true"]') || tabs.firstElementChild).getAttribute('data-avb-tab'));
+      return p;
+    }
+    function hojaDe(li, crea) {
+      var bur = li.querySelector('.pa-burbuja');
+      if (!bur) return null;
+      var hoja = bur.querySelector('.avb-hoja');
+      if (hoja || !crea) return hoja;
+      hoja = document.createElement('div');
+      hoja.className = 'avb-hoja';
+      hoja.setAttribute('data-avb-hoja', (++nHoja) + Math.random().toString(36).slice(2, 6));
+      hoja.innerHTML = '<div class="avb-htabs" role="tablist" aria-label="Más sobre esta respuesta"></div>';
+      var ref = null;
+      Array.prototype.some.call(bur.children, function (k) { if (k.matches('.pa-mas-t, .pa-mas, .avb-rguarda-p')) { ref = k; return true; } return false; });
+      bur.insertBefore(hoja, ref);
+      return hoja;
+    }
+    function hoja(li) {
+      var bur = li.querySelector('.pa-burbuja');
+      if (!bur || bur.querySelector('.avb-hoja') || !bur.querySelector('.pa-cab')) return;
+      var lec = [], docs = [], seg = [], srv = [], nomLec = 'Lectura del modo';
+      Array.prototype.forEach.call(bur.children, function (k) {
+        if (k.matches('.pa-capa, .pa-reportero')) {
+          if (!lec.length) NOM_LECTURA.some(function (n) { if (k.classList.contains(n[0])) { nomLec = n[1]; return true; } return false; });
+          lec.push(k);
+        } else if (k.matches('.pa-exp, .pa-rec')) docs.push(k);
+        else if (k.matches('.pa-srv')) srv.push(k);
+        else if (k.matches('.pa-panel')) { k.open = true; seg.push(k); }
+        else if (k.matches('.pa-app') && !k.hasAttribute('data-pa-abre') && !k.querySelector('iframe')) seg.push(k);
+      });
+      /* Los documentos oficiales que la respuesta ya cita, juntos: las mismas ligas, sin repetir. */
+      var vistos = {}, fu = [];
+      Array.prototype.forEach.call(bur.querySelectorAll('.pa-resp a[href^="http"], .pa-capa a[href^="http"], .pa-reportero a[href^="http"]'), function (a) {
+        var h = a.href.split('#')[0], host = '';
+        if (vistos[h] || fu.length >= 12) return;
+        vistos[h] = 1;
+        try { host = new URL(h).hostname.replace(/^www\./, ''); } catch (e) { host = ''; }
+        fu.push('<li><a href="' + esc(a.href) + '" target="_blank" rel="noopener">' + LIGA + '<span><b>' + esc(texto(a).replace(/\s*↗$/, '').slice(0, 140) || host) + '</b><small>' + esc(host) + '</small></span></a></li>');
+      });
+      if (fu.length) {
+        var caja = document.createElement('div');
+        caja.className = 'avb-docs';
+        caja.innerHTML = '<p class="avb-docs-t">Los documentos oficiales que cita esta respuesta</p><ul>' + fu.join('') + '</ul>';
+        docs.unshift(caja);
+      }
+      seg = seg.concat(srv);
+      if (!lec.length && !docs.length && !seg.length) return;
+      var h = hojaDe(li, true);
+      if (lec.length) ponTab(h, 'lectura', nomLec, lec);
+      if (docs.length) ponTab(h, 'docs', 'Documentos', docs);
+      if (seg.length) ponTab(h, 'seguir', 'Para seguir', seg);
+    }
+    /* Las gráficas del lugar de la última pregunta (insp-visual.js: lo que la base ya trae, dibujado) van en su pestaña,
+       solo en la última respuesta. Sin lugar, no hay pestaña. */
+    function graficas(bot, q) {
+      if (!hilo || !window.AuditorBot || !window.AuditorBot.visual) return;
+      Array.prototype.forEach.call(hilo.querySelectorAll('[data-avb-tab="graf"], [data-avb-tp="graf"]'), function (x) {
+        var h0 = x.closest('.avb-hoja');
+        x.parentNode.removeChild(x);
+        if (h0 && h0.querySelector('[data-avb-tab]')) activa(h0, (h0.querySelector('[aria-selected="true"]') || h0.querySelector('[data-avb-tab]')).getAttribute('data-avb-tab'));
+        else if (h0) h0.parentNode.removeChild(h0);
+      });
+      if (!bot.querySelector('.pa-cab')) return;
+      var tmp = document.createElement('div');
+      tmp.hidden = true;
+      bot.appendChild(tmp);
+      window.AuditorBot.visual(q, tmp, function () {
+        var h3 = tmp.querySelector('.pv h3 span[aria-hidden]');
+        if (h3) h3.parentNode.removeChild(h3);
+        if (tmp.parentNode) tmp.parentNode.removeChild(tmp);
+        if (!tmp.innerHTML || !bot.parentNode) return;
+        hoja(bot);
+        var h = hojaDe(bot, true), p = ponTab(h, 'graf', 'En gráficas', [], h.querySelector('[data-avb-tab="docs"]') ? 'docs' : (h.querySelector('[data-avb-tab="seguir"]') ? 'seguir' : ''));
+        while (tmp.firstChild) p.appendChild(tmp.firstChild);
+      });
+    }
+    if (hilo) {
+      hilo.addEventListener('click', function (ev) {
+        var t = ev.target.closest ? ev.target.closest('[data-avb-tab]') : null;
+        if (t) activa(t.closest('.avb-hoja'), t.getAttribute('data-avb-tab'));
+      });
+      hilo.addEventListener('keydown', function (ev) {
+        var t = ev.target.closest ? ev.target.closest('[data-avb-tab]') : null;
+        if (!t || (ev.key !== 'ArrowRight' && ev.key !== 'ArrowLeft')) return;
+        var l = Array.prototype.slice.call(t.parentNode.querySelectorAll('[data-avb-tab]')), i = l.indexOf(t);
+        var n = l[(i + (ev.key === 'ArrowRight' ? 1 : l.length - 1)) % l.length];
+        ev.preventDefault();
+        activa(t.closest('.avb-hoja'), n.getAttribute('data-avb-tab'), true);
+      });
+    }
 
     /* Expediente vivo: lo que la última respuesta ya citó. */
     var exp = { vacio: document.getElementById('avbExpVacio'), caja: document.getElementById('avbExp'), q: document.getElementById('avbExpQ'),
@@ -133,6 +277,8 @@
       var yo = hilo.querySelectorAll('.pa-yo'), bots = hilo.querySelectorAll('.pa-bot:not(.pa-escribe):not(.pa-modo-aviso)');
       if (!yo.length || !bots.length) { exp.caja.hidden = true; exp.vacio.hidden = false; ultimo = null; visto = ''; return; }
       var bot = bots[bots.length - 1], q = texto(yo[yo.length - 1]);
+      /* Ronda 29: mientras la respuesta de la última pregunta no llega, el expediente espera (no lee la anterior). */
+      if (!(yo[yo.length - 1].compareDocumentPosition(bot) & 4)) return;
       var firma = q + '|' + bot.innerHTML.length;
       if (firma === visto) return;
       var nueva = visto.split('|')[0] !== q;
@@ -170,16 +316,9 @@
         exp.por.innerHTML = pt.join('');
         exp.por.hidden = exp.porT.hidden = !pt.length;
       }
-      if (nueva && exp.vis && window.AuditorBot && window.AuditorBot.visual) {
-        /* El mini-mapa del INEGI y el semáforo del lugar de la pregunta (insp-visual.js): lo que la base ya trae, dibujado. */
-        exp.vis.innerHTML = '';
-        exp.vis.hidden = true;
-        window.AuditorBot.visual(q, exp.vis, function () {
-          var h3 = exp.vis.querySelector('.pv h3 span[aria-hidden]');
-          if (h3) h3.parentNode.removeChild(h3);
-          exp.vis.hidden = !exp.vis.innerHTML;
-        });
-      }
+      /* Ronda 29: el mapa y las gráficas del lugar ya no van aquí, angostos: viven en la pestaña «En gráficas» de la respuesta. */
+      if (exp.vis) { exp.vis.innerHTML = ''; exp.vis.hidden = true; }
+      if (nueva) graficas(bot, q);
       if (nueva) { exp.guarda.disabled = false; exp.guarda.querySelector('span').textContent = 'Guardar en mi portafolio'; }
       ultimo = { q: q, dic: dic ? dic.getAttribute('href') : '' };
       exp.vacio.hidden = true;
@@ -204,7 +343,7 @@
       var yo = hilo && hilo.querySelectorAll('.pa-yo'), ult = yo && yo[yo.length - 1];
       if (ult || chat) (ult || chat).scrollIntoView({ behavior: quieto() ? 'auto' : 'smooth', block: 'start' });
     }
-    var hf = document.getElementById('avbForm'), hq = document.getElementById('avbQ');
+    var hf = document.getElementById('avbForm');
     function aLaCaja(arriba) {
       if (!hf || !hq) return;
       if (arriba) window.scrollTo({ top: 0, behavior: quieto() ? 'auto' : 'smooth' });
@@ -314,6 +453,8 @@
     }
     function yaGuardada(q) { return leePort().some(function (x) { return x && x.o === 'auditor' && x.q === q; }); }
     function pintaGuarda(b, si) {
+      /* Sin cambio no se repinta: cada repintado despierta a quien vigila el hilo. */
+      if (b.firstChild && b.getAttribute('aria-pressed') === (si ? 'true' : 'false')) return;
       b.disabled = si;
       b.setAttribute('aria-pressed', si ? 'true' : 'false');
       b.innerHTML = (si ? MARCA_LLENA : MARCA) + '<span>' + (si ? 'Guardado' : 'Guardar en mi portafolio') + '</span>';
@@ -325,15 +466,16 @@
       Array.prototype.forEach.call(hilo.querySelectorAll('.pa-bot:not(.pa-escribe):not(.pa-modo-aviso)'), function (li) {
         var q = preguntaDe(li);
         if (!q) return;
+        hoja(li);
         var b = li.querySelector('.avb-rguarda');
         if (!b) {
-          var cont = li.querySelector('.pa-burbuja') || li, p = document.createElement('p');
-          p.className = 'avb-rguarda-p';
+          /* Ronda 29: con acciones (Saber más, Generar ficha), «Guardar» va con ellas; sin ellas, al pie de la respuesta. */
+          var acc = li.querySelector('.pa-acc'), cont = li.querySelector('.pa-burbuja') || li, p = document.createElement('p');
           b = document.createElement('button');
           b.type = 'button';
           b.className = 'avb-rguarda';
-          p.appendChild(b);
-          cont.appendChild(p);
+          if (acc) acc.insertBefore(b, acc.querySelector('.pa-noera'));
+          else { p.className = 'avb-rguarda-p'; p.appendChild(b); cont.appendChild(p); }
         }
         pintaGuarda(b, yaGuardada(q));
       });
