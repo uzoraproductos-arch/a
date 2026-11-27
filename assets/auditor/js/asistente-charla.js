@@ -839,6 +839,35 @@
         sug: ['¿Cuánto se paga de intereses al día?', '¿Cuánta deuda dejó AMLO?', '¿Qué estado debe más?'] };
     }
 
+    /* ¿La deuda del país sube o baja? (Ronda 32, pedido del autor: que «¿es cierto que la deuda bajó?» conteste eso y no
+       el renglón de ingresos por financiamiento). Compara lo aprobado para 2026 con lo propuesto para 2027, en pesos y
+       frente al PIB, con los renglones del Paquete (NF): ninguna cifra se escribe aquí; la diferencia es derivada. Dice
+       lo que la base no cubre: el saldo observado mes a mes. */
+    var DEUDA_DIR = /\b(baj[oóa]\w*|disminuy\w*|redu[jc]\w*|menor|menos|subi\w*|sube\w*|aument\w*|crec\w*|mayor|mas alta|se dispar\w*)\b/;
+    function deudaTendencia(t) {
+      var by = {}; NF.forEach(function (x) { by[x.id] = x; });
+      var b = by['pq-f-shrfsp'], a = by['pq26-f-shrfsp'], d1 = by['pq-f-rfsp'], d0 = by['pq26-f-rfsp'];
+      if (!a || !b || a.v == null || b.v == null || a.v === b.v) return null;
+      var sube = b.v > a.v, dijoBaja = /\b(baj|disminuy|redu[jc]|menor|menos)/.test(t), dijoSube = /\b(subi|sube|aument|crec|mayor|mas alta|se dispar)/.test(t);
+      var consta = (sube && dijoSube && !dijoBaja) || (!sube && dijoBaja && !dijoSube), dif = Math.abs(b.v - a.v);
+      var h = '<p>' + (consta ? '✅ <b>Sí: en los documentos que tenemos integrados, la deuda del país ' + (sube ? 'sube' : 'baja') + '.</b>'
+        : '❌ <b>No consta que ' + (sube ? 'baje' : 'suba') + ': en los documentos que tenemos integrados, la deuda del país ' + (sube ? 'sube' : 'baja') + '.</b>') +
+        ' Hablamos de su medida más amplia, el Saldo Histórico de los Requerimientos Financieros del Sector Público (SHRFSP).</p><ul class="pa-lista">' +
+        '<li><b>En pesos:</b> de ' + nv(a) + ' (aprobado 2026) a ' + nv(b) + ' (propuesta 2027): ' + (sube ? '+' : '−') + mdp(dif) + ' ' + chip('derivado') + '</li>' +
+        (a.pib != null && b.pib != null ? '<li><b>Frente al tamaño de la economía:</b> de ' + n(a.pib, 1) + ' % a ' + n(b.pib, 1) + ' % del PIB.' + (b.d ? ' ' + esc(b.d) : '') + '</li>' : '') +
+        (d0 && d1 && d0.pib != null && d1.pib != null && Math.abs(d1.pib) < Math.abs(d0.pib) && sube ? '<li><b>Lo que sí baja es el déficit</b>, no la deuda: lo que el sector público necesita financiar en el año pasa de ' +
+          n(Math.abs(d0.pib), 1) + ' % a ' + n(Math.abs(d1.pib), 1) + ' % del PIB. Mientras haya déficit, la deuda sigue creciendo en pesos; solo crece más despacio.</li>' : '') + '</ul>' +
+        '<p class="pa-chico"><b>Lo que esta respuesta no cubre:</b> comparo lo aprobado para 2026 con lo que el Paquete Económico propone para 2027, que el Congreso todavía puede cambiar. ' +
+        'El saldo observado mes a mes lo publica Hacienda en sus informes trimestrales y aún no está integrado: de ese no afirmamos ni negamos nada. ' +
+        'Si lo que leíste habla de la deuda de un estado, de Pemex o de un sexenio, pregúntame por ese: son cuentas distintas.</p>';
+      return { html: h, tend: 1, tit: 'La deuda del país: ¿sube o baja?', ficha: null, ir: b.ir,
+        fu: [{ que: 'Deuda pública aprobada para 2026', e: a.e, fu: a.fu }, { que: 'Deuda pública propuesta para 2027', e: b.e, fu: b.fu },
+          { que: 'Diferencia', e: 'derivado', op: nv(b) + ' − ' + nv(a) }],
+        ci: [{ v: nv(a), etq: 'Deuda pública (SHRFSP), aprobado 2026', e: a.e }, { v: nv(b), etq: 'Deuda pública (SHRFSP), propuesta 2027', e: b.e },
+          { v: (sube ? '+' : '−') + mdp(dif), etq: 'Diferencia 2027 − 2026', e: 'derivado' }],
+        val: { v: b.v, u: 'mdp' }, sug: ['¿Cuánto se paga de intereses al día?', '¿Cuánto es el déficit 2027?', '¿Qué estado debe más?'] };
+    }
+
     /* ---------- Lo que se aprobó a cada dependencia en 2026 ---------- */
     var DEP_ALIAS = { 'sedena': 'Secretaría de la Defensa Nacional', 'defensa': 'Secretaría de la Defensa Nacional', 'ejercito': 'Secretaría de la Defensa Nacional',
       'semar': 'Secretaría de Marina', 'marina': 'Secretaría de Marina', 'sep': 'Secretaría de Educación Pública', 'educacion': 'Secretaría de Educación Pública',
@@ -2217,6 +2246,8 @@
       var dicho = cifraDicha(norm(claim).replace(/[¿?¡!]/g, ' ')), val = dentro && dentro.val;
       if (val && val.dia && /diari|al dia|por dia|cada dia/.test(t)) val = { v: val.dia, u: 'mdp' };
       if (val && val.anual && /al ano|anual|por ano|cada ano/.test(t)) val = { v: val.anual, u: 'pesos' };
+      /* Una afirmación de rumbo («la deuda bajó») ya trae su veredicto: no lleva el «no hay una cifra que contrastar». */
+      if (dentro && dentro.tend && !dicho) { dentro.listo = 1; return dentro; }
       var oc = val && dicho ? otroConcepto(claim, dentro) : '';
       var jz = val && dicho && !oc ? juzgaDicho(dicho, val) : null;
       if (jz) {
@@ -2384,6 +2415,9 @@
       var nt = !es.length && !/ (pemex|cfe) /.test(t) && nacTema(t), pideParte = PCT.test(t) || /de cada (peso|\$? ?100|cien)/.test(t);
       var ntOk = nt && (NAC.test(t) || nt === 'intereses' || nt === 'nueva' || /presupuesto (de |del )?(2026|este ano|federal)|cuanto (se )?gasta el gobierno/.test(t));
       var anioH = (/\b(199\d|20[01]\d|202[0-5])\b/.exec(t) || [])[1];
+      if (nt === 'deuda' && DEUDA_DIR.test(t) && !pideParte && !anioH && !/\b(estados?|entidad(es)?|municipios?|sexenio|president\w*|amlo|lopez obrador|pena nieto|calderon|fox|sheinbaum|zedillo|salinas)\b/.test(t)) {
+        var dt = deudaTendencia(t); if (dt) return fin(dt, { tipo: 'nac', tema: 'deuda' });
+      }
       if (ntOk && /intereses|nueva|deuda/.test(nt) && !pideParte && !anioH) { var na = nacional(nt); if (na) return fin(na, { tipo: 'nac', tema: nt }); }
 
       /* La pestaña Números: un renglón del ingreso, del gasto, de un ramo, del
@@ -2508,7 +2542,7 @@
         fu: r.fu.filter(function (x) { return x && x.fu && x.fu.tx; }).map(function (x) { return x.fu; }).filter(function (f, i, a) { return a.map(function (z) { return z.tx; }).indexOf(f.tx) === i; }),
         ir: r.ir || ['indice.html', 'el índice general']
       } : null);
-      return { html: html, ficha: ficha, ir: r.ir, plat: r.plat, tit: r.tit, anota: r.sinDato, val: r.val, pasa: r.pasa, claim: r.claim, sug: (r.sug || sugerir(ctx)).filter(function (x) { return plano(x) !== plano(ultima); }) };
+      return { html: html, ficha: ficha, ir: r.ir, plat: r.plat, tit: r.tit, anota: r.sinDato, val: r.val, tend: r.tend, pasa: r.pasa, claim: r.claim, sug: (r.sug || sugerir(ctx)).filter(function (x) { return plano(x) !== plano(ultima); }) };
     }
     function sugerir(c) {
       if (c.tipo === 'edo' && c.es && c.es.length === 1) {

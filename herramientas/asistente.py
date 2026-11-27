@@ -796,6 +796,8 @@ def escribir_base():
         and n.split(' de ')[0] not in donde and not n.startswith(('san ', 'santa ', 'santo ', 'villa ', 'valle ')) else []
     dat['calc']['predEsp'] = [{'k': k, 'n': [_pl(w['nombre'])] + _cesp(_pl(w['nombre'])), 'nom': w['nombre'], 'm': w['motivo']}
                               for k, w in cc_predial.ESPERA.items()]
+    # El calendario de conservación contesta el plazo en el chat (Ronda 32): las reglas, con su ley y su cita.
+    dat['cons'] = __import__('insp_conservacion').chat()
     # Inversión y Megaobras, dentro del chat (24-10-2026): sus obras, sus
     # sexenios, sus cifras y sus cinco aplicaciones.
     import asistente_megaobras

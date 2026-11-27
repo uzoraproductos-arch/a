@@ -3640,6 +3640,40 @@
     "El predial no lo cobra el estado",
     "Índice SHF"
    ]
+  },
+  {
+   "q": "¿Cuánto tiempo guardo mis facturas?",
+   "ir": "herramienta-inspector-conservacion.html",
+   "dice": [
+    "5 años",
+    "CFF, art. 30",
+    "Manda el plazo más largo",
+    "Lo que esta respuesta no cubre"
+   ]
+  },
+  {
+   "q": "¿Cuánto tiempo guardo las listas de raya?",
+   "ir": "herramienta-inspector-conservacion.html",
+   "dice": [
+    "LSS, art. 15"
+   ]
+  },
+  {
+   "q": "¿Es cierto que la deuda bajó?",
+   "dice": [
+    "No consta que baje",
+    "Lo que sí baja es el déficit",
+    "Lo que esta respuesta no cubre"
+   ],
+   "no_dice": [
+    "No hay una cifra que contrastar"
+   ]
+  },
+  {
+   "q": "¿La deuda pública subió?",
+   "dice": [
+    "Sí: en los documentos que tenemos integrados, la deuda del país sube"
+   ]
   }
  ]
 }
