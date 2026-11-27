@@ -59,6 +59,7 @@ TRAZOS = {
     'liga': '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
     'herramientas': '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/>',
     'pausa': '<path d="M9 5v14M15 5v14"/>',
+    'info': '<circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><path d="M12 7.5h.01"/>',
     'libro': '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 7h6"/>',
 }
 
@@ -415,7 +416,7 @@ def _tour():
 
 
 def pie(sello):
-    """El pie de esta página: los cinco conteos de la base y las ligas, sin «Volver al auditor»."""
+    """El pie de esta página: los cinco conteos de la base y las ligas, sin «Volver al auditor». En celular va plegado (Ronda 37)."""
     import monetizacion
     c = {x[0]: x for x in monetizacion.contadores()}
     falta = [k for k in CONTEOS if k not in c]
@@ -424,6 +425,9 @@ def pie(sello):
     li = '\n'.join('          <li><b>%s</b> <span>%s</span></li>' % (format(c[k][1], ','), html.escape(c[k][2])) for k in CONTEOS)
     return '''<footer class="apartado-pie avb-pie">
     <div class="apartado-ancho">
+      <details class="avb-pie-det" id="avbPieDet" open>
+      <summary>%s<span>Información de la base y avisos</span></summary>
+      <div class="avb-pie-cuerpo">
       <a class="avb-conteos" href="base-al-dia.html">
         <ul>
 %s
@@ -436,8 +440,10 @@ def pie(sello):
         <a href="derecho-de-replica.html">Derecho de réplica</a>
         <span>Auditavisión · Toda cifra lleva su fuente oficial · Versión publicada: <b>%s</b></span>
       </nav>
+      </div>
+      </details>
     </div>
-  </footer>''' % (li, ico('flecha', 14), sello)
+  </footer>''' % (ico('info', 18), li, ico('flecha', 14), sello)
 
 
 def bloque(chat, servicios):

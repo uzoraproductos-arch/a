@@ -267,6 +267,22 @@
 .avb-conteos:hover .avb-con-nota, .avb-conteos:focus-visible .avb-con-nota { text-decoration: underline; }
 .avb-pie-ligas { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 18px; font-size: 14px; color: var(--avb-gris); }
 .avb-pie-ligas a { display: inline-flex; align-items: center; min-height: 44px; color: var(--avb-tinta); }
+/* Ronda 37: el pie va en un desplegable que solo se pliega en celular; en escritorio no se ve su barra. */
+.avb-pie-det > summary { display: none; }
+.avb-pie-cuerpo { display: grid; gap: 14px; }
+@media (max-width: 980px) {
+  .avb-pie.apartado-pie { padding-top: 10px; padding-bottom: 10px; }
+  .avb-pie-det > summary { display: flex; align-items: center; gap: 10px; min-height: 44px; list-style: none; cursor: pointer; font-size: 16px; font-weight: 600; color: var(--avb-tinta); }
+  .avb-pie-det > summary::-webkit-details-marker { display: none; }
+  .avb-pie-det > summary svg { flex: none; color: var(--avb-azul); }
+  .avb-pie-det > summary span { flex: 1; min-width: 0; }
+  .avb-pie-det > summary::after { content: ""; flex: none; width: 9px; height: 9px; border-right: 2px solid var(--avb-gris); border-bottom: 2px solid var(--avb-gris); transform: rotate(45deg); margin: 0 6px 4px 0; }
+  .avb-pie-det[open] > summary::after { transform: rotate(225deg); margin-bottom: -4px; }
+  .avb-pie-det > summary:focus-visible { outline: 2px solid var(--avb-azul); outline-offset: 2px; border-radius: 8px; }
+  .avb-pie-cuerpo { padding: 8px 0 6px; min-width: 0; }
+  .avb-pie-cuerpo .avb-conteos li, .avb-pie-cuerpo .avb-pie-ligas, .avb-pie-cuerpo .avb-con-nota { font-size: 16px; }
+  .avb-pie-cuerpo .avb-pie-ligas span { overflow-wrap: anywhere; }
+}
 
 /* La barra izquierda fija desde 981 px. */
 /* Escritorio ancho (1100 px o más): centro y Mesa de Trabajo, lado a lado; la mesa se puede ocultar. */
