@@ -3673,6 +3673,36 @@
    ]
   },
   {
+   "q": "Zapopan",
+   "dice": [
+    "tuvo ingresos por",
+    "Lo que egresó",
+    "Lo que debe",
+    "Lo que revisamos",
+    "Lo que la base no cubre",
+    "El acta de entrega-recepción",
+    "Qué sigue"
+   ]
+  },
+  {
+   "q": "Nuevo León",
+   "dice": [
+    "en corto",
+    "Lo que revisamos",
+    "Lo que revisó la auditoría superior del estado",
+    "Lo que no está integrado, no lo afirmamos ni lo negamos",
+    "Qué sigue"
+   ]
+  },
+  {
+   "q": "Deuda de Nuevo León",
+   "dice": [
+    "debe",
+    "Lo que debe después de ese corte",
+    "A quién le debe, crédito por crédito"
+   ]
+  },
+  {
    "q": "¿La deuda pública subió?",
    "dice": [
     "Sí: en los documentos que tenemos integrados, la deuda del país sube"

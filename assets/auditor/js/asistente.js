@@ -3587,7 +3587,7 @@
     d.innerHTML = h;
     var quita = [], vistos = 0, n = 0;
     Array.prototype.some.call(d.children, function (k) {
-      if (k.classList.contains('pa-dedonde') || k.querySelector('iframe, form, table, .pa-app') || /^(TABLE|FORM|IFRAME|DETAILS)$/.test(k.tagName)) return false;
+      if (k.classList.contains('pa-dedonde') || k.classList.contains('pd-tiempo') || k.querySelector('iframe, form, table, .pa-app') || /^(TABLE|FORM|IFRAME|DETAILS)$/.test(k.tagName)) return false;
       vistos++; n += /^(UL|OL)$/.test(k.tagName) ? Array.prototype.slice.call(k.children, 0, 3).reduce(function (a, x) { return a + x.textContent.length; }, 0) : k.textContent.length;
       if (!(/^(UL|OL)$/.test(k.tagName) && k.children.length > 3)) quita.push(k);
       return vistos >= 2 || n > 260;
@@ -3601,7 +3601,7 @@
     d.innerHTML = h;
     var out = [], n = 0;
     Array.prototype.some.call(d.children, function (k) {
-      if (k.classList.contains('pa-dedonde') || k.querySelector('iframe, form, table, .pa-app') || /^(TABLE|FORM|IFRAME|DETAILS)$/.test(k.tagName)) return false;
+      if (k.classList.contains('pa-dedonde') || k.classList.contains('pd-tiempo') || k.querySelector('iframe, form, table, .pa-app') || /^(TABLE|FORM|IFRAME|DETAILS)$/.test(k.tagName)) return false;
       if (/^(UL|OL)$/.test(k.tagName)) {
         var c = k.cloneNode(false);
         Array.prototype.slice.call(k.children, 0, 3).forEach(function (x) { c.appendChild(x.cloneNode(true)); });

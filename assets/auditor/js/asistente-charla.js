@@ -336,7 +336,75 @@
         h = '<p><b>' + esc(e.n) + '</b> tiene ' + V + ' a mitad de 2026, según el CONAPO.' + lugarTxt('pob', e, 'de mayor a menor') + '</p>';
         fu.push(LUGAR);
       }
+      if (k === 'deuda') h += edoTiempos(e, fu, true);
       return { html: h, fu: fu, val: k === 'sem' ? null : { v: v, u: m.u }, ci: [{ v: fmt(v, m.u) || e.sem || 'No se mide', etq: m.n, e: m.e, op: m.op }], tit: e.n + ': ' + m.n };
+    }
+
+    /* La respuesta en cuatro tiempos de un lugar (Ronda 32, entrega B: Radiografía y Entrega). Tras el veredicto: lo que revisamos
+       (sale de las fuentes de la propia respuesta), lo que la base no cubre y dónde está, y qué sigue. No agrega cifras. */
+    function plClave(a) { return a.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+    function revDe(fu) {
+      var g = [], por = {};
+      (fu || []).forEach(function (f) {
+        if (!f || !f.fu || !f.fu.tx || f.e === 'pendiente') return;
+        var x = por[f.fu.tx]; if (!x) { x = por[f.fu.tx] = { fu: f.fu, q: [] }; g.push(x); }
+        if (f.que && x.q.indexOf(f.que) < 0) x.q.push(f.que);
+      });
+      return g.map(function (x) { return '<li><b>' + esc(x.q.join(' · ')) + ':</b> ' + (x.fu.url ? '<a href="' + esc(x.fu.url) + '" target="_blank" rel="noopener">' + esc(x.fu.tx) + '</a>' : esc(x.fu.tx)) + '</li>'; });
+    }
+    function tiempos(fu, no, sig) {
+      var rv = revDe(fu);
+      return (rv.length ? '<div class="pd-tiempo"><p><b>Lo que revisamos</b> <span class="pa-chico">(cada fuente, al corte que publicó su autoridad)</span></p><ul class="pa-lista">' + rv.join('') + '</ul></div>' : '') +
+        '<div class="pd-tiempo"><p><b>Lo que la base no cubre</b></p><div class="pd-cubre"><table><thead><tr><th scope="col">Qué</th><th scope="col">Por qué, y dónde está</th></tr></thead><tbody>' +
+        no.map(function (x) { return '<tr><th scope="row">' + x[0] + '</th><td>' + x[1] + '</td></tr>'; }).join('') + '</tbody></table></div>' +
+        '<p class="pa-chico">Lo que no está integrado, no lo afirmamos ni lo negamos.</p></div>' +
+        '<div class="pd-tiempo"><p><b>Qué sigue</b></p><ul class="pa-lista">' + sig.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></div>';
+    }
+    function preg(q, tx) { return '<button type="button" class="pa-enlace" data-pa-pregunta="' + esc(q) + '">' + esc(tx || q) + '</button>'; }
+    var NO_ACTA = ['El acta de entrega-recepción y sus anexos', 'Inventarios, plantilla, juicios y cuentas por pagar los entrega la administración que sale: no son una fuente pública que tengamos integrada.'];
+    var SIG_SERV = '<b>¿Lo vas a recibir o a gobernar?</b> El documento completo es la <a href="servicio-radiografia.html">Radiografía ➔</a>, y lo que recibes, el <a href="servicio-entrega.html">kit de entrega-recepción ➔</a>';
+    function edoTiempos(e, fu, deuda) {
+      var c = plClave(e.a);
+      var no = deuda ? [
+        ['Lo que debe después de ese corte', 'El Sistema de Alertas se mide una vez al año con la Cuenta Pública. El saldo crédito por crédito, por trimestre, está en el Registro Público Único.'],
+        ['Si la deuda se usó bien', 'El semáforo mide cuánto pesa la deuda frente a los ingresos, no en qué se gastó: eso consta en el decreto que la autorizó y en la cuenta pública del estado.']] : [
+        ['Lo que ingresó y gastó después de las cifras que ves', 'Cada fuente llega al año que dice. Lo más reciente está en la cuenta pública del estado y en sus informes trimestrales.'],
+        ['Lo que revisó la auditoría superior del estado', 'La ASF solo audita el dinero federal. El dinero propio del estado lo revisa su órgano local de fiscalización, en su portal.'],
+        ['Sus contratos con dinero estatal', 'ComprasMX trae los contratos federales; los demás están en el portal de compras del estado.']];
+      no.push(['Pensiones, juicios y adeudos que no son deuda inscrita', 'El Sistema de Alertas mide la deuda inscrita y las obligaciones de corto plazo. Lo demás consta en la cuenta pública del estado.'], NO_ACTA);
+      return tiempos(fu, no, [
+        '<b>A quién le debe, crédito por crédito:</b> <a href="planisferio-' + c + '-deuda.html">su deuda en el Planisferio ➔</a>',
+        '<b>Sus municipios, uno por uno:</b> <a href="planisferio-' + c + '.html">el portal de ' + esc(e.n) + ' ➔</a>',
+        deuda ? '<b>Lo demás de su ficha:</b> ' + preg(e.n, 'la radiografía de ' + e.n) + ' · ' + preg('¿Cuánto le dejó por aclarar la ASF a ' + e.n + '?', 'lo que dejó la ASF') :
+          '<b>Pregunta por partes:</b> ' + preg('¿Cuánto debe ' + e.n + '?', 'su deuda') + ' · ' + preg('¿A quién le debe ' + e.n + '?', 'sus acreedores') + ' · ' + preg('¿Cuánto invierte ' + e.n + ' en obra?', 'su obra'),
+        SIG_SERV]);
+    }
+    function sdaMunTxt(m, nom) {
+      var sdaM = MDEU && MDEU.sda && MDEU.sda.m && MDEU.sda.m[m.cve];
+      return !sdaM ? 'En el Sistema de Alertas de Hacienda (Cuenta Pública 2025), <b>' + nom + '</b> no figura con financiamientos inscritos en el Registro Público Único (no se mide, LDF art. 43).' :
+        (sdaM[0] > 0 ? 'Al cierre de 2025, en el Sistema de Alertas de Hacienda (Cuenta Pública 2025), <b>' + nom + '</b> registra un saldo de deuda y obligaciones de <b>$' + n(sdaM[1], 1) + ' millones</b> (deuda directa: $' + n(sdaM[2], 1) + ' millones), con semáforo en <b>' + ['', 'endeudamiento sostenible (verde)', 'endeudamiento en observación (amarillo)', 'endeudamiento elevado (rojo)'][sdaM[0]] + '</b> (' + n(sdaM[3], 1) + ' % de sus ingresos de libre disposición).' :
+        'En el Sistema de Alertas de Hacienda (Cuenta Pública 2025), <b>' + nom + '</b> tiene deuda inscrita en el Registro Público Único, pero no entregó información suficiente para su evaluación ' + chip('pendiente', 'deuda-municipios') + '.');
+    }
+    function sdaMunFu(m) {
+      var sdaM = MDEU && MDEU.sda && MDEU.sda.m && MDEU.sda.m[m.cve];
+      return sdaM && sdaM[0] === 0 ? { que: 'Saldo al cierre de 2025 en el Sistema de Alertas (no entregó información)', e: 'pendiente', p: 'deuda-municipios' } :
+        { que: 'Saldo y semáforo al cierre de 2025 en el Sistema de Alertas', e: 'oficial', fu: { tx: (MDEU.sda && MDEU.sda.fuente) || 'SHCP, Sistema de Alertas de los Municipios, Cuenta Pública 2025', url: (MDEU.sda && MDEU.sda.pagina) || 'https://www.disciplinafinanciera.hacienda.gob.mx/es/DISCIPLINA_FINANCIERA/Municipios_2025' } };
+    }
+    function munTiempos(m, fu, deuda) {
+      var c = plClave(m.a), q = m.n + ', ' + m.en;
+      var no = deuda ? [
+        ['Lo que debe después de ese corte', 'El Sistema de Alertas se mide una vez al año con la Cuenta Pública. El saldo crédito por crédito, por trimestre, está en el Registro Público Único.'],
+        ['Si la deuda se usó bien', 'El semáforo mide cuánto pesa la deuda frente a los ingresos, no en qué se gastó: eso consta en el decreto que la autorizó y en la cuenta pública del municipio.']] : [
+        ['Lo que ingresó y gastó después de 2024', 'La estadística municipal del INEGI sale con más de un año de distancia. Lo más reciente está en la cuenta pública del municipio y en su tesorería.'],
+        ['Lo que le observaron la ASF o la auditoría superior del estado', 'Traemos lo que dejó la ASF por estado, no municipio por municipio: búscalo en los informes individuales de la ASF y en el órgano de fiscalización de ' + esc(m.en) + '.'],
+        ['Sus contratos y sus obras', 'ComprasMX trae los contratos federales; los del ayuntamiento están en su portal de transparencia.']];
+      no.push(['Laudos, pensiones y adeudos con proveedores', 'No son deuda inscrita: constan en la cuenta pública del municipio.'], NO_ACTA);
+      return tiempos(fu, no, [
+        '<b>Míralo en su mapa:</b> <a href="planisferio-' + c + '.html?mun=' + esc(m.cve.slice(2)) + '#mapa-municipios">' + esc(m.n) + ' en el Planisferio ➔</a>',
+        deuda ? '<b>Lo demás de su ficha:</b> ' + preg('Municipio de ' + q, 'la radiografía de ' + m.n) :
+          '<b>Pregunta por partes:</b> ' + preg('¿Cuánto pagó de deuda el municipio de ' + q + '?', 'su deuda') + ' · ' + preg('¿Cuánto invirtió en obra el municipio de ' + q + '?', 'su obra') + ' · ' + preg('¿Cuánto recaudó de predial el municipio de ' + q + '?', 'su predial'),
+        '<b>La deuda de los municipios de ' + esc(m.en) + ':</b> <a href="planisferio-' + c + '-deuda.html">en el Planisferio ➔</a>',
+        SIG_SERV]);
     }
 
     function edoResumen(e) {
@@ -345,7 +413,7 @@
       li.push('Recibe <b>' + fmt(e.gasto, 'mdp') + '</b> de la Federación en 2026 por los Ramos 28 y 33: <b>' + fmt(e.pc, 'pesos') + '</b> por habitante.'); fu.push(fuenteDe('gasto', e), fuenteDe('pc', e));
       if (e.dep != null) { li.push('De cada $100 que ingresó en 2024, <b>$' + n(e.dep, 1) + '</b> vinieron de la Federación.'); fu.push(fuenteDe('dep', e)); }
       if (e.asf != null) { li.push('La ASF le dejó <b>' + fmt(e.asf, 'mdp') + '</b> por aclarar de la Cuenta Pública 2024.'); fu.push(fuenteDe('asf', e)); }
-      return { html: '<p><b>' + esc(e.n) + '</b>, en corto:</p><ul class="pa-lista">' + li.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>', fu: fu };
+      return { html: '<p><b>' + esc(e.n) + '</b>, en corto:</p><ul class="pa-lista">' + li.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' + edoTiempos(e, fu), fu: fu };
     }
 
     /* Cómo se dice cada cifra en «el estado con más…». */
@@ -510,6 +578,13 @@
         h = '<p><b>' + nom + '</b> tuvo ingresos por <b>' + grande(ing, 1) + '</b> en 2024. De cada $100, <b>$' + n(mv(m, 'dep'), 1) + '</b> llegaron de la Federación (participaciones y aportaciones) y <b>$' + n(mv(m, 'propios') / ing * 100, 1) + '</b> los cobró por su cuenta.' +
           (mv(m, 'predial') ? ' Solo de predial juntó <b>' + grande(mv(m, 'predial'), 1) + '</b>.' : '') + (L.de > 1 ? ' Es el lugar <b>' + L.l + ' de ' + L.de + '</b> en ingresos de ' + esc(m.en) + '.' : '') + '</p>';
         fu.push(munFu('dep'), munFu('propios'), { que: 'Porcentajes y lugar', e: 'derivado', op: 'parte ÷ ingresos totales × 100; lugar entre los municipios del estado con cifra' });
+        if (!k) {
+          /* La radiografía en corto (Ronda 32, entrega B): además de lo que le entra, lo que egresó y lo que debe, y los tiempos 2 a 4. */
+          var eg = mv(m, 'egr'), iv2 = mv(m, 'inv'), lr = [];
+          if (eg != null) { lr.push('<b>Lo que egresó:</b> <b>' + grande(eg, 1) + '</b> en 2024 (el egreso total del INEGI cuenta también lo que quedó en caja al cierre)' + (iv2 ? '; de eso, <b>' + grande(iv2, 1) + '</b> fueron inversión pública' : '') + '.'); fu.push(munFu('egr')); }
+          if (MDEU) { lr.push('<b>Lo que debe:</b> ' + sdaMunTxt(m, nom)); fu.push(sdaMunFu(m)); }
+          h += (lr.length ? '<ul class="pa-lista">' + lr.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' : '') + munTiempos(m, fu);
+        }
       } else if (k === 'inv' && mv(m, 'inv') != null) {
         L = munLugar(m, 'inv');
         var mi = mv(m, 'inv'), me = mv(m, 'egr');
@@ -520,10 +595,8 @@
         fu.push(munFu('egr'), { que: 'De cada $100 y lugar', e: 'derivado', op: 'inversión pública ÷ egresos totales × 100; lugar entre los municipios del estado con cifra' });
       } else if (k === 'deu' && mv(m, 'deu') != null) {
         /* La deuda en su cuenta (anclar_deuda_municipios.py): lo que pagó y pidió en 2024 (INEGI) y su saldo al cierre de 2025 en el Sistema de Alertas (SHCP). */
-        var dd = MDEU.mun[m.cve], sdaM = MDEU.sda && MDEU.sda.m && MDEU.sda.m[m.cve], md = function (x) { return grande(x, 1); };
-        var txtSda = !sdaM ? 'En el Sistema de Alertas de Hacienda (Cuenta Pública 2025), <b>' + nom + '</b> no figura con financiamientos inscritos en el Registro Público Único (no se mide, LDF art. 43).' :
-          (sdaM[0] > 0 ? 'Al cierre de 2025, en el Sistema de Alertas de Hacienda (Cuenta Pública 2025), <b>' + nom + '</b> registra un saldo de deuda y obligaciones de <b>$' + n(sdaM[1], 1) + ' millones</b> (deuda directa: $' + n(sdaM[2], 1) + ' millones), con semáforo en <b>' + ['', 'endeudamiento sostenible (verde)', 'endeudamiento en observación (amarillo)', 'endeudamiento elevado (rojo)'][sdaM[0]] + '</b> (' + n(sdaM[3], 1) + ' % de sus ingresos de libre disposición).' :
-          'En el Sistema de Alertas de Hacienda (Cuenta Pública 2025), <b>' + nom + '</b> tiene deuda inscrita en el Registro Público Único, pero no entregó información suficiente para su evaluación ' + chip('pendiente', 'deuda-municipios') + '.');
+        var dd = MDEU.mun[m.cve], md = function (x) { return grande(x, 1); };
+        var txtSda = sdaMunTxt(m, nom);
         L = munLugar(m, 'deu');
         h = (mv(m, 'deu') === 0 ?
           '<p>En su cuenta de 2024 al INEGI, <b>' + nom + '</b> reportó <b>$0</b> en pagos de créditos: ni capital ni intereses.</p>' :
@@ -536,8 +609,8 @@
           'El renglón «Financiamiento» del INEGI no es deuda nueva: casi todo es «Déficit», con que se cuadra el ingreso con el egreso.</p>';
         fu = [{ que: 'Su capítulo de deuda pública y sus empréstitos (2024)', e: 'oficial', fu: MFU },
           { que: 'Lo que pagó por sus créditos y su lugar', e: 'derivado', op: 'amortización + intereses + comisiones y gastos de la deuda; lugar entre los municipios del estado con cifra' },
-          sdaM && sdaM[0] === 0 ? { que: 'Saldo al cierre de 2025 en el Sistema de Alertas (no entregó información)', e: 'pendiente', p: 'deuda-municipios' } :
-            { que: 'Saldo y semáforo al cierre de 2025 en el Sistema de Alertas', e: 'oficial', fu: { tx: (MDEU.sda && MDEU.sda.fuente) || 'SHCP, Sistema de Alertas de los Municipios, Cuenta Pública 2025', url: (MDEU.sda && MDEU.sda.pagina) || 'https://www.disciplinafinanciera.hacienda.gob.mx/es/DISCIPLINA_FINANCIERA/Municipios_2025' } }];
+          sdaMunFu(m)];
+        h += munTiempos(m, fu, true);
       } else if (k === 'dep') {
         h = '<p>De cada $100 que ingresó <b>' + nom + '</b> en 2024, <b>$' + n(mv(m, 'dep'), 1) + '</b> llegaron de la Federación (participaciones y aportaciones). Lo que cobró por su cuenta fue $' + n(mv(m, 'propios') / ing * 100, 1) + ' de cada $100.</p>';
         fu.push(munFu('propios'));
