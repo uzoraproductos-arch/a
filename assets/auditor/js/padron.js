@@ -209,8 +209,28 @@
     else if (f.sinCmx) h += '<p>🏛️ <b>Contratos públicos:</b> no encontramos contratos de este RFC en los expedientes federales de ComprasMX que tenemos integrados (<a href="contratos-publicos.html?q=' + encodeURIComponent(f.rfc) + '">ve qué años cubren ➔</a>). Eso no quiere decir que no tenga tratos con el gobierno: puede tenerlos en años anteriores, con gobiernos estatales o municipales que no usan ComprasMX, o bajo otra figura (una concesión o un permiso no son un contrato). Lo que no está integrado, no lo afirmamos ni lo negamos.</p>';
     if (opc.grupo) h += '<p>🏢 <b>Grupo:</b> ' + esc(opc.grupo) + '.</p>';
     if (f.faltan.length) h += '<p class="' + CH + '">⚠️ No pude cargar ' + esc(f.faltan.join(', ')) + ': revisa tu conexión y vuelve a buscar.</p>';
-    h += '<p class="' + CH + '">⚖️ Una coincidencia es una <b>señal para revisar</b>, no una acusación: la lista 69-B y las del artículo 69 son determinaciones administrativas del SAT, no condenas (salvo la sentencia por delito fiscal, que la dicta un juez), y la OFAC y la ONU sancionan, no juzgan. ' +
-      'Revisamos: ' + esc(revisadas(f).join(' · ')) + '. No revisamos la Lista de Personas Bloqueadas de la UIF, que no es pública: si tu actividad es vulnerable, consúltala en tu acceso del SAT.</p>';
+    h += '<p class="' + CH + '">⚖️ Una coincidencia es una <b>señal para revisar</b>, no una acusación: la lista 69-B y las del artículo 69 son determinaciones administrativas del SAT, no condenas (salvo la sentencia por delito fiscal, que la dicta un juez), y la OFAC y la ONU sancionan, no juzgan.</p>';
+    /* La respuesta en cuatro tiempos (Ronda 32, pedido del autor): tras el veredicto, lo que se revisó con su corte, lo que la
+       base no cubre y qué sigue. No agrega cifras: los cortes salen de cada lista y la cobertura de contratos vive en su página. */
+    var M = f.meta, R = revisadas(f), nSat = M.orden.length, cq = 'contratos-publicos.html?q=' + encodeURIComponent(f.rfc);
+    h += '<div class="pd-tiempo"><p><b>Lo que revisamos</b> <span class="' + CH + '">(' + R.length + ' listas, cada una al corte que publicó su autoridad)</span></p><ul class="' + LI + '">' +
+      '<li><b>Las ' + nSat + ' listas del SAT</b> (datos abiertos): ' + esc(R.slice(0, nSat).join(' · ')) + '.</li>' +
+      R.slice(nSat).map(function (x) { return '<li>' + esc(x.charAt(0).toUpperCase() + x.slice(1)) + '.</li>'; }).join('') + '</ul></div>';
+    var no = [['La Lista de Personas Bloqueadas de la UIF', 'No es pública. Si tu actividad es vulnerable, consúltala en tu acceso del SAT.']];
+    if (f.moral && f.cmx) no.push(
+      ['Sus contratos de años anteriores', 'Solo traemos los expedientes federales de ComprasMX que están integrados (<a href="' + cq + '">ve qué años cubren ➔</a>).'],
+      ['Contratos con gobiernos estatales o municipales', 'Los que no usan ComprasMX los publican en su propio portal.'],
+      ['Concesiones y permisos', 'No son contratos: se acreditan con su título.']);
+    if (f.moral) no.push(['Quiénes son sus socios o su beneficiario controlador', 'No está en estas listas: consta en su acta y en el Registro Público de Comercio.']);
+    else no.push(['Su nombre', 'De una persona física solo decimos si su RFC coincide; no publicamos quién es.']);
+    h += '<div class="pd-tiempo"><p><b>Lo que la base no cubre</b></p><div class="pd-cubre"><table><thead><tr><th scope="col">Qué</th><th scope="col">Por qué, y dónde está</th></tr></thead><tbody>' +
+      no.map(function (x) { return '<tr><th scope="row">' + x[0] + '</th><td>' + x[1] + '</td></tr>'; }).join('') + '</tbody></table></div>' +
+      '<p class="' + CH + '">Lo que no está integrado, no lo afirmamos ni lo negamos.</p></div>';
+    h += '<div class="pd-tiempo"><p><b>Qué sigue</b></p><ul class="' + LI + '">' +
+      (vivas.length ? '<li><b>Antes de firmar o de pagar</b>, abre la fuente de cada señal y pide a tu contraparte el documento que la aclare.</li>'
+        : '<li><b>Guarda la fecha de esta revisión:</b> vale al corte de hoy, y las listas cambian cada semana.</li>') +
+      '<li><b>¿Son varios?</b> Revisa tu cartera completa de una vez, con tus RFC o tus facturas, sin subir nada: <a href="herramienta-inspector-padron.html#lote">la matriz por lote ➔</a></li>' +
+      '<li><b>Para enterarte si entra a una lista:</b> el aviso cada semana es el servicio de <a href="servicio-seguimiento.html">Seguimiento ➔</a></li></ul></div>';
     return h;
   }
   function htmlNombre(x, opc) {
