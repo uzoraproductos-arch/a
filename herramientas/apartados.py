@@ -2110,9 +2110,37 @@ def bib_cuerpo():
             % (tarjetas, BIB_FAQ, ico('ayuda', 24), faq[2], faq[3], faq[4], ico('flecha', 16)))
 
 
+def bib_base():
+    """«La base de datos, en números» (Ronda 35): los conteos de monetizacion.contadores(), los mismos del bloque «La base,
+    contada» que tuvo Servicios. Ninguna cifra se escribe aquí: cada una se cuenta de su archivo al generar."""
+    # La llamada va en <b> y dice «Abrir»: por_auditor_html() toma de ahí la pregunta y, como es genérica, usa el
+    # título de la página destino; así ninguna liga al chat lleva una cifra como pregunta.
+    import auditor_bento
+    import monetizacion
+    cont = monetizacion.contadores()
+    if not cont:
+        raise SystemExit('apartados.py: monetizacion.contadores() no trae conteos para la Biblioteca')
+    fichas = '\n'.join(
+        '          <a class="bib-base-n" href="%s">\n'
+        '            <span class="bib-base-cifra">%s</span>\n'
+        '            <span class="bib-base-et">%s</span>\n'
+        '            <span class="bib-base-fu">%s. Fuente: %s</span>\n'
+        '            <span class="bib-col-ir"><b>Abrir</b> %s</span>\n'
+        '          </a>' % (liga, format(v, ','), html.escape(et[0].upper() + et[1:]), html.escape(op[0].upper() + op[1:]), html.escape(fu),
+                           auditor_bento.ico('flecha', 16))
+        for _, v, et, op, fu, _url, liga in cont)
+    return ('<div class="bib-base">\n%s\n        </div>\n'
+            '        <p class="bib-base-nota">Son conteos de los archivos de la plataforma al generar esta página (<span class="est-chip est-derivado">auditada</span>), '
+            'salvo los derechohabientes del ISSSTE, que son la cifra de su Anuario (<span class="est-chip est-oficial">oficial</span>); '
+            'cada uno dice de qué documento sale. <a href="base-al-dia.html">Cómo se alimenta la base</a></p>') % fichas
+
+
 DICCIONARIO['secciones'] = [
     {'id': 'apartados', 'titulo': 'Las colecciones', 'texto': 'Elige una: cada colección abre su propia página.',
      'tarjetas': [], 'bloque': bib_cuerpo()},
+    {'id': 'base', 'titulo': 'La base de datos, en números', 'salto': 'La base en números',
+     'texto': 'Lo que hoy puedes consultar en la plataforma, contado de sus propios archivos. Cada tarjeta lleva a donde se revisa.',
+     'tarjetas': [], 'bloque': bib_base()},
     {'id': 'terminos', 'titulo': 'Los términos del Diccionario',
      'texto': 'Busca arriba o elige una letra. Cada ficha abre su término en el Diccionario, con su fundamento.',
      'tarjetas': [],
@@ -7488,7 +7516,7 @@ def _pagina(a, sello):
     elif len(a['secciones']) > 1 and not a.get('sin_saltos'):
         saltos = '\n'.join('          <a href="#%s">%s%s</a>' % (
             s['id'], ('<span class="apartado-cap-num" aria-hidden="true">%d</span>' % s['num']) if s.get('num') else '',
-            a['saltos'][s['id']] if isinstance(a.get('saltos'), dict) else s['titulo'])
+            a['saltos'][s['id']] if isinstance(a.get('saltos'), dict) else s.get('salto') or s['titulo'])
             for s in a['secciones'] if not a.get('saltos') or s['id'] in a['saltos'])
         en_pagina = '''      <nav class="apartado-saltos" aria-label="En esta página">
           <span class="apartado-saltos-tit">En esta página:</span>
