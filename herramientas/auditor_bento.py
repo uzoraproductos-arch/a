@@ -190,10 +190,15 @@ def lado(actual, n_serv, en_auditor=False, pestana=''):
     if en_auditor:
         nueva = '<button type="button" class="avb-nueva" id="avbNueva">%s Nueva investigación</button>' % ico('mas', 16)
         tour = '<button type="button" class="avb-tour-btn" id="avbTourBtn">%s Cómo funciona (3 pasos)</button>' % ico('ayuda')
+        # Ronda 34: en celular, la franja del Auditor enseña la billetera, y la Mesa y la insignia viven en el menú.
+        movil = ('<div class="avb-lado-movil">\n        <button type="button" class="avb-mesa-btn-m" id="avbMesaBtnM" aria-controls="avbMesa">'
+                 '%s<span>Mostrar mesa derecha</span><i class="avb-aviso" id="avbAvisoM" hidden></i></button>\n'
+                 '        <p class="avb-insignia">%s Plataforma abierta · Cero CIEC · Datos oficiales</p>\n      </div>' % (ico('panel'), ico('check', 16)))
     else:
         nueva = '<a class="avb-nueva" href="%s">%s Nueva investigación</a>' % (AUDITOR, ico('mas', 16))
         tour = '<a class="avb-tour-btn" href="%s?tour=1">%s Cómo funciona (3 pasos)</a>' % (AUDITOR, ico('ayuda'))
-    return LADO % (_e(pestana or ('Auditor' if en_auditor else '')), AUDITOR, ico('panel'), '\n'.join(nav), ley, ico('flecha', 14), nueva, tour, CANJE, ico('llave'))
+        movil = ''
+    return LADO % (_e(pestana or ('Auditor' if en_auditor else '')), AUDITOR, ico('panel'), '\n'.join(nav), ley, ico('flecha', 14), nueva, tour, CANJE, ico('llave'), movil)
 
 
 LADO = '''<aside class="avb-lado" id="avbLado" data-pestana="%s" aria-label="Navegación de Auditavisión">
@@ -225,6 +230,7 @@ LADO = '''<aside class="avb-lado" id="avbLado" data-pestana="%s" aria-label="Nav
       <div class="avb-acceso" id="avbAcceso">
         <a class="avb-ingresa" href="%s">%s Ingresar / Canjear código</a>
       </div>
+      %s
       </div>
     </aside>'''
 
@@ -235,9 +241,10 @@ def _lado(n_serv):
 
 def _barra():
     return '''<div class="avb-barra">
+        <p class="avb-barra-tk" id="avbBarraTk"><b class="avb-barra-saldo" id="avbBarraSaldo"></b><a href="%s">Canjear / Solicitar código</a></p>
         <p class="avb-insignia">%s Plataforma abierta · Cero CIEC · Datos oficiales</p>
         <button type="button" class="avb-mesa-btn" id="avbMesaBtn" aria-controls="avbMesa" aria-expanded="true">%s<span>Ocultar mesa derecha</span><i class="avb-aviso" id="avbAviso" hidden></i></button>
-      </div>''' % (ico('check', 16), ico('panel'))
+      </div>''' % (CANJE, ico('check', 16), ico('panel'))
 
 
 def _cab():

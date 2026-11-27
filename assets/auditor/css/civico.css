@@ -1517,6 +1517,7 @@ table.sa-rangos tbody th { font-weight: 600; }
 /* «Cuéntanos lo que viste», dentro de Comunidad. */
 .avc-cuentanos a { font-weight: 700; }
 @media (min-width: 981px) {
+  .avb-lado-movil { display: none; }
   body:has(> .avb-lado), body.avb-pagina { padding-left: 268px; }
   .avb-lado { position: fixed; top: 0; bottom: 0; left: 0; width: 268px; overflow-y: auto; z-index: 20; }
   body:has(> .avb-lado) .av-volver, body.avb-pagina .av-volver { left: 284px; }
@@ -1526,8 +1527,20 @@ table.sa-rangos tbody th { font-weight: 600; }
   .avb-lado-menu { display: inline-flex; }
   .avb-lado-cuerpo { display: none; gap: 10px; padding-bottom: 6px; }
   .avb-lado.avb-lado-abierto .avb-lado-cuerpo { display: flex; }
-  .avb-nav { display: flex; flex-wrap: wrap; gap: 4px; }
-  .avb-nav a { flex: 1 1 auto; padding: 8px 10px; background: rgba(255, 255, 255, .06); }
+  /* Ronda 34: el menú del celular baja en lista, un destino por renglón. */
+  .avb-nav { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .avb-nav a { min-height: 44px; box-sizing: border-box; padding: 8px 12px; background: rgba(255, 255, 255, .06); }
+  /* En el Auditor, la billetera va en la franja (.avb-barra-tk) y aquí entran la Mesa y la insignia. */
+  body.avb-pagina #avbAcceso { display: none; }
+  .avb-lado-movil { display: grid; gap: 8px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, .12); }
+  .avb-mesa-btn-m { position: relative; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 12px; border: 1px solid rgba(255, 255, 255, .28);
+    border-radius: 10px; background: rgba(255, 255, 255, .06); color: #ffffff; font: inherit; font-size: 16px; font-weight: 600; text-align: left; cursor: pointer; }
+  .avb-mesa-btn-m .avb-aviso, .avb-lado-menu.avb-con-aviso::after { width: 9px; height: 9px; border-radius: 50%; background: #d4a826; }
+  .avb-mesa-btn-m .avb-aviso { position: static; margin-left: auto; }
+  .avb-mesa-btn-m .avb-aviso[hidden] { display: none; }
+  .avb-lado-menu.avb-con-aviso::after { content: ""; flex: none; }
+  .avb-lado-movil .avb-insignia { display: flex; align-items: center; gap: 8px; margin: 0; padding: 8px 12px; border-radius: 10px;
+    border: 1px solid #cfe6d8; background: #f1faf4; color: #1d6a3d; font-size: 16px; font-weight: 600; }
   .avb-tour-btn { margin-top: 0; }
   .avb-acceso { padding-top: 10px; }
   .avb-leyenda li, .avb-leyenda > a, .avb-port li a, .avb-port-vacio, .avb-tour-btn { font-size: 16px; }
