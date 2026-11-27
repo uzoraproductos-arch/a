@@ -3072,6 +3072,23 @@
   /* El autodiagnóstico de cumplimiento (19-11-2026): «¿cumplo con…?», «¿qué me falta para cumplir?». Va antes que el calendario. */
   var CUMPLE_RE = /autodiagn[oó]stico|diagn[oó]stico de cumplimiento|(?:checklist|lista) de cumplimiento|cumplimiento documental|(?:cumplo|cumple|cumplimos|cumples|estoy cumpliendo|estamos cumpliendo)\s+(?:[\wáéíóúñ]+\s+){0,3}(?:papeles|documentos|archivos?|la ley de datos|datos personales|lfpdppp|ley general de archivos|obligaciones documentales)|qu[eé]\s+(?:me|nos)\s+falta\s+para\s+cumplir/i;
   var RIESGO_DOC_RE = /(?:matriz|mapa)(?: de calor)? de riesgos? (?:documental(?:es)?|de (?:mis |nuestros |los )?(?:papeles|documentos|archivos)|de cumplimiento(?: documental)?|de datos personales)|riesgos? documental(?:es)?|por d[oó]nde empiezo a cumplir|qu[eé] (?:atiendo|atendemos|arreglo) primero (?:de|en) (?:mis |nuestros )?(?:papeles|documentos|cumplimiento)/i;
+  /* El plazo de un papel, contestado (Ronda 32, pedido del autor: que la respuesta diga el plazo y no describa la
+     página). Lee D.cons, que escribe insp_conservacion.chat(): la regla del papel que se nombra y las que conviene
+     decir junto a ella, porque manda el plazo más largo. Sin cifras propias: cada plazo con su ley, su artículo y su cita. */
+  function plazoHtml(t) {
+    var L = (B.dat && B.dat.cons) || [], p = ' ' + plano(t) + ' ', hit = null, por = {};
+    L.forEach(function (x) { por[x.id] = x; if (!hit && new RegExp(x.re).test(p)) hit = x; });
+    if (!hit) return '';
+    var ley = function (x) { return '<a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.ley) + ', ' + esc(x.art) + '</a>'; };
+    var junto = (hit.junto || []).map(function (k) { return por[k]; }).filter(Boolean);
+    return '<p><span aria-hidden="true">' + hit.ic + '</span> <b>' + esc(hit.plazo) + '.</b> ' + esc(hit.doc) + '</p>' +
+      '<p><b>Desde cuándo se cuenta:</b> ' + esc(hit.desde) + ' La ley lo dice así: «' + esc(hit.cita) + '» (' + ley(hit) + ') ' + chip('oficial') + '</p>' +
+      '<p><b>Ojo:</b> ' + esc(hit.ojo) + '</p>' +
+      (junto.length ? '<p><b>Manda el plazo más largo.</b> El mismo papel puede caer en otra regla:</p><ul class="pa-lista">' + junto.map(function (x) {
+        return '<li><b>' + esc(x.plazo) + '</b>: ' + esc(x.doc) + ' (' + ley(x) + ')</li>'; }).join('') + '</ul>' : '') +
+      '<p class="pa-chico"><b>Lo que esta respuesta no cubre:</b> la fecha exacta de tus papeles depende de cuándo presentaste tu declaración o de cuándo terminó la relación: ' +
+      'esa cuenta la hace el calendario de aquí abajo, con tus fechas y en tu navegador. Es la regla de la ley, no una asesoría fiscal ni legal.</p>';
+  }
   function respuesta(q, previas) {
     var t = String(q || '').trim().replace(/^[¿¡\s]+/, '').replace(/[?!.\s]+$/, '');
     if (RIESGO_DOC_RE.test(t)) {
@@ -3085,7 +3102,7 @@
     if (CONSERVA_RE.test(t)) {
       var srvC = /servicio|cotiza|gobernanza|h[aá]g[ae]n|quiero un calendario|para mi empresa/i.test(t), lc = srvC ? 'servicio-gobernanza.html' : 'herramienta-inspector-conservacion.html';
       var rc = abre(q, lc);
-      if (rc) return rc;
+      if (rc) { var pz = srvC ? '' : plazoHtml(t); if (pz) rc.html = pz; return rc; }
     }
     if (PROTEGE_RE.test(t)) {
       var fuga = /fuga|filtraci|vulneraci|robo|hackeo/i.test(t), lp = 'aviso-de-privacidad.html#' + (fuga ? 'vulneraciones' : 'seguridad');
@@ -3563,6 +3580,22 @@
   }
   /* La respuesta en corto del Inspector de Servicios: lo primero que dice, sin
      tablas, marcos ni listas largas; lo demás vive en su página completa. */
+  /* Lo que la versión corta ya enseñó entero no se repite debajo (Ronda 32: en el panel la respuesta salía dos veces).
+     Recorre igual que corto(): quita los primeros bloques que aquella copió completos; una lista recortada se queda. */
+  function sinCorto(h) {
+    var d = document.createElement('div');
+    d.innerHTML = h;
+    var quita = [], vistos = 0, n = 0;
+    Array.prototype.some.call(d.children, function (k) {
+      if (k.classList.contains('pa-dedonde') || k.querySelector('iframe, form, table, .pa-app') || /^(TABLE|FORM|IFRAME|DETAILS)$/.test(k.tagName)) return false;
+      vistos++; n += /^(UL|OL)$/.test(k.tagName) ? Array.prototype.slice.call(k.children, 0, 3).reduce(function (a, x) { return a + x.textContent.length; }, 0) : k.textContent.length;
+      if (!(/^(UL|OL)$/.test(k.tagName) && k.children.length > 3)) quita.push(k);
+      return vistos >= 2 || n > 260;
+    });
+    if (!vistos) return h;
+    quita.forEach(function (k) { d.removeChild(k); });
+    return d.innerHTML;
+  }
   function corto(h) {
     var d = document.createElement('div');
     d.innerHTML = h;
@@ -3738,7 +3771,7 @@
            final, «Generar dictamen». Mismos datos que la página completa: nada nuevo entra a la huella. */
         var app = appDe(r).replace(/<small>[^<]*aplicación \d+ de \d+<\/small>/, '');
         doc.innerHTML = '<h2 class="pa-pag-q">«' + esc(q) + '»</h2>' + vistazoHtml(r, '') + '<div class="pa-visual-caja" id="paVisual"></div>' +
-          '<div class="pa-resp">' + r.html + '</div>' + integralHtml(r.integ) + app + expInvHtml(q, r) +
+          '<div class="pa-resp">' + sinCorto(r.html) + '</div>' + integralHtml(r.integ) + app + expInvHtml(q, r) +
           (r.ficha ? '<section class="pa-pag-dic"><h3><span aria-hidden="true">🧾</span> Tu dictamen</h3>' +
             '<p>El respaldo de esta revisión' + (r.integ ? ', con la revisión completa' : '') + ': cada cifra con su estado, sus fuentes y el método, con folio, sello y huella digital. ' +
             'No es un documento oficial ni un peritaje.</p><p class="pa-acc">' + genera + '</p></section>' : '');

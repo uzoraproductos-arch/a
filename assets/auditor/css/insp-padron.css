@@ -26,3 +26,21 @@
 .pd-m-o { display: block; font-size: inherit; }
 .pd-cadena { padding-left: 1.25rem; }
 .pd-cadena li { margin: .4rem 0; line-height: 1.5; overflow-wrap: anywhere; }
+
+/* La respuesta en cuatro tiempos (Ronda 32): lo que revisamos, lo que la base no cubre y qué sigue. */
+.pd-tiempo { margin: 12px 0 0; padding: 10px 0 0; border-top: 1px solid #e3e8f1; }
+.pd-tiempo > p:first-child { margin: 0 0 6px; }
+.pd-cubre { overflow-x: auto; margin: 0 0 6px; }
+.pd-cubre table { border-collapse: collapse; width: 100%; font-size: 16px; }
+.pd-cubre th, .pd-cubre td { padding: 8px 10px; border-bottom: 1px solid #e3e8f1; text-align: left; vertical-align: top; line-height: 1.45; }
+.pd-cubre thead th { background: #eef3fb; color: #0b2a63; font-size: 14px; }
+.pd-cubre tbody th { font-weight: 600; width: 38%; }
+.pd-tiempo a { display: inline-block; min-height: 24px; }
+@media (max-width: 600px) {
+  .pd-cubre thead { display: none; }
+  .pd-cubre tr, .pd-cubre tbody th, .pd-cubre td { display: block; width: auto; }
+  .pd-cubre tbody th { border-bottom: 0; padding-bottom: 0; }
+}
+html[data-theme="dark"] .pd-tiempo, html[data-theme="dark"] .pd-cubre th, html[data-theme="dark"] .pd-cubre td { border-color: #2c3a52; }
+html[data-theme="dark"] .pd-cubre thead th { background: #1a2740; color: #cfe0ff; }
+.pd-tiempo .pd-lista { font-size: 16px; color: inherit; }

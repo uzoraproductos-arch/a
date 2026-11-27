@@ -161,6 +161,45 @@ REGLAS = [
          ojo='En el gobierno no hay un plazo único: un documento sin catálogo no se puede dar de baja.'),
 ]
 
+# Cómo se pregunta por cada papel en el chat (Ronda 32, 27-11-2026, pedido del autor: que la respuesta
+# conteste el plazo y no describa la página). Por regla: la expresión que la reconoce (sin acentos, igual en
+# Python y en JavaScript) y las reglas que conviene decir junto a ella, porque manda el plazo más largo.
+# **Una regla nueva de REGLAS necesita aquí su renglón**, o la generación se detiene. El orden importa:
+# lo más específico va primero.
+PAL = [
+    ('lft_contrato', r'contratos? (individual(es)? )?de trabajo|contratos? laboral', ['lft_pagos']),
+    ('lft_pagos', r'recibos? de (nomina|salario|sueldo|pago)|control(es)? de asistencia|aguinaldo|vacaciones|\bptu\b', ['imss', 'fiscal']),
+    ('imss', r'nomina|listas? de raya|\bimss\b', ['lft_pagos', 'fiscal']),
+    ('pld', r'actividad(es)? vulnerable|lavado|\bpld\b|expedientes? de (mis |los |tus )?clientes|beneficiario controlador', []),
+    ('impago', r'impago|adeudo|incumplimiento|buro de credito', []),
+    ('datos', r'datos personales', []),
+    ('sociedad', r'acta constitutiva|actas? de asamblea|aumento de capital|dividendos', []),
+    ('juicio', r'juicio|litigio|demanda|recurso de revocacion', []),
+    ('efectos', r'depreci|perdidas? fiscal|activos? fijos?', []),
+    ('contratos', r'contratos?|convenios?|correos?', []),
+    ('gobierno', r'dependencia|ayuntamiento|sujeto obligado|archivos? (publico|del gobierno|municipal)', []),
+    ('comercio', r'libros|comerciante|de mi negocio', ['fiscal']),
+    ('fiscal', r'factura|cfdi|contabilidad|estados? de cuenta|poliza|comprobantes?|declaraci|impuestos', ['comercio']),
+]
+
+
+def chat():
+    """Las reglas para el chat: el plazo de cada papel con su ley, su artículo y su cita. Sin cifras propias."""
+    ids = [r['id'] for r in REGLAS]
+    pal = [x[0] for x in PAL]
+    if sorted(ids) != sorted(pal):
+        raise SystemExit('insp_conservacion: cada regla de REGLAS necesita su renglón en PAL (faltan o sobran: %s)'
+                         % ', '.join(sorted(set(ids) ^ set(pal))))
+    for k, _, junto in PAL:
+        for j in junto:
+            if j not in ids:
+                raise SystemExit('insp_conservacion: PAL de «%s» cita una regla que no existe: %s' % (k, j))
+    por = {r['id']: r for r in REGLAS}
+    return [{'id': k, 're': rx, 'junto': junto, 'ic': por[k]['ic'], 'doc': por[k]['doc'], 'plazo': por[k]['plazo'],
+             'desde': por[k]['desde'], 'ley': LEYES[por[k]['ley']][1], 'url': LEYES[por[k]['ley']][3], 'art': por[k]['art'],
+             'cita': por[k]['cita'], 'ojo': por[k]['ojo']} for k, rx, junto in PAL]
+
+
 # Lo que casi nadie dice (los puntos ciegos de la conversación «guárdalo 5 años»).
 CIEGOS = [
     ('Los 5 años no empiezan con la factura', 'Empiezan con la declaración anual del ejercicio: lo de 2026 se guarda, como mínimo, hasta 2032.', 'cff', 'art. 30'),
