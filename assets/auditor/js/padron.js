@@ -52,7 +52,8 @@
   function comprasmx(rfc) {
     var pre = rfc.slice(0, 2);
     return carga('comprasmx/p-' + pre.replace(/[^A-Z0-9]/g, '_') + '.js', function () { return window.CMX_P && window.CMX_P[pre]; })
-      .then(function (L) { return L[rfc] || null; });
+      /* false: el índice cargó y el RFC no trae contratos (se dice en la ficha); null queda para «no se pudo cargar». */
+      .then(function (L) { return L[rfc] || false; });
   }
 
   function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
@@ -139,6 +140,7 @@
           });
         } else f.faltan.push('las listas de la OFAC y de la ONU');
         if (C) { f.cmx = C; if (!f.nombre) f.nombre = C.n; }
+        f.sinCmx = moral && C === false;
         f.senales.sort(function (a, b) { return (PESO[b.k] || 0) - (PESO[a.k] || 0); });
         f.nivel = f.senales.reduce(function (m, s) { return Math.max(m, PESO[s.k] || 0); }, 0);
         f.meta = M;
@@ -202,6 +204,9 @@
         }).join('') + '</ul>';
     }
     if (f.cmx) h += '<p>🏛️ <b>Contratos públicos:</b> ' + n(f.cmx.c) + ' contrato' + (f.cmx.c === 1 ? '' : 's') + ' en ComprasMX por ' + pesos(f.cmx.m) + ' (importe reportado por cada institución, antes de impuestos). <a href="contratos-publicos.html?q=' + encodeURIComponent(f.rfc) + '">Verlos ➔</a></p>';
+    /* Sin contratos en lo integrado (27-11-2026, pedido del autor: «tiene tratos con el gobierno y no salió»): se dice, con lo
+       que la base no cubre, para que el silencio no se lea como «no tiene contratos». La cobertura vive en Contratos públicos. */
+    else if (f.sinCmx) h += '<p>🏛️ <b>Contratos públicos:</b> no encontramos contratos de este RFC en los expedientes federales de ComprasMX que tenemos integrados (<a href="contratos-publicos.html?q=' + encodeURIComponent(f.rfc) + '">ve qué años cubren ➔</a>). Eso no quiere decir que no tenga tratos con el gobierno: puede tenerlos en años anteriores, con gobiernos estatales o municipales que no usan ComprasMX, o bajo otra figura (una concesión o un permiso no son un contrato). Lo que no está integrado, no lo afirmamos ni lo negamos.</p>';
     if (opc.grupo) h += '<p>🏢 <b>Grupo:</b> ' + esc(opc.grupo) + '.</p>';
     if (f.faltan.length) h += '<p class="' + CH + '">⚠️ No pude cargar ' + esc(f.faltan.join(', ')) + ': revisa tu conexión y vuelve a buscar.</p>';
     h += '<p class="' + CH + '">⚖️ Una coincidencia es una <b>señal para revisar</b>, no una acusación: la lista 69-B y las del artículo 69 son determinaciones administrativas del SAT, no condenas (salvo la sentencia por delito fiscal, que la dicta un juez), y la OFAC y la ONU sancionan, no juzgan. ' +

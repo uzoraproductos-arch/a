@@ -48,6 +48,46 @@
   })();
 
   /* 2 · El mapa -------------------------------------------------------- */
+  /* La barra de ubicación (Ronda 31): entidad y, si se quiere, municipio, directo a su portal. El padrón del INEGI se
+     carga solo al elegir la entidad; el municipio va siempre «Municipio, Entidad · clave», para no confundir homónimos. */
+  (function () {
+    var f = document.getElementById('plUbica');
+    if (!f) return;
+    var selE = document.getElementById('plUbEnt'), selM = document.getElementById('plUbMun'), ir = document.getElementById('plUbIr'), padron = null;
+    var TODOS = '<option value="">Todos sus municipios (portal estatal)</option>';
+    function trae() {
+      if (window.AUDIT_MUNICIPIOS) return Promise.resolve(window.AUDIT_MUNICIPIOS);
+      if (!padron) padron = new Promise(function (ok, mal) {
+        var s = document.createElement('script'), v = /\?v=\w+/.exec((document.querySelector('script[src*="planisferio.js"]') || {}).src || '');
+        s.src = 'assets/auditor/js/municipios-efipem.js' + (v ? v[0] : '');
+        s.onload = function () { ok(window.AUDIT_MUNICIPIOS); };
+        s.onerror = function () { padron = null; mal(); };
+        document.head.appendChild(s);
+      });
+      return padron;
+    }
+    selE.addEventListener('change', function () {
+      var a = selE.value, o = selE.options[selE.selectedIndex];
+      selM.innerHTML = TODOS;
+      selM.disabled = true;
+      ir.disabled = !a;
+      if (!a || o.getAttribute('data-mm') !== '1') return;
+      trae().then(function (MU) {
+        if (selE.value !== a) return;
+        var E = MU && MU.ent[a], L = E ? E.lista : [];
+        selM.innerHTML = TODOS + L.map(function (r) {
+          return '<option value="' + esc(r[0]) + '">' + esc(r[1] + ', ' + o.textContent + ' · ' + E.cve + r[0]) + '</option>';
+        }).join('');
+        selM.disabled = !L.length;
+      }, function () { selM.disabled = true; });
+    });
+    f.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var o = selE.options[selE.selectedIndex], p = o && o.getAttribute('data-p');
+      if (!selE.value || !p) { selE.focus(); return; }
+      location.href = p + (selM.value ? '?mun=' + encodeURIComponent(selM.value) + '#mapa-municipios' : '');
+    });
+  })();
   (function () {
     var nodo = document.getElementById('plDatos');
     if (!nodo) return;
@@ -225,7 +265,7 @@
     }
     var listo = false;
     function guarda() {
-      if (!listo || !history.replaceState) return;
+      if (!listo || !abierta || !history.replaceState) return;
       try { history.replaceState(null, '', location.pathname + '?d=' + dimP + '&l=' + lente.id + (sel ? '&e=' + encodeURIComponent(sel.a) : '') + location.hash); } catch (err) { /* sin historial, la vista sigue igual */ }
     }
     function suelta() {
@@ -567,6 +607,9 @@
     function ponLente(id) {
       lente = lenteDe(id) || lente;
       ultima[lente.dim] = lente.id;
+      /* En celular las lentes son una tira: la elegida queda a la vista (Ronda 31). */
+      var vista = document.querySelector('#plTablero .pl-lente[data-l="' + lente.id + '"]'), tira = vista && vista.parentNode;
+      if (tira && tira.scrollWidth > tira.clientWidth) setTimeout(function () { tira.scrollLeft = Math.max(0, vista.offsetLeft - tira.offsetLeft - 12); }, 0);
       /* Los temas (16-11-2026): una dimensión con muchas lentes enseña solo
          las del tema elegido. */
       var g = '';
@@ -609,6 +652,41 @@
       if (!sel) ficha.innerHTML = VACIA;
     }
     /* Las dimensiones que todavía no se pintan llevan a donde ya viven. */
+    /* Ronda 31 (27-11-2026): las dimensiones abren cerradas. Tocar una despliega el panel (el mismo tablero, con su mapa);
+       tocarla otra vez o «Cerrar dimensión» lo repliega. Una dirección con ?d=, ?l= o ?e= abre su vista, como antes. */
+    var abierta = false, dimsC = document.getElementById('plDims'), invita = document.getElementById('plInvita'), cerrarB = document.getElementById('plCerrar');
+    function abre(mueve) {
+      abierta = true;
+      if (tablero) tablero.hidden = false;
+      if (dimsC) dimsC.classList.add('pl-abierta');
+      if (invita) invita.hidden = true;
+      if (mueve && tablero) {
+        var quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        (dimsC || tablero).scrollIntoView({ behavior: quieto ? 'auto' : 'smooth', block: 'start' });
+      }
+    }
+    function cierra() {
+      abierta = false;
+      if (tablero) tablero.hidden = true;
+      if (dimsC) dimsC.classList.remove('pl-abierta');
+      if (invita) invita.hidden = false;
+      Array.prototype.forEach.call(document.querySelectorAll('.pl-dim'), function (x) { x.setAttribute('aria-expanded', 'false'); });
+      try { history.replaceState(null, '', location.pathname + location.hash); } catch (err) { /* la vista sigue igual */ }
+    }
+    /* En el panel no va ni un emoji: lo que el motor arma con flecha o con cruz se deja en signos de texto. */
+    if (tablero && window.MutationObserver) {
+      var signos = function (n) {
+        var w = document.createTreeWalker(n, NodeFilter.SHOW_TEXT, null), t;
+        while ((t = w.nextNode())) if (/[\u2794\u2715]/.test(t.nodeValue)) t.nodeValue = t.nodeValue.replace(/\u2794/g, '\u2192').replace(/\u2715/g, '\u00d7');
+      };
+      signos(tablero);
+      new MutationObserver(function (ms) { ms.forEach(function (m) { Array.prototype.forEach.call(m.addedNodes, function (n) { if (n.nodeType === 1) signos(n); else if (n.nodeType === 3 && n.parentNode) signos(n.parentNode); }); }); }).observe(tablero, { childList: true, subtree: true });
+    }
+    if (cerrarB) cerrarB.addEventListener('click', function () {
+      var b = document.querySelector('.pl-dim[data-dim="' + dimP + '"]');
+      cierra();
+      if (b) b.focus();
+    });
     var dim = null;
     function avisa() {
       if (!dim || !aviso) return;
@@ -619,12 +697,16 @@
     }
     Array.prototype.forEach.call(document.querySelectorAll('.pl-dim'), function (b) {
       b.addEventListener('click', function () {
-        eligeDim(b.getAttribute('data-dim'));
+        if (abierta && b.getAttribute('aria-expanded') === 'true') { cierra(); return; }
+        eligeDim(b.getAttribute('data-dim'), true);
       });
     });
-    function eligeDim(id) {
+    function eligeDim(id, mueve) {
       if (!D.dims[id]) return;
-      Array.prototype.forEach.call(document.querySelectorAll('.pl-dim'), function (x) { x.setAttribute('aria-selected', x.getAttribute('data-dim') === id ? 'true' : 'false'); });
+      Array.prototype.forEach.call(document.querySelectorAll('.pl-dim'), function (x) { x.setAttribute('aria-expanded', x.getAttribute('data-dim') === id ? 'true' : 'false'); });
+      abre(mueve);
+      var elegida = document.querySelector('.pl-dim[data-dim="' + id + '"]');
+      if (dimsC && elegida && dimsC.scrollWidth > dimsC.clientWidth) dimsC.scrollLeft = Math.max(0, elegida.offsetLeft - dimsC.offsetLeft - 12);
       if (D.dims[id].pinta) { dim = null; if (aviso) aviso.hidden = true; ponDim(id); return; }
       dim = id;
       avisa();
@@ -632,11 +714,14 @@
     var m = /[?&]e=([^&#]+)/.exec(location.search), pedida = null;
     try { pedida = m ? decodeURIComponent(m[1]) : null; } catch (err) { pedida = null; }
     /* ?d=deuda, ?d=inversion, ?d=ambiental, ?d=legislativa o ?d=judicial (desde el Auditor): abre el mapa en esa dimensión (y &l=, en esa lente). */
-    var md = /[?&]d=([a-z]+)/.exec(location.search);
+    var md = /[?&]d(?:im)?=([a-z]+)/.exec(location.search);
     /* &l=minT (desde el Auditor o la Enciclopedia): la lente con que abre esa dimensión. */
     var ml = /[?&]l=([A-Za-z]+)/.exec(location.search), lp = ml && lenteDe(ml[1]);
     if (lp) ultima[lp.dim] = lp.id;
-    if (md && D.dims[md[1]]) eligeDim(md[1]); else pinta();
+    /* Sin dimensión, lente ni entidad en la dirección, no se abre ninguna a la fuerza. */
+    if (md && D.dims[md[1]]) eligeDim(md[1]);
+    else if (lp) eligeDim(lp.dim);
+    else if (pedida) eligeDim(dimP);
     /* ?e=JAL&m=1 (desde el Auditor): si la entidad ya tiene el mapa de sus
        municipios, se va directo a él; si no, se queda con su ficha. */
     if (pedida && porA[pedida] && porA[pedida].mm && /[?&]m=1/.test(location.search)) { location.replace(porA[pedida].p + '#mapa-municipios'); return; }
@@ -802,6 +887,9 @@
       });
     });
     pinta();
+    /* ?mun=039 (desde la barra de ubicación del Planisferio, Ronda 31): abre el portal con ese municipio ya elegido. */
+    var pm = new URLSearchParams(location.search).get('mun');
+    if (pm && porC[pm]) elige(pm);
   })();
 
   /* 4 · Los municipios de cada portal ---------------------------------- */

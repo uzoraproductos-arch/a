@@ -33,6 +33,7 @@ Lo usa apartados.generar(); lo interactivo vive en planisferio.js.
 import html
 import json
 import os
+import re
 import subprocess
 import unicodedata
 from urllib.parse import quote
@@ -84,6 +85,65 @@ DIMENSIONES = [
      'y cuántos delitos no se denunciaron o no se investigaron (la cifra oculta); y las carpetas por fraude que abrieron sus fiscalías (SESNSP).',
      'aprende-fraude-en-numeros.html', None, True),
 ]
+
+
+# Ronda 31 (27-11-2026): cada dimensión es una tarjeta cerrada con su ícono de trazo (sin emojis) y su línea corta.
+# **Una dimensión nueva necesita aquí su trazo y su línea**, o la generación se detiene (pagina_mapa()).
+DIM_TRAZO = {
+    'financiera': '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/>',
+    'deuda': '<path d="M3 22h18M6 18v-7M10 18v-7M14 18v-7M18 18v-7M12 2l8 5H4z"/>',
+    'inversion': '<rect x="2" y="6" width="20" height="8" rx="1"/><path d="M17 14v7M7 14v7M17 3v3M7 3v3M10 14 2.3 6.3M14 6l7.7 7.7M8 6l8 8"/>',
+    'ambiental': '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+    'legislativa': '<path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/>',
+    'judicial': '<path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10M12 3v18M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>',
+    'salud': '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/>',
+    'social': '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+    'administracion': '<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/>',
+    'penal': '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 8v4M12 16h.01"/>',
+}
+DIM_CORTA = {
+    'financiera': 'Lo que baja de la Federación, lo que cobra el estado y lo que ingresan sus municipios.',
+    'deuda': 'Cuánto debe cada gobierno estatal y cuánto le pesa.',
+    'inversion': 'La obra de cada gobierno estatal y lo que la ASF dejó por aclarar.',
+    'ambiental': 'Agua, bosques, incendios, pesca, minería y refinerías.',
+    'legislativa': 'Lo que gasta cada congreso local y cuánto cuesta por curul.',
+    'judicial': 'Lo que resuelve cada poder judicial con su presupuesto.',
+    'salud': 'El IMSS y el ISSSTE en cada estado: personas, consultas y camas.',
+    'social': 'La pobreza y la población de cada estado.',
+    'administracion': 'El gobierno que ejecuta: su gente, su gasto y sus contratos.',
+    'penal': 'El fraude que la gente reporta y las carpetas que se abren.',
+}
+TODO_MARCA = '<!--pl-todo:%s-->'
+
+
+def trazo(d, tam=22):
+    """El ícono de trazo de una dimensión (decorativo)."""
+    return ('<svg class="pl-i" width="%d" height="%d" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" '
+            'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">%s</svg>') % (tam, tam, DIM_TRAZO[d])
+
+
+def todo_dim(pags):
+    """«Todo lo de esta dimensión» de cada panel (Ronda 31): los grupos de páginas de planisferio-dim-<id>.html, con cuántas
+    trae cada uno. Sale de traslado.paginas_dim(), ya con todo generado: sin cifras y sin copiar su contenido."""
+    out = {}
+    for p in pags:
+        d = re.match(r'planisferio-dim-(\w+)\.html$', p['archivo']).group(1)
+        gs = [(x['titulo'], len(x['tarjetas']), x['id']) for x in p['secciones'] if x['tarjetas']]
+        n = sum(g[1] for g in gs)
+        out[d] = ('<ul class="pl-todo-l">%s</ul><p class="pl-todo-ir"><a href="%s">Ver el índice completo: %d %s</a></p>' % (
+            ''.join('<li><a href="%s#%s"><b>%s</b><small>%d %s</small></a></li>' % (p['archivo'], i, html.escape(t), k, 'página' if k == 1 else 'páginas')
+                    for t, k, i in gs), p['archivo'], n, 'página' if n == 1 else 'páginas')) if gs else (
+            '<p class="pl-todo-ir">Esta dimensión aún no tiene páginas propias fuera del mapa y los portales. <a href="%s">Ver su índice</a></p>' % p['archivo'])
+    return out
+
+
+def limpia(texto):
+    """planisferio.html va sin emojis dentro de <main> (Ronda 31): las flechas y el cierre pasan a trazo y lo demás se quita."""
+    import auditor_bento as ab
+    i, j = texto.find('<main'), texto.rfind('</main>')
+    c = texto[i:j].replace('➔', ab.ico('flecha', 14, 'pl-i')).replace('✕', ab.ico('cerrar', 16, 'pl-i'))
+    c = re.sub('(?:[\U0001F000-\U0001FAFF\u2600-\u27BF\u2B00-\u2BFF\u2300-\u23FF][\uFE0F\u200D]*)+[ \u00a0]?', '', c)
+    return texto[:i] + c + texto[j:]
 
 
 DINERO = 'planisferio-dinero.html'
@@ -1434,11 +1494,13 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         # Rediseño del 04-11-2026: las nueve dimensiones son un mosaico de
         # color (su color es el del tablero del mapa cuando se eligen).
         nl = sum(1 for l in LENTES if l['dim'] == i)
-        dims.append('<button type="button" class="pl-dim%s" role="tab" aria-selected="%s" aria-controls="plTablero" data-dim="%s">'
+        if i not in DIM_TRAZO or i not in DIM_CORTA:
+            raise SystemExit('planisferio: la dimensión %s no tiene su trazo o su línea corta (DIM_TRAZO y DIM_CORTA)' % i)
+        dims.append('<button type="button" class="pl-dim%s" aria-expanded="false" aria-controls="plTablero" data-dim="%s">'
                     '<span class="pl-dim-ico" aria-hidden="true">%s</span><span class="pl-dim-n">%s</span>'
-                    '<small>%s</small></button>' % (
-                        '' if pinta else ' pl-dim-prox', 'true' if k == 0 else 'false', i,
-                        ico, nom, ('%d %s' % (nl, 'lente' if nl == 1 else 'lentes')) if pinta else 'Próximamente'))
+                    '<span class="pl-dim-d">%s</span><small>%s</small></button>' % (
+                        '' if pinta else ' pl-dim-prox', i, trazo(i), nom, DIM_CORTA[i],
+                        ('%d %s' % (nl, 'lente' if nl == 1 else 'lentes')) if pinta else 'Próximamente'))
     otras = ''.join('<li><span aria-hidden="true">%s</span> <b>%s.</b> %s <a href="%s">Ya está en la Enciclopedia ➔</a></li>' % (
         ico, nom, que, ir) for _, ico, nom, que, ir, _, pinta in DIMENSIONES if ir and not pinta)
     pintadas = [d for d in DIMENSIONES if d[6]]
@@ -1594,10 +1656,6 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
     # dimensiones, el mapa en su tablero (con lo de leerla bien debajo) y lo
     # de la dimensión financiera en pestañas. No se quitó nada: se reordenó.
     d0 = DIMENSIONES[0]
-    pasos = ('<ol class="pl-pasos" aria-label="Cómo se usa el Planisferio">'
-             '<li><b aria-hidden="true">1</b><span><strong>Elige una dimensión</strong><small>%d maneras de mirar el país</small></span></li>'
-             '<li><b aria-hidden="true">2</b><span><strong>Toca una entidad</strong><small>su ficha aparece junto al mapa</small></span></li>'
-             '<li><b aria-hidden="true">3</b><span><strong>Entra a su portal</strong><small>el mapa de sus municipios, uno por uno</small></span></li></ol>') % len(DIMENSIONES)
     hojas = [('cont', '⏱️', 'Los contadores', '<div class="pl-conts">%s</div><div class="pl-cuentas">%s</div>' % (contadores, cuenta_btn))]
     for mod in modulos:
         hojas.append(('cuanto' if 'numeros-cuanto-dinero-es.html' in mod else 'origenes',
@@ -1609,10 +1667,12 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
                 for k, (h, ico, nom, _c) in enumerate(hojas)),
         ''.join('<div class="pl-hoja" role="tabpanel" id="plHoja-%s" aria-labelledby="plHojaB-%s">%s</div>' % (h, h, c)
                 for h, _i, _n, c in hojas))
-    bloque_mapa = '''%s
-          <div class="pl-dims" role="tablist" aria-label="Las dimensiones del Planisferio">%s</div>
-          <section class="pl-tablero" id="plTablero" data-dim="%s" aria-labelledby="plDimTit">
+    bloque_mapa = '''
+          <div class="pl-dims" id="plDims" role="group" aria-label="Las dimensiones del Planisferio">%s</div>
+          <p class="pl-invita" id="plInvita">Toca una dimensión para abrir su mapa, sus lentes y todo lo que trae.</p>
+          <section class="pl-tablero" id="plTablero" data-dim="%s" aria-labelledby="plDimTit" hidden>
             <header class="pl-tab-cab">
+              <button type="button" class="pl-cerrar" id="plCerrar">__X__ Cerrar dimensión</button>
               <h3 class="pl-tab-tit" id="plDimTit">Dimensión %s</h3>
               <p class="pl-tab-q" id="plDimQ">%s</p>
             </header>
@@ -1643,21 +1703,22 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
               <div class="pl-cajones">%s</div>
               <div class="pl-indice-b"><button type="button" class="pl-caj-b pl-indice-btn" data-cajon="plTplIndice" data-cajon-tit="plTplIndiceTit" data-cajon-hash="entidades" aria-haspopup="dialog">📍 Las 32 entidades: entra a su portal</button></div>
             </footer>
+            <div class="pl-solo-dim pl-fin" data-dim="judicial" hidden>
+            %s
+            </div>
+            <div class="pl-mas">__MAS__</div>
             <aside class="pl-puente" id="plPuente" aria-label="Servicios de Auditavisión">
               <div class="pl-puente-t"><p class="pl-puente-e">Servicio de Auditavisión</p><p class="pl-puente-h">🧾 ¿Necesitas lo de tu estado o tu municipio en un solo documento?</p><p class="pl-puente-d">La Radiografía reúne lo que los documentos públicos dicen de su gobierno: cada cifra con su documento y su etiqueta, y lo que falta, con el nombre de quien lo debe.</p></div>
               <div class="pl-puente-a"><a class="pl-puente-b" href="servicios-catalogo.html#sv-radiografia">Ver la Radiografía ➔</a><a class="pl-puente-o" href="servicios.html">Todos los servicios</a></div>
             </aside>
           </section>%s
           <template id="plTplIndice">%s</template>
-          <div class="pl-solo-dim pl-fin" data-dim="judicial" hidden>
-            %s
-          </div>
           <script type="application/json" id="plDatos" data-src="%s"></script>
-          <noscript><p>El mapa se colorea con JavaScript; sin él, cada entidad se abre desde la lista de arriba.</p></noscript>''' % (
-        pasos, ''.join(dims), d0[0], d0[2].lower(), d0[3], lentes, svg, ''.join(cajones), ''.join(plantillas),
+          <noscript><p>El mapa se colorea con JavaScript; sin él, cada entidad se abre desde esta lista.</p><nav class="pl-indice" aria-label="Las 32 entidades"><ul>__IND__</ul></nav></noscript>''' % (
+        ''.join(dims), d0[0], d0[2].lower(), d0[3], lentes, svg, ''.join(cajones), _bloque_judicial_mapa(base, ref, filas), ''.join(plantillas),
         _cajon('📍', 'Las 32 entidades', 'Elige una entidad para entrar a su portal', 'plTplIndiceTit',
                '<nav class="pl-indice" aria-label="Las 32 entidades, una por una"><ul>%s</ul></nav>' % indice),
-        _bloque_judicial_mapa(base, ref, filas), datos_externos('planisferio-datos.json', datos))
+        datos_externos('planisferio-datos.json', datos))
     for _l in ('servicios.html',):
         if not os.path.exists(os.path.join(RAIZ, _l)):
             raise SystemExit('planisferio: el puente a Servicios apunta a %s, que no existe' % _l)
@@ -1666,9 +1727,27 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
     # «Cuánto dinero es, de dónde sale y lo que baja al territorio» (pedido del
     # autor, 16-11-2026): deja de desglosarse bajo el mapa y vive en su página;
     # en el Planisferio queda su tarjeta, arriba de «Juega con el mapa».
-    tarjeta_dinero = ('<a class="pl-dinero" href="%s"><span class="pl-dinero-ico" aria-hidden="true">💰</span>'
+    tarjeta_dinero = ('<a class="pl-dinero" href="%s"><span class="pl-dinero-ico" aria-hidden="true">' + trazo('financiera', 24) + '</span>'
                       '<span class="pl-dinero-tx"><b>%s</b><small>Los contadores de los tres presupuestos de 2026, cuánto dinero es y los 16 orígenes del ingreso.</small></span>'
                       '<span class="pl-dinero-ir" aria-hidden="true">➔</span></a>') % (DINERO, DINERO_TIT)
+    # Ronda 31 (27-11-2026): la tarjeta del dinero vive dentro de la dimensión financiera, y cada panel cierra con «Todo lo
+    # de esta dimensión» (la marca la llena apartados.generar() con traslado.paginas_dim(), ya con todo generado).
+    import auditor_bento as ab
+    mas = '<div class="pl-solo-dim" data-dim="financiera" hidden>%s</div>' % tarjeta_dinero
+    mas += ''.join('<section class="pl-solo-dim pl-todo" data-dim="%s" aria-label="Todo lo de la dimensión %s" hidden><h4>Todo lo de esta dimensión</h4>'
+                   '<p class="pl-todo-q">Sus páginas propias, cada una con sus fuentes y las mismas cifras.</p>%s</section>' % (d[0], d[2].lower(), TODO_MARCA % d[0])
+                   for d in DIMENSIONES)
+    bloque_mapa = bloque_mapa.replace('__MAS__', mas).replace('__X__', ab.ico('cerrar', 16, 'pl-i')).replace('__IND__', indice)
+    # La barra de ubicación (Ronda 31): entidad y, si se quiere, municipio (el padrón se carga al elegir la entidad), directo
+    # a su portal. Cada entidad lleva su portal en data-p, así que no espera a las cifras del mapa.
+    ubica = ('<form class="pl-ubica" id="plUbica" aria-labelledby="plUbicaT" novalidate>'
+             '<p class="pl-ubica-t" id="plUbicaT">%s <span><b>Ubícate</b> por entidad federativa o municipio</span></p>'
+             '<label class="pl-ubica-c"><span>Entidad federativa</span><select id="plUbEnt"><option value="">Elige una entidad</option>%s</select></label>'
+             '<label class="pl-ubica-c"><span>Municipio</span><select id="plUbMun" disabled><option value="">Todos sus municipios (portal estatal)</option></select></label>'
+             '<button type="submit" class="pl-ubica-b" id="plUbIr" disabled>Abrir portal territorial</button></form>') % (
+                 ab.ico('marcador', 20, 'pl-i'),
+                 ''.join('<option value="%s" data-p="%s" data-mm="%d">%s</option>' % (f['a'], f['p'], 1 if f.get('mm') else 0, html.escape(f['n']))
+                         for f in sorted(filas, key=lambda x: clave(x['n']))))
     dinero = {
         'archivo': DINERO, 'padre': (ARCHIVO, 'Planisferio'), 'menu': 'Cuánto dinero es', 'menu_archivo': ARCHIVO,
         'icono': '💰', 'titulo': DINERO_TIT, 'lema': 'La dimensión financiera del Planisferio, en números',
@@ -1683,8 +1762,8 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
     return [{
         'archivo': ARCHIVO, 'menu': 'Planisferio', 'menu_archivo': ARCHIVO,
         'icono': '🗺️', 'titulo': 'Planisferio', 'lema': 'México en un mapa: cada entidad, cada municipio, cada peso',
-        'entrada': ('El dinero público tiene domicilio. Elige una dimensión y toca una entidad para entrar a su portal, con sus municipios. '
-                    'Todo sale de la base de la plataforma, con su fuente oficial y su etiqueta; abajo, todo lo que trae cada dimensión.'),
+        'entrada': ('El dinero público tiene domicilio. Ubícate por entidad o municipio, o elige una dimensión y toca una entidad para entrar a su portal. '
+                    'Todo sale de la base de la plataforma, con su fuente oficial y su etiqueta.'),
         # La imagen del encabezado (pedido del autor, 04-11-2026): el paisaje al
         # frente y la persona que lo mira, en sombra. planisferio.css la pone.
         'fondo': 'assets/auditor/img/planisferio-paisaje.webp', 'rubro': 'planisferio',
@@ -1692,18 +1771,12 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         'scripts': ['planisferio.js'],
         'sin_saltos': True,
         'secciones': [
-            {'id': 'dinero', 'titulo': DINERO_TIT, 'sin_cab': True, 'texto': '', 'tarjetas': [], 'bloque': tarjeta_dinero},
-            {'id': 'mapa', 'titulo': 'Juega con el mapa',
-             'texto': 'Hoy se pintan %d dimensiones. Cada una trae su «Cómo leerla» y lo que su mapa no dice.' % len(pintadas),
+{'id': 'ubica', 'titulo': 'Ubícate por entidad federativa o municipio', 'sin_cab': True, 'texto': '', 'tarjetas': [], 'bloque': ubica},
+            # Ronda 31 (27-11-2026, decisión del autor): las diez dimensiones abren cerradas; cada una despliega su panel con
+            # el mapa, sus lentes, lo suyo y «Todo lo de esta dimensión». Ya no hay tarjeta del dinero suelta ni sección #todo.
+            {'id': 'mapa', 'titulo': 'Elige una dimensión',
+             'texto': 'Hoy se pintan %d dimensiones. Cada una trae su mapa, su «Cómo leerla» y lo que su mapa no dice.' % len(pintadas),
              'tarjetas': [], 'bloque': bloque_mapa},
-            # Ronda 7 (22-11-2026, decisión del autor): la Enciclopedia se volvió Planisferio. Cada dimensión tiene su
-            # página con todo lo que trae (traslado.paginas_dim()).
-            {'id': 'todo', 'titulo': 'Todo lo de cada dimensión',
-             'texto': ('Lo que antes vivía en la Enciclopedia (Números, Datos y Aprende) ya vive aquí, repartido en las diez dimensiones: '
-                       'cada página es autónoma, con sus fuentes y las mismas cifras.'),
-             'tarjetas': [], 'bloque': '<nav class="pl-todo" aria-label="Las diez dimensiones">%s</nav>' % ''.join(
-                 '<a class="pl-todo-dim" href="planisferio-dim-%s.html" data-dim="%s"><span aria-hidden="true">%s</span><b>%s</b></a>'
-                 % (d[0], d[0], d[1], d[2]) for d in DIMENSIONES)},
         ] + ([] if not otras else [
             {'id': 'dimensiones', 'titulo': 'Las dimensiones que vienen',
              'texto': ('El Planisferio crece por entregas, una dimensión a la vez y, después, municipio por municipio. Mientras llegan al mapa, cada una ya tiene su lugar en la Enciclopedia:'),
