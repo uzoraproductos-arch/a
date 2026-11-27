@@ -245,7 +245,7 @@ def _cab():
                     for q in list(acceso.PREGUNTAS_ENTRADA) + [c for c in CHIPS if c not in acceso.PREGUNTAS_ENTRADA])
     return '''<header class="avb-cab">
         <div class="avb-cab-tit">
-          <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="76" height="60">
+          <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="100" height="79">
           <h1 class="avb-tit" id="avbTit">%s</h1>
         </div>
         <details class="avb-quienes" id="avbQuienes" open>
