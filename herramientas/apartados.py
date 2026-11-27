@@ -7323,6 +7323,10 @@ def pagina(a, sello):
         cuerpo = re.sub(r'(<span class="apartado-tarjeta-icono"[^>]*>)\s*' + EMOJI_RE + r'\s*(</span>)', r'\1\2', texto[i:j])
         cuerpo = re.sub(EMOJI_RE + r'[ \u00a0]?', '', cuerpo)
         texto = texto[:i] + cuerpo + texto[j:]
+    if a['archivo'] == 'planisferio.html':
+        # Ronda 31 (27-11-2026): el Planisferio va sin emojis dentro de <main>; las flechas y el cierre pasan a trazo.
+        import planisferio as _pl
+        texto = _pl.limpia(texto)
     if a['archivo'] in ('participa.html', 'agora.html') and 'data-puerta' not in texto:
         # Ronda 26D: «Cuéntanos lo que viste» vive en la columna de acciones cívicas del Ágora (agora_red()).
         raise SystemExit('apartados.py: %s ya no trae «Cuéntanos lo que viste»' % a['archivo'])
@@ -8112,9 +8116,19 @@ def generar(sello=None):
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     # Ronda 7 (22-11-2026): la Enciclopedia se volvió Planisferio; cada dimensión, con todo lo que trae (traslado.py).
     import traslado
-    for extra in [TRIVIA] + traslado.paginas_dim():
+    dims_pag = traslado.paginas_dim()
+    for extra in [TRIVIA] + dims_pag:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
+    # Ronda 31 (27-11-2026): cada panel del Planisferio cierra con «Todo lo de esta dimensión», que sale de esas mismas
+    # páginas. Si una marca se queda sin llenar, la generación se detiene.
+    _pm = os.path.join(RAIZ, planisferio.ARCHIVO)
+    texto = open(_pm, 'rb').read().decode('utf-8')
+    for _d, _h in planisferio.todo_dim(dims_pag).items():
+        texto = texto.replace(planisferio.TODO_MARCA % _d, _h)
+    if '<!--pl-todo:' in texto:
+        raise SystemExit('apartados.py: el Planisferio trae una dimensión sin su «Todo lo de esta dimensión»')
+    open(_pm, 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
         texto = redireccion(*datos).replace('\n', '\r\n')
         open(os.path.join(RAIZ, archivo), 'wb').write(texto.encode('utf-8'))
