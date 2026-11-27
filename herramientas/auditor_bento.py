@@ -88,7 +88,8 @@ SEGMENTOS = [('inspector', 'lupa', 'Inspector', 'Investigación completa, con di
              ('ambientalista', 'hoja', 'Ambientalista', 'El costo y el daño ambiental')]
 # Las preguntas de ejemplo: cada una ya la contesta el chat (preguntas_auditor.json). Ronda 28B: ya no van como fila de
 # botones bajo la caja; rotan en «Pregúntale al Auditor», después de las de acceso.PREGUNTAS_ENTRADA (que no se tocan).
-CHIPS = ['¿Mi proveedor está en la lista negra del SAT?', '¿Cuánto debe Jalisco?',
+CHIPS = ['Dame mi estado de cuenta cívico', 'Mi estado de cuenta ambiental', 'Estado de cuenta administrativo',
+         '¿Mi proveedor está en la lista negra del SAT?', '¿Cuánto debe Jalisco?',
          '¿Cuánto costó el Tren Maya?', 'Diagnóstico de Pemex', 'Semáforo Patrimonial de Zapopan, Jalisco']
 TITULO = 'Las cuentas del gobierno, con sus documentos'
 # Los accesos de la Mesa de Trabajo: (ícono, etiqueta, título, una línea, servicio o liga, precio). El precio es

@@ -6,6 +6,10 @@
    "ir": "herramienta-calculadora-ticket.html"
   },
   {
+   "q": "Estado de cuenta administrativo",
+   "ir": "radar-estado-de-cuenta.html"
+  },
+  {
    "q": "¿Cuánto debe Jalisco?",
    "ir": "herramienta-inspector-entes.html#ente=estatal:JAL"
   },
