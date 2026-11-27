@@ -754,6 +754,8 @@ html.pa-en-vista .pa-app-marco iframe { min-height: 420px; }
 .pd-cubre thead th { background: #eef3fb; color: #0b2a63; font-size: 14px; }
 .pd-cubre tbody th { font-weight: 600; width: 38%; }
 .pd-tiempo a { display: inline-block; min-height: 24px; }
+.pd-tiempo .pa-chico { font-size: 16px; }
+.pd-tiempo .pa-enlace { display: inline-block; min-height: 44px; padding: 10px 4px; }
 @media (max-width: 600px) {
   .pd-cubre thead { display: none; }
   .pd-cubre tr, .pd-cubre tbody th, .pd-cubre td { display: block; width: auto; }
