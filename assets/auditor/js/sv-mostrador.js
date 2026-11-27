@@ -55,7 +55,25 @@
       if (d.suelta) { sueltaTx.textContent = d.suelta.tx; arch.setAttribute('accept', d.suelta.acepta); }
     }
     document.title = 'El Inspector: ' + d.n + ' · Auditavisión';
+    costoTx();
   }
+
+  /* Ronda 30: lo que gasta la revisión se dice antes de tocar «Revisar» (la tabla es la de tokens.js; aquí no hay números). */
+  function costoTx() {
+    var c = $('svMostCosto'), d = D[sel.value], T = window.AvTokens;
+    if (!c || !d) return;
+    var lote = d.suelta && T ? ' Con tus archivos, ' + T.costo('lote') + ' tokens por lote.' : '';
+    c.className = 'sv-most-costo' + (d.pago ? '' : ' sv-most-libre');
+    if (!d.pago) c.textContent = 'Revisar aquí es gratis: no gasta tokens.' + lote;
+    else if (!T) c.textContent = '';
+    else if (T.ilimitado() || T.admin()) c.textContent = 'Tienes tokens ilimitados: esta revisión no descuenta saldo.';
+    else {
+      var s = T.saldo();
+      c.textContent = 'Esta revisión usa ' + T.costo(d.patri ? 'semaforo' : 'servicio') + ' tokens · te ' + (s === 1 ? 'queda ' : 'quedan ') + s +
+        '. La misma pregunta no se cobra dos veces.' + lote;
+    }
+  }
+  document.addEventListener('av-tokens', costoTx);
 
   function alto() {
     try {

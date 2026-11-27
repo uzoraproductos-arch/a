@@ -3024,6 +3024,7 @@ def sv_mostrador(sf):
             '            <div class="sv-most-fila"><input id="svMostQ" name="q" type="text" maxlength="300" autocomplete="off" aria-describedby="svMostAy">'
             '<input type="hidden" name="vista" value="1"><button type="submit" class="sz-btn sz-btn-of">Revisar</button></div>\n'
             '            <p class="sv-most-ay" id="svMostAy"></p>\n'
+            '            <p class="sv-most-costo" id="svMostCosto" aria-live="polite"></p>\n'
             '            <p class="sv-most-ej"><span>Pruébalo:</span> <span id="svMostEj"></span> <button type="button" class="sv-most-app" id="svMostApp"></button></p>\n'
             '            <label class="sv-most-suelta" id="svMostSuelta" hidden><input type="file" id="svMostArch" multiple class="sr-only">'
             '<span aria-hidden="true">📥</span><span id="svMostSueltaTx"></span><small>Se leen en tu navegador: nada se sube.</small></label>\n'
@@ -3698,33 +3699,31 @@ def servicios():
         # el 07-11-2026 sobre el lienzo de nueve bloques; el 11-11-2026, en
         # cuatro familias y, el mismo día, en tablero: cada sección es su página
         # (SV_PAGINAS) y lo demás vive en SV_PORQUE, sin borrar nada.
-        'archivo': 'servicios.html', 'titulo': 'Servicios',
-        'lema': 'Investigación por encargo',  # Ronda 10: el rótulo largo ya va en la portada (sv-hero-pre); aquí se repetía
-        'entrada': ('La consulta es libre y lo seguirá siendo. Cuando quieras ir más a fondo, lo hacemos por encargo, con la misma regla. '
-                    'Los Servicios y las <a href="donaciones.html">donaciones</a> sostienen el trabajo; ninguno compra lo que publicamos.'),
+        'archivo': 'servicios.html', 'titulo': 'Servicios y Planes',
+        # Ronda 30 (27-11-2026): un solo encabezado. La cabecera de la plantilla queda solo con las migas y el título
+        # para lectores de pantalla (cab_extra 'svp-cab'); lo que se ve es el encabezado de sp.hero(), con la regla del cobro.
+        'lema': 'Investigación por encargo',
+        'entrada': 'Lo que dicen los documentos, antes de que decidas: qué es gratis, los planes con Precio Fundador y los servicios, cada uno con su Inspector.',
+        'cab_extra': 'svp-cab',
         'sin_saltos': True, 'redirige': redir,
-        'scripts': ['servicios.js'],  # las pestañas por familia; el Inspector de cada servicio vive en servicios-revisa.html
+        'scripts': ['servicios.js', 'sv-catalogo.js'],  # las pestañas por familia y el filtro del mostrador; el Inspector vive en servicios-revisa.html
         'estilos': ['servicios.css', 'servicios-planes.css'],
-        'antes': aviso,
-        # Ronda 24 (25-11-2026, decisión del autor): cinco bloques (servicios_planes.py), sin emojis: qué puedes hacer,
-        # a quién va dirigido, qué es gratis y los planes con el Precio Fundador, el código promocional y el catálogo
-        # por objetivo. «La base al día» quedó en la tira del encabezado y «Cómo funciona», en el recorrido del Auditor.
+        # Ronda 30 (27-11-2026, orden decidido por el autor): encabezado con la regla del cobro, planes con su botón, la banda
+        # del código y el catálogo como mostrador con filtro por perfil y por objetivo (reúne «¿A quién va dirigido?»).
+        # «La base al día» va en la tira del encabezado y «Cómo funciona», en el recorrido del Auditor.
         'secciones': [
-            bloque_sec('propuesta', 'Servicios y Planes', '', sp.hero(monetizacion.contadores()), sin_cab=True),
-            bloque_sec('que-haces', '¿Qué puedes hacer y para qué te sirve?', 'Cuatro cosas que la plataforma hace por ti, cada una con sus documentos.',
-                       sp.que_haces(), pre='Bloque 1'),
-            bloque_sec('para-quien', '¿A quién va dirigido?', 'Cuatro perfiles y los servicios que más les sirven; toca uno y se abre su Inspector.',
-                       sp.para_quien(SERVICIOS, PERFILES, sf), pre='Bloque 2'),
-            bloque_sec('precio-fundador', 'Qué es gratis y los planes, con Precio Fundador',
-                       'La consulta es libre y lo seguirá siendo. Para ir más a fondo: tokens de pago único o un plan mensual.',
-                       sp.precios(), pre='Bloque 3'),
-            bloque_sec('codigo-promocional', 'Tu código promocional o de cortesía', '', sp.codigo(), pre='Bloque 4'),
-            bloque_sec('necesitas', 'Los %d servicios, por objetivo' % len(SERVICIOS),
-                       'Cada uno dice si es gratis o va con tokens o plan, y cómo se cobra el encargo; tócalo y se abre su Inspector.',
-                       '<span id="nuevo"></span>' + sp.catalogo(SERVICIOS, LINEAS, COBRO, sf), pre='Bloque 5'),
+            bloque_sec('propuesta', 'Servicios y Planes', '', sp.hero(monetizacion.contadores(), SERVICIOS_OPERAN) + '\n        ' + sp.nav(), sin_cab=True),
+            bloque_sec('precio-fundador', 'Qué es gratis y los planes',
+                       'La consulta es libre y lo seguirá siendo. Para ir más a fondo: tokens de pago único o un plan mensual con Precio Fundador.',
+                       sp.precios() + '\n        <span id="codigo-promocional"></span>' + sp.codigo()),
+            bloque_sec('necesitas', 'Los %d servicios: elige el tuyo' % len(SERVICIOS),
+                       'Dinos quién eres o qué buscas y te quedan los que te sirven. Toca uno y se abre su Inspector.',
+                       '<span id="nuevo"></span><span id="para-quien"></span>' + sp.catalogo(SERVICIOS, LINEAS, COBRO, PERFILES, sf)),
+            bloque_sec('que-haces', 'Cuatro revisiones para empezar', 'Lo que más se pide, a un toque.', sp.que_haces()),
             bloque_sec('arriesgas', 'Lo que arriesgas si no revisas',
                        'Lo que dice la ley cuando un proveedor o un cliente no es lo que parece. Toca el artículo para leer su texto.', arriesga, pre='Por qué revisar'),
-            bloque_sec('preguntas-f', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.', faq),
+            bloque_sec('preguntas-f', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.', faq +
+                       '\n        <p class="svp-nota">Los Servicios y las <a href="donaciones.html">donaciones</a> sostienen el trabajo; ninguno compra lo que publicamos.</p>'),
         ],
         # «Cómo operan» y «Compara los servicios» se quitaron el 22-11-2026 (pedido del autor: «ya quedó
         # superado»); sus páginas siguen vivas y el catálogo, en SV_CATALOGO.
@@ -3736,7 +3735,7 @@ def servicios():
         'archivo': sf.SV_REVISA, 'menu': 'El Inspector de tu servicio', 'titulo': 'El Inspector de tu servicio', 'icono': '🔍',
         'padre': ('servicios.html', 'Servicios'), 'lema': 'Servicios · revisa tu caso',
         'entrada': ('Elige tu servicio, escribe tu caso y ve aquí mismo lo que encontró la base, con sus fuentes. '
-                    'Tu documento es el dictamen, con folio y huella. Nunca un monto: los servicios se cotizan.'),
+                    'Tu documento es el dictamen, con folio y huella. Revisarlo aquí es gratis o gasta tokens, y te lo decimos antes; el encargo a la medida se cotiza.'),
         'sin_saltos': True, 'scripts': ['sv-mostrador.js'],
         'secciones': [bloque_sec('inspector', 'El Inspector', '', sv_mostrador(sf) +
                                  '\n        <p class="sv-nota"><a href="servicios.html#necesitas">← Todos los servicios</a></p>', sin_cab=True)],
