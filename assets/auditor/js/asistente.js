@@ -3477,6 +3477,14 @@
       localStorage.setItem('av-caso', JSON.stringify(c.slice(0, 60)));
     } catch (e) { /* sin almacenamiento, el chat sirve igual */ }
   }
+  /* Ronda 29: los hallazgos clave de la respuesta, en mosaicos. Son las primeras cifras de su ficha, con su estado: las
+     mismas que abren el dictamen («Hallazgos clave»). No agrega cifras ni entra a la huella. */
+  function claveHtml(r) {
+    var ci = ((r.ficha && r.ficha.ci) || []).filter(function (c) { return c && c.v && c.etq; }).slice(0, 4);
+    if (ci.length < 2) return '';
+    return '<div class="pa-clave" role="group" aria-label="Hallazgos clave">' + ci.map(function (c) {
+      return '<div class="pa-clave-i"><b class="pa-clave-v">' + esc(c.v) + '</b><span>' + esc(c.etq) + '</span>' + chip(c) + '</div>'; }).join('') + '</div>';
+  }
   function responde(q, quieto, ya) {
     q = String(q || '').trim().slice(0, 600);
     if (!q) return;
@@ -3519,7 +3527,7 @@
         guarda();
         return;
       }
-      li.querySelector('.pa-burbuja').innerHTML = cabResp(r) + remiteHtml(q, r) + '<div class="pa-resp">' + esquema(r.html) + '</div>' + acciones(q, r, previas) +
+      li.querySelector('.pa-burbuja').innerHTML = cabResp(r) + remiteHtml(q, r) + claveHtml(r) + '<div class="pa-resp">' + esquema(r.html) + '</div>' + acciones(q, r, previas) +
         servicioHtml(r, q) + expInvHtml(q, r) +
         periodistaHtml(q, r) + capaModoHtml(q, r) +
         appDe(r) +
@@ -3537,8 +3545,11 @@
       if (espera) espera.then(function () { pinta(l0); }); else pinta(l0);
       return;
     }
-    var li = agrega('pa-bot pa-escribe', '<span class="pa-puntos" role="img" aria-label="Escribiendo"><i></i><i></i><i></i></span>');
-    Promise.all([new Promise(function (ok) { setTimeout(ok, 420); }), espera]).then(function () {
+    /* Ronda 29: en el Auditor, la espera dice los tres pasos que de verdad se hacen (buscar en la base, juntar sus
+       documentos y armar la respuesta); duran lo justo para leerse. En Servicios sigue la espera corta. */
+    var li = agrega('pa-bot pa-escribe', '<span class="pa-puntos" role="img" aria-label="Escribiendo"><i></i><i></i><i></i></span>' +
+      (SOLO ? '' : '<ol class="pa-pasos" aria-hidden="true"><li>Busco en la base</li><li>Junto sus documentos</li><li>Armo la respuesta</li></ol>'));
+    Promise.all([new Promise(function (ok) { setTimeout(ok, SOLO ? 420 : 1050); }), espera]).then(function () {
       li.classList.remove('pa-escribe'); pinta(li); li.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
   }

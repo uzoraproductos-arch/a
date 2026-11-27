@@ -294,12 +294,20 @@ def _caja():
 
 def _chat(chat):
     """Ronda 22: la plática original sigue aquí con su motor, sin su cabecera, su selector de modos, sus ejemplos ni
-    su caja (auditor-bento.css); la tarjeta solo aparece cuando ya hay una pregunta (auditor-bento.js)."""
+    su caja (auditor-bento.css); la tarjeta solo aparece cuando ya hay una pregunta (auditor-bento.js).
+    Ronda 29: con una pregunta, la tarjeta sube arriba de la caja y abre con su barra fija (la última pregunta, lo que
+    gastó en tokens y «Hacer otra pregunta»); cada respuesta se ordena como hoja de resultado en auditor-bento.js."""
     return '''<section class="avb-chatcard" id="avbChat" aria-labelledby="avbChatT" hidden>
-        <h2 id="avbChatT">Tu plática con el Auditor</h2>
+        <div class="avb-rbar" id="avbRbar">
+          <div class="avb-rbar-q">
+            <h2 id="avbChatT">Tu plática con el Auditor</h2>
+            <p id="avbRQ"></p>
+          </div>
+          <p class="avb-rbar-tk" id="avbRTk" aria-live="polite"></p>
+          <button type="button" class="avb-rbar-otra" id="avbOtra">%s<span>Hacer otra pregunta</span></button>
+        </div>
 %s
-        <p class="avb-otra"><button type="button" id="avbOtra">%s Hacer otra pregunta</button></p>
-      </section>''' % (chat, ico('pluma'))
+      </section>''' % (ico('pluma'), chat)
 
 
 def _planes():

@@ -574,7 +574,9 @@ a.pa-ctl { text-decoration: none; }
 .dic-tabla th { padding: 8px 10px; text-align: left; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: #44526b; border-bottom: 2px solid #c9d2e3; }
 .dic-tabla td { padding: 10px; vertical-align: top; border-bottom: 1px solid #e6ebf3; line-height: 1.5; color: #1c2a44; }
 .dic-tabla .dic-n { color: #6b7588; font-weight: 700; }
-.dic-tabla .dic-v { font: 800 17px/1.3 'JetBrains Mono', ui-monospace, monospace; white-space: nowrap; }
+/* Ronda 29: una cifra larga ya no le quita el ancho a «Qué es» (antes partía las palabras letra por letra). */
+.dic-tabla .dic-v { font: 800 17px/1.3 'JetBrains Mono', ui-monospace, monospace; width: 34%; overflow-wrap: anywhere; }
+.dic-tabla .dic-n { width: 2.5em; }
 .dic-tabla .pa-op { display: block; margin-top: 4px; font-size: 14px; color: #5a4a12; }
 @media (max-width: 640px) {
   .pa-cab-est { margin-left: 0; }
@@ -734,3 +736,11 @@ html.pa-en-vista .pa-app-marco iframe { min-height: 420px; }
 .pv-i3-v { fill: #1f2937; }
 :root[data-theme="dark"] .pv-i3-v { fill: #f3f4f6; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pv-i3-v { fill: #f3f4f6; } }
+
+/* Ronda 29: los hallazgos clave en la respuesta del chat (las mismas cifras que abren el dictamen) y los pasos de la espera. */
+.pa-clave { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 4px 0 14px; }
+.pa-clave-i { display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 12px; border: 1px solid #dfe5f0; background: #f6f8fc; min-width: 0; }
+.pa-clave-v { font-size: 20px; line-height: 1.2; color: #0b2a63; overflow-wrap: anywhere; }
+.pa-clave-i > span:not(.est-chip) { font-size: 16px; line-height: 1.35; color: #33415c; }
+.pa-clave-i .est-chip { align-self: flex-start; }
+.pa-pasos { display: none; }
