@@ -1245,6 +1245,14 @@
     });
     return CMXP[ruta];
   }
+  /* Cuando no hay contratos en lo integrado se dice igual en todas las respuestas (27-11-2026, pedido del autor: «me gustaría
+     que así respondiera el chat»): qué no se encontró, qué no quiere decir y que lo no integrado no se afirma ni se niega.
+     Los años salen de los archivos integrados (meta de ComprasMX), nunca escritos a mano. */
+  var CMX_NO = '<p>Eso no quiere decir que no tenga tratos con el gobierno: puede tenerlos en años anteriores, con gobiernos estatales o municipales que no usan ComprasMX, o bajo otra figura (una <b>concesión</b> o un permiso no son un contrato). Lo que no está integrado, no lo afirmamos ni lo negamos.</p>';
+  function cmxAnios(M) {
+    var a = ((M && M.archivos) || []).map(function (x) { return x.anio; }).filter(Boolean).sort();
+    return !a.length ? 'los expedientes federales de ComprasMX que tenemos integrados' : 'los expedientes federales de ComprasMX de ' + (a.length > 1 ? a.slice(0, -1).join(', ') + ' y ' + a[a.length - 1] : a[0]);
+  }
   function cmxIdx() { return cargaJs(CMX_DIR + 'indice.js', function () { return window.CMX_IDX; }); }
   function cmxInst() { return cargaJs(CMX_DIR + 'inst.js', function () { return window.CMX_INST; }); }
   function cmxSanc() { return cargaJs('assets/auditor/data/sancionados.js', function () { return window.AUDIT_SANCIONADOS; }).catch(function () { return null; }); }
@@ -1303,8 +1311,8 @@
           return ws.every(function (w) { return n.indexOf(' ' + w + ' ') >= 0; });
         }).map(function (rfc) { return [rfc, S.n[rfc]]; });
       }
-      if (!provs.length) return { html: '<p>◻️ No encontré «' + esc(nombre) + '» entre los <b>' + I.meta.proveedores.toLocaleString('es-MX') + '</b> proveedores (personas morales) ni entre las <b>' + I.meta.instituciones.toLocaleString('es-MX') + '</b> instituciones con contratos en ComprasMX, en los expedientes de 2025 y 2026.</p>' +
-        '<p>Eso no quiere decir que no tenga contratos: el nombre puede estar escrito distinto, sus contratos pueden ser de otros años, o la institución puede no reportar en ComprasMX. Varios órganos autónomos, como el INE, y los gobiernos que no usan la plataforma publican sus contratos en sus propios portales y en la Plataforma Nacional de Transparencia. Con el <b>RFC</b> la búsqueda es exacta.</p>',
+      if (!provs.length) return { html: '<p>◻️ No encontré «' + esc(nombre) + '» entre los <b>' + I.meta.proveedores.toLocaleString('es-MX') + '</b> proveedores (personas morales) ni entre las <b>' + I.meta.instituciones.toLocaleString('es-MX') + '</b> instituciones con contratos en ' + cmxAnios(I.meta) + '.</p>' + CMX_NO +
+        '<p>Además, el nombre puede estar escrito distinto, o la institución puede no reportar en ComprasMX: varios órganos autónomos, como el INE, y los gobiernos que no usan la plataforma publican sus contratos en sus propios portales y en la Plataforma Nacional de Transparencia. Con el <b>RFC</b> la búsqueda es exacta.</p>',
         ir: [CMX_PAG + '?q=' + encodeURIComponent(nombre), 'Contratos públicos'], sug: [], rec: [], web: nombre };
       var exacto = provs.filter(function (r) { return satNorm(r[1]).replace(/\b(S ?A|DE|C ?V|S ?A ?P ?I|R ?L|S ?C)\b/g, '').replace(/ +/g, ' ').trim() === ws.join(' '); });
       if (provs.length === 1 || exacto.length === 1) { var r1 = provs.length === 1 ? provs[0] : exacto[0]; return cmxProv(r1[0]).then(function (d) { return respProv(r1[0], d, I.meta, S); }); }
@@ -1345,13 +1353,13 @@
     if (!d) {
       if (sh && S && S.n && S.n[rfc]) {
         var nomS = S.n[rfc];
-        var hs = '<p>🏢 <b>' + esc(nomS) + '</b> (<code>' + esc(rfc) + '</code>) no tiene contratos en los expedientes de 2025 y 2026 de ComprasMX, pero aparece en el Directorio de Buen Gobierno:</p>' + sh +
+        var hs = '<p>🏢 <b>' + esc(nomS) + '</b> (<code>' + esc(rfc) + '</code>) no tiene contratos en ' + cmxAnios(M) + ', pero aparece en el Directorio de Buen Gobierno:</p>' + sh +
           '<p class="pa-chico">⚖️ ' + esc(S.nota) + '</p>' + (charla && charla.deDonde ? charla.deDonde(deDondeList.slice(1)) : '');
         return { html: hs, ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'], rec: [],
           ficha: { t: 'calculo', tit: 'Proveedor sancionado: ' + nomS, txt: texto(hs), ci: ci, fu: fuentes.slice(1), ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'] },
           sug: ['¿Está en la lista negra del SAT el RFC ' + rfc + '?', '¿Qué proveedores están sancionados o inhabilitados?'] };
       }
-      return { html: '<p>◻️ El RFC <code>' + esc(rfc) + '</code> no tiene contratos en los expedientes de 2025 y 2026 de ComprasMX ni aparece en el Directorio de Proveedores y Contratistas Sancionados.</p><p>Puede tenerlos en otros años o con gobiernos que no usan ComprasMX. Eso no certifica nada.</p>',
+      return { html: '<p>◻️ El RFC <code>' + esc(rfc) + '</code> no tiene contratos en ' + cmxAnios(M) + ' ni aparece en el Directorio de Proveedores y Contratistas Sancionados.</p>' + CMX_NO,
         ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'], sug: ['¿Está en la lista negra del SAT el RFC ' + rfc + '?'], rec: [] };
     }
     var tp = d.tp || {}, mtp = d.mtp || {};
@@ -1507,8 +1515,8 @@
       if (!m.todos.length || (!m.uno && m.todos.length > 60)) return Promise.resolve(sigueSinEmp(q, previas)).then(function (r) {
         /* Si lo demás de la plataforma tampoco la tiene, se dice: no se contesta con lo que se le parece. */
         if (r && !r.sin && !r.tambien && !/^<p>Eso lo encuentras en/.test(r.html || '')) return r;
-        return { html: '<p>◻️ No encontré a «' + esc(nombre) + '» entre los <b>' + I.meta.proveedores.toLocaleString('es-MX') + '</b> proveedores (personas morales) con contratos en ComprasMX, en los expedientes de 2025 y 2026, ni en el resto de la plataforma.</p>' +
-          '<p>Eso no quiere decir que no tenga contratos: muchos grupos contratan con el nombre de una filial o de un consorcio, sus contratos pueden ser de otros años, o pueden ser de gobiernos que no usan ComprasMX. Y una <b>concesión</b> no aparece ahí: se acredita con su título. Con el <b>RFC</b> de la empresa la búsqueda es exacta.</p>',
+        return { html: '<p>◻️ No encontré a «' + esc(nombre) + '» entre los <b>' + I.meta.proveedores.toLocaleString('es-MX') + '</b> proveedores (personas morales) con contratos en ' + cmxAnios(I.meta) + ', ni en el resto de la plataforma.</p>' + CMX_NO +
+          '<p>Además, muchos grupos contratan con el nombre de una filial o de un consorcio, y una concesión se acredita con su título. Con el <b>RFC</b> de la empresa la búsqueda es exacta.</p>',
           ir: [GR.pag || CMX_PAG, 'Grupos y filiales'], sug: ['¿Qué es una concesión?', '¿Qué contratistas están en la lista negra del SAT?'], rec: [], web: nombre, anota: true };
       });
       var nota = con ? '<p>📑 <b>ComprasMX trae contratos, no concesiones.</b> Una concesión se acredita con su título, que publica el gobierno que la otorga. Esto es lo que la plataforma tiene de sus contratos:</p>' : '';
