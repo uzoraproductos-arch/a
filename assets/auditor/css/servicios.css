@@ -617,3 +617,7 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 .sv-most-rfc { display: grid; gap: 4px; min-width: 0; grid-column: 1 / -1; }
 .sv-most-rfc[hidden] { display: none; }
 .sv-most-rfc input { min-height: 44px; width: 100%; max-width: 100%; box-sizing: border-box; border-radius: 12px; border: 0; padding: 6px 12px; font: 16px 'Inter', system-ui, sans-serif; color: #0b2a63; background: #fff; }
+/* Ronda 30: el panel del Inspector dice lo que gasta antes de revisar (sv-mostrador.js, costoTx). */
+.sv-most-costo { margin: 0; padding: 8px 12px; border-radius: 10px; background: rgba(255, 255, 255, .12); border: 1px solid rgba(255, 255, 255, .22); font-size: 16px; line-height: 1.45; font-weight: 600; }
+.sv-most-costo:empty { display: none; }
+.sv-most-costo.sv-most-libre { background: #eaf6ee; border-color: #cfe6d8; color: #17502f; }

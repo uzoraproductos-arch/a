@@ -207,6 +207,12 @@
     });
     // Ronda 27A: el aviso de la billetera («Solicitar código para más tokens») llega con ?pedir=1.
     if (/[?&]pedir=1/.test(location.search) && $('tabPedir')) activa($('tabPedir'), false);
+    // Ronda 30: los botones de los planes de servicios.html traen lo que el lector eligió (?interes=): se anota en el
+    // motivo, que el lector puede cambiar. Solo letras, números y signos de un nombre de plan; nunca HTML.
+    try {
+      var inter = (new URLSearchParams(location.search).get('interes') || '').replace(/[^\wáéíóúüñÁÉÍÓÚÜÑ /·.-]/g, '').slice(0, 60).trim();
+      if (inter && f.motivo && !f.motivo.value) f.motivo.value = 'Me interesa: ' + inter;
+    } catch (e) { /* sin URLSearchParams */ }
     // Un acceso vencido abre de una vez «Solicitar código».
     var p = A.leer && A.leer();
     if (p && p.hasta && !p.admin && A.vigente && !A.vigente(p) && $('tabPedir')) activa($('tabPedir'), false);
