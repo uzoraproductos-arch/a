@@ -291,7 +291,17 @@
   .avb-rota { padding: 10px 16px; }
   .avb-box { padding: 14px 14px; }
   .avb-barra { padding: 8px 16px; }
+  /* Ronda 34: en celular la franja es la billetera; la insignia y el botón de la Mesa viven en el menú. */
+  .avb-barra .avb-insignia, .avb-barra .avb-mesa-btn { display: none; }
+  .avb-barra-tk { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; width: 100%; margin: 0; }
+  .avb-barra-saldo { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: #ffffff; font-size: 17px; font-weight: 700; }
+  .avb-barra-saldo .avb-i { color: #f3d77a; }
+  .avb-barra-poco { color: #f3d77a; }
+  .avb-barra-tk a { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 12px; box-sizing: border-box; border: 1px solid rgba(255, 255, 255, .45);
+    border-radius: 10px; background: rgba(9, 28, 66, .45); color: #ffffff; font-size: 16px; font-weight: 600; text-decoration: none; }
+  .avb-barra-tk a:hover, .avb-barra-tk a:focus-visible { background: rgba(9, 28, 66, .7); }
 }
+@media (min-width: 981px) { .avb-barra-tk { display: none; } }
 /* Ronda 28B: en celular «¿Quiénes somos?» se pliega (auditor-bento.js lo cierra al abrir) para que la caja quede en la
    primera pantalla; su título es el botón, de 44 px. */
 @media (max-width: 700px) {

@@ -235,7 +235,7 @@ def _q(t):
     return '%s?modo=periodista&amp;q=%s' % (CHAT, quote(t))
 
 
-def puente(archivo):
+def puente(archivo, colofon=False):
     """La franja al pie: el modo Periodista (con preguntas que ya contesta) y
     los servicios que vienen al caso, con su forma de cobro. Nunca un monto."""
     import html as h
@@ -249,7 +249,7 @@ def puente(archivo):
         '<em>%s</em></span></a></li>' % (apartados.SV_CATALOGO, sid, por_id[sid][1], h.escape(por_id[sid][2]), h.escape(por_id[sid][3]),
                                          h.escape(apartados.COBRO[sid])) for sid in servs)
     chips = ' '.join('<a class="nt-chip" href="%s">%s</a>' % (_q(q), h.escape(q)) for q in preguntas)
-    return ('<aside class="nt-puente" aria-label="El modo Periodista y los servicios">\n'
+    return ('<aside class="nt-puente%s" aria-label="El modo Periodista y los servicios">\n'
             '  <div class="nt-pu-modo">\n'
             '    <h2 class="nt-pu-tit"><span aria-hidden="true">📰</span> Pregúntaselo al Auditor en modo Periodista</h2>\n'
             '    <p>Te cuenta <b>lo que casi nadie te cuenta, con documento</b>: lo que la ASF dejó por aclarar, lo que una dependencia no ha '
@@ -266,7 +266,7 @@ def puente(archivo):
             '    <p class="nt-pie">Leer, verificar y seguir un caso aquí es gratis. Lo de pago es el trabajo a la medida, y nunca cambia '
             'lo que publicamos.</p>\n'
             '  </div>\n'
-            '</aside>') % (chips, CHAT, h.escape(tit), h.escape(tx), lis, apartados.SV_COTIZA)
+            '</aside>') % (' nt-colofon' if colofon else '', chips, CHAT, h.escape(tit), h.escape(tx), lis, apartados.SV_COTIZA)
 
 
 def tablero():
@@ -310,7 +310,7 @@ def ultimas(n=3):
 
 def cierre_indice():
     # Ronda 7: «Lo último, verificado» sube al arranque del portal (portada()); aquí queda el puente.
-    return '<div class="nt-indice">\n%s\n</div>' % puente(ARCHIVO)
+    return '<div class="nt-indice">\n%s\n</div>' % puente(ARCHIVO, colofon=True)
 
 
 # Ronda 21 (25-11-2026, Propuesta E del autor: «Diario Digital de Investigación»): la portada abre con una
@@ -353,12 +353,45 @@ def _destacada():
                                h.escape(que), au.archivo(id_), h.escape(au.chat_url(q), quote=True))
 
 
+# Ronda 33 (27-11-2026, encargo del autor: la portada como diario clásico de gran formato). El cabezal lleva la línea de
+# edición (la fecha viva, que pinta el guion de portada()) y la barra de secciones; las tarjetas del tablero pasan a
+# «Secciones y archivo del diario», en cuatro columnas. Mismos id y mismas ligas de tablero(); ninguna cifra.
+CABEZAL_NAV = (('Portada', ARCHIVO), ('Auditorías en imágenes', '#auditorias'), ('El periódico', DIARIO), ('Verifica', VERIFICA),
+               ('Seguimiento', SEGUIMIENTO), ('Garantías', 'garantias.html'))
+COLUMNAS = (('Sección I · Lee', 'El periódico'), ('Sección II · Verifica', 'Del rumor al documento'),
+            ('Sección III · Sigue', 'El caso no se olvida'), ('Sección IV · Protección', 'Prensa y garantías'))
+
+
+def cabezal():
+    ligas = ''.join('<a href="%s"%s>%s</a>' % (u, ' aria-current="page"' if u == ARCHIVO else '', n) for n, u in CABEZAL_NAV)
+    return ('<p class="nt-cab-fecha"><time id="ntHoy"></time></p>'
+            '<p class="nt-cab-edic">México · Edición verificada</p>'
+            '<nav class="nt-cab-nav" aria-label="Secciones del diario">%s</nav>' % ligas)
+
+
+def secciones_diario():
+    import html as h
+    cols = []
+    for g, sid, pag, (_ico, nom, lema) in tablero():
+        if g or not cols:
+            cols.append([])
+        cols[-1].append('          <li><a id="pestana-%s" href="%s"><b>%s</b><small>%s</small></a></li>' % (sid, pag, h.escape(nom), h.escape(lema)))
+    # «Quienes informan» y «Tus garantías» van juntas en la cuarta columna: sin filas huérfanas de una tarjeta.
+    cols = cols[:3] + [[x for c in cols[3:] for x in c]]
+    if len(cols) != len(COLUMNAS) or not all(cols):
+        raise SystemExit('noticias.py: las secciones del tablero ya no caben en las %d columnas de COLUMNAS' % len(COLUMNAS))
+    return ('      <section class="nt-secs" aria-labelledby="ntSecsTit">\n'
+            '        <h2 class="nt-secs-tit" id="ntSecsTit">Secciones y archivo del diario</h2>\n'
+            '        <div class="nt-secs-cols">\n%s\n        </div>\n      </section>') % '\n'.join(
+        '        <div class="nt-secs-col">\n          <p class="nt-secs-k">%s</p>\n          <h3>%s</h3>\n          <ul>\n%s\n          </ul>\n        </div>'
+        % (h.escape(k), h.escape(t), '\n'.join(c)) for (k, t), c in zip(COLUMNAS, cols))
+
+
 def portada():
     """El arranque del portal (Ronda 7, decisión del autor: «que arranque directamente desde arriba como el portal del
     periódico»). Desde la Ronda 21, como diario de investigación: la Auditoría en imágenes destacada, lo último
     verificado a su lado y la galería de todas, antes de las tarjetas."""
     return ('<div class="nt-indice nt-portal nt-diario">\n'
-            '<p class="nt-fecha"><time id="ntHoy"></time></p>\n'
             '<script>(function () { var t = document.getElementById(\'ntHoy\'); if (t) t.textContent = new Date().toLocaleDateString(\'es-MX\', '
             '{ weekday: \'long\', day: \'numeric\', month: \'long\', year: \'numeric\' }); })();</script>\n'
             '<div class="nt-portada">\n  %s\n  <div class="nt-filete" aria-hidden="true"></div>\n%s\n</div>\n%s\n</div>') % (

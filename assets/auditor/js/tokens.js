@@ -163,6 +163,10 @@
     });
     var caja = document.getElementById('avbAcceso');
     if (!caja || admin()) return;
+    /* Ronda 34: en celular, la franja del Auditor (#avbBarraTk) lleva el mismo saldo y la misma liga. */
+    var tk = document.getElementById('avbBarraTk');
+    if (tk) tk.innerHTML = '<b class="avb-barra-saldo' + (!il && s < costo('pregunta') ? ' avb-barra-poco' : '') + '" id="avbBarraSaldo">' + svg(MONEDA, 18) + ' ' +
+      (il ? 'Tokens ilimitados' : esc(tokens(s))) + '</b><a href="' + esc(T.canje) + '?volver=' + encodeURIComponent(volver()) + '">Canjear / Solicitar código</a>';
     var A = window.AvAcceso, p = A && A.leer && A.leer(), pase = p && A.vigente && A.vigente(p) && !p.admin;
     var b = billetera();
     caja.className = 'avb-acceso avb-billetera' + (il ? ' avb-ilimitado' : s < costo('pregunta') ? ' avb-sin-saldo' : '');

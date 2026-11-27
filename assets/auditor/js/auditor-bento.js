@@ -42,14 +42,21 @@
 
     /* La Mesa de Trabajo: a la derecha en escritorio; cajón en pantallas angostas. */
     var mesa = document.getElementById('avbMesa'), mBtn = document.getElementById('avbMesaBtn'), mX = document.getElementById('avbMesaX'),
-      velo = document.getElementById('avbVelo'), aviso = document.getElementById('avbAviso');
+      velo = document.getElementById('avbVelo'), aviso = document.getElementById('avbAviso'),
+      mBtnM = document.getElementById('avbMesaBtnM'), avisoM = document.getElementById('avbAvisoM'), menu = document.getElementById('avbLadoMenu');
+    /* Ronda 34: en celular el botón de la Mesa vive en el menú; su punto dorado se repite ahí y en «Menú». */
+    function avisa(si) {
+      if (aviso) aviso.hidden = !si;
+      if (avisoM) avisoM.hidden = !si;
+      if (menu) menu.classList.toggle('avb-con-aviso', !!si);
+    }
     function mesaVista() { return !avb.classList.contains('avb-sin-mesa') && (ancho() || avb.classList.contains('avb-mesa-abierta')); }
     function pintaBtn() {
       var v = mesaVista();
       if (!mBtn) return;
       mBtn.setAttribute('aria-expanded', v ? 'true' : 'false');
       mBtn.querySelector('span').textContent = v ? 'Ocultar mesa derecha' : 'Mostrar mesa derecha';
-      if (v && aviso) aviso.hidden = true;
+      if (v) avisa(false);
       if (velo) velo.hidden = !(v && !ancho());
     }
     function abreMesa(si, foco) {
@@ -60,6 +67,11 @@
       if (!si && foco && mBtn) mBtn.focus();
     }
     if (mBtn) mBtn.addEventListener('click', function () { abreMesa(!mesaVista(), true); });
+    if (mBtnM) mBtnM.addEventListener('click', function () {
+      var lado = document.getElementById('avbLado');
+      if (lado && lado.classList.contains('avb-lado-abierto') && menu) menu.click();
+      abreMesa(true, true);
+    });
     if (mX) mX.addEventListener('click', function () { abreMesa(false, true); });
     if (velo) velo.addEventListener('click', function () { abreMesa(false, true); });
     document.addEventListener('keydown', function (ev) {
@@ -325,7 +337,7 @@
       exp.caja.hidden = false;
       if (nueva) {
         pestana(1);
-        if (!mesaVista() && aviso) aviso.hidden = false;
+        if (!mesaVista()) avisa(true);
       }
     }
     var espera = 0;

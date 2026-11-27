@@ -1531,6 +1531,9 @@ def noticias(base, ref):
     # verificado y luego las tarjetas (con Garantías cívicas).
     'entrada': 'Que ninguna noticia sobre el dinero público se quede sin cotejar.',
     'cab_extra': 'nt-portal-cab',
+    # Ronda 33 (27-11-2026): el cabezal del diario (línea de edición y barra de secciones), el papel en toda la página
+    # (body_clase) y las tarjetas como «Secciones y archivo del diario» en cuatro columnas (en_pagina). Sin emojis: SIN_EMOJI.
+    'sin_icono_lema': True, 'cab_bloque': nt.cabezal(), 'body_clase': 'nt-papel', 'en_pagina': nt.secciones_diario(),
     'antes': nt.portada(),
     # Tablero de tarjetas por grupo desde el 16-11-2026 (reestructura del autor):
     # cada sección tiene su tarjeta (nt.tablero()), y abajo van lo último, el
@@ -4212,7 +4215,7 @@ AGORA_COLORES = ['#1a56b8', '#0f7b4f', '#b45309', '#b3261e', '#6d28d9', '#be185d
 
 
 # Ronda 26D: páginas rediseñadas sin un solo emoji dentro de <main> (pagina() los limpia).
-SIN_EMOJI = ('participa.html', 'agora.html', 'diccionario.html', 'administracion-codigos.html')
+SIN_EMOJI = ('participa.html', 'agora.html', 'diccionario.html', 'administracion-codigos.html', 'noticias-relevantes.html')
 EMOJI_RE = '(?:[\U0001F000-\U0001FAFF\u2600-\u27BF\u2B00-\u2BFF\u2300-\u23FF][\uFE0F\u200D]*)+'
 
 
@@ -7493,6 +7496,9 @@ def _pagina(a, sello):
       </nav>''' % saltos
     else:
         en_pagina = ''
+    if a.get('en_pagina'):
+        # Ronda 33: una página puede traer su propio índice de secciones (el Noticiero, en columnas de diario).
+        en_pagina = a['en_pagina']
     nota = ('<a class="apartado-nota" href="index.html?ir=nota">📖 Qué son las finanzas públicas y qué encontrarás aquí</a>'
             if a.get('nota') else '')
     guia = GUIA if a.get('guia') else ''
@@ -7631,7 +7637,7 @@ def _pagina(a, sello):
   <script src="assets/auditor/js/comunidad.js?v={sello}"></script>{scripts}
 </body>
 </html>
-'''.format(body_clase=' class="avb-pagina"' if a.get('bento') else '', csp=seguridad.meta(), titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
+'''.format(body_clase=' class="avb-pagina"' if a.get('bento') else ((' class="%s"' % a['body_clase']) if a.get('body_clase') else ''), csp=seguridad.meta(), titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
            sociales=sociales(a['archivo'], titulo_doc, descripcion) + ('\n  <meta name="robots" content="noindex, nofollow">' if a.get('noindex') else ''),
            cabecera=cabecera(marca, sello, a['archivo']), menu=a['menu'],
            volver='' if a.get('pie_corto') else (

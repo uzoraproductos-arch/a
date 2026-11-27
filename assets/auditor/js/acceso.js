@@ -121,6 +121,10 @@
       'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="15" r="4"/>' +
       '<path d="m10.8 12.2 9.2-9.2"/><path d="m17 6 3 3"/><path d="m14.5 8.5 2 2"/></svg>';
     if (admin) {
+      // Ronda 34: en celular, la franja del Auditor dice lo mismo que la tarjeta.
+      var tk = document.getElementById('avbBarraTk');
+      if (tk) tk.innerHTML = '<b class="avb-barra-saldo" id="avbBarraSaldo">Administración <span class="avb-inf">∞</span></b>' +
+        '<a href="' + C.panel + '" title="Tus códigos, las solicitudes y tu código de la semana">Abrir el panel</a>';
       caja.className = 'avb-acceso avb-ilimitado';
       caja.innerHTML = '<a class="avb-adm" href="' + C.panel + '" title="Tus códigos, las solicitudes y tu código de la semana">' +
         '<span><b>Administración <span class="avb-inf">∞</span></b><small>Servicios y tokens ilimitados</small></span></a>';
