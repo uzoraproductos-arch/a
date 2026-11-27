@@ -415,6 +415,15 @@
     var qs = document.getElementById('avbQuienes');
     if (qs && window.matchMedia && window.matchMedia('(max-width: 700px)').matches) qs.removeAttribute('open');
 
+    /* Ronda 37: en celular (hasta 980 px) el pie abre plegado; en escritorio, siempre abierto. */
+    var pieDet = document.getElementById('avbPieDet');
+    if (pieDet && window.matchMedia) {
+      var pieMq = window.matchMedia('(max-width: 980px)');
+      var piePon = function () { pieDet.open = !pieMq.matches; };
+      piePon();
+      if (pieMq.addEventListener) pieMq.addEventListener('change', piePon); else if (pieMq.addListener) pieMq.addListener(piePon);
+    }
+
     /* Las preguntas de la entrada y las de ejemplo, una cada 4 s. */
     var rota = document.getElementById('avbRota'), rq = rota ? rota.querySelectorAll('li') : [], ri = 0, rt = 0, pausa = false;
     if (rq.length > 1 && !quieto()) {
