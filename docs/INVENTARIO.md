@@ -847,7 +847,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicios-respuesta.html` | La respuesta completa · Auditavisión | apartados.py | 42 | 0 | 1 | 1 | 1 |
 | `servicios-revisa.html` | El Inspector de tu servicio · Auditavisión | apartados.py | 43 | 0 | 1 | 1 | 1 |
 | `servicios-tu-perfil.html` | Tu perfil · Auditavisión | apartados.py | 120 | 0 | 1 | 1 | 1 |
-| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 88 | 0 | 7 | 2 | 1 |
+| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 106 | 0 | 7 | 2 | 1 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 45 | 0 | 1 | 1 | 1 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 45 | 0 | 1 | 1 | 1 |
 
