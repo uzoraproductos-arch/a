@@ -143,6 +143,7 @@ cientos de megas y van al almacenamiento, no a Git.
 | 4 | `BANXICO_TOKEN`: gratis, desde la página del API del SIE (banxico.org.mx/SieAPIRest/service/v1/, opción del token; llega por correo, 64 caracteres). Va en **GitHub → Settings → Secrets → Actions**; el flujo «Sube la base de datos» lo pasa a Supabase y sube `portales` | Gratis |
 | 5 | `INEGI_TOKEN`: gratis en la página de desarrolladores del API de indicadores del INEGI. Igual: secreto de GitHub, y el flujo lo pasa a Supabase | Gratis |
 | 6 | `ANTHROPIC_API_KEY`, solo si quieres la capa de IA | Por pregunta, según el modelo |
+| 7 | `RESEND_API_KEY` y `ADMIN_NOTIFY_EMAIL` (y, si quieres otro remitente, `RESEND_FROM`), solo si quieres que cada solicitud de código te avise por correo (función `codigo`). Sin ellos no se manda nada y la solicitud se guarda igual | Resend, plan gratuito |
 
 Con eso, el agente corre `supabase db push` y `supabase functions deploy`, y
 conecta los botones «Enviar», «Lo que aún no sé» y «Búscalo en internet» de la página.

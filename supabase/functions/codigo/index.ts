@@ -5,9 +5,59 @@
 // así nadie prueba códigos al azar. El código maestro de la administración
 // entra por aquí mismo y abre su sesión (migración 20261030000009). El canje no guarda nombre ni correo; la
 // solicitud guarda el correo solo con el aviso de privacidad aceptado.
+//
+// Aviso por correo de cada solicitud de código (27-11-2026, pedido del autor), con
+// Resend. Tres secretos de la función, ninguno escrito aquí:
+//   RESEND_API_KEY      la llave de Resend; sin ella no se manda nada.
+//   ADMIN_NOTIFY_EMAIL  a quién se le avisa; sin él no se manda nada.
+//   RESEND_FROM         (opcional) el remitente; por defecto «Auditavisión <onboarding@resend.dev>».
+// El aviso nunca detiene ni tumba la solicitud: si faltan los secretos se omite en
+// silencio, y si Resend falla o tarda más de 4 segundos solo queda un console.warn.
 import { base, dentroDelLimite, huellaIp, leeJson, responde, sirve } from "../_comun/comun.ts";
 
 const PASE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+const CORREO = /^[^\s@<>",;]+@[^\s@<>",;]+\.[^\s@<>",;]+$/;
+const PANEL = "https://auditavision.com.mx/administracion-codigos.html";
+const unaLinea = (t: string) => t.replace(/[\u0000-\u001f\u007f\u2028\u2029]+/g, " ").replace(/\s+/g, " ").trim();
+
+// Avisa a la administración de una solicitud nueva. No lanza nunca.
+async function avisaSolicitud(correo: string, nombre: string | null, motivo: string | null): Promise<void> {
+  try {
+    const llave = Deno.env.get("RESEND_API_KEY"), para = Deno.env.get("ADMIN_NOTIFY_EMAIL");
+    if (!llave || !para) return;
+    const de = Deno.env.get("RESEND_FROM") || "Auditavisión <onboarding@resend.dev>";
+    const mot = unaLinea(motivo ?? ""), nom = unaLinea(nombre ?? ""), cor = unaLinea(correo);
+    const cuando = new Intl.DateTimeFormat("es-MX", { timeZone: "America/Mexico_City", dateStyle: "long", timeStyle: "short" }).format(new Date());
+    const cuerpo: Record<string, unknown> = {
+      from: de,
+      to: [para],
+      subject: "[Auditavisión] Nueva solicitud de código" + (mot ? ": " + (mot.length > 60 ? mot.slice(0, 59) + "…" : mot) : ""),
+      text: [
+        "Llegó una solicitud de código de acceso.",
+        "",
+        "Nombre: " + (nom || "No indicó"),
+        "Correo: " + (cor || "No indicó"),
+        "Motivo: " + (mot || "Sin motivo"),
+        "Fecha y hora: " + cuando + " (Ciudad de México)",
+        "",
+        "Atiéndela en el panel: " + PANEL,
+      ].join("\n"),
+    };
+    if (CORREO.test(cor)) cuerpo.reply_to = cor;
+    const r = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: "Bearer " + llave, "Content-Type": "application/json" },
+      body: JSON.stringify(cuerpo),
+      signal: AbortSignal.timeout(4000),
+    });
+    if (!r.ok) console.warn("codigo: Resend no aceptó el aviso de la solicitud (HTTP " + r.status + ")");
+    await r.body?.cancel();
+  } catch (e) {
+    // Solo el tipo de error: nunca la llave ni el correo.
+    console.warn("codigo: no se pudo mandar el aviso de la solicitud (" + (e instanceof Error ? e.name : "error") + ")");
+  }
+}
 
 sirve(async (req) => {
   const j = await leeJson(req, 16000);
@@ -53,14 +103,26 @@ sirve(async (req) => {
   if (accion === "solicitar") {
     // Tres solicitudes por hora por IP; el correo solo con el aviso aceptado.
     if (!(await dentroDelLimite(db, huella, "codigo-solicitud", 3, 3600))) return responde(req, { ok: false, motivo: "espera" }, 429);
+    const correo = j && typeof j.correo === "string" ? j.correo.slice(0, 254) : "";
+    const nombre = j && typeof j.nombre === "string" ? j.nombre.slice(0, 80) : null;
+    const motivo = j && typeof j.motivo === "string" ? j.motivo.slice(0, 300) : null;
     const { data, error } = await db.rpc("solicitar_codigo", {
-      p_correo: j && typeof j.correo === "string" ? j.correo.slice(0, 254) : "",
-      p_nombre: j && typeof j.nombre === "string" ? j.nombre.slice(0, 80) : null,
-      p_motivo: j && typeof j.motivo === "string" ? j.motivo.slice(0, 300) : null,
+      p_correo: correo,
+      p_nombre: nombre,
+      p_motivo: motivo,
       p_acepta: j?.acepta_aviso === true,
       p_huella: huella,
     });
     if (error) throw error;
+    // Solo si la base la guardó. El aviso corre aparte cuando el entorno lo permite
+    // (EdgeRuntime.waitUntil), para no hacer esperar a quien pide; si no, se espera
+    // a lo más su límite de 4 segundos. Nunca cambia la respuesta.
+    if (data && data.ok !== false) {
+      const aviso = avisaSolicitud(correo, nombre, motivo);
+      const er = (globalThis as { EdgeRuntime?: { waitUntil?: (p: Promise<unknown>) => void } }).EdgeRuntime;
+      if (er && typeof er.waitUntil === "function") er.waitUntil(aviso);
+      else await aviso;
+    }
     return responde(req, data);
   }
 

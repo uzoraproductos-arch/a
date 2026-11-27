@@ -1753,7 +1753,7 @@ AVISO = {
         {'id': 'terceros', 'titulo': 'Servicios de terceros', 'texto': 'Lo que tu navegador pide a otros sitios al abrir una página.', 'tarjetas': [],
          'bloque': ('<p>Para mostrarte la página, tu navegador se conecta a GitHub Pages (donde vive el sitio), a Google Fonts (las letras) '
                     'y a cdnjs (la librería de los mapas). Si abres un formulario para enviarlo, también a Cloudflare Turnstile, '
-                    'que comprueba que eres una persona y no un programa; y si usas la IA, a nuestra base, que llama a Anthropic (arriba). Esos servicios reciben, como cualquier sitio, tu dirección IP y los datos técnicos '
+                    'que comprueba que eres una persona y no un programa; y si usas la IA, a nuestra base, que llama a Anthropic (arriba). Si pides un código de acceso, nuestra base avisa a la administración por correo con el servicio <b>Resend</b> (en Estados Unidos), que recibe para ese aviso el nombre, el correo y el motivo que escribiste. Esos servicios reciben, como cualquier sitio, tu dirección IP y los datos técnicos '
                     'de tu navegador, y los tratan con sus propias políticas. Los enlaces a portales oficiales y a noticias te llevan a '
                     'sitios con sus propios avisos.</p>')},
         # Cómo se protege y qué se hace si algo falla (19-11-2026, pedido del autor: «la
