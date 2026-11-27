@@ -925,8 +925,10 @@ EJEMPLOS.extend([('¿Qué pasó con Dos Bocas?', '🛢️'), ('¿Qué es el huac
 # las cifras salen de la misma base, con su fuente y su estado (AGENTS.md §2).
 # (id, icono, nombre, lema, qué hace, herramientas cuyas aplicaciones usa,
 #  preguntas extra para sus aplicaciones, saludo)
-# Ronda 21 (25-11-2026, decisión del autor): el Auditor reúne otra vez sus cuatro modos y abre en el Inspector.
-MODO_INICIAL = 'inspector'
+# Ronda 21 (25-11-2026, decisión del autor): el Auditor reúne otra vez sus cuatro modos, con el Inspector primero.
+# Ronda 28B (26-11-2026): abre en Ciudadano, el modo de la pregunta sencilla, para que nadie gaste por accidente lo del
+# Inspector · Pro en su primera prueba; el Inspector se elige a propósito.
+MODO_INICIAL = 'ciudadano'
 ORDEN_AUDITOR = ('inspector', 'ciudadano', 'periodista', 'ambientalista')
 MODOS = [
     ('inspector', '🔍', 'Inspector', 'La investigación más completa',

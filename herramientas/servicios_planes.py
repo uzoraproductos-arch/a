@@ -124,7 +124,7 @@ def precios():
     L = F['libre']
     lis = lambda xs: ''.join('<li>%s<span>%s</span></li>' % (ico('check', 16), html.escape(x)) for x in xs)
     libre = ('<article class="svp-plan"><h3>%s</h3><p class="svp-precio">%s <small>%s</small></p>'
-             '<ul>%s<li>%s<span>%d tokens de bienvenida al crear tu cuenta <em>(próximamente)</em></span></li></ul></article>') % (
+             '<ul>%s<li>%s<span>%d tokens gratis cada mes, en tu navegador, sin cuenta ni tarjeta</span></li></ul></article>') % (
         L['nombre'], mo.pesos(0), html.escape(L['nota'].lower()), lis(L['incluye']), ico('check', 16), L['bienvenida'])
     paq = ('<article class="svp-plan"><h3>Paquetes de tokens</h3><p class="svp-precio">Pago único</p><ul>%s</ul>'
            '<p class="svp-plan-n">Lo que gasta cada acción está en la tabla de abajo.</p></article>') % ''.join(
@@ -141,6 +141,8 @@ def precios():
         html.escape(med['nombre']), mo.pesos(med['desde']), lis(med['incluye']))
     consumo = ''.join('<tr><th scope="row">%s</th><td>%d token%s</td></tr>' % (html.escape(q), t, '' if t == 1 else 's')
                       for _k, q, t in F['consumo'])
+    # Ronda 27A: lo que nunca gasta tokens, en la misma tabla (la billetera, tokens.js, lee la misma lista).
+    consumo += ''.join('<tr class="svp-gratis"><th scope="row">%s</th><td>Gratis</td></tr>' % html.escape(g) for g in F['gratis'])
     return '''%s<div class="svp-planes">
           %s
           %s
@@ -154,7 +156,7 @@ def precios():
             <tbody>%s</tbody>
           </table>
           <p class="svp-nota">Precios en pesos mexicanos, publicados por decisión del autor el %s. Mientras se activan los pagos en línea, hoy se opera
-          con códigos piloto y promocionales: nada se cobra en esta página.</p>
+          con códigos piloto y promocionales: nada se cobra en esta página. Tu saldo vive en tu navegador; un código de recarga le suma tokens.</p>
         </div>
         <p class="svp-acc"><a class="svp-btn svp-btn-of" href="%s">Empezar gratis</a>
         <a class="svp-btn" href="%s" data-directa="seo">%s Canjear código / Solicitar acceso</a></p>%s''' % (

@@ -270,6 +270,7 @@ def entrada_html(sello):
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="assets/auditor/js/iconos.js?v={sello}"></script>
   <script src="assets/auditor/js/acceso.js?v={sello}"></script>
+  <script src="assets/auditor/js/tokens.js?v={sello}"></script>
   <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/acceso.css?v={sello}">
   <script type="application/ld+json">{ld}</script>
@@ -546,9 +547,12 @@ def pagina_panel():
               '        <label class="ac-otra" hidden>Días <input class="ac-campo" name="dias" type="number" min="1" max="1825" value="10"></label>\n'
               '        <label>Personas por código <input class="ac-campo" name="usos" type="number" min="1" max="10000" value="1" required></label>\n'
               '        <label>Canjear antes del <input class="ac-campo" name="antes" type="date"></label>\n'
+              '        <label>Tokens que da <select class="ac-campo" name="tokens"><option value="">Sin tokens (solo abre)</option></select></label>\n'
+              '        <label class="ac-otros" hidden>Cuántos tokens <input class="ac-campo" name="tokensN" type="number" min="1" max="100000" value="35"></label>\n'
               '        <label class="ac-ancho">Nota (opcional) <input class="ac-campo" name="nota" type="text" maxlength="120" placeholder="Para quién son: «Taller», «Prensa»…"></label>\n'
               '        <label class="ac-ancho">Código propio (opcional) <input class="ac-campo" name="propio" type="text" autocapitalize="characters" maxlength="9" autocomplete="off" spellcheck="false" placeholder="Vacío: salen al azar. Ejemplo: 2026-1029 o PASE-TALL"></label>\n'
-              '        <details class="ac-nota ac-ancho"><summary>Ayuda sobre los códigos</summary>\n'
+              '        <details class="ac-nota ac-ancho"><summary>Ayuda sobre los códigos y sus tokens</summary>\n'
+              '        <p class="ac-ayuda">Tokens: al canjearse, el código suma esa cantidad a la billetera de quien lo usa, una sola vez por navegador, o le da tokens ilimitados mientras dure su acceso. La duración sigue diciendo cuánto tiempo abre los Servicios. Sin tokens, el código solo abre. Los tokens de un código se cambian con «Editar»; renovarlo no los cambia.</p>\n'
               '        <p class="ac-ayuda">Si escribes un código propio se crea solo ese, con la duración y los usos de arriba. Lleva 8 caracteres: puros números, puras letras o revueltos, como tú quieras. Los que salen al azar siempre revuelven letras y números, así que uno de puros números o de puras letras es uno que diste tú. La nota es opcional.</p>\n'
               '        <p class="ac-ayuda">Archivar solo ordena: el código sigue abriendo si alguien lo usa. Renovar le devuelve la vida: quita la revocación y el archivo, suma personas o fecha y, si quieres, da más tiempo a quien ya lo canjeó (desde hoy, si ya se le había acabado). Eliminar lo borra para siempre y quien lo canjeó pierde su tiempo. Todo queda en la Bitácora.</p></details>\n'
               '      </div>\n'
@@ -569,7 +573,7 @@ def pagina_panel():
               '    </div>\n'
               '    <p class="ac-estado" id="acTablaEstado" role="status" aria-live="polite"></p>\n'
               '    <div class="ac-tabla-caja"><table class="ac-tabla" id="acTabla">\n'
-              '      <thead><tr><th>Código</th><th>Duración</th><th>Usos</th><th>Estado</th><th>Nota</th><th>Acciones</th></tr></thead>\n'
+              '      <thead><tr><th>Código</th><th>Duración</th><th>Tokens</th><th>Usos</th><th>Estado</th><th>Nota</th><th>Acciones</th></tr></thead>\n'
               '      <tbody></tbody></table></div>\n'
               '    </section>\n'
               '  </div>\n'
@@ -595,4 +599,5 @@ def paginas():
     """Las páginas con el molde de apartados.py: el panel. La entrada tiene el
     suyo (escribir_entrada)."""
     escribir_config()
+    __import__('monetizacion').escribir_tokens()
     return [pagina_panel()]

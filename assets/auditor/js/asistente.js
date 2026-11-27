@@ -3480,6 +3480,15 @@
   function responde(q, quieto, ya) {
     q = String(q || '').trim().slice(0, 600);
     if (!q) return;
+    /* Ronda 27A: la billetera (tokens.js). Una pregunta gasta lo de su modo (el Inspector, «Pro»); abrir una página desde
+       otra pestaña (?q=&abre=) y volver a preguntar lo que no se contestó no gastan. Sin saldo, la pregunta se queda en la
+       caja y el aviso ofrece canjear o pedir un código. */
+    var tk = modoActual() === 'inspector' ? 'inspector' : 'pregunta';
+    if (!ya && window.AvTokens && !window.AvTokens.cobra(tk, tk + '|' + q, { libre: !!(quieto && abreUna) })) {
+      campo.value = q;
+      try { document.dispatchEvent(new CustomEvent('av-tokens-falta', { detail: { q: q, accion: tk } })); } catch (e) { /* nada */ }
+      return;
+    }
     /* Ya empezó la plática: los ejemplos del arranque se guardan, como en cualquier chat. */
     var ejs = document.querySelector('.pa-ejs');
     if (ejs) ejs.hidden = true;
@@ -3495,6 +3504,8 @@
       /* La medición de uso (18-11-2026): solo el modo y la página a la que llevó la respuesta; la pregunta no sale. */
       if (!ya && window.AvUso) window.AvUso.marca('pregunta', { modo: modoActual(), destino: r.sin ? 'sin respuesta' : String((r.ir && r.ir[0]) || (r.ficha && r.ficha.ir && r.ficha.ir[0]) || '').split(/[?#]/)[0].slice(0, 160) });
       if (r.sin) {
+        /* Ronda 27A: lo que el Auditor no supo contestar no gasta tokens. */
+        if (!ya && window.AvTokens) window.AvTokens.devuelve(tk, tk + '|' + q);
         li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + pideExpHtml() + iaHtml(q) + (r.web ? webHtml(r.web) : fueraHtml(q));
         if (!ya) { anota(q, 'sin'); caso(q, r, previas, true); }
         return;
@@ -3826,7 +3837,7 @@
   var app = document.getElementById('paApp'), MODOS_OK = {};
   Array.prototype.forEach.call(app.querySelectorAll('.pa-modo-op'), function (b) { MODOS_OK[b.getAttribute('data-pa-modo')] = 1; });
   function modoActual() { return app.getAttribute('data-modo'); }
-  function poneModo(m, avisa) {
+  function poneModo(m, avisa, sinGuardar) {
     if (!MODOS_OK[m]) return;
     var antes = modoActual();
     app.setAttribute('data-modo', m);
@@ -3843,7 +3854,8 @@
     /* El ícono se copia como está: iconos.js ya cambió el emoji por su trazo. */
     var ico = op ? '<span aria-hidden="true">' + op.querySelector('.pa-modo-ico').innerHTML + '</span> ' : '';
     if (et && op) et.innerHTML = ico + esc(op.getAttribute('data-nom'));
-    try { localStorage.setItem('av-modo', m); } catch (e) { /* sin almacenamiento: dura esta vista */ }
+    /* Ronda 28B: solo se recuerda el modo que el lector eligió; el de arranque no se guarda. */
+    if (!sinGuardar) { try { localStorage.setItem('av-modo', m); } catch (e) { /* sin almacenamiento: dura esta vista */ } }
     app.dispatchEvent(new CustomEvent('pa-modo', { detail: m }));
     if (avisa && antes !== m && historial.length && op) {
       hilo.insertAdjacentHTML('beforeend', '<li class="pa-msg pa-bot pa-modo-aviso"><div class="pa-burbuja"><p>' +
@@ -4033,7 +4045,7 @@
     /* Ronda 21 (25-11-2026): el Auditor reúne otra vez sus cuatro modos, con el Inspector
        primero; ?modo=inspector ya no se muda a Servicios. */
     if (!MODOS_OK[m]) { try { m = viejo(localStorage.getItem('av-modo')); } catch (e) { m = null; } }
-    poneModo(MODOS_OK[m] ? m : modoActual());
+    poneModo(MODOS_OK[m] ? m : modoActual(), false, !MODOS_OK[m]);
   })();
   if (muda) return;
   abreUna = ps.get('abre');

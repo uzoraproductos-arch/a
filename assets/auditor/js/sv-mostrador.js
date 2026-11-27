@@ -91,6 +91,14 @@
   function revisa(texto, abreL, baja, lug) {
     var sid = sel.value, t = (texto || '').trim() || (D[sid] && D[sid].q) || '';
     if (!t) return;
+    /* Ronda 27A: un servicio «Con tokens» gasta lo de una revisión avanzada (tokens.js). La misma pregunta no se cobra dos
+       veces, y afinar el lugar (la entidad y luego uno de sus municipios) cuenta como una sola revisión. Sin saldo, la
+       pregunta se queda escrita. */
+    if (D[sid] && D[sid].pago && window.AvTokens &&
+        !window.AvTokens.cobra(D[sid].patri ? 'semaforo' : 'servicio', sid + '|' + (lug && lug.ent ? 'lugar:' + lug.ent + '|' + (rfcIn ? rfcIn.value.trim().toUpperCase() : '') : t))) {
+      q.value = texto || '';
+      return;
+    }
     q.value = texto ? texto : '';
     anota(sid, texto ? t : '');
     ultimo = null;
@@ -142,6 +150,9 @@
   function recibe(fs) {
     var d = D[sel.value];
     if (!d || !d.suelta || !fs || !fs.length) return;
+    /* Ronda 27A: tus archivos son un lote Cero CIEC (tokens.js); el mismo lote no se cobra dos veces. */
+    var firma = Array.prototype.map.call(fs, function (f) { return f.name + ':' + (f.size || 0); }).sort().join('|');
+    if (window.AvTokens && !window.AvTokens.cobra('lote', firma)) { if (arch) arch.value = ''; return; }
     archivos = fs;
     muestra(d.suelta.app);
   }

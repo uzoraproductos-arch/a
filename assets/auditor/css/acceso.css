@@ -89,7 +89,7 @@
 .ac-f-cuanto { font-size: 18px; margin: 0 0 6px; }
 .ac-f-hasta { font-size: 16px; color: #33415c; margin: 0 0 18px; }
 .ac-felicidades .ac-boton { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
-.ac-sol-dur { width: auto; display: inline-block; min-width: 120px; }
+.ac-sol-dur, .ac-sol-tk, .ac-sol-tkn { width: auto; display: inline-block; min-width: 120px; }
 .ac-solicitudes { margin: 18px 0; }
 .ac-solicitudes h3 { color: #0b2a63; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 /* El código semanal de la administración (30-10-2026). */
@@ -307,6 +307,9 @@
 .ac-pase-fila .ac-pase:empty { display: none; }
 .ac-pase-ok { color: #1f6b3a; }
 .ac-pase-mal { color: #9b2c2c; }
+.ac-tk { color: #7a5d08; font-weight: 600; white-space: nowrap; }
+.ac-tk-no { color: #5a6782; }
+.ac-sol-tkn { min-width: 0; width: 110px; }
 
 /* ── Ronda 28 (26-11-2026): el panel como cabina de control ─────────────────────────────────────────────────
    El encabezado va compacto para que el panel empiece en la primera pantalla; arriba, una barra con quién entró,
@@ -386,8 +389,9 @@ main.apartado:has(.ac-cab) .apartado-cuerpo { padding-top: 16px; }
   .ac-tabla td:empty { display: none; }
   .ac-tabla td:not([colspan])::before { display: block; color: #5a6782; font-weight: 700; font-size: 14px; }
   #acTabla td:nth-child(2):not([colspan])::before { content: "Duración"; }
-  #acTabla td:nth-child(3):not([colspan])::before { content: "Usos"; }
-  #acTabla td:nth-child(5):not([colspan])::before { content: "Nota"; }
+  #acTabla td:nth-child(3):not([colspan])::before { content: "Tokens"; }
+  #acTabla td:nth-child(4):not([colspan])::before { content: "Usos"; }
+  #acTabla td:nth-child(6):not([colspan])::before { content: "Nota"; }
   #acSol td:nth-child(2):not([colspan])::before { content: "Quién y para qué"; }
   #acSol td:nth-child(3):not([colspan])::before { content: "Pidió"; }
   #acBit td:nth-child(1):not([colspan])::before { content: "Cuándo"; }

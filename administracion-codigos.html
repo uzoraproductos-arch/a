@@ -22,14 +22,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261126j">
-  <script src="assets/auditor/js/iconos.js?v=20261126j"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261126j"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261126j" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261126j">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261126j">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261126j">
-  <link rel="stylesheet" href="assets/auditor/css/acceso.css?v=20261126j">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261126l">
+  <script src="assets/auditor/js/iconos.js?v=20261126l"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261126l"></script>
+  <script src="assets/auditor/js/tokens.js?v=20261126l"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261126l" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261126l">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261126l">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261126l">
+  <link rel="stylesheet" href="assets/auditor/css/acceso.css?v=20261126l">
 </head>
 <body data-pagina="apartado">
   <!--carcasa-->
@@ -324,9 +325,12 @@
         <label class="ac-otra" hidden>Días <input class="ac-campo" name="dias" type="number" min="1" max="1825" value="10"></label>
         <label>Personas por código <input class="ac-campo" name="usos" type="number" min="1" max="10000" value="1" required></label>
         <label>Canjear antes del <input class="ac-campo" name="antes" type="date"></label>
+        <label>Tokens que da <select class="ac-campo" name="tokens"><option value="">Sin tokens (solo abre)</option></select></label>
+        <label class="ac-otros" hidden>Cuántos tokens <input class="ac-campo" name="tokensN" type="number" min="1" max="100000" value="35"></label>
         <label class="ac-ancho">Nota (opcional) <input class="ac-campo" name="nota" type="text" maxlength="120" placeholder="Para quién son: «Taller», «Prensa»…"></label>
         <label class="ac-ancho">Código propio (opcional) <input class="ac-campo" name="propio" type="text" autocapitalize="characters" maxlength="9" autocomplete="off" spellcheck="false" placeholder="Vacío: salen al azar. Ejemplo: 2026-1029 o PASE-TALL"></label>
-        <details class="ac-nota ac-ancho"><summary>Ayuda sobre los códigos</summary>
+        <details class="ac-nota ac-ancho"><summary>Ayuda sobre los códigos y sus tokens</summary>
+        <p class="ac-ayuda">Tokens: al canjearse, el código suma esa cantidad a la billetera de quien lo usa, una sola vez por navegador, o le da tokens ilimitados mientras dure su acceso. La duración sigue diciendo cuánto tiempo abre los Servicios. Sin tokens, el código solo abre. Los tokens de un código se cambian con «Editar»; renovarlo no los cambia.</p>
         <p class="ac-ayuda">Si escribes un código propio se crea solo ese, con la duración y los usos de arriba. Lleva 8 caracteres: puros números, puras letras o revueltos, como tú quieras. Los que salen al azar siempre revuelven letras y números, así que uno de puros números o de puras letras es uno que diste tú. La nota es opcional.</p>
         <p class="ac-ayuda">Archivar solo ordena: el código sigue abriendo si alguien lo usa. Renovar le devuelve la vida: quita la revocación y el archivo, suma personas o fecha y, si quieres, da más tiempo a quien ya lo canjeó (desde hoy, si ya se le había acabado). Eliminar lo borra para siempre y quien lo canjeó pierde su tiempo. Todo queda en la Bitácora.</p></details>
       </div>
@@ -347,7 +351,7 @@
     </div>
     <p class="ac-estado" id="acTablaEstado" role="status" aria-live="polite"></p>
     <div class="ac-tabla-caja"><table class="ac-tabla" id="acTabla">
-      <thead><tr><th>Código</th><th>Duración</th><th>Usos</th><th>Estado</th><th>Nota</th><th>Acciones</th></tr></thead>
+      <thead><tr><th>Código</th><th>Duración</th><th>Tokens</th><th>Usos</th><th>Estado</th><th>Nota</th><th>Acciones</th></tr></thead>
       <tbody></tbody></table></div>
     </section>
   </div>
@@ -363,12 +367,12 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261126j</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261126l</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261126j"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261126j"></script>
-  <script src="assets/auditor/js/acceso-paginas.js?v=20261126j"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261126l"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261126l"></script>
+  <script src="assets/auditor/js/acceso-paginas.js?v=20261126l"></script>
 </body>
 </html>
