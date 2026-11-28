@@ -1,0 +1,661 @@
+{
+ "documento": "Lo que cambia y lo que no cambia el 1 de enero de 2027",
+ "corte": "2026-11-28",
+ "nota": "Todo lo de este archivo con vigencia_desde 2027-01-01 rige desde el 1 de enero de 2027: hasta el 31 de diciembre de 2026 valen las cifras de 2026. La LISR consolidada de la Cámara de Diputados aún no integra el Decreto del 13-11-2026; por eso lo de 2027 se cita del Decreto.",
+ "cambios": [
+  {
+   "id": "decreto-lisr-vigencia",
+   "concepto": "Entrada en vigor del Decreto de reforma a la LISR",
+   "estado": "oficial",
+   "valor": {
+    "fecha": "2027-01-01"
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Transitorio Único",
+     "cita": "Único. El presente Decreto entrará en vigor el 1 de enero de 2027."
+    }
+   ]
+  },
+  {
+   "id": "resico-pf-tope-2027",
+   "concepto": "RESICO de personas físicas: tope de ingresos desde 2027",
+   "estado": "oficial",
+   "valor": {
+    "pesos": 5000000
+   },
+   "en_letra": [
+    "cinco millones de pesos"
+   ],
+   "unidad": "pesos al año",
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Art. 113-E",
+     "cita": "Artículo 113-E. Los contribuyentes personas físicas que realicen únicamente actividades empresariales, profesionales u otorguen el uso o goce temporal de bienes, podrán optar por pagar el impuesto sobre la renta en los términos establecidos en esta Sección, siempre que la totalidad de sus ingresos propios de la actividad o las actividades señaladas que realicen, obtenidos en el ejercicio inmediato anterior, no hubieran excedido de la cantidad de cinco millones de pesos. ... Para los efectos de los párrafos anteriores, en caso de que los ingresos a que se"
+    }
+   ]
+  },
+  {
+   "id": "resico-pf-mensual-2027",
+   "concepto": "RESICO de personas físicas: tabla mensual desde 2027",
+   "estado": "oficial",
+   "tabla": [
+    {
+     "hasta": 25000.0,
+     "tasa": 1.0
+    },
+    {
+     "hasta": 50000.0,
+     "tasa": 1.1
+    },
+    {
+     "hasta": 83333.33,
+     "tasa": 1.5
+    },
+    {
+     "hasta": 208333.33,
+     "tasa": 2.0
+    },
+    {
+     "hasta": 5000000.0,
+     "tasa": 2.5
+    }
+   ],
+   "unidad": "pesos mensuales cobrados, sin IVA; tasa en %",
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Art. 113-E, tabla mensual",
+     "cita": "Hasta 25,000.00 | 1.00% | Hasta 50,000.00 | 1.10% | Hasta 83,333.33 | 1.50% | Hasta 208,333.33 | 2.00% | Hasta 5,000,000.00 | 2.50% | ... Los"
+    }
+   ]
+  },
+  {
+   "id": "resico-pf-anual-2027",
+   "concepto": "RESICO de personas físicas: tabla anual desde 2027",
+   "estado": "oficial",
+   "tabla": [
+    {
+     "hasta": 300000.0,
+     "tasa": 1.0
+    },
+    {
+     "hasta": 600000.0,
+     "tasa": 1.1
+    },
+    {
+     "hasta": 1000000.0,
+     "tasa": 1.5
+    },
+    {
+     "hasta": 2500000.0,
+     "tasa": 2.0
+    },
+    {
+     "hasta": 5000000.0,
+     "tasa": 2.5
+    }
+   ],
+   "unidad": "pesos anuales cobrados, sin IVA; tasa en %",
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Art. 113-F, tabla anual",
+     "cita": "Hasta 300,000.00 | 1.00% | Hasta 600,000.00 | 1.10% | Hasta 1,000,000.00 | 1.50% | Hasta 2,500,000.00 | 2.00% | Hasta 5,000,000.00 | 2.50% | ... ..."
+    }
+   ]
+  },
+  {
+   "id": "resico-pf-salida-2027",
+   "concepto": "RESICO de personas físicas: quien rebase el tope sale del régimen",
+   "estado": "oficial",
+   "valor": {
+    "pesos": 5000000
+   },
+   "en_letra": [
+    "cinco millones de pesos"
+   ],
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Art. 113-E",
+     "cita": "Para los efectos de los párrafos anteriores, en caso de que los ingresos a que se refiere este artículo excedan de cinco millones de pesos en cualquier momento del año de tributación, o se incumpla con alguna de las obligaciones a que se refiere el artículo 113-G de esta Ley, o se actualice el supuesto previsto en el artículo"
+    }
+   ]
+  },
+  {
+   "id": "resico-pf-regreso-2027",
+   "concepto": "RESICO de personas físicas: quien salió puede volver al ejercicio siguiente",
+   "estado": "oficial",
+   "valor": {
+    "pesos": 5000000
+   },
+   "en_letra": [
+    "cinco millones de pesos"
+   ],
+   "vigencia_desde": "2027-01-01",
+   "nota": "En 2026 solo puede volver quien salió por rebasar el tope (si el año anterior no pasó de 3.5 millones); quien salió por incumplir no vuelve. El texto de 2027 permite volver al ejercicio siguiente a quien no pase de 5 millones y esté al corriente.",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Art. 113-E",
+     "cita": "Los contribuyentes que dejen de tributar conforme a esta Sección, podrán volver a tributar a partir del ejercicio fiscal siguiente, conforme a la misma, siempre que los ingresos obtenidos en el ejercicio inmediato anterior a aquel de que se trate, no excedan de cinco millones de pesos y se encuentren al corriente en el"
+    },
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 113-E, texto vigente en 2026",
+     "cita": "Cuando los contribuyentes dejen de tributar conforme a esta Sección, por el incumplimiento de sus obligaciones fiscales, en ningún caso podrán volver a tributar en los términos de la misma. Tratándose de aquellos contribuyentes que hayan excedido el monto de tres millones quinientos mil pesos a que se refiere el primer párrafo de este artículo, podrán volver a tributar conforme a esta Sección, siempre que los ingresos obtenidos en el ejercicio inmediato anterior a"
+    }
+   ]
+  },
+  {
+   "id": "resico-agro-exencion-2026",
+   "concepto": "RESICO: ingresos exentos de actividades agrícolas, ganaderas, silvícolas o pesqueras, 2026",
+   "estado": "oficial",
+   "valor": {
+    "pesos": 900000
+   },
+   "en_letra": [
+    "novecientos mil pesos"
+   ],
+   "unidad": "pesos al año",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 113-E",
+     "cita": "de esta Ley. Las personas físicas que se dediquen exclusivamente a las actividades agrícolas, ganaderas, silvícolas o pesqueras, cuyos ingresos en el ejercicio no excedan de novecientos mil pesos"
+    }
+   ]
+  },
+  {
+   "id": "resico-agro-exencion-2027",
+   "concepto": "RESICO: ingresos exentos de actividades agrícolas, ganaderas, silvícolas o pesqueras, desde 2027",
+   "estado": "oficial",
+   "valor": {
+    "pesos": 1000000
+   },
+   "en_letra": [
+    "un millón de pesos"
+   ],
+   "unidad": "pesos al año",
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Art. 113-E",
+     "cita": "Las personas físicas que se dediquen exclusivamente a las actividades agrícolas, ganaderas, silvícolas o pesqueras, cuyos ingresos en el ejercicio no excedan de un millón de pesos efectivamente cobrados, no pagarán el impuesto sobre la renta por los ingresos provenientes de dichas actividades. En"
+    }
+   ]
+  },
+  {
+   "id": "resico-pm-tope-2026",
+   "concepto": "RESICO de personas morales: tope de ingresos 2026",
+   "estado": "oficial",
+   "valor": {
+    "pesos": 35000000
+   },
+   "en_letra": [
+    "35 millones de pesos"
+   ],
+   "unidad": "pesos al año",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 206",
+     "cita": "Artículo 206. Deberán cumplir con sus obligaciones fiscales en materia del impuesto sobre la renta conforme al régimen establecido en el presente Capítulo, las personas morales residentes en México únicamente constituidas por personas físicas, cuyos ingresos totales en el ejercicio inmediato anterior no excedan de la cantidad de 35 millones de pesos o las personas morales residentes en México únicamente constituidas por"
+    }
+   ]
+  },
+  {
+   "id": "resico-pm-tope-2027",
+   "concepto": "RESICO de personas morales: tope de ingresos desde 2027",
+   "estado": "oficial",
+   "nota": "El texto de 2027 dice «podrán cumplir» donde el vigente en 2026 dice «deberán cumplir».",
+   "valor": {
+    "pesos": 50000000
+   },
+   "en_letra": [
+    "cincuenta millones de pesos"
+   ],
+   "unidad": "pesos al año",
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Art. 206",
+     "cita": "Artículo 206. Podrán cumplir con sus obligaciones fiscales en materia del impuesto sobre la renta conforme al régimen establecido en el presente Capítulo, las personas morales residentes en México únicamente constituidas por personas físicas, cuyos ingresos totales en el ejercicio inmediato anterior no excedan de la cantidad de cincuenta millones de pesos o las personas morales residentes en México únicamente"
+    }
+   ]
+  },
+  {
+   "id": "iva-opcional-resico-7",
+   "concepto": "IVA opcional para RESICO: 7 % definitivo sobre lo cobrado, en 2027",
+   "estado": "oficial",
+   "valor": {
+    "tasa": 7
+   },
+   "unidad": "% de las contraprestaciones gravadas efectivamente cobradas",
+   "vigencia_desde": "2027-01-01",
+   "nota": "Es una opción de la Ley de Ingresos de 2027: vale ese ejercicio. Los pagos mensuales son definitivos.",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Art. 25, fracción XVIII",
+     "cita": "XVIII. Las personas contribuyentes que tributen en términos del Título IV, Capítulo II, Sección IV o Título VII, Capítulo XII de la Ley del Impuesto sobre la Renta, que realicen actos o actividades por los que hubieran trasladado el impuesto al valor agregado a la tasa que corresponda conforme al tipo de acto o actividad, en los términos de la Ley del Impuesto al Valor Agregado, podrán optar por pagar el impuesto en la declaración que corresponda al mes de que se trate, aplicando la tasa del 7 por ciento al monto total de las contraprestaciones gravadas con el impuesto al valor agregado efectivamente cobradas por los actos o actividades a que se refiere el artículo 1o., párrafo primero, de la Ley del Impuesto al Valor Agregado. El monto del impuesto"
+    },
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Art. 25, fracción XVIII",
+     "cita": "Los pagos mensuales tendrán el carácter de definitivos. En"
+    }
+   ]
+  },
+  {
+   "id": "iva-opcional-resico-sin-acreditamiento",
+   "concepto": "IVA opcional para RESICO: sin acreditamiento y sin cambiar de opción en el año",
+   "estado": "oficial",
+   "valor": {
+    "acreditamiento": "ninguno"
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Art. 25, fracción XVIII",
+     "cita": "Quienes ejerzan la opción mencionada no tendrán derecho a efectuar acreditamiento alguno por el impuesto que les hubieran trasladado, o en su caso, el propio pagado en la importación. Exclusivamente"
+    },
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Art. 25, fracción XVIII",
+     "cita": "Una vez ejercida la opción a que se refiere esta fracción, ésta no podrá variarse durante el ejercicio. Cuando"
+    }
+   ]
+  },
+  {
+   "id": "iva-opcional-resico-equilibrio",
+   "concepto": "IVA opcional para RESICO: a partir de qué proporción de IVA acreditable deja de convenir",
+   "estado": "auditada",
+   "valor": {
+    "porcentaje": 56.25
+   },
+   "unidad": "% del IVA trasladado a la tasa de 16 %",
+   "operacion": "(16 − 7) ÷ 16 × 100: quien traslada 16 y paga 7 se queda con 9; el régimen general conviene más solo si su IVA acreditable pasa de 9 de cada 16 pesos trasladados",
+   "nota": "Cuenta nuestra, solo para actividades a la tasa de 16 %. No es asesoría: no considera retenciones, importaciones ni tasas distintas.",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Art. 25, fracción XVIII",
+     "cita": "La diferencia de las cantidades que se trasladen por concepto del impuesto al valor agregado, respecto del total del impuesto que se pague a la tasa establecida en esta fracción, no se considerará ingreso para efectos del impuesto sobre la renta. Las personas contribuyentes que opten por aplicar lo establecido en esta fracción,"
+    }
+   ]
+  },
+  {
+   "id": "retencion-intereses-2026",
+   "concepto": "Retención anual del ISR sobre intereses, 2026",
+   "estado": "oficial",
+   "valor": {
+    "tasa": 0.9
+   },
+   "unidad": "% anual sobre el capital",
+   "citas": [
+    {
+     "fuente": "LIF_2026",
+     "articulo": "Art. 24",
+     "cita": "Artículo 24. Durante el ejercicio fiscal de 2026 la tasa de retención anual a que se refieren los artículos 54 y 135 de la Ley del Impuesto sobre la Renta será del 0.90 por ciento. Artículo"
+    }
+   ]
+  },
+  {
+   "id": "retencion-intereses-2027",
+   "concepto": "Retención anual del ISR sobre intereses, 2027",
+   "estado": "oficial",
+   "valor": {
+    "tasa": 0.68
+   },
+   "unidad": "% anual sobre el capital",
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Art. 24",
+     "cita": "Artículo 24. Durante el ejercicio fiscal de 2027 la tasa de retención anual a que se refieren los artículos 54 y 135 de la Ley del Impuesto sobre la Renta será del 0.68 por ciento. La tasa"
+    }
+   ]
+  },
+  {
+   "id": "estimulo-regularizacion-100",
+   "concepto": "Estímulo de regularización 2027: 100 % de multas, recargos y gastos de ejecución",
+   "estado": "oficial",
+   "valor": {
+    "porcentaje": 100,
+    "adeudos_hasta_ejercicio": 2025,
+    "pago_a_mas_tardar": "2027-12-31"
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Transitorio Vigésimo Primero",
+     "cita": "El estímulo fiscal será del 100 por ciento de las multas, recargos y gastos de ejecución, a las personas contribuyentes que: I. Tengan a su cargo adeudos correspondientes al ejercicio fiscal 2025 o anteriores, siempre que presenten las declaraciones respectivas y realicen el pago de estos en una sola exhibición a más tardar el 31 de diciembre de 2027; II. Se encuentren sujetas a"
+    }
+   ]
+  },
+  {
+   "id": "estimulo-regularizacion-90",
+   "concepto": "Estímulo de regularización 2027: 90 % cuando el crédito firme es solo de multas por obligaciones distintas a las de pago",
+   "estado": "oficial",
+   "valor": {
+    "porcentaje": 90
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Transitorio Vigésimo Primero",
+     "cita": "Cuando los créditos fiscales firmes estén constituidos exclusivamente por multas derivadas del incumplimiento a las obligaciones distintas a las de pago, siempre que cumplan con la obligación omitida que haya dado origen a la multa y con los requisitos establecidos en el párrafo cuarto de este transitorio, se les aplicará un estímulo fiscal equivalente al 90 por ciento del total de la multa. El pago del crédito fiscal no podrá"
+    }
+   ]
+  },
+  {
+   "id": "estimulo-regularizacion-solicitud",
+   "concepto": "Estímulo de regularización 2027: quien tiene créditos fiscales firmes debe presentar su solicitud a más tardar el 31 de octubre de 2027",
+   "estado": "oficial",
+   "valor": {
+    "fecha": "2027-10-31"
+   },
+   "vigencia_desde": "2027-01-01",
+   "nota": "La solicitud es el requisito de los créditos firmes (fracción III); el pago se hace dentro de los 15 días naturales siguientes a que se ponga a disposición el formulario.",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Transitorio Vigésimo Primero, fracción III",
+     "cita": "III. Tengan a su cargo créditos fiscales firmes determinados por la autoridad fiscal federal, siempre que estos no hayan sido objeto de impugnación o, habiendo sido impugnados, la persona contribuyente se desista del medio de defensa interpuesto. En caso de haber solicitado la revisión administrativa, las personas contribuyentes deben desistirse de dicho recurso. En estos casos, el estímulo fiscal será aplicable siempre que se cumplan los requisitos siguientes: I."
+    },
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Transitorio Vigésimo Primero, fracción I",
+     "cita": "I. Deberá presentarse una solicitud a más tardar el 31 de octubre de 2027, ante el Servicio de Administración Tributaria, cumpliendo con los requisitos que establezca mediante reglas de carácter"
+    }
+   ]
+  },
+  {
+   "id": "estimulo-regularizacion-exclusiones",
+   "concepto": "Estímulo de regularización 2027: no aplica a quien no desvirtuó los procedimientos de los arts. 49 Bis, 69-B y 69-B Bis del CFF",
+   "estado": "oficial",
+   "valor": {
+    "articulos_cff": "49 Bis, 69-B y 69-B Bis"
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Transitorio Vigésimo Primero",
+     "cita": "la comisión de algún delito fiscal. Tratándose de delitos cometidos en materia de hidrocarburos, bastará la presentación de la denuncia, querella o requisito equivalente; II. Se encuentren publicados en los listados de las personas contribuyentes que no desvirtuaron los hechos que se les imputaron en los procedimientos establecidos en los artículos 49 Bis, 69-B y 69-B"
+    }
+   ]
+  },
+  {
+   "id": "pm-limite-deducciones",
+   "concepto": "Personas morales con más de 50 millones de pesos de ingresos: límite a deducciones y pérdidas",
+   "estado": "oficial",
+   "valor": {
+    "ingresos_mayores_a_millones": 50
+   },
+   "unidad": "millones de pesos de ingresos acumulables",
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Art. 78-A",
+     "cita": "Artículo 78-A. Para efectos del artículo 9 de esta Ley, las personas morales residentes en México que obtengan ingresos acumulables de los señalados en este Título superiores a 50 millones de pesos y determinen utilidad fiscal del ejercicio en términos del citado artículo 9, aplicarán en el ejercicio de que se trate, sus deducciones autorizadas y pérdidas fiscales a que se refiere este Título, conforme a los límites que se establecen en el presente Capítulo. La"
+    }
+   ]
+  },
+  {
+   "id": "pm-factor-deducciones",
+   "concepto": "Límite de deducciones: factores",
+   "estado": "oficial",
+   "valor": {
+    "umbral": 0.9667,
+    "factor": 0.99
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Art. 78-B, apartado A, fracción I",
+     "cita": "I. Cuando el total de las deducciones autorizadas a que se refiere este Título sea menor o igual al resultado que se obtenga de multiplicar los ingresos acumulables del ejercicio que corresponda por el factor de 0.9667, el límite de dichas deducciones autorizadas será el monto que se obtenga como resultado de multiplicar el total de las deducciones autorizadas a que se refiere este Título por el factor de 0.9900. II. Cuando el total de las deducciones autorizadas a que se"
+    }
+   ]
+  },
+  {
+   "id": "pm-limite-perdidas",
+   "concepto": "Límite de pérdidas fiscales de ejercicios anteriores: la mitad de la utilidad fiscal",
+   "estado": "oficial",
+   "valor": {
+    "factor": 0.5
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Art. 78-C",
+     "cita": "Artículo 78-C. Para efectos del artículo 78-A de esta Ley, el límite de las pérdidas fiscales pendientes de aplicar de ejercicios anteriores que se podrá disminuir de la utilidad fiscal del ejercicio, será el monto que se obtenga como resultado de multiplicar la utilidad fiscal del ejercicio, después de aplicar el límite a las deducciones que establece el artículo 78-B de esta Ley, por el factor de 0.5000. Cuando las pérdidas"
+    }
+   ]
+  },
+  {
+   "id": "pm-perdidas-provisionales",
+   "concepto": "Pagos provisionales: pérdidas hasta la mitad de la utilidad fiscal del pago",
+   "estado": "oficial",
+   "valor": {
+    "factor": 0.5
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Art. 78-D",
+     "cita": "Artículo 78-D. Para los efectos del artículo 14, fracción II, inciso c), de esta Ley, las personas morales residentes en México que en el ejercicio inmediato anterior hayan obtenido ingresos acumulables de los señalados en este Título superiores a 50 millones de pesos, que cuenten con pérdida fiscal de ejercicios anteriores pendiente de disminuir de las utilidades fiscales, sólo podrán disminuir por concepto de dicha pérdida fiscal el monto que se obtenga como resultado de multiplicar la utilidad fiscal para el pago provisional determinada en términos del artículo 14, fracción II, incisos a) y b), de esta Ley, por el factor de 0.5000. Cuando la pérdida fiscal de ejercicios anteriores pendiente de aplicar contra"
+    }
+   ]
+  },
+  {
+   "id": "pm-coeficiente-2027",
+   "concepto": "Pagos provisionales de 2027: factores sobre el coeficiente de utilidad",
+   "estado": "oficial",
+   "valor": {
+    "umbral": 0.9667,
+    "factor_menor_o_igual": 1.0658,
+    "factor_mayor": 2.6162
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Artículo Segundo, fracción I, inciso a), subinciso i",
+     "cita": "i. Cuando el total de las deducciones autorizadas correspondiente a la última declaración anual presentada sea menor o igual al resultado que se obtenga de multiplicar los ingresos acumulables del ejercicio que corresponda por el factor de 0.9667, multiplicarán el coeficiente de utilidad que resulte en términos del artículo 14, fracción I, de la Ley del Impuesto sobre la Renta por el factor de 1.0658 y el coeficiente de utilidad resultante se aplicará para el cálculo de los"
+    },
+    {
+     "fuente": "dlisr27",
+     "articulo": "Artículo Segundo, fracción I, inciso a), subinciso ii",
+     "cita": "ii. Cuando el total de las deducciones autorizadas correspondiente a la última declaración anual presentada sea mayor al resultado que se obtenga de multiplicar los ingresos acumulables del ejercicio que corresponda por el factor de 0.9667, multiplicarán el coeficiente de utilidad que resulte en términos del artículo 14, fracción I, de la Ley del Impuesto sobre la Renta por el factor de 2.6162 y el coeficiente de utilidad resultante se aplicará para el cálculo de"
+    }
+   ]
+  },
+  {
+   "id": "intereses-netos-2026",
+   "concepto": "Intereses netos no deducibles: lo que exceda del 30 % de la utilidad fiscal ajustada, 2026",
+   "estado": "oficial",
+   "valor": {
+    "porcentaje": 30
+   },
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 28, fracción XXXII",
+     "cita": "XXXII. Los intereses netos del ejercicio que excedan del monto que resulte de multiplicar la utilidad fiscal ajustada por el 30%."
+    }
+   ]
+  },
+  {
+   "id": "intereses-netos-2027",
+   "concepto": "Intereses netos no deducibles: lo que exceda del 20 % de la utilidad fiscal ajustada, desde 2027",
+   "estado": "oficial",
+   "valor": {
+    "porcentaje": 20
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Art. 28, fracción XXXII",
+     "cita": "XXXII. Los intereses netos del ejercicio que excedan del monto que resulte de multiplicar la utilidad fiscal ajustada por el 20%."
+    }
+   ]
+  },
+  {
+   "id": "grupos-sociedades-derogado",
+   "concepto": "Se deroga el régimen opcional para grupos de sociedades (arts. 59 a 71)",
+   "estado": "oficial",
+   "valor": {
+    "articulos": "59 a 71"
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Artículo Primero",
+     "cita": "así como el Capítulo VI del Título II, que comprende los artículos del 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70 y 71, de la Ley del Impuesto"
+    }
+   ]
+  },
+  {
+   "id": "deduccion-inmediata-plan-mexico",
+   "concepto": "Deducción inmediata de inversiones en bienes nuevos de activo fijo («Plan México»)",
+   "estado": "oficial",
+   "valor": {
+    "adquiridos_desde": "2027-01-01",
+    "adquiridos_hasta": "2030-09-30"
+   },
+   "vigencia_desde": "2027-01-01",
+   "nota": "Los porcentajes por tipo de bien y sus requisitos están en el Decreto; aquí no se copian.",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Artículo Tercero, apartado A, fracción I, inciso b)",
+     "cita": "b) El estímulo a que se refiere el párrafo primero de esta fracción consiste en optar por efectuar la deducción inmediata de la inversión en bienes nuevos de activo fijo, adquiridos a partir del 1 de enero de 2027 y hasta el 30 de septiembre de 2030,"
+    }
+   ]
+  },
+  {
+   "id": "repatriacion-capitales",
+   "concepto": "Retorno de recursos del extranjero: ISR de 7.5 % sin deducción",
+   "estado": "oficial",
+   "valor": {
+    "tasa": 7.5,
+    "retorno_a_mas_tardar": "2027-12-31"
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Transitorio Vigésimo Tercero, fracción II",
+     "cita": "II. El impuesto a que se refiere este transitorio se calculará aplicando la tasa del 7.5 por ciento, sin deducción alguna, al monto total de los recursos que se retornen o ingresen al país, que se"
+    },
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Transitorio Vigésimo Tercero, fracción I",
+     "cita": "los recursos que se retornen o ingresen al país a más tardar el 31 de diciembre de 2027 y"
+    }
+   ]
+  },
+  {
+   "id": "iva-cero-gestion-menstrual",
+   "concepto": "IVA de 0 % a calzones y discos menstruales",
+   "estado": "oficial",
+   "valor": {
+    "tasa": 0
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Art. 25, fracción XIII",
+     "cita": "XIII. Para efectos del artículo 2o.-A, párrafo primero, fracción I, inciso j) de la Ley del Impuesto al Valor Agregado, se aplicará la tasa del 0 por ciento del impuesto al valor agregado a la enajenación de calzones y discos menstruales, reutilizables y desechables, para la gestión menstrual; XIV. Para los efectos de los"
+    }
+   ]
+  },
+  {
+   "id": "plataformas-relacion-laboral",
+   "concepto": "Plataformas digitales: la relación laboral no cambia el tratamiento fiscal",
+   "estado": "oficial",
+   "valor": {
+    "efecto_fiscal": "ninguno"
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Transitorio Vigésimo Octavo",
+     "cita": "Vigésimo Octavo.- Para efectos del artículo 291-A de la Ley Federal del Trabajo, los servicios que presten las personas físicas a través de las plataformas digitales, utilizando las tecnologías de la información y la comunicación, que se consideran una relación laboral subordinada, no tendrán tal carácter para efectos fiscales y se aplicará el tratamiento que prevén las disposiciones fiscales, tanto para las personas"
+    }
+   ]
+  }
+ ],
+ "lo_que_no_cambia": [
+  {
+   "id": "sin-cambio-tarifas-isr",
+   "concepto": "Los arts. 96, 151 y 152 de la LISR no se reforman",
+   "estado": "auditada",
+   "operacion": "Se leyó la lista de artículos reformados, adicionados y derogados del Artículo Primero del Decreto: no enumera los arts. 96, 151 ni 152",
+   "nota": "Las cantidades de las tarifas sí pueden actualizarse por inflación en el Anexo 8 de la RMF 2027, que sigue pendiente.",
+   "citas": [
+    {
+     "fuente": "dlisr27",
+     "articulo": "Artículo Primero",
+     "cita": "Artículo Primero.- Se reforman los artículos 22, párrafo noveno; 27, fracciones V, párrafo primero y XVIII, párrafo segundo; 28, fracción XXXII, párrafo primero; 77, párrafo tercero, fracción II, y párrafo quinto; 78, párrafos décimo primero y décimo séptimo; 113-E, párrafos primero, tercero, quinto, TABLA MENSUAL, séptimo y"
+    }
+   ]
+  },
+  {
+   "id": "sin-cambio-iva-general",
+   "concepto": "La tasa general del IVA sigue en 16 %",
+   "estado": "auditada",
+   "valor": {
+    "tasa": 16
+   },
+   "operacion": "El texto vigente de la LIVA conserva la tasa de 16 % y su última reforma es de 2021; el 13-11-2026 no se publicó decreto que la reforme",
+   "citas": [
+    {
+     "fuente": "LIVA",
+     "articulo": "Art. 1o.",
+     "cita": "El impuesto se calculará aplicando a los valores que señala esta Ley, la tasa del 16%. El impuesto al valor agregado en"
+    }
+   ]
+  },
+  {
+   "id": "sin-cambio-plataformas",
+   "concepto": "La retención de 2.5 % en plataformas por enajenación y servicios continúa en 2027",
+   "estado": "oficial",
+   "valor": {
+    "tasa": 2.5
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Art. 25",
+     "cita": "identes en el extranjero con o sin establecimiento permanente en el país, así como las entidades o figuras jurídicas extranjeras que proporcionen, de manera directa o indirecta, el uso de plataformas tecnológicas, aplicaciones informáticas y similares, en sustitución de la tasa de retención a que se refiere el artículo 113-A, párrafo tercero, fracción III, de la Ley del Impuesto sobre la Renta, aplicarán la tasa del 2.5 por ciento. Las personas morales que obtengan ingresos"
+    }
+   ]
+  }
+ ]
+}
