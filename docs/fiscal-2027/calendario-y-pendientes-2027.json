@@ -1,0 +1,264 @@
+{
+ "documento": "Calendario fiscal de diciembre de 2026 a diciembre de 2027 y lo que sigue pendiente",
+ "corte": "2026-11-28",
+ "calendario": [
+  {
+   "id": "dias-inhabiles-2027",
+   "concepto": "Días inhábiles de 2027 según el art. 12 del CFF, además de sábados y domingos",
+   "estado": "auditada",
+   "valor": {
+    "fechas": [
+     "2027-01-01",
+     "2027-02-01",
+     "2027-03-15",
+     "2027-05-01",
+     "2027-05-05",
+     "2027-09-16",
+     "2027-11-15",
+     "2027-12-25"
+    ]
+   },
+   "operacion": "Las fechas fijas y los lunes que nombra el art. 12, llevados al calendario de 2027",
+   "nota": "No incluye las vacaciones generales del SAT, que se publican por regla.",
+   "citas": [
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 12",
+     "cita": ". Artículo 12. En los plazos fijados en días no se contarán los sábados, los domingos ni el 1o. de enero; el primer lunes de febrero en conmemoración del 5 de febrero; el tercer lunes de marzo en conmemoración del 21 de marzo; el 1o. y 5 de mayo; el 16 de septiembre; el tercer lunes de noviembre en conmemoración del 20 de noviembre; el 1o. de diciembre de cada 6 años, cuando corresponda a la"
+    }
+   ]
+  },
+  {
+   "id": "calendario-dia-17",
+   "concepto": "Pagos mensuales: el día 17 de cada mes, recorrido al siguiente día hábil",
+   "estado": "auditada",
+   "fechas": [
+    {
+     "periodo_de_pago": "2026-12",
+     "dia_17": "2026-12-17",
+     "vence": "2026-12-17"
+    },
+    {
+     "periodo_de_pago": "2027-01",
+     "dia_17": "2027-01-17",
+     "vence": "2027-01-18"
+    },
+    {
+     "periodo_de_pago": "2027-02",
+     "dia_17": "2027-02-17",
+     "vence": "2027-02-17"
+    },
+    {
+     "periodo_de_pago": "2027-03",
+     "dia_17": "2027-03-17",
+     "vence": "2027-03-17"
+    },
+    {
+     "periodo_de_pago": "2027-04",
+     "dia_17": "2027-04-17",
+     "vence": "2027-04-19"
+    },
+    {
+     "periodo_de_pago": "2027-05",
+     "dia_17": "2027-05-17",
+     "vence": "2027-05-17"
+    },
+    {
+     "periodo_de_pago": "2027-06",
+     "dia_17": "2027-06-17",
+     "vence": "2027-06-17"
+    },
+    {
+     "periodo_de_pago": "2027-07",
+     "dia_17": "2027-07-17",
+     "vence": "2027-07-19"
+    },
+    {
+     "periodo_de_pago": "2027-08",
+     "dia_17": "2027-08-17",
+     "vence": "2027-08-17"
+    },
+    {
+     "periodo_de_pago": "2027-09",
+     "dia_17": "2027-09-17",
+     "vence": "2027-09-17"
+    },
+    {
+     "periodo_de_pago": "2027-10",
+     "dia_17": "2027-10-17",
+     "vence": "2027-10-18"
+    },
+    {
+     "periodo_de_pago": "2027-11",
+     "dia_17": "2027-11-17",
+     "vence": "2027-11-17"
+    },
+    {
+     "periodo_de_pago": "2027-12",
+     "dia_17": "2027-12-17",
+     "vence": "2027-12-17"
+    }
+   ],
+   "operacion": "Día 17 del mes; si cae en sábado, domingo o inhábil del art. 12 del CFF, el siguiente día hábil",
+   "nota": "Sin los días adicionales por el sexto dígito del RFC ni las vacaciones generales del SAT.",
+   "citas": [
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 12",
+     "cita": "si el último día del plazo o en la fecha determinada, las oficinas ante las que se vaya a hacer el trámite permanecen cerradas durante el horario normal de labores o se trate de un día inhábil, se prorrogará el plazo hasta el siguiente día hábil. Lo dispuesto en este artículo es aplicable, inclusive cuando se autorice a las"
+    },
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 96",
+     "cita": "ersonas morales a que se refiere el Título III de esta Ley, enterarán las retenciones a que se refiere este artículo a más tardar el día 17 de cada uno de los"
+    }
+   ]
+  },
+  {
+   "id": "prorroga-sexto-digito",
+   "concepto": "Días adicionales al 17 según el sexto dígito numérico del RFC",
+   "estado": "oficial",
+   "valor": {
+    "tabla": "1 y 2 | Día 17 más un día hábil | 3 y 4 | Día 17 más dos días hábiles | 5 y 6 | Día 17 más tres días hábiles | 7 y 8 | Día 17 más cuatro días hábiles | 9 y 0 | Día 17 más cinco días hábiles"
+   },
+   "nota": "Del Decreto de 2013; no se revisó si fue modificado después, ni sus excepciones.",
+   "citas": [
+    {
+     "fuente": "ben13",
+     "articulo": "Art. 5.1",
+     "cita": "Sexto dígito numérico de la clave del RFC | Fecha límite de pago | 1 y 2 | Día 17 más un día hábil | 3 y 4 | Día 17 más dos días hábiles | 5 y 6 | Día 17 más tres días hábiles | 7 y 8 | Día 17 más cuatro días hábiles | 9 y 0 | Día 17 más cinco días hábiles | Lo dispuesto en este artículo no será aplicable tratándose de: l. Los"
+    }
+   ]
+  },
+  {
+   "id": "calendario-anual-pm-2026",
+   "concepto": "Declaración anual 2026 de personas morales",
+   "estado": "auditada",
+   "valor": {
+    "fecha_de_ley": "2027-03-31",
+    "vence": "2027-03-31"
+   },
+   "operacion": "Tres meses después del cierre del ejercicio (31-12-2026); si cae en inhábil, el siguiente hábil",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 9",
+     "cita": "de ejercicios anteriores. El impuesto del ejercicio se pagará mediante declaración que presentarán ante las oficinas autorizadas, dentro de los tres meses siguientes a la fecha en la que termine el ejercicio"
+    }
+   ]
+  },
+  {
+   "id": "calendario-anual-pf-2026",
+   "concepto": "Declaración anual 2026 de personas físicas",
+   "estado": "auditada",
+   "valor": {
+    "fecha_de_ley": "2027-04-30",
+    "vence": "2027-04-30"
+   },
+   "operacion": "Último día de abril del año siguiente; si cae en inhábil, el siguiente hábil",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 150",
+     "cita": "Las personas físicas que obtengan ingresos en un año de calendario, a excepción de los exentos y de aquéllos por los que se haya pagado impuesto definitivo, están obligadas a pagar su impuesto anual mediante declaración que presentarán en el mes de abril del año"
+    }
+   ]
+  },
+  {
+   "id": "calendario-estimulo-2027",
+   "concepto": "Estímulo de regularización 2027: fechas",
+   "estado": "oficial",
+   "valor": {
+    "solicitud_creditos_firmes": "2027-10-31",
+    "pago_adeudos_2025_o_anteriores": "2027-12-31"
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Transitorio Vigésimo Primero, fracción I",
+     "cita": "I. Deberá presentarse una solicitud a más tardar el 31 de octubre de 2027, ante el Servicio de Administración Tributaria, cumpliendo con los requisitos que establezca mediante reglas de carácter"
+    },
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Transitorio Vigésimo Primero, fracción I",
+     "cita": "realicen el pago de estos en una sola exhibición a más tardar el 31 de diciembre de 2027;"
+    }
+   ]
+  }
+ ],
+ "pendientes": [
+  {
+   "id": "cancelacion-cfdi-2026",
+   "concepto": "Fecha límite para cancelar los CFDI expedidos en 2026",
+   "estado": "pendiente",
+   "motivo": "No se localizó en el texto guardado del CFF el párrafo del art. 29-A que fija el plazo de cancelación: no se afirma la fecha sin su cita. Falta de integración de la plataforma.",
+   "quien": "Auditavisión",
+   "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf"
+  },
+  {
+   "id": "rmf-2027",
+   "concepto": "Resolución Miscelánea Fiscal para 2027 y sus anexos",
+   "estado": "pendiente",
+   "motivo": "Aún no se publica en el DOF (suele salir a finales de diciembre). De ella dependen el formato y el plazo del aviso del IVA opcional de 7 %, su combinación con la retención de dos terceras partes del IVA, y las reglas del art. 78-F de la LISR.",
+   "quien": "SAT",
+   "url": "https://dof.gob.mx/"
+  },
+  {
+   "id": "isr-tarifas-2027",
+   "concepto": "Tarifas del ISR de 2027 (Anexo 8 de la RMF 2027)",
+   "estado": "pendiente",
+   "motivo": "El Anexo 8 de 2027 aún no se publica: no se sabe si las cantidades de las tarifas se actualizan por inflación. Mientras tanto no se usa ninguna tarifa de 2027.",
+   "quien": "SAT",
+   "url": "https://dof.gob.mx/"
+  },
+  {
+   "id": "uma-2027",
+   "concepto": "Unidad de Medida y Actualización 2027",
+   "estado": "pendiente",
+   "motivo": "El INEGI la publica en enero y rige desde el 1 de febrero de 2027. Todos los topes en UMA de 2027 dependen de ella.",
+   "quien": "INEGI",
+   "url": "https://www.inegi.org.mx/temas/uma/"
+  },
+  {
+   "id": "salario-minimo-2027",
+   "concepto": "Salario mínimo 2027",
+   "estado": "pendiente",
+   "motivo": "La CONASAMI aún no publica en el DOF la resolución que regirá desde el 1 de enero de 2027.",
+   "quien": "CONASAMI",
+   "url": "https://dof.gob.mx/"
+  },
+  {
+   "id": "subsidio-empleo-2027",
+   "concepto": "Subsidio para el empleo 2027",
+   "estado": "pendiente",
+   "motivo": "Depende de la UMA de 2027 y de si el Ejecutivo modifica su decreto, como hizo el 31-12-2025.",
+   "quien": "SHCP",
+   "url": "https://dof.gob.mx/"
+  },
+  {
+   "id": "iva-frontera-2027",
+   "concepto": "Estímulo del IVA de 8 % en la región fronteriza después del 31 de diciembre de 2026",
+   "estado": "pendiente",
+   "motivo": "No se cotejó en esta entrega el decreto de estímulos de la región fronteriza ni su vigencia: no se afirma ni su vencimiento ni su prórroga. Falta de integración de la plataforma.",
+   "quien": "Auditavisión (cotejo); en su caso, SHCP",
+   "url": "https://dof.gob.mx/"
+  },
+  {
+   "id": "dias-inhabiles-sat-2027",
+   "concepto": "Vacaciones generales y días inhábiles del SAT en 2027",
+   "estado": "pendiente",
+   "motivo": "Se publican por regla de la RMF: sin ella, el calendario solo considera el art. 12 del CFF.",
+   "quien": "SAT",
+   "url": "https://dof.gob.mx/"
+  },
+  {
+   "id": "lisr-consolidada-2027",
+   "concepto": "Texto consolidado de la LISR con la reforma de 2027",
+   "estado": "pendiente",
+   "motivo": "La Cámara de Diputados aún no integra el Decreto del 13-11-2026 a su texto vigente (su última reforma anotada es del 01-04-2024). Mientras tanto lo de 2027 se cita del Decreto.",
+   "quien": "Cámara de Diputados",
+   "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
+  }
+ ]
+}

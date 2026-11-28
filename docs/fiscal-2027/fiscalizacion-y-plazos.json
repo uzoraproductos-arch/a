@@ -1,0 +1,382 @@
+{
+ "documento": "Fiscalización, multas, recargos y medios de defensa",
+ "corte": "2026-11-28",
+ "nota": "Plazos y cifras tomados del texto vigente. Una coincidencia con un supuesto de fiscalización es una señal para revisar, nunca una acusación.",
+ "datos": [
+  {
+   "id": "visita-cfdi-falsos-plazo",
+   "concepto": "Visita domiciliaria por comprobantes presuntamente falsos: plazo máximo del procedimiento",
+   "estado": "oficial",
+   "valor": {
+    "dias_habiles": 24
+   },
+   "en_letra": [
+    "veinticuatro días hábiles"
+   ],
+   "citas": [
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 49 Bis, fracción IX",
+     "cita": "IX. El procedimiento a que se refiere este artículo, se deberá concluir, como máximo, dentro de los veinticuatro días hábiles e iniciará cuando se entregue la orden o, en su caso, cuando surta efectos su notificación, y concluirá al emitirse la resolución"
+    }
+   ]
+  },
+  {
+   "id": "visita-cfdi-falsos-suspension",
+   "concepto": "Visita domiciliaria por comprobantes presuntamente falsos: se suspende la emisión de CFDI desde la orden",
+   "estado": "oficial",
+   "valor": {
+    "suspension": "desde la entrega o notificación de la orden"
+   },
+   "citas": [
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 49 Bis, fracción I",
+     "cita": "También se ordenará la suspensión de la emisión de dichos comprobantes, a partir de la entrega o notificación de la orden. En estos casos no será aplicable el artículo 17-H Bis de este Código y la suspensión se mantendrá hasta la emisión de la resolución a este procedimiento. II. Se llevará a cabo en el domicilio fiscal,"
+    }
+   ]
+  },
+  {
+   "id": "lista-69b-receptor",
+   "concepto": "Lista 69-B: plazo de quien recibió los comprobantes para acreditar la operación o corregirse",
+   "estado": "oficial",
+   "valor": {
+    "dias": 30
+   },
+   "en_letra": [
+    "treinta días"
+   ],
+   "citas": [
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 69-B",
+     "cita": "contarán con treinta días siguientes al de la citada publicación para acreditar ante la propia autoridad, que efectivamente adquirieron los bienes o recibieron los servicios que amparan los citados comprobantes fiscales, o bien procederán en el mismo plazo a corregir su situación fiscal, mediante la declaración o declaraciones"
+    }
+   ]
+  },
+  {
+   "id": "csd-restriccion-aclaracion",
+   "concepto": "Restricción temporal del sello digital: plazo para pedir la aclaración",
+   "estado": "oficial",
+   "valor": {
+    "dias_habiles": 40
+   },
+   "en_letra": [
+    "cuarenta días hábiles"
+   ],
+   "citas": [
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 17-H Bis",
+     "cita": "podrán presentar, en un plazo no mayor a cuarenta días hábiles, la solicitud de aclaración a través del procedimiento que, mediante reglas de carácter general, determine el Servicio de Administración Tributaria para subsanar las irregularidades detectadas, o"
+    }
+   ]
+  },
+  {
+   "id": "multa-buzon-tributario",
+   "concepto": "Multa por no habilitar el buzón tributario o no actualizar los medios de contacto",
+   "estado": "oficial",
+   "valor": {
+    "minima": 3850.0,
+    "maxima": 11540.0
+   },
+   "unidad": "pesos",
+   "citas": [
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 86-D",
+     "cita": "Artículo 86-D. A quien cometa la infracción relacionada con la no habilitación del buzón tributario, el no registro o actualización de los medios de contacto conforme a lo previsto en el artículo 86-C, se impondrá una multa de $3,850.00 a $11,540.00."
+    }
+   ]
+  },
+  {
+   "id": "multa-buzon-desde",
+   "concepto": "La multa del buzón tributario se aplica desde el 1 de enero de 2027",
+   "estado": "oficial",
+   "valor": {
+    "fecha": "2027-01-01"
+   },
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "rmf26",
+     "articulo": "Transitorio Cuarto",
+     "cita": "Cuarto. Para los efectos de los artículos 17-K y 86-C del CFF, los contribuyentes que no hayan habilitado el buzón tributario, o no hayan registrado o actualizado sus medios de contacto, les será aplicable lo señalado en el artículo 86-D del citado Código a partir del 1o. de enero de 2027. Quinto. Para los efectos del artículo"
+    }
+   ]
+  },
+  {
+   "id": "buzon-opcion-asalariados",
+   "concepto": "Buzón tributario: asalariados con ingresos menores a $400,000 pueden no habilitarlo",
+   "estado": "oficial",
+   "valor": {
+    "ingresos_menores_a": 400000
+   },
+   "unidad": "pesos del ejercicio anterior",
+   "citas": [
+    {
+     "fuente": "rmf26",
+     "articulo": "Regla 2.2.22.",
+     "cita": "Asimismo, para los efectos de los artículos 17-K, tercer párrafo y 86-C del CFF, los contribuyentes comprendidos en el Título IV, Capítulo I de la Ley del ISR a que se refiere el artículo 94 de dicha Ley, que hayan obtenido ingresos en el ejercicio inmediato anterior menores a $400,000.00 (cuatrocientos mil pesos 00/100 M.N.), podrán optar por no habilitar el buzón tributario. CFF 17-K, 27, 29,"
+    }
+   ]
+  },
+  {
+   "id": "recargos-prorroga-2026",
+   "concepto": "Recargos por prórroga, 2026",
+   "estado": "oficial",
+   "valor": {
+    "tasa_mensual": 1.38
+   },
+   "unidad": "% mensual sobre saldos insolutos",
+   "citas": [
+    {
+     "fuente": "LIF_2026",
+     "articulo": "Art. 11, fracción I",
+     "cita": "Artículo 11. En los casos de prórroga para el pago de créditos fiscales se causarán recargos: I. Al 1.38 por ciento mensual sobre los saldos"
+    }
+   ]
+  },
+  {
+   "id": "recargos-mora-2026",
+   "concepto": "Recargos por mora, 2026",
+   "estado": "auditada",
+   "valor": {
+    "tasa_mensual": 2.07
+   },
+   "unidad": "% mensual",
+   "operacion": "1.38 × 1.5 (CFF, art. 21: la tasa de prórroga más 50 %)",
+   "citas": [
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 21",
+     "cita": "La tasa de recargos para cada uno de los meses de mora será la que resulte de incrementar en 50% a la que mediante Ley fije anualmente el Congreso de la Unión, para tal"
+    }
+   ]
+  },
+  {
+   "id": "recargos-prorroga-2027",
+   "concepto": "Recargos por prórroga, 2027",
+   "estado": "oficial",
+   "valor": {
+    "tasa_mensual": 1.38
+   },
+   "unidad": "% mensual sobre saldos insolutos",
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Art. 11, fracción I",
+     "cita": "Artículo 11. En los casos de prórroga para el pago de créditos fiscales se causarán recargos: I. Al 1.38 por ciento mensual sobre los saldos"
+    }
+   ]
+  },
+  {
+   "id": "recargos-mora-2027",
+   "concepto": "Recargos por mora, 2027",
+   "estado": "auditada",
+   "valor": {
+    "tasa_mensual": 2.07
+   },
+   "unidad": "% mensual",
+   "vigencia_desde": "2027-01-01",
+   "operacion": "1.38 × 1.5 (CFF, art. 21: la tasa de prórroga más 50 %)",
+   "citas": [
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 21",
+     "cita": "La tasa de recargos para cada uno de los meses de mora será la que resulte de incrementar en 50% a la que mediante Ley fije anualmente el Congreso de la Unión, para tal"
+    }
+   ]
+  },
+  {
+   "id": "recargos-parcialidades-2027",
+   "concepto": "Recargos en pagos a plazos, 2027",
+   "estado": "oficial",
+   "valor": {
+    "hasta_12_meses": 1.42,
+    "de_12_a_24_meses": 1.63,
+    "mas_de_24_meses_o_diferido": 1.97
+   },
+   "unidad": "% mensual",
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Art. 11, fracción II",
+     "cita": "1. De los pagos a plazos en parcialidades de hasta 12 meses, la tasa de recargos será del 1.42 por ciento mensual. 2. De los pagos a plazos en parcialidades de más de 12 meses y hasta de 24 meses, la tasa de recargos será de 1.63 por ciento mensual. 3. De los pagos a plazos en parcialidades superiores a 24 meses, así como tratándose de pagos a plazo diferido, la tasa de recargos será de 1.97 por ciento mensual. Las tasas de"
+    }
+   ]
+  },
+  {
+   "id": "reduccion-multas-auditoria",
+   "concepto": "Reducción de multas formales al corregirse durante una auditoría, 2027",
+   "estado": "oficial",
+   "valor": {
+    "antes_del_acta_final_paga": 50,
+    "despues_paga": 60
+   },
+   "unidad": "% de la multa que se paga",
+   "vigencia_desde": "2027-01-01",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Art. 19",
+     "cita": "pagarán el 50 por ciento de la multa que les corresponda si llevan a cabo dicho pago después de que las autoridades fiscales inicien el ejercicio de sus facultades de comprobación y hasta antes de que se levante el acta final de la visita domiciliaria o se notifique el oficio de observaciones a que se refiere la fracción IV del"
+    },
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Art. 19",
+     "cita": "deración o se notifique la resolución provisional a que se refiere el artículo 53-B, párrafo primero, fracción I, del citado Código, pero antes de que se notifique la resolución que determine el monto de las contribuciones omitidas o la resolución definitiva a que se refiere el citado artículo 53- B, las personas contribuyentes pagarán el 60 por ciento de la multa"
+    }
+   ]
+  },
+  {
+   "id": "depositos-efectivo-informe",
+   "concepto": "Depósitos en efectivo: los bancos informan al SAT cuando pasan de $15,000 al mes",
+   "estado": "oficial",
+   "valor": {
+    "monto_mensual": 15000
+   },
+   "unidad": "pesos al mes, por institución",
+   "nota": "Es una obligación de informar de las instituciones financieras: no es un impuesto ni una retención.",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 55, fracción IV",
+     "cita": "ción de los depósitos en efectivo que se realicen en las cuentas abiertas a nombre de los contribuyentes en las instituciones del sistema financiero, cuando el monto mensual acumulado por los depósitos en efectivo que se realicen en todas las cuentas de las que el contribuyente sea titular en una misma institución del sistema financiero exceda de $15,000.00, así como respecto de todas las adquisiciones en efectivo de cheques"
+    }
+   ]
+  },
+  {
+   "id": "discrepancia-fiscal",
+   "concepto": "Discrepancia fiscal: cuando lo que gastas en el año es más que lo que declaraste",
+   "estado": "oficial",
+   "valor": {
+    "procedimiento": "art. 91 LISR"
+   },
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 91",
+     "cita": "Artículo 91. Las personas físicas podrán ser objeto del procedimiento de discrepancia fiscal cuando se compruebe que el monto de las erogaciones en un año de calendario sea superior a los ingresos declarados por el contribuyente, o bien a los que le hubiere correspondido declarar. Para tal efecto,"
+    }
+   ]
+  },
+  {
+   "id": "depositos-sin-rfc",
+   "concepto": "Depósitos de quien no está inscrito en el RFC: se presumen ingresos si pasan de esta suma en un ejercicio",
+   "estado": "oficial",
+   "valor": {
+    "pesos": 2028610
+   },
+   "unidad": "pesos en un ejercicio",
+   "citas": [
+    {
+     "fuente": "anx26",
+     "articulo": "Anexo 5, art. 59, fracción III del CFF",
+     "cita": "....................................................... También se presumirá que los depósitos que se efectúen en un ejercicio fiscal, cuya suma sea superior a $2,028,610.00 en las cuentas o cuentas bancarias de una persona que no está inscrita en el Registro"
+    }
+   ]
+  },
+  {
+   "id": "recurso-revocacion-plazo",
+   "concepto": "Recurso de revocación: plazo para presentarlo",
+   "estado": "oficial",
+   "valor": {
+    "dias": 30
+   },
+   "en_letra": [
+    "treinta días"
+   ],
+   "nota": "Los plazos en días del CFF cuentan solo días hábiles (art. 12).",
+   "citas": [
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 121",
+     "cita": "Artículo 121. El recurso deberá presentarse a través del buzón tributario, dentro de los treinta días siguientes a aquél en que haya surtido efectos su notificación, excepto lo dispuesto en el"
+    }
+   ]
+  },
+  {
+   "id": "juicio-tfja-plazo",
+   "concepto": "Juicio ante el Tribunal Federal de Justicia Administrativa: plazo de la demanda",
+   "estado": "oficial",
+   "valor": {
+    "dias": 30
+   },
+   "en_letra": [
+    "treinta días"
+   ],
+   "citas": [
+    {
+     "fuente": "LFPCA",
+     "articulo": "Art. 13, fracción I",
+     "cita": "I. De treinta días siguientes a aquél en el que se dé alguno de los supuestos siguientes: Párrafo reformado DOF 13-06-2016 a) Que"
+    }
+   ]
+  },
+  {
+   "id": "acuerdos-conclusivos",
+   "concepto": "Acuerdos conclusivos ante la PRODECON durante una auditoría",
+   "estado": "oficial",
+   "valor": {
+    "via": "art. 69-C CFF"
+   },
+   "citas": [
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 69-C",
+     "cita": "Artículo 69-C. Cuando los contribuyentes sean objeto del ejercicio de las facultades de comprobación a que se refiere el artículo 42, fracciones II, III o IX de este Código y no estén de acuerdo con los hechos u omisiones asentados en la última acta parcial, en el acta final, en el oficio de observaciones o en la resolución provisional, que puedan entrañar incumplimiento de las disposiciones fiscales, podrán optar por"
+    }
+   ]
+  },
+  {
+   "id": "resico-salida-por-omision",
+   "concepto": "RESICO: sale del régimen quien omite tres pagos mensuales o la anual",
+   "estado": "oficial",
+   "valor": {
+    "pagos_omitidos": "tres o más"
+   },
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 113-I",
+     "cita": "Artículo 113-I. Los contribuyentes que omitan tres o más pagos mensuales en un año calendario consecutivos o no, o bien, no presenten su declaración anual, dejarán de tributar conforme a esta Sección y deberán realizarlo en los términos del Título IV, Capítulo II, Sección I o Capítulo III de esta Ley, según corresponda. En caso"
+    }
+   ]
+  },
+  {
+   "id": "scjn-pj-209-2026",
+   "concepto": "Jurisprudencia P./J. 209/2026 (registro digital 2032821) sobre la salida automática del RESICO",
+   "estado": "pendiente",
+   "motivo": "El portal del Semanario Judicial de la Federación pide verificación de navegador y no entrega la tesis a una descarga directa: falta cotejar su rubro, su texto y su número antes de citarla. Es una falta de integración de la plataforma, no una omisión de la Corte.",
+   "quien": "Auditavisión (cotejo a mano)",
+   "url": "https://sjf2.scjn.gob.mx/detalle/tesis/2032821"
+  },
+  {
+   "id": "multas-anexo-5-arts-82-84",
+   "concepto": "Tabla completa de multas de los arts. 82 y 84 del CFF (Anexo 5 de la RMF 2026)",
+   "estado": "pendiente",
+   "motivo": "El Anexo 5 ya está guardado con su huella, pero sus renglones de los arts. 82 y 84 remiten con puntos suspensivos a fracciones e incisos: falta armar la tabla renglón por renglón antes de publicarla. Falta de integración de la plataforma.",
+   "quien": "Auditavisión",
+   "url": "https://dof.gob.mx/nota_detalle.php?codigo=5777219&fecha=28/12/2025"
+  },
+  {
+   "id": "visita-cfdi-falsos-pruebas",
+   "concepto": "Plazos de prueba y de declaración complementaria del receptor en la visita del art. 49 Bis del CFF",
+   "estado": "pendiente",
+   "motivo": "El artículo está guardado y citado en su plazo máximo; los plazos intermedios (pruebas del visitado y corrección de quien recibió los comprobantes) no se cotejaron fracción por fracción en esta entrega. Falta de integración de la plataforma.",
+   "quien": "Auditavisión",
+   "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf"
+  },
+  {
+   "id": "buzon-excepcion-resico",
+   "concepto": "Plazo de gracia de RESICO para habilitar el buzón tributario",
+   "estado": "pendiente",
+   "motivo": "No se localizó en la RMF 2026 la regla que lo establece: no se afirma sin su regla. Falta de integración de la plataforma.",
+   "quien": "Auditavisión",
+   "url": "https://dof.gob.mx/nota_detalle.php?codigo=5777217&fecha=28/12/2025"
+  }
+ ]
+}

@@ -1,0 +1,772 @@
+{
+ "documento": "Tarifas, unidades y topes fiscales vigentes en 2026",
+ "corte": "2026-11-28",
+ "nota": "Cifras de 2026. Lo que cambia el 1 de enero de 2027 está en reforma-2027.json; la UMA, el salario mínimo y las tarifas actualizadas de 2027 siguen pendientes (calendario-y-pendientes-2027.json).",
+ "uma": [
+  {
+   "id": "uma-2026",
+   "concepto": "Unidad de Medida y Actualización 2026",
+   "estado": "oficial",
+   "valor": {
+    "diaria": 117.31,
+    "mensual": 3566.22,
+    "anual": 42794.64
+   },
+   "unidad": "pesos",
+   "vigencia_desde": "2026-02-01",
+   "nota": "Rige del 1 de febrero de 2026 al 31 de enero de 2027. En enero de 2026 siguió vigente la UMA de 2025.",
+   "citas": [
+    {
+     "fuente": "uma26",
+     "articulo": "Comunicado del INEGI",
+     "cita": "el Instituto Nacional de Estadística y Geografía da a conocer que el valor diario de la Unidad de Medida y Actualización es de $117.31 pesos mexicanos, el mensual es de $3,566.22 pesos mexicanos y el valor anual $42,794.64 pesos mexicanos, los cuales estarán vigentes a partir del 1º de febrero de 2026. Ciudad de México, a 8 de enero de 2026.- Instituto"
+    }
+   ]
+  }
+ ],
+ "salario_minimo": [
+  {
+   "id": "salario-minimo-general-2026",
+   "concepto": "Salario mínimo general 2026 (resto del país)",
+   "estado": "oficial",
+   "valor": {
+    "diario": 315.04
+   },
+   "unidad": "pesos por jornada diaria",
+   "vigencia_desde": "2026-01-01",
+   "citas": [
+    {
+     "fuente": "sm26",
+     "articulo": "Resolución, considerandos",
+     "cita": "En 13.0% en la Zona del Salario Mínimo General (ZSMG), con lo que será de 315.04 pesos por jornada diaria de trabajo; que se compone de 17.01 pesos de MIR más un aumento por fijación de 6.5%. · En 5.0% en la Zona Libre de la"
+    }
+   ]
+  },
+  {
+   "id": "salario-minimo-zlfn-2026",
+   "concepto": "Salario mínimo 2026 en la Zona Libre de la Frontera Norte",
+   "estado": "oficial",
+   "valor": {
+    "diario": 440.87
+   },
+   "unidad": "pesos por jornada diaria",
+   "vigencia_desde": "2026-01-01",
+   "citas": [
+    {
+     "fuente": "sm26",
+     "articulo": "Resolución, considerandos",
+     "cita": "En 5.0% en la Zona Libre de la Frontera Norte (ZLFN), con lo que será de 440.87 pesos por jornada diaria de trabajo. En este caso no se aplica el MIR. Estos montos serán los que figuren en la"
+    }
+   ]
+  }
+ ],
+ "isr": [
+  {
+   "id": "isr-tarifa-mensual-2026",
+   "concepto": "Tarifa mensual del ISR 2026 (retenciones y pagos provisionales, art. 96 de la LISR)",
+   "estado": "oficial",
+   "tabla": [
+    {
+     "inferior": 0.01,
+     "superior": 844.59,
+     "cuota": 0.0,
+     "tasa": 1.92
+    },
+    {
+     "inferior": 844.6,
+     "superior": 7168.51,
+     "cuota": 16.22,
+     "tasa": 6.4
+    },
+    {
+     "inferior": 7168.52,
+     "superior": 12598.02,
+     "cuota": 420.95,
+     "tasa": 10.88
+    },
+    {
+     "inferior": 12598.03,
+     "superior": 14644.64,
+     "cuota": 1011.68,
+     "tasa": 16.0
+    },
+    {
+     "inferior": 14644.65,
+     "superior": 17533.64,
+     "cuota": 1339.14,
+     "tasa": 17.92
+    },
+    {
+     "inferior": 17533.65,
+     "superior": 35362.83,
+     "cuota": 1856.84,
+     "tasa": 21.36
+    },
+    {
+     "inferior": 35362.84,
+     "superior": 55736.68,
+     "cuota": 5665.16,
+     "tasa": 23.52
+    },
+    {
+     "inferior": 55736.69,
+     "superior": 106410.5,
+     "cuota": 10457.09,
+     "tasa": 30.0
+    },
+    {
+     "inferior": 106410.51,
+     "superior": 141880.66,
+     "cuota": 25659.23,
+     "tasa": 32.0
+    },
+    {
+     "inferior": 141880.67,
+     "superior": 425641.99,
+     "cuota": 37009.69,
+     "tasa": 34.0
+    },
+    {
+     "inferior": 425642.0,
+     "superior": null,
+     "cuota": 133488.54,
+     "tasa": 35.0
+    }
+   ],
+   "unidad": "pesos; tasa en % sobre el excedente del límite inferior",
+   "vigencia_desde": "2026-01-01",
+   "citas": [
+    {
+     "fuente": "anx26",
+     "articulo": "Anexo 8, apartado B, numeral V",
+     "cita": "V. Tarifa aplicable durante 2026 para el cálculo de los pagos provisionales mensuales a que se refieren los artículos 96 de la Ley del ISR y 175 de su"
+    },
+    {
+     "fuente": "anx26",
+     "articulo": "Anexo 8, apartado B, numeral V, primer renglón",
+     "cita": "0.01 | 844.59 |"
+    }
+   ]
+  },
+  {
+   "id": "isr-tarifa-anual-2026",
+   "concepto": "Tarifa anual del ISR del ejercicio 2026 (art. 152 de la LISR)",
+   "estado": "oficial",
+   "tabla": [
+    {
+     "inferior": 0.01,
+     "superior": 10135.11,
+     "cuota": 0.0,
+     "tasa": 1.92
+    },
+    {
+     "inferior": 10135.12,
+     "superior": 86022.11,
+     "cuota": 194.59,
+     "tasa": 6.4
+    },
+    {
+     "inferior": 86022.12,
+     "superior": 151176.19,
+     "cuota": 5051.37,
+     "tasa": 10.88
+    },
+    {
+     "inferior": 151176.2,
+     "superior": 175735.66,
+     "cuota": 12140.13,
+     "tasa": 16.0
+    },
+    {
+     "inferior": 175735.67,
+     "superior": 210403.69,
+     "cuota": 16069.64,
+     "tasa": 17.92
+    },
+    {
+     "inferior": 210403.7,
+     "superior": 424353.97,
+     "cuota": 22282.14,
+     "tasa": 21.36
+    },
+    {
+     "inferior": 424353.98,
+     "superior": 668840.14,
+     "cuota": 67981.92,
+     "tasa": 23.52
+    },
+    {
+     "inferior": 668840.15,
+     "superior": 1276925.98,
+     "cuota": 125485.07,
+     "tasa": 30.0
+    },
+    {
+     "inferior": 1276925.99,
+     "superior": 1702567.97,
+     "cuota": 307910.81,
+     "tasa": 32.0
+    },
+    {
+     "inferior": 1702567.98,
+     "superior": 5107703.92,
+     "cuota": 444116.23,
+     "tasa": 34.0
+    },
+    {
+     "inferior": 5107703.93,
+     "superior": null,
+     "cuota": 1601862.46,
+     "tasa": 35.0
+    }
+   ],
+   "unidad": "pesos; tasa en % sobre el excedente del límite inferior",
+   "vigencia_desde": "2026-01-01",
+   "citas": [
+    {
+     "fuente": "anx26",
+     "articulo": "Anexo 8, apartado C, numeral II",
+     "cita": "II. Tarifa para el cálculo del impuesto correspondiente al ejercicio de 2026 a que se refieren los artículos 97 y 152 de la Ley del ISR, así como la"
+    },
+    {
+     "fuente": "anx26",
+     "articulo": "Anexo 8, apartado C, numeral II, primer renglón",
+     "cita": "0.01 | 10,135.11 |"
+    }
+   ]
+  }
+ ],
+ "subsidio_empleo": [
+  {
+   "id": "subsidio-empleo-2026",
+   "concepto": "Subsidio para el empleo 2026",
+   "estado": "oficial",
+   "valor": {
+    "porcentaje_uma_mensual": 15.02,
+    "limite_ingreso_mensual": 11492.66
+   },
+   "unidad": "% de la UMA mensual; pesos",
+   "vigencia_desde": "2026-01-01",
+   "citas": [
+    {
+     "fuente": "sub26",
+     "articulo": "Artículo Segundo",
+     "cita": "Artículo Segundo. Se otorga un subsidio para el empleo mensual a las personas trabajadoras a que hace referencia el Artículo Primero de este decreto, cuyos ingresos mensuales que sirvan de base para calcular el impuesto sobre la renta correspondiente al mes de calendario de que se trate, no excedan de $11,492.66 (once mil cuatrocientos noventa y dos pesos 66/100 M.N.), excepto los percibidos por concepto de primas de antigüedad, retiro e indemnizaciones u otros pagos por separación, hasta por la cantidad que resulte de multiplicar el valor mensual de la Unidad de Medida y Actualización por 15.02%. Dicho subsidio"
+    }
+   ]
+  },
+  {
+   "id": "subsidio-empleo-enero-2026",
+   "concepto": "Subsidio para el empleo de enero de 2026",
+   "estado": "oficial",
+   "valor": {
+    "porcentaje_uma_mensual": 15.59
+   },
+   "unidad": "% de la UMA mensual vigente en 2025",
+   "vigencia_desde": "2026-01-01",
+   "citas": [
+    {
+     "fuente": "sub26",
+     "articulo": "Transitorio Segundo",
+     "cita": "SEGUNDO. Para los efectos del Artículo Segundo, párrafos primero, tercero, cuarto y quinto del presente decreto, para calcular el Subsidio para el Empleo correspondiente al mes de enero de 2026, el valor mensual de la Unidad de Medida y Actualización se deberá multiplicar por 15.59%, en sustitución del porcentaje de 15.02%. Dado"
+    }
+   ]
+  },
+  {
+   "id": "subsidio-empleo-mensual-pesos",
+   "concepto": "Subsidio para el empleo mensual en pesos, de febrero de 2026 en adelante",
+   "estado": "auditada",
+   "valor": {
+    "pesos": 535.65
+   },
+   "unidad": "pesos al mes",
+   "operacion": "UMA mensual 2026 × 15.02 % = 3566.22 × 15.02 ÷ 100",
+   "nota": "El considerando del Decreto anticipa $536.22; con la UMA que el INEGI publicó después, la operación que manda el Artículo Segundo da esta cifra. Vale la operación del artículo.",
+   "citas": [
+    {
+     "fuente": "sub26",
+     "articulo": "Considerandos",
+     "cita": "se actualiza el porcentaje de 13.8% de la Unidad de Medida y Actualización mensual a 15.02%, el cual representa un monto de $536.22 (quinientos treinta y seis pesos 22/100 M.N.) a efecto de que su"
+    }
+   ]
+  }
+ ],
+ "exenciones_art_93": [
+  {
+   "id": "exencion-aguinaldo",
+   "concepto": "Aguinaldo exento del ISR",
+   "estado": "auditada",
+   "valor": {
+    "veces_uma": 30,
+    "pesos": 3519.3
+   },
+   "unidad": "pesos",
+   "operacion": "30 × UMA diaria 2026 (117.31)",
+   "nota": "La ley dice «salario mínimo»; desde la desindexación (DOF 27-01-2016) esa referencia se lee en UMA.",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 93, fracción XIV",
+     "cita": "XIV. Las gratificaciones que reciban los trabajadores de sus patrones, durante un año de calendario, hasta el equivalente del salario mínimo general del área geográfica del trabajador elevado a 30 días, cuando dichas gratificaciones se otorguen en forma general; así como las primas vacacionales que otorguen los patrones durante el año de calendario a sus trabajadores en forma general y la participación de los trabajadores en las utilidades de las empresas, hasta por el equivalente a 15 días de salario mínimo general del área geográfica del trabajador, por cada uno de los conceptos señalados. Tratándose de primas dominicales hasta por el equivalente de un salario mínimo general del área geográfica del trabajador por cada domingo que se labore. XV. Por el excedente de los ingresos a que se refiere la fracción anterior se pagará el impuesto en los términos de este Título. XVI. Las"
+    },
+    {
+     "fuente": "des16",
+     "articulo": "Transitorio Tercero",
+     "cita": "u parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
+    }
+   ]
+  },
+  {
+   "id": "exencion-prima-vacacional",
+   "concepto": "Prima vacacional exenta del ISR",
+   "estado": "auditada",
+   "valor": {
+    "veces_uma": 15,
+    "pesos": 1759.65
+   },
+   "unidad": "pesos",
+   "operacion": "15 × UMA diaria 2026 (117.31)",
+   "nota": "La ley dice «salario mínimo»; desde la desindexación (DOF 27-01-2016) esa referencia se lee en UMA.",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 93, fracción XIV",
+     "cita": "XIV. Las gratificaciones que reciban los trabajadores de sus patrones, durante un año de calendario, hasta el equivalente del salario mínimo general del área geográfica del trabajador elevado a 30 días, cuando dichas gratificaciones se otorguen en forma general; así como las primas vacacionales que otorguen los patrones durante el año de calendario a sus trabajadores en forma general y la participación de los trabajadores en las utilidades de las empresas, hasta por el equivalente a 15 días de salario mínimo general del área geográfica del trabajador, por cada uno de los conceptos señalados. Tratándose de primas dominicales hasta por el equivalente de un salario mínimo general del área geográfica del trabajador por cada domingo que se labore. XV. Por el excedente de los ingresos a que se refiere la fracción anterior se pagará el impuesto en los términos de este Título. XVI. Las"
+    },
+    {
+     "fuente": "des16",
+     "articulo": "Transitorio Tercero",
+     "cita": "u parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
+    }
+   ]
+  },
+  {
+   "id": "exencion-ptu",
+   "concepto": "PTU exenta del ISR",
+   "estado": "auditada",
+   "valor": {
+    "veces_uma": 15,
+    "pesos": 1759.65
+   },
+   "unidad": "pesos",
+   "operacion": "15 × UMA diaria 2026 (117.31)",
+   "nota": "La ley dice «salario mínimo»; desde la desindexación (DOF 27-01-2016) esa referencia se lee en UMA.",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 93, fracción XIV",
+     "cita": "XIV. Las gratificaciones que reciban los trabajadores de sus patrones, durante un año de calendario, hasta el equivalente del salario mínimo general del área geográfica del trabajador elevado a 30 días, cuando dichas gratificaciones se otorguen en forma general; así como las primas vacacionales que otorguen los patrones durante el año de calendario a sus trabajadores en forma general y la participación de los trabajadores en las utilidades de las empresas, hasta por el equivalente a 15 días de salario mínimo general del área geográfica del trabajador, por cada uno de los conceptos señalados. Tratándose de primas dominicales hasta por el equivalente de un salario mínimo general del área geográfica del trabajador por cada domingo que se labore. XV. Por el excedente de los ingresos a que se refiere la fracción anterior se pagará el impuesto en los términos de este Título. XVI. Las"
+    },
+    {
+     "fuente": "des16",
+     "articulo": "Transitorio Tercero",
+     "cita": "u parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
+    }
+   ]
+  },
+  {
+   "id": "exencion-prima-dominical",
+   "concepto": "Prima dominical exenta, por cada domingo",
+   "estado": "auditada",
+   "valor": {
+    "veces_uma": 1,
+    "pesos": 117.31
+   },
+   "unidad": "pesos",
+   "operacion": "1 × UMA diaria 2026 (117.31)",
+   "nota": "La ley dice «salario mínimo»; desde la desindexación (DOF 27-01-2016) esa referencia se lee en UMA.",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 93, fracción XIV",
+     "cita": "XIV. Las gratificaciones que reciban los trabajadores de sus patrones, durante un año de calendario, hasta el equivalente del salario mínimo general del área geográfica del trabajador elevado a 30 días, cuando dichas gratificaciones se otorguen en forma general; así como las primas vacacionales que otorguen los patrones durante el año de calendario a sus trabajadores en forma general y la participación de los trabajadores en las utilidades de las empresas, hasta por el equivalente a 15 días de salario mínimo general del área geográfica del trabajador, por cada uno de los conceptos señalados. Tratándose de primas dominicales hasta por el equivalente de un salario mínimo general del área geográfica del trabajador por cada domingo que se labore. XV. Por el excedente de los ingresos a que se refiere la fracción anterior se pagará el impuesto en los términos de este Título. XVI. Las"
+    },
+    {
+     "fuente": "des16",
+     "articulo": "Transitorio Tercero",
+     "cita": "u parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
+    }
+   ]
+  }
+ ],
+ "deducciones_personales": [
+  {
+   "id": "tope-deducciones-personales",
+   "concepto": "Tope global de las deducciones personales: lo menor entre 5 UMA anuales y el 15 % de los ingresos",
+   "estado": "auditada",
+   "valor": {
+    "veces_uma_anual": 5,
+    "porcentaje_ingresos": 15,
+    "pesos": 213973.2
+   },
+   "unidad": "pesos",
+   "operacion": "5 × UMA anual 2026 (42794.64)",
+   "nota": "No aplica a las aportaciones de retiro (fracción V) ni, por la misma ley, a los donativos.",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 151",
+     "cita": "no podrá exceder de la cantidad que resulte menor entre cinco veces el valor anual de la Unidad de Medida y Actualización, o del 15% del total de los ingresos del contribuyente, incluyendo aquéllos por los que no se pague el impuesto. Lo dispuesto en este párrafo no será aplicable tratándose de la"
+    }
+   ]
+  },
+  {
+   "id": "tope-aportaciones-retiro",
+   "concepto": "Aportaciones complementarias de retiro: hasta el 10 % de los ingresos acumulables, sin pasar de 5 UMA anuales",
+   "estado": "auditada",
+   "valor": {
+    "porcentaje_ingresos": 10,
+    "veces_uma_anual": 5,
+    "pesos": 213973.2
+   },
+   "unidad": "pesos",
+   "operacion": "5 × UMA anual 2026 (42794.64)",
+   "nota": "Va aparte del tope global (el último párrafo del art. 151 lo excluye). La ley dice «salarios mínimos»: se lee en UMA.",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 151, fracción V",
+     "cita": "V. Las aportaciones complementarias de retiro realizadas directamente en la subcuenta de aportaciones complementarias de retiro, en los términos de la Ley de los Sistemas de Ahorro para el Retiro o a las cuentas de planes personales de retiro, así como las aportaciones voluntarias realizadas a la subcuenta de aportaciones voluntarias, siempre que en este último caso dichas aportaciones cumplan con los requisitos de permanencia establecidos para los planes de retiro conforme al segundo párrafo de esta fracción. El monto de la deducción a que se refiere esta fracción será de hasta el 10% de los ingresos acumulables del contribuyente en el ejercicio, sin que dichas aportaciones excedan del equivalente a cinco salarios mínimos generales del área"
+    },
+    {
+     "fuente": "des16",
+     "articulo": "Transitorio Tercero",
+     "cita": "u parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
+    }
+   ]
+  },
+  {
+   "id": "tope-gastos-funerales",
+   "concepto": "Gastos funerarios: hasta 1 UMA anual",
+   "estado": "auditada",
+   "valor": {
+    "veces_uma_anual": 1,
+    "pesos": 42794.64
+   },
+   "unidad": "pesos",
+   "operacion": "1 × UMA anual 2026 (42794.64)",
+   "nota": "La ley dice «salario mínimo»: se lee en UMA.",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 151, fracción II",
+     "cita": "II. Los gastos de funerales en la parte en que no excedan del salario mínimo general del área geográfica del contribuyente elevado al año, efectuados para las personas señaladas en la fracción que"
+    },
+    {
+     "fuente": "des16",
+     "articulo": "Transitorio Tercero",
+     "cita": "u parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
+    }
+   ]
+  },
+  {
+   "id": "tope-donativos",
+   "concepto": "Donativos: hasta el 7 % de los ingresos acumulables del año anterior; 4 % si van a la Federación, estados o municipios",
+   "estado": "oficial",
+   "valor": {
+    "porcentaje_general": 7,
+    "porcentaje_gobierno": 4
+   },
+   "unidad": "% de los ingresos acumulables del ejercicio anterior",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 151, fracción III",
+     "cita": "no exceda del 7% de los ingresos acumulables que sirvan de base para calcular el impuesto sobre la renta a cargo del contribuyente en el ejercicio inmediato anterior a aquél en el que se efectúe la deducción, antes de aplicar las deducciones a que se refiere el presente artículo. Cuando se realicen donativos a favor de la Federación, de las entidades federativas, de los municipios, o de sus organismos descentralizados, el monto deducible no podrá exceder del 4% de los ingresos acumulables a que se refiere este párrafo, sin que en ningún caso el límite de la deducción tratándose de estos donativos, y de los realizados a donatarias autorizadas distintas, exceda del 7% citado. Cuando se"
+    }
+   ]
+  },
+  {
+   "id": "tope-intereses-hipotecarios",
+   "concepto": "Intereses reales de créditos hipotecarios: por créditos que no pasen de 750,000 UDIS",
+   "estado": "oficial",
+   "valor": {
+    "udis": 750000
+   },
+   "en_letra": [
+    "setecientas cincuenta mil unidades de inversión"
+   ],
+   "unidad": "UDIS",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 151, fracción IV",
+     "cita": "IV. Los intereses reales efectivamente pagados en el ejercicio por créditos hipotecarios destinados a la adquisición de su casa habitación contratados con las instituciones integrantes del sistema financiero, siempre que el monto total de los créditos otorgados por dicho inmueble no exceda de setecientas cincuenta mil unidades de inversión. Para estos efectos, se considerarán como intereses reales el monto en el que los intereses efectivamente pagados en el ejercicio excedan al ajuste anual por inflación del mismo"
+    }
+   ]
+  }
+ ],
+ "colegiaturas": [
+  {
+   "id": "colegiaturas",
+   "concepto": "Límite anual de deducción de colegiaturas por nivel educativo",
+   "estado": "oficial",
+   "valor": {
+    "preescolar": 14200.0,
+    "primaria": 12900.0,
+    "secundaria": 19900.0,
+    "profesional_tecnico": 17100.0,
+    "bachillerato": 24500.0
+   },
+   "unidad": "pesos al año por alumno",
+   "citas": [
+    {
+     "fuente": "ben13",
+     "articulo": "Art. 1.10",
+     "cita": "Preescolar | $14,200.00 | Primaria | $12,900.00 | Secundaria | $19,900.00 | Profesional técnico | $17,100.00 | Bachillerato o su equivalente | $24,500.00 | Cuando los contribuyentes realicen"
+    },
+    {
+     "fuente": "ben13",
+     "articulo": "Art. 1.8",
+     "cita": "Artículo 1.8. Se otorga un estímulo fiscal a las personas físicas residentes en el país que obtengan ingresos de los establecidos en el Título IV de la Ley del Impuesto sobre la Renta, consistente en disminuir del resultado obtenido conforme al artículo 152, primer párrafo, primera oración, de la Ley del Impuesto sobre la Renta,"
+    }
+   ]
+  }
+ ],
+ "resico_personas_fisicas": [
+  {
+   "id": "resico-pf-tope-2026",
+   "concepto": "RESICO de personas físicas: tope de ingresos 2026",
+   "estado": "oficial",
+   "valor": {
+    "pesos": 3500000
+   },
+   "en_letra": [
+    "tres millones quinientos mil pesos"
+   ],
+   "unidad": "pesos al año",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 113-E",
+     "cita": "Artículo 113-E. Los contribuyentes personas físicas que realicen únicamente actividades empresariales, profesionales u otorguen el uso o goce temporal de bienes, podrán optar por pagar el impuesto sobre la renta en los términos establecidos en esta Sección, siempre que la totalidad de sus ingresos propios de la actividad o las actividades señaladas que realicen, obtenidos en el ejercicio inmediato anterior, no hubieran excedido de la cantidad de tres millones quinientos mil pesos. Los contribuyentes a que se refiere el párrafo anterior que inicien"
+    }
+   ]
+  },
+  {
+   "id": "resico-pf-mensual-2026",
+   "concepto": "RESICO de personas físicas: tabla mensual 2026",
+   "estado": "oficial",
+   "tabla": [
+    {
+     "hasta": 25000.0,
+     "tasa": 1.0
+    },
+    {
+     "hasta": 50000.0,
+     "tasa": 1.1
+    },
+    {
+     "hasta": 83333.33,
+     "tasa": 1.5
+    },
+    {
+     "hasta": 208333.33,
+     "tasa": 2.0
+    },
+    {
+     "hasta": 3500000.0,
+     "tasa": 2.5
+    }
+   ],
+   "unidad": "pesos mensuales cobrados, sin IVA; tasa en %",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 113-E, tabla mensual",
+     "cita": "Hasta 25,000.00 1.00% Hasta 50,000.00 1.10% Hasta 83,333.33 1.50% Hasta 208,333.33 2.00% Hasta 3,500,000.00 2.50% Los"
+    }
+   ]
+  },
+  {
+   "id": "resico-pf-anual-2026",
+   "concepto": "RESICO de personas físicas: tabla anual 2026",
+   "estado": "oficial",
+   "tabla": [
+    {
+     "hasta": 300000.0,
+     "tasa": 1.0
+    },
+    {
+     "hasta": 600000.0,
+     "tasa": 1.1
+    },
+    {
+     "hasta": 1000000.0,
+     "tasa": 1.5
+    },
+    {
+     "hasta": 2500000.0,
+     "tasa": 2.0
+    },
+    {
+     "hasta": 3500000.0,
+     "tasa": 2.5
+    }
+   ],
+   "unidad": "pesos anuales cobrados, sin IVA; tasa en %",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 113-F, tabla anual",
+     "cita": "Hasta 300,000.00 1.00% Hasta 600,000.00 1.10% Hasta 1,000,000.00 1.50% Hasta 2,500,000.00 2.00% Hasta 3,500,000.00 2.50% Los"
+    }
+   ]
+  }
+ ],
+ "retenciones": [
+  {
+   "id": "retencion-resico-pm",
+   "concepto": "Retención del ISR a RESICO cuando le paga una persona moral",
+   "estado": "oficial",
+   "valor": {
+    "tasa": 1.25
+   },
+   "unidad": "% del pago, sin IVA",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 113-J",
+     "cita": "Artículo 113-J. Cuando los contribuyentes a que se refiere el artículo 113-E de esta Ley realicen actividades empresariales, profesionales u otorguen el uso o goce temporal de bienes, a personas morales, estas últimas deberán retener, como pago mensual, el monto que resulte de aplicar la tasa del 1.25% sobre el monto de los pagos que les efectúen, sin considerar el impuesto al valor agregado,"
+    }
+   ]
+  },
+  {
+   "id": "retencion-honorarios",
+   "concepto": "Retención del ISR por honorarios pagados por una persona moral",
+   "estado": "oficial",
+   "valor": {
+    "tasa": 10
+   },
+   "unidad": "% del pago",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 106",
+     "cita": "Cuando los contribuyentes presten servicios profesionales a las personas morales, éstas deberán retener, como pago provisional, el monto que resulte de aplicar la tasa del 10% sobre el monto de los pagos que les efectúen, sin deducción alguna, debiendo proporcionar a los contribuyentes comprobante fiscal en el que conste el"
+    }
+   ]
+  },
+  {
+   "id": "retencion-arrendamiento",
+   "concepto": "Retención del ISR por arrendamiento pagado por una persona moral",
+   "estado": "oficial",
+   "valor": {
+    "tasa": 10
+   },
+   "unidad": "% del pago",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 116",
+     "cita": "Cuando los ingresos a que se refiere este Capítulo se obtengan por pagos que efectúen las personas morales, éstas deberán retener como pago provisional el monto que resulte de aplicar la tasa del 10% sobre el monto de los mismos, sin deducción alguna, debiendo proporcionar a los contribuyentes comprobante fiscal en el que conste"
+    }
+   ]
+  },
+  {
+   "id": "retencion-iva-dos-terceras",
+   "concepto": "Retención de IVA de una persona moral a una persona física: dos terceras partes del impuesto trasladado",
+   "estado": "oficial",
+   "valor": {
+    "fraccion": "2/3"
+   },
+   "unidad": "del IVA trasladado",
+   "citas": [
+    {
+     "fuente": "RLIVA",
+     "articulo": "Art. 3, fracción I",
+     "cita": "I. La retención se hará por las dos terceras partes del impuesto que se les traslade y que haya sido efectivamente pagado, cuando el impuesto le sea trasladado por personas físicas por las operaciones siguientes: a) Prestación de servicios personales independientes; b) Prestación de servicios de comisión, y c) Otorgamiento del"
+    },
+    {
+     "fuente": "LIVA",
+     "articulo": "Art. 1o.-A, fracción II",
+     "cita": "II. Sean personas morales que: a) Reciban servicios personales independientes, o usen o gocen temporalmente bienes, prestados u otorgados por personas físicas, respectivamente. b) Adquieran desperdicios para ser utilizados como insumo de su actividad industrial o para su comercialización. c) Reciban servicios de autotransporte"
+    }
+   ]
+  },
+  {
+   "id": "retencion-iva-autotransporte",
+   "concepto": "Retención de IVA por autotransporte terrestre de bienes",
+   "estado": "oficial",
+   "valor": {
+    "tasa": 4
+   },
+   "unidad": "% de la contraprestación",
+   "citas": [
+    {
+     "fuente": "RLIVA",
+     "articulo": "Art. 3, fracción II",
+     "cita": "II. La retención se hará por el 4% del valor de la contraprestación pagada efectivamente, cuando reciban los servicios de autotransporte terrestre de bienes que sean considerados como tales en los términos de las leyes de la materia. Las personas físicas o"
+    }
+   ]
+  },
+  {
+   "id": "retencion-plataformas-ley",
+   "concepto": "Retención del ISR en plataformas digitales, según la LISR",
+   "estado": "oficial",
+   "valor": {
+    "transporte_y_entrega": 2.1,
+    "hospedaje": 4,
+    "enajenacion_y_servicios": 1
+   },
+   "unidad": "% de los ingresos",
+   "nota": "Durante 2026 y 2027 la Ley de Ingresos fija 2.5 % para enajenación de bienes y prestación de servicios (ver retencion-plataformas-lif).",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 113-A",
+     "cita": "I. Tratándose de prestación de servicios de transporte terrestre de pasajeros y de entrega de bienes la retención se hará por el 2.1%. II. Tratándose de prestación de servicios de hospedaje la retención se hará por el 4%. III. Tratándose de enajenación de bienes y prestación de servicios la retención se hará por el 1%. Párrafo con fracciones reformado DOF 08-12-2020 Cuando las personas físicas a"
+    }
+   ]
+  },
+  {
+   "id": "retencion-plataformas-lif",
+   "concepto": "Retención del ISR en plataformas por enajenación de bienes y prestación de servicios, 2026",
+   "estado": "oficial",
+   "valor": {
+    "tasa": 2.5
+   },
+   "unidad": "% de los ingresos",
+   "vigencia_desde": "2026-01-01",
+   "citas": [
+    {
+     "fuente": "LIF_2026",
+     "articulo": "Art. 25",
+     "cita": "identes en el extranjero con o sin establecimiento permanente en el país, así como las entidades o figuras jurídicas extranjeras que proporcionen, de manera directa o indirecta, el uso de plataformas tecnológicas, aplicaciones informáticas y similares, en sustitución de la tasa de retención a que se refiere el artículo 113-A, párrafo tercero, fracción III, de la Ley del Impuesto sobre la Renta, aplicarán la tasa del 2.5 por ciento. Las personas morales que obtengan ingresos"
+    }
+   ]
+  },
+  {
+   "id": "retencion-plataformas-sin-rfc",
+   "concepto": "Retención en plataformas a quien no da su RFC",
+   "estado": "oficial",
+   "valor": {
+    "tasa": 20
+   },
+   "unidad": "% de los ingresos",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 113-C, fracción IV",
+     "cita": "la retención. En el caso de que los contribuyentes no proporcionen su clave del Registro Federal de Contribuyentes prevista en el inciso b) de la fracción III del artículo 18-J de la Ley del Impuesto al Valor Agregado, se deberá retener el impuesto que corresponda por los ingresos a que se refiere el artículo 113-A de esta Ley, aplicando la tasa del 20% sobre los ingresos"
+    }
+   ]
+  },
+  {
+   "id": "deduccion-ciega-arrendamiento",
+   "concepto": "Arrendamiento: deducción opcional sin comprobantes («deducción ciega»)",
+   "estado": "oficial",
+   "valor": {
+    "porcentaje": 35
+   },
+   "unidad": "% de los ingresos",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 115",
+     "cita": "Los contribuyentes que otorguen el uso o goce temporal de bienes inmuebles podrán optar por deducir el 35% de los ingresos a que se refiere este Capítulo, en substitución de las deducciones a que este artículo se refiere. Quienes ejercen esta opción podrán"
+    }
+   ]
+  }
+ ]
+}

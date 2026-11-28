@@ -1,0 +1,133 @@
+{
+ "documento": "Fuentes de la base fiscal 2026-2027",
+ "nota": "Cada archivo lleva su huella SHA-256. Si una huella cambia, sus citas se vuelven a cotejar.",
+ "fuentes": {
+  "uma26": {
+   "nombre": "INEGI, Unidad de Medida y Actualización 2026",
+   "publicacion": "DOF 09-01-2026",
+   "url": "https://dof.gob.mx/nota_detalle.php?codigo=5778072&fecha=09/01/2026",
+   "archivo": "investigaciones/fiscal-2027/dof-uma-2026.txt",
+   "sha256": "05a0373d3035f44018abd48ecdf3c5c04b43996f3debdded45bbade93d64fb81",
+   "nota": "Texto de la nota del DOF convertido de su HTML; la referencia es la imagen o el PDF de la edición."
+  },
+  "sm26": {
+   "nombre": "CONASAMI, Resolución que fija los salarios mínimos que rigen desde el 1 de enero de 2026",
+   "publicacion": "DOF 09-12-2025",
+   "url": "https://dof.gob.mx/nota_detalle.php?codigo=5775534&fecha=09/12/2025",
+   "archivo": "investigaciones/fiscal-2027/dof-salario-minimo-2026.txt",
+   "sha256": "4d5406375c94fd057ba1f4c010742752c51d2f6195128a24156f16882444dbe6",
+   "nota": "Texto de la nota del DOF convertido de su HTML; la referencia es la imagen o el PDF de la edición."
+  },
+  "sub26": {
+   "nombre": "Decreto por el que se modifica el diverso que otorga el subsidio para el empleo",
+   "publicacion": "DOF 31-12-2025",
+   "url": "https://dof.gob.mx/nota_detalle.php?codigo=5777649&fecha=31/12/2025",
+   "archivo": "investigaciones/fiscal-2027/dof-subsidio-empleo-2026.txt",
+   "sha256": "5cea7f6d195917e0582da05fbcf3cfb28cc0e92280b15070c808e49425763914",
+   "nota": "Texto de la nota del DOF convertido de su HTML; la referencia es la imagen o el PDF de la edición."
+  },
+  "ben13": {
+   "nombre": "Decreto que compila diversos beneficios fiscales y establece medidas de simplificación administrativa",
+   "publicacion": "DOF 26-12-2013",
+   "url": "https://dof.gob.mx/nota_detalle.php?codigo=5328028&fecha=26/12/2013",
+   "archivo": "investigaciones/fiscal-2027/dof-decreto-beneficios-2013.txt",
+   "sha256": "7325ac0bab53245800c34cd6209157d9b2efe1a5be3aa679070ba78b0804541c",
+   "nota": "Texto de la nota del DOF convertido de su HTML; la referencia es la imagen o el PDF de la edición. No se revisaron sus modificaciones posteriores."
+  },
+  "des16": {
+   "nombre": "Decreto de reforma constitucional en materia de desindexación del salario mínimo",
+   "publicacion": "DOF 27-01-2016",
+   "url": "https://dof.gob.mx/nota_detalle.php?codigo=5423663&fecha=27/01/2016",
+   "archivo": "investigaciones/fiscal-2027/dof-desindexacion-2016.txt",
+   "sha256": "7709c822afcb87123ffa4ec411e4e6264ede9f260dff9a37315715f5762eddc4",
+   "nota": "Texto de la nota del DOF convertido de su HTML; la referencia es la imagen o el PDF de la edición."
+  },
+  "rmf26": {
+   "nombre": "Resolución Miscelánea Fiscal para 2026",
+   "publicacion": "DOF 28-12-2025",
+   "url": "https://dof.gob.mx/nota_detalle.php?codigo=5777217&fecha=28/12/2025",
+   "archivo": "investigaciones/fiscal-2027/dof-rmf-2026.txt",
+   "sha256": "ffb3a57afd24017d8673b8cf54b5595c8c10b91c3151673d866fecb767be4416",
+   "nota": "Texto del archivo .doc que sirve el DOF para esta nota (nota_to_doc.php?codnota=5777217), convertido a texto. No incluye sus resoluciones de modificaciones posteriores."
+  },
+  "anx26": {
+   "nombre": "Anexos 4, 5, 6, 8, 15 y 25 de la Resolución Miscelánea Fiscal para 2026",
+   "publicacion": "DOF 28-12-2025",
+   "url": "https://dof.gob.mx/nota_detalle.php?codigo=5777219&fecha=28/12/2025",
+   "archivo": "investigaciones/fiscal-2027/dof-rmf-2026-anexos-4-5-6-8-15-25.txt",
+   "sha256": "37555430bca665363a95040a650a4914f2d7fc0f90322b560a42b99354e69ae4",
+   "nota": "Texto de la nota del DOF convertido de su HTML; la referencia es la imagen o el PDF de la edición."
+  },
+  "dlisr27": {
+   "nombre": "Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Ley del Impuesto sobre la Renta y se expiden disposiciones de vigencia transitoria",
+   "publicacion": "DOF 13-11-2026",
+   "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803758&fecha=13/11/2026",
+   "archivo": "investigaciones/fiscal-2027/dof-decreto-lisr-2027.txt",
+   "sha256": "c8997837fa850e21899b783b1593555caa64b02c6849d20a506854caf4d9d2bb",
+   "nota": "Texto de la nota del DOF convertido de su HTML; la referencia es la imagen o el PDF de la edición. Entra en vigor el 1 de enero de 2027."
+  },
+  "LISR": {
+   "nombre": "Ley del Impuesto sobre la Renta",
+   "publicacion": "última reforma DOF 01-04-2024 (no incluye el Decreto del 13-11-2026, que rige desde el 1 de enero de 2027)",
+   "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf",
+   "archivo": "investigaciones/leyes/LISR.pdf",
+   "sha256": "803c2875c09c751c1966b8eb4dca99f460b237da4ef67ee04b4fa325d8c2f786",
+   "nota": "Texto vigente de la Cámara de Diputados (LeyesBiblio)."
+  },
+  "CFF": {
+   "nombre": "Código Fiscal de la Federación",
+   "publicacion": "última reforma DOF 09-04-2026",
+   "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf",
+   "archivo": "investigaciones/leyes/CFF.pdf",
+   "sha256": "be7427b20d3552775ab42018f8f87578078770095bf8cf46322c25e36ee3aa7d",
+   "nota": "Texto vigente de la Cámara de Diputados (LeyesBiblio)."
+  },
+  "LIVA": {
+   "nombre": "Ley del Impuesto al Valor Agregado",
+   "publicacion": "última reforma DOF 12-11-2021",
+   "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIVA.pdf",
+   "archivo": "investigaciones/leyes/LIVA.pdf",
+   "sha256": "f2b5b1770441a6a4e48f3ade408f9ff7a3e9c81bd5d529e52484f49e4a8e91a6",
+   "nota": "Texto vigente de la Cámara de Diputados (LeyesBiblio)."
+  },
+  "LIF_2026": {
+   "nombre": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2026",
+   "publicacion": "DOF 07-11-2025",
+   "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf",
+   "archivo": "investigaciones/leyes/LIF_2026.pdf",
+   "sha256": "a305ca23bba43cddf2275067af29bb0ba35def7aedbbb0d3fc4557da9067a82c",
+   "nota": "Texto vigente de la Cámara de Diputados (LeyesBiblio)."
+  },
+  "LIF_2027": {
+   "nombre": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027",
+   "publicacion": "DOF 13-11-2026; rige del 1 de enero al 31 de diciembre de 2027",
+   "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf",
+   "archivo": "investigaciones/leyes/LIF_2027.pdf",
+   "sha256": "1c247831459988960cbb9ef86868c9174e1bce7532957e8156b359e214ac10db",
+   "nota": "Texto vigente de la Cámara de Diputados (LeyesBiblio)."
+  },
+  "LFPCA": {
+   "nombre": "Ley Federal de Procedimiento Contencioso Administrativo",
+   "publicacion": "última reforma DOF 09-06-2026",
+   "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPCA.pdf",
+   "archivo": "investigaciones/leyes/LFPCA.pdf",
+   "sha256": "d2a25adcb45f622bbbf2a4e58f1139fb5236961fe86de3dd9ad9de2dfa21d54e",
+   "nota": "Texto vigente de la Cámara de Diputados (LeyesBiblio)."
+  },
+  "RLIVA": {
+   "nombre": "Reglamento de la Ley del Impuesto al Valor Agregado",
+   "publicacion": "última reforma DOF 25-09-2014",
+   "url": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LIVA_250914.pdf",
+   "archivo": "investigaciones/leyes/RLIVA.pdf",
+   "sha256": "4f46c1f92fb5682281a7679836e517de95975786fa5326848a331c9eb946cc5f",
+   "nota": "Texto vigente de la Cámara de Diputados (LeyesBiblio)."
+  },
+  "scjn": {
+   "nombre": "Semanario Judicial de la Federación (SCJN)",
+   "publicacion": "",
+   "url": "https://sjf2.scjn.gob.mx/detalle/tesis/2032821",
+   "archivo": null,
+   "sin_archivo": "El portal del Semanario pide verificación de navegador y no entrega la tesis a una descarga directa; se coteja a mano."
+  }
+ }
+}
