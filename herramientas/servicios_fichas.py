@@ -300,6 +300,9 @@ FICHAS = {
             ('📄', 'El informe de tu predial', 'Tu cuenta del predial en un documento que se imprime y se descarga, con folio, la huella SHA-256 de tus datos '
              'y una liga que repite la cuenta. No es un documento oficial ni un avalúo, y nada sale de tu navegador.',
              'herramienta-calculadora-predial.html', 'Nuevo'),
+            ('🧮', 'Simulador y Blindaje Fiscal 2027', 'El IVA opcional del RESICO contra el régimen general, tu declaración anual, el ISR de cada régimen lado a lado '
+             'y tu lista de blindaje ante el SAT, con las cifras oficiales de 2026 y de 2027. Todo en tu navegador, sin tu Contraseña del SAT.',
+             'fiscal-simulador-2027.html', 'Nuevo'),
             ('🏘️', 'El precio de la vivienda en el Planisferio', 'El Índice SHF de los 32 estados en el mapa: el índice, cuánto subió en un año y el precio '
              'mediano de los avalúos, la misma cifra que lee el simulador del predial.', 'planisferio.html?d=financiera&l=shfI', 'Nuevo'),
         ],
@@ -307,7 +310,7 @@ FICHAS = {
                     ('Me despidieron, ¿cuánto me toca de liquidación?', 'ciudadano'),
                     ('Gano 15 mil al mes, ¿cuánto me retienen?', 'ciudadano'), ('Trabajo en el gobierno y gano 20 mil al mes, ¿cuánto me retienen?', 'ciudadano'), ('¿Cuánto ISR pago si vendo mi casa?', 'ciudadano'),
                     ('¿Cuánto ISR pago si vendo acciones en la bolsa?', 'ciudadano'), ('¿Cuánto pago de predial en Zapopan?', 'ciudadano'),
-                    ('¿Cuánto ha subido el precio de la vivienda en Jalisco?', 'ciudadano')],
+                    ('¿Cuánto ha subido el precio de la vivienda en Jalisco?', 'ciudadano'), ('¿Qué régimen fiscal me conviene?', 'ciudadano')],
         'enciclopedia': [('herramienta-calculadora.html', 'La Calculadora Cívica'), ('numeros-herramientas-del-auditor.html', 'Las herramientas del Auditor')],
         'glosario': ['ISR (Impuesto Sobre la Renta)', 'Retención del ISR (Tarifa del Artículo 96)', 'Cuota Obrera del IMSS', 'Cuota Patronal del IMSS', 'Cuotas al ISSSTE',
                      'Costos Totales por Agotamiento y Degradación Ambiental',

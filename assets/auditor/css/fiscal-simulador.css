@@ -1,0 +1,75 @@
+/* Simulador y Blindaje Fiscal 2027 · Cero CIEC (Ronda 40). Solo la página fiscal-simulador-2027.html. */
+.fsim-ico { flex: none; color: #0b3a6e; }
+.apartado-pestana[aria-selected="true"] .fsim-ico { color: #ffffff; }
+.fsim-cero { display: flex; gap: 14px; align-items: flex-start; margin: 16px 0 6px; padding: 14px 16px; border: 1px solid #c9a227; border-left: 5px solid #9a7400; border-radius: 10px; background: #fbf7ea; color: #1d2a44; }
+.fsim-cero p { margin: 0; font-size: 16px; line-height: 1.5; }
+.fsim-cero .fsim-ico { color: #7c5c16; margin-top: 2px; }
+.fsim-form { margin: 14px 0 6px; padding: 18px; border: 1px solid #d5dbe6; border-radius: 12px; background: #ffffff; }
+.fsim-campos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.fsim-campo { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.fsim-campo[hidden] { display: none; }
+.fsim-etq { font-size: 16px; font-weight: 600; color: #1d2a44; line-height: 1.35; }
+.fsim-inp { width: 100%; min-height: 48px; padding: 10px 12px; border: 1px solid #8a96ab; border-radius: 8px; background: #ffffff; color: #1d2a44; font: inherit; font-size: 17px; box-sizing: border-box; }
+.fsim-inp:focus-visible { outline: 3px solid #4a90d9; outline-offset: 1px; border-color: #0b3a6e; }
+.fsim-ayuda { font-size: 16px; color: #44526b; line-height: 1.4; }
+.fsim-grupo { margin: 18px 0 0; padding: 12px 14px 14px; border: 1px solid #d5dbe6; border-radius: 10px; min-width: 0; }
+.fsim-grupo legend { padding: 0 6px; font-size: 16px; font-weight: 700; color: #0b3a6e; }
+.fsim-casilla { display: flex; gap: 12px; align-items: flex-start; min-height: 44px; padding: 8px 4px; font-size: 16px; line-height: 1.45; color: #1d2a44; cursor: pointer; }
+.fsim-casilla input { flex: none; width: 24px; height: 24px; margin: 1px 0 0; accent-color: #0b3a6e; }
+.fsim-botones { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; }
+.fsim-sec { min-height: 44px; padding: 10px 16px; border: 1px solid #0b3a6e; border-radius: 8px; background: #ffffff; color: #0b3a6e; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer; }
+.fsim-pri { min-height: 44px; padding: 10px 26px; border: 1px solid #0b3a6e; border-radius: 8px; background: #0b3a6e; color: #ffffff; font: inherit; font-size: 17px; font-weight: 700; cursor: pointer; }
+.fsim-pri:hover { background: #072a52; }
+.fsim-pri:focus-visible { outline: 3px solid #4a90d9; outline-offset: 2px; }
+a.fsim-sec { display: inline-flex; align-items: center; text-decoration: none; box-sizing: border-box; }
+.fsim-sec:hover { background: #eef3fa; }
+.fsim-sec:focus-visible { outline: 3px solid #4a90d9; outline-offset: 2px; }
+.fsim-col { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto; gap: 10px; margin: 12px 0 0; }
+.fsim-res:empty { display: none; }
+.fsim-res { margin: 16px 0; padding: 18px; border: 2px solid #0b3a6e; border-radius: 12px; background: #f6f9fd; scroll-margin-top: 90px; }
+.fsim-h3 { margin: 22px 0 10px; font-size: 20px; line-height: 1.3; color: #0b3a6e; }
+.fsim-res > .fsim-h3 { margin-top: 0; }
+.fsim-mosaicos { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 0 0 14px; }
+.fsim-mos { display: flex; flex-direction: column; gap: 4px; padding: 14px; border: 1px solid #c8d3e3; border-top: 4px solid #0b3a6e; border-radius: 8px; background: #ffffff; min-width: 0; }
+.fsim-mos-a { border-top-color: #196f3d; }
+.fsim-mos-b { border-top-color: #942020; }
+.fsim-mos-etq { font-size: 16px; color: #44526b; line-height: 1.35; }
+.fsim-mos-val { font-size: 24px; line-height: 1.2; color: #1d2a44; overflow-wrap: anywhere; }
+.fsim-mos-nota { font-size: 16px; color: #44526b; line-height: 1.35; }
+.fsim-aviso { margin: 10px 0; font-size: 16px; line-height: 1.55; color: #1d2a44; overflow-wrap: anywhere; }
+.fsim-veredicto { padding: 12px 14px; border-left: 5px solid #0b3a6e; border-radius: 0 8px 8px 0; background: #ffffff; font-size: 17px; }
+.fsim-pend { padding: 10px 14px; border: 1px dashed #9a7400; border-radius: 8px; background: #fff8e1; }
+.fsim-alerta { padding: 10px 14px; border: 1px solid #942020; border-radius: 8px; background: #fdf0ef; }
+.fsim-tabla td, .fsim-tabla th { font-size: 16px; }
+.fsim-fund-c { padding: 0 14px 12px; }
+.fsim-leyenda { margin: 16px 0 0; }
+.fsim-lista { list-style: none; margin: 14px 0; padding: 0; }
+.fsim-punto { margin: 0 0 12px; padding: 8px 14px 12px; border: 1px solid #d5dbe6; border-radius: 10px; background: #ffffff; }
+.fsim-punto-c { padding-left: 36px; }
+.fsim-punto-c p { margin: 6px 0; font-size: 16px; line-height: 1.55; overflow-wrap: anywhere; }
+.fsim-punto:has(input:checked) { border-color: #196f3d; background: #f3faf5; }
+.fsim-avance { font-size: 17px; font-weight: 700; color: #0b3a6e; }
+.fsim-prox { padding: 12px 14px; border-left: 5px solid #9a7400; border-radius: 0 8px 8px 0; background: #fbf7ea; font-size: 17px; color: #1d2a44; }
+.fsim-prox:empty { display: none; }
+.fsim-pie { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 0; }
+@media (max-width: 600px) {
+  .fsim-form, .fsim-res { padding: 14px; }
+  .fsim-col { grid-template-columns: 1fr; }
+  .fsim-punto-c { padding-left: 0; }
+  .fsim-mos-val { font-size: 22px; }
+  .fsim-botones > * { flex: 1 1 100%; text-align: center; }
+}
+html[data-theme="dark"] .fsim-ico { color: #9cc3f0; }
+html[data-theme="dark"] .fsim-cero, html[data-theme="dark"] .fsim-prox, html[data-theme="dark"] .fsim-pend { background: #2a2410; color: #f3e9c6; border-color: #7a6520; }
+html[data-theme="dark"] .fsim-cero .fsim-ico { color: #e8c86a; }
+html[data-theme="dark"] .fsim-form, html[data-theme="dark"] .fsim-punto, html[data-theme="dark"] .fsim-mos, html[data-theme="dark"] .fsim-veredicto { background: #121c30; border-color: #2c3a52; }
+html[data-theme="dark"] .fsim-res { background: #0f1828; border-color: #4a78b0; }
+html[data-theme="dark"] .fsim-inp { background: #0f1828; color: #e6edf7; border-color: #56688a; }
+html[data-theme="dark"] .fsim-etq, html[data-theme="dark"] .fsim-casilla, html[data-theme="dark"] .fsim-aviso, html[data-theme="dark"] .fsim-mos-val { color: #e6edf7; }
+html[data-theme="dark"] .fsim-ayuda, html[data-theme="dark"] .fsim-mos-etq, html[data-theme="dark"] .fsim-mos-nota { color: #a9b8d0; }
+html[data-theme="dark"] .fsim-h3, html[data-theme="dark"] .fsim-grupo legend, html[data-theme="dark"] .fsim-avance { color: #9cc3f0; }
+html[data-theme="dark"] .fsim-grupo { border-color: #2c3a52; }
+html[data-theme="dark"] .fsim-pri { background: #2f6fb5; border-color: #2f6fb5; }
+html[data-theme="dark"] .fsim-sec { background: #121c30; color: #9cc3f0; border-color: #4a78b0; }
+html[data-theme="dark"] .fsim-alerta { background: #2c1414; color: #f6d5d2; border-color: #a04545; }
+html[data-theme="dark"] .fsim-punto:has(input:checked) { background: #10261a; border-color: #2e8b57; }

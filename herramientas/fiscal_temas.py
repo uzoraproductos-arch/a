@@ -34,6 +34,8 @@ import fiscal_2027 as fb  # noqa: E402
 RAIZ = fb.RAIZ
 ARCHIVO = 'fiscal-reforma-2027.html'
 TITULO = 'Reforma fiscal 2026 → 2027 y calendario fiscal'
+SIMULADOR = 'fiscal-simulador-2027.html'   # Ronda 40: lo arma fiscal_simulador.py
+SIM_TITULO = 'Simulador y Blindaje Fiscal 2027'
 PRE = 'fiscal-'          # el id de cada pendiente en el Registro: fiscal-<id>
 MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
 RIGE = 'rige desde el 1 de enero de 2027'
@@ -207,7 +209,7 @@ def _li(i, tx=None, n=0):
     return '<li>%s%s %s <span class="pa-chico">(%s)</span></li>' % (tx or html.escape(d['concepto']), '' if tx or not v else ': <b>%s</b>' % html.escape(v), chip(i), liga(i, n))
 
 
-def _tema(tit, ancla, rx, parrafos, ids, sug, ci, pendientes=(), nota=None, cita_de=None, rige=False):
+def _tema(tit, ancla, rx, parrafos, ids, sug, ci, pendientes=(), nota=None, cita_de=None, rige=False, sim=None):
     h = ''.join('<p>%s</p>' % p for p in parrafos)
     if rige:
         h += '<p class="fis-rige"><b>Ojo con la fecha:</b> esto %s. Hasta el 31 de diciembre de 2026 valen las cifras de 2026.</p>' % RIGE
@@ -219,7 +221,8 @@ def _tema(tit, ancla, rx, parrafos, ids, sug, ci, pendientes=(), nota=None, cita
     fuentes = []
     for i in list(ids) + list(pendientes):
         fuentes += fu(i)
-    return {'tit': tit, 'rx': rx, 'h': h, 'fu': fuentes, 'ci': ci, 'ir': [ARCHIVO + '#' + ancla, TITULO], 'sug': sug}
+    # `sim`: el tema es una cuenta que hace el simulador (Ronda 40); «Saber más» abre su módulo.
+    return {'tit': tit, 'rx': rx, 'h': h, 'fu': fuentes, 'ci': ci, 'ir': [SIMULADOR + '#' + sim, SIM_TITULO] if sim else [ARCHIVO + '#' + ancla, TITULO], 'sug': sug}
 
 
 def _ci(i, v, etq):
@@ -580,11 +583,64 @@ def temas():
         [_ci('uma-2026', P('uma-2026', 'diaria'), 'UMA diaria de 2026, vigente hasta el 31 de enero de 2027'),
          _ci('salario-minimo-general-2026', P('salario-minimo-general-2026'), 'salario mínimo general diario de 2026')],
         pendientes=P_TODOS)
+    # ---- Ronda 40: las cuentas que hace el simulador (fiscal_simulador.py). «Saber más» abre su módulo.
+    t['sim_iva'] = _tema(
+        'Simula tu IVA: la opción de %s o el régimen general' % T('iva-opcional-resico-7'), 'cambios',
+        r'(simul|calcul|compar|decid|convien|convendr).*iva.*(7|siete|opcional|16|dieciseis)|iva.*(7|siete).*( o | vs | contra | versus ).*(16|dieciseis)|iva.*(16|dieciseis).*( o | vs | contra | versus ).*(7|siete)',
+        ['Depende de cuánto IVA acreditas. En el régimen general trasladas <b>%s</b> y restas el IVA de tus gastos; con la opción pagas <b>%s</b> de lo cobrado, definitivo y sin acreditar nada.'
+         % (T('sin-cambio-iva-general'), T('iva-opcional-resico-7')),
+         'El punto de equilibrio es <b>%s</b> del IVA que trasladas %s: %s.' % (T('iva-opcional-resico-equilibrio'), chip('iva-opcional-resico-equilibrio'), html.escape(_e(D('iva-opcional-resico-equilibrio')['operacion']))),
+         'El <b>simulador</b> hace la cuenta con lo que tú cobras y gastas, en tu navegador y sin guardar nada.'],
+        ['iva-opcional-resico-7', 'sin-cambio-iva-general', 'iva-opcional-resico-equilibrio', 'iva-opcional-resico-sin-acreditamiento'],
+        ['¿Qué es el IVA opcional del 7 % para RESICO?', '¿Qué régimen fiscal me conviene?'],
+        [_ci('iva-opcional-resico-7', T('iva-opcional-resico-7'), 'IVA opcional para RESICO, definitivo'),
+         _ci('iva-opcional-resico-equilibrio', T('iva-opcional-resico-equilibrio'), 'del IVA trasladado: el punto de equilibrio')],
+        pendientes=['rmf-2027'], cita_de='iva-opcional-resico-sin-acreditamiento', rige=True, nota=html.escape(D('iva-opcional-resico-equilibrio')['nota']), sim='resico')
+    t['sim_anual'] = _tema(
+        'Simula tu declaración anual de 2026', 'tarifas',
+        r'(simul|calcul|estim).*(declaracion anual|isr anual|mi anual|la anual|saldo a favor)|saldo a (favor|cargo)|cuanto (me (regresan|devuelven|devolveran)|(voy a )?pag(o|ar|aria)|me sale).*(declaracion anual|la anual|isr anual)|(calcul|cuanto es).*isr (anual|del ano)',
+        ['Tu ISR del año sale de la tarifa anual (%s) sobre tu ingreso menos tus deducciones personales; si te retuvieron más que eso, tienes saldo a favor, y si menos, saldo a cargo.'
+         % liga('isr-tarifa-anual-2026'),
+         'Tus deducciones tienen un tope global: lo menor entre %s veces la UMA anual (<b>%s</b>) y el <b>%s</b> de tus ingresos. Las aportaciones de retiro y las colegiaturas van aparte.'
+         % (N('tope-deducciones-personales', 'veces_uma_anual'), P('tope-deducciones-personales', 'pesos'), T('tope-deducciones-personales', 'porcentaje_ingresos')),
+         'El <b>simulador</b> hace la cuenta con tus números y te dice si estás obligado a presentarla. La anual de 2026 de personas físicas vence el <b>%s</b>.' % F('calendario-anual-pf-2026', 'vence')],
+        ['isr-tarifa-anual-2026', 'tope-deducciones-personales', 'tope-aportaciones-retiro', 'colegiaturas-fuera-del-tope', 'anual-asalariados-obligados', 'calendario-anual-pf-2026'],
+        ['¿Quién presenta declaración anual?', '¿Qué puedo deducir en mi declaración anual?'],
+        [_ci('tope-deducciones-personales', P('tope-deducciones-personales', 'pesos'), 'tope global de deducciones en 2026 (o el %s de tus ingresos, lo menor)' % T('tope-deducciones-personales', 'porcentaje_ingresos')),
+         _ci('calendario-anual-pf-2026', F('calendario-anual-pf-2026', 'vence'), 'vence la anual 2026 de personas físicas')],
+        pendientes=['isr-tarifas-2027'], cita_de='tope-deducciones-personales', sim='anual')
+    t['sim_reg'] = _tema(
+        'Compara regímenes: ¿en cuál pagas menos ISR?', 'tarifas',
+        r'(que|cual) regimen (fiscal )?(me )?(conviene|convendria|es mejor|elijo|elegir)|compar\w*.*regimen|(resico|simplificado de confianza).*( o | vs | contra | versus ).*(actividad empresarial|honorarios|servicios profesionales|regimen general|arrendamiento|sueldos)|(convien|convendr).*(resico|simplificado de confianza)|resico.*(me conviene|sale mejor)',
+        ['No hay una respuesta única: depende de tus ingresos y de tus gastos. En el RESICO pagas una tasa sobre todo lo cobrado, sin deducciones (%s); en actividad empresarial o servicios profesionales, la tarifa anual sobre tu utilidad (%s).'
+         % (liga('resico-pf-sin-deducciones'), liga('isr-utilidad-actividades')),
+         'En arrendamiento puedes deducir el <b>%s</b> de tus ingresos sin comprobantes (%s), y en plataformas la retención puede ser pago definitivo si tus ingresos del año anterior no pasaron de <b>%s</b> (%s).'
+         % (T('deduccion-ciega-arrendamiento'), liga('deduccion-ciega-arrendamiento'), P('plataformas-pago-definitivo'), liga('plataformas-pago-definitivo')),
+         'El <b>simulador</b> pone los regímenes lado a lado con tus números. Antes revisa los candados del RESICO: %s' % html.escape(D('resico-pf-exclusiones')['nota'])],
+        ['resico-pf-sin-deducciones', 'isr-utilidad-actividades', 'deduccion-ciega-arrendamiento', 'plataformas-pago-definitivo', 'resico-pf-exclusiones', 'resico-pf-tope-2026', 'resico-pf-tope-2027'],
+        ['¿Cuál es el tope del RESICO en 2027?', '¿Me conviene el IVA del 7 % o el del 16 %?'],
+        [_ci('resico-pf-tope-2026', P('resico-pf-tope-2026'), 'tope del RESICO de personas físicas en 2026'),
+         _ci('deduccion-ciega-arrendamiento', T('deduccion-ciega-arrendamiento'), 'deducción opcional sin comprobantes en arrendamiento'),
+         _ci('plataformas-pago-definitivo', P('plataformas-pago-definitivo'), 'ingresos del año anterior para el pago definitivo en plataformas')],
+        pendientes=['resico-plataformas', 'isr-tarifas-2027'], cita_de='resico-pf-exclusiones', sim='regimenes')
+    t['sim_blindaje'] = _tema(
+        'Tu lista de blindaje ante el SAT para 2027', 'fiscalizacion',
+        r'blindaje|blindar\w*|checklist.*(sat|fiscal)|simulador fiscal|simulador.*(2027|impuestos|del sat|resico)|como me preparo.*(sat|2027)|(que debo|que tengo que) tener (en orden|al dia|listo).*(sat|fiscal|2027)',
+        ['Ocho puntos para llegar en orden a 2027, cada uno con su artículo: buzón tributario, proveedores contra la lista 69-B, visitas por comprobantes, pagos mensuales del RESICO, el aviso del IVA opcional, el estímulo de regularización, depósitos en efectivo y la declaración anual.',
+         'Dos fechas para empezar: la multa del buzón tributario (de <b>%s</b> a <b>%s</b>) se aplica desde el <b>%s</b>, y la anual de 2026 de personas físicas vence el <b>%s</b>.'
+         % (P('multa-buzon-tributario', 'minima'), P('multa-buzon-tributario', 'maxima'), F('multa-buzon-desde'), F('calendario-anual-pf-2026', 'vence')),
+         'En el <b>simulador</b> marcas lo que ya resolviste; la lista vive solo en tu navegador y nunca guarda montos.'],
+        ['multa-buzon-tributario', 'multa-buzon-desde', 'lista-69b-receptor', 'visita-cfdi-falsos-plazo', 'resico-salida-por-omision', 'iva-opcional-resico-aviso', 'estimulo-regularizacion-100',
+         'depositos-efectivo-informe', 'calendario-anual-pf-2026'],
+        ['¿Cuáles son las fechas del calendario fiscal 2027?', '¿Qué cambia en los impuestos en 2027?'],
+        [_ci('multa-buzon-tributario', P('multa-buzon-tributario', 'maxima'), 'multa máxima por no habilitar el buzón tributario'),
+         _ci('multa-buzon-desde', F('multa-buzon-desde'), 'desde cuándo se aplica esa multa')],
+        pendientes=['buzon-excepcion-resico', 'visita-cfdi-falsos-pruebas'], cita_de='multa-buzon-tributario', sim='blindaje')
     return t
 
 
 # El orden en que el chat prueba los temas: de lo particular a lo general.
-ORDEN = ['iva7', 'resico_pm', 'resico_pf', 'intereses', 'estimulo', 'grandes', 'pendientes', 'nocambia', 'depositos', 'discrepancia', 'buzon', 'visita49', 'plazo69b', 'sellos',
+ORDEN = ['sim_iva', 'sim_anual', 'sim_reg', 'sim_blindaje', 'iva7', 'resico_pm', 'resico_pf', 'intereses', 'estimulo', 'grandes', 'pendientes', 'nocambia', 'depositos', 'discrepancia', 'buzon', 'visita49', 'plazo69b', 'sellos',
          'plataformas', 'arrendamiento', 'recargos', 'caducidad', 'defensa', 'aguinaldo', 'subsidio', 'deducciones', 'anual', 'calendario', 'reforma']
 
 
@@ -605,7 +661,7 @@ def pendientes():
         nuestra = d['quien'].startswith('Auditavisión')
         out.append({'id': PRE + i, 'tema': 'Ingresos', 'que': d['concepto'], 'porque': d['motivo'],
                     'responsable': 'Falta de la plataforma: el documento existe y aún no lo cotejamos' if nuestra else d['quien'], 'enlace': d['url'], 'enlace_txt': 'Dónde debe estar (%s)' % re.sub(r'^https://([^/]+)/.*$', r'\1', d['url']),
-                    'aparece': [(ARCHIVO + '#pendientes', TITULO), ('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor')]})
+                    'aparece': [(ARCHIVO + '#pendientes', TITULO), (SIMULADOR + '#blindaje', SIM_TITULO), ('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor')]})
     return out
 
 
@@ -665,9 +721,9 @@ def pagina():
         for i in ('sin-cambio-tarifas-isr', 'sin-cambio-iva-general', 'sin-cambio-plataformas'))
     topes = ['uma-2026', 'salario-minimo-general-2026', 'salario-minimo-zlfn-2026', 'subsidio-empleo-2026', 'subsidio-empleo-mensual-pesos', 'exencion-aguinaldo', 'exencion-prima-vacacional',
              'exencion-ptu', 'exencion-prima-dominical', 'tope-deducciones-personales', 'tope-aportaciones-retiro', 'tope-gastos-funerales', 'tope-donativos', 'tope-intereses-hipotecarios',
-             'colegiaturas', 'anual-asalariados-obligados']
+             'colegiaturas', 'colegiaturas-fuera-del-tope', 'anual-asalariados-obligados', 'isr-utilidad-actividades', 'resico-pf-sin-deducciones', 'resico-pf-exclusiones']
     reten = ['retencion-resico-pm', 'retencion-honorarios', 'retencion-arrendamiento', 'deduccion-ciega-arrendamiento', 'retencion-iva-dos-terceras', 'retencion-iva-autotransporte',
-             'retencion-plataformas-ley', 'retencion-plataformas-lif', 'retencion-plataformas-sin-rfc']
+             'retencion-plataformas-ley', 'retencion-plataformas-lif', 'retencion-plataformas-sin-rfc', 'plataformas-pago-definitivo']
     ops = ''.join('<li><b>%s:</b> %s. %s</li>' % (html.escape(D(i)['concepto']), html.escape(_e(D(i)['operacion'])), html.escape(D(i).get('nota') or '')) for i in topes if D(i).get('operacion'))
     fisc = ['depositos-efectivo-informe', 'depositos-sin-rfc', 'discrepancia-fiscal', 'buzon-tributario-que-es', 'multa-buzon-tributario', 'multa-buzon-desde', 'buzon-opcion-asalariados',
             'visita-cfdi-falsos-plazo', 'visita-cfdi-falsos-suspension', 'lista-69b-receptor', 'csd-restriccion-aclaracion', 'constancia-situacion-fiscal', 'opinion-cumplimiento-32d',
@@ -700,7 +756,7 @@ def pagina():
     secc = [
         {'id': 'cambios', 'salto': 'Qué cambia', 'titulo': 'Qué cambia: 2026 frente a 2027',
          'texto': 'El Decreto que reforma la LISR y la Ley de Ingresos de 2027 se publicaron en el DOF el mismo día. Todo lo de esta sección %s: hasta el 31 de diciembre de 2026 valen las cifras de 2026.' % RIGE,
-         'tarjetas': [], 'bloque': cambios + t_nuevos + '<details class="fis-notas"><summary>Las notas de cada cambio</summary><ul>%s</ul></details>' % notas_n +
+         'tarjetas': [], 'bloque': '<p><a class="apartado-boton" href="%s">Simular mi caso 2026–2027</a></p>' % SIMULADOR + cambios + t_nuevos + '<details class="fis-notas"><summary>Las notas de cada cambio</summary><ul>%s</ul></details>' % notas_n +
          '<p class="fis-op"><b>La cuenta del IVA opcional</b> %s: %s. %s</p>' % (chip('iva-opcional-resico-equilibrio'), html.escape(_e(op['operacion'])), html.escape(op['nota'])) +
          _tarifa('resico-pf-mensual-2026', False) + _tarifa('resico-pf-mensual-2027', False) + _tarifa('resico-pf-anual-2026', False) + _tarifa('resico-pf-anual-2027', False)},
         {'id': 'no-cambia', 'salto': 'Qué no cambia', 'titulo': 'Qué no cambia en 2027', 'texto': 'Tan importante como lo nuevo: lo que la reforma no tocó.',

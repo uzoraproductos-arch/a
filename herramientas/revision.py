@@ -118,6 +118,8 @@ def main():
     # Ronda 38 (28-11-2026): la base fiscal 2026-2027, cada cifra con su cita en el documento oficial.
     revisiones.append(('base fiscal 2026-2027', lambda: corre('fiscal_2027.py', '--prueba')))
     revisiones.append(('la base fiscal en las cuatro partes', lambda: corre('fiscal_temas.py', '--prueba')))
+    # Ronda 40 (28-11-2026): el simulador fiscal no escribe cifras y sus fórmulas dan lo mismo en Python y en el navegador.
+    revisiones.append(('simulador fiscal 2027', lambda: corre('fiscal_simulador.py', '--prueba')))
     if not a.rapida:
         revisiones.append(('preguntas del Auditor', lambda: corre('prueba_auditor.py')))
         revisiones.append(('la Enciclopedia en el Auditor', lambda: corre('cobertura_auditor.py')))

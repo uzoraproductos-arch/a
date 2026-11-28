@@ -112,6 +112,8 @@ RECURSOS = [
      'compara comparar comparacion contra versus duelo presidente sexenio administracion'),
     ('maquina', '💱', 'Usar la máquina del tiempo', 'La máquina del tiempo del peso', 'radar-peso-maquina.html', None, 'simulador',
      'peso pesos dolar dolares euro inflacion valen vale valia hoy antes poder adquisitivo'),
+    ('fiscal-sim', '🧮', 'Ver simulador', 'Simulador y Blindaje Fiscal 2027', 'fiscal-simulador-2027.html', None, 'simulador',
+     'resico iva opcional declaracion anual saldo favor regimen regimenes fiscal blindaje buzon tributario isr deducciones simulador'),
     ('simulador', '🧮', 'Ver simulador', 'Reparte el presupuesto', 'simulador-presupuesto.html', None, 'simulador',
      'presupuesto egresos reparte repartir gasto simulador escenario'),
     ('expide', '🧾', 'Ver estado de cuenta', 'Estado de cuenta administrativo', EXPIDE, None, 'tablero',
