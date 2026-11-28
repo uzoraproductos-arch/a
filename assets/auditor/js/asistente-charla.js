@@ -2055,6 +2055,18 @@
       return null;
     }
 
+    /* La base fiscal 2026-2027 (fiscal_temas.py, Ronda 39): la reforma de 2027, la anual, los topes y los mitos del SAT.
+       Cada tema llega armado desde docs/fiscal-2027/, con su cita y su chip: aquí no se escribe ninguna cifra. */
+    var FIS = D.fis || null;
+    function fisResp(t) {
+      if (!FIS || new RegExp(FIS.no).test(t)) return null;
+      for (var i = 0; i < FIS.orden.length; i++) {
+        var x = FIS.t[FIS.orden[i]];
+        if (new RegExp(x.rx).test(t)) return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug };
+      }
+      return null;
+    }
+
     /* El padrón del SAT, las donatarias y las asociaciones religiosas (padron_sat.py, 19-11-2026). */
     var PAD = D.pad || null;
     function padTema(k) { var x = PAD.t[k]; return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug }; }
@@ -2747,6 +2759,7 @@
       /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       social: function (q) { var r = socEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'soc' }); },
+      fiscal: function (q) { var r = fisResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'fis' }); },
       sda: function (q) { var r = sdaResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sda' }); },
       patrimonial: function (q) { var r = patrimonial(q); if (!r) return null; ultima = q; return fin(r, { tipo: 'patri' }); },
       vivienda: function (q) { var r = vivEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'viv' }); },

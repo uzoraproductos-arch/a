@@ -117,6 +117,7 @@ def main():
     revisiones.append(('rangos del Sistema de Alertas', lambda: corre('sistema_alertas.py', '--prueba')))
     # Ronda 38 (28-11-2026): la base fiscal 2026-2027, cada cifra con su cita en el documento oficial.
     revisiones.append(('base fiscal 2026-2027', lambda: corre('fiscal_2027.py', '--prueba')))
+    revisiones.append(('la base fiscal en las cuatro partes', lambda: corre('fiscal_temas.py', '--prueba')))
     if not a.rapida:
         revisiones.append(('preguntas del Auditor', lambda: corre('prueba_auditor.py')))
         revisiones.append(('la Enciclopedia en el Auditor', lambda: corre('cobertura_auditor.py')))

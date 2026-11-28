@@ -300,6 +300,18 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://dof.gob.mx/": {
+   "primera_vez": "2026-11-28",
+   "historial": [],
+   "usos": [],
+   "consultado": "2026-11-28",
+   "estado": "copiado",
+   "sha256": "cf9311e1111b3a8da7cd2ae3b1cbf129b800d42f105586527096302a53222b57",
+   "bytes": 77472,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-28"
+  },
   "https://dof.gob.mx/2023/SHCP/PEF_2024.html": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -444,19 +456,44 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
-  "https://dof.gob.mx/nota_detalle.php?codigo=5777219&fecha=28/12/2025": {
-   "primera_vez": "2026-10-27",
+  "https://dof.gob.mx/nota_detalle.php?codigo=5777217&fecha=28/12/2025": {
+   "primera_vez": "2026-11-28",
    "historial": [],
    "usos": [
-    "biblioteca:ref-rmf2026"
+    "cifra:fiscal-multa-buzon-2027",
+    "cotejo:fiscal-multa-buzon-2027:1",
+    "cotejo:fiscal-multa-buzon-2027:2",
+    "fuente:fiscal-multa-buzon-2027"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-11-28",
    "estado": "copiado",
-   "sha256": "1cef0094200a4311fe118e1d57b660d3a6352796b6c1071e969dbcd81a966fb7",
-   "bytes": 4469595,
+   "sha256": "319dda36a09f011328f0333fb865a1bbd5ef64df1779d362268e2f937c21aa21",
+   "bytes": 50860,
    "tipo": "text/html",
    "http": 200,
-   "copiado": "2026-10-27"
+   "copiado": "2026-11-28"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5777219&fecha=28/12/2025": {
+   "primera_vez": "2026-10-27",
+   "historial": [
+    {
+     "sha256": "1cef0094200a4311fe118e1d57b660d3a6352796b6c1071e969dbcd81a966fb7",
+     "bytes": 4469595,
+     "hasta": "2026-10-27"
+    }
+   ],
+   "usos": [
+    "biblioteca:ref-rmf2026",
+    "cifra:fiscal-depositos-15-mil",
+    "fuente:fiscal-depositos-15-mil"
+   ],
+   "consultado": "2026-11-28",
+   "estado": "copiado",
+   "sha256": "c0763e630cf02043537d3e70c947bc8884fa79400eaf4ed2631ceac0b5b495f5",
+   "bytes": 4468617,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-28"
   },
   "https://dof.gob.mx/nota_detalle.php?codigo=5777649&fecha=31/12/2025": {
    "primera_vez": "2026-10-27",
@@ -2660,15 +2697,19 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "biblioteca:ref-cff"
+    "biblioteca:ref-cff",
+    "cifra:fiscal-multa-buzon-2027",
+    "cotejo:fiscal-multa-buzon-2027:0",
+    "fuente:fiscal-estimulo-2027",
+    "fuente:fiscal-multa-buzon-2027"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-11-28",
    "estado": "copiado",
    "sha256": "be7427b20d3552775ab42018f8f87578078770095bf8cf46322c25e36ee3aa7d",
    "bytes": 3134465,
    "tipo": "application/pdf",
    "http": 200,
-   "copiado": "2026-10-27"
+   "copiado": "2026-11-28"
   },
   "https://www.diputados.gob.mx/LeyesBiblio/pdf/CNPP.pdf": {
    "primera_vez": "2026-10-27",
@@ -3019,33 +3060,63 @@
    "historial": [],
    "usos": [
     "biblioteca:ref-lif2026",
+    "cifra:fiscal-plataformas-2-5",
+    "fuente:fiscal-plataformas-2-5",
     "fuente:lif-2027-deuda-y-multas"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-11-28",
    "estado": "copiado",
    "sha256": "a305ca23bba43cddf2275067af29bb0ba35def7aedbbb0d3fc4557da9067a82c",
    "bytes": 756083,
    "tipo": "application/pdf",
    "http": 200,
-   "copiado": "2026-10-27"
+   "copiado": "2026-11-28"
   },
   "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf": {
    "primera_vez": "2026-11-18",
    "historial": [],
    "usos": [
     "auditoria:deuda-congreso-2027",
+    "cifra:fiscal-estimulo-2027",
+    "cifra:fiscal-plataformas-2-5",
     "cifra:senado-ley-de-ingresos-2027",
+    "cotejo:fiscal-estimulo-2027:0",
+    "cotejo:fiscal-estimulo-2027:1",
+    "cotejo:fiscal-estimulo-2027:2",
+    "cotejo:fiscal-plataformas-2-5:1",
     "cotejo:senado-ley-de-ingresos-2027:1",
     "cotejo:senado-ley-de-ingresos-2027:2",
-    "cotejo:senado-ley-de-ingresos-2027:3"
+    "cotejo:senado-ley-de-ingresos-2027:3",
+    "fuente:fiscal-estimulo-2027",
+    "fuente:fiscal-plataformas-2-5"
    ],
-   "consultado": "2026-11-18",
+   "consultado": "2026-11-28",
    "estado": "copiado",
    "sha256": "1c247831459988960cbb9ef86868c9174e1bce7532957e8156b359e214ac10db",
    "bytes": 763072,
    "tipo": "application/pdf",
    "http": 200,
-   "copiado": "2026-11-18"
+   "copiado": "2026-11-28"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf": {
+   "primera_vez": "2026-11-28",
+   "historial": [],
+   "usos": [
+    "cifra:fiscal-depositos-15-mil",
+    "cifra:fiscal-plataformas-2-5",
+    "cotejo:fiscal-depositos-15-mil:1",
+    "cotejo:fiscal-depositos-15-mil:3",
+    "cotejo:fiscal-plataformas-2-5:2",
+    "fuente:fiscal-depositos-15-mil",
+    "fuente:fiscal-plataformas-2-5"
+   ],
+   "consultado": "2026-11-28",
+   "estado": "copiado",
+   "sha256": "803c2875c09c751c1966b8eb4dca99f460b237da4ef67ee04b4fa325d8c2f786",
+   "bytes": 3021915,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-28"
   },
   "https://www.diputados.gob.mx/LeyesBiblio/pdf/LOAPF.pdf": {
    "primera_vez": "2026-10-27",

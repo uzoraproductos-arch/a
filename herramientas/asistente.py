@@ -573,6 +573,8 @@ def _charla(d):
             'san': informe_sancion.bot(__import__('asistente_servicios').enriquece(__import__('territorio_modulos').temas_bot(d))), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d), 'apu': __import__('administracion_publica').chat(d), 'soc': __import__('dimension_social').chat(d), 'viv': __import__('cc_predial').chat_shf(),
             # El padrón del SAT, las donatarias y las asociaciones religiosas (padron_sat.py, 19-11-2026).
             'pad': __import__('padron_sat').chat(d),
+            # La base fiscal 2026-2027 (fiscal_temas.py, Ronda 39): ninguna cifra se escribe aquí, todas salen de docs/fiscal-2027/.
+            'fis': __import__('fiscal_temas').chat(),
             # Los rangos del semáforo del Sistema de Alertas, con sus Acuerdos del DOF (sistema_alertas.py, Ronda 14).
             'sda': __import__('sistema_alertas').visual(), 'sdaR': __import__('sistema_alertas').chat(),
             # Nepotismo y cargos publicos (28-10-2026): la tabla de la calculadora.

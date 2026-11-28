@@ -3324,6 +3324,8 @@
     var ssa = charla && charla.sda && charla.sda(q); if (ssa) return ssa;
     var svi = charla && charla.vivienda && charla.vivienda(q); if (svi) return svi;
     var sap = charla && charla.administracion && charla.administracion(q); if (sap) return sap;
+    /* La base fiscal 2026-2027 (Ronda 39): la reforma, la anual, los topes y los mitos del SAT, antes que la columna o la aplicación del mismo tema. */
+    var sfi = charla && charla.fiscal && charla.fiscal(q); if (sfi) return sfi;
     var tc = tituloColumna(q);
     if (tc) return tc;
     var tm = temaColumna(q);

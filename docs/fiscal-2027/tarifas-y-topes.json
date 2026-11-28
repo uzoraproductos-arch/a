@@ -312,7 +312,7 @@
     {
      "fuente": "des16",
      "articulo": "Transitorio Tercero",
-     "cita": "u parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
+     "cita": "parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
     }
    ]
   },
@@ -336,7 +336,7 @@
     {
      "fuente": "des16",
      "articulo": "Transitorio Tercero",
-     "cita": "u parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
+     "cita": "parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
     }
    ]
   },
@@ -360,7 +360,7 @@
     {
      "fuente": "des16",
      "articulo": "Transitorio Tercero",
-     "cita": "u parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
+     "cita": "parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
     }
    ]
   },
@@ -384,7 +384,7 @@
     {
      "fuente": "des16",
      "articulo": "Transitorio Tercero",
-     "cita": "u parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
+     "cita": "parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
     }
    ]
   }
@@ -431,7 +431,7 @@
     {
      "fuente": "des16",
      "articulo": "Transitorio Tercero",
-     "cita": "u parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
+     "cita": "parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
     }
    ]
   },
@@ -455,7 +455,7 @@
     {
      "fuente": "des16",
      "articulo": "Transitorio Tercero",
-     "cita": "u parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
+     "cita": "parte, el valor inicial anual será el producto de multiplicar el valor inicial mensual por 12. Tercero.- A la fecha de entrada en vigor del presente Decreto, todas las menciones al salario mínimo como unidad de cuenta, índice, base, medida o referencia para determinar la cuantía de las"
     }
    ]
   },
@@ -732,7 +732,7 @@
     {
      "fuente": "LIF_2026",
      "articulo": "Art. 25",
-     "cita": "identes en el extranjero con o sin establecimiento permanente en el país, así como las entidades o figuras jurídicas extranjeras que proporcionen, de manera directa o indirecta, el uso de plataformas tecnológicas, aplicaciones informáticas y similares, en sustitución de la tasa de retención a que se refiere el artículo 113-A, párrafo tercero, fracción III, de la Ley del Impuesto sobre la Renta, aplicarán la tasa del 2.5 por ciento. Las personas morales que obtengan ingresos"
+     "cita": "en el extranjero con o sin establecimiento permanente en el país, así como las entidades o figuras jurídicas extranjeras que proporcionen, de manera directa o indirecta, el uso de plataformas tecnológicas, aplicaciones informáticas y similares, en sustitución de la tasa de retención a que se refiere el artículo 113-A, párrafo tercero, fracción III, de la Ley del Impuesto sobre la Renta, aplicarán la tasa del 2.5 por ciento. Las personas morales que obtengan ingresos"
     }
    ]
   },
@@ -765,6 +765,25 @@
      "fuente": "LISR",
      "articulo": "Art. 115",
      "cita": "Los contribuyentes que otorguen el uso o goce temporal de bienes inmuebles podrán optar por deducir el 35% de los ingresos a que se refiere este Capítulo, en substitución de las deducciones a que este artículo se refiere. Quienes ejercen esta opción podrán"
+    }
+   ]
+  }
+ ],
+ "declaracion_anual": [
+  {
+   "id": "anual-asalariados-obligados",
+   "concepto": "Asalariados: en qué casos presentan declaración anual",
+   "estado": "oficial",
+   "valor": {
+    "ingresos_mayores_a": 400000
+   },
+   "unidad": "pesos al año por sueldos y salarios",
+   "nota": "Además del monto, la ley lista otros cuatro casos: otros ingresos acumulables, haberlo comunicado por escrito al retenedor, dejar de prestar servicios antes del 31 de diciembre o tener dos o más empleadores a la vez, e ingresos del extranjero o de quien no está obligado a retener.",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 98, fracción III",
+     "cita": "III. Presentar declaración anual en los siguientes casos: a) Cuando además obtengan ingresos acumulables distintos de los señalados en este Capítulo. b) Cuando se hubiera comunicado por escrito al retenedor que se presentará declaración anual. c) Cuando dejen de prestar servicios antes del 31 de diciembre del año de que se trate o cuando se hubiesen prestado servicios a dos o más empleadores en forma simultánea. d) Cuando obtengan ingresos, por los conceptos a que se refiere este Capítulo, de fuente de riqueza ubicada en el extranjero o provenientes de personas no obligadas a efectuar las retenciones del artículo 96 de esta Ley. e) Cuando obtengan ingresos anuales por los conceptos a que se refiere este Capítulo que excedan de $400,000.00."
     }
    ]
   }

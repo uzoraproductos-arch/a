@@ -48,6 +48,7 @@ REGLAS = [
     (r'^contexto-dimensional-social\.html$', 'social'),
     (r'^aprende-fraude-en-numeros\.html$', 'penal'),
     (r'^(herramienta-inspector(-[a-z0-9-]+)?|expedientes|informes-[a-z0-9-]+|datos-administracion-publica(-[a-z0-9-]+)?|aprende-auditoria|numeros-herramientas-del-auditor)\.html$', 'administracion'),
+    (r'^fiscal-[a-z0-9-]+\.html$', 'financiera'),
     (r'^(numeros-[a-z0-9-]+|datos-[a-z0-9-]+|radar-[a-z0-9-]+|contexto-dimensional-[a-z0-9-]+|herramienta-calculadora(-[a-z0-9-]+)?|simulador-presupuesto)\.html$', 'financiera'),
 ]
 # Las del Auditor que empiezan como herramienta del Inspector, pero son del chat.

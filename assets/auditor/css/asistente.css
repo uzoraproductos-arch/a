@@ -763,3 +763,25 @@ html.pa-en-vista .pa-app-marco iframe { min-height: 420px; }
 }
 html[data-theme="dark"] .pd-tiempo, html[data-theme="dark"] .pd-cubre th, html[data-theme="dark"] .pd-cubre td { border-color: #2c3a52; }
 html[data-theme="dark"] .pd-cubre thead th { background: #1a2740; color: #cfe0ff; }
+
+/* La base fiscal 2026-2027 (fiscal_temas.py, Ronda 39): la cita textual, el aviso «rige desde» y los plegables. */
+.fis-cita { margin: 10px 0; padding: 10px 14px; border-left: 4px solid #9a7400; background: #fbf7ea; color: #1d2a44; border-radius: 0 8px 8px 0; overflow-wrap: anywhere; }
+.fis-rige { margin: 10px 0; padding: 10px 14px; border: 1px solid #c9a227; background: #fff8e1; color: #1d2a44; border-radius: 8px; }
+.fis-uni { color: #44526b; }
+.fis-tabla { width: 100%; max-width: 980px; }
+.fis-tabla td, .fis-tabla th { text-align: left; vertical-align: top; }
+.fis-tabla td:last-child { min-width: 200px; overflow-wrap: anywhere; }
+.fis-op { margin: 14px 0; }
+.fis-lista { padding-left: 20px; }
+.fis-lista li { margin: 8px 0; overflow-wrap: anywhere; }
+.fis-notas, .fis-precepto { margin: 10px 0; border: 1px solid #d5dbe6; border-radius: 8px; background: #fff; }
+.fis-notas > summary, .fis-precepto > summary { min-height: 44px; padding: 10px 14px; cursor: pointer; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.fis-notas > ul { padding: 0 14px 10px 34px; }
+.fis-notas li { margin: 6px 0; }
+.fis-precepto > blockquote { margin: 0 14px 10px; padding: 10px 14px; border-left: 4px solid #9a7400; background: #fbf7ea; overflow-wrap: anywhere; }
+.fis-precepto > p { margin: 0 14px 10px; }
+.fis-precepto .pa-chico, .fis-notas li, .apartado-seccion .fis-cita, .apartado-seccion .pa-chico { font-size: 16px; }
+html[data-theme="dark"] .fis-cita, html[data-theme="dark"] .fis-precepto > blockquote { background: #1a2740; color: #e6edf7; border-left-color: #c9a227; }
+html[data-theme="dark"] .fis-rige { background: #2a2410; color: #f3e9c6; border-color: #7a6520; }
+html[data-theme="dark"] .fis-notas, html[data-theme="dark"] .fis-precepto { background: #121c30; border-color: #2c3a52; }
+html[data-theme="dark"] .fis-uni { color: #a9b8d0; }

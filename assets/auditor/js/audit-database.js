@@ -8289,6 +8289,54 @@ window.AUDIT_DB = {
       "definicion": "El SAT tiene 5 años para revisarte y determinar contribuciones omitidas. Sube a 10 años si no te inscribiste en el RFC, si no llevas contabilidad o no la conservas el plazo de ley, o si no presentaste la declaración del ejercicio estando obligado. Por eso perder los papeles puede doblar el tiempo en que te pueden revisar.",
       "ley": "Art. 67 · Código Fiscal de la Federación (última reforma DOF 09-04-2026)",
       "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Buzón Tributario",
+      "definicion": "El sistema de comunicación electrónico, dentro del Portal del SAT, por el que la autoridad te notifica sus actos y resoluciones. Cuando recibes un aviso electrónico tienes tres días para consultarlo. Quien no lo habilita o no mantiene al día sus medios de contacto se expone a una multa de $3,850 a $11,540, que se aplica desde el 1 de enero de 2027. Los asalariados con ingresos menores a $400,000 en el año anterior pueden optar por no habilitarlo.",
+      "ley": "CFF, art. 17-K · CFF, art. 86-D · RMF 2026, transitorio Cuarto · RMF 2026, regla 2.2.22",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Constancia de Situación Fiscal",
+      "definicion": "El documento del SAT que acompaña a tu cédula de identificación fiscal, con la que la autoridad entrega la clave del RFC. Su formato oficial está en el Anexo 1 de la Resolución Miscelánea Fiscal y se genera en el Portal del SAT, con el trámite de la ficha ficha 22/CFF.",
+      "ley": "CFF, art. 27, apartado C, fracción VIII · RMF 2026, regla 2.4.9",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Opinión de Cumplimiento (32-D)",
+      "definicion": "El documento con el que el SAT dice si un contribuyente está al corriente de sus obligaciones fiscales. Lo piden para contratar con el gobierno: quien recibe y ejerce recursos públicos federales no puede contratar adquisiciones, arrendamientos, servicios u obra pública con quien, entre otros supuestos, tiene créditos fiscales firmes. Se obtiene con el procedimiento de la Resolución Miscelánea Fiscal.",
+      "ley": "CFF, art. 32-D · RMF 2026, regla 2.1.36",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Discrepancia Fiscal",
+      "definicion": "El procedimiento que el SAT puede abrirle a una persona física cuando comprueba que lo que gastó en un año es más que los ingresos que declaró o que debió declarar. Es un procedimiento, no un impuesto ni una multa automática. Los bancos informan al SAT de los depósitos en efectivo que en el mes pasan de $15,000 por institución; eso es un aviso, no un impuesto.",
+      "ley": "LISR, art. 91 · LISR, art. 55, fracción IV",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Deducción Ciega (Arrendamiento)",
+      "definicion": "La opción de quien renta un inmueble de deducir, sin comprobantes, el 35 % de sus ingresos por rentas, en sustitución de las demás deducciones del artículo. Cuando quien paga la renta es una persona moral, retiene el 10 % del pago como ISR.",
+      "ley": "LISR, art. 115 · LISR, art. 116",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "IVA Opcional del 7 % (RESICO)",
+      "definicion": "Una opción de la Ley de Ingresos de 2027 para quien tributa en el RESICO: pagar el IVA con una tasa de 7 % sobre lo efectivamente cobrado, como pago definitivo de cada mes, sin acreditar el IVA que le trasladaron y sin poder cambiar de opción en el año. Pide un aviso dentro de los 30 días siguientes al primer cobro del año. Es una opción de la Ley de Ingresos de 2027: vale ese ejercicio. Los pagos mensuales son definitivos. Por nuestra cuenta, para actividades a la tasa de 16 %, deja de convenir cuando el IVA acreditable pasa de 56.25 % del trasladado. Rige desde el 1 de enero de 2027; el formato del aviso sigue pendiente.",
+      "ley": "LIF 2027, art. 25, fracción XVIII · LIF 2027, art. 25, fracción XVIII · el punto de equilibrio es derivado: (16 − 7) ÷ 16 × 100: quien traslada 16 y paga 7 se queda con 9; el régimen general conviene más solo si su IVA acreditable pasa de 9 de cada 16 pesos trasladados",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Visita por CFDI Falsos (Art. 49 Bis)",
+      "definicion": "La visita domiciliaria que el SAT puede hacer cuando presume que los comprobantes fiscales que emite un contribuyente son falsos. Desde la entrega o la notificación de la orden se suspende la emisión de comprobantes del visitado, y el procedimiento dura como máximo 24 días hábiles. Es un procedimiento de revisión: no prueba por sí mismo que los comprobantes sean falsos. Quien no lo desvirtúa queda fuera del estímulo de regularización de 2027.",
+      "ley": "CFF, art. 49 Bis, fracción I · CFF, art. 49 Bis, fracción IX · LIF 2027, transitorio Vigésimo Primero",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Estímulo de Regularización 2027",
+      "definicion": "El estímulo de la Ley de Ingresos de 2027 que cubre el 100 % de las multas, recargos y gastos de ejecución de adeudos del ejercicio 2025 o anteriores, si se presentan las declaraciones y se paga en una sola exhibición a más tardar el 31 de diciembre de 2027. No perdona el impuesto. Es de 90 % cuando el crédito firme es solo de multas por obligaciones distintas de las de pago; quien tiene créditos firmes presenta su solicitud a más tardar el 31 de octubre de 2027. No aplica a quien no desvirtuó los procedimientos de los artículos 49 Bis, 69-B y 69-B Bis del CFF. Rige desde el 1 de enero de 2027.",
+      "ley": "LIF 2027, transitorio Vigésimo Primero · LIF 2027, transitorio Vigésimo Primero, fracción III",
+      "categoria": "💰 Hacendario & Deuda"
     }
   ],
   "legislativo": {

@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 834 |
+| Páginas revisadas | 835 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -173,6 +173,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `expediente-tren-toluca.html` | Expediente: Tren Interurbano México-Toluca «El Insurgente» · Auditavisión | apartados.py | 58 | 0 | 2 | 4 | 2 |
 | `expedientes-investigacion.html` | Expedientes de control interno · Auditavisión | apartados.py | 75 | 0 | 1 | 1 | 1 |
 | `expedientes.html` | Los casos por aclarar · Auditavisión | apartados.py | 45 | 0 | 1 | 1 | 1 |
+| `fiscal-reforma-2027.html` | Reforma fiscal 2026 → 2027 y calendario fiscal · Auditavisión | apartados.py | 43 | 0 | 83 | 21 | 14 |
 | `fuentes-del-auditor.html` | Fuentes del auditor · Auditavisión | apartados.py | 2 | 0 | 0 | 0 | 0 |
 | `fuentes-oficiales.html` | Referencias · Auditavisión | apartados.py | 48 | 0 | 1 | 1 | 1 |
 | `garantias-brujula.html` | La brújula: ¿a qué puerta toco? · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 1 |
@@ -256,7 +257,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `informes-oficiales.html` | Informes oficiales · Auditavisión | apartados.py | 45 | 0 | 1 | 1 | 1 |
 | `informes-semestral-asf.html` | Informe semestral de la ASF · Auditavisión | apartados.py | 55 | 0 | 33 | 7 | 5 |
 | `marco-legal-tres-niveles.html` | Las leyes del dinero en los tres niveles · Auditavisión | apartados.py | 45 | 0 | 1 | 1 | 3 |
-| `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 49 | 0 | 1 | 1 | 1 |
+| `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 51 | 0 | 31 | 4 | 1 |
 | `mis-respuestas.html` | Tus respuestas · Auditavisión | apartados.py | 41 | 0 | 1 | 1 | 1 |
 | `nepotismo-y-cargos-publicos.html` | Nepotismo y cargos públicos · Auditavisión | apartados.py | 2 | 0 | 0 | 0 | 0 |
 | `noticias-al-momento-agua-guadalajara-14500-federal.html` | El agua de Guadalajara: la Federación anuncia 14,500 millones «sin deuda», pero el dinero todavía no aparece en el Presupuesto 2027 · Auditavisión | apartados.py | 48 | 0 | 1 | 1 | 3 |
@@ -344,7 +345,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-trivia-presidentes.html` | El examen de los presidentes · Auditavisión | apartados.py | 41 | 0 | 1 | 1 | 1 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 48 | 0 | 1 | 1 | 1 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 2 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 240 | 0 | 1 | 1 | 127 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 268 | 0 | 1 | 1 | 142 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 41 | 0 | 12 | 6 | 1 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 54 | 0 | 2 | 1 | 1 |
 | `planisferio-ags-administracion.html` | Su administración pública · Auditavisión | apartados.py | 62 | 0 | 15 | 6 | 1 |
@@ -480,7 +481,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-dim-administracion.html` | Administración pública · todo lo de esta dimensión · Auditavisión | apartados.py | 76 | 0 | 1 | 1 | 1 |
 | `planisferio-dim-ambiental.html` | Ambiental · todo lo de esta dimensión · Auditavisión | apartados.py | 61 | 0 | 1 | 1 | 1 |
 | `planisferio-dim-deuda.html` | Deuda · todo lo de esta dimensión · Auditavisión | apartados.py | 41 | 0 | 1 | 1 | 1 |
-| `planisferio-dim-financiera.html` | Financiera · todo lo de esta dimensión · Auditavisión | apartados.py | 130 | 0 | 1 | 1 | 1 |
+| `planisferio-dim-financiera.html` | Financiera · todo lo de esta dimensión · Auditavisión | apartados.py | 131 | 0 | 1 | 1 | 1 |
 | `planisferio-dim-inversion.html` | Inversión · todo lo de esta dimensión · Auditavisión | apartados.py | 46 | 0 | 1 | 1 | 1 |
 | `planisferio-dim-judicial.html` | Judicial · todo lo de esta dimensión · Auditavisión | apartados.py | 84 | 0 | 1 | 1 | 1 |
 | `planisferio-dim-legislativa.html` | Legislativa · todo lo de esta dimensión · Auditavisión | apartados.py | 45 | 0 | 1 | 1 | 1 |
@@ -519,7 +520,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-ficha-estado-de-cuenta.html` | Contexto dimensional · Auditavisión | apartados.py | 52 | 0 | 1 | 1 | 1 |
 | `planisferio-ficha-fuentes-oficiales.html` | Referencias · Auditavisión | apartados.py | 49 | 0 | 1 | 1 | 1 |
 | `planisferio-ficha-glosario.html` | Diccionario · Auditavisión | apartados.py | 49 | 0 | 1 | 1 | 1 |
-| `planisferio-ficha-marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 50 | 0 | 1 | 1 | 1 |
+| `planisferio-ficha-marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 52 | 0 | 31 | 4 | 1 |
 | `planisferio-gro-administracion.html` | Su administración pública · Auditavisión | apartados.py | 62 | 0 | 15 | 6 | 1 |
 | `planisferio-gro-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 63 | 0 | 11 | 19 | 4 |
 | `planisferio-gro-deuda.html` | Su deuda · Auditavisión | apartados.py | 66 | 0 | 11 | 20 | 4 |
@@ -902,10 +903,10 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-125 fichas, cada una con su porqué, su responsable y su enlace oficial.
+140 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 
-Documentos en `docs/boveda/evidencias.json`: 331 copiado, 8 no abrió, 8 sin copia, 1 sustituida.
+Documentos en `docs/boveda/evidencias.json`: 334 copiado, 8 no abrió, 8 sin copia, 1 sustituida.
 
 Todos los cotejos «consta» y «matiz» tienen su evidencia.

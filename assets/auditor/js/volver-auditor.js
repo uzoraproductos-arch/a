@@ -48,6 +48,7 @@
     [/^contexto-dimensional-social\.html$/, 'social'],
     [/^aprende-fraude-en-numeros\.html$/, 'penal'],
     [/^(herramienta-inspector(-[a-z0-9-]+)?|expedientes|informes-[a-z0-9-]+|datos-administracion-publica(-[a-z0-9-]+)?|aprende-auditoria|numeros-herramientas-del-auditor)\.html$/, 'administracion'],
+    [/^fiscal-[a-z0-9-]+\.html$/, 'financiera'],
     [/^(numeros-[a-z0-9-]+|datos-[a-z0-9-]+|radar-[a-z0-9-]+|contexto-dimensional-[a-z0-9-]+|herramienta-calculadora(-[a-z0-9-]+)?|simulador-presupuesto)\.html$/, 'financiera']
   ];
   function traslado(f) {
