@@ -339,7 +339,8 @@
     if (!funcionBot || !window.fetch) return;
     try {
       fetch(funcionBot, { method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
-        body: JSON.stringify({ pregunta: String(q).slice(0, 600), motivo: motivo === 'noera' ? 'noera' : 'sin', ficha: tit || null, version: selloSitio(),
+        /* Ronda 41: una pregunta que pide una cuenta fiscal sale sin sus montos ni datos personales (FiscalCalc.anonimiza). */
+        body: JSON.stringify({ pregunta: String(window.FiscalCalc && window.FiscalCalc.intencion(q) ? window.FiscalCalc.anonimiza(q) : q).slice(0, 600), motivo: motivo === 'noera' ? 'noera' : 'sin', ficha: tit || null, version: selloSitio(),
           modo: MODO_ICO[modoVivo()] ? modoVivo() : null, modo_toca: modoSugerido(q, true) })
       }).catch(function () {});
     } catch (e) {}
@@ -352,6 +353,47 @@
      nombre que la plataforma no tiene, «Buscar ahora» (buscar-web) trae solo
      enlaces de sitios oficiales y de la lista de prensa, sin verificar. */
   var funcionBase = funcionBot ? funcionBot.replace(/\/pregunta-bot$/, '') : '';
+  /* El buzón de aprendizaje (Ola 4, Ronda 41). Es voluntario: el botón enseña primero lo único que saldría del navegador, ya
+     sin RFC, CURP, correos, teléfonos ni montos (FiscalCalc.anonimiza), y solo se envía con «Enviar al buzón» (función
+     aprendizaje). No lleva nombre ni correo. La administración lo lee en su panel, hoja «Aprendizaje». */
+  var ICO_BUZON = '<svg class="pa-aprende-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>';
+  function aprendeBoton(q, sin) {
+    if (!funcionBase || !window.FiscalCalc) return '';
+    return '<button type="button" class="pa-aprende' + (sin ? ' pa-aprende-sin' : '') + '" data-pa-q="' + esc(q) + '"' + (sin ? ' data-pa-sin="1"' : '') + '>' + ICO_BUZON +
+      '<span>¿No resolvió tu duda? Envíala para investigar</span></button>';
+  }
+  function aprendeAbre(b) {
+    var ancla = b.closest('.pa-acc') || b, sig = ancla.nextElementSibling;
+    if (sig && sig.classList.contains('pa-aprende-caja')) { sig.parentNode.removeChild(sig); return; }
+    var anon = window.FiscalCalc.anonimiza(b.getAttribute('data-pa-q') || '').slice(0, 400);
+    var c = document.createElement('div');
+    c.className = 'pa-aprende-caja';
+    c.setAttribute('data-pa-anon', anon);
+    if (b.getAttribute('data-pa-sin')) c.setAttribute('data-pa-sin', '1');
+    c.innerHTML = '<p><b>Esto es lo único que se enviaría</b>, sin tu nombre ni tu correo. Tu navegador ya le quitó RFC, CURP, correos, teléfonos y montos:</p>' +
+      '<blockquote class="pa-aprende-tx">' + esc(anon) + '</blockquote>' +
+      '<p class="pa-chico">Revísalo: si todavía trae algo que te identifique, cancela. Enviarlo es voluntario y sirve para saber qué falta en la base y contestarlo mejor. ' +
+      'Lo explica el <a href="aviso-de-privacidad.html#buzon">aviso de privacidad</a>.</p>' +
+      '<p class="pa-acc"><button type="button" class="pa-boton pa-aprende-enviar">Enviar al buzón</button> <button type="button" class="pa-boton pa-aprende-cancelar">Cancelar</button></p>' +
+      '<p class="pa-chico pa-aprende-estado" role="status" aria-live="polite"></p>';
+    ancla.parentNode.insertBefore(c, ancla.nextSibling);
+  }
+  function aprendeEnvia(c) {
+    var est = c.querySelector('.pa-aprende-estado'), bs = c.querySelectorAll('button');
+    Array.prototype.forEach.call(bs, function (x) { x.disabled = true; });
+    var falla = function () {
+      est.textContent = 'No se pudo enviar en este momento. Tu pregunta no salió de tu navegador; inténtalo más tarde.';
+      Array.prototype.forEach.call(bs, function (x) { x.disabled = false; });
+    };
+    try {
+      fetch(funcionBase + '/aprendizaje', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pregunta: c.getAttribute('data-pa-anon'), modo: MODO_ICO[modoVivo()] ? modoVivo() : null, sin: !!c.getAttribute('data-pa-sin'), version: selloSitio() })
+      }).then(function (r) { return r.json(); }).then(function (j) {
+        if (!j || !j.ok) return falla();
+        c.innerHTML = '<p><b>Gracias.</b> ' + (j.anotada === false ? 'Ya recibimos varias dudas desde esta conexión; inténtalo más tarde.' : 'Tu duda quedó en el buzón de la administración, sin datos que te identifiquen. Si se integra a la base, el Auditor la contestará con su documento.') + '</p>';
+      }).catch(falla);
+    } catch (e) { falla(); }
+  }
   function idsIa(q) {
     return buscar(q).slice(0, 8).map(function (x) { return F.indexOf(x.f); }).filter(function (i) { return i >= 0 && i < N0; });
   }
@@ -500,7 +542,7 @@
     return '<p class="pa-acc">' +
       (ir ? '<a class="pa-boton pa-ver" href="' + esc(ir[0]) + '">📖 Saber más <span class="pa-ver-donde">· ' + esc(ir[1]) + '</span> ➔</a>' : '') +
       (r.ficha ? '<a class="pa-boton pa-genera" href="' + esc(enlaceDictamen(q, previas || []) + (r.abre ? '&abre=' + encodeURIComponent(r.abre) : '')) + '" target="_blank" rel="noopener">🧾 Generar ' + docNom() + '</a>' : '') +
-      '<button type="button" class="pa-boton pa-noera" data-pa-q="' + esc(q) + '" data-pa-tit="' + esc(r.ficha ? r.ficha.tit : '') + '">🤔 No era lo que buscaba</button></p>';
+      '<button type="button" class="pa-boton pa-noera" data-pa-q="' + esc(q) + '" data-pa-tit="' + esc(r.ficha ? r.ficha.tit : '') + '">🤔 No era lo que buscaba</button>' + aprendeBoton(q) + '</p>';
   }
 
   /* La pregunta de una imagen de la portada (23-10-2026): si coincide con la
@@ -3574,7 +3616,7 @@
       if (r.sin) {
         /* Ronda 27A: lo que el Auditor no supo contestar no gasta tokens. */
         if (!ya && window.AvTokens) window.AvTokens.devuelve(tk, tk + '|' + q);
-        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + pideExpHtml() + iaHtml(q) + (r.web ? webHtml(r.web) : fueraHtml(q));
+        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + (aprendeBoton(q, true) ? '<p class="pa-acc">' + aprendeBoton(q, true) + '</p>' : '') + pideExpHtml() + iaHtml(q) + (r.web ? webHtml(r.web) : fueraHtml(q));
         if (!ya) { anota(q, 'sin'); caso(q, r, previas, true); }
         return;
       }
@@ -3655,7 +3697,7 @@
     return '<p class="pa-acc">' +
       '<a class="pa-boton pa-ver" href="' + esc(enlaceResp(q, previas, r.abre)) + '">📄 Ver la respuesta completa ➔</a>' +
       (r.ficha ? '<a class="pa-boton pa-genera" href="' + esc(enlaceDictamen(q, previas || []) + (r.abre ? '&abre=' + encodeURIComponent(r.abre) : '')) + '" target="_blank" rel="noopener">🧾 Generar ' + docNom() + '</a>' : '') +
-      '<button type="button" class="pa-boton pa-noera" data-pa-q="' + esc(q) + '" data-pa-tit="' + esc(r.ficha ? r.ficha.tit : '') + '">🤔 No era lo que buscaba</button></p>';
+      '<button type="button" class="pa-boton pa-noera" data-pa-q="' + esc(q) + '" data-pa-tit="' + esc(r.ficha ? r.ficha.tit : '') + '">🤔 No era lo que buscaba</button>' + aprendeBoton(q) + '</p>';
   }
 
   /* La tarjeta de la aplicación del Modo Inspector que viene al caso: la que
@@ -3904,6 +3946,11 @@
       if (bu && !bu.querySelector('.pa-ia')) { bu.insertAdjacentHTML('beforeend', iaHtml(ne.getAttribute('data-pa-q'))); guarda(); }
       return;
     }
+    var ap = ev.target.closest ? ev.target.closest('.pa-aprende') : null;
+    if (ap) { aprendeAbre(ap); return; }
+    var apc = ev.target.closest ? ev.target.closest('.pa-aprende-caja') : null;
+    if (apc && ev.target.closest('.pa-aprende-enviar')) { aprendeEnvia(apc); return; }
+    if (apc && ev.target.closest('.pa-aprende-cancelar')) { apc.parentNode.removeChild(apc); return; }
     if (ev.target.id === 'paSinRespCopiar') {
       var bc = ev.target;
       (navigator.clipboard ? navigator.clipboard.writeText(textoLista(leeLista())) : Promise.reject()).then(function () {

@@ -378,6 +378,8 @@ HOJAS = [
     ('tablero', 'panel', 'Tablero de uso'),
     ('codigos', 'llave', 'Códigos'),
     ('solicitudes', 'campana', 'Solicitudes'),
+    # Ronda 41: el buzón de aprendizaje (las dudas que mandan los lectores, ya anonimizadas en su navegador).
+    ('aprendizaje', 'matraz', 'Aprendizaje'),
     ('bitacora', 'documento', 'Bitácora'),
     ('acceso', 'escudo', 'Mi acceso'),
     # Ronda 7 (22-11-2026): la antigua Enciclopedia, solo para la administración (traslado.py).
@@ -449,6 +451,32 @@ def _bitacora():
             '        <tbody></tbody></table></div>\n')
 
 
+# Ronda 41: los estados de una duda del buzón (los mismos de la tabla preguntas_aprendizaje; el panel los lee de este selector).
+ESTADOS_AP = [('nueva', 'Nueva'), ('en_revision', 'En revisión'), ('integrada', 'Integrada'), ('descartada', 'Descartada')]
+
+
+def _aprendizaje():
+    ops = ''.join('<option value="%s">%s</option>' % e for e in ESTADOS_AP)
+    return ('      <h3>Buzón de aprendizaje <span class="ac-chip ac-sin_usar" id="acApCuenta"></span></h3>\n'
+            '      <details class="ac-nota"><summary>Qué llega aquí y qué hacer con ello</summary>\n'
+            '      <p class="ac-ayuda">Las dudas que los lectores mandan desde el chat con «¿No resolvió tu duda? Envíala para investigar». '
+            'Es voluntario y llegan anonimizadas desde su navegador: sin RFC, CURP, correos ni teléfonos, y con cada monto cambiado por [MONTO]. No traen nombre ni correo, así que no se le contesta a nadie: '
+            'sirven para saber qué falta en la base.</p>\n'
+            '      <p class="ac-ayuda">El ciclo: una duda «Nueva» pasa a «En revisión» mientras se coteja contra su documento oficial; «Integrada» cuando el dato ya entró a la base con su cita, '
+            'y «Descartada» si no toca a la plataforma. Nada de aquí entra solo a la base: cada dato sigue pasando por su módulo, con su fuente. Cada cambio queda en la Bitácora, y lo descartado se borra a los 12 meses.</p></details>\n'
+            '      <div class="ac-orden">\n'
+            '        <label class="ac-busca">Estado <select class="ac-campo" id="acApEstado"><option value="">Todos</option>%s</select></label>\n'
+            '        <label class="ac-busca">Orden <select class="ac-campo" id="acApOrden"><option value="veces">Las más repetidas</option><option value="reciente">Las más recientes</option></select></label>\n'
+            '        <label class="ac-busca">Buscar <input class="ac-campo" id="acApBusca" type="search" placeholder="Una palabra de la duda o de la nota" autocomplete="off"></label>\n'
+            '        <button class="sz-btn ac-chico ac-claro" type="button" id="acApRecargar">Actualizar</button>\n'
+            '        <button class="sz-btn ac-chico ac-claro" type="button" id="acApCsv">Descargar CSV</button>\n'
+            '      </div>\n'
+            '      <p class="ac-estado" id="acApAviso" role="status" aria-live="polite"></p>\n'
+            '      <div class="ac-tabla-caja"><table class="ac-tabla" id="acAp">\n'
+            '        <thead><tr><th>Duda</th><th>Veces</th><th>Llegó</th><th>Estado</th><th>Nota de investigación</th><th></th></tr></thead>\n'
+            '        <tbody></tbody></table></div>\n') % ops
+
+
 def pagina_panel():
     import auditor_bento
     opciones = ''.join('<option value="%s"%s>%s</option>' % (v, ' selected' if v == '7 days' else '', t) for v, t in DURACIONES)
@@ -497,6 +525,9 @@ def pagina_panel():
               '    </section>\n'
               '    <section class="ac-hoja" id="ac-hoja-enciclopedia" role="tabpanel" aria-labelledby="ac-tab-enciclopedia" hidden>\n'
               + _enciclopedia() +
+              '    </section>\n'
+              '    <section class="ac-hoja" id="ac-hoja-aprendizaje" role="tabpanel" aria-labelledby="ac-tab-aprendizaje" hidden>\n'
+              + _aprendizaje() +
               '    </section>\n'
               '    <section class="ac-hoja" id="ac-hoja-bitacora" role="tabpanel" aria-labelledby="ac-tab-bitacora" hidden>\n'
               + _bitacora() +

@@ -574,7 +574,8 @@ def _charla(d):
             # El padrón del SAT, las donatarias y las asociaciones religiosas (padron_sat.py, 19-11-2026).
             'pad': __import__('padron_sat').chat(d),
             # La base fiscal 2026-2027 (fiscal_temas.py, Ronda 39): ninguna cifra se escribe aquí, todas salen de docs/fiscal-2027/.
-            'fis': __import__('fiscal_temas').chat(),
+            # Ronda 41: `calc` son los datos del simulador y el fundamento de cada cuenta que el chat hace al vuelo (fiscal_calculo.py).
+            'fis': dict(__import__('fiscal_temas').chat(), calc=__import__('fiscal_calculo').chat()),
             # Los rangos del semáforo del Sistema de Alertas, con sus Acuerdos del DOF (sistema_alertas.py, Ronda 14).
             'sda': __import__('sistema_alertas').visual(), 'sdaR': __import__('sistema_alertas').chat(),
             # Nepotismo y cargos publicos (28-10-2026): la tabla de la calculadora.

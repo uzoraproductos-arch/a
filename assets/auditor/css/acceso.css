@@ -373,6 +373,11 @@ main.apartado:has(.ac-cab) .apartado-cuerpo { padding-top: 16px; }
 .ac-enc a b { font-size: 18px; }
 .ac-enc a small { grid-column: 2; font-size: 16px; color: #33415c; }
 
+/* Ronda 41: el buzón de aprendizaje. */
+#acAp td:first-child { min-width: 240px; overflow-wrap: anywhere; }
+.ac-ap-estado { min-width: 150px; }
+.ac-ap-nota { width: 100%; min-width: 220px; min-height: 64px; resize: vertical; font: inherit; font-size: 16px; }
+
 @media (max-width: 760px) {
   main.apartado .ac-cab .apartado-titulo { font-size: 22px; }
   main.apartado .ac-cab .apartado-lema { display: none; }
@@ -398,4 +403,9 @@ main.apartado:has(.ac-cab) .apartado-cuerpo { padding-top: 16px; }
   #acBit td:nth-child(2):not([colspan])::before { content: "Quién"; }
   #acBit td:nth-child(4):not([colspan])::before { content: "Sobre"; }
   #acBit td:nth-child(5):not([colspan])::before { content: "Detalle"; }
+  #acAp td:nth-child(2):not([colspan])::before { content: "Veces"; }
+  #acAp td:nth-child(3):not([colspan])::before { content: "Llegó"; }
+  #acAp td:nth-child(4):not([colspan])::before { content: "Estado"; }
+  #acAp td:nth-child(5):not([colspan])::before { content: "Nota de investigación"; }
+  #acAp td .sz-btn { width: 100%; }
 }

@@ -24,6 +24,7 @@ probada. Falta solo lo que toca al autor: crear la cuenta y poner las llaves.
    Funciones de Supabase (llave de servicio, secreta)
    ├─ recibir-formulario ──▶ envios          (antispam + 5 envíos / 10 min)
    ├─ pregunta-bot ────────▶ preguntas_bot   («Lo que aún no sé»)
+   ├─ aprendizaje ─────────▶ preguntas_aprendizaje   (el buzón de aprendizaje, Ronda 41: dudas anonimizadas en el navegador)
    ├─ portales ────────────▶ portales_cache  (Banxico SIE; INEGI por verificar)
    ├─ auditor-ia ──────────▶ consultas_ia    (Claude, con cuatro candados)
    └─ buscar-web ──────────▶ busquedas_web   (internet: solo enlaces)
