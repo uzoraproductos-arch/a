@@ -2058,6 +2058,17 @@
     /* La base fiscal 2026-2027 (fiscal_temas.py, Ronda 39): la reforma de 2027, la anual, los topes y los mitos del SAT.
        Cada tema llega armado desde docs/fiscal-2027/, con su cita y su chip: aquí no se escribe ninguna cifra. */
     var FIS = D.fis || null;
+    /* Ronda 41: si la pregunta trae montos y pide una cuenta (RESICO, IVA de 7 o 16, la anual, qué régimen conviene), la hace
+       FiscalCalc con las fórmulas del simulador, aquí en el navegador. La respuesta va con `calc`: sin ficha y sin dictamen, para que
+       los montos no viajen en ningún enlace. Si falta un dato indispensable, contesta la regla y dice cuál falta. */
+    function fisCalc(q) {
+      var FC = window.FiscalCalc, c = FIS && FIS.calc && FC ? FC.responde(FIS.calc, q) : null;
+      if (!c) return null;
+      if (!c.falta) return c;
+      var x = FIS.t[c.tema];
+      return { html: '<div class="fc-cab"><p><b>Para hacerte la cuenta me falta un dato:</b> ' + esc(c.falta) + '. Escríbemelo en tu pregunta, o ponlo en el simulador. Mientras, esto dice la regla:</p></div>' + x.h,
+        fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug };
+    }
     function fisResp(t) {
       if (!FIS || new RegExp(FIS.no).test(t)) return null;
       for (var i = 0; i < FIS.orden.length; i++) {
@@ -2759,7 +2770,7 @@
       /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       social: function (q) { var r = socEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'soc' }); },
-      fiscal: function (q) { var r = fisResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'fis' }); },
+      fiscal: function (q) { var r = fisCalc(q) || fisResp(plano(q)); if (!r) return null; ultima = q; var f = fin(r, { tipo: 'fis' }); if (r.calc) f.calc = true; return f; },
       sda: function (q) { var r = sdaResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sda' }); },
       patrimonial: function (q) { var r = patrimonial(q); if (!r) return null; ultima = q; return fin(r, { tipo: 'patri' }); },
       vivienda: function (q) { var r = vivEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'viv' }); },

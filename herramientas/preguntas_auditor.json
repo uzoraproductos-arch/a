@@ -4008,6 +4008,76 @@
    "dice": [
     "Ocho puntos"
    ]
+  },
+  {
+   "q": "¿Cuánto pago de ISR si cobro $80,000 al mes en RESICO?",
+   "ir": "fiscal-simulador-2027.html#resico",
+   "dice": [
+    "Hice la cuenta con tus números",
+    "$1,200.00",
+    "no se envían",
+    "valen las cifras de 2026",
+    "De dónde sale cada tasa"
+   ]
+  },
+  {
+   "q": "¿Me conviene el 7 % si facturo $100,000 y gasto $30,000 con IVA?",
+   "ir": "fiscal-simulador-2027.html#resico",
+   "dice": [
+    "$7,000.00",
+    "$11,200.00",
+    "punto de equilibrio",
+    "valen las cifras de 2026",
+    "auditada"
+   ]
+  },
+  {
+   "q": "¿Cuánto me devuelve el SAT si gané $360,000, me retuvieron $55,000 y tuve $35,000 de gastos médicos?",
+   "ir": "fiscal-simulador-2027.html#anual",
+   "dice": [
+    "saldo a favor de $8,240.09",
+    "$46,759.91",
+    "tope global",
+    "No es tu declaración ni una asesoría fiscal"
+   ]
+  },
+  {
+   "q": "¿Cuánto me devuelve el SAT si gané $360,000 y tuve $35,000 de gastos médicos?",
+   "ir": "fiscal-simulador-2027.html#anual",
+   "dice": [
+    "Me falta un dato para decirte si te devuelven",
+    "el ISR que te retuvieron",
+    "$46,759.91"
+   ]
+  },
+  {
+   "q": "¿Qué régimen me conviene si gano 50 mil al mes y gasto 20 mil?",
+   "ir": "fiscal-simulador-2027.html#regimenes",
+   "dice": [
+    "$54,235.91",
+    "$6,600.00",
+    "RESICO en 2026",
+    "Es solo el ISR"
+   ]
+  },
+  {
+   "q": "¿Me pueden regresar IVA si estoy en RESICO?",
+   "ir": "fiscal-simulador-2027.html#resico",
+   "dice": [
+    "Sí, si pagas el IVA en el régimen general",
+    "solicitar su devolución",
+    "No, si eliges la opción",
+    "no tendrán derecho a efectuar acreditamiento",
+    "valen las cifras de 2026"
+   ]
+  },
+  {
+   "q": "¿Cuánto me devuelve el SAT si tuve $35,000 de gastos médicos?",
+   "ir": "fiscal-simulador-2027.html#anual",
+   "dice": [
+    "Para hacerte la cuenta me falta un dato",
+    "tope global"
+   ]
   }
  ]
 }

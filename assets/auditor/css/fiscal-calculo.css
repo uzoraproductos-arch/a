@@ -1,0 +1,24 @@
+/* El Auditor calcula al vuelo y el buzón de aprendizaje (Ola 4, Ronda 41).
+   Va en su propio archivo (LF) para no tocar asistente.css. */
+.fc-cab { margin: 0 0 .7rem; padding: .6rem .8rem; border-left: 4px solid #1f6f5b; background: rgba(31, 111, 91, .08); border-radius: 0 8px 8px 0; }
+.fc-cab p { margin: 0; }
+.fc-cab .fc-ver { margin-top: .5rem; }
+.fc-clave { margin: .2rem 0 .9rem; }
+.fc-ojo { padding: .55rem .8rem; border-left: 4px solid #b7791f; background: rgba(183, 121, 31, .1); border-radius: 0 8px 8px 0; }
+.fc-fund { margin-top: .8rem; padding-top: .6rem; border-top: 1px solid rgba(0, 0, 0, .12); }
+.pa-aprende { display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; padding: .45rem .7rem; border: 1px dashed currentColor; border-radius: 999px;
+  background: transparent; color: inherit; font: inherit; opacity: .82; cursor: pointer; text-align: left; }
+.pa-aprende:hover, .pa-aprende:focus-visible { opacity: 1; background: rgba(31, 111, 91, .08); }
+.pa-aprende-ico { flex: 0 0 auto; }
+.pa-aprende-sin { opacity: 1; border-style: solid; border-color: #1f6f5b; background: rgba(31, 111, 91, .1); font-weight: 600; }
+.pa-aprende-caja { margin: .7rem 0; padding: .8rem .9rem; border: 1px solid rgba(31, 111, 91, .45); border-radius: 12px; background: rgba(31, 111, 91, .06); }
+.pa-aprende-caja p { margin: 0 0 .55rem; }
+.pa-aprende-tx { margin: 0 0 .6rem; padding: .6rem .8rem; border-left: 4px solid #1f6f5b; background: rgba(255, 255, 255, .7); border-radius: 0 8px 8px 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow-wrap: anywhere; }
+.pa-aprende-estado:empty { display: none; }
+:root[data-theme="dark"] .fc-fund, [data-tema="oscuro"] .fc-fund { border-top-color: rgba(255, 255, 255, .18); }
+:root[data-theme="dark"] .pa-aprende-tx, [data-tema="oscuro"] .pa-aprende-tx { background: rgba(0, 0, 0, .28); }
+@media (max-width: 600px) {
+  .pa-aprende { width: 100%; border-radius: 12px; }
+  .pa-aprende-caja .pa-acc .pa-boton { width: 100%; }
+}

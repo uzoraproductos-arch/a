@@ -548,4 +548,53 @@ select pg_temp.igual(((public.atender_solicitud((select id from public.solicitud
 reset role;
 reset request.jwt.claim.sub;
 
+-- 20. El buzón de aprendizaje (20261128000001_aprendizaje.sql, Ronda 41).
+set role service_role;
+select pg_temp.igual(public.anotar_aprendizaje('¿Me conviene el RESICO si cobro [MONTO] al mes?', 'ciudadano', false, '20261128d')::int, 1, 'una duda nueva se guarda en el buzón');
+select pg_temp.igual(public.anotar_aprendizaje('¿me conviene el resico si  cobro [MONTO] al mes?', 'ciudadano', true, '20261128d')::int, 0, 'la misma duda no se duplica');
+select pg_temp.igual((select veces from public.preguntas_aprendizaje where pregunta_anonima like '%RESICO%'), 2, 'la duda repetida suma una vez');
+select pg_temp.igual((select sin_respuesta::int from public.preguntas_aprendizaje where pregunta_anonima like '%RESICO%'), 1, 'y recuerda que alguna vez quedó sin respuesta');
+select pg_temp.debe_fallar($$select public.anotar_aprendizaje('escríbeme a ana@ejemplo.mx')$$, 'una duda con un correo');
+select pg_temp.debe_fallar($$select public.anotar_aprendizaje('gané $360,000 en el año')$$, 'una duda con un monto');
+select pg_temp.debe_fallar($$select public.anotar_aprendizaje('mi RFC es XAXX010101000')$$, 'una duda con un RFC');
+select pg_temp.debe_fallar($$select public.anotar_aprendizaje('mi teléfono es 5512345678')$$, 'una duda con un teléfono');
+select pg_temp.debe_fallar($$select public.anotar_aprendizaje('¿y esto?', 'chismoso')$$, 'una duda con un modo que no existe');
+select pg_temp.debe_fallar($$select public.anotar_aprendizaje(repeat('a', 401))$$, 'una duda de más de 400 caracteres');
+insert into public.preguntas_aprendizaje (pregunta_anonima, estado, actualizada_en) values ('duda descartada hace más de un año', 'descartada', now() - interval '13 months');
+select public.anotar_aprendizaje('¿Cómo deduzco mis lentes?', 'ciudadano');
+select pg_temp.igual((select count(*) from public.preguntas_aprendizaje where pregunta_anonima like '%hace más de un año%'), 0, 'una duda descartada hace más de 12 meses se borra');
+reset role;
+set role anon;
+select pg_temp.debe_fallar($$select count(*) from public.preguntas_aprendizaje$$, 'que el público lea el buzón de aprendizaje');
+select pg_temp.debe_fallar($$insert into public.preguntas_aprendizaje (pregunta_anonima) values ('una duda directa')$$, 'que el público escriba directo en el buzón');
+select pg_temp.debe_fallar($$update public.preguntas_aprendizaje set estado = 'integrada'$$, 'que el público cambie el buzón');
+select pg_temp.debe_fallar($$delete from public.preguntas_aprendizaje$$, 'que el público borre el buzón');
+select pg_temp.debe_fallar($$select public.anotar_aprendizaje('una duda sin pasar por la función')$$, 'que el público llame a anotar_aprendizaje');
+select pg_temp.debe_fallar($$select * from public.aprendizaje_lista()$$, 'que el público liste el buzón');
+reset role;
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+select pg_temp.igual((select count(*) from public.preguntas_aprendizaje), 0, 'dudas del buzón que ve una cuenta común');
+select pg_temp.debe_fallar($$select * from public.aprendizaje_lista()$$, 'que una cuenta común liste el buzón');
+select pg_temp.debe_fallar($$select public.aprendizaje_marca(1, 'integrada', null)$$, 'que una cuenta común cambie el buzón');
+select pg_temp.debe_fallar($$delete from public.preguntas_aprendizaje$$, 'que una cuenta común borre el buzón');
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+set request.jwt.claims = '{"aal":"aal1"}';
+select pg_temp.debe_fallar($$select * from public.aprendizaje_lista()$$, 'que la administración con un solo factor liste el buzón');
+set request.jwt.claims = '{"aal":"aal2"}';
+select pg_temp.igual((select count(*) from public.aprendizaje_lista()), 2, 'dudas del buzón que ve la administración');
+select pg_temp.igual((select veces from public.aprendizaje_lista() limit 1), 2, 'la más repetida va primero');
+select id as ap from public.aprendizaje_lista() limit 1 \gset
+select pg_temp.igual((select count(*) from public.aprendizaje_marca(:ap, 'en_revision', '  Falta el dato del art. 113-E  ') where estado = 'en_revision' and nota_admin = 'Falta el dato del art. 113-E'), 1, 'la administración pasa una duda a revisión con su nota');
+select pg_temp.debe_fallar(format($$select public.aprendizaje_marca(%s, 'resuelta', null)$$, :ap), 'un estado que no existe');
+select pg_temp.debe_fallar($$select public.aprendizaje_marca(-1, 'integrada', null)$$, 'marcar una duda que no existe');
+select pg_temp.debe_fallar($$delete from public.preguntas_aprendizaje$$, 'que la administración borre el buzón a mano');
+select pg_temp.debe_fallar($$update public.preguntas_aprendizaje set pregunta_anonima = 'otra cosa'$$, 'que la administración reescriba una duda');
+select pg_temp.igual((select count(*) from public.bitacora_lista() where accion = 'aprendizaje: en_revision' and detalle ->> 'antes' = 'nueva'), 1, 'la bitácora anota el cambio de estado de una duda');
+reset role;
+reset request.jwt.claim.sub;
+set role service_role;
+select pg_temp.igual(public.anotar_aprendizaje('¿Me conviene el RESICO si cobro [MONTO] al mes?')::int, 1, 'una duda que ya está en revisión entra otra vez como nueva');
+reset role;
+
 \echo 'Todas las pruebas de permisos pasaron.'

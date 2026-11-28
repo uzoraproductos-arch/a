@@ -860,6 +860,21 @@
      "cita": "Los contribuyentes que otorguen el uso o goce temporal de bienes inmuebles podrán optar por deducir el 35% de los ingresos a que se refiere este Capítulo, en substitución de las deducciones a que este artículo se refiere. Quienes ejercen esta opción podrán"
     }
    ]
+  },
+  {
+   "id": "iva-saldo-a-favor",
+   "concepto": "IVA en el régimen general: el saldo a favor se acredita contra los meses siguientes o se pide en devolución, por el total",
+   "estado": "oficial",
+   "valor": {
+    "opciones": "acreditarlo o solicitar su devolución"
+   },
+   "citas": [
+    {
+     "fuente": "LIVA",
+     "articulo": "Art. 6o.",
+     "cita": "Cuando en la declaración de pago resulte saldo a favor, el contribuyente únicamente podrá acreditarlo contra el impuesto a su cargo que le corresponda en los meses siguientes hasta agotarlo o solicitar su devolución. Cuando se solicite la devolución deberá ser sobre el total del saldo a favor."
+    }
+   ]
   }
  ],
  "declaracion_anual": [

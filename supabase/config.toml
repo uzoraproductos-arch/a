@@ -16,3 +16,6 @@ verify_jwt = false
 
 [functions.pregunta-bot]
 verify_jwt = false
+
+[functions.aprendizaje]
+verify_jwt = false

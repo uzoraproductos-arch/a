@@ -1354,7 +1354,7 @@ def herramienta_asistente(bloque):
         'descripcion': ('Pregúntale al Auditor del gasto público en México: revisa a tu proveedor contra la lista 69-B del SAT sin '
                         'Contraseña del SAT (Cero CIEC), consulta el Semáforo Patrimonial Inmobiliario antes de comprar o rentar, '
                         'y genera un dictamen con sus documentos oficiales.'),
-        'estilos': ['asistente.css', 'auditor-bento.css'], 'scripts': ['auditor-bento.js', 'municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'municipios-fraude.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'insp-visual.js', 'asistente.js'],
+        'estilos': ['asistente.css', 'auditor-bento.css', 'fiscal-calculo.css'], 'scripts': ['auditor-bento.js', 'municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'municipios-fraude.js', 'asistente-base.js', 'verificador.js', 'fiscal-simulador.js', 'fiscal-calculo.js', 'asistente-charla.js', 'insp-visual.js', 'asistente.js'],
         # Ronda 23 (25-11-2026, decisión del autor): sin la franja «Volver al índice / La otra división» del Modo
         # Inspector; la barra lateral es la única navegación.
         'pie_extra': '',
@@ -1386,7 +1386,8 @@ def servicios_chat(bloque, resp=False):
     del Auditor; contesta en corto y la respuesta completa abre en su propia página."""
     import asistente
     # Ronda 25: con la población y el fraude, como el chat del Auditor y el dictamen, para que el panel diga lo mismo que el dictamen.
-    scripts = ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'municipios-fraude.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js']
+    # Ronda 41: el calculador fiscal del chat (FiscalSim y FiscalCalc), como en el Auditor; el dictamen no lo carga.
+    scripts = ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'municipios-fraude.js', 'asistente-base.js', 'verificador.js', 'fiscal-simulador.js', 'fiscal-calculo.js', 'asistente-charla.js', 'asistente.js']
     if resp:
         # Ronda 9: el expediente visual (miniatura del mapa y gráficas en SVG) solo en la respuesta completa y el panel.
         scripts = scripts[:-1] + ['insp-visual.js', 'asistente.js']
@@ -1397,7 +1398,7 @@ def servicios_chat(bloque, resp=False):
             'entrada': ('<b>Todo lo que la plataforma sabe de tu pregunta, en una página.</b> La cifra y sus documentos, el expediente, los mapas y las demás '
                         'partes de la plataforma, el servicio que toca y, al final, tu dictamen. Se arma de nuevo con la base cada vez que abres el enlace.'),
             'secciones': [{'id': 'respuesta', 'titulo': 'La respuesta completa', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
-            'estilos': ['asistente.css', 'servicios.css'], 'scripts': scripts,
+            'estilos': ['asistente.css', 'servicios.css', 'fiscal-calculo.css'], 'scripts': scripts,
         }
     return {
         'archivo': asistente.SV_CHAT, 'menu': 'El Inspector', 'menu_archivo': 'servicios.html',
@@ -1406,7 +1407,7 @@ def servicios_chat(bloque, resp=False):
         'entrada': ('<b>Cuéntale tu caso.</b> Te contesta en corto, con la cifra y su documento; la respuesta completa abre en su propia página '
                     'y cierra con tu dictamen. Es el mismo Auditor, con la misma base, en su modo más completo.'),
         'secciones': [{'id': 'chat', 'titulo': 'El Inspector de Servicios', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
-        'estilos': ['asistente.css', 'servicios.css'], 'scripts': scripts,
+        'estilos': ['asistente.css', 'servicios.css', 'fiscal-calculo.css'], 'scripts': scripts,
     }
 
 
@@ -1738,6 +1739,19 @@ AVISO = {
                     '<p>Si pulsas <b>«Buscar ahora»</b> con el nombre de una persona de la vida pública, ese nombre se manda a Anthropic '
                     'para buscarlo en sitios oficiales y de prensa. Los enlaces que encuentre quedan públicos, con su fecha (así cualquiera '
                     'puede ver qué se encontró), y se reusan un día para no repetir la búsqueda. De quien busca no se guarda nada.</p>')},
+        {'id': 'buzon', 'titulo': 'Las cuentas del Auditor y el buzón de aprendizaje', 'texto': 'Tus montos se quedan en tu navegador; mandar una duda es voluntario (28-11-2026).', 'tarjetas': [],
+         'bloque': ('<p><b>Las cuentas fiscales se hacen en tu navegador.</b> Cuando le escribes al Auditor una pregunta con montos («¿cuánto pago si cobro tanto al mes?»), '
+                    'la cuenta se hace en tu propia pantalla: <b>tus ingresos, tus gastos y tus montos no se envían a ningún servidor</b>. Por eso esa respuesta no ofrece dictamen, '
+                    'cuyo enlace llevaría tu pregunta en la dirección. Si esa pregunta se anota en «Lo que aún no sé» o la marcas con «No era lo que buscaba», sale ya sin montos ni datos personales. '
+                    'La plática sí queda, como siempre, en tu navegador, hasta que cierras la pestaña o la limpias.</p>\n'
+                    '<p><b>El buzón de aprendizaje es voluntario.</b> Bajo cada respuesta está el botón «¿No resolvió tu duda? Envíala para investigar». Nada sale si no lo pulsas y luego confirmas con «Enviar al buzón». '
+                    'Antes de enviar, tu navegador cambia lo que parezca un RFC, una CURP, un correo o un teléfono por su marca, y cada monto por <code>[MONTO]</code>, y te enseña el texto exacto que saldría. '
+                    '<b>Ese filtro es automático y no reconoce nombres de personas ni domicilios: revisa el texto y no los escribas.</b></p>\n'
+                    '<p><b>Qué se guarda</b> en nuestra base (Supabase): la pregunta ya anonimizada, el modo del chat, si había quedado sin respuesta, cuántas veces ha llegado esa misma duda y la versión del sitio. '
+                    '<b>No se guarda tu nombre, tu correo ni la huella de tu conexión junto a la pregunta</b>; una huella cifrada de la conexión (no tu dirección IP) se usa solo para limitar los envíos por hora. '
+                    'La función vuelve a pasar el filtro y la base rechaza lo que todavía traiga un correo o un monto. <b>Para qué:</b> para saber qué le falta a la base y cotejarlo contra su documento oficial. '
+                    '<b>Quién lo ve:</b> solo la administración, con sesión de dos factores. Como no sabemos quién la mandó, no se le contesta a nadie en lo individual. '
+                    '<b>Cuánto tiempo:</b> mientras sirva para mejorar la base; lo que la administración descarta se borra solo a los 12 meses.</p>')},
         {'id': 'uso', 'titulo': 'Cómo medimos el uso de la plataforma', 'texto': 'Para mejorarla, sin saber quién eres (18-11-2026).', 'tarjetas': [],
          'bloque': ('<p>Para saber qué temas interesan, qué páginas sirven y dónde falta información, la plataforma anota en nuestra base '
                     '(Supabase) <b>qué página abres, cuánto tiempo la tienes a la vista y qué liga o botón tocas</b> (la página a la que lleva o el '

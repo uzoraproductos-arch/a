@@ -596,6 +596,20 @@ def temas():
         [_ci('iva-opcional-resico-7', T('iva-opcional-resico-7'), 'IVA opcional para RESICO, definitivo'),
          _ci('iva-opcional-resico-equilibrio', T('iva-opcional-resico-equilibrio'), 'del IVA trasladado: el punto de equilibrio')],
         pendientes=['rmf-2027'], cita_de='iva-opcional-resico-sin-acreditamiento', rige=True, nota=html.escape(D('iva-opcional-resico-equilibrio')['nota']), sim='resico')
+    # Ronda 41: la duda de la devolución del IVA, con las dos citas (LIVA, art. 6o. y LIF 2027, art. 25, fr. XVIII).
+    t['iva_devolucion'] = _tema(
+        'IVA a favor en el RESICO: depende de cómo pagues el IVA', 'cambios',
+        r'(regres|devuelv|devolv|devolucion|reembols|recuper|saldo a favor|a mi favor).*\biva\b|\biva\b.*(regres|devuelv|devolv|devolucion|reembols|recuper|a favor)',
+        ['<b>Sí, si pagas el IVA en el régimen general</b>: cuando el IVA de tus gastos es mayor que el que trasladaste, tu declaración da saldo a favor, y la ley te deja acreditarlo contra los meses siguientes o pedir su devolución, por el total (%s) %s.'
+         % (liga('iva-saldo-a-favor'), chip('iva-saldo-a-favor')),
+         '<b>No, si eliges la opción de %s</b>: pagas ese porcentaje de lo cobrado como definitivo y no acreditas el IVA que te trasladaron (%s) %s. Sin acreditamiento, tus gastos no dan saldo a favor. Esa opción %s: hasta el 31 de diciembre de 2026 no existe, y valen las cifras de 2026.'
+         % (T('iva-opcional-resico-7'), liga('iva-opcional-resico-sin-acreditamiento'), chip('iva-opcional-resico-sin-acreditamiento'), RIGE),
+         'Estar en el RESICO no cambia esa regla: quien tributa ahí traslada el IVA en los términos de la Ley del IVA. Si le dices al Auditor cuánto cobras y cuánto gastas al mes, hace la cuenta de las dos formas.'],
+        ['iva-saldo-a-favor', 'iva-opcional-resico-sin-acreditamiento', 'iva-opcional-resico-7'],
+        ['¿Me conviene el IVA de 7 % o el de 16 %?', '¿Qué es el IVA opcional del 7 % para RESICO?'],
+        [_ci('iva-saldo-a-favor', 'Sí', 'en el régimen general: se acredita o se pide en devolución'),
+         _ci('iva-opcional-resico-sin-acreditamiento', 'No', 'con la opción de %s: sin acreditamiento' % T('iva-opcional-resico-7'))],
+        pendientes=['rmf-2027'], cita_de=['iva-saldo-a-favor', 'iva-opcional-resico-sin-acreditamiento'], sim='resico')
     t['sim_anual'] = _tema(
         'Simula tu declaración anual de 2026', 'tarifas',
         r'(simul|calcul|estim).*(declaracion anual|isr anual|mi anual|la anual|saldo a favor)|saldo a (favor|cargo)|cuanto (me (regresan|devuelven|devolveran)|(voy a )?pag(o|ar|aria)|me sale).*(declaracion anual|la anual|isr anual)|(calcul|cuanto es).*isr (anual|del ano)',
@@ -640,7 +654,7 @@ def temas():
 
 
 # El orden en que el chat prueba los temas: de lo particular a lo general.
-ORDEN = ['sim_iva', 'sim_anual', 'sim_reg', 'sim_blindaje', 'iva7', 'resico_pm', 'resico_pf', 'intereses', 'estimulo', 'grandes', 'pendientes', 'nocambia', 'depositos', 'discrepancia', 'buzon', 'visita49', 'plazo69b', 'sellos',
+ORDEN = ['iva_devolucion', 'sim_iva', 'sim_anual', 'sim_reg', 'sim_blindaje', 'iva7', 'resico_pm', 'resico_pf', 'intereses', 'estimulo', 'grandes', 'pendientes', 'nocambia', 'depositos', 'discrepancia', 'buzon', 'visita49', 'plazo69b', 'sellos',
          'plataformas', 'arrendamiento', 'recargos', 'caducidad', 'defensa', 'aguinaldo', 'subsidio', 'deducciones', 'anual', 'calendario', 'reforma']
 
 

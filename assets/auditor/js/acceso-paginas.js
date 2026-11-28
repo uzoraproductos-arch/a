@@ -610,7 +610,7 @@
       });
       try { sessionStorage.setItem('av-admin-hoja', id); } catch (e) {}
       if (location.hash.slice(1) !== id) history.replaceState(null, '', '#' + id);
-      if (s && !admin.hidden) { if (id === 'tablero' && !cargado.tablero) tablero(); if (id === 'bitacora' && !cargado.bitacora) bitacora(); }
+      if (s && !admin.hidden) { if (id === 'tablero' && !cargado.tablero) tablero(); if (id === 'bitacora' && !cargado.bitacora) bitacora(); if (id === 'aprendizaje' && !cargado.aprendizaje) aprendizaje(); }
     }
     raiz.querySelectorAll('[data-hoja]').forEach(function (b, i, todas) {
       b.addEventListener('click', function () { hoja(b.dataset.hoja); });
@@ -782,6 +782,58 @@
         $('acBit').querySelector('tbody').innerHTML = '<tr><td colspan="5">No se pudo leer la bitácora' + (e && e.message ? ': ' + esc(e.message) : '') + '.</td></tr>';
       });
     }
+    // ---------------------------------------------------------------------
+    // El buzón de aprendizaje (Ronda 41): las dudas que los lectores mandan desde el chat, ya anonimizadas en su
+    // navegador. Se lee al abrir la hoja (aprendizaje_lista) y cada cambio de estado o de nota va con aprendizaje_marca.
+    var aps = [], AP_ET = {};
+    [].forEach.call($('acApEstado').options, function (o) { if (o.value) AP_ET[o.value] = o.textContent; });
+    function pintaAp() {
+      var est = $('acApEstado').value, q = limpiaBusca($('acApBusca').value), orden = $('acApOrden').value;
+      var nuevas = aps.filter(function (x) { return x.estado === 'nueva'; }).length;
+      $('acApCuenta').textContent = nuevas ? nuevas + (nuevas === 1 ? ' nueva' : ' nuevas') : 'sin dudas nuevas';
+      var ver = aps.filter(function (x) {
+        if (est && x.estado !== est) return false;
+        return !q || limpiaBusca(x.pregunta_anonima + ' ' + (x.nota_admin || '')).indexOf(q) >= 0;
+      }).sort(function (a, b) {
+        return orden === 'reciente' ? Date.parse(b.actualizada_en) - Date.parse(a.actualizada_en) : (b.veces - a.veces) || (Date.parse(b.actualizada_en) - Date.parse(a.actualizada_en));
+      });
+      $('acAp').querySelector('tbody').innerHTML = ver.map(function (x) {
+        var ops = Object.keys(AP_ET).map(function (k) { return '<option value="' + k + '"' + (k === x.estado ? ' selected' : '') + '>' + esc(AP_ET[k]) + '</option>'; }).join('');
+        return '<tr><td>' + esc(x.pregunta_anonima) + (x.modo ? ' <span class="ac-chip">' + esc(MODO_N[x.modo] || x.modo) + '</span>' : '') +
+          (x.sin_respuesta ? ' <span class="ac-chip ac-sin_usar">quedó sin respuesta</span>' : '') + '</td>' +
+          '<td><b>' + num(x.veces) + '</b></td><td>' + esc(fecha(x.creada_en)) + (x.actualizada_en !== x.creada_en ? '<br><small>movida: ' + esc(fecha(x.actualizada_en)) + '</small>' : '') + '</td>' +
+          '<td><select class="ac-campo ac-ap-estado" data-ap-estado="' + x.id + '" aria-label="Estado de la duda">' + ops + '</select></td>' +
+          '<td><textarea class="ac-campo ac-ap-nota" data-ap-nota="' + x.id + '" rows="2" maxlength="600" aria-label="Nota de investigación" placeholder="Qué documento la contesta, qué falta…">' + esc(x.nota_admin || '') + '</textarea></td>' +
+          '<td><button class="sz-btn sz-btn-of ac-chico" type="button" data-ap-guardar="' + x.id + '">Guardar</button></td></tr>';
+      }).join('') || '<tr><td colspan="6">' + (aps.length ? 'Ninguna duda coincide con el filtro.' : 'Todavía no llega ninguna duda al buzón.') + '</td></tr>';
+    }
+    function aprendizaje() {
+      cargado.aprendizaje = true;
+      $('acApAviso').textContent = 'Leyendo el buzón…';
+      return rpc('aprendizaje_lista').then(function (j) { aps = j || []; $('acApAviso').textContent = ''; pintaAp(); }).catch(function (e) {
+        cargado.aprendizaje = false;
+        $('acApAviso').textContent = 'No se pudo leer el buzón' + (e && e.message ? ': ' + e.message : '') + '. Si la migración del buzón (20261128000001) todavía no llega a Supabase, se sube sola con el flujo «Sube la base de datos».';
+      });
+    }
+    ['acApEstado', 'acApOrden'].forEach(function (i) { $(i).addEventListener('change', pintaAp); });
+    $('acApBusca').addEventListener('input', pintaAp);
+    $('acApRecargar').addEventListener('click', aprendizaje);
+    $('acAp').addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-ap-guardar]'); if (!b) return;
+      var id = +b.dataset.apGuardar, est = $('acAp').querySelector('[data-ap-estado="' + id + '"]').value, nota = $('acAp').querySelector('[data-ap-nota="' + id + '"]').value;
+      b.disabled = true;
+      rpc('aprendizaje_marca', { p_id: id, p_estado: est, p_nota: nota || null }).then(function (f) {
+        aps = aps.map(function (x) { return x.id === id ? (Array.isArray(f) ? f[0] : f) || x : x; });
+        cargado.bitacora = false;
+        $('acApAviso').textContent = 'Guardado: la duda quedó como «' + (AP_ET[est] || est) + '».';
+        pintaAp();
+      }).catch(function (e2) { b.disabled = false; $('acApAviso').textContent = 'No se pudo guardar' + (e2 && e2.message ? ': ' + e2.message : '') + '.'; });
+    });
+    $('acApCsv').addEventListener('click', function () {
+      bajaCsv('aprendizaje-auditavision.csv', [['id', 'duda', 'modo', 'sin_respuesta', 'veces', 'estado', 'nota', 'llego', 'movida']].concat(aps.map(function (x) {
+        return [x.id, x.pregunta_anonima, x.modo || '', x.sin_respuesta ? 'sí' : 'no', x.veces, AP_ET[x.estado] || x.estado, x.nota_admin || '', x.creada_en, x.actualizada_en];
+      })));
+    });
     $('acBitQue').addEventListener('change', pintaBit);
     $('acBitBusca').addEventListener('input', pintaBit);
     $('acBitCsv').addEventListener('click', function () {

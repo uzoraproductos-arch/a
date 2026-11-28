@@ -69,6 +69,8 @@ jobs:
         run: |
           supabase functions deploy recibir-formulario --project-ref "$PROYECTO" --no-verify-jwt --yes
           supabase functions deploy pregunta-bot --project-ref "$PROYECTO" --no-verify-jwt --yes
+          # El buzón de aprendizaje (Ronda 41): la pregunta llega ya anonimizada del navegador.
+          supabase functions deploy aprendizaje --project-ref "$PROYECTO" --no-verify-jwt --yes
       # La IA del Auditor (02-11-2026): la llave ANTHROPIC_API_KEY vive solo en
       # los secretos de Supabase (la puso el autor); aquí solo se suben las
       # funciones. Sin la llave, contestan «pendiente» y el chat sigue igual.
