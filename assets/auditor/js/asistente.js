@@ -164,7 +164,14 @@
   function chip(c) {
     return '<span class="est-chip est-' + esc(c.e) + '"' + (c.p ? ' data-pend="' + esc(c.p) + '"' : '') + '>' + esc(c.e === 'derivado' ? 'auditada' : c.e) + '</span>';
   }
-  function selloSitio() { var b = document.querySelector('.apartado-pie-txt b'); return b ? b.textContent : ''; }
+  /* El sello de versión del sitio. Sale del pie de la página; donde el pie es otro (el Auditor, Ronda 23), del «?v=» con que
+     se cargó este mismo archivo: sin él, las funciones que leen la base publicada (auditor-ia) rechazan la consulta. */
+  function selloSitio() {
+    var b = document.querySelector('.apartado-pie-txt b'), t = b ? b.textContent.trim() : '';
+    if (/^\d{8}[a-z]{0,2}$/.test(t)) return t;
+    var s = document.querySelector('script[src*="asistente.js?v="]'), m = s ? /[?&]v=(\d{8}[a-z]{0,2})/.exec(s.getAttribute('src')) : null;
+    return m ? m[1] : t;
+  }
   function hoy() {
     var d = new Date();
     return d.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) + ', ' + d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
@@ -397,13 +404,41 @@
   function idsIa(q) {
     return buscar(q).slice(0, 8).map(function (x) { return F.indexOf(x.f); }).filter(function (i) { return i >= 0 && i < N0; });
   }
+  /* El Auditor IA como agente lector (Ola 4, entrega B, Ronda 42). Ya no hace falta que el buscador de la página
+     encuentre fichas: el modelo busca él mismo en las fichas publicadas y en la base fiscal (función auditor-ia, modo
+     agente), con tres rondas como tope, y la función tira la respuesta si trae una cifra que no salió de ahí. Sigue
+     siendo a pedido, con botón, para cuidar el gasto. De la pregunta salen antes el RFC, la CURP, el correo y el
+     teléfono (FiscalCalc.identidad); y si pedía una cuenta, también sus montos (FiscalCalc.anonimiza). */
+  var ICO_IA = '<svg class="pa-ia-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>';
+  var ICO_DOC = '<svg class="pa-ia-ico" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6"/><path d="M9 17h6"/></svg>';
+  function preguntaIa(q) {
+    var C = window.FiscalCalc;
+    return String(C ? (C.intencion(q) ? C.anonimiza(q) : C.identidad(q)) : q).slice(0, 600);
+  }
   function iaHtml(q) {
-    if (!funcionBase || !idsIa(q).length) return '';
-    return '<div class="pa-rec pa-ia"><p class="pa-mas-t">Pídeselo a la IA</p>' +
-      '<p class="pa-chico">Una inteligencia artificial puede redactarte una respuesta <b>solo con las fichas más cercanas de la plataforma</b>. ' +
-      'Cada cifra que escriba se coteja contra ellas; si escribe una que no está, la descartamos y no te mostramos nada.</p>' +
-      '<p><button type="button" class="pa-boton pa-ia-btn" data-pa-ia="' + esc(q) + '">📝 Redáctalo con las fichas</button></p>' +
+    if (!funcionBase || !window.fetch) return '';
+    return '<div class="pa-rec pa-ia"><p class="pa-mas-t">Búscalo con el Auditor IA</p>' +
+      '<p class="pa-chico">Una inteligencia artificial puede <b>buscar en las fichas y en la base fiscal de la plataforma</b> y redactarte una respuesta solo con lo que encuentre. ' +
+      'Cada cifra que escriba se coteja contra esos documentos; si escribe una que no está, la descartamos y no te mostramos nada. ' +
+      'Tu pregunta viaja a la IA sin RFC, CURP, correo ni teléfono: lo explica el <a href="aviso-de-privacidad.html#ia">aviso de privacidad</a>.</p>' +
+      '<p><button type="button" class="pa-boton pa-ia-btn" data-pa-ia="' + esc(q) + '">' + ICO_IA + '<span>Buscar y redactar con el Auditor IA</span></button></p>' +
       '<div class="pa-ia-sal" aria-live="polite"></div></div>';
+  }
+  /* Las fuentes que devolvió el agente: cada ficha con su página y cada dato fiscal con su estado y su documento. */
+  function iaFuentes(lista) {
+    return (lista || []).map(function (x) {
+      var ir = x.ir && x.ir[0] ? '<a class="pa-ia-ir" href="' + esc(x.ir[0]) + '">' + esc(x.ir[1] || 'Saber más') + '</a>' : '';
+      var est = x.estado ? chip({ e: x.estado === 'auditada' ? 'derivado' : x.estado, p: x.estado === 'pendiente' ? 'fiscal-' + x.dato : '' }) + ' ' : '';
+      var docs = (x.fu || []).map(function (f) {
+        return /^https:\/\//.test(f.url || '') ? '<a href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(f.tx) + '</a>' : esc(f.tx);
+      }).join(' · ');
+      return '<li>' + est + '<b>' + esc(x.tit) + '</b>' + (docs ? '<span class="pa-ia-doc">' + ICO_DOC + '<span>' + docs + '</span></span>' : '') + ir + '</li>';
+    }).join('');
+  }
+  /* Si la IA tampoco lo resolvió, el buzón de aprendizaje queda a un toque (una sola vez por respuesta). */
+  function iaBuzon(sal, q) {
+    var bu = sal.closest('.pa-burbuja'), b = aprendeBoton(q, true);
+    return b && !(bu && bu.querySelector('.pa-aprende-sin')) ? '<p class="pa-acc">' + b + '</p>' : '';
   }
   function parrafos(t) {
     return String(t).split(/\n\s*\n/).map(function (x) { return x.trim(); }).filter(Boolean)
@@ -414,29 +449,28 @@
       .then(function (r) { return r.json().catch(function () { return { ok: false }; }); });
   }
   function pideIa(bt) {
-    var q = bt.getAttribute('data-pa-ia'), sal = bt.closest('.pa-ia').querySelector('.pa-ia-sal'), ids = idsIa(q);
-    if (!ids.length || !window.fetch) return;
+    var q = bt.getAttribute('data-pa-ia'), sal = bt.closest('.pa-ia').querySelector('.pa-ia-sal');
+    if (!window.fetch) return;
     bt.disabled = true;
-    sal.innerHTML = '<p class="pa-chico">Redactando con ' + ids.length + ' fichas de la plataforma…</p>';
-    postea('auditor-ia', { pregunta: q.slice(0, 600), fichas: ids, version: selloSitio() }).then(function (j) {
+    sal.innerHTML = '<p class="pa-chico pa-ia-espera">Buscando en las fichas y en la base fiscal de la plataforma… puede tardar hasta un minuto.</p>';
+    /* Las fichas más cercanas del buscador de la página van de adelanto (cuatro como mucho); la función las lee de lo publicado. */
+    postea('auditor-ia', { pregunta: preguntaIa(q), modo: 'agente', fichas: idsIa(q).slice(0, 4), version: selloSitio() }).then(function (j) {
       if (j && j.ok) {
-        var fu = (j.fuentes || []).map(function (x) {
-          var ir = x.ir && x.ir[0] ? ' · <a href="' + esc(x.ir[0]) + '">' + esc(x.ir[1] || 'Saber más') + '</a>' : '';
-          return '<li><b>' + esc(x.tit) + '</b>' + ir + '</li>';
-        }).join('');
+        var fu = iaFuentes(j.fuentes);
         sal.innerHTML = '<div class="pa-resp">' + parrafos(j.respuesta) + '</div>' +
           (fu ? '<p class="pa-mas-t">De dónde sale</p><ul class="pa-ia-fu">' + fu + '</ul>' : '') +
-          '<p class="pa-chico">📝 ' + esc(j.aviso || 'Redactado por inteligencia artificial solo con fichas de la plataforma.') + '</p>';
+          '<p class="pa-chico pa-ia-aviso">' + ICO_IA + '<span>' + esc(j.aviso || 'Redactado por inteligencia artificial solo con lo que encontró en la plataforma. Verifica en los documentos.') + '</span></p>' +
+          (j.sin_respuesta ? iaBuzon(sal, q) : '');
         bt.hidden = true;
       } else {
-        var m = j && j.rechazo === 'cifra_no_respaldada' ? 'La IA escribió una cifra que no está en las fichas, así que la descartamos. Prefiero no darte nada antes que un dato sin documento.'
+        var m = j && j.rechazo === 'cifra_no_respaldada' ? 'La IA escribió una cifra que no está en lo que encontró, así que la descartamos. Prefiero no darte nada antes que un dato sin documento.'
           : j && j.rechazo ? 'La IA no pudo darte una respuesta que cumpla nuestras reglas. Prueba con otras palabras.'
           : (j && j.error) || 'La IA no respondió ahora. El Auditor sigue contestando con su base.';
-        sal.innerHTML = '<p class="pa-chico">' + esc(m) + '</p>';
+        sal.innerHTML = '<p class="pa-chico">' + esc(m) + '</p>' + iaBuzon(sal, q);
         bt.disabled = false;
       }
       guarda();
-    }, function () { sal.innerHTML = '<p class="pa-chico">No hubo conexión con la IA. Intenta más tarde.</p>'; bt.disabled = false; });
+    }, function () { sal.innerHTML = '<p class="pa-chico">No hubo conexión con la IA. Intenta más tarde.</p>' + iaBuzon(sal, q); bt.disabled = false; });
   }
   function webVivoHtml(nombre) {
     if (!funcionBase) return '';

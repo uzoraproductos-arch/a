@@ -26,7 +26,7 @@ probada. Falta solo lo que toca al autor: crear la cuenta y poner las llaves.
    ├─ pregunta-bot ────────▶ preguntas_bot   («Lo que aún no sé»)
    ├─ aprendizaje ─────────▶ preguntas_aprendizaje   (el buzón de aprendizaje, Ronda 41: dudas anonimizadas en el navegador)
    ├─ portales ────────────▶ portales_cache  (Banxico SIE; INEGI por verificar)
-   ├─ auditor-ia ──────────▶ consultas_ia    (Claude, con cuatro candados)
+   ├─ auditor-ia ──────────▶ consultas_ia    (Claude, con cuatro candados; desde la Ronda 42, agente lector con tres herramientas)
    └─ buscar-web ──────────▶ busquedas_web   (internet: solo enlaces)
 
    herramientas/boveda.py --subir (llave de servicio, desde la computadora del autor)
@@ -91,6 +91,34 @@ Modelo: `claude-opus-5-5` (se cambia con el secreto `MODELO_IA`), esfuerzo
 bajo, salida en JSON con esquema, y si el modelo se niega, la API reintenta
 con otro (`fallbacks: "default"`). Tope: 10 preguntas por minuto y 100 por
 día por persona.
+
+### El agente lector (Ronda 42, 28-11-2026)
+
+Si la página no manda fichas, o pide `modo: "agente"`, el modelo busca él mismo
+en lo publicado. Los cuatro candados no cambian; cambia quién busca.
+
+| Herramienta (solo lectura) | Qué lee | Qué devuelve |
+|---|---|---|
+| `buscar_fichas(consulta, limite)` | `assets/auditor/js/asistente-base.js` de la versión publicada | Hasta 6 fichas, con texto (recortado a 1,500 caracteres), cifras con estado y fuentes |
+| `consultar_dato_fiscal(consulta)` | `docs/fiscal-2027/` (tarifas y topes, reforma 2027, fiscalización y plazos, calendario) | Hasta 5 datos: valor, estado, vigencia y cita textual con su documento |
+| `consultar_pendientes(consulta)` | Los datos con estado `pendiente` de esos mismos archivos | Por qué falta, quién lo debe y dónde; nunca un valor. Sin consulta, la lista completa |
+
+- **La evidencia** es lo que devolvieron las herramientas, más las fichas que la
+  página adelantó (cuatro como mucho, leídas aquí de lo publicado). `sinDocumento()`
+  corre contra eso: una cifra fuera de ahí tira la respuesta (`cifra_no_respaldada`).
+  Una herramienta **nunca repite la consulta del modelo** en su resultado, y lo que
+  el modelo escribe nunca entra a la evidencia: así no puede meter una cifra propia.
+- **Tope de costo:** tres rondas de herramientas, tres llamadas por ronda; a la
+  cuarta vuelta va `tool_choice: none`. Pasados 75 segundos ya no abre otra ronda.
+  Además del tope general, el agente tiene el suyo: 4 consultas por minuto y 40 por día.
+- **Cero CIEC:** la pregunta llega al modelo sin correo, CURP, RFC ni teléfono
+  (`sinIdentidad()`), y en `consultas_ia` se guarda además sin montos (`anonimo()`),
+  con `agente`, `herramientas` (solo sus nombres), `datos` y `rondas`
+  (migración `20261128000002_agente_lector.sql`).
+- **Si `docs/fiscal-2027/` no se puede leer**, la herramienta fiscal lo dice y el
+  agente sigue con las fichas; no afirma nada fiscal de memoria.
+- La lógica vive en `_comun/agente.ts`, sin red: `deno test --allow-read supabase/pruebas/`
+  y `python3 herramientas/prueba_agente.py` (con Node, en `revision.py`) corren los mismos casos.
 
 ## La búsqueda en internet (`buscar-web`, 24-10-2026)
 

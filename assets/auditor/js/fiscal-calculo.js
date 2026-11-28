@@ -50,6 +50,13 @@
     ['(^|[^A-Za-z\\d])[A-Za-zÑñ&]{3,4}-?\\d{6}-?[A-Za-z\\d]{3}(?![A-Za-z\\d])', '$1[RFC]'],
     ['(^|[^\\d$,.])(?:\\+?\\d{1,3}[ .-]?)?\\(?\\d{2,3}\\)?[ .-]?\\d{3,4}[ .-]?\\d{4}(?!\\d|[,.]\\d)', '$1[TELEFONO]']
   ];
+  /* Para el Auditor IA (Ronda 42): la pregunta sin RFC, CURP, correo ni teléfono, pero con sus cifras, que una
+     pregunta libre necesita para entenderse. Una pregunta que pide una cuenta no pasa por aquí: sale con anonimiza(). */
+  function identidad(q) {
+    var s = String(q == null ? '' : q).normalize('NFC').replace(rx('\\s+', 'g'), ' ').trim();
+    DATOS.forEach(function (d) { s = s.replace(rx(d[0], 'g'), d[1]); });
+    return s;
+  }
   /* Lo que sale del navegador: sin RFC, CURP, correo ni teléfono, y con cada monto cambiado por [MONTO]. */
   function anonimiza(q) {
     var s = String(q == null ? '' : q).normalize('NFC').replace(rx('\\s+', 'g'), ' ').trim();
@@ -277,7 +284,7 @@
     return r;
   }
 
-  var API = { plano: plano, montos: montos, anonimiza: anonimiza, lee: lee, intencion: function (q) { return intencion(lee(q)); }, responde: responde };
+  var API = { plano: plano, montos: montos, anonimiza: anonimiza, identidad: identidad, lee: lee, intencion: function (q) { return intencion(lee(q)); }, responde: responde };
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
   raiz.FiscalCalc = API;
 })(typeof window !== 'undefined' ? window : globalThis);

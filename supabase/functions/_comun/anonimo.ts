@@ -19,6 +19,21 @@ const REGLAS: [RegExp, string][] = [
   [/@/g, " "],
 ];
 
+/** Las reglas que quitan lo que identifica a una persona (correo, CURP, RFC y teléfono): las cuatro primeras. */
+const IDENTIDAD = 4;
+
+/**
+ * La pregunta sin correo, CURP, RFC ni teléfono, pero con sus cifras: es lo que
+ * auditor-ia le manda al modelo (Ronda 42). Los montos se quedan porque una
+ * pregunta libre los necesita para entenderse («¿el tope es de 3.5 millones?»);
+ * lo que se guarda en consultas_ia sí pasa por anonimo().
+ */
+export function sinIdentidad(t: string): string {
+  let s = t.replace(/\s+/g, " ").trim();
+  for (const [re, marca] of REGLAS.slice(0, IDENTIDAD)) s = s.replace(re, marca);
+  return s.replace(/\s+/g, " ").trim();
+}
+
 /** La pregunta, sin nada que identifique a una persona ni un monto exacto. */
 export function anonimo(t: string): string {
   let s = t.replace(/\s+/g, " ").trim();

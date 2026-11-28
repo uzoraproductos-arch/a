@@ -1730,12 +1730,17 @@ AVISO = {
                     'además de una huella cifrada de tu conexión (no tu dirección IP) para frenar el spam. <b>Para qué:</b> solo para mandarte tu código '
                     'y, si lo pides otra vez, saber que ya lo tenías. No lo usamos para publicidad ni lo compartimos. <b>Cuánto tiempo:</b> la solicitud '
                     'se borra sola 12 meses después de atendida. Para pedir que la borremos antes, responde al correo con el que te mandamos tu código.</p>')},
-        {'id': 'ia', 'titulo': 'Si le pides algo a la inteligencia artificial', 'texto': 'La IA del Auditor, a pedido (02-11-2026).', 'tarjetas': [],
-         'bloque': ('<p>El Auditor contesta con su base sin ninguna IA. Solo si pulsas <b>«Redáctalo con las fichas»</b>, tu pregunta y '
-                    'las fichas de la plataforma más cercanas se mandan a <b>Anthropic</b> (el modelo Claude, en Estados Unidos), que '
-                    'redacta la respuesta. Guardamos en nuestra base la pregunta, qué fichas se usaron, lo que contestó y una huella '
-                    'cifrada de tu conexión (no tu dirección IP), para auditar a la IA y frenar el abuso; <b>nada de tu nombre ni tu '
-                    'correo</b>. Se borra solo a los <b>12 meses</b>. Por eso, <b>no escribas datos personales en tu pregunta</b>.</p>\n'
+        {'id': 'ia', 'titulo': 'Si le pides algo a la inteligencia artificial', 'texto': 'La IA del Auditor, a pedido (02-11-2026; desde el 28-11-2026 busca ella misma en lo publicado).', 'tarjetas': [],
+         'bloque': ('<p>El Auditor contesta con su base sin ninguna IA. Solo si pulsas <b>«Buscar y redactar con el Auditor IA»</b> '
+                    '(antes, «Redáctalo con las fichas»), tu pregunta se manda a <b>Anthropic</b> (el modelo Claude, en Estados Unidos), que '
+                    'busca en las fichas y en la base fiscal ya publicadas de la plataforma y redacta la respuesta solo con lo que encuentra. '
+                    '<b>Antes de salir de tu navegador</b>, a tu pregunta se le quitan el RFC, la CURP, los correos y los teléfonos; y si pedía una '
+                    'cuenta con tus montos, también los montos. Nuestra base lo vuelve a hacer antes de llamar a la IA. Las cifras de una pregunta '
+                    'que no es una cuenta («¿es cierto que el tope es de…?») sí viajan, porque sin ellas no se entiende.</p>\n'
+                    '<p>Guardamos en nuestra base la pregunta <b>ya sin esos datos y sin montos</b>, qué fichas y qué datos fiscales leyó la IA, '
+                    'qué herramientas de búsqueda usó (solo su nombre), lo que contestó y una huella cifrada de tu conexión (no tu dirección IP), '
+                    'para auditar a la IA y frenar el abuso; <b>nada de tu nombre ni tu correo</b>. Se borra solo a los <b>12 meses</b>. '
+                    'El anonimizador no reconoce nombres de personas ni domicilios: por eso, <b>no escribas datos personales en tu pregunta</b>.</p>\n'
                     '<p>Si pulsas <b>«Buscar ahora»</b> con el nombre de una persona de la vida pública, ese nombre se manda a Anthropic '
                     'para buscarlo en sitios oficiales y de prensa. Los enlaces que encuentre quedan públicos, con su fecha (así cualquiera '
                     'puede ver qué se encontró), y se reusan un día para no repetir la búsqueda. De quien busca no se guarda nada.</p>')},
