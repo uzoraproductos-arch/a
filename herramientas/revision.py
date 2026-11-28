@@ -122,6 +122,8 @@ def main():
     revisiones.append(('simulador fiscal 2027', lambda: corre('fiscal_simulador.py', '--prueba')))
     # Ronda 41: el Auditor calcula al vuelo y el anonimizador del buzón (fiscal_calculo.py).
     revisiones.append(('calculador y anonimizador', lambda: corre('fiscal_calculo.py', '--prueba')))
+    # Ronda 42: el agente lector de auditor-ia (sus tres herramientas, el tope de rondas y el candado de cifras), sin red.
+    revisiones.append(('agente lector', lambda: corre('prueba_agente.py')))
     if not a.rapida:
         revisiones.append(('preguntas del Auditor', lambda: corre('prueba_auditor.py')))
         revisiones.append(('la Enciclopedia en el Auditor', lambda: corre('cobertura_auditor.py')))

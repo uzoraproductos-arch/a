@@ -98,6 +98,20 @@ jobs:
           echo "$r" | head -c 900; echo
           if echo "$r" | grep -q '"pendiente":true'; then echo "::warning::La IA no tiene su llave en Supabase (ANTHROPIC_API_KEY)"; exit 0; fi
           echo "$r" | grep -q '"ok":true' || { echo "::error::La IA no contestó la pregunta de prueba"; exit 1; }
+      # Ronda 42: el agente lector, con el modelo real. Si la función no responde en
+      # modo agente, se detiene; si el candado tiró la respuesta (una cifra sin
+      # documento), solo avisa: ese rechazo es el candado haciendo su trabajo.
+      - name: Prueba el agente lector con una pregunta real
+        if: steps.hay.outputs.si == 'si'
+        run: |
+          v=$(grep -o '?v=[0-9]\{8\}[a-z]\{0,2\}' index.html | head -1 | cut -c4-)
+          r=$(curl -s -m 150 -X POST "https://$PROYECTO.supabase.co/functions/v1/auditor-ia" \
+            -H 'Content-Type: application/json' -H 'Origin: https://auditavision.com.mx' \
+            -d "{\"pregunta\":\"¿Cuál es el tope de ingresos del RESICO de personas físicas en 2026 y qué cambia en 2027?\",\"modo\":\"agente\",\"fichas\":[],\"version\":\"$v\"}")
+          echo "$r" | head -c 1800; echo
+          if echo "$r" | grep -q '"pendiente":true'; then echo "::warning::La IA no tiene su llave en Supabase (ANTHROPIC_API_KEY)"; exit 0; fi
+          echo "$r" | grep -q '"agente":true' || { echo "::error::auditor-ia no respondió en modo agente"; exit 1; }
+          echo "$r" | grep -q '"ok":true' || echo "::warning::El agente lector respondió, pero su respuesta no pasó la revisión (ver arriba el rechazo)"
       # Banxico salió el 01-11-2026 por decisión del autor: ya no se usa su llave
       # y este flujo no la vuelve a poner en Supabase.
       - name: Sube la llave del INEGI

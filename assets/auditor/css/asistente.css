@@ -785,3 +785,18 @@ html[data-theme="dark"] .fis-cita, html[data-theme="dark"] .fis-precepto > block
 html[data-theme="dark"] .fis-rige { background: #2a2410; color: #f3e9c6; border-color: #7a6520; }
 html[data-theme="dark"] .fis-notas, html[data-theme="dark"] .fis-precepto { background: #121c30; border-color: #2c3a52; }
 html[data-theme="dark"] .fis-uni { color: #a9b8d0; }
+
+/* El Auditor IA como agente lector (Ronda 42): el botón, las fuentes que devolvió y su aviso. */
+.pa-ia-btn { display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; text-align: left; }
+.pa-ia-btn[hidden] { display: none; }
+.pa-ia-ico { flex: 0 0 auto; }
+.pa-burbuja ul.pa-ia-fu { list-style: none; margin: 0 0 .7rem; padding: 0; display: grid; gap: .5rem; }
+.pa-ia-fu li { padding: .6rem .75rem; border: 1px solid rgba(90, 103, 130, .3); border-radius: 12px; min-width: 0; overflow-wrap: anywhere; }
+.pa-ia-doc { display: flex; align-items: flex-start; gap: .4rem; margin-top: .3rem; font-size: 15px; line-height: 1.4; }
+.pa-ia-doc .pa-ia-ico { margin-top: .2rem; }
+.pa-burbuja a.pa-ia-ir { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+.pa-ia-aviso { display: flex; align-items: flex-start; gap: .45rem; }
+.pa-ia-aviso .pa-ia-ico { margin-top: .15rem; }
+@media (max-width: 480px) {
+  .pa-ia-btn { width: 100%; }
+}

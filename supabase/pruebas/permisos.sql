@@ -54,6 +54,13 @@ select pg_temp.debe_fallar($$insert into public.preguntas_bot (pregunta, motivo,
 select pg_temp.debe_fallar($$insert into public.envios (tipo, asunto, texto, correo) values ('tema','Hola','Texto suficiente aquí','x@y.mx')$$, 'un correo sin aceptar el aviso de privacidad');
 select pg_temp.debe_fallar($$insert into public.envios (tipo, asunto, texto, pagina) values ('tema','Hola','Texto suficiente aquí','https://otro.sitio/x')$$, 'una página que no es de la plataforma');
 select pg_temp.debe_fallar($$insert into public.consultas_ia (pregunta, fichas, version, verificada, rechazo) values ('x?', '{1}', '20261024r', true, 'formato')$$, 'una consulta verificada y rechazada a la vez');
+-- Ronda 42: el agente lector.
+insert into public.consultas_ia (pregunta, version, agente, herramientas, datos, rondas, verificada) values ('¿cuál es el tope del RESICO?', '20261128e', true, '{consultar_dato_fiscal,consultar_pendientes}', '{resico-pf-tope-2026}', 1, true);
+insert into public.consultas_ia (pregunta, fichas, version, agente, rondas) values ('¿y el Tren Maya?', '{1,2,3,4,5,6,7,8,9,10,11,12,13,14}', '20261128e', true, 3);
+select pg_temp.debe_fallar($$insert into public.consultas_ia (pregunta, version) values ('¿sin fichas y sin agente?', '20261128e')$$, 'una consulta sin fichas que no es del agente');
+select pg_temp.debe_fallar($$insert into public.consultas_ia (pregunta, fichas, version, herramientas) values ('¿herramientas sin agente?', '{1}', '20261128e', '{buscar_fichas}')$$, 'una consulta con herramientas que no es del agente');
+select pg_temp.debe_fallar($$insert into public.consultas_ia (pregunta, version, agente, herramientas) values ('¿otra herramienta?', '20261128e', true, '{navegar_internet}')$$, 'una herramienta que el agente no tiene');
+select pg_temp.debe_fallar($$insert into public.consultas_ia (pregunta, version, agente, rondas) values ('¿cuatro rondas?', '20261128e', true, 4)$$, 'un agente con más de tres rondas');
 insert into public.busquedas_web (clave, nombre, enlaces, vence) values ('fulana perez', 'Fulana Pérez', '[]', now() + interval '1 day');
 select pg_temp.debe_fallar($$insert into public.busquedas_web (clave, nombre, enlaces, vence) values ('<script>', 'Fulana Pérez', '[]', now())$$, 'una búsqueda con la clave mal escrita');
 select pg_temp.debe_fallar($$insert into public.busquedas_web (clave, nombre, enlaces, vence) values ('fulana perez', 'Fulana Pérez', '{"texto": "redactado"}', now())$$, 'una búsqueda que guarda texto en vez de enlaces');
