@@ -279,6 +279,23 @@
    ]
   },
   {
+   "id": "iva-opcional-resico-aviso",
+   "concepto": "IVA opcional para RESICO: aviso de opción dentro de los 30 días siguientes al primer cobro del año",
+   "estado": "oficial",
+   "valor": {
+    "dias": 30
+   },
+   "vigencia_desde": "2027-01-01",
+   "nota": "El aviso se presenta conforme a las reglas que emita el SAT: su formato sigue pendiente con la RMF 2027.",
+   "citas": [
+    {
+     "fuente": "LIF_2027",
+     "articulo": "Art. 25, fracción XVIII",
+     "cita": "deberán presentar un aviso de opción ante el Servicio de Administración Tributaria, dentro de los 30 días siguientes a aquél en el que la persona contribuyente perciba el primer cobro en el año por las actividades a que se refiere esta fracción, el cual se presentará de conformidad con las reglas de carácter general que para tal efecto emita dicho órgano administrativo desconcentrado."
+    }
+   ]
+  },
+  {
    "id": "iva-opcional-resico-equilibrio",
    "concepto": "IVA opcional para RESICO: a partir de qué proporción de IVA acreditable deja de convenir",
    "estado": "auditada",
@@ -653,7 +670,7 @@
     {
      "fuente": "LIF_2027",
      "articulo": "Art. 25",
-     "cita": "identes en el extranjero con o sin establecimiento permanente en el país, así como las entidades o figuras jurídicas extranjeras que proporcionen, de manera directa o indirecta, el uso de plataformas tecnológicas, aplicaciones informáticas y similares, en sustitución de la tasa de retención a que se refiere el artículo 113-A, párrafo tercero, fracción III, de la Ley del Impuesto sobre la Renta, aplicarán la tasa del 2.5 por ciento. Las personas morales que obtengan ingresos"
+     "cita": "en el extranjero con o sin establecimiento permanente en el país, así como las entidades o figuras jurídicas extranjeras que proporcionen, de manera directa o indirecta, el uso de plataformas tecnológicas, aplicaciones informáticas y similares, en sustitución de la tasa de retención a que se refiere el artículo 113-A, párrafo tercero, fracción III, de la Ley del Impuesto sobre la Renta, aplicarán la tasa del 2.5 por ciento. Las personas morales que obtengan ingresos"
     }
    ]
   }

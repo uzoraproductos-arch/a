@@ -3012,6 +3012,395 @@
   "actualizado": "28-10-2026"
  },
  {
+  "id": "fiscal-depositos-15-mil",
+  "seccion": "Verificado",
+  "icono": "🏦",
+  "titulo": "No existe un impuesto a los depósitos de $15,000 ni a las transferencias",
+  "balazo": "Lo que la ley manda es que el banco informe al SAT de los depósitos en efectivo que en el mes pasen de $15,000. No es un impuesto ni una retención, y la regla no habla de transferencias.",
+  "circula": {
+   "red": "Redes sociales y cadenas de mensajes",
+   "cuenta": "Lo que suele decirse (no es una publicación en particular)",
+   "fecha": "cotejado al 28 de noviembre de 2026",
+   "texto": "El SAT te va a cobrar impuesto por cada depósito o transferencia de más de $15,000."
+  },
+  "cuerpo": [
+   "La cifra es real, pero la regla es otra. La Ley del ISR obliga a las instituciones del sistema financiero a informar al SAT de los depósitos en efectivo cuando el acumulado del mes, en todas las cuentas que una persona tiene en una misma institución, pasa de $15,000.",
+   "La ley lo dice así: «… de los depósitos en efectivo que se realicen en las cuentas abiertas a nombre de los contribuyentes en las instituciones del sistema financiero, cuando el monto mensual acumulado por los depósitos en efectivo que se realicen en todas las cuentas de las que el contribuyente sea titular en una misma institución del sistema financiero exceda de $15,000.00, así como respecto de todas las adquisiciones en efectivo de cheques …» (LISR, art. 55, fracción IV).",
+   "Es un aviso del banco, no un cobro: nadie te descuenta nada por depositar. Y el artículo habla de depósitos en efectivo y de la compra en efectivo de cheques de caja; una transferencia electrónica no es un depósito en efectivo.",
+   "Lo que sí puede pasar: si en un año gastas más de lo que declaraste, el SAT puede abrir un procedimiento de discrepancia fiscal (LISR, art. 91). Y a quien no está inscrito en el RFC, los depósitos se le presumen ingresos cuando en un ejercicio pasan de $2,028,610 (RMF 2026, anexo 5, art. 59, fracción III del CFF).",
+   "Nota de método: es una verificación de servicio público sobre un mito frecuente, no sobre una publicación en particular. Las cifras se leen de la base fiscal de la plataforma, con corte al 28 de noviembre de 2026."
+  ],
+  "dato_curioso": "El umbral es por institución: el banco suma los depósitos en efectivo de todas tus cuentas con él, no los de otros bancos.",
+  "cifras": [
+   {
+    "valor": "$15,000",
+    "etq": "Depósitos en efectivo al mes, por institución: desde ahí el banco informa al SAT",
+    "estado": "oficial",
+    "fuente": "Ley del Impuesto sobre la Renta, Art. 55, fracción IV",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
+   },
+   {
+    "valor": "$2,028,610",
+    "etq": "Depósitos en un ejercicio de quien no está en el RFC: se presumen ingresos",
+    "estado": "oficial",
+    "fuente": "Anexos 4, 5, 6, 8, 15 y 25 de la Resolución Miscelánea Fiscal para 2026, Anexo 5, art. 59, fracción III del CFF",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5777219&fecha=28/12/2025"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "El SAT cobra un impuesto por los depósitos de más de $15,000.",
+    "res": "no consta",
+    "explica": "El artículo establece una obligación de informar para los bancos. No fija tasa, cuota ni retención alguna.",
+    "fuente": "Ley del Impuesto sobre la Renta, Art. 55, fracción IV",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
+   },
+   {
+    "dice": "Los bancos reportan al SAT los depósitos en efectivo de más de $15,000 al mes.",
+    "res": "consta",
+    "explica": "Es el acumulado mensual de depósitos en efectivo en todas las cuentas de una misma institución.",
+    "fuente": "Ley del Impuesto sobre la Renta, Art. 55, fracción IV",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
+   },
+   {
+    "dice": "También aplica a las transferencias entre cuentas.",
+    "res": "no consta",
+    "explica": "El artículo solo nombra los depósitos en efectivo y las adquisiciones en efectivo de cheques de caja.",
+    "fuente": "Ley del Impuesto sobre la Renta, Art. 55, fracción IV",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
+   },
+   {
+    "dice": "Si gastas más de lo que declaras, el SAT puede revisarte.",
+    "res": "consta",
+    "explica": "Es el procedimiento de discrepancia fiscal: un procedimiento, no un impuesto ni una multa automática.",
+    "fuente": "Ley del Impuesto sobre la Renta, Art. 91",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "La tabla de fiscalización, con cada plazo y su artículo",
+    "url": "fiscal-reforma-2027.html#fiscalizacion"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Ley del Impuesto sobre la Renta (última reforma DOF 01-04-2024 (no incluye el Decreto del 13-11-2026, que rige desde el 1 de enero de 2027))",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
+   },
+   {
+    "nombre": "Anexos 4, 5, 6, 8, 15 y 25 de la Resolución Miscelánea Fiscal para 2026 (DOF 28-12-2025)",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5777219&fecha=28/12/2025"
+   }
+  ],
+  "actualizado": "28 de noviembre de 2026"
+ },
+ {
+  "id": "fiscal-plataformas-2-5",
+  "seccion": "Verificado",
+  "icono": "📱",
+  "titulo": "La retención de 2.5 % en plataformas digitales no es nueva en 2027: ya estaba en la Ley de Ingresos de 2026",
+  "balazo": "La Ley del ISR dice 1 % para quien vende bienes o presta servicios por plataformas; la Ley de Ingresos sustituye esa tasa por 2.5 % desde 2026, y la de 2027 lo repite.",
+  "circula": {
+   "red": "Redes sociales y cadenas de mensajes",
+   "cuenta": "Lo que suele decirse (no es una publicación en particular)",
+   "fecha": "cotejado al 28 de noviembre de 2026",
+   "texto": "En 2027 el SAT va a empezar a cobrar un nuevo impuesto de 2.5 % a quienes venden por internet o por aplicaciones."
+  },
+  "cuerpo": [
+   "No es un impuesto nuevo y no empieza en 2027. Es una retención del ISR que hace la plataforma, y la tasa de 2.5 % para enajenación de bienes y prestación de servicios ya estaba en la Ley de Ingresos de 2026 (LIF 2026, art. 25).",
+   "La Ley de Ingresos de 2027 la repite. Lo dice así: «… en el extranjero con o sin establecimiento permanente en el país, así como las entidades o figuras jurídicas extranjeras que proporcionen, de manera directa o indirecta, el uso de plataformas tecnológicas, aplicaciones informáticas y similares, en sustitución de la tasa de retención a que se refiere el artículo 113-A, párrafo tercero, fracción III, de la Ley del Impuesto sobre la Renta, aplicarán la tasa del 2.5 por ciento. Las personas morales que obtengan ingresos …» (LIF 2027, art. 25).",
+   "La confusión viene de que la Ley del ISR, en su texto, sigue diciendo 1 % para esa actividad (LISR, art. 113-A): la Ley de Ingresos de cada año la sustituye. Las otras dos tasas de la Ley del ISR no cambian: 2.1 % en transporte de pasajeros y entrega de bienes, y 4 % en hospedaje.",
+   "Quien no le da su RFC a la plataforma sí paga más: la retención es de 20 % (LISR, art. 113-C, fracción IV).",
+   "Nota de método: es una verificación de servicio público sobre un mito frecuente, no sobre una publicación en particular. Corte: 28 de noviembre de 2026."
+  ],
+  "dato_curioso": "La Ley de Ingresos vale un año: por eso la tasa de 2.5 % tiene que repetirse en cada una para seguir aplicando.",
+  "cifras": [
+   {
+    "valor": "2.5 %",
+    "etq": "Retención en plataformas por enajenación y servicios, en 2026",
+    "estado": "oficial",
+    "fuente": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2026, Art. 25",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf"
+   },
+   {
+    "valor": "2.5 %",
+    "etq": "La misma retención en 2027",
+    "estado": "oficial",
+    "fuente": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027, Art. 25",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
+   },
+   {
+    "valor": "1 %",
+    "etq": "Lo que dice el texto de la Ley del ISR para esa actividad",
+    "estado": "oficial",
+    "fuente": "Ley del Impuesto sobre la Renta, Art. 113-A",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
+   },
+   {
+    "valor": "20 %",
+    "etq": "Retención a quien no da su RFC",
+    "estado": "oficial",
+    "fuente": "Ley del Impuesto sobre la Renta, Art. 113-C, fracción IV",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "La retención de 2.5 % en plataformas es nueva en 2027.",
+    "res": "no consta",
+    "explica": "Ya estaba en el artículo 25 de la Ley de Ingresos de 2026. La de 2027 la repite.",
+    "fuente": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2026, Art. 25",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf"
+   },
+   {
+    "dice": "En 2027 la retención por enajenación y servicios en plataformas es de 2.5 %.",
+    "res": "consta",
+    "explica": "La Ley de Ingresos de 2027 sustituye la tasa de la fracción III del artículo 113-A de la Ley del ISR.",
+    "fuente": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027, Art. 25",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
+   },
+   {
+    "dice": "Es un impuesto nuevo.",
+    "res": "matiz",
+    "explica": "Es una retención del ISR que ya existía: lo que la Ley de Ingresos cambia es su tasa para una de las tres actividades.",
+    "fuente": "Ley del Impuesto sobre la Renta, Art. 113-A",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "Todas las retenciones vigentes, con su artículo",
+    "url": "fiscal-reforma-2027.html#tarifas"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2026 (DOF 07-11-2025)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf"
+   },
+   {
+    "nombre": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027 (DOF 13-11-2026; rige del 1 de enero al 31 de diciembre de 2027)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
+   },
+   {
+    "nombre": "Ley del Impuesto sobre la Renta (última reforma DOF 01-04-2024 (no incluye el Decreto del 13-11-2026, que rige desde el 1 de enero de 2027))",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
+   }
+  ],
+  "actualizado": "28 de noviembre de 2026"
+ },
+ {
+  "id": "fiscal-estimulo-2027",
+  "seccion": "Verificado",
+  "icono": "🧾",
+  "titulo": "El estímulo del 100 % en 2027 perdona multas y recargos, no el impuesto",
+  "balazo": "La Ley de Ingresos de 2027 da un estímulo sobre multas, recargos y gastos de ejecución de adeudos de 2025 o anteriores. El impuesto se paga completo, y hay fechas y exclusiones.",
+  "circula": {
+   "red": "Redes sociales y cadenas de mensajes",
+   "cuenta": "Lo que suele decirse (no es una publicación en particular)",
+   "fecha": "cotejado al 28 de noviembre de 2026",
+   "texto": "En 2027 el SAT va a perdonar el 100 % de las deudas fiscales."
+  },
+  "cuerpo": [
+   "El 100 % es real, pero no es de la deuda completa. El estímulo es sobre lo accesorio: multas, recargos y gastos de ejecución. La contribución que se dejó de pagar se cubre entera.",
+   "La ley lo dice así: «El estímulo fiscal será del 100 por ciento de las multas, recargos y gastos de ejecución, a las personas contribuyentes que: I. Tengan a su cargo adeudos correspondientes al ejercicio fiscal 2025 o anteriores, siempre que presenten las declaraciones respectivas y realicen el pago de estos en una sola exhibición a más tardar el 31 de diciembre de 2027; II. Se encuentren sujetas a …» (LIF 2027, transitorio Vigésimo Primero).",
+   "Tiene condiciones: los adeudos deben ser del ejercicio 2025 o anteriores, hay que presentar las declaraciones y pagar en una sola exhibición a más tardar el 31 de diciembre de 2027. Quien tiene créditos fiscales firmes debe presentar su solicitud a más tardar el 31 de octubre de 2027.",
+   "Cuando el crédito firme es solo de multas por obligaciones distintas de las de pago, el estímulo es de 90 % (LIF 2027, transitorio Vigésimo Primero). Y no aplica a quien no desvirtuó los procedimientos de los artículos 49 Bis, 69-B y 69-B Bis del CFF.",
+   "Lo que falta: las reglas del SAT con el formato y el trámite. Vienen en la Resolución Miscelánea Fiscal para 2027, que todavía no se publica.",
+   "Nota de método: es una verificación de servicio público sobre un mito frecuente, no sobre una publicación en particular. Corte: 28 de noviembre de 2026."
+  ],
+  "dato_curioso": "El estímulo rige desde el 1 de enero de 2027: no se puede pedir antes.",
+  "cifras": [
+   {
+    "valor": "100 %",
+    "etq": "De multas, recargos y gastos de ejecución; no del impuesto",
+    "estado": "oficial",
+    "fuente": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027, Transitorio Vigésimo Primero",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
+   },
+   {
+    "valor": "90 %",
+    "etq": "Cuando el crédito firme es solo de multas formales",
+    "estado": "oficial",
+    "fuente": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027, Transitorio Vigésimo Primero",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
+   },
+   {
+    "valor": "31 de octubre de 2027",
+    "etq": "Solicitud de quien tiene créditos fiscales firmes",
+    "estado": "oficial",
+    "fuente": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027, Transitorio Vigésimo Primero, fracción III",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
+   },
+   {
+    "valor": "31 de diciembre de 2027",
+    "etq": "Pago en una sola exhibición, a más tardar",
+    "estado": "oficial",
+    "fuente": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027, Transitorio Vigésimo Primero",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "El SAT perdonará el 100 % de las deudas fiscales en 2027.",
+    "res": "matiz",
+    "explica": "El estímulo es del total de multas, recargos y gastos de ejecución. El impuesto omitido no entra.",
+    "fuente": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027, Transitorio Vigésimo Primero",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
+   },
+   {
+    "dice": "Aplica a adeudos de 2025 o anteriores.",
+    "res": "consta",
+    "explica": "Con las declaraciones presentadas y el pago en una sola exhibición dentro del plazo.",
+    "fuente": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027, Transitorio Vigésimo Primero",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
+   },
+   {
+    "dice": "Cualquier contribuyente puede acogerse.",
+    "res": "matiz",
+    "explica": "Quedan fuera quienes no desvirtuaron los procedimientos de los artículos 49 Bis, 69-B y 69-B Bis del CFF.",
+    "fuente": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027, Transitorio Vigésimo Primero",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
+   },
+   {
+    "dice": "Ya se conoce el trámite para pedirlo.",
+    "res": "pendiente",
+    "explica": "El formato y los requisitos los fijará el SAT en reglas de carácter general.",
+    "fuente": "Aún sin publicar",
+    "url": "https://dof.gob.mx/",
+    "quien": "SAT: Aún no se publica en el DOF (suele salir a finales de diciembre). De ella dependen el formato y el plazo del aviso del IVA opcional de 7 %, su combinación con la retención de dos terceras partes del IVA, y las reglas del art. 78-F de la LISR.",
+    "donde": "https://dof.gob.mx/"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "La Resolución Miscelánea Fiscal para 2027, con el trámite del estímulo",
+    "url": "https://dof.gob.mx/"
+   },
+   {
+    "que": "Las fechas del estímulo en el calendario fiscal de 2027",
+    "url": "fiscal-reforma-2027.html#calendario"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027 (DOF 13-11-2026; rige del 1 de enero al 31 de diciembre de 2027)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
+   },
+   {
+    "nombre": "Código Fiscal de la Federación (última reforma DOF 09-04-2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf"
+   }
+  ],
+  "actualizado": "28 de noviembre de 2026"
+ },
+ {
+  "id": "fiscal-multa-buzon-2027",
+  "seccion": "Verificado",
+  "icono": "🔔",
+  "titulo": "Multa del buzón tributario desde el 1 de enero de 2027: de $3,850 a $11,540, y quién puede optar por no habilitarlo",
+  "balazo": "La multa por no habilitar el buzón o no actualizar los medios de contacto está en el CFF; la Resolución Miscelánea de 2026 la aplica desde el 1 de enero de 2027. Los asalariados de menos de $400,000 al año pueden optar por no habilitarlo.",
+  "circula": {
+   "red": "Redes sociales y cadenas de mensajes",
+   "cuenta": "Lo que suele decirse (no es una publicación en particular)",
+   "fecha": "cotejado al 28 de noviembre de 2026",
+   "texto": "Desde enero de 2027 el SAT va a multar a todos los que no tengan activo su buzón tributario."
+  },
+  "cuerpo": [
+   "La multa existe y tiene fecha. El CFF la fija así: «Artículo 86-D. A quien cometa la infracción relacionada con la no habilitación del buzón tributario, el no registro o actualización de los medios de contacto conforme a lo previsto en el artículo 86-C, se impondrá una multa de $3,850.00 a $11,540.00.» (CFF, art. 86-D).",
+   "La Resolución Miscelánea Fiscal para 2026 dice desde cuándo se aplica: el 1 de enero de 2027 (RMF 2026, transitorio Cuarto).",
+   "Pero no es para todos. La misma Resolución da una opción: «Asimismo, para los efectos de los artículos 17-K, tercer párrafo y 86-C del CFF, los contribuyentes comprendidos en el Título IV, Capítulo I de la Ley del ISR a que se refiere el artículo 94 de dicha Ley, que hayan obtenido ingresos en el ejercicio inmediato anterior menores a $400,000.00 (cuatrocientos mil pesos 00/100 M.N.), podrán optar por no habilitar el buzón tributario. CFF 17-K, 27, 29, …» (RMF 2026, regla 2.2.22).",
+   "El buzón es el sistema electrónico del Portal del SAT por el que la autoridad notifica sus actos (CFF, art. 17-K). Habilitarlo y mantener al día los medios de contacto es lo que evita la multa.",
+   "Lo que no afirmamos: que exista un plazo de gracia para el RESICO. No localizamos la regla que lo diga, así que queda pendiente. Y las reglas de 2027 vendrán en su propia Resolución Miscelánea, aún sin publicar.",
+   "Nota de método: es una verificación de servicio público, no sobre una publicación en particular. Corte: 28 de noviembre de 2026."
+  ],
+  "dato_curioso": "El umbral de la opción para asalariados ($400,000) es el mismo monto desde el que un asalariado debe presentar declaración anual (LISR, art. 98, fracción III).",
+  "cifras": [
+   {
+    "valor": "$3,850",
+    "etq": "Multa mínima",
+    "estado": "oficial",
+    "fuente": "Código Fiscal de la Federación, Art. 86-D",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf"
+   },
+   {
+    "valor": "$11,540",
+    "etq": "Multa máxima",
+    "estado": "oficial",
+    "fuente": "Código Fiscal de la Federación, Art. 86-D",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf"
+   },
+   {
+    "valor": "1 de enero de 2027",
+    "etq": "Desde cuándo se aplica",
+    "estado": "oficial",
+    "fuente": "Resolución Miscelánea Fiscal para 2026, Transitorio Cuarto",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5777217&fecha=28/12/2025"
+   },
+   {
+    "valor": "$400,000",
+    "etq": "Asalariados con ingresos menores a esta cifra pueden optar por no habilitarlo",
+    "estado": "oficial",
+    "fuente": "Resolución Miscelánea Fiscal para 2026, Regla 2.2.22",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5777217&fecha=28/12/2025"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "La multa por no habilitar el buzón tributario va de $3,850 a $11,540.",
+    "res": "consta",
+    "explica": "Es el artículo 86-D del CFF.",
+    "fuente": "Código Fiscal de la Federación, Art. 86-D",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf"
+   },
+   {
+    "dice": "Se aplica desde el 1 de enero de 2027.",
+    "res": "consta",
+    "explica": "Lo dice un transitorio de la Resolución Miscelánea Fiscal para 2026.",
+    "fuente": "Resolución Miscelánea Fiscal para 2026, Transitorio Cuarto",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5777217&fecha=28/12/2025"
+   },
+   {
+    "dice": "Multarán a todos los contribuyentes sin buzón.",
+    "res": "matiz",
+    "explica": "Los asalariados con ingresos menores a $400,000 en el ejercicio anterior pueden optar por no habilitarlo.",
+    "fuente": "Resolución Miscelánea Fiscal para 2026, Regla 2.2.22",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5777217&fecha=28/12/2025"
+   },
+   {
+    "dice": "El RESICO tiene un plazo de gracia para habilitarlo.",
+    "res": "pendiente",
+    "explica": "No se localizó la regla que lo establezca: no se afirma sin su regla.",
+    "fuente": "Aún sin publicar",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5777217&fecha=28/12/2025",
+    "quien": "Auditavisión: No se localizó en la RMF 2026 la regla que lo establece: no se afirma sin su regla. Falta de integración de la plataforma.",
+    "donde": "https://dof.gob.mx/nota_detalle.php?codigo=5777217&fecha=28/12/2025"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "La Resolución Miscelánea Fiscal para 2027: si mantiene la opción de los asalariados",
+    "url": "https://dof.gob.mx/"
+   },
+   {
+    "que": "Los demás plazos de fiscalización, con su artículo",
+    "url": "fiscal-reforma-2027.html#fiscalizacion"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Código Fiscal de la Federación (última reforma DOF 09-04-2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf"
+   },
+   {
+    "nombre": "Resolución Miscelánea Fiscal para 2026 (DOF 28-12-2025)",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5777217&fecha=28/12/2025"
+   }
+  ],
+  "actualizado": "28 de noviembre de 2026"
+ },
+ {
   "id": "seguro-popular-51-millones",
   "seccion": "Verificado",
   "icono": "🔎",

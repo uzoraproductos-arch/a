@@ -122,6 +122,78 @@
    ]
   },
   {
+   "id": "buzon-tributario-que-es",
+   "concepto": "Buzón tributario: el medio electrónico por el que el SAT notifica y el contribuyente promueve",
+   "estado": "oficial",
+   "valor": {
+    "consulta_dias": "tres"
+   },
+   "en_letra": [
+    "tres días"
+   ],
+   "nota": "Quien recibe el aviso electrónico debe consultar su buzón dentro de los tres días siguientes.",
+   "citas": [
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 17-K",
+     "cita": "Artículo 17-K. Las personas físicas y morales inscritas en el registro federal de contribuyentes tendrán asignado un buzón tributario, consistente en un sistema de comunicación electrónico ubicado en la página de Internet del Servicio de Administración Tributaria, a través del cual: I. La autoridad fiscal realizará la notificación de cualquier acto o resolución administrativa que emita, en documentos digitales, incluyendo cualquiera que pueda ser recurrido y podrá enviar mensajes de interés."
+    },
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 17-K",
+     "cita": "Las personas físicas y morales que tengan asignado un buzón tributario deberán consultarlo dentro de los tres días siguientes a aquél en que reciban un aviso electrónico enviado por el Servicio de Administración Tributaria"
+    }
+   ]
+  },
+  {
+   "id": "constancia-situacion-fiscal",
+   "concepto": "Constancia de situación fiscal y cédula de identificación fiscal",
+   "estado": "oficial",
+   "valor": {
+    "tramite": "ficha 22/CFF"
+   },
+   "en_letra": [
+    "22/CFF"
+   ],
+   "nota": "La clave del RFC se entrega con la cédula de identificación fiscal o la constancia de registro fiscal; la constancia de situación fiscal se genera en el Portal del SAT.",
+   "citas": [
+    {
+     "fuente": "rmf26",
+     "articulo": "Regla 2.4.9.",
+     "cita": "2.4.9. Para los efectos del artículo 27, apartado C, fracciones VIII y IX del CFF, la cédula de identificación fiscal, así como la constancia de situación fiscal, son las contenidas en el Anexo 1, rubro B, numerales 1. y 1.1., respectivamente. La cédula de identificación fiscal se podrá obtener a través del Portal del SAT, en el apartado Trámites y servicios / Más trámites y servicios / Constancias, devoluciones y notificaciones / Constancia de Situación Fiscal / Contenidos relacionados / Cédula de Identificación Fiscal. Para la generación de la Constancia de Situación Fiscal con cédula de identificación fiscal, deberá seguir los procedimientos de la ficha de trámite 22/CFF \"Constancia de Situación Fiscal con CIF\", contenida en el Anexo 2."
+    },
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 27, apartado C, fracción VIII",
+     "cita": "VIII. Asignar la clave que corresponda a cada contribuyente que se inscriba en el Registro Federal de Contribuyentes. Dicha clave será proporcionada a través de la cédula de identificación fiscal o la constancia de registro fiscal."
+    }
+   ]
+  },
+  {
+   "id": "opinion-cumplimiento-32d",
+   "concepto": "Opinión del cumplimiento de obligaciones fiscales (art. 32-D del CFF)",
+   "estado": "oficial",
+   "valor": {
+    "via": "art. 32-D CFF"
+   },
+   "en_letra": [
+    "32-D"
+   ],
+   "nota": "Quien recibe y ejerce recursos públicos federales no contrata con quien tiene créditos fiscales firmes, entre otros supuestos; la opinión se obtiene en el Portal del SAT.",
+   "citas": [
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 32-D",
+     "cita": "Artículo 32-D. Cualquier autoridad, ente público, entidad, órgano u organismo de los poderes Legislativo, Ejecutivo y Judicial, de la Federación, de las entidades federativas y de los municipios, órganos autónomos, partidos políticos, fideicomisos y fondos, así como cualquier persona física, moral o sindicato, que reciban y ejerzan recursos públicos federales, en ningún caso contratarán adquisiciones, arrendamientos, servicios u obra pública con las personas físicas, morales o entes jurídicos que: I. Tengan a su cargo créditos fiscales firmes."
+    },
+    {
+     "fuente": "rmf26",
+     "articulo": "Regla 2.1.36.",
+     "cita": "2.1.36. Para los efectos del artículo 32-D del CFF, los contribuyentes que requieran obtener la opinión del cumplimiento de obligaciones fiscales, deberán realizar el siguiente procedimiento:"
+    }
+   ]
+  },
+  {
    "id": "recargos-prorroga-2026",
    "concepto": "Recargos por prórroga, 2026",
    "estado": "oficial",
@@ -227,7 +299,7 @@
     {
      "fuente": "LIF_2027",
      "articulo": "Art. 19",
-     "cita": "deración o se notifique la resolución provisional a que se refiere el artículo 53-B, párrafo primero, fracción I, del citado Código, pero antes de que se notifique la resolución que determine el monto de las contribuciones omitidas o la resolución definitiva a que se refiere el citado artículo 53- B, las personas contribuyentes pagarán el 60 por ciento de la multa"
+     "cita": "o se notifique la resolución provisional a que se refiere el artículo 53-B, párrafo primero, fracción I, del citado Código, pero antes de que se notifique la resolución que determine el monto de las contribuciones omitidas o la resolución definitiva a que se refiere el citado artículo 53- B, las personas contribuyentes pagarán el 60 por ciento de la multa"
     }
    ]
   },
@@ -244,7 +316,7 @@
     {
      "fuente": "LISR",
      "articulo": "Art. 55, fracción IV",
-     "cita": "ción de los depósitos en efectivo que se realicen en las cuentas abiertas a nombre de los contribuyentes en las instituciones del sistema financiero, cuando el monto mensual acumulado por los depósitos en efectivo que se realicen en todas las cuentas de las que el contribuyente sea titular en una misma institución del sistema financiero exceda de $15,000.00, así como respecto de todas las adquisiciones en efectivo de cheques"
+     "cita": "de los depósitos en efectivo que se realicen en las cuentas abiertas a nombre de los contribuyentes en las instituciones del sistema financiero, cuando el monto mensual acumulado por los depósitos en efectivo que se realicen en todas las cuentas de las que el contribuyente sea titular en una misma institución del sistema financiero exceda de $15,000.00, así como respecto de todas las adquisiciones en efectivo de cheques"
     }
    ]
   },
@@ -276,6 +348,32 @@
      "fuente": "anx26",
      "articulo": "Anexo 5, art. 59, fracción III del CFF",
      "cita": "....................................................... También se presumirá que los depósitos que se efectúen en un ejercicio fiscal, cuya suma sea superior a $2,028,610.00 en las cuentas o cuentas bancarias de una persona que no está inscrita en el Registro"
+    }
+   ]
+  },
+  {
+   "id": "caducidad-facultades",
+   "concepto": "Caducidad: el plazo del SAT para determinar contribuciones omitidas e imponer sanciones",
+   "estado": "oficial",
+   "valor": {
+    "anios": "cinco",
+    "anios_ampliado": "diez"
+   },
+   "en_letra": [
+    "cinco años",
+    "diez años"
+   ],
+   "nota": "Sube a diez años cuando no hay inscripción en el RFC, no se lleva o no se conserva la contabilidad, o no se presentó la declaración del ejercicio estando obligado.",
+   "citas": [
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 67",
+     "cita": "Artículo 67.- Las facultades de las autoridades fiscales para determinar las contribuciones o aprovechamientos omitidos y sus accesorios, así como para imponer sanciones por infracciones a las disposiciones fiscales, se extinguen en el plazo de cinco años contados a partir del día siguiente a aquél en que:"
+    },
+    {
+     "fuente": "CFF",
+     "articulo": "Art. 67",
+     "cita": "El plazo a que se refiere este artículo será de diez años, cuando el contribuyente no haya presentado su solicitud en el Registro Federal de Contribuyentes, no lleve contabilidad o no la conserve durante el plazo que establece este Código, así como por los ejercicios en que no presente alguna declaración del ejercicio, estando obligado a presentarlas"
     }
    ]
   },

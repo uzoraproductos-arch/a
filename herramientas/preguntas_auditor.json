@@ -3011,7 +3011,12 @@
   },
   {
    "q": "¿Cuántos años tiene el SAT para revisarme?",
-   "ir": "glosario.html#Plazo-para-que-el-SAT-te-Revise"
+   "ir": "fiscal-reforma-2027.html#fiscalizacion",
+   "dice": [
+    "se extinguen en",
+    "La ley lo dice así",
+    "perder los papeles"
+   ]
   },
   {
    "q": "¿Mi empresa cumple con sus papeles?",
@@ -3741,6 +3746,209 @@
     "Lo que la nota afirma sin cifra",
     "la memoria de promesas",
     "Licencia de temporada"
+   ]
+  },
+  {
+   "q": "¿Cuál es el tope del RESICO en 2027?",
+   "ir": "fiscal-reforma-2027.html#cambios",
+   "dice": [
+    "Ojo con la fecha",
+    "valen las cifras de 2026",
+    "Desde 2027 el tope sube"
+   ]
+  },
+  {
+   "q": "¿Qué cambia para el RESICO de personas morales en 2027?",
+   "ir": "fiscal-reforma-2027.html#cambios",
+   "dice": [
+    "podrán cumplir",
+    "Ojo con la fecha"
+   ]
+  },
+  {
+   "q": "¿Qué es el IVA opcional del 7 % para RESICO?",
+   "ir": "fiscal-reforma-2027.html#cambios",
+   "dice": [
+    "no acreditas",
+    "aviso de opción",
+    "Lo que todavía no se publica",
+    "Resolución Miscelánea Fiscal para 2027"
+   ]
+  },
+  {
+   "q": "¿Cuánto retienen por intereses en 2027?",
+   "ir": "fiscal-reforma-2027.html#cambios",
+   "dice": [
+    "tasa anual sobre el capital",
+    "Ojo con la fecha"
+   ]
+  },
+  {
+   "q": "¿Qué perdona el estímulo de regularización 2027?",
+   "ir": "fiscal-reforma-2027.html#cambios",
+   "dice": [
+    "Lo que no perdona",
+    "el impuesto",
+    "A quién no le aplica"
+   ]
+  },
+  {
+   "q": "¿Qué cambia para las empresas de más de 50 millones?",
+   "ir": "fiscal-reforma-2027.html#cambios",
+   "dice": [
+    "límites nuevos",
+    "régimen opcional para grupos de sociedades"
+   ]
+  },
+  {
+   "q": "¿Qué no cambia en 2027?",
+   "ir": "fiscal-reforma-2027.html#no-cambia",
+   "dice": [
+    "Las tarifas del ISR no se reforman",
+    "El IVA general sigue"
+   ]
+  },
+  {
+   "q": "¿Qué cambia en los impuestos en 2027?",
+   "ir": "fiscal-reforma-2027.html#cambios",
+   "dice": [
+    "Lo principal",
+    "Lo que no cambia"
+   ]
+  },
+  {
+   "q": "¿Quién está obligado a presentar declaración anual?",
+   "ir": "fiscal-reforma-2027.html#calendario",
+   "dice": [
+    "dos o más patrones",
+    "La ley lo dice así"
+   ]
+  },
+  {
+   "q": "¿Qué puedo deducir en mi declaración anual?",
+   "ir": "fiscal-reforma-2027.html#tarifas",
+   "dice": [
+    "tope global",
+    "Van aparte del tope",
+    "auditada"
+   ]
+  },
+  {
+   "q": "¿Cuánto del aguinaldo está exento?",
+   "ir": "fiscal-reforma-2027.html#tarifas",
+   "dice": [
+    "Por qué va como «auditada»",
+    "salario mínimo"
+   ]
+  },
+  {
+   "q": "¿Cuánto es el subsidio para el empleo?",
+   "ir": "fiscal-reforma-2027.html#tarifas",
+   "dice": [
+    "de la UMA mensual",
+    "Lo que todavía no se publica"
+   ]
+  },
+  {
+   "q": "¿El SAT cobra impuesto por depósitos de 15 mil pesos?",
+   "ir": "fiscal-reforma-2027.html#fiscalizacion",
+   "dice": [
+    "No existe un impuesto",
+    "depósitos en efectivo",
+    "una transferencia electrónica no es un depósito en efectivo"
+   ]
+  },
+  {
+   "q": "¿Qué es la discrepancia fiscal?",
+   "ir": "fiscal-reforma-2027.html#fiscalizacion",
+   "dice": [
+    "No es una multa automática",
+    "La ley lo dice así"
+   ]
+  },
+  {
+   "q": "¿Cuánto es la multa del buzón tributario?",
+   "ir": "fiscal-reforma-2027.html#fiscalizacion",
+   "dice": [
+    "Quién puede optar por no habilitarlo",
+    "se aplica desde"
+   ]
+  },
+  {
+   "q": "¿Qué es la visita del artículo 49 Bis?",
+   "ir": "fiscal-reforma-2027.html#fiscalizacion",
+   "dice": [
+    "días hábiles",
+    "se suspende la emisión de comprobantes"
+   ]
+  },
+  {
+   "q": "¿Qué plazo tengo si mi proveedor cayó en la lista 69-B?",
+   "ir": "fiscal-reforma-2027.html#fiscalizacion",
+   "dice": [
+    "una señal para revisar, nunca una acusación"
+   ]
+  },
+  {
+   "q": "Me restringieron los sellos digitales, ¿qué plazo tengo?",
+   "ir": "fiscal-reforma-2027.html#fiscalizacion",
+   "dice": [
+    "solicitud de aclaración"
+   ]
+  },
+  {
+   "q": "¿Cuánto me retienen las plataformas digitales?",
+   "ir": "fiscal-reforma-2027.html#tarifas",
+   "dice": [
+    "No es una novedad de 2027",
+    "ya estaba en la de 2026"
+   ]
+  },
+  {
+   "q": "¿Qué es la deducción ciega en arrendamiento?",
+   "ir": "fiscal-reforma-2027.html#tarifas",
+   "dice": [
+    "sin comprobantes",
+    "deducción ciega"
+   ]
+  },
+  {
+   "q": "¿Cuánto son los recargos del SAT en 2027?",
+   "ir": "fiscal-reforma-2027.html#fiscalizacion",
+   "dice": [
+    "Son los mismos en 2026 y en 2027"
+   ]
+  },
+  {
+   "q": "¿Cuánto tiempo tengo para un recurso de revocación?",
+   "ir": "fiscal-reforma-2027.html#fiscalizacion",
+   "dice": [
+    "recurso de revocación",
+    "Tribunal Federal de Justicia Administrativa"
+   ]
+  },
+  {
+   "q": "¿Cuáles son las fechas del calendario fiscal 2027?",
+   "ir": "fiscal-reforma-2027.html#calendario",
+   "dice": [
+    "siguiente día hábil",
+    "cuenta nuestra"
+   ]
+  },
+  {
+   "q": "¿Cuál es la UMA 2027?",
+   "ir": "fiscal-reforma-2027.html#pendientes",
+   "dice": [
+    "no usamos ninguna cifra de 2027",
+    "Quién lo debe: INEGI"
+   ]
+  },
+  {
+   "q": "¿Sigue el IVA del 8 % en la frontera en 2027?",
+   "ir": "fiscal-reforma-2027.html#pendientes",
+   "dice": [
+    "Lo que todavía no se publica",
+    "no se afirma ni su vencimiento ni su prórroga"
    ]
   }
  ]

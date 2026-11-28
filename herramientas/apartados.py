@@ -6219,6 +6219,11 @@ PAGINAS_BIBLIOTECA = [
     # autor): pase-del-auditor.html redirige a Donaciones (REDIRECCIONES).
 ]
 
+# Ronda 39: el Marco legal suma el bloque «Reforma 2027», con los artículos ya cotejados de docs/fiscal-2027/reforma-2027.json (fiscal_temas.marco()).
+[x for x in PAGINAS_BIBLIOTECA if x['archivo'] == 'marco-legal.html'][0]['secciones'].append({
+    'id': 'reforma-2027', 'titulo': 'Reforma 2027 (rige desde el 1 de enero de 2027)', 'texto': '', 'tarjetas': [], 'bloque': __import__('fiscal_temas').marco()})
+[x for x in PAGINAS_BIBLIOTECA if x['archivo'] == 'marco-legal.html'][0].setdefault('estilos', []).append('asistente.css')
+
 GUIA = '''<section class="apartado-guia" aria-labelledby="guiaTitulo">
         <h2 class="apartado-guia-titulo" id="guiaTitulo">Cómo se usa</h2>
         <ol class="apartado-pasos">
@@ -8145,7 +8150,7 @@ def generar(sello=None):
     import leyes_niveles
     import presupuesto_modulos
     import mis_respuestas
-    for extra in [mis_respuestas.pagina(SERVICIOS, COBRO, __import__('asistente').MODOS, AUDITOR_VIRTUAL)] + planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), fraude.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), *servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA + [dict(x, pie_extra=bib_nav(expedientes_inv.INDICE)) for x in expedientes_inv.paginas()]:
+    for extra in [mis_respuestas.pagina(SERVICIOS, COBRO, __import__('asistente').MODOS, AUDITOR_VIRTUAL)] + planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), __import__('fiscal_temas').pagina(), DICCIONARIO, metodologia_auditoria.pagina(), fraude.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), *servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA + [dict(x, pie_extra=bib_nav(expedientes_inv.INDICE)) for x in expedientes_inv.paginas()]:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     # Ronda 7 (22-11-2026): la Enciclopedia se volvió Planisferio; cada dimensión, con todo lo que trae (traslado.py).
