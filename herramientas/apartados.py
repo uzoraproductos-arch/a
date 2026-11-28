@@ -1694,6 +1694,7 @@ _AV_NAVEGADOR = [
     ('Las columnas que sigues', 'av-sigo', 'Cuáles casos de Verificamos sigues y qué versión viste, para avisarte cuando cambian.'),
     ('Ágora cívica', 'auditavision_foro_debates y otras', 'Tus hilos, tus apoyos y el seudónimo que elijas. No se publican: viven solo en tu navegador.'),
     ('Preferencias de las herramientas', 'av-am-reloj, crReloj y otras', 'Cómo dejaste un reloj, una unidad o un filtro.'),
+    ('Tu lista de blindaje fiscal', 'av-fiscal-blindaje', 'Cuáles puntos de la lista del Simulador y Blindaje Fiscal 2027 marcaste como resueltos. Nunca guarda tus ingresos, tus gastos ni ningún monto: lo que escribes en el simulador no se guarda en ningún lado. La borras ahí mismo, con su botón.'),
 ]
 AVISO = {
     'archivo': 'aviso-de-privacidad.html',
@@ -4243,7 +4244,7 @@ AGORA_COLORES = ['#1a56b8', '#0f7b4f', '#b45309', '#b3261e', '#6d28d9', '#be185d
 
 
 # Ronda 26D: páginas rediseñadas sin un solo emoji dentro de <main> (pagina() los limpia).
-SIN_EMOJI = ('participa.html', 'agora.html', 'diccionario.html', 'administracion-codigos.html', 'noticias-relevantes.html')
+SIN_EMOJI = ('participa.html', 'agora.html', 'diccionario.html', 'administracion-codigos.html', 'noticias-relevantes.html', 'fiscal-simulador-2027.html')
 EMOJI_RE = '(?:[\U0001F000-\U0001FAFF\u2600-\u27BF\u2B00-\u2BFF\u2300-\u23FF][\uFE0F\u200D]*)+'
 
 
@@ -8150,7 +8151,7 @@ def generar(sello=None):
     import leyes_niveles
     import presupuesto_modulos
     import mis_respuestas
-    for extra in [mis_respuestas.pagina(SERVICIOS, COBRO, __import__('asistente').MODOS, AUDITOR_VIRTUAL)] + planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), __import__('fiscal_temas').pagina(), DICCIONARIO, metodologia_auditoria.pagina(), fraude.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), *servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA + [dict(x, pie_extra=bib_nav(expedientes_inv.INDICE)) for x in expedientes_inv.paginas()]:
+    for extra in [mis_respuestas.pagina(SERVICIOS, COBRO, __import__('asistente').MODOS, AUDITOR_VIRTUAL)] + planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), __import__('fiscal_temas').pagina(), __import__('fiscal_simulador').pagina(), DICCIONARIO, metodologia_auditoria.pagina(), fraude.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), *servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA + [dict(x, pie_extra=bib_nav(expedientes_inv.INDICE)) for x in expedientes_inv.paginas()]:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     # Ronda 7 (22-11-2026): la Enciclopedia se volvió Planisferio; cada dimensión, con todo lo que trae (traslado.py).

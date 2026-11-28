@@ -259,6 +259,14 @@
    "motivo": "La Cámara de Diputados aún no integra el Decreto del 13-11-2026 a su texto vigente (su última reforma anotada es del 01-04-2024). Mientras tanto lo de 2027 se cita del Decreto.",
    "quien": "Cámara de Diputados",
    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
+  },
+  {
+   "id": "resico-plataformas",
+   "concepto": "Si quien cobra por plataformas digitales puede tributar en RESICO por esos ingresos",
+   "estado": "pendiente",
+   "motivo": "La regla de la Resolución Miscelánea Fiscal que lo define no está cotejada en la base: el simulador no compara RESICO para ese perfil. Falta de integración de la plataforma.",
+   "quien": "Auditavisión",
+   "url": "https://www.sat.gob.mx/"
   }
  ]
 }

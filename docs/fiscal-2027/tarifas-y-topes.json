@@ -234,6 +234,21 @@
      "cita": "0.01 | 10,135.11 |"
     }
    ]
+  },
+  {
+   "id": "isr-utilidad-actividades",
+   "concepto": "Actividades empresariales y profesionales: el ISR anual se calcula con la tarifa del art. 152 sobre la utilidad fiscal (ingresos menos deducciones autorizadas)",
+   "estado": "oficial",
+   "valor": {
+    "tarifa": "art. 152"
+   },
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 109",
+     "cita": "Artículo 109. Los contribuyentes a que se refiere esta Sección, deberán calcular el impuesto del ejercicio a su cargo en los términos del artículo 152 de esta Ley. Para estos efectos, la utilidad fiscal del ejercicio se determinará disminuyendo de la totalidad de los ingresos acumulables obtenidos por las actividades empresariales o por la prestación de servicios profesionales, las deducciones autorizadas en esta Sección, ambos correspondientes al ejercicio de que se trate."
+    }
+   ]
   }
  ],
  "subsidio_empleo": [
@@ -521,6 +536,28 @@
      "cita": "Artículo 1.8. Se otorga un estímulo fiscal a las personas físicas residentes en el país que obtengan ingresos de los establecidos en el Título IV de la Ley del Impuesto sobre la Renta, consistente en disminuir del resultado obtenido conforme al artículo 152, primer párrafo, primera oración, de la Ley del Impuesto sobre la Renta,"
     }
    ]
+  },
+  {
+   "id": "colegiaturas-fuera-del-tope",
+   "concepto": "Las colegiaturas no entran al tope global de las deducciones personales",
+   "estado": "auditada",
+   "valor": {
+    "tope_global": "no aplica"
+   },
+   "operacion": "El tope global limita las deducciones «en los términos de este artículo» (el 151 de la LISR); el estímulo de colegiaturas está en el Decreto del 26-12-2013, no en ese artículo, y lleva su propio límite por nivel educativo",
+   "nota": "Lectura nuestra de los dos textos.",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 151, último párrafo",
+     "cita": "El monto total de las deducciones que podrán efectuar los contribuyentes en los términos de este artículo, no podrá exceder"
+    },
+    {
+     "fuente": "ben13",
+     "articulo": "Art. 1.8",
+     "cita": "Artículo 1.8. Se otorga un estímulo fiscal a las personas físicas residentes en el país que obtengan ingresos de los establecidos en el Título IV de la Ley del Impuesto sobre la Renta,"
+    }
+   ]
   }
  ],
  "resico_personas_fisicas": [
@@ -610,6 +647,37 @@
      "fuente": "LISR",
      "articulo": "Art. 113-F, tabla anual",
      "cita": "Hasta 300,000.00 1.00% Hasta 600,000.00 1.10% Hasta 1,000,000.00 1.50% Hasta 2,500,000.00 2.00% Hasta 3,500,000.00 2.50% Los"
+    }
+   ]
+  },
+  {
+   "id": "resico-pf-sin-deducciones",
+   "concepto": "RESICO de personas físicas: el ISR se calcula sobre lo cobrado, sin deducciones",
+   "estado": "oficial",
+   "valor": {
+    "deducciones": "ninguna"
+   },
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 113-E",
+     "cita": "efectivamente cobrados, sin incluir el impuesto al valor agregado, y sin aplicar deducción alguna, considerando la siguiente tabla: TABLA MENSUAL"
+    }
+   ]
+  },
+  {
+   "id": "resico-pf-exclusiones",
+   "concepto": "RESICO de personas físicas: quiénes no pueden tributar en el régimen",
+   "estado": "oficial",
+   "valor": {
+    "supuestos": "cuatro"
+   },
+   "nota": "Es el texto vigente de la LISR; el Decreto del 13-11-2026 no enumera este párrafo entre los que reforma. La fracción IV se refiere a ingresos asimilados a salarios.",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 113-E",
+     "cita": "No podrán aplicar lo previsto en esta Sección las personas físicas a que se refiere el primer párrafo de este artículo en los supuestos siguientes: I. Sean socios, accionistas o integrantes de personas morales o cuando sean partes relacionadas en los términos del artículo 90 de esta Ley. II. Sean residentes en el extranjero que tengan uno o varios establecimientos permanentes en el país. III. Cuenten con ingresos sujetos a regímenes fiscales preferentes. IV. Perciban los ingresos a que se refieren las fracciones III, IV, V y VI del artículo 94 de esta Ley."
     }
    ]
   }
@@ -749,6 +817,31 @@
      "fuente": "LISR",
      "articulo": "Art. 113-C, fracción IV",
      "cita": "la retención. En el caso de que los contribuyentes no proporcionen su clave del Registro Federal de Contribuyentes prevista en el inciso b) de la fracción III del artículo 18-J de la Ley del Impuesto al Valor Agregado, se deberá retener el impuesto que corresponda por los ingresos a que se refiere el artículo 113-A de esta Ley, aplicando la tasa del 20% sobre los ingresos"
+    }
+   ]
+  },
+  {
+   "id": "plataformas-pago-definitivo",
+   "concepto": "Plataformas digitales: la retención puede tomarse como pago definitivo si los ingresos del año anterior no pasaron de $300,000",
+   "estado": "oficial",
+   "valor": {
+    "pesos": 300000
+   },
+   "en_letra": [
+    "trescientos mil pesos"
+   ],
+   "unidad": "pesos en el ejercicio inmediato anterior",
+   "nota": "Quien toma la opción no puede hacer las deducciones de esas actividades.",
+   "citas": [
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 113-B",
+     "cita": "Artículo 113-B. Las personas físicas a que se refiere el artículo anterior, podrán optar por considerar como pagos definitivos las retenciones que les efectúen conforme a la presente Sección, en los siguientes casos: I. Cuando únicamente obtengan ingresos a los que se refiere el primer párrafo del artículo 113-A de esta Ley, que en el ejercicio inmediato anterior no hayan excedido de la cantidad de trescientos mil pesos."
+    },
+    {
+     "fuente": "LISR",
+     "articulo": "Art. 113-B",
+     "cita": "a) No podrán hacer las deducciones que correspondan por las actividades realizadas a través de las plataformas tecnológicas, aplicaciones informáticas y similares"
     }
    ]
   },

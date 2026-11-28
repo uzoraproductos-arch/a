@@ -3950,6 +3950,64 @@
     "Lo que todavía no se publica",
     "no se afirma ni su vencimiento ni su prórroga"
    ]
+  },
+  {
+   "q": "¿Me conviene el IVA del 7 % o el del 16 %?",
+   "ir": "fiscal-simulador-2027.html#resico",
+   "dice": [
+    "punto de equilibrio",
+    "Ojo con la fecha",
+    "valen las cifras de 2026",
+    "simulador"
+   ]
+  },
+  {
+   "q": "Quiero calcular mi declaración anual",
+   "ir": "fiscal-simulador-2027.html#anual",
+   "dice": [
+    "tope global",
+    "saldo a favor",
+    "simulador"
+   ]
+  },
+  {
+   "q": "¿Tengo saldo a favor?",
+   "ir": "fiscal-simulador-2027.html#anual",
+   "dice": [
+    "tarifa anual",
+    "simulador"
+   ]
+  },
+  {
+   "q": "¿Qué régimen fiscal me conviene?",
+   "ir": "fiscal-simulador-2027.html#regimenes",
+   "dice": [
+    "sin deducciones",
+    "candados del RESICO",
+    "Lo que todavía no se publica"
+   ]
+  },
+  {
+   "q": "¿Me conviene el RESICO?",
+   "ir": "fiscal-simulador-2027.html#regimenes",
+   "dice": [
+    "lado a lado"
+   ]
+  },
+  {
+   "q": "¿Cómo me preparo para el SAT en 2027?",
+   "ir": "fiscal-simulador-2027.html#blindaje",
+   "dice": [
+    "buzón tributario",
+    "solo en tu navegador"
+   ]
+  },
+  {
+   "q": "Abre el simulador fiscal",
+   "ir": "fiscal-simulador-2027.html#blindaje",
+   "dice": [
+    "Ocho puntos"
+   ]
   }
  ]
 }

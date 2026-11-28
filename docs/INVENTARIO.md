@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 835 |
+| Páginas revisadas | 836 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -173,7 +173,8 @@ La Enciclopedia queda fuera porque está congelada.
 | `expediente-tren-toluca.html` | Expediente: Tren Interurbano México-Toluca «El Insurgente» · Auditavisión | apartados.py | 58 | 0 | 2 | 4 | 2 |
 | `expedientes-investigacion.html` | Expedientes de control interno · Auditavisión | apartados.py | 75 | 0 | 1 | 1 | 1 |
 | `expedientes.html` | Los casos por aclarar · Auditavisión | apartados.py | 45 | 0 | 1 | 1 | 1 |
-| `fiscal-reforma-2027.html` | Reforma fiscal 2026 → 2027 y calendario fiscal · Auditavisión | apartados.py | 43 | 0 | 83 | 21 | 14 |
+| `fiscal-reforma-2027.html` | Reforma fiscal 2026 → 2027 y calendario fiscal · Auditavisión | apartados.py | 44 | 0 | 87 | 22 | 15 |
+| `fiscal-simulador-2027.html` | Simulador y Blindaje Fiscal 2027 · Auditavisión | apartados.py | 48 | 0 | 43 | 19 | 24 |
 | `fuentes-del-auditor.html` | Fuentes del auditor · Auditavisión | apartados.py | 2 | 0 | 0 | 0 | 0 |
 | `fuentes-oficiales.html` | Referencias · Auditavisión | apartados.py | 48 | 0 | 1 | 1 | 1 |
 | `garantias-brujula.html` | La brújula: ¿a qué puerta toco? · Auditavisión | apartados.py | 51 | 0 | 1 | 1 | 1 |
@@ -345,7 +346,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-trivia-presidentes.html` | El examen de los presidentes · Auditavisión | apartados.py | 41 | 0 | 1 | 1 | 1 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 48 | 0 | 1 | 1 | 1 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 2 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 268 | 0 | 1 | 1 | 142 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 284 | 0 | 1 | 1 | 143 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 41 | 0 | 12 | 6 | 1 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 54 | 0 | 2 | 1 | 1 |
 | `planisferio-ags-administracion.html` | Su administración pública · Auditavisión | apartados.py | 62 | 0 | 15 | 6 | 1 |
@@ -481,7 +482,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-dim-administracion.html` | Administración pública · todo lo de esta dimensión · Auditavisión | apartados.py | 76 | 0 | 1 | 1 | 1 |
 | `planisferio-dim-ambiental.html` | Ambiental · todo lo de esta dimensión · Auditavisión | apartados.py | 61 | 0 | 1 | 1 | 1 |
 | `planisferio-dim-deuda.html` | Deuda · todo lo de esta dimensión · Auditavisión | apartados.py | 41 | 0 | 1 | 1 | 1 |
-| `planisferio-dim-financiera.html` | Financiera · todo lo de esta dimensión · Auditavisión | apartados.py | 131 | 0 | 1 | 1 | 1 |
+| `planisferio-dim-financiera.html` | Financiera · todo lo de esta dimensión · Auditavisión | apartados.py | 132 | 0 | 1 | 1 | 1 |
 | `planisferio-dim-inversion.html` | Inversión · todo lo de esta dimensión · Auditavisión | apartados.py | 46 | 0 | 1 | 1 | 1 |
 | `planisferio-dim-judicial.html` | Judicial · todo lo de esta dimensión · Auditavisión | apartados.py | 84 | 0 | 1 | 1 | 1 |
 | `planisferio-dim-legislativa.html` | Legislativa · todo lo de esta dimensión · Auditavisión | apartados.py | 45 | 0 | 1 | 1 | 1 |
@@ -807,7 +808,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-zac-salud.html` | Su salud pública · Auditavisión | apartados.py | 62 | 0 | 20 | 12 | 4 |
 | `planisferio-zac-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 65 | 0 | 11 | 5 | 1 |
 | `planisferio-zac.html` | Zacatecas · Auditavisión | apartados.py | 59 | 0 | 3 | 3 | 2 |
-| `planisferio.html` | Planisferio · Auditavisión | apartados.py | 195 | 0 | 114 | 74 | 9 |
+| `planisferio.html` | Planisferio · Auditavisión | apartados.py | 196 | 0 | 114 | 74 | 9 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 48 | 0 | 1 | 1 | 1 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 2 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 48 | 0 | 1 | 1 | 1 |
@@ -834,7 +835,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicio-radiografia.html` | Radiografía de tu municipio o de tu estado · Auditavisión | apartados.py | 101 | 0 | 1 | 1 | 1 |
 | `servicio-revision.html` | Revisión documental puntual · Auditavisión | apartados.py | 96 | 0 | 1 | 1 | 1 |
 | `servicio-seguimiento.html` | Vigía y seguimiento periódico · Auditavisión | apartados.py | 118 | 0 | 3 | 6 | 1 |
-| `servicio-simulacion.html` | Simulación de tu caso · Auditavisión | apartados.py | 113 | 0 | 1 | 1 | 1 |
+| `servicio-simulacion.html` | Simulación de tu caso · Auditavisión | apartados.py | 115 | 0 | 1 | 1 | 1 |
 | `servicio-temporada.html` | Licencia de temporada para redacciones · Auditavisión | apartados.py | 96 | 0 | 1 | 1 | 1 |
 | `servicios-calendario.html` | Calendario · Auditavisión | apartados.py | 50 | 0 | 1 | 1 | 1 |
 | `servicios-catalogo.html` | Catálogo · Auditavisión | apartados.py | 124 | 0 | 1 | 1 | 1 |
@@ -903,7 +904,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-140 fichas, cada una con su porqué, su responsable y su enlace oficial.
+141 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 
